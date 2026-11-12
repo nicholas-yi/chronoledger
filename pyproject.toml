@@ -23,6 +23,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+embed = [
+    "torch>=2.4",
+    "transformers>=4.48",
+]
 dev = [
     "pytest>=8.0",
     "hypothesis>=6.100",
