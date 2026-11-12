@@ -29,6 +29,19 @@ def test_skips_table_of_contents_and_hidden_text() -> None:
     assert "hidden" not in sections["1A"].text
 
 
+def test_long_single_line_header_is_found() -> None:
+    # Real 10-Ks (e.g. NVIDIA, Apple) put the full Item 7 title on one >80-char line.
+    title = "Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations"
+    text = f"PART II\n{title}\n" + "Revenue grew because of demand. " * 30 + "\nItem 8. Financial Statements\nx"
+    assert "7" in extract_sections(text)
+
+
+def test_inline_cross_reference_is_not_a_header() -> None:
+    text = "Item 1A. Risk Factors\n" + "See Part II, Item 7 of this Form 10-K. " * 20 + "\nItem 2. Properties\n"
+    sections = extract_sections(text, items=("1A", "7"))
+    assert "7" not in sections
+
+
 def test_offsets_point_into_text() -> None:
     text = html_to_text(DOC)
     sec = extract_sections(text)["1A"]

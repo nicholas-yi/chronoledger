@@ -8,15 +8,19 @@ table of contents. Results include character offsets so every derived claim can 
 from __future__ import annotations
 
 import re
+import warnings
 from collections import Counter
 from dataclasses import dataclass
 
 import numpy as np
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
+
+# Inline-XBRL 10-Ks are XHTML; the HTML parser handles them correctly for text extraction.
+warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 ITEMS = ["1", "1A", "1B", "1C", "2", "3", "4", "5", "6", "7", "7A", "8", "9", "9A", "9B", "10"]
 TARGET_ITEMS = ("1", "1A", "7")
-_HEADER = re.compile(r"(?im)^\s*item\s*(\d{1,2}[a-c]?)\s*[\.\:\-\u2013\u2014]?\s*(.{0,80})$")
+_HEADER = re.compile(r"(?im)^\s*item\s*(\d{1,2}[a-c]?)\s*[\.\:\-\u2013\u2014]?\s*(.{0,200})$")
 
 
 @dataclass(frozen=True)
