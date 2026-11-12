@@ -40,6 +40,13 @@ Raw data and caches are written to `data/` and never committed.
 - Prices: free sources for personal research only. **Raw prices are never redistributed; only derived statistics are published.**
 - Factors: Kenneth French Data Library, which is linked and cited but not re-hosted.
 
+## Provenance of ideas and code
+
+All code in this repository was written from scratch for this project. It contains no code, data, or
+unpublished material from any employer. Methods are implemented from public sources and cited
+where used: SEC EDGAR documentation, peer-reviewed finance and statistics papers, and public arXiv
+preprints (for example, the episode-provenance reconciliation idea described in arXiv:2609.34242).
+
 ## License
 
 MIT for code.
