@@ -52,10 +52,11 @@ CREATE TABLE IF NOT EXISTS xbrl_facts (
 """
 
 
-def connect(path: str = ":memory:") -> duckdb.DuckDBPyConnection:
-    con = duckdb.connect(path)
+def connect(path: str = ":memory:", read_only: bool = False) -> duckdb.DuckDBPyConnection:
+    con = duckdb.connect(path, read_only=read_only)
     con.execute("SET TimeZone='UTC'")
-    con.execute(SCHEMA)
+    if not read_only:
+        con.execute(SCHEMA)
     return con
 
 

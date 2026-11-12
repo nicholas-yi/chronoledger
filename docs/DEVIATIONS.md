@@ -21,3 +21,14 @@
   - The portfolio test can detect only very large effects. Null results will be reported as uninformative about moderate effects, not as evidence of no effect.
   - Coverage in the new periods is 88–97%, not 100%, so delisting sensitivities still apply.
 
+## D2: defining "prior-knowledge hallucination rate" for the extraction gate
+
+- **Logged:** 2026-11-12, **after** seeing the first benchmark result (Qwen 3.5 4B, 300 cases): 5.0% of raw model outputs failed grounding (28/557). No return data was involved.
+- **Issue:** the pre-registration set a gate of "prior-knowledge hallucination rate below 2%" without defining how to compute it. The first implementation counted every rejected output, which includes paraphrased quotes where the partner does appear in the text.
+- **Definition adopted:** prior-knowledge hallucination rate = raw outputs naming a partner absent from the entire source chunk, divided by all raw outputs.
+- **Transparency:**
+  - Both rates are reported side by side in every benchmark result: all ungrounded outputs, and prior-knowledge hallucinations only.
+  - The referee checks the prior-knowledge rate against the 2% gate.
+  - Because this definition was chosen after seeing a number, the all-ungrounded rate is also shown in the referee report, so readers can apply the stricter reading.
+  - Accepted links are unaffected: every accepted link passes deterministic grounding.
+

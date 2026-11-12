@@ -18,7 +18,7 @@ import random
 import re
 from dataclasses import dataclass, field
 
-from asof.extraction import ExtractionResult, Extractor
+from asof.extraction import ExtractionResult, Extractor, normalize
 from asof.reconcile import normalize_partner
 
 _SYL = ["vel", "tro", "na", "or", "bi", "que", "cal", "du", "ran", "brim", "wel", "tar", "sen",
@@ -126,16 +126,21 @@ class Score:
     pct_wrong: int = 0
     raw_outputs: int = 0
     raw_ungrounded: int = 0
+    partner_absent: int = 0  # named partner appears nowhere in the chunk (prior-knowledge)
+    reasons: dict[str, int] = field(default_factory=dict)
     by_kind: dict[str, list[int]] = field(default_factory=dict)  # kind -> [hit, total]
 
     def as_dict(self) -> dict:
         recall = self.tp / (self.tp + self.fn) if self.tp + self.fn else float("nan")
         precision = self.tp / (self.tp + self.fp) if self.tp + self.fp else float("nan")
         hall = self.raw_ungrounded / self.raw_outputs if self.raw_outputs else 0.0
+        prior = self.partner_absent / self.raw_outputs if self.raw_outputs else 0.0
         return {
             "recall": recall, "precision": precision, "raw_hallucination_rate": hall,
+            "prior_knowledge_hallucination_rate": prior,
             "tp": self.tp, "fn": self.fn, "fp": self.fp, "pct_wrong": self.pct_wrong,
             "raw_outputs": self.raw_outputs, "raw_ungrounded": self.raw_ungrounded,
+            "partner_absent": self.partner_absent, "rejection_reasons": self.reasons,
             "recall_by_kind": {k: v[0] / v[1] for k, v in self.by_kind.items() if v[1]},
         }
 
@@ -145,6 +150,11 @@ def score_case(case: Case, result: ExtractionResult, score: Score) -> None:
     score.raw_ungrounded += sum(
         1 for _, why in result.rejected if why in ("evidence_not_in_source", "partner_not_in_evidence")
     )
+    chunk_norm = normalize(case.chunk)
+    for link, why in result.rejected:
+        score.reasons[why] = score.reasons.get(why, 0) + 1
+        if normalize(link.partner) not in chunk_norm:
+            score.partner_absent += 1
     fict = {normalize_partner(i.name): i for i in case.injections}
     got: dict[str, set[tuple[str, float | None]]] = {}
     for link in result.accepted:
@@ -184,3 +194,69 @@ def dump_cases(cases: list[Case]) -> str:
                     "injections": [i.__dict__ for i in c.injections]})
         for c in cases
     )
+
+
+# ------------------------------------------------------------ entity-swap prior-knowledge probe
+
+# (famous real partner, clue that evokes it, relation). The written partner is always fictitious;
+# outputting the famous name means the model filled the relationship in from memory.
+SWAP_TEMPLATES = [
+    ("Apple", "Sales to {p}, the maker of the iPhone, accounted for {pct}% of our revenue in {y}.", "customer"),
+    ("Walmart", "{p}, the world's largest retailer, accounted for {pct}% of our net sales in {y}.", "customer"),
+    ("Amazon", "Revenue from {p}, which operates the AWS cloud platform, was {pct}% of total revenue in {y}.", "customer"),
+    ("Microsoft", "{p}, the developer of the Windows operating system, represented {pct}% of our revenue in {y}.", "customer"),
+    ("Taiwan Semiconductor", "{p}, the leading contract chipmaker in Taiwan, manufactures substantially all of our wafers.", "supplier"),
+    ("Foxconn", "{p}, the Taiwanese electronics assembler also known as Hon Hai, assembles most of our devices.", "supplier"),
+    ("Boeing", "Sales to {p}, the commercial aircraft manufacturer based in Arlington, Virginia, were {pct}% of revenue in {y}.", "customer"),
+    ("General Motors", "{p}, the Detroit automaker behind Chevrolet and Cadillac, accounted for {pct}% of our sales in {y}.", "customer"),
+]
+
+
+@dataclass
+class SwapCase:
+    case_id: str
+    chunk: str
+    fictitious: str
+    famous: str
+    relation: str
+
+
+def build_swap_cases(
+    backgrounds: list[str], real_names: set[str], n_cases: int, seed: int = 0
+) -> list[SwapCase]:
+    rng = random.Random(seed + 10_000)
+    names = fictitious_names(n_cases, real_names, rng)
+    cases = []
+    for i, name in enumerate(names):
+        famous, tpl, rel = SWAP_TEMPLATES[i % len(SWAP_TEMPLATES)]
+        sent = tpl.format(p=name, pct=rng.randint(10, 45), y=rng.randint(2012, 2025))
+        bg = [s for s in re.split(r"(?<=[\.\!\?])\s+", rng.choice(backgrounds)) if s.strip()]
+        start = rng.randrange(max(1, len(bg) - 3))
+        body = bg[start:start + rng.randint(1, 3)]
+        body.insert(rng.randint(0, len(body)), sent)
+        chunk = " ".join(body)
+        if normalize(famous) in normalize(chunk):
+            continue  # background already names the famous company; not a clean probe
+        cases.append(SwapCase(f"s{i:04d}", chunk, name, famous, rel))
+    return cases
+
+
+def run_swap(cases: list[SwapCase], extractor: Extractor) -> dict:
+    leaked = correct = 0
+    for case in cases:
+        res = extractor.extract_chunk(case.chunk)
+        raw = list(res.accepted) + [link for link, _ in res.rejected]
+        partners = [normalize(link.partner) for link in raw]
+        famous = normalize(case.famous)
+        leaked += any(famous in p or p in famous for p in partners if p)
+        correct += any(
+            normalize(link.partner) == normalize(case.fictitious) and link.relation == case.relation
+            for link in res.accepted
+        )
+    n = len(cases)
+    return {
+        "cases": n,
+        "famous_name_leak_rate": leaked / n if n else float("nan"),
+        "correct_fictitious_extraction_rate": correct / n if n else float("nan"),
+        "leaked": leaked,
+    }

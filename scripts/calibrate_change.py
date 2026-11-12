@@ -29,7 +29,7 @@ def auc(scores: np.ndarray, labels: np.ndarray) -> float:
 
 
 def main(n_pairs: int = 200, n_mean: int = 400, seed: int = 0) -> None:
-    con = store.connect(str(DATA_DIR / "pilot.duckdb"))
+    con = store.connect(str(DATA_DIR / "pilot.duckdb"), read_only=True)
     client = EdgarClient()
     rows = con.execute(
         "SELECT cik, accession, primary_doc FROM filings WHERE form='10-K' "

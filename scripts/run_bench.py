@@ -15,7 +15,7 @@ from pathlib import Path
 import pandas as pd
 
 from asof import store
-from asof.bench import build_cases, dump_cases, run
+from asof.bench import build_cases, build_swap_cases, dump_cases, run, run_swap
 from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.edgar import EdgarClient
 from asof.extraction import Extractor, candidate_chunks
@@ -23,7 +23,7 @@ from asof.sections import extract_sections, html_to_text
 
 
 def backgrounds(db: Path) -> list[str]:
-    con = store.connect(str(db))
+    con = store.connect(str(db), read_only=True)
     client = EdgarClient()
     rows = con.execute(
         "SELECT cik, accession, primary_doc FROM filings WHERE form='10-K' "
@@ -43,6 +43,7 @@ def main() -> None:
     ap.add_argument("--cases", type=int, default=300)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--db", default=str(DATA_DIR / "pilot.duckdb"))
+    ap.add_argument("--swap", type=int, default=0, help="number of entity-swap probe cases")
     args = ap.parse_args()
 
     bgs = backgrounds(Path(args.db))
@@ -60,6 +61,14 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(metrics, indent=2))
     json.dump(metrics, sys.stdout, indent=2)
+
+    if args.swap:
+        swap_cases = build_swap_cases(bgs, real_names, args.swap, seed=args.seed)
+        swap = run_swap(swap_cases, Extractor(model=args.model))
+        swap.update(model=args.model, seed=args.seed)
+        sout = PROJECT_ROOT / "results" / f"swap_{args.model.replace(':', '-')}_n{args.swap}_s{args.seed}.json"
+        sout.write_text(json.dumps(swap, indent=2))
+        json.dump(swap, sys.stdout, indent=2)
 
 
 if __name__ == "__main__":

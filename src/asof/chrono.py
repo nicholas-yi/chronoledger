@@ -35,7 +35,7 @@ def _load(model_id: str):
     from transformers import AutoModel, AutoTokenizer
 
     tok = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModel.from_pretrained(model_id, torch_dtype=torch.float32).eval()
+    model = AutoModel.from_pretrained(model_id, dtype=torch.float32).eval()
     return tok, model
 
 

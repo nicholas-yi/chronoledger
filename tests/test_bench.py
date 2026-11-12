@@ -45,3 +45,32 @@ def test_distractor_and_wrong_pct_penalized() -> None:
     d = s.as_dict()
     assert d["tp"] == 0 and d["fn"] == 2 and d["fp"] == 1 and d["pct_wrong"] == 1
     assert d["raw_hallucination_rate"] == 1 / 3
+    # "Apple" appears nowhere in the case text, so it is a prior-knowledge hallucination.
+    assert d["partner_absent"] == 1 and d["rejection_reasons"] == {"partner_not_in_evidence": 1}
+
+
+class _FakeExtractor:
+    def __init__(self, outputs):
+        self.outputs = outputs
+
+    def extract_chunk(self, chunk):
+        return self.outputs(chunk)
+
+
+def test_swap_probe_detects_famous_leak() -> None:
+    from asof.bench import build_swap_cases, run_swap
+
+    bg = ["We design radio components. Our products ship worldwide. Demand is cyclical."]
+    cases = build_swap_cases(bg, set(), 8, seed=0)
+    assert cases and all(c.famous.lower() not in c.chunk.lower() for c in cases)
+
+    leak = _FakeExtractor(lambda chunk: ExtractionResult([], [(Link("Apple", "customer", None, "x"), "partner_not_in_evidence")]))
+    r = run_swap(cases, leak)
+    assert r["leaked"] == sum(c.famous == "Apple" for c in cases)
+
+    def faithful(chunk):
+        case = next(c for c in cases if c.chunk == chunk)
+        return ExtractionResult([Link(case.fictitious, case.relation, None, "x")], [])
+
+    r = run_swap(cases, _FakeExtractor(faithful))
+    assert r["famous_name_leak_rate"] == 0 and r["correct_fictitious_extraction_rate"] == 1

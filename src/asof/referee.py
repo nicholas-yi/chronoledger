@@ -99,7 +99,7 @@ def _store_invariance(db: Path, n: int = 10) -> tuple[bool, str]:
     from asof import store
     from asof.invariance import invariance_violation
 
-    con = store.connect(str(db))
+    con = store.connect(str(db), read_only=True)
     fn = lambda c, t: store.facts_as_of(c, t)[["cik", "tag", "period_end", "value"]]  # noqa: E731
     rng = random.Random(0)
     start, end = datetime(2010, 1, 1, tzinfo=timezone.utc), datetime(2026, 11, 1, tzinfo=timezone.utc)
@@ -114,7 +114,7 @@ def _store_revision_invariance(db: Path, n: int = 6) -> tuple[bool, str]:
     from asof import store
     from asof.invariance import invariance_violation
 
-    con = store.connect(str(db))
+    con = store.connect(str(db), read_only=True)
     fn = lambda c, t: store.revisions_as_of(c, t)[["cik", "tag", "period_end", "value", "prev_value"]]  # noqa: E731
     rng = random.Random(1)
     start, end = datetime(2012, 1, 1, tzinfo=timezone.utc), datetime(2026, 11, 1, tzinfo=timezone.utc)
@@ -126,7 +126,7 @@ def _store_canary(db: Path) -> tuple[bool, str]:
     from asof import store
     from asof.invariance import invariance_violation
 
-    con = store.connect(str(db))
+    con = store.connect(str(db), read_only=True)
 
     def leaky(c, t):  # data treated as known at period end
         return c.execute(
@@ -204,6 +204,17 @@ def _bench_metric(path: Path, key: str, cmp: Callable[[float], bool], label: str
     return cmp(m[key]), f"{label} = {m[key]:.3f} ({path.name})"
 
 
+def _hallucination(path: Path) -> tuple[bool, str]:
+    if not path.exists():
+        return False, f"missing {path.name}"
+    m = json.loads(path.read_text())
+    prior = m.get("prior_knowledge_hallucination_rate")
+    if prior is None:
+        return False, "benchmark predates the D2 metric; rerun scripts/run_bench.py"
+    return prior < 0.02, (f"prior-knowledge {prior:.3f}; all ungrounded outputs "
+                          f"{m['raw_hallucination_rate']:.3f} (stricter reading) ({path.name})")
+
+
 def _grounding_canary() -> tuple[bool, str]:
     from asof.extraction import Link, ground
 
@@ -279,9 +290,11 @@ def _price_filter_canary() -> tuple[bool, str]:
     return adjusted[0] < 5 <= traded[0], f"adjusted $1.00 vs as-traded ${traded[0]:.2f}"
 
 
-def default_threats(db: Path | None = None, bench: Path | None = None) -> list[Threat]:
+def default_threats(db: Path | None = None, bench: Path | None = None,
+                    swap: Path | None = None) -> list[Threat]:
     db = db or DATA_DIR / "pilot.duckdb"
     bench = bench or PROJECT_ROOT / "results" / "bench_qwen3.5-4b_n300_s0.json"
+    swap = swap or PROJECT_ROOT / "results" / "swap_qwen3.5-4b_n160_s0.json"
     return [
         Threat("lookahead.store", "Could any fact be read before EDGAR accepted the filing?", [
             Check("invariance of as-of facts", lambda: _store_invariance(db)),
@@ -297,8 +310,9 @@ def default_threats(db: Path | None = None, bench: Path | None = None) -> list[T
             Check("same-day vintage is refused", _vintage_canary, mutation=True),
         ]),
         Threat("extraction.hallucination", "Does the extractor name companies the text never mentions?", [
-            Check("raw hallucination rate < 2%", lambda: _bench_metric(
-                bench, "raw_hallucination_rate", lambda v: v < 0.02, "raw hallucination rate")),
+            Check("prior-knowledge hallucination rate < 2% (definition: deviation D2)", lambda: _hallucination(bench)),
+            Check("entity-swap probe: famous real partner leaked < 2%", lambda: _bench_metric(
+                swap, "famous_name_leak_rate", lambda v: v < 0.02, "famous-name leak rate")),
             Check("grounding rejects fabricated links", _grounding_canary, mutation=True),
         ]),
         Threat("extraction.quality", "Would H2/H3 be driven by extraction errors rather than economics?", [
