@@ -72,7 +72,7 @@ class YahooPrices:
         if resp.status_code == 200:
             result = resp.json().get("chart", {}).get("result")
             payload = result[0] if result else {}
-        elif resp.status_code != 404:
+        elif resp.status_code not in (400, 404):  # 400/404: no data for this symbol and range
             resp.raise_for_status()
         path.write_bytes(gzip.compress(json.dumps(payload).encode()))
         return payload or None

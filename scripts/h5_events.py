@@ -28,7 +28,7 @@ def load_events() -> pd.DataFrame:
     con.close()
     ev["knowledge_time"] = pd.to_datetime(ev["knowledge_time"], utc=True)
     local = ev["knowledge_time"].dt.tz_convert(ET)
-    ev["friday_evening"] = (local.dt.weekday == 4) & (local.dt.hour >= 16)
+    ev["friday_evening"] = (local.dt.day_of_week == 4) & (local.dt.hour >= 16)
     items = ev["items"].fillna("")
     ev["item_402"] = items.str.contains(r"\b4\.02\b")
     ev["item_401"] = items.str.contains(r"\b4\.01\b")
