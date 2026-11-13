@@ -8,9 +8,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import platform
 from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import datetime, timezone
+from importlib.metadata import version
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +46,11 @@ def lineage(inputs: list[Path] | None = None) -> dict[str, Any]:
         "git_commit": git("rev-parse", "HEAD"),
         "git_dirty": bool(git("status", "--porcelain", "--", "src", "scripts")),
         "inputs": {str(Path(p).name): file_sha256(p) for p in (inputs or []) if Path(p).exists()},
+        "environment": {
+            "python": platform.python_version(),
+            **{name: version(name) for name in (
+                "duckdb", "pandas", "pyarrow", "httpx", "numpy", "scipy", "statsmodels", "lxml")},
+        },
     }
 
 

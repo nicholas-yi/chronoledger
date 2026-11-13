@@ -27,6 +27,9 @@ include a hash of `data/h0_market_inputs.json`, which fingerprints the guarded
 price caches and cached French factor/breakpoint archives without publishing their
 contents. H4 also fingerprints the entity metadata used for SIC controls; H6
 fingerprints the companyfacts archive and its sample or universe.
+New lineage also records Python and core runtime package versions. The historical
+entries did not pin that environment, so differences from them must not be attributed
+solely to new downloads: code corrections and runtime changes may also contribute.
 
 Development runners append a ledger entry even if execution raises after an
 evaluation starts. `execution_status` describes execution, not scientific validity;
