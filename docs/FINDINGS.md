@@ -65,3 +65,27 @@ These use verified first-use dates: J&J named Kenvue on 2022-09-28; 3M named Sol
 - **No context-specific leakage in the in-use vintages.** But the post-coinage positive controls also fail: the 2022 vintage doesn't know Kenvue, and the 2023 vintage doesn't know Solventum. Yearly vintages appear to absorb only high-frequency new terms, such as COVID, so this probe can detect only large leaks.
 - **Mounjaro is a subword-prior false positive under the rank-only rule:** its control context ranks it just as high. See deviation D4.
 - **More power** needs frequent terms coined within the in-use window, or a different method, such as likelihood comparisons on dated news text.
+
+## F2: distress-event tests are invalid under a current-ticker universe
+
+**Status:** confirmed by diagnostic. It invalidates the H5b, H5c, and H6(b) development results.
+
+**Trigger.** Every H5 development result had the opposite sign to the published effects, even though those effects are well established. Late-filing notices showed a mean CAR(+1..+60) of +6.8% (t = 1.5), Item 4.02 +5.9%, Item 4.01 +4.4%, and Friday-evening 8-Ks +0.97% relative to other 8-Ks (t = 2.0).
+
+**Diagnostics.**
+- **Random-date placebo, same universe:** mean CAR(+1..+20) −0.3% (t = −2.1); CAR(+1..+60) −0.6% (t = −1.3). There's no general positive bias.
+- **Coverage by event type**, using all SEC filers from the bulk archive, Jan 2023–Jun 2024:
+
+| Filers | Firms | In price-covered universe | Stopped filing 10-Ks before mid-2025 |
+|---|---|---|---|
+| All 10-K filers | 7,378 | 36.6% | 26.2% |
+| NT 10-K/10-Q | 1,822 | 11.0% | 49.3% |
+| 8-K Item 4.02 | 329 | 27.1% | 34.3% |
+| 8-K Item 4.01 | 1,115 | 20.6% | 30.7% |
+
+**Reading.** The universe uses today's tickers and a public float of at least $200M. Distressed filers are therefore 1.3–3.3x less likely to be included, and the excluded ones are disproportionately those that later disappeared. Among distressed firms, conditioning on survival selects the rebounders, so the sign flips.
+
+**Consequences.**
+- H5b, H5c, and H6(b) cannot be tested with free current-ticker price data. Their development results are reported as **invalid**, not as evidence against the published effects. Their holdouts will not be opened under this data.
+- H5a compares Friday-evening 8-Ks with other 8-Ks within the same universe, so it is less directly affected, but it is still subject to the same selection. Its positive development estimate is not a replication.
+- Testing distress events needs prices for delisted securities, for example the Tiingo free tier, or for acquired firms, their deal consideration. This is the strongest argument yet for adding a delisted-price source.
