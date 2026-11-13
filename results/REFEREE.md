@@ -5,12 +5,12 @@
 ```
 lookahead.store              [#####] 5/5
 lookahead.reconcile          [####.] 4/5
-lookahead.representation     [##...] 2/5
+lookahead.representation     [#....] 1/5
 extraction.hallucination     [#####] 5/5
 extraction.quality           [####.] 4/5
 multiple_testing             [#####] 5/5
 survivorship                 [####.] 4/5
-price_level_leak             [##...] 2/5
+price_level_leak             [#####] 5/5
 ```
 
 ## lookahead.store — level 5
@@ -28,11 +28,12 @@ price_level_leak             [##...] 2/5
 - PASS (check) **invariance over random amendment chains**: 200 random amendment sequences, 0 invariance violations
 - PASS (check) **retraction vs append-only ablation**: amendment retracts link; append-only baseline keeps the stale link
 
-## lookahead.representation — level 2
+## lookahead.representation — level 1
 
 *Could the text model have read text written after the filing?*
 
 - PASS (check) **vintage strictly before filing date**: 2000 random acceptance times; 0 used a vintage not strictly before the filing date
+- FAIL (check) **neologism probe: pre-coinage vintages don't know the term**: 2/10 pre-coinage probes ranked the term top-10: COVID@20181231 rank 1, COVID@20191231 rank 1
 - PASS (mutation) **same-day vintage is refused**: a filing on 2023-12-31 does not get the same-day 2023-12-31 vintage
 
 ## extraction.hallucination — level 5
@@ -65,9 +66,10 @@ price_level_leak             [##...] 2/5
 - PASS (check) **coverage audit and D1 documented**: coverage audit and deviation D1 are documented
 - PASS (check) **no returns computed before deviation D1**: no return outputs exist yet
 
-## price_level_leak — level 2
+## price_level_leak — level 5
 
 *Do price filters or market caps use future split information?*
 
 - PASS (check) **as-traded reconstruction on AAPL 2020 split**: AAPL 2020 split: 499.23 / 129.04
+- PASS (check) **as-traded close matches the historical record (real data)**: AAPL as-traded close 2014-06-06 = 645.57 (record: 645.57)
 - PASS (mutation) **$5 filter canary**: adjusted $1.00 vs as-traded $28.00

@@ -24,6 +24,32 @@ The Python package is named `asof`, after the `as_of` queries everything is buil
 - The 10-K section parser finds Items 1, 1A, and 7 in 30/30 sampled real filings (2012–2026) and skips tables of contents.
 - Free-price survivorship coverage was audited by public float; see `docs/DATA_AUDIT.md`.
 
+### Relationship extraction (local Qwen 3.5, synthetic benchmark on real 10-K text)
+
+Ground truth comes from construction: fictitious companies are injected into real filing text, with no human labels.
+
+| | Qwen 3.5 4B (300 cases) | Qwen 3.5 9B (80 cases) | Gate |
+|---|---|---|---|
+| Recall | 0.942 | 0.835 | ≥ 0.80 |
+| Precision | 0.956 | 0.981 | ≥ 0.90 |
+| Prior-knowledge hallucination | 0.5% | 0.0% | < 2% |
+| All ungrounded raw outputs | 5.0% | 0.8% | reported |
+| Entity-swap probe: famous real partner leaked | 0/159 | 0/40 | < 2% |
+
+Every accepted link is verified by deterministic quote grounding.
+
+### Change detection
+
+Centering ChronoBERT embeddings fixes their anisotropy. Similarity between unrelated risks drops from 0.971 to 0.045, and AUC on synthetic same-risk vs. different-risk pairs is 0.9999. See `results/change_calibration.json`.
+
+### Socratic referee: gate BLOCKED
+
+`python -m asof.referee` evaluates 8 threats with executable checks and mutation tests; see `results/REFEREE.md`.
+
+- **7 of 8 threats are at level 4 or higher.**
+- **Representation look-ahead is at level 1.** A neologism probe found context-specific "COVID" knowledge in the 2018 and 2019 ChronoBERT vintages; see [docs/FINDINGS.md](docs/FINDINGS.md).
+- No return-based result will be reported until the gate passes.
+
 ## Setup
 
 ```bash

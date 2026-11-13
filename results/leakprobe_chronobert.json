@@ -1,0 +1,242 @@
+[
+  {
+    "term": "COVID",
+    "vintage": "20181231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 1,
+    "mean_logprob": -0.05860809236764908
+  },
+  {
+    "term": "COVID",
+    "vintage": "20181231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 1163,
+    "mean_logprob": -9.315776824951172
+  },
+  {
+    "term": "COVID",
+    "vintage": "20191231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 1,
+    "mean_logprob": -0.016050653532147408
+  },
+  {
+    "term": "COVID",
+    "vintage": "20191231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 1400,
+    "mean_logprob": -9.62420654296875
+  },
+  {
+    "term": "COVID",
+    "vintage": "20201231",
+    "before_first_use": false,
+    "context": "evoking",
+    "first_rank": 1,
+    "mean_logprob": -0.0017948722233995795
+  },
+  {
+    "term": "COVID",
+    "vintage": "20201231",
+    "before_first_use": false,
+    "context": "control",
+    "first_rank": 79,
+    "mean_logprob": -6.123406410217285
+  },
+  {
+    "term": "coronavirus",
+    "vintage": "20181231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 342,
+    "mean_logprob": -8.13660717010498
+  },
+  {
+    "term": "coronavirus",
+    "vintage": "20181231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 2665,
+    "mean_logprob": -11.043720245361328
+  },
+  {
+    "term": "coronavirus",
+    "vintage": "20191231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 302,
+    "mean_logprob": -7.9639387130737305
+  },
+  {
+    "term": "coronavirus",
+    "vintage": "20191231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 1444,
+    "mean_logprob": -9.55316162109375
+  },
+  {
+    "term": "coronavirus",
+    "vintage": "20201231",
+    "before_first_use": false,
+    "context": "evoking",
+    "first_rank": 1,
+    "mean_logprob": -0.009246266447007656
+  },
+  {
+    "term": "coronavirus",
+    "vintage": "20201231",
+    "before_first_use": false,
+    "context": "control",
+    "first_rank": 5,
+    "mean_logprob": -4.0796380043029785
+  },
+  {
+    "term": "Omicron",
+    "vintage": "20191231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 37,
+    "mean_logprob": -9.299649874369303
+  },
+  {
+    "term": "Omicron",
+    "vintage": "20191231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 247,
+    "mean_logprob": -10.540873845418295
+  },
+  {
+    "term": "Omicron",
+    "vintage": "20201231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 20,
+    "mean_logprob": -8.620335261027018
+  },
+  {
+    "term": "Omicron",
+    "vintage": "20201231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 444,
+    "mean_logprob": -11.32592805226644
+  },
+  {
+    "term": "Omicron",
+    "vintage": "20211231",
+    "before_first_use": false,
+    "context": "evoking",
+    "first_rank": 60,
+    "mean_logprob": -8.924345970153809
+  },
+  {
+    "term": "Omicron",
+    "vintage": "20211231",
+    "before_first_use": false,
+    "context": "control",
+    "first_rank": 304,
+    "mean_logprob": -10.73016325632731
+  },
+  {
+    "term": "ChatGPT",
+    "vintage": "20201231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 28,
+    "mean_logprob": -6.64644209543864
+  },
+  {
+    "term": "ChatGPT",
+    "vintage": "20201231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 3759,
+    "mean_logprob": -11.030292193094889
+  },
+  {
+    "term": "ChatGPT",
+    "vintage": "20211231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 20,
+    "mean_logprob": -6.317002614339192
+  },
+  {
+    "term": "ChatGPT",
+    "vintage": "20211231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 3265,
+    "mean_logprob": -10.393147468566895
+  },
+  {
+    "term": "ChatGPT",
+    "vintage": "20221231",
+    "before_first_use": false,
+    "context": "evoking",
+    "first_rank": 18,
+    "mean_logprob": -5.772777239481608
+  },
+  {
+    "term": "ChatGPT",
+    "vintage": "20221231",
+    "before_first_use": false,
+    "context": "control",
+    "first_rank": 1925,
+    "mean_logprob": -10.842631340026855
+  },
+  {
+    "term": "Brexit",
+    "vintage": "20101231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 2444,
+    "mean_logprob": -12.414400100708008
+  },
+  {
+    "term": "Brexit",
+    "vintage": "20101231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 7592,
+    "mean_logprob": -15.665552139282227
+  },
+  {
+    "term": "Brexit",
+    "vintage": "20111231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 2109,
+    "mean_logprob": -12.230130195617676
+  },
+  {
+    "term": "Brexit",
+    "vintage": "20111231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 7317,
+    "mean_logprob": -14.804916381835938
+  },
+  {
+    "term": "Brexit",
+    "vintage": "20161231",
+    "before_first_use": false,
+    "context": "evoking",
+    "first_rank": 16,
+    "mean_logprob": -4.432602882385254
+  },
+  {
+    "term": "Brexit",
+    "vintage": "20161231",
+    "before_first_use": false,
+    "context": "control",
+    "first_rank": 1243,
+    "mean_logprob": -10.513757705688477
+  }
+]

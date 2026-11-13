@@ -32,3 +32,14 @@
   - Because this definition was chosen after seeing a number, the all-ungrounded rate is also shown in the referee report, so readers can apply the stricter reading.
   - Accepted links are unaffected: every accepted link passes deterministic grounding.
 
+## D3: leak-proof robustness representation for H1
+
+- **Logged:** 2026-11-12, after the neologism probe (`docs/FINDINGS.md`, F1) showed
+  context-specific "COVID" knowledge in pre-2020 ChronoBERT vintages. **No return data was
+  involved.**
+- **Change:** H1 is additionally computed with a bag-of-words TF-IDF paragraph representation,
+  fitted only on filings known by each as-of date. It cannot encode information from after the
+  filing.
+- **Rule:** H1 is "supported" only if it meets the pre-registered threshold under ChronoBERT
+  **and** keeps its sign with t ≥ 2.0 under TF-IDF. The ChronoBERT threshold is unchanged.
+
