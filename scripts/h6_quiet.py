@@ -54,7 +54,7 @@ def part_a(filings: pd.DataFrame) -> dict:
     fit = sm.OLS(base["restate_12m"], x).fit(cov_type="cluster", cov_kwds={"groups": pd.factorize(base["cik"])[0]})
     q = base[base["quiet_down"] == 1]
     return {"coef": float(fit.params["quiet_down"]), "t": float(fit.tvalues["quiet_down"]),
-            "n_filings": int(len(base)), "n_quiet": int(len(q)), "firms": int(base["cik"].nunique()),
+            "n_filings": len(base), "n_quiet": len(q), "firms": int(base["cik"].nunique()),
             "restate_rate_quiet": float(q["restate_12m"].mean()) if len(q) else float("nan"),
             "restate_rate_other": float(base.loc[base["quiet_down"] == 0, "restate_12m"].mean()),
             "item402_rate_quiet": float(q["item402_12m"].mean()) if len(q) else float("nan"),
@@ -90,9 +90,9 @@ def part_b(filings: pd.DataFrame) -> dict:
                          "month": pd.Timestamp(r.knowledge_time).strftime("%Y-%m")})
     c = pd.DataFrame(cars).dropna()
     if len(c) < 10:
-        return {"n": int(len(c)), "note": "too few events for inference"}
+        return {"n": len(c), "note": "too few events for inference"}
     fit = sm.OLS(c["car"], np.ones(len(c))).fit(cov_type="cluster", cov_kwds={"groups": pd.factorize(c["month"])[0]})
-    return {"mean_car": float(fit.params.iloc[0]), "t": float(fit.tvalues.iloc[0]), "n": int(len(c)),
+    return {"mean_car": float(fit.params.iloc[0]), "t": float(fit.tvalues.iloc[0]), "n": len(c),
             "clusters": int(c["month"].nunique())}
 
 
