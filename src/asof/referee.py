@@ -189,6 +189,27 @@ def _vintage_rule() -> tuple[bool, str]:
     return bad == 0, f"2000 random acceptance times; {bad} used a vintage not strictly before the filing date"
 
 
+def _neologism_probe(path: Path) -> tuple[bool, str]:
+    if not path.exists():
+        return False, f"missing {path.name}; run scripts/leakprobe.py"
+    rows = json.loads(path.read_text())
+    leaks = [r for r in rows if r["before_first_use"] and r["context"] == "evoking" and r["first_rank"] <= 10]
+    tested = sum(1 for r in rows if r["before_first_use"] and r["context"] == "evoking")
+    detail = ", ".join(f"{r['term']}@{r['vintage']} rank {r['first_rank']}" for r in leaks)
+    return not leaks, f"{len(leaks)}/{tested} pre-coinage probes ranked the term top-10" + (f": {detail}" if leaks else "")
+
+
+def _as_traded_real() -> tuple[bool, str]:
+    from asof.prices import YahooPrices
+
+    df = YahooPrices().daily("AAPL")
+    row = df[df["date"].astype(str) == "2014-06-06"]
+    if row.empty:
+        return False, "AAPL 2014-06-06 not in cached prices"
+    close = float(row["close"].iloc[0])
+    return abs(close - 645.57) < 0.05, f"AAPL as-traded close 2014-06-06 = {close:.2f} (record: 645.57)"
+
+
 def _vintage_canary() -> tuple[bool, str]:
     from asof.chrono import vintage_for
 
@@ -307,6 +328,8 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
         ]),
         Threat("lookahead.representation", "Could the text model have read text written after the filing?", [
             Check("vintage strictly before filing date", _vintage_rule),
+            Check("neologism probe: pre-coinage vintages don't know the term",
+                  lambda: _neologism_probe(PROJECT_ROOT / "results" / "leakprobe_chronobert.json")),
             Check("same-day vintage is refused", _vintage_canary, mutation=True),
         ]),
         Threat("extraction.hallucination", "Does the extractor name companies the text never mentions?", [
@@ -330,6 +353,7 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
         ]),
         Threat("price_level_leak", "Do price filters or market caps use future split information?", [
             Check("as-traded reconstruction on AAPL 2020 split", _as_traded_unit),
+            Check("as-traded close matches the historical record (real data)", _as_traded_real),
             Check("$5 filter canary", _price_filter_canary, mutation=True),
         ]),
     ]

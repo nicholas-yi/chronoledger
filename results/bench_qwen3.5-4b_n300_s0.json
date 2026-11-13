@@ -2,12 +2,18 @@
   "recall": 0.9422632794457275,
   "precision": 0.955503512880562,
   "raw_hallucination_rate": 0.05026929982046679,
+  "prior_knowledge_hallucination_rate": 0.005385996409335727,
   "tp": 408,
   "fn": 25,
   "fp": 19,
   "pct_wrong": 0,
   "raw_outputs": 557,
   "raw_ungrounded": 28,
+  "partner_absent": 3,
+  "rejection_reasons": {
+    "evidence_not_in_source": 21,
+    "partner_not_in_evidence": 7
+  },
   "recall_by_kind": {
     "customer": 0.9888888888888889,
     "customer_pct": 0.912621359223301,
@@ -17,5 +23,5 @@
   "cases": 300,
   "seed": 0,
   "backgrounds": 3222,
-  "seconds": 1048.5
+  "seconds": 11.7
 }

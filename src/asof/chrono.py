@@ -39,6 +39,16 @@ def _load(model_id: str):
     return tok, model
 
 
+@lru_cache(maxsize=2)
+def _load_mlm(model_id: str):
+    import torch
+    from transformers import AutoModelForMaskedLM, AutoTokenizer
+
+    tok = AutoTokenizer.from_pretrained(model_id)
+    model = AutoModelForMaskedLM.from_pretrained(model_id, dtype=torch.float32).eval()
+    return tok, model
+
+
 def embed(texts: list[str], model_id: str, max_tokens: int = 512, batch: int = 8) -> np.ndarray:
     """Mean-pooled, L2-normalized last-layer embeddings."""
     import torch

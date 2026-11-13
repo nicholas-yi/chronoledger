@@ -1,0 +1,26 @@
+{
+  "recall": 0.8347107438016529,
+  "precision": 0.9805825242718447,
+  "raw_hallucination_rate": 0.008403361344537815,
+  "prior_knowledge_hallucination_rate": 0.0,
+  "tp": 101,
+  "fn": 20,
+  "fp": 2,
+  "pct_wrong": 0,
+  "raw_outputs": 119,
+  "raw_ungrounded": 1,
+  "partner_absent": 0,
+  "rejection_reasons": {
+    "partner_not_in_evidence": 1
+  },
+  "recall_by_kind": {
+    "supplier": 0.7,
+    "customer": 0.8214285714285714,
+    "customer_pct": 0.9433962264150944
+  },
+  "model": "qwen3.5:9b",
+  "cases": 80,
+  "seed": 0,
+  "backgrounds": 3222,
+  "seconds": 4501.9
+}

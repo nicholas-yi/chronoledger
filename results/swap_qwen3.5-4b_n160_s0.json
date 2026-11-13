@@ -1,0 +1,8 @@
+{
+  "cases": 159,
+  "famous_name_leak_rate": 0.0,
+  "correct_fictitious_extraction_rate": 0.9056603773584906,
+  "leaked": 0,
+  "model": "qwen3.5:4b",
+  "seed": 0
+}
