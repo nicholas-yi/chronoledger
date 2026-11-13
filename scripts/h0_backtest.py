@@ -17,9 +17,16 @@ import numpy as np
 import pandas as pd
 
 from asof import ledger
-from asof.backtest import Config, clean_shares, form_portfolios, latest_as_of, long_short, monthly_panel
+from asof.backtest import (
+    Config,
+    clean_shares,
+    form_portfolios,
+    latest_as_of,
+    long_short,
+    monthly_panel,
+)
 from asof.config import DATA_DIR, PROJECT_ROOT
-from asof.events import car, event_panel, neutralize, rank_ic
+from asof.events import CarEngine, event_panel, neutralize, rank_ic
 from asof.factors import ff5_umd_daily, ff5_umd_monthly, nyse_me_breakpoints
 from asof.inference import nw_alpha
 from asof.periods import DEV_END, DEV_RETURN_CUTOFF, DEV_START
@@ -105,9 +112,9 @@ def monthly_test(cfg: Config, sig, shares, panel, bp, factors) -> dict:
             "mean_ic": float(ic.mean()), "ic_t": float(ic.mean() / (ic.std(ddof=1) / np.sqrt(len(ic)))) if len(ic) > 2 else float("nan")}
 
 
-def event_test(sig: pd.DataFrame, signal: str, daily_ret, factors_d, uni) -> dict:
+def event_test(sig: pd.DataFrame, signal: str, daily_ret, engine: CarEngine, uni) -> dict:
     s = sig.merge(uni[["cik", "ticker"]], on="cik").dropna(subset=[signal])
-    days = list(factors_d.index)
+    days = engine.days
     cars = []
     for r in s.itertuples():
         if r.ticker not in daily_ret:
@@ -115,7 +122,7 @@ def event_test(sig: pd.DataFrame, signal: str, daily_ret, factors_d, uni) -> dic
         day = first_tradable_close(r.knowledge_time.to_pydatetime(), days)
         if day is None:
             continue
-        cars.append({"car": car(daily_ret[r.ticker], factors_d, day, horizon=60), "x": getattr(r, signal),
+        cars.append({"car": engine.car(r.ticker, daily_ret[r.ticker], day, horizon=60), "x": getattr(r, signal),
                      "month": r.knowledge_time.strftime("%Y-%m")})
     c = pd.DataFrame(cars).dropna()
     if len(c) < 30:
@@ -130,6 +137,7 @@ def main() -> None:
     factors = ff5_umd_monthly().loc[: pd.Period(DEV_RETURN_CUTOFF, "M")]
     factors_d = ff5_umd_daily()
     factors_d = factors_d[factors_d.index <= DEV_RETURN_CUTOFF]
+    engine = CarEngine(factors_d)
     bp = nyse_me_breakpoints()
     results = []
     variants = {
@@ -140,9 +148,11 @@ def main() -> None:
                            "neg_change_n", True, "change_n"),
     }
     for name, (s, col, long_high, ev_col) in variants.items():
+        t0 = __import__("time").time()
         cfg = replace(Config(), signal=col, long_high=long_high)
         m = monthly_test(cfg, s, shares, panel, bp, factors)
-        e = event_test(s, ev_col, daily_ret, factors_d, uni)
+        e = event_test(s, ev_col, daily_ret, engine, uni)
+        print(f"{name}: {__import__('time').time() - t0:.0f}s", file=sys.stderr, flush=True)
         entry = {"variant": name, "config": asdict(cfg), "monthly": m, "event_panel_change_on_car60": e}
         h = ledger.log_trial("H0" if "raw" in name else "H1n", {"variant": name, **asdict(cfg)},
                              "development", {**{f"m_{k}": v for k, v in m.items()}, **{f"e_{k}": v for k, v in e.items()}},

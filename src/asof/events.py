@@ -52,6 +52,46 @@ def car(
     return float((post["r"] - expected).sum())
 
 
+class CarEngine:
+    """Fast CARs: each firm's returns are aligned to the factor calendar once, then every event is
+    a slice plus a small least-squares fit. Numerically identical to ``car``."""
+
+    def __init__(self, factors: pd.DataFrame) -> None:
+        self.factors = factors
+        self.days = list(factors.index)
+        self.pos = {d: i for i, d in enumerate(self.days)}
+        self.F = factors[FACTORS].to_numpy()
+        self.rf = factors["RF"].to_numpy()
+        self._cache: dict[str, np.ndarray] = {}
+
+    def _aligned(self, key: str, returns: pd.Series) -> np.ndarray:
+        if key not in self._cache:
+            self._cache[key] = returns.reindex(self.factors.index).to_numpy(dtype=float)
+        return self._cache[key]
+
+    def car(self, key: str, returns: pd.Series, event_day: date, horizon: int = 60,
+            est: tuple[int, int] = (-260, -21), min_est: int = 120) -> float:
+        import bisect
+
+        r = self._aligned(key, returns)
+        idx = np.flatnonzero(~np.isnan(r))  # calendar positions of this firm's valid days
+        dpos = bisect.bisect_left(self.days, event_day)  # first calendar day >= event_day
+        j = int(np.searchsorted(idx, dpos))  # first valid firm day on/after the event
+        if j >= idx.size:
+            return float("nan")
+        lo, hi = j + est[0], j + est[1]
+        if lo < 0 or j + horizon >= idx.size:
+            return float("nan")
+        e = idx[lo:hi + 1]
+        if e.size < min_est:
+            return float("nan")
+        X = np.column_stack([np.ones(e.size), self.F[e]])
+        beta, *_ = np.linalg.lstsq(X, r[e] - self.rf[e], rcond=None)
+        p = idx[j + 1:j + 1 + horizon]
+        expected = self.rf[p] + np.column_stack([np.ones(p.size), self.F[p]]) @ beta
+        return float((r[p] - expected).sum())
+
+
 @dataclass(frozen=True)
 class PanelResult:
     coef: float

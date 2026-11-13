@@ -56,3 +56,23 @@ def test_rank_ic() -> None:
     s = pd.Series(range(50), dtype=float)
     assert rank_ic(s, s * 2) == pytest.approx(1.0)
     assert rank_ic(s, -s) == pytest.approx(-1.0)
+
+
+def test_car_engine_matches_reference_and_is_fast() -> None:
+    import time
+
+    from asof.events import CarEngine
+
+    f = _factors(900)
+    rng = np.random.default_rng(5)
+    r = f["RF"] + 0.9 * f["Mkt_RF"] + rng.normal(0, 0.003, len(f))
+    r = r.drop(r.index[[100, 350, 351, 600]])  # gaps: firm missing some days
+    eng = CarEngine(f)
+    days = [f.index[i] for i in (300, 420, 500, 700, 830, 899)] + [date(2022, 1, 1)]
+    for d in days:
+        a, b = car(r, f, d, horizon=60), eng.car("X", r, d, horizon=60)
+        assert (np.isnan(a) and np.isnan(b)) or a == pytest.approx(b, abs=1e-12)
+    t = time.time()
+    for _ in range(500):
+        eng.car("X", r, f.index[500], horizon=60)
+    assert time.time() - t < 2.0
