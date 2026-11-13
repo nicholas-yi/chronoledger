@@ -134,6 +134,7 @@ def stage_outcomes() -> None:
 
 def build_panel() -> pd.DataFrame:
     pairs = pd.read_parquet(PAIRS)
+    pairs = pairs[pd.to_datetime(pairs["knowledge_time"], utc=True).between(*DEV)].copy()
     out = pd.read_parquet(OUT)
     out["report_date"] = pd.to_datetime(out["report_date"])
     out = out.sort_values(["cik", "report_date"])

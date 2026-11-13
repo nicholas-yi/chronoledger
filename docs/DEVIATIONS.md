@@ -62,3 +62,21 @@
   - **Form:** only regular 10-K or 10-Q comparative columns count. Amendments themselves are not "quiet."
   - **Scale changes:** filings that revise three or more income-statement tags by the same ratio (to three decimals) are treated as unit or scale changes and excluded.
   - **H6(a) outcome:** a 10-K/A or an 8-K Item 4.02 by the same firm within 365 days after the revising filing. Because 10-K/As are often Part III-only amendments, the 4.02-only rate is reported descriptively, but it does not decide success.
+
+## D6: fit H4 winsorization on development observations only
+
+- **Logged:** 2026-11-13, **after** the historical H4 development estimates in the ledger,
+  but before a rebuilt-data H4 estimate was evaluated. Identified by source inspection and
+  reproduced with synthetic data; no new validation or holdout estimate was examined.
+- **Bug:** `build_panel()` computed the 1%/99% winsorization cutoffs on every available
+  signal period before `stage_test()` selected development rows. Future-period outcomes
+  could therefore change development regressors and outcomes.
+- **Correction:** select signals accepted in the existing H4 development window
+  (2012-01-01 through 2018-12-31 UTC) before estimating any winsorization cutoffs.
+  Next-fiscal-year outcomes remain the first-reported values required by the design.
+  The hypothesis, outcomes, 1%/99% levels, and inference thresholds are unchanged.
+- **Evidence and consequence:** `tests/test_h4_development.py` demonstrates that adding
+  synthetic future observations changed development `d_roa` under the old code and must
+  not do so under the correction. Historical entries remain untouched. Rebuilt results
+  must be distinguished from the old estimates; this repair does not retroactively
+  establish that historical preprocessing respected the holdout boundary.

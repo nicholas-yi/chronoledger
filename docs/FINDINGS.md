@@ -103,3 +103,16 @@ These use verified first-use dates: J&J named Kenvue on 2022-09-28; 3M named Sol
 **Process.**
 - The invalid runs remain in the append-only trial ledger, so they still count toward the multiple-testing penalty.
 - The referee now includes a `data_integrity` threat that automatically fails any long-short mean above 5% per month.
+
+## F4: H4 winsorization used observations outside development
+
+**Status:** implementation bug reproduced with synthetic data on 2026-11-13; corrected
+before the rebuilt-data regression. No new empirical result is established by this test.
+
+`build_panel()` winsorized ratio variables before selecting the development period.
+Synthetic future observations changed the development-only `d_roa` cutoffs, violating
+the intended separation. Development signals are now selected before fitting cutoffs;
+see [D6](DEVIATIONS.md#d6-fit-h4-winsorization-on-development-observations-only).
+The prior H4 ledger entries remain available but are not clean evidence of out-of-period
+preprocessing invariance. A fresh development run is required. The return holdout remains
+sealed, and no validation or holdout regression was run as part of this repair.
