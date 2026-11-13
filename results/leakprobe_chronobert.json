@@ -238,5 +238,149 @@
     "context": "control",
     "first_rank": 1243,
     "mean_logprob": -10.513757705688477
+  },
+  {
+    "term": "Mounjaro",
+    "vintage": "20211231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 6,
+    "mean_logprob": -7.658254384994507
+  },
+  {
+    "term": "Mounjaro",
+    "vintage": "20211231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 8,
+    "mean_logprob": -7.574393033981323
+  },
+  {
+    "term": "Mounjaro",
+    "vintage": "20221231",
+    "before_first_use": false,
+    "context": "evoking",
+    "first_rank": 7,
+    "mean_logprob": -7.48953378200531
+  },
+  {
+    "term": "Mounjaro",
+    "vintage": "20221231",
+    "before_first_use": false,
+    "context": "control",
+    "first_rank": 10,
+    "mean_logprob": -7.747123718261719
+  },
+  {
+    "term": "Kenvue",
+    "vintage": "20211231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 923,
+    "mean_logprob": -8.970703125
+  },
+  {
+    "term": "Kenvue",
+    "vintage": "20211231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 403,
+    "mean_logprob": -8.88382887840271
+  },
+  {
+    "term": "Kenvue",
+    "vintage": "20221231",
+    "before_first_use": false,
+    "context": "evoking",
+    "first_rank": 818,
+    "mean_logprob": -8.6754150390625
+  },
+  {
+    "term": "Kenvue",
+    "vintage": "20221231",
+    "before_first_use": false,
+    "context": "control",
+    "first_rank": 257,
+    "mean_logprob": -8.831907510757446
+  },
+  {
+    "term": "Solventum",
+    "vintage": "20221231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 594,
+    "mean_logprob": -8.218603610992432
+  },
+  {
+    "term": "Solventum",
+    "vintage": "20221231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 1264,
+    "mean_logprob": -9.75140126546224
+  },
+  {
+    "term": "Solventum",
+    "vintage": "20231231",
+    "before_first_use": false,
+    "context": "evoking",
+    "first_rank": 688,
+    "mean_logprob": -8.57146962483724
+  },
+  {
+    "term": "Solventum",
+    "vintage": "20231231",
+    "before_first_use": false,
+    "context": "control",
+    "first_rank": 1294,
+    "mean_logprob": -10.993725776672363
+  },
+  {
+    "term": "Qnity",
+    "vintage": "20221231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 311,
+    "mean_logprob": -7.248910109202067
+  },
+  {
+    "term": "Qnity",
+    "vintage": "20221231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 2768,
+    "mean_logprob": -9.767915407816568
+  },
+  {
+    "term": "Qnity",
+    "vintage": "20231231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 611,
+    "mean_logprob": -7.613671938578288
+  },
+  {
+    "term": "Qnity",
+    "vintage": "20231231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 3407,
+    "mean_logprob": -10.82083829243978
+  },
+  {
+    "term": "Qnity",
+    "vintage": "20241231",
+    "before_first_use": true,
+    "context": "evoking",
+    "first_rank": 368,
+    "mean_logprob": -7.161577542622884
+  },
+  {
+    "term": "Qnity",
+    "vintage": "20241231",
+    "before_first_use": true,
+    "context": "control",
+    "first_rank": 3379,
+    "mean_logprob": -10.932089805603027
   }
 ]

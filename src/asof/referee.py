@@ -200,9 +200,10 @@ def _neologism_probe(path: Path) -> tuple[bool, str]:
 
 
 def _as_traded_real() -> tuple[bool, str]:
+    from asof.periods import DEV_RETURN_CUTOFF
     from asof.prices import YahooPrices
 
-    df = YahooPrices().daily("AAPL")
+    df = YahooPrices().daily("AAPL", end=DEV_RETURN_CUTOFF)
     row = df[df["date"].astype(str) == "2014-06-06"]
     if row.empty:
         return False, "AAPL 2014-06-06 not in cached prices"
@@ -275,8 +276,22 @@ def _dsr_noise() -> tuple[bool, str]:
 
 
 def _no_returns_before_deviation() -> tuple[bool, str]:
-    files = list((PROJECT_ROOT / "results").glob("returns_*")) + list(DATA_DIR.glob("returns_*"))
-    return not files, "no return outputs exist yet" if not files else f"found {len(files)} return files"
+    """Every commit that first added a return output must descend from the deviation-d1 tag."""
+    import subprocess
+
+    def git(*args: str) -> subprocess.CompletedProcess:
+        return subprocess.run(["git", *args], cwd=PROJECT_ROOT, capture_output=True, text=True)
+
+    if git("rev-parse", "deviation-d1").returncode != 0:
+        return False, "tag deviation-d1 not found"
+    added = git("log", "--diff-filter=A", "--format=%H", "--", "results/returns_*").stdout.split()
+    early = [c for c in added if git("merge-base", "--is-ancestor", "deviation-d1", c).returncode != 0]
+    uncommitted = [p.name for p in (PROJECT_ROOT / "results").glob("returns_*")
+                   if git("ls-files", "--error-unmatch", str(p)).returncode != 0]
+    if early:
+        return False, f"{len(early)} commit(s) added return outputs before deviation D1"
+    return True, (f"{len(added)} commit(s) added return outputs, all after deviation-d1"
+                  + (f"; uncommitted: {', '.join(uncommitted)}" if uncommitted else ""))
 
 
 def _coverage_audit_present() -> tuple[bool, str]:

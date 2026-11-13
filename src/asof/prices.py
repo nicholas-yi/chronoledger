@@ -37,9 +37,22 @@ class YahooPrices:
         self._last = 0.0
         self._http = httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=60.0)
 
-    def raw(self, ticker: str, *, refresh: bool = False) -> dict | None:
+    def raw(self, ticker: str, *, end: date | None = None, holdout_opened: bool = False,
+            refresh: bool = False) -> dict | None:
+        """Fetch daily history through ``end`` (exclusive of later days).
+
+        With ``end`` set, the request itself stops at ``end``, so later prices never reach disk.
+        """
+        from asof.periods import price_end_allowed
+
         symbol = _yahoo_symbol(ticker)
-        path = self.cache_dir / f"{symbol}.json.gz"
+        if end is not None:
+            price_end_allowed(end, holdout_opened)
+            path = self.cache_dir / f"{symbol}_to{end:%Y%m%d}.json.gz"
+            period2 = int(datetime.combine(end, datetime.min.time(), tzinfo=timezone.utc).timestamp()) + 86400
+        else:
+            path = self.cache_dir / f"{symbol}.json.gz"
+            period2 = int(datetime.now(timezone.utc).timestamp())
         if path.exists() and not refresh:
             payload = json.loads(gzip.decompress(path.read_bytes()))
             return payload or None
@@ -49,7 +62,7 @@ class YahooPrices:
         self._last = time.monotonic()
         params = {
             "period1": "0",
-            "period2": str(int(datetime.now(timezone.utc).timestamp())),
+            "period2": str(period2),
             "interval": "1d",
             "events": "div,splits",
             "includeAdjustedClose": "true",
@@ -64,8 +77,8 @@ class YahooPrices:
         path.write_bytes(gzip.compress(json.dumps(payload).encode()))
         return payload or None
 
-    def daily(self, ticker: str) -> pd.DataFrame:
-        payload = self.raw(ticker)
+    def daily(self, ticker: str, *, end: date | None = None, holdout_opened: bool = False) -> pd.DataFrame:
+        payload = self.raw(ticker, end=end, holdout_opened=holdout_opened)
         if not payload or "timestamp" not in payload:
             return pd.DataFrame()
         quote = payload["indicators"]["quote"][0]
@@ -89,6 +102,8 @@ class YahooPrices:
         for col in ("open", "high", "low"):
             df[col] = df[col] * factor
         df["ticker"] = ticker.upper()
+        if end is not None:
+            df = df[df["date"] <= end]
         return df.drop_duplicates("date", keep="last").reset_index(drop=True)
 
 

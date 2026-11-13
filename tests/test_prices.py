@@ -30,3 +30,15 @@ def test_reverse_split() -> None:
 def test_no_splits_is_identity() -> None:
     dates = [date(2019, 1, 2)]
     assert as_traded_close(dates, np.array([42.0]), []).tolist() == [42.0]
+
+
+def test_price_requests_past_dev_cutoff_are_refused(tmp_path) -> None:
+    from asof.periods import DEV_RETURN_CUTOFF, HoldoutAccessError
+    from asof.prices import YahooPrices
+
+    y = YahooPrices(cache_dir=tmp_path)
+    with pytest.raises(HoldoutAccessError):
+        y.raw("AAPL", end=date(2024, 8, 1))
+    with pytest.raises(HoldoutAccessError):
+        y.daily("AAPL", end=date(2026, 1, 1))
+    assert DEV_RETURN_CUTOFF == date(2024, 7, 31)
