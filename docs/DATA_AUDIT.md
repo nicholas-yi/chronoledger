@@ -38,3 +38,9 @@ Issuer counts per bucket range from about 1,000 to 2,700 per year.
 On 2026-11-12, before the price guard existed, AAPL's full daily price history was downloaded once to validate split handling. That file contained post-2024 prices. It was used only to confirm the as-traded close on 2014-06-06 and on 2020-08-28, then deleted. No returns were computed from it.
 
 From then on, `asof.periods.price_end_allowed` refuses any price request past 2024-07-31 unless the holdout is explicitly opened, so holdout-period prices never reach disk.
+
+## Price-request change (F3)
+
+Yahoo adjusts *all* historical prices for every split up to today. A request that stopped at the development cutoff therefore returned prices already adjusted for later splits, but not the later split *events*. That made as-traded price reconstruction impossible for stocks that split afterward; for example, FFAI showed $1,200 when it traded at pennies.
+
+From 2026-11-13, each request spans the full history. **Every quote and dividend after the cutoff is discarded in memory before caching**, and only split events (date and ratio) are kept. Those later split events are used solely to reverse the vendor's own adjustment. No post-cutoff price, return, or dividend is stored or used.

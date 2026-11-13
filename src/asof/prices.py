@@ -39,20 +39,22 @@ class YahooPrices:
 
     def raw(self, ticker: str, *, end: date | None = None, holdout_opened: bool = False,
             refresh: bool = False) -> dict | None:
-        """Fetch daily history through ``end`` (exclusive of later days).
+        """Fetch daily history; with ``end``, price rows after ``end`` are stripped before caching.
 
-        With ``end`` set, the request itself stops at ``end``, so later prices never reach disk.
+        Yahoo adjusts *all* prices for every split up to today. To reverse that adjustment
+        (as-traded reconstruction) we need split *events* after ``end`` as well. So the request
+        spans the full history, every quote after ``end`` is discarded in memory, and only the
+        split events (date and ratio) are kept. No post-``end`` price or dividend reaches disk.
         """
         from asof.periods import price_end_allowed
 
         symbol = _yahoo_symbol(ticker)
         if end is not None:
             price_end_allowed(end, holdout_opened)
-            path = self.cache_dir / f"{symbol}_to{end:%Y%m%d}.json.gz"
-            period2 = int(datetime.combine(end, datetime.min.time(), tzinfo=timezone.utc).timestamp()) + 86400
+            path = self.cache_dir / f"{symbol}_to{end:%Y%m%d}_v2.json.gz"
         else:
             path = self.cache_dir / f"{symbol}.json.gz"
-            period2 = int(datetime.now(timezone.utc).timestamp())
+        period2 = int(datetime.now(timezone.utc).timestamp())
         if path.exists() and not refresh:
             payload = json.loads(gzip.decompress(path.read_bytes()))
             return payload or None
@@ -74,6 +76,8 @@ class YahooPrices:
             payload = result[0] if result else {}
         elif resp.status_code not in (400, 404):  # 400/404: no data for this symbol and range
             resp.raise_for_status()
+        if end is not None and payload:
+            payload = _strip_after(payload, end)
         path.write_bytes(gzip.compress(json.dumps(payload).encode()))
         return payload or None
 
@@ -105,6 +109,27 @@ class YahooPrices:
         if end is not None:
             df = df[df["date"] <= end]
         return df.drop_duplicates("date", keep="last").reset_index(drop=True)
+
+
+def _strip_after(payload: dict, end: date) -> dict:
+    """Drop every quote and dividend after ``end``; keep all split events (dates and ratios)."""
+    tz = payload.get("meta", {}).get("exchangeTimezoneName", "America/New_York")
+    ts = payload.get("timestamp") or []
+    days = pd.to_datetime(ts, unit="s", utc=True).tz_convert(tz).date if ts else []
+    keep = [i for i, d in enumerate(days) if d <= end]
+    out = {k: v for k, v in payload.items() if k not in ("timestamp", "indicators", "events")}
+    out["timestamp"] = [ts[i] for i in keep]
+    ind = payload.get("indicators", {})
+    out["indicators"] = {
+        name: [{k: [s[i] for i in keep] for k, s in block.items()} for block in blocks]
+        for name, blocks in ind.items()
+    }
+    events = payload.get("events", {})
+    out["events"] = {"splits": events.get("splits", {})}
+    cutoff = int(datetime.combine(end, datetime.max.time(), tzinfo=timezone.utc).timestamp())
+    out["events"]["dividends"] = {k: v for k, v in events.get("dividends", {}).items() if v.get("date", 0) <= cutoff}
+    out["stripped_after"] = end.isoformat()
+    return out
 
 
 def splits_from_payload(payload: dict) -> list[tuple[date, float]]:

@@ -68,3 +68,35 @@ def test_long_short_signs_and_costs() -> None:
     # Similarity and next return rise together here, so long-high earns a positive spread.
     assert r["ls_gross"] > 0
     assert r["ls_net"] < r["ls_gross"]
+
+
+def test_clean_shares_drops_typo_and_accepts_confirmed_split() -> None:
+    from asof.backtest import clean_shares
+
+    t = [datetime(2023, m, 1, tzinfo=timezone.utc) for m in (1, 4, 7, 10, 12)]
+    df = pd.DataFrame({"cik": 1, "val": [90e6, 90e9, 90e6, 4.5e6, 4.6e6], "knowledge_time": t})
+    out = clean_shares(df)
+    # 1,000x typo is never accepted; a 20:1 reverse split takes effect only once confirmed.
+    assert out["val"].tolist() == [90e6, 90e6, 4.6e6]
+    assert out["knowledge_time"].tolist() == [t[0], t[2], t[4]]
+
+
+def test_returns_below_minus_100pct_are_dropped() -> None:
+    days = [date(2023, 1, 31), date(2023, 2, 28)]
+    d = pd.DataFrame({"ticker": "X", "date": days, "close": [10, 11], "adjclose": [10.0, -4.0],
+                      "high": [10, 11], "low": [10, 11]})
+    assert np.isnan(monthly_panel(d)["ret_next"].iloc[0])
+
+
+def test_strip_after_keeps_future_splits_only() -> None:
+    from asof.prices import _strip_after
+
+    ts = [1688140800, 1690819200, 1693497600]  # 2023-06-30, 2023-07-31, 2023-08-31 (UTC)
+    payload = {"meta": {"exchangeTimezoneName": "UTC"}, "timestamp": ts,
+               "indicators": {"quote": [{"close": [1, 2, 3]}], "adjclose": [{"adjclose": [1, 2, 3]}]},
+               "events": {"splits": {"x": {"date": 1693497600, "numerator": 1, "denominator": 10}},
+                          "dividends": {"y": {"date": 1693497600, "amount": 0.1}}}}
+    out = _strip_after(payload, date(2023, 7, 31))
+    assert out["timestamp"] == ts[:2]
+    assert out["indicators"]["quote"][0]["close"] == [1, 2]
+    assert "x" in out["events"]["splits"] and out["events"]["dividends"] == {}

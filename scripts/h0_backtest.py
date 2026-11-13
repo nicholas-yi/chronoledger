@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 
 from asof import ledger
-from asof.backtest import Config, form_portfolios, latest_as_of, long_short, monthly_panel
+from asof.backtest import Config, clean_shares, form_portfolios, latest_as_of, long_short, monthly_panel
 from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.events import car, event_panel, neutralize, rank_ic
 from asof.factors import ff5_umd_daily, ff5_umd_monthly, nyse_me_breakpoints
@@ -41,6 +41,7 @@ def load_inputs():
     sig["change"] = 1.0 - sig["cos_full"]
     shares = pd.read_parquet(DATA_DIR / "h0_shares.parquet")
     shares["knowledge_time"] = pd.to_datetime(shares["knowledge_time"], utc=True)
+    shares = clean_shares(shares)  # point-in-time removal of XBRL share-count typos (F3)
     ent = pd.read_parquet(DATA_DIR / "bulk_entities.parquet")[["cik", "sic"]]
     fil = pd.read_parquet(DATA_DIR / "bulk_filings.parquet")
     ma = fil[(fil["form"] == "8-K") & fil["items"].fillna("").str.contains(r"\b2\.01\b")][["cik", "knowledge_time"]]

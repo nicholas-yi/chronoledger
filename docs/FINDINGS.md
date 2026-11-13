@@ -89,3 +89,17 @@ These use verified first-use dates: J&J named Kenvue on 2022-09-28; 3M named Sol
 - H5b, H5c, and H6(b) cannot be tested with free current-ticker price data. Their development results are reported as **invalid**, not as evidence against the published effects. Their holdouts will not be opened under this data.
 - H5a compares Friday-evening 8-Ks with other 8-Ks within the same universe, so it is less directly affected, but it is still subject to the same selection. Its positive development estimate is not a replication.
 - Testing distress events needs prices for delisted securities, for example the Tiingo free tier, or for acquired firms, their deal consideration. This is the strongest argument yet for adding a delisted-price source.
+
+## F3: three data bugs caught by an implausible backtest
+
+**Trigger.** The first H0 development run showed long-short means of +20% to +27% per month, with alpha t-statistics up to 4.6. That is an order of magnitude above any credible text-change effect, so it was treated as a bug until proven otherwise.
+
+**Root causes.**
+1. **XBRL share-count typos.** PKG filed 89.8 billion shares in one 10-Q, against about 89.8 million before and after; the maximum in the data was 8 × 10^13. Value weights became meaningless.
+   - Fix: point-in-time cleaning. A jump of more than 10x takes effect only after a later filing confirms it.
+2. **Vendor look-ahead in price levels.** Yahoo's prices embed adjustments for splits after the request window. Fix: see `docs/DATA_AUDIT.md`.
+3. **Impossible returns.** Monthly returns below −100% appeared. Fix: treated as data errors and dropped.
+
+**Process.**
+- The invalid runs remain in the append-only trial ledger, so they still count toward the multiple-testing penalty.
+- The referee now includes a `data_integrity` threat that automatically fails any long-short mean above 5% per month.

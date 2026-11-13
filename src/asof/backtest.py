@@ -39,6 +39,7 @@ def monthly_panel(daily: pd.DataFrame) -> pd.DataFrame:
     p["ret_next"] = p.groupby("ticker")["adjclose"].shift(-1) / p["adjclose"] - 1.0
     nxt = p.groupby("ticker")["month"].shift(-1)
     p.loc[nxt != p["month"] + 1, "ret_next"] = np.nan  # gaps are not silently bridged
+    p.loc[p["ret_next"] <= -1.0, "ret_next"] = np.nan  # a loss beyond -100% is a data error
     return p
 
 
@@ -49,6 +50,32 @@ def latest_as_of(facts: pd.DataFrame, key: str, as_of: datetime, value_cols: lis
         return pd.DataFrame(columns=[key, *value_cols])
     idx = known.sort_values("knowledge_time").groupby(key).tail(1)
     return idx[[key, *value_cols]]
+
+
+def clean_shares(shares: pd.DataFrame, jump: float = 10.0, confirm_tol: float = 0.2) -> pd.DataFrame:
+    """Point-in-time cleaning of reported shares outstanding.
+
+    A value more than ``jump``x away from the last accepted value is held as pending and only takes
+    effect when a later filing confirms it (within ``confirm_tol``), as of that later filing's
+    knowledge time. This removes 1,000x tagging typos while still accepting genuine reverse
+    splits, and never uses information before it was public.
+    """
+    out = []
+    for cik, g in shares.dropna(subset=["val"]).sort_values("knowledge_time").groupby("cik"):
+        accepted = pending = None
+        for r in g.itertuples():
+            v = float(r.val)
+            if v <= 0:
+                continue
+            if accepted is None or 1 / jump <= v / accepted <= jump:
+                accepted, pending = v, None
+                out.append((cik, v, r.knowledge_time))
+            elif pending is not None and abs(v / pending - 1) <= confirm_tol:
+                accepted, pending = v, None
+                out.append((cik, v, r.knowledge_time))
+            else:
+                pending = v
+    return pd.DataFrame(out, columns=["cik", "val", "knowledge_time"])
 
 
 @dataclass(frozen=True)

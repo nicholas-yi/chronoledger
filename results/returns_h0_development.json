@@ -1,0 +1,129 @@
+{
+  "note": "Development period only (~18 monthly obs). Event panel: expected sign of change->CAR is negative. Point estimates for pipeline validation; holdout sealed.",
+  "coverage": {
+    "universe": 2754,
+    "with_prices": 2736
+  },
+  "results": [
+    {
+      "variant": "v1_10K_raw",
+      "config": {
+        "signal": "cos_full",
+        "n_quantiles": 5,
+        "weighting": "value",
+        "min_price": 5.0,
+        "size_pct": "p20",
+        "max_signal_age_days": 365,
+        "long_high": true
+      },
+      "monthly": {
+        "months": 17,
+        "mean_net": 0.2739125614450173,
+        "mean_gross": 0.2756788503646441,
+        "alpha": 0.1485063065332636,
+        "alpha_t": 4.333293356504991,
+        "avg_firms": 1521.8235294117646,
+        "mean_ic": 0.025204258277390153,
+        "ic_t": 2.1396796803038116
+      },
+      "event_panel_change_on_car60": {
+        "coef": 1.7447965421389287,
+        "t": 2.027016102557051,
+        "n_events": 4966,
+        "clusters": 17
+      },
+      "config_hash": "665a2413dfa6795f"
+    },
+    {
+      "variant": "v2_latest_raw",
+      "config": {
+        "signal": "cos_full",
+        "n_quantiles": 5,
+        "weighting": "value",
+        "min_price": 5.0,
+        "size_pct": "p20",
+        "max_signal_age_days": 365,
+        "long_high": true
+      },
+      "monthly": {
+        "months": 18,
+        "mean_net": 0.2590428908393395,
+        "mean_gross": 0.2611668927684863,
+        "alpha": 0.133198962048963,
+        "alpha_t": 4.6441443241674,
+        "avg_firms": 1542.8333333333333,
+        "mean_ic": 0.018324526356354863,
+        "ic_t": 1.3156531525722461
+      },
+      "event_panel_change_on_car60": {
+        "coef": 0.21788167419470766,
+        "t": 0.5442649456701619,
+        "n_events": 14407,
+        "clusters": 17
+      },
+      "config_hash": "f3a533eed202cf73"
+    },
+    {
+      "variant": "v2_latest_neutral",
+      "config": {
+        "signal": "neg_change_n",
+        "n_quantiles": 5,
+        "weighting": "value",
+        "min_price": 5.0,
+        "size_pct": "p20",
+        "max_signal_age_days": 365,
+        "long_high": true
+      },
+      "monthly": {
+        "months": 18,
+        "mean_net": 0.19635244529190213,
+        "mean_gross": 0.19861873281149767,
+        "alpha": 0.10171350710660895,
+        "alpha_t": 2.9517103935803686,
+        "avg_firms": 1542.3333333333333,
+        "mean_ic": 0.003486062186451371,
+        "ic_t": 0.2636005568460412
+      },
+      "event_panel_change_on_car60": {
+        "coef": 0.03501051439833076,
+        "t": 0.1694781659197087,
+        "n_events": 12689,
+        "clusters": 17
+      },
+      "config_hash": "53178e5650217818"
+    },
+    {
+      "variant": "v2_10K_neutral",
+      "config": {
+        "signal": "neg_change_n",
+        "n_quantiles": 5,
+        "weighting": "value",
+        "min_price": 5.0,
+        "size_pct": "p20",
+        "max_signal_age_days": 365,
+        "long_high": true
+      },
+      "monthly": {
+        "months": 17,
+        "mean_net": 0.012822570236492659,
+        "mean_gross": 0.014107587749453176,
+        "alpha": -0.0014632061573924648,
+        "alpha_t": -0.17779231210595053,
+        "avg_firms": 1517.764705882353,
+        "mean_ic": -0.010671505154518684,
+        "ic_t": -0.621453162066211
+      },
+      "event_panel_change_on_car60": {
+        "coef": 0.6717382314888746,
+        "t": 1.8789046588071054,
+        "n_events": 4368,
+        "clusters": 17
+      },
+      "config_hash": "e714ffcef5b59dac"
+    }
+  ],
+  "n_trials": {
+    "H0": 2,
+    "H1n": 2
+  }
+}

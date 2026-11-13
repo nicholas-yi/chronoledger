@@ -234,6 +234,28 @@ def _tfidf_invariance() -> tuple[bool, str]:
     return bad == 0, f"100 random corpora, {bad} differences between full and as-of-truncated fits"
 
 
+def _plausibility(max_monthly: float = 0.05) -> tuple[bool, str]:
+    """Any long-short mean above 5%/month is treated as a data or code error until explained (F3)."""
+    path = PROJECT_ROOT / "results" / "returns_h0_development.json"
+    if not path.exists():
+        return True, "no H0 results yet"
+    res = json.loads(path.read_text())["results"]
+    bad = [f"{r['variant']} {r['monthly']['mean_net']:.3f}" for r in res
+           if abs(r["monthly"].get("mean_net", 0.0)) > max_monthly]
+    return not bad, ("implausible monthly long-short means: " + ", ".join(bad)) if bad else \
+        f"all variants within +/-{max_monthly:.0%} per month"
+
+
+def _shares_clean_unit() -> tuple[bool, str]:
+    import pandas as pd
+
+    from asof.backtest import clean_shares
+
+    t = [datetime(2023, m, 1, tzinfo=timezone.utc) for m in (1, 4, 7)]
+    out = clean_shares(pd.DataFrame({"cik": 1, "val": [90e6, 90e9, 90e6], "knowledge_time": t}))
+    return out["val"].tolist() == [90e6, 90e6], "a 1,000x share-count typo is rejected"
+
+
 def _distress_coverage_parity(min_ratio: float = 0.8) -> tuple[bool, str]:
     """Price-universe coverage of distress-event filers relative to all 10-K filers (F2)."""
     import pandas as pd
@@ -442,6 +464,10 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
             Check("as-traded reconstruction on AAPL 2020 split", _as_traded_unit),
             Check("as-traded close matches the historical record (real data)", _as_traded_real),
             Check("$5 filter canary", _price_filter_canary, mutation=True),
+        ]),
+        Threat("data_integrity", "Are results driven by data errors rather than economics?", [
+            Check("long-short means are plausible (<= 5%/month)", _plausibility),
+            Check("share-count typos are cleaned point-in-time", _shares_clean_unit),
         ]),
     ]
 
