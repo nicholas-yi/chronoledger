@@ -22,7 +22,7 @@ def test_car_recovers_planted_abnormal_return() -> None:
     event = f.index[400]
     r.iloc[401:421] += 0.002  # +4% over 20 days
     assert car(r, f, event, horizon=20) == pytest.approx(0.04, abs=0.01)
-    assert abs(car(r, f, f.index[200], horizon=20)) < 0.01  # no planted effect there
+    assert abs(car(r, f, f.index[560], horizon=20)) < 0.01  # no planted effect there
 
 
 def test_car_nan_when_window_incomplete() -> None:
