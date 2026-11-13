@@ -1,8 +1,9 @@
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 import pytest
 
 from asof.timeutil import (
+    close_time_utc,
     first_tradable_close,
     parse_acceptance_utc,
     parse_header_acceptance_et,
@@ -53,3 +54,15 @@ def test_naive_knowledge_time_rejected() -> None:
 def test_no_future_trading_day_returns_none() -> None:
     accepted = datetime(2026, 1, 5, 23, tzinfo=timezone.utc)
     assert first_tradable_close(accepted, [date(2026, 1, 5)]) is None
+
+
+def test_binary_lookup_matches_linear_reference_across_dst_and_gaps() -> None:
+    start = date(2023, 1, 1)
+    days = [start + timedelta(days=i) for i in range(400)
+            if (start + timedelta(days=i)).weekday() < 5 and i % 17]
+    for day in [days[0] - timedelta(days=5), *days, days[-1] + timedelta(days=5)]:
+        for offset in (-1, 0, 1, 8 * 3600):
+            accepted = close_time_utc(day) + timedelta(seconds=offset)
+            expected = next((d for d in days if close_time_utc(d) > accepted), None)
+            assert first_tradable_close(accepted, days) == expected
+    assert first_tradable_close(close_time_utc(days[0]), []) is None

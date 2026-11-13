@@ -238,12 +238,81 @@ def _plausibility(max_monthly: float = 0.05) -> tuple[bool, str]:
     """Any long-short mean above 5%/month is treated as a data or code error until explained (F3)."""
     path = PROJECT_ROOT / "results" / "returns_h0_development.json"
     if not path.exists():
-        return True, "no H0 results yet"
+        return False, "no H0 results; development rerun is incomplete"
     res = json.loads(path.read_text())["results"]
+    expected = {"v1_10K_raw", "v2_latest_raw", "v2_latest_neutral", "v2_10K_neutral"}
+    if len(res) != 4 or {r["variant"] for r in res} != expected:
+        return False, "H0 output must contain exactly the four declared variants"
+    import math
+
+    for row in res:
+        monthly = row["monthly"]
+        if monthly.get("months", 0) < 8 or not math.isfinite(monthly.get("mean_net", float("nan"))):
+            return False, f"{row['variant']}: insufficient or non-finite monthly results"
     bad = [f"{r['variant']} {r['monthly']['mean_net']:.3f}" for r in res
            if abs(r["monthly"].get("mean_net", 0.0)) > max_monthly]
     return not bad, ("implausible monthly long-short means: " + ", ".join(bad)) if bad else \
         f"all variants within +/-{max_monthly:.0%} per month"
+
+
+def _formation_fixture():
+    import numpy as np
+    import pandas as pd
+
+    n = 50
+    month = pd.Period("2023-03", "M")
+    known = pd.Timestamp("2023-03-01", tz="UTC")
+    signals = pd.DataFrame({"cik": range(n), "cos_full": np.linspace(0, 1, n),
+                            "knowledge_time": known})
+    signals["change"] = 1 - signals["cos_full"]
+    shares = pd.DataFrame({"cik": range(n), "val": 1e8, "knowledge_time": known})
+    panel = pd.DataFrame({"ticker": [f"S{i}" for i in range(n)], "cik": range(n),
+                          "month": month, "last_day": pd.Timestamp("2023-03-31").date(),
+                          "close": np.linspace(20, 50, n), "ret_next": 0.01, "spread": 0.01})
+    return month, signals, shares, panel
+
+
+def _formation_return_invariance(mutation: bool = False) -> tuple[bool, str]:
+    import numpy as np
+
+    from asof.backtest import Config, form_portfolios
+
+    month, signals, shares, panel = _formation_fixture()
+    before = form_portfolios(month, signals, shares, panel, 700.0, Config())
+    panel.loc[0, "ret_next"] = np.nan
+    after = form_portfolios(
+        month, signals, shares, panel.dropna(subset=["ret_next"]) if mutation else panel,
+        700.0, Config())
+    equal = before[["cik", "q", "w"]].reset_index(drop=True).equals(
+        after[["cik", "q", "w"]].reset_index(drop=True))
+    if mutation:
+        return not equal, "planted future-return availability filter changes holdings and is caught"
+    return equal, "formation holdings and weights are unchanged when a future return is hidden"
+
+
+def _formation_neutral_invariance() -> tuple[bool, str]:
+    import runpy
+
+    import numpy as np
+    import pandas as pd
+
+    from asof.backtest import Config, formation_snapshots
+
+    fn = runpy.run_path(str(PROJECT_ROOT / "scripts" / "h0_backtest.py"))["neutralize_formations"]
+    month, signals, shares, panel = _formation_fixture()
+    ent = pd.DataFrame({"cik": range(50), "sic": ["3500"] * 25 + ["4500"] * 25})
+    ma = pd.DataFrame({"cik": [1], "knowledge_time": pd.to_datetime(["2023-03-03"], utc=True)})
+    bp = pd.DataFrame({"p20": [700.0]}, index=pd.PeriodIndex([month]))
+    before = fn(formation_snapshots(signals, shares, panel), ent, ma, bp, Config())[month]
+    late = pd.Timestamp("2023-03-31 21:00:00", tz="UTC")
+    signals = pd.concat([signals, pd.DataFrame({
+        "cik": [0], "cos_full": [-999.0], "change": [1000.0], "knowledge_time": [late]})])
+    shares = pd.concat([shares, pd.DataFrame({"cik": [0], "val": [1e15], "knowledge_time": [late]})])
+    ma = pd.concat([ma, pd.DataFrame({"cik": [0], "knowledge_time": [late]})])
+    after = fn(formation_snapshots(signals, shares, panel), ent, ma, bp, Config())[month]
+    ok = before["neg_change_n"].notna().sum() == 50 and np.allclose(
+        before["neg_change_n"], after["neg_change_n"], equal_nan=True, atol=1e-12, rtol=1e-10)
+    return bool(ok), "post-close filing/share/acquisition events do not change formation residuals"
 
 
 def _shares_clean_unit() -> tuple[bool, str]:
@@ -292,7 +361,8 @@ def _as_traded_real() -> tuple[bool, str]:
     if row.empty:
         return False, "AAPL 2014-06-06 not in cached prices"
     close = float(row["close"].iloc[0])
-    return abs(close - 645.57) < 0.05, f"AAPL as-traded close 2014-06-06 = {close:.2f} (record: 645.57)"
+    error = abs(close - 645.57)
+    return error < 0.05, f"AAPL 2014-06-06 reconstruction: absolute reference discrepancy {error:.4f} (need < 0.05)"
 
 
 def _vintage_canary() -> tuple[bool, str]:
@@ -420,6 +490,12 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
             Check("invariance of as-of facts", lambda: _store_invariance(db)),
             Check("invariance of revision detection", lambda: _store_revision_invariance(db)),
             Check("planted period-end leak is caught", lambda: _store_canary(db), mutation=True),
+        ]),
+        Threat("lookahead.formation", "Could future returns or post-close events change current holdings?", [
+            Check("formation ignores future outcome availability", _formation_return_invariance),
+            Check("formation neutralization excludes post-close information", _formation_neutral_invariance),
+            Check("planted future-outcome selection is caught",
+                  lambda: _formation_return_invariance(True), mutation=True),
         ]),
         Threat("lookahead.reconcile", "Can a later amendment change what was believed earlier?", [
             Check("invariance over random amendment chains", _reconcile_invariance),

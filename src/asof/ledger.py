@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Iterator
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -49,7 +51,7 @@ def log_trial(
     hypothesis: str,
     config: dict[str, Any],
     period: str,
-    metrics: dict[str, float],
+    metrics: dict[str, Any],
     path: Path = LEDGER_PATH,
     inputs: list[Path] | None = None,
 ) -> str:
@@ -72,6 +74,25 @@ def log_trial(
     with path.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(entry, sort_keys=True) + "\n")
     return entry["config_hash"]
+
+
+@contextmanager
+def development_trial(
+    hypothesis: str,
+    config: dict[str, Any],
+    *,
+    inputs: list[Path] | None = None,
+    path: Path = LEDGER_PATH,
+) -> Iterator[dict[str, Any]]:
+    """Log partial metrics even when development execution raises; never open a holdout."""
+    metrics: dict[str, Any] = {}
+    completed = False
+    try:
+        yield metrics
+        completed = True
+    finally:
+        metrics["execution_status"] = "completed" if completed else "failed"
+        log_trial(hypothesis, config, "development", metrics, path=path, inputs=inputs)
 
 
 def read_ledger(path: Path = LEDGER_PATH) -> list[dict[str, Any]]:

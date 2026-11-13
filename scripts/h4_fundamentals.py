@@ -174,18 +174,20 @@ def stage_test() -> None:
     results = {}
     for sig in ("change_n", "change"):
         for outcome in ("d_roa", "decline", "impair_next"):
-            cols = [sig, "log_assets", "roa", "sales_growth"]
-            d = dev.dropna(subset=[outcome, *cols, "sic2"])
-            fe = pd.get_dummies(d[["sic2", "year"]].astype(str), drop_first=True, dtype=float)
-            x = sm.add_constant(pd.concat([d[cols], fe], axis=1))
-            groups = np.column_stack([pd.factorize(d["cik"])[0], pd.factorize(d["year"])[0]])
-            fit = sm.OLS(d[outcome], x).fit(cov_type="cluster", cov_kwds={"groups": groups})
-            res = {"coef": float(fit.params[sig]), "t": float(fit.tvalues[sig]), "n": len(d),
-                   "firms": int(d["cik"].nunique()), "years": int(d["year"].nunique()),
-                   "outcome_mean": float(d[outcome].mean())}
+            with ledger.development_trial(
+                "H4", {"signal": sig, "outcome": outcome}, inputs=[PAIRS, OUT, SAMPLE, ENT],
+            ) as metrics:
+                cols = [sig, "log_assets", "roa", "sales_growth"]
+                d = dev.dropna(subset=[outcome, *cols, "sic2"])
+                fe = pd.get_dummies(d[["sic2", "year"]].astype(str), drop_first=True, dtype=float)
+                x = sm.add_constant(pd.concat([d[cols], fe], axis=1))
+                groups = np.column_stack([pd.factorize(d["cik"])[0], pd.factorize(d["year"])[0]])
+                fit = sm.OLS(d[outcome], x).fit(cov_type="cluster", cov_kwds={"groups": groups})
+                res = {"coef": float(fit.params[sig]), "t": float(fit.tvalues[sig]), "n": len(d),
+                       "firms": int(d["cik"].nunique()), "years": int(d["year"].nunique()),
+                       "outcome_mean": float(d[outcome].mean())}
+                metrics.update(res)
             results[f"{sig}->{outcome}"] = res
-            ledger.log_trial("H4", {"signal": sig, "outcome": outcome}, "development", res,
-                             inputs=[PAIRS, OUT, SAMPLE])
     out = {"note": "Development period (10-Ks accepted 2012-2018) only. Primary: change_n -> d_roa; "
                    "expected sign: negative for d_roa, positive for decline and impair_next.",
            "results": results}

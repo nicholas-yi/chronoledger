@@ -63,8 +63,11 @@ def values_as_of(
     known = facts.dropna(subset=["knowledge_time"])[["cik", "knowledge_time", *value_cols]]
     if queries.empty or known.empty:
         return queries.assign(**{c: known[c].iloc[:0].reindex(queries.index) for c in value_cols})
+    known = known.assign(knowledge_time=known["knowledge_time"].dt.as_unit("ns"))
     known = known.sort_values("knowledge_time", kind="stable").rename(columns={"knowledge_time": "_known_at"})
-    left = queries.assign(_query_order=np.arange(len(queries))).sort_values("as_of")
+    left = queries.assign(
+        as_of=queries["as_of"].dt.as_unit("ns"), _query_order=np.arange(len(queries)),
+    ).sort_values("as_of")
     out = pd.merge_asof(
         left, known, by="cik", left_on="as_of", right_on="_known_at",
         direction="backward", allow_exact_matches=allow_exact_matches,
@@ -135,6 +138,7 @@ class Config:
     size_pct: str = "p20"
     max_signal_age_days: int = 365
     long_high: bool = True  # long high-similarity (non-changers), short low-similarity
+    missing_return: float = 0.0  # pre-registered primary; sensitivities: -0.3 and -1.0
 
 
 def form_portfolios(
@@ -162,7 +166,7 @@ def form_portfolios(
         df = snapshot[[*panel_m.columns, cfg.signal, "shares"]].dropna(
             subset=[cfg.signal, "shares"]).reset_index(drop=True)
     df["mcap_musd"] = df["shares"] * df["close"] / 1e6
-    df = df[(df["close"] >= cfg.min_price) & (df["mcap_musd"] >= breakpoint_musd)].dropna(subset=["ret_next"])
+    df = df[(df["close"] >= cfg.min_price) & (df["mcap_musd"] >= breakpoint_musd)]
     if len(df) < cfg.n_quantiles * 5:
         return pd.DataFrame()
     df["q"] = pd.qcut(df[cfg.signal].rank(method="first"), cfg.n_quantiles, labels=False) + 1
@@ -180,12 +184,12 @@ def long_short(port: pd.DataFrame, prev: pd.DataFrame | None, cfg: Config) -> di
     out = {}
     for leg, q in (("long", long_q), ("short", short_q)):
         cur = port[port["q"] == q].set_index("ticker")
-        gross = float((cur["w"] * cur["ret_next"]).sum())
+        gross = float((cur["w"] * cur["ret_next"].fillna(cfg.missing_return)).sum())
         if prev is None or prev.empty:
             turnover_cost = float((cur["w"] * cur["spread"].fillna(0) / 2).sum())
         else:
             p = prev[prev["q"] == q].set_index("ticker")
-            drifted = p["w"] * (1 + p["ret_next"])
+            drifted = p["w"] * (1 + p["ret_next"].fillna(cfg.missing_return))
             total = drifted.sum()
             drifted = drifted / total if total else drifted
             new, old = cur["w"].align(drifted, join="outer", fill_value=0.0)
@@ -194,6 +198,7 @@ def long_short(port: pd.DataFrame, prev: pd.DataFrame | None, cfg: Config) -> di
         out[f"{leg}_gross"] = gross
         out[f"{leg}_cost"] = turnover_cost
         out[f"{leg}_n"] = len(cur)
+        out[f"{leg}_missing"] = int(cur["ret_next"].isna().sum())
     out["ls_gross"] = out["long_gross"] - out["short_gross"]
     out["ls_net"] = out["ls_gross"] - out["long_cost"] - out["short_cost"]
     return out

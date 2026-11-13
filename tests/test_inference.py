@@ -85,3 +85,25 @@ def test_ledger_records_lineage(tmp_path) -> None:
     assert len(lin["git_commit"]) == 40
     assert lin["inputs"]["input.parquet"] == ledger.file_sha256(data)
     assert isinstance(lin["git_dirty"], bool)
+
+
+def test_failed_development_execution_keeps_partial_metrics_and_prior_entries(tmp_path) -> None:
+    path = tmp_path / "ledger.jsonl"
+    data = tmp_path / "input.bin"
+    data.write_bytes(b"synthetic-input")
+    with ledger.development_trial("HX", {"variant": "complete"}, path=path) as metrics:
+        metrics["n"] = 10
+    prefix = path.read_bytes()
+    with pytest.raises(RuntimeError, match="event fit failed"):
+        with ledger.development_trial(
+            "HX", {"variant": "failure"}, inputs=[data], path=path,
+        ) as metrics:
+            metrics.update(phase="event_panel", m_months=18)
+            raise RuntimeError("event fit failed")
+    assert path.read_bytes().startswith(prefix)
+    entries = ledger.read_ledger(path)
+    assert [e["metrics"]["execution_status"] for e in entries] == ["completed", "failed"]
+    assert entries[1]["period"] == "development"
+    assert entries[1]["metrics"]["m_months"] == 18
+    assert entries[1]["metrics"]["phase"] == "event_panel"
+    assert entries[1]["lineage"]["inputs"]["input.bin"] == ledger.file_sha256(data)

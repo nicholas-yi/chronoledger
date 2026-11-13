@@ -7,6 +7,7 @@ US/Eastern local time.
 
 from __future__ import annotations
 
+from bisect import bisect_left
 from datetime import date, datetime, time, timedelta, timezone
 from zoneinfo import ZoneInfo
 
@@ -32,7 +33,7 @@ def close_time_utc(day: date) -> datetime:
 
 
 def first_tradable_close(knowledge_time: datetime, trading_days: list[date]) -> date | None:
-    """First trading day whose 16:00 ET close is strictly after ``knowledge_time``.
+    """First day in a sorted trading calendar whose close is strictly after ``knowledge_time``.
 
     A signal known at ``knowledge_time`` can earn returns only from that close onward. This is
     deliberately conservative: filings accepted at 15:59 ET are traded at that day's close only
@@ -40,10 +41,10 @@ def first_tradable_close(knowledge_time: datetime, trading_days: list[date]) -> 
     """
     if knowledge_time.tzinfo is None:
         raise ValueError("knowledge_time must be timezone-aware")
-    for day in trading_days:
-        if close_time_utc(day) > knowledge_time:
-            return day
-    return None
+    i = bisect_left(trading_days, knowledge_time.astimezone(ET).date())
+    if i < len(trading_days) and close_time_utc(trading_days[i]) <= knowledge_time:
+        i += 1
+    return trading_days[i] if i < len(trading_days) else None
 
 
 def utc_day_end(day: date) -> datetime:

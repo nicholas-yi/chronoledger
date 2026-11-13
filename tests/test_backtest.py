@@ -113,13 +113,16 @@ def test_strip_after_keeps_future_splits_only() -> None:
 
 
 @pytest.mark.parametrize("exact", [False, True])
-def test_batch_asof_matches_reference_and_preserves_query_order(exact) -> None:
+@pytest.mark.parametrize("query_unit", ["us", "ns"])
+def test_batch_asof_matches_reference_and_preserves_query_order(exact, query_unit) -> None:
     t = pd.Timestamp("2023-03-01", tz="UTC")
     facts = pd.DataFrame({"cik": [1, 2, 1], "val": [10, 20, 30],
                          "knowledge_time": [t, t, t + pd.Timedelta(days=1)]})
     queries = pd.DataFrame({"cik": [1, 2, 1, 3], "as_of": [
         t + pd.Timedelta(days=2), t, t - pd.Timedelta(days=1), t,
     ]}, index=[8, 2, 9, 1])
+    facts["knowledge_time"] = facts["knowledge_time"].dt.as_unit("us")
+    queries["as_of"] = queries["as_of"].dt.as_unit(query_unit)
     result = values_as_of(queries, facts, ["val"], allow_exact_matches=exact)
     expected = []
     for r in queries.itertuples():
@@ -199,3 +202,28 @@ def test_share_ties_use_latest_reported_date_not_duplicate_confirmation() -> Non
     assert cleaned["val"].tolist() == [90e6, 90e6]
     assert cleaned["knowledge_time"].tolist() == list(pd.to_datetime(
         ["2023-01-01", "2023-05-01"], utc=True))
+
+
+def test_formation_membership_and_weights_do_not_depend_on_future_return_availability() -> None:
+    panel = _panel()
+    t = pd.Timestamp("2023-03-01", tz="UTC")
+    sig = pd.DataFrame({"cik": range(50), "cos_full": np.linspace(0, 1, 50),
+                        "knowledge_time": t})
+    shares = pd.DataFrame({"cik": range(50), "val": 1e8, "knowledge_time": t})
+    month = pd.Period("2023-03", "M")
+    complete = form_portfolios(month, sig, shares, panel, 700.0, Config())
+    panel.loc[0, "ret_next"] = np.nan
+    missing = form_portfolios(month, sig, shares, panel, 700.0, Config())
+    pd.testing.assert_frame_equal(
+        missing[["cik", "q", "w"]].reset_index(drop=True),
+        complete[["cik", "q", "w"]].reset_index(drop=True))
+
+
+@pytest.mark.parametrize("assumption", [0.0, -0.3, -1.0])
+def test_missing_returns_use_declared_sensitivity_and_report_counts(assumption) -> None:
+    port = pd.DataFrame({"ticker": ["A", "B"], "q": [1, 5], "w": [1.0, 1.0],
+                         "ret_next": [np.nan, 0.1], "spread": [0.0, 0.0]})
+    result = long_short(port, port, replace(Config(), missing_return=assumption))
+    assert result["ls_net"] == pytest.approx(0.1 - assumption)
+    assert result["short_missing"] == 1
+    assert result["long_missing"] == 0

@@ -102,3 +102,39 @@
 - **Validation:** `tests/test_backtest.py` covers most-recent reported-date
   selection and prevents same-filing pseudo-confirmation. Historical ledger
   entries are retained; fresh trial lineage must pin the corrected code.
+
+## D8: formation-time eligibility, neutralization, and missing-return accounting
+
+- **Logged:** 2026-11-13, after the historical H0 estimates, before any rebuilt
+  empirical H0 estimate. Discovered by source inspection and synthetic invariance
+  tests, not by choosing a better return estimate.
+- **Future-availability bug:** `form_portfolios()` dropped firms without a known
+  next-month return before assigning quintiles and weights. Hiding one future
+  outcome changed a synthetic 50-firm formation into 49 firms. Formation now uses
+  only known signals, shares, current prices, and size breakpoints.
+- **Missing outcomes:** the pre-registered primary 0% assumption is explicit in
+  `Config.missing_return`; -30% and -100% sensitivities use identical formation
+  sets and are separately logged. Gross returns and drift both use the declared
+  assumption, and missing long/short observations are counted. These are bounds
+  on unpriced observations, not observed delisting returns, and do not restore
+  firms absent from the current-ticker universe or repair F2.
+- **Neutralization:** the legacy implementation pooled filings by their acceptance
+  month and used that month's latest filing time. It could use information not
+  known at an earlier event or even at the month's formation close. Monthly
+  residuals are now fit on each variant's latest eligible firm signals and controls
+  known at its formation close, as intended by pre-registration v2. They are not
+  reused as filing-time event scores.
+- **Event panels:** raw change panels remain descriptive pipeline diagnostics.
+  Neutralized panels are explicitly **not evaluated** until an event-time
+  neutralization contract is fixed. The co-primary success rule cannot be claimed
+  satisfied from these outputs. The neutralized H0 variants labeled `H1n` in the
+  historical ledger are not the claim-level H1 signal.
+- **Equivalence scope:** legacy optimization comparisons use the same corrected
+  shares (D7) and complete-return rows, solely for engineering comparison. They
+  test the unchanged numerical operations, not equivalence to the deliberately
+  removed future-outcome selection or legacy neutralization design. Production
+  formation never uses that complete-return restriction.
+- **Evidence:** focused tests cover future-outcome availability, the three declared
+  missing-return assumptions and counts, and post-close filing/share/acquisition
+  events that must not alter formation residuals. Historical runs are retained;
+  rebuilt results must disclose these corrections as well as fresh-data differences.

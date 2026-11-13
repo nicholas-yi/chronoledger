@@ -17,7 +17,7 @@ import statsmodels.api as sm
 
 from asof import ledger
 from asof.bulk import iter_companyfacts
-from asof.config import DATA_DIR, PROJECT_ROOT
+from asof.config import DATA_DIR, PROJECT_ROOT, RAW_DIR
 from asof.quiet import IS_TAGS, flatten_usd, quiet_down_revisions
 
 FIL = DATA_DIR / "bulk_filings.parquet"
@@ -98,10 +98,21 @@ def part_b(filings: pd.DataFrame) -> dict:
 
 def main() -> None:
     filings = pd.read_parquet(FIL)
-    results = {"H6a_restatement_12m": part_a(filings), "H6b_car_60": part_b(filings)}
-    for name, m in results.items():
-        ledger.log_trial("H6", {"test": name}, "development", m, inputs=[FIL])
-    out = {"note": "Development only. H6a threshold |t| >= 3 (new); H6b |t| >= 2 with Holm (replication family).",
+    results = {}
+    common = [FIL, RAW_DIR / "bulk" / "companyfacts.zip"]
+    for name, fn, inputs in (
+        ("H6a_restatement_12m", part_a, [*common, DATA_DIR / "h4_sample.parquet"]),
+        ("H6b_car_60", part_b, [*common, DATA_DIR / "h0_universe.parquet",
+                              DATA_DIR / "h0_market_inputs.json"]),
+    ):
+        with ledger.development_trial("H6", {"test": name}, inputs=inputs) as metrics:
+            if name == "H6b_car_60":
+                metrics["scientific_status"] = "invalid_f2_current_ticker_survivorship"
+            m = fn(filings)
+            metrics.update(m)
+        results[name] = m
+    out = {"note": "Development only. H6a threshold |t| >= 3 (new). H6b is INVALID under F2; "
+                   "its rerun is a pipeline diagnostic, not a replication or hypothesis result.",
            "results": results}
     (PROJECT_ROOT / "results" / "h6_development.json").write_text(json.dumps(out, indent=2, default=float))
     json.dump(out, sys.stdout, indent=2, default=float)

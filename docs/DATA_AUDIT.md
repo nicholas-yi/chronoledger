@@ -19,6 +19,35 @@ malformed requested archive members fail explicitly rather than silently droppin
 Overlapping recent/history pages are deduplicated by accession at ingestion, retaining
 the recent-page row first, as in the bulk metadata reader.
 
+### Rebuild provenance and verification
+
+The 2026-11-13 devbox rebuild is a new download, not a byte-for-byte restoration
+of the handoff's local caches. Input fingerprints may differ. New H0 ledger entries
+include a hash of `data/h0_market_inputs.json`, which fingerprints the guarded
+price caches and cached French factor/breakpoint archives without publishing their
+contents. H4 also fingerprints the entity metadata used for SIC controls; H6
+fingerprints the companyfacts archive and its sample or universe.
+
+Development runners append a ledger entry even if execution raises after an
+evaluation starts. `execution_status` describes execution, not scientific validity;
+in particular, a completed H6(b) diagnostic remains invalid under F2. Partial
+metrics and the failing phase are retained where available; exceptions still
+propagate and the run must not be presented as complete.
+
+After rebuilding inputs, run `python scripts/benchmark_h0.py --firms 100` before
+the full backtest. It checks numerical equivalence to the pinned handoff revision
+on the same corrected shares (D7) and complete-return engineering subsample (D8),
+logs the engineering configurations, and writes
+`results/h0_optimization_equivalence.json`. Its timings cover the subsample
+comparison only. The full backtest's `elapsed_seconds` includes loading and shared
+preparation and is the measurement for the all-four-variants, 180-second target.
+Neither benchmark success nor historical CI proves scientific acceptance.
+The formation-time repair and the legacy filing-cohort comparison are deliberately
+separate: the latter is not an event-time signal and is not used for production
+neutralized portfolios. Production reports the 0%, -30%, and -100% missing-return
+assumptions and missing-observation counts; these do not repair the missing-firm
+selection documented in F2.
+
 ## Coverage among public-equity issuers, by public float
 
 | Float year | $1M–50M | $50M–500M | >$500M |

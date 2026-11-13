@@ -123,3 +123,20 @@ see [D6](DEVIATIONS.md#d6-fit-h4-winsorization-on-development-observations-only)
 The prior H4 ledger entries remain available but are not clean evidence of out-of-period
 preprocessing invariance. A fresh development run is required. The return holdout remains
 sealed, and no validation or holdout regression was run as part of this repair.
+
+## F5: formation selected on future outcomes; monthly residuals were not event-time signals
+
+**Status:** source defects reproduced with synthetic data before rebuilt empirical
+H0 estimates, 2026-11-13. See [D8](DEVIATIONS.md#d8-formation-time-eligibility-neutralization-and-missing-return-accounting).
+
+- Removing one next-month return changed a 50-firm formation into 49 firms and
+  changed its weights. Missing future outcomes must not determine current holdings.
+- Filing-month cohort residuals used the latest filing time in that month, so they
+  could not be treated as scores observable at each filing's acceptance time.
+
+Formation now ignores future return availability, uses explicit missing-return
+assumptions with counts, and neutralizes latest eligible signals using formation-time
+controls. Neutralized event panels remain unevaluated pending a time-safe specification;
+raw panels are descriptive diagnostics, not the pre-registered neutralized co-primary.
+These repairs do not establish an effect, repair survivorship, or validate historical
+estimates. No formal claim-level H1 result is produced by these cosine variants.
