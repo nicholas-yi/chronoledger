@@ -1,0 +1,11 @@
+{
+  "representation": "tfidf_as_of",
+  "as_of": "2022-12-31T23:59:00+00:00",
+  "vocab": 3965,
+  "n_pairs": 400,
+  "auc": 0.99905,
+  "tau": 0.4910292785659439,
+  "balanced_accuracy": 0.995,
+  "mean_sim_pos": 0.9674519947444569,
+  "mean_sim_neg": 0.1144303858241979
+}

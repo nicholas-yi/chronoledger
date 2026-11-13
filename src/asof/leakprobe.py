@@ -27,6 +27,16 @@ PROBES = [
      "The software vendor released the tool [T] for spreadsheets.", date(2022, 11, 30)),
     ("Brexit", "After the 2016 referendum, the United Kingdom began negotiating [T] with the European Union.",
      "The committee began negotiating [T] with the union.", date(2012, 5, 15)),
+    # Verified first public use: FDA approval 2022-05-13; J&J release 2022-09-28;
+    # 3M release 2023-11-16; DuPont release 2025-04-29.
+    ("Mounjaro", "Eli Lilly's diabetes drug tirzepatide is sold under the brand name [T].",
+     "The new herbal tea is sold under the brand name [T].", date(2022, 5, 13)),
+    ("Kenvue", "Johnson & Johnson separated its consumer health business, maker of Tylenol and Band-Aid, into a new company named [T].",
+     "The bakery on Main Street is a new company named [T].", date(2022, 9, 28)),
+    ("Solventum", "3M separated its health care business into an independent public company named [T].",
+     "The paint store downtown is an independent company named [T].", date(2023, 11, 16)),
+    ("Qnity", "DuPont separated its electronics materials business into an independent public company named [T].",
+     "The coffee shop downtown is an independent company named [T].", date(2025, 4, 29)),
 ]
 
 

@@ -15,7 +15,12 @@ VINTAGES = {
     "Omicron": [V.format(y) for y in (2019, 2020, 2021)],
     "ChatGPT": [V.format(y) for y in (2020, 2021, 2022)],
     "Brexit": [V.format(y) for y in (2010, 2011, 2016)],
+    "Mounjaro": [V.format(y) for y in (2021, 2022)],
+    "Kenvue": [V.format(y) for y in (2021, 2022)],
+    "Solventum": [V.format(y) for y in (2022, 2023)],
+    "Qnity": [V.format(y) for y in (2022, 2023, 2024)],
 }
+IN_USE = {"20221231", "20231231", "20241231"}  # vintages used for 2023+ filings (deviation D1)
 
 
 def main() -> None:

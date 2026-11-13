@@ -12,6 +12,7 @@ from __future__ import annotations
 import random
 import re
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Callable
 
 import numpy as np
@@ -113,3 +114,51 @@ def calibrate_tau(sims: np.ndarray, labels: np.ndarray) -> tuple[float, float]:
         if bal > best[1]:
             best = (float(tau), float(bal))
     return best
+
+
+# ----------------------------------------------------------- leak-proof TF-IDF (deviation D3)
+
+
+class AsOfTfidf:
+    """TF-IDF whose vocabulary and IDF come only from documents public by ``as_of``.
+
+    Bag-of-words weights cannot encode anything not present in the fitting corpus, so restricting
+    the corpus by knowledge time makes the representation leak-proof by construction.
+    """
+
+    def __init__(self, min_df: int = 2, max_features: int = 20_000) -> None:
+        self.min_df = min_df
+        self.max_features = max_features
+        self.vocab: dict[str, int] = {}
+        self.idf = np.zeros(0)
+
+    def fit(self, docs: list[tuple[datetime, str]], as_of: datetime) -> "AsOfTfidf":
+        from collections import Counter
+
+        from asof.sections import tokens
+
+        if as_of.tzinfo is None:
+            raise ValueError("as_of must be timezone-aware")
+        known = [text for t, text in docs if t <= as_of]
+        df: Counter[str] = Counter()
+        for text in known:
+            df.update(set(tokens(text)))
+        terms = sorted((w for w, c in df.items() if c >= self.min_df), key=lambda w: (-df[w], w))
+        terms = sorted(terms[: self.max_features])
+        self.vocab = {w: i for i, w in enumerate(terms)}
+        n = len(known)
+        self.idf = np.array([np.log((1 + n) / (1 + df[w])) + 1.0 for w in terms])
+        return self
+
+    def transform(self, texts: list[str]) -> np.ndarray:
+        from asof.sections import tokens
+
+        out = np.zeros((len(texts), len(self.vocab)))
+        for i, text in enumerate(texts):
+            for w in tokens(text):
+                j = self.vocab.get(w)
+                if j is not None:
+                    out[i, j] += 1.0
+        out *= self.idf
+        norms = np.linalg.norm(out, axis=1, keepdims=True)
+        return out / np.clip(norms, 1e-12, None)
