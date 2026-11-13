@@ -50,3 +50,18 @@ COVID-19 pandemic". That would spread "COVID-19" while leaving "coronavirus" rar
   actually uses), is future work.
 - Before any public claim about the model, contact the ChronoBERT authors with the reproduction
   script.
+
+### F1 update: probing the vintages this project uses
+
+These use verified first-use dates: J&J named Kenvue on 2022-09-28; 3M named Solventum on 2023-11-16; DuPont named Qnity on 2025-04-29; the FDA approved Mounjaro on 2022-05-13.
+
+| Term | Vintage (pre = before first use) | Evoking rank | Control rank |
+|---|---|---|---|
+| Mounjaro | 2021 (pre) / 2022 | 6 / 7 | 8 / 10 |
+| Kenvue | 2021 (pre) / 2022 | 923 / 818 | 403 / 257 |
+| Solventum | 2022 (pre, in use) / 2023 | 594 / 688 | 1,264 / 1,294 |
+| Qnity | 2022 / 2023 / 2024 (all pre, all in use) | 311 / 611 / 368 | 2,768 / 3,407 / 3,379 |
+
+- **No context-specific leakage in the in-use vintages.** But the post-coinage positive controls also fail: the 2022 vintage doesn't know Kenvue, and the 2023 vintage doesn't know Solventum. Yearly vintages appear to absorb only high-frequency new terms, such as COVID, so this probe can detect only large leaks.
+- **Mounjaro is a subword-prior false positive under the rank-only rule:** its control context ranks it just as high. See deviation D4.
+- **More power** needs frequent terms coined within the in-use window, or a different method, such as likelihood comparisons on dated news text.

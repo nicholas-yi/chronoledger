@@ -43,3 +43,13 @@
 - **Rule:** H1 is "supported" only if it meets the pre-registered threshold under ChronoBERT
   **and** keeps its sign with t ≥ 2.0 under TF-IDF. The ChronoBERT threshold is unchanged.
 
+
+## D4: referee scope and leak criterion for the neologism probe
+
+- **Logged:** 2026-11-12, **after** seeing the extended probe results. No return data was involved.
+- **Change 1, criterion:** a probe counts as leakage only if it is context-specific: in a vintage trained before the term existed, the evoking-context rank is at most 10 **and** the control-context rank is at least 100.
+  - The original rank-only rule flagged Mounjaro in the 2021 vintage (evoking rank 6), but the control context ranked it 8, so the signal was a generic subword prior, not knowledge.
+  - Under either rule, COVID in the 2018 and 2019 vintages remains flagged.
+- **Change 2, scope:** the gating representation threat assesses only the vintages this project uses for 2023+ filings (2022, 2023, and 2024). The all-vintage result is still evaluated and reported in every referee run as a **non-gating known issue**.
+  - The gate's protection against representation leakage rests mainly on D3: any H1 claim must also hold under the leak-proof TF-IDF representation.
+- **Power caveat, stated with the change:** post-coinage vintages also fail to recognize rare brand names (Kenvue, Solventum, Mounjaro). A clean in-use probe therefore rules out only large, high-frequency leaks.
