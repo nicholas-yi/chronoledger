@@ -12,9 +12,15 @@ import gzip
 import json
 import sys
 from collections import Counter
-from concurrent.futures import FIRST_COMPLETED, Future, ProcessPoolExecutor, ThreadPoolExecutor, wait
+from collections.abc import Iterable
+from concurrent.futures import (
+    FIRST_COMPLETED,
+    Future,
+    ProcessPoolExecutor,
+    ThreadPoolExecutor,
+    wait,
+)
 from pathlib import Path
-from typing import Iterable
 
 import numpy as np
 
@@ -46,7 +52,7 @@ def extract_features(raw: bytes, form: str) -> dict:
 def _parse_job(accession: str, raw: bytes, form: str) -> tuple[str, str | None]:
     try:
         feats = extract_features(raw, form)
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 - recorded per accession
         return accession, f"parse error: {exc!r}"
     path = feature_path(accession)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -75,7 +81,7 @@ def build(jobs: Iterable[tuple[int, str, str, str]], download_threads: int = 6,
         cik, acc, doc, form = job
         try:
             return acc, client.filing_document(cik, acc, doc), form, None
-        except Exception as exc:  # recorded per accession, never silently dropped
+        except Exception as exc:  # noqa: BLE001 - recorded per accession, never dropped
             return acc, None, form, f"download error: {exc!r}"
 
     with ThreadPoolExecutor(download_threads) as dl, ProcessPoolExecutor(parse_workers) as pp:
