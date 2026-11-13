@@ -124,6 +124,12 @@
   residuals are now fit on each variant's latest eligible firm signals and controls
   known at its formation close, as intended by pre-registration v2. They are not
   reused as filing-time event scores.
+- **Industry-source limitation:** SIC is still the fixed mapping in the current SEC
+  bulk entity metadata, not a historically timestamped industry table. Formation
+  canaries establish timing for shares, filings, and acquisition events under that
+  fixed mapping; they do not prove historical SIC availability. H4 and neutralized
+  H0 estimates remain conditional diagnostics until that proxy is qualified or
+  replaced before confirmatory evaluation.
 - **Event panels:** raw change panels remain descriptive pipeline diagnostics.
   Neutralized panels are explicitly **not evaluated** until an event-time
   neutralization contract is fixed. The co-primary success rule cannot be claimed

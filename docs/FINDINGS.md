@@ -136,7 +136,9 @@ H0 estimates, 2026-11-13. See [D8](DEVIATIONS.md#d8-formation-time-eligibility-n
 
 Formation now ignores future return availability, uses explicit missing-return
 assumptions with counts, and neutralizes latest eligible signals using formation-time
-controls. Neutralized event panels remain unevaluated pending a time-safe specification;
+size/event controls under a fixed SIC mapping. The SIC mapping is current metadata,
+not verified historical classification, so neutralized H0 and H4 interpretations
+remain conditional on that proxy. Neutralized event panels remain unevaluated pending a time-safe specification;
 raw panels are descriptive diagnostics, not the pre-registered neutralized co-primary.
 These repairs do not establish an effect, repair survivorship, or validate historical
 estimates. No formal claim-level H1 result is produced by these cosine variants.

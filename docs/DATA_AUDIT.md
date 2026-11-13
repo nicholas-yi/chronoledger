@@ -31,6 +31,13 @@ New lineage also records Python and core runtime package versions. The historica
 entries did not pin that environment, so differences from them must not be attributed
 solely to new downloads: code corrections and runtime changes may also contribute.
 
+The SIC field in bulk entity metadata is the **current** classification. It has no
+historical knowledge timestamp here. H4 and neutralized H0 use it as a fixed proxy;
+the formation-time tests do not establish that it was the classification known
+at each historical filing. Those estimates remain conditional development
+diagnostics, not clean historical-industry-adjusted confirmatory tests. Resolve
+that source/proxy contract before opening applicable holdouts.
+
 Development runners append a ledger entry even if execution raises after an
 evaluation starts. `execution_status` describes execution, not scientific validity;
 in particular, a completed H6(b) diagnostic remains invalid under F2. Partial

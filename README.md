@@ -1,21 +1,23 @@
 # ChronoLedger
 
-**A research engine that can't see the future.** ChronoLedger turns SEC filings into a point-in-time,
+**A point-in-time research engine with an executable self-audit.** ChronoLedger turns SEC filings into a point-in-time,
 provenance-tracked record of public companies, then tests whether filing-derived signals predict
 returns, with explicit time-travel tests for look-ahead bias rather than an assumption of safety.
 
 **Status:** development diagnostics only; no supported return claim. The public-data rebuild and
-corrected reruns are in progress. Holdouts remain sealed. Historical estimates are not fresh-data
-results; [F2-F5](docs/FINDINGS.md) document survivorship and point-in-time defects, including
-corrections [D6-D8](docs/DEVIATIONS.md). See [pre-registration](docs/PREREGISTRATION.md) and
+corrected reruns are in progress. No holdout test has been executed. Historical H4 preprocessing
+contaminated its isolation ([F4](docs/FINDINGS.md#f4-h4-winsorization-used-observations-outside-development));
+the correction does not restore an untouched sample. Historical estimates are not fresh-data
+results; [F2-F6](docs/FINDINGS.md) document survivorship and point-in-time defects, including
+corrections [D6-D9](docs/DEVIATIONS.md). See [pre-registration](docs/PREREGISTRATION.md) and
 [data audit / rebuild provenance](docs/DATA_AUDIT.md).
 
 The Python package is named `asof`, after the `as_of` queries everything is built on.
 
 ## Principles
 
-- **Bitemporal by construction.** Every fact carries *valid time* (the period it describes) and *knowledge time* (when it became public, from EDGAR acceptance in UTC). Research code reads only through `as_of` queries.
-- **Look-ahead is tested, not assumed away.** A time-travel invariance test checks that each research function gives identical results on the full store and on a store truncated at the as-of instant. Canary tests confirm that known-leaky code fails.
+- **Bitemporal research facts.** Temporal filing facts carry *valid time* (the period described) and *knowledge time* (EDGAR acceptance in UTC). Time-filtered queries protect these records; current-ticker and current-SIC proxies remain explicit limitations, not historical point-in-time guarantees.
+- **Look-ahead is tested, not assumed away.** Time-travel checks compare full and as-of-truncated inputs, with canaries for known leaks. Passing checks are evidence for the tested paths, not a universal proof.
 - **Pre-registered.** Hypotheses, thresholds, and sample splits are fixed and git-tagged before returns are examined. Deviations are logged with a timestamp and tag.
 - **Every trial counts.** An append-only trial ledger feeds the Deflated Sharpe Ratio and probability-of-overfitting estimates, and the holdout can be opened only once.
 - **As-traded prices.** Vendor prices adjusted for later splits are converted back to the prices that actually traded, so price filters and market caps don't leak future corporate actions.

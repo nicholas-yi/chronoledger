@@ -115,7 +115,7 @@ def neutralize_formations(
     bp: pd.DataFrame,
     cfg: Config,
 ) -> dict[pd.Period, pd.DataFrame]:
-    """Neutralize latest eligible firm signals using only controls known at each formation close."""
+    """Neutralize formation snapshots: size/events are as-of; SIC is the supplied fixed mapping."""
     if not snapshots:
         return {}
     rows = pd.concat([
@@ -253,7 +253,8 @@ def main() -> None:
         results.append(entry)
     out = {"note": "Development period only (~18 monthly obs). Raw change panels are descriptive; "
                    "neutralized event panels are not evaluated (D8). These cosine variants are not "
-                   "the claim-level H1 signal. No co-primary success claim; holdout sealed.",
+                   "the claim-level H1 signal. SIC uses current bulk metadata, not verified historical "
+                   "classifications. No co-primary success claim; no holdout test executed.",
            "coverage": {"universe": len(uni), "with_prices": len(daily_ret),
                         "unusable_daily_returns_dropped": sum(
                             r.attrs["excluded_price_returns"] for r in daily_ret.values())},

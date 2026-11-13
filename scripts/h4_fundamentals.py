@@ -189,7 +189,9 @@ def stage_test() -> None:
                 metrics.update(res)
             results[f"{sig}->{outcome}"] = res
     out = {"note": "Development period (10-Ks accepted 2012-2018) only. Primary: change_n -> d_roa; "
-                   "expected sign: negative for d_roa, positive for decline and impair_next.",
+                   "expected sign: negative for d_roa, positive for decline and impair_next. "
+                   "SIC controls use current bulk metadata, not verified historical classifications; "
+                   "interpret these as conditional development diagnostics.",
            "results": results}
     (PROJECT_ROOT / "results" / "h4_development.json").write_text(json.dumps(out, indent=2))
     json.dump(out, sys.stdout, indent=2)
