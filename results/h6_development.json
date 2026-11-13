@@ -1,0 +1,22 @@
+{
+  "note": "Development only. H6a threshold |t| >= 3 (new); H6b |t| >= 2 with Holm (replication family).",
+  "results": {
+    "H6a_restatement_12m": {
+      "coef": 0.042029092890432815,
+      "t": 1.7377173148163776,
+      "n_filings": 22745,
+      "n_quiet": 499,
+      "firms": 1103,
+      "restate_rate_quiet": 0.17835671342685372,
+      "restate_rate_other": 0.13723815517396387,
+      "item402_rate_quiet": 0.04809619238476954,
+      "item402_rate_other": 0.018160568192034522
+    },
+    "H6b_car_60": {
+      "mean_car": 0.04579215234249664,
+      "t": 1.770776492871435,
+      "n": 316,
+      "clusters": 15
+    }
+  }
+}
