@@ -2,6 +2,82 @@
 
 Findings are recorded as they occur, including ones that weaken this project's own design.
 
+## Development rerun reconciliation (2026-11-13)
+
+**Current status: development diagnostics only, no supported hypothesis or tradable edge.**
+The numerical runs used [execution revision db73f74](https://github.com/nicholas-yi/chronoledger/tree/db73f742214239f4e4b1a0515784279f492da3ec).
+The [ledger](../results/trial_ledger.jsonl) retains all 18 original entries, including invalid runs,
+and appends new engineering checks and evaluations with input and runtime lineage.
+All five common H0 input-file hashes changed on rebuild; that alone does not distinguish
+data-content, serialization, runtime, and code effects.
+
+### H0 cosine variants: the other three are now rerun
+
+| Variant | Monthly observations | Net mean / month | Alpha t |
+|---|---:|---:|---:|
+| `v1_10K_raw` | 17 | -0.80485% | -0.4543 |
+| `v2_latest_raw` | 18 | +0.29079% | +1.4575 |
+| `v2_latest_neutral` | 18 | -0.29411% | -2.3307 |
+| `v2_10K_neutral` | 17 | -1.68946% | -2.3592 |
+
+These are net long-low-change/short-high-change portfolios, so positive is the registered
+direction. None establishes support. The first variant is close to the historical partial
+-0.80497% result, but D7/D8 correct ties, eligibility and neutralization; this is not a
+claim of exact replication of the old implementation.
+No held long/short leg lacks its next-month return, so all three missing-return assumptions
+coincide. That is not evidence that missing firms or survivorship have been repaired.
+The [full output](../results/returns_h0_development.json) includes raw descriptive event panels;
+neutralized event panels remain unevaluated. `H1n` is a historical ledger label for neutralized
+cosine variants, not a tested claim-level H1 signal.
+
+The full process took 61.073 seconds with validated prepared inputs, including all 12 monthly
+configurations. Every numeric metric exactly matched the earlier raw-preparation run.
+That earlier run took 298.712 seconds and failed the timing target; it remains recorded.
+Snapshot construction separately took 154.955 seconds and exactly round-tripped 57,195 monthly
+rows and 2,733 daily series (14,433,060 returns). These are local component/process observations,
+not a hardware-independent performance guarantee.
+
+### H4: no-support conclusion reproduced, not identical estimates
+
+| Signal -> outcome | Historical t | Rebuilt t | Observations, unchanged |
+|---|---:|---:|---:|
+| Neutralized -> dROA | -1.2475 | -1.2007 | 2,655 |
+| Neutralized -> earnings decline | -0.0151 | -0.0616 | 2,658 |
+| Neutralized -> impairment | +1.1836 | +1.2221 | 2,689 |
+| Raw -> dROA | -1.2049 | -1.1520 | 2,655 |
+| Raw -> earnings decline | -0.0745 | -0.1836 | 2,658 |
+| Raw -> impairment | +1.0191 | +1.0604 | 2,689 |
+
+All absolute t values remain below 1.23, versus the 3.0 bar. Directions for dROA and
+impairment remain as expected; decline remains wrong-sign and near zero.
+With development-only winsorization (D6), the dROA mean changes from -2.2972% to -4.0996%
+and the primary coefficient from -19.9324 to -36.1710 in native score/ROA units.
+Firm counts remain 607/608/614 by outcome, with only seven year clusters. The current-SIC
+proxy is not historical industry data. See [the full output](../results/h4_development.json).
+Original byte-identical inputs and runtime were not available, so no numerical decomposition
+of each source of change is claimed. The repair does not restore H4's untouched holdout status.
+
+### H6: exact H6(a) reproduction; H6(b) still invalid
+
+Every reported H6(a) metric exactly reproduces the historical entry: adjusted coefficient
+0.04202909 (+4.20 percentage points), t = 1.7377173, 22,745 filings, 499 quiet filings,
+and 1,103 firms. Observed formal-outcome rates are 17.8357% versus 13.7238%; 4.02-only
+descriptive rates are 4.8096% versus 1.8161%. This does not meet the new-signal bar of 3.0.
+The counting unit is a filing, with year fixed effects and firm-clustered inference;
+the broad outcome includes amendments that are not earnings restatements.
+
+The fresh H6(b) pipeline diagnostic is CAR +4.5792%, t = 1.7708, 316 events and 15 month
+clusters, close to the historical value. It remains **INVALID under F2**, not a return finding.
+See [H6 output](../results/h6_development.json). H5 return tests were not rerun here.
+The referee did recompute the distress-coverage contrasts: NT 0.30, Item 4.02 0.74 and
+Item 4.01 0.56 relative to all 10-K filers, below the 0.8 diagnostic floor.
+
+The executable referee passes its defined gating checks; that is not scientific acceptance.
+The current-SIC proxy, fixed-16:00 session clock, valid-observation CAR indexing, incomplete
+neutralized co-primary, and historical H4 contamination remain qualification/approval issues.
+No holdout test, paid-data purchase, market-data-key use, or publication beyond this existing
+public repository was performed.
+
 ## F1: context-specific "COVID" knowledge in pre-2020 ChronoBERT vintages
 
 **Status:** reproducible probe result. The cause is unconfirmed, and nothing has yet been reported to
@@ -41,8 +117,9 @@ but contain later revisions, for example encyclopedia articles edited to add "ca
 COVID-19 pandemic". That would spread "COVID-19" while leaving "coronavirus" rare.
 
 **Implications for this project.**
-- ChronoBERT vintages cannot be assumed perfectly leak-free. The referee's representation threat
-  fails, and the gate stays blocked.
+- ChronoBERT vintages cannot be assumed perfectly leak-free. At the initial discovery, before D4,
+  this failed the representation threat and blocked the gate. D4 later scoped gating to the in-use
+  vintages; the all-vintage failure remains visible as a known, non-gating issue.
 - Mitigation (deviation D3): every H1 result must also hold under a bag-of-words TF-IDF
   representation, which structurally cannot leak information from after the filing.
 - The probe covers only five terms, and its power is limited for multi-token or generic-prefix
@@ -121,8 +198,8 @@ Synthetic future observations changed the development-only `d_roa` cutoffs, viol
 the intended separation. Development signals are now selected before fitting cutoffs;
 see [D6](DEVIATIONS.md#d6-fit-h4-winsorization-on-development-observations-only).
 The prior H4 ledger entries remain available but are not clean evidence of out-of-period
-preprocessing invariance. A fresh development run is required. The return holdout remains
-sealed, and no validation or holdout regression was run as part of this repair.
+preprocessing invariance. The corrected development run is reconciled above; it does not restore
+an untouched H4 holdout. No validation or holdout regression was run as part of this repair.
 
 ## F5: formation selected on future outcomes; monthly residuals were not event-time signals
 

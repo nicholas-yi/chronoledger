@@ -1,49 +1,49 @@
 {
-  "note": "Development period (10-Ks accepted 2012-2018) only. Primary: change_n -> d_roa; expected sign: negative for d_roa, positive for decline and impair_next.",
+  "note": "Development period (10-Ks accepted 2012-2018) only. Primary: change_n -> d_roa; expected sign: negative for d_roa, positive for decline and impair_next. SIC controls use current bulk metadata, not verified historical classifications; interpret these as conditional development diagnostics.",
   "results": {
     "change_n->d_roa": {
-      "coef": -19.932448289820517,
-      "t": -1.2475363312916479,
+      "coef": -36.17101052256628,
+      "t": -1.2006854830521336,
       "n": 2655,
       "firms": 607,
       "years": 7,
-      "outcome_mean": -0.022972299257828566
+      "outcome_mean": -0.04099579878349264
     },
     "change_n->decline": {
-      "coef": -0.014733833636146887,
-      "t": -0.015108744143566886,
+      "coef": -0.06129487818527779,
+      "t": -0.06159856188226434,
       "n": 2658,
       "firms": 608,
       "years": 7,
       "outcome_mean": 0.4717832957110609
     },
     "change_n->impair_next": {
-      "coef": 1.9249940714222444,
-      "t": 1.1835984617498985,
+      "coef": 1.977324084505672,
+      "t": 1.2221022878996899,
       "n": 2689,
       "firms": 614,
       "years": 7,
       "outcome_mean": 0.08516177017478617
     },
     "change->d_roa": {
-      "coef": -21.36296067615812,
-      "t": -1.2049414094686375,
+      "coef": -39.18726790715555,
+      "t": -1.151967401502785,
       "n": 2655,
       "firms": 607,
       "years": 7,
-      "outcome_mean": -0.022972299257828566
+      "outcome_mean": -0.04099579878349264
     },
     "change->decline": {
-      "coef": -0.040877158977040695,
-      "t": -0.0744733600974777,
+      "coef": -0.10910700086629066,
+      "t": -0.18362255057493412,
       "n": 2658,
       "firms": 608,
       "years": 7,
       "outcome_mean": 0.4717832957110609
     },
     "change->impair_next": {
-      "coef": 1.7960901718483555,
-      "t": 1.019051899579517,
+      "coef": 1.8552534648207741,
+      "t": 1.0603811446371902,
       "n": 2689,
       "firms": 614,
       "years": 7,

@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 import random
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
 
@@ -81,6 +81,9 @@ def render(outcomes: list[Outcome]) -> str:
     gating = [o for o in outcomes if o.gating]
     gate = all(o.level >= 4 for o in gating)
     lines.append(f"**Gate: {'PASS' if gate else 'BLOCKED'}** (every gating threat must be at level 4 or higher)")
+    lines += ["", ("This reports defined executable checks, not scientific acceptance or permission "
+                   "to open holdouts. Some checks read recorded model/extraction artifacts; passing "
+                   "does not mean those models were rerun.")]
     lines += ["", "```"]
     for o in outcomes:
         bar = "#" * o.level + "." * (5 - o.level)
@@ -564,8 +567,26 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
 
 
 def main() -> None:
+    from asof import ledger
+    from asof.periods import DEV_RETURN_CUTOFF
+    from asof.prices import YahooPrices
+
     outcomes = evaluate(default_threats())
     report = render(outcomes)
+    results = PROJECT_ROOT / "results"
+    inputs = [
+        DATA_DIR / "pilot.duckdb", DATA_DIR / "bulk_filings.parquet",
+        DATA_DIR / "h0_universe.parquet", DATA_DIR / "h0_price_snapshot.json",
+        results / "returns_h0_development.json",
+        results / "bench_qwen3.5-4b_n300_s0.json",
+        results / "swap_qwen3.5-4b_n160_s0.json",
+        results / "leakprobe_chronobert.json",
+        PROJECT_ROOT / "docs" / "DATA_AUDIT.md", PROJECT_ROOT / "docs" / "DEVIATIONS.md",
+        YahooPrices().cache_path("AAPL", end=DEV_RETURN_CUTOFF),
+    ]
+    report += f"\n## Run provenance\n\nGenerated UTC: `{datetime.now(UTC).isoformat()}`.\n\n"
+    report += "The holdout-seal mutation uses a temporary synthetic ledger, not the project holdout.\n\n"
+    report += "```json\n" + json.dumps(ledger.lineage(inputs), indent=2) + "\n```\n"
     out = PROJECT_ROOT / "results" / "REFEREE.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(report, encoding="utf-8")

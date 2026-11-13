@@ -1,5 +1,5 @@
 {
-  "note": "Development only. H6a threshold |t| >= 3 (new); H6b |t| >= 2 with Holm (replication family).",
+  "note": "Development only. H6a threshold |t| >= 3 (new). H6b is INVALID under F2; its rerun is a pipeline diagnostic, not a replication or hypothesis result.",
   "results": {
     "H6a_restatement_12m": {
       "coef": 0.042029092890432815,
@@ -13,8 +13,8 @@
       "item402_rate_other": 0.018160568192034522
     },
     "H6b_car_60": {
-      "mean_car": 0.04579215234249664,
-      "t": 1.770776492871435,
+      "mean_car": 0.045792149274950185,
+      "t": 1.7707765472303367,
       "n": 316,
       "clusters": 15
     }

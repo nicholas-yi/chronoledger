@@ -4,6 +4,7 @@
 
 ```
 lookahead.store                    [#####] 5/5
+lookahead.formation                [#####] 5/5
 lookahead.reconcile                [####.] 4/5
 lookahead.representation           [#####] 5/5
 lookahead.representation.all_vintages [#....] 1/5  (known issue, non-gating)
@@ -11,7 +12,9 @@ extraction.hallucination           [#####] 5/5
 extraction.quality                 [####.] 4/5
 multiple_testing                   [#####] 5/5
 survivorship                       [####.] 4/5
+survivorship.distress_events [blocks H5b, H5c, H6b] [#....] 1/5  (known issue, non-gating)
 price_level_leak                   [#####] 5/5
+data_integrity                     [####.] 4/5
 ```
 
 ## lookahead.store: level 5
@@ -21,6 +24,14 @@ price_level_leak                   [#####] 5/5
 - PASS (check) **invariance of as-of facts**: 10 random as-of instants on pilot.duckdb, 0 violations
 - PASS (check) **invariance of revision detection**: revision detection at 6 instants, 0 violations
 - PASS (mutation) **planted period-end leak is caught**: planted period-end look-ahead bug was caught
+
+## lookahead.formation: level 5
+
+*Could future returns or post-close events change current holdings?*
+
+- PASS (check) **formation ignores future outcome availability**: formation holdings and weights are unchanged when a future return is hidden
+- PASS (check) **formation neutralization excludes post-close information**: post-close filing/share/acquisition events do not change formation residuals
+- PASS (mutation) **planted future-outcome selection is caught**: planted future-return availability filter changes holdings and is caught
 
 ## lookahead.reconcile: level 4
 
@@ -65,19 +76,33 @@ price_level_leak                   [#####] 5/5
 
 - PASS (check) **DSR rejects best-of-noise**: best of 500 noise strategies: naive PSR 1.00, DSR 0.60
 - PASS (mutation) **holdout is single-use**: second holdout access was refused
-- PASS (check) **no returns computed before deviation D1**: 0 commit(s) added return outputs, all after deviation-d1
+- PASS (check) **no returns computed before deviation D1**: 2 commit(s) added return outputs, all after deviation-d1
 
 ## survivorship: level 4
 
 *Are failed or acquired firms silently missing?*
 
 - PASS (check) **coverage audit and D1 documented**: coverage audit and deviation D1 are documented
-- PASS (check) **no returns computed before deviation D1**: 0 commit(s) added return outputs, all after deviation-d1
+- PASS (check) **no returns computed before deviation D1**: 2 commit(s) added return outputs, all after deviation-d1
+
+## survivorship.distress_events [blocks H5b, H5c, H6b]: level 1 (known issue, non-gating)
+
+*Are distressed firms that later disappeared missing from event samples? (F2)*
+
+- FAIL (check) **distress-event coverage parity >= 0.8**: coverage relative to all 10-K filers: NT 0.30, 4.02 0.74, 4.01 0.56 (need >= 0.8)
 
 ## price_level_leak: level 5
 
 *Do price filters or market caps use future split information?*
 
 - PASS (check) **as-traded reconstruction on AAPL 2020 split**: AAPL 2020 split: 499.23 / 129.04
-- PASS (check) **as-traded close matches the historical record (real data)**: AAPL as-traded close 2014-06-06 = 645.57 (record: 645.57)
+- PASS (check) **as-traded close matches the historical record (real data)**: AAPL 2014-06-06 reconstruction: absolute reference discrepancy 0.0000 (need < 0.05)
 - PASS (mutation) **$5 filter canary**: adjusted $1.00 vs as-traded $28.00
+
+## data_integrity: level 4
+
+*Are results driven by data errors rather than economics?*
+
+- PASS (check) **long-short means are plausible (<= 5%/month)**: all variants within +/-5% per month
+- PASS (check) **share-count typos are cleaned point-in-time**: a 1,000x share-count typo is rejected
+- PASS (check) **unusable daily price ratios are excluded and counted**: four unusable daily ratios are excluded; the valid return and exclusion count remain
