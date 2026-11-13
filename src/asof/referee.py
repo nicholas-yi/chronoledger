@@ -234,6 +234,33 @@ def _tfidf_invariance() -> tuple[bool, str]:
     return bad == 0, f"100 random corpora, {bad} differences between full and as-of-truncated fits"
 
 
+def _distress_coverage_parity(min_ratio: float = 0.8) -> tuple[bool, str]:
+    """Price-universe coverage of distress-event filers relative to all 10-K filers (F2)."""
+    import pandas as pd
+
+    from asof.periods import DEV_END, DEV_START
+
+    fpath, upath = DATA_DIR / "bulk_filings.parquet", DATA_DIR / "h0_universe.parquet"
+    if not fpath.exists() or not upath.exists():
+        return False, "bulk filings or universe missing"
+    f = pd.read_parquet(fpath)
+    uni = set(pd.read_parquet(upath)["cik"])
+    lo, hi = pd.Timestamp(DEV_START, tz="UTC"), pd.Timestamp(DEV_END, tz="UTC") + pd.Timedelta(days=1)
+    w = f[f["knowledge_time"].between(lo, hi)]
+    items = w["items"].fillna("")
+
+    def cov(g):
+        c = set(g["cik"])
+        return len(c & uni) / len(c) if c else float("nan")
+
+    base = cov(w[w["form"] == "10-K"])
+    ratios = {"NT": cov(w[w["form"].str.startswith("NT ")]) / base,
+              "4.02": cov(w[(w["form"] == "8-K") & items.str.contains(r"\b4\.02\b")]) / base,
+              "4.01": cov(w[(w["form"] == "8-K") & items.str.contains(r"\b4\.01\b")]) / base}
+    ok = all(r >= min_ratio for r in ratios.values())
+    return ok, "coverage relative to all 10-K filers: " + ", ".join(f"{k} {v:.2f}" for k, v in ratios.items()) + f" (need >= {min_ratio})"
+
+
 def _as_traded_real() -> tuple[bool, str]:
     from asof.periods import DEV_RETURN_CUTOFF
     from asof.prices import YahooPrices
@@ -407,6 +434,10 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
             Check("coverage audit and D1 documented", _coverage_audit_present),
             Check("no returns computed before deviation D1", _no_returns_before_deviation),
         ]),
+        Threat("survivorship.distress_events [blocks H5b, H5c, H6b]",
+               "Are distressed firms that later disappeared missing from event samples? (F2)", [
+            Check("distress-event coverage parity >= 0.8", _distress_coverage_parity),
+        ], gating=False),
         Threat("price_level_leak", "Do price filters or market caps use future split information?", [
             Check("as-traded reconstruction on AAPL 2020 split", _as_traded_unit),
             Check("as-traded close matches the historical record (real data)", _as_traded_real),
