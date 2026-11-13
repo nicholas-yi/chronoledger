@@ -63,7 +63,7 @@ def stage_features() -> None:
     k = fil[(fil["form"] == "10-K") & fil["cik"].isin(s) & fil["knowledge_time"].between(WIN_LO, WIN_HI)]
     jobs = [(int(r.cik), r.accession, r.primary_doc, r.form) for r in k.itertuples()]
     log(f"features: {len(jobs)} 10-Ks")
-    errors = build(jobs)
+    errors = build(jobs, parse_workers=10)
     log(f"features: done, {len(errors)} errors")
 
 
@@ -109,23 +109,24 @@ def _first_reported(facts: dict, tags: list[str], accession: str, end: str, dura
 
 
 def stage_outcomes() -> None:
-    from asof.bulk import read_companyfacts
+    from asof.bulk import iter_companyfacts
 
     fil = pd.read_parquet(FIL)
     s = set(pd.read_parquet(SAMPLE)["cik"])
     k = fil[(fil["form"] == "10-K") & fil["cik"].isin(s)].dropna(subset=["report_date"])
-    cf = read_companyfacts(s)
+    by_cik = {c: g for c, g in k.groupby("cik")}
     rows = []
-    for r in k.itertuples():
-        facts = cf.get(int(r.cik), {}).get("facts", {})
-        end = str(r.report_date)[:10]
-        rows.append({
-            "cik": int(r.cik), "accession": r.accession, "report_date": end,
-            "ni": _first_reported(facts, NI_TAGS, r.accession, end, True),
-            "assets": _first_reported(facts, ["Assets"], r.accession, end, False),
-            "revenue": _first_reported(facts, REV_TAGS, r.accession, end, True),
-            "gw_impair": _first_reported(facts, ["GoodwillImpairmentLoss"], r.accession, end, True),
-        })
+    for cik, data in iter_companyfacts(s):
+        facts = data.get("facts", {})
+        for r in by_cik.get(cik, k.iloc[0:0]).itertuples():
+            end = str(r.report_date)[:10]
+            rows.append({
+                "cik": int(r.cik), "accession": r.accession, "report_date": end,
+                "ni": _first_reported(facts, NI_TAGS, r.accession, end, True),
+                "assets": _first_reported(facts, ["Assets"], r.accession, end, False),
+                "revenue": _first_reported(facts, REV_TAGS, r.accession, end, True),
+                "gw_impair": _first_reported(facts, ["GoodwillImpairmentLoss"], r.accession, end, True),
+            })
     out = pd.DataFrame(rows)
     out.to_parquet(OUT)
     log(f"outcomes: {len(out)} 10-Ks, {out['ni'].notna().mean():.0%} with NI, {out['assets'].notna().mean():.0%} with assets")

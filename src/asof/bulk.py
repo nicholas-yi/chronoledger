@@ -75,8 +75,8 @@ def read_submissions(path: Path = BULK / "submissions.zip") -> tuple[pd.DataFram
     return pd.DataFrame(entities), f.drop_duplicates("accession")
 
 
-def read_companyfacts(ciks: set[int], path: Path = BULK / "companyfacts.zip") -> dict[int, dict]:
-    out = {}
+def iter_companyfacts(ciks: set[int], path: Path = BULK / "companyfacts.zip"):
+    """Yield (cik, facts JSON) one firm at a time, keeping memory flat."""
     with zipfile.ZipFile(path) as zf:
         for name in zf.namelist():
             try:
@@ -86,8 +86,12 @@ def read_companyfacts(ciks: set[int], path: Path = BULK / "companyfacts.zip") ->
             if cik in ciks:
                 data = _load(zf, name)
                 if data is not None:
-                    out[cik] = data
-    return out
+                    yield cik, data
+
+
+def read_companyfacts(ciks: set[int], path: Path = BULK / "companyfacts.zip") -> dict[int, dict]:
+    """Load facts for a small set of CIKs. Prefer ``iter_companyfacts`` for large sets."""
+    return dict(iter_companyfacts(ciks, path))
 
 
 def max_public_float(path: Path = BULK / "companyfacts.zip") -> pd.Series:

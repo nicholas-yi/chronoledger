@@ -16,7 +16,7 @@ import pandas as pd
 import statsmodels.api as sm
 
 from asof import ledger
-from asof.bulk import read_companyfacts
+from asof.bulk import iter_companyfacts
 from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.quiet import IS_TAGS, flatten_usd, quiet_down_revisions
 
@@ -25,11 +25,11 @@ DEV_A = (pd.Timestamp("2012-01-01", tz="UTC"), pd.Timestamp("2018-12-31 23:59:59
 
 
 def detect(ciks: set[int], filings: pd.DataFrame) -> pd.DataFrame:
-    cf = read_companyfacts(ciks)
+    by_cik = {c: g for c, g in filings[filings["cik"].isin(ciks)].groupby("cik")}
     out = []
-    for cik, data in cf.items():
+    for cik, data in iter_companyfacts(ciks):
         facts = flatten_usd(data.get("facts", {}), cik, IS_TAGS)
-        out.append(quiet_down_revisions(facts, filings[filings["cik"] == cik]))
+        out.append(quiet_down_revisions(facts, by_cik.get(cik, filings.iloc[0:0])))
     return pd.concat(out, ignore_index=True) if out else pd.DataFrame()
 
 
