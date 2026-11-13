@@ -1,8 +1,9 @@
 {
-  "note": "Development period only (~18 monthly obs). Event panel: expected sign of change->CAR is negative. Point estimates for pipeline validation; holdout sealed.",
+  "note": "Development period only (~18 monthly obs). Raw change panels are descriptive; neutralized event panels are not evaluated (D8). These cosine variants are not the claim-level H1 signal. SIC uses current bulk metadata, not verified historical classifications. No co-primary success claim; no holdout test executed.",
   "coverage": {
-    "universe": 2754,
-    "with_prices": 2736
+    "universe": 2753,
+    "with_prices": 2733,
+    "unusable_daily_returns_dropped": 3
   },
   "results": [
     {
@@ -14,25 +15,70 @@
         "min_price": 5.0,
         "size_pct": "p20",
         "max_signal_age_days": 365,
-        "long_high": true
+        "long_high": true,
+        "missing_return": 0.0
       },
       "monthly": {
         "months": 17,
-        "mean_net": 0.2739125614450173,
-        "mean_gross": 0.2756788503646441,
-        "alpha": 0.1485063065332636,
-        "alpha_t": 4.333293356504991,
-        "avg_firms": 1521.8235294117646,
-        "mean_ic": 0.025204258277390153,
-        "ic_t": 2.1396796803038116
+        "mean_net": -0.008048542087534851,
+        "mean_gross": -0.007055517317301605,
+        "alpha": -0.002836822499069423,
+        "alpha_t": -0.45431715643250004,
+        "avg_firms": 1461.0,
+        "missing_long_returns": 0,
+        "missing_short_returns": 0,
+        "missing_return_assumption": 0.0,
+        "mean_ic": 0.010968661246355727,
+        "ic_t": 0.9209525840277051
+      },
+      "monthly_missing_return_sensitivity": {
+        "0.0": {
+          "months": 17,
+          "mean_net": -0.008048542087534851,
+          "mean_gross": -0.007055517317301605,
+          "alpha": -0.002836822499069423,
+          "alpha_t": -0.45431715643250004,
+          "avg_firms": 1461.0,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": 0.0,
+          "mean_ic": 0.010968661246355727,
+          "ic_t": 0.9209525840277051
+        },
+        "-0.3": {
+          "months": 17,
+          "mean_net": -0.008048542087534851,
+          "mean_gross": -0.007055517317301605,
+          "alpha": -0.002836822499069423,
+          "alpha_t": -0.45431715643250004,
+          "avg_firms": 1461.0,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": -0.3,
+          "mean_ic": 0.010968661246355727,
+          "ic_t": 0.9209525840277051
+        },
+        "-1.0": {
+          "months": 17,
+          "mean_net": -0.008048542087534851,
+          "mean_gross": -0.007055517317301605,
+          "alpha": -0.002836822499069423,
+          "alpha_t": -0.45431715643250004,
+          "avg_firms": 1461.0,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": -1.0,
+          "mean_ic": 0.010968661246355727,
+          "ic_t": 0.9209525840277051
+        }
       },
       "event_panel_change_on_car60": {
-        "coef": 1.7447965421389287,
-        "t": 2.027016102557051,
-        "n_events": 4966,
+        "coef": 1.7446338720003947,
+        "t": 1.8411537120675652,
+        "n_events": 4960,
         "clusters": 17
       },
-      "config_hash": "665a2413dfa6795f"
+      "config_hash": "5652983298aed336"
     },
     {
       "variant": "v2_latest_raw",
@@ -43,25 +89,70 @@
         "min_price": 5.0,
         "size_pct": "p20",
         "max_signal_age_days": 365,
-        "long_high": true
+        "long_high": true,
+        "missing_return": 0.0
       },
       "monthly": {
         "months": 18,
-        "mean_net": 0.2590428908393395,
-        "mean_gross": 0.2611668927684863,
-        "alpha": 0.133198962048963,
-        "alpha_t": 4.6441443241674,
-        "avg_firms": 1542.8333333333333,
-        "mean_ic": 0.018324526356354863,
-        "ic_t": 1.3156531525722461
+        "mean_net": 0.002907895034257874,
+        "mean_gross": 0.0051105179507698155,
+        "alpha": 0.013298512498880246,
+        "alpha_t": 1.457483948284343,
+        "avg_firms": 1482.2777777777778,
+        "missing_long_returns": 0,
+        "missing_short_returns": 0,
+        "missing_return_assumption": 0.0,
+        "mean_ic": 0.008541959127442876,
+        "ic_t": 0.6221606681410208
+      },
+      "monthly_missing_return_sensitivity": {
+        "0.0": {
+          "months": 18,
+          "mean_net": 0.002907895034257874,
+          "mean_gross": 0.0051105179507698155,
+          "alpha": 0.013298512498880246,
+          "alpha_t": 1.457483948284343,
+          "avg_firms": 1482.2777777777778,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": 0.0,
+          "mean_ic": 0.008541959127442876,
+          "ic_t": 0.6221606681410208
+        },
+        "-0.3": {
+          "months": 18,
+          "mean_net": 0.002907895034257874,
+          "mean_gross": 0.0051105179507698155,
+          "alpha": 0.013298512498880246,
+          "alpha_t": 1.457483948284343,
+          "avg_firms": 1482.2777777777778,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": -0.3,
+          "mean_ic": 0.008541959127442876,
+          "ic_t": 0.6221606681410208
+        },
+        "-1.0": {
+          "months": 18,
+          "mean_net": 0.002907895034257874,
+          "mean_gross": 0.0051105179507698155,
+          "alpha": 0.013298512498880246,
+          "alpha_t": 1.457483948284343,
+          "avg_firms": 1482.2777777777778,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": -1.0,
+          "mean_ic": 0.008541959127442876,
+          "ic_t": 0.6221606681410208
+        }
       },
       "event_panel_change_on_car60": {
-        "coef": 0.21788167419470766,
-        "t": 0.5442649456701619,
-        "n_events": 14407,
+        "coef": 0.21664428550946516,
+        "t": 0.5389253056256739,
+        "n_events": 14391,
         "clusters": 17
       },
-      "config_hash": "f3a533eed202cf73"
+      "config_hash": "1187a0e477a8efc2"
     },
     {
       "variant": "v2_latest_neutral",
@@ -72,25 +163,68 @@
         "min_price": 5.0,
         "size_pct": "p20",
         "max_signal_age_days": 365,
-        "long_high": true
+        "long_high": true,
+        "missing_return": 0.0
       },
       "monthly": {
         "months": 18,
-        "mean_net": 0.19635244529190213,
-        "mean_gross": 0.19861873281149767,
-        "alpha": 0.10171350710660895,
-        "alpha_t": 2.9517103935803686,
-        "avg_firms": 1542.3333333333333,
-        "mean_ic": 0.003486062186451371,
-        "ic_t": 0.2636005568460412
+        "mean_net": -0.0029410661399329823,
+        "mean_gross": 0.0002820627909132847,
+        "alpha": -0.017395670876276036,
+        "alpha_t": -2.3306570936675364,
+        "avg_firms": 1482.2777777777778,
+        "missing_long_returns": 0,
+        "missing_short_returns": 0,
+        "missing_return_assumption": 0.0,
+        "mean_ic": -0.004142337259517049,
+        "ic_t": -0.3306059466858673
+      },
+      "monthly_missing_return_sensitivity": {
+        "0.0": {
+          "months": 18,
+          "mean_net": -0.0029410661399329823,
+          "mean_gross": 0.0002820627909132847,
+          "alpha": -0.017395670876276036,
+          "alpha_t": -2.3306570936675364,
+          "avg_firms": 1482.2777777777778,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": 0.0,
+          "mean_ic": -0.004142337259517049,
+          "ic_t": -0.3306059466858673
+        },
+        "-0.3": {
+          "months": 18,
+          "mean_net": -0.0029410661399329823,
+          "mean_gross": 0.0002820627909132847,
+          "alpha": -0.017395670876276036,
+          "alpha_t": -2.3306570936675364,
+          "avg_firms": 1482.2777777777778,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": -0.3,
+          "mean_ic": -0.004142337259517049,
+          "ic_t": -0.3306059466858673
+        },
+        "-1.0": {
+          "months": 18,
+          "mean_net": -0.0029410661399329823,
+          "mean_gross": 0.0002820627909132847,
+          "alpha": -0.017395670876276036,
+          "alpha_t": -2.3306570936675364,
+          "avg_firms": 1482.2777777777778,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": -1.0,
+          "mean_ic": -0.004142337259517049,
+          "ic_t": -0.3306059466858673
+        }
       },
       "event_panel_change_on_car60": {
-        "coef": 0.03501051439833076,
-        "t": 0.1694781659197087,
-        "n_events": 12689,
-        "clusters": 17
+        "status": "not_evaluated",
+        "note": "Formation-month residuals are not event-time signals (D8). An event-time neutralization contract must be fixed before this test."
       },
-      "config_hash": "53178e5650217818"
+      "config_hash": "81d2e16f13489260"
     },
     {
       "variant": "v2_10K_neutral",
@@ -101,29 +235,73 @@
         "min_price": 5.0,
         "size_pct": "p20",
         "max_signal_age_days": 365,
-        "long_high": true
+        "long_high": true,
+        "missing_return": 0.0
       },
       "monthly": {
         "months": 17,
-        "mean_net": 0.012822570236492659,
-        "mean_gross": 0.014107587749453176,
-        "alpha": -0.0014632061573924648,
-        "alpha_t": -0.17779231210595053,
-        "avg_firms": 1517.764705882353,
-        "mean_ic": -0.010671505154518684,
-        "ic_t": -0.621453162066211
+        "mean_net": -0.016894604998287238,
+        "mean_gross": -0.014358956827336247,
+        "alpha": -0.021246053785635002,
+        "alpha_t": -2.3591937466000457,
+        "avg_firms": 1461.0,
+        "missing_long_returns": 0,
+        "missing_short_returns": 0,
+        "missing_return_assumption": 0.0,
+        "mean_ic": -0.012303772737190249,
+        "ic_t": -1.4972251182836223
+      },
+      "monthly_missing_return_sensitivity": {
+        "0.0": {
+          "months": 17,
+          "mean_net": -0.016894604998287238,
+          "mean_gross": -0.014358956827336247,
+          "alpha": -0.021246053785635002,
+          "alpha_t": -2.3591937466000457,
+          "avg_firms": 1461.0,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": 0.0,
+          "mean_ic": -0.012303772737190249,
+          "ic_t": -1.4972251182836223
+        },
+        "-0.3": {
+          "months": 17,
+          "mean_net": -0.016894604998287238,
+          "mean_gross": -0.014358956827336247,
+          "alpha": -0.021246053785635002,
+          "alpha_t": -2.3591937466000457,
+          "avg_firms": 1461.0,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": -0.3,
+          "mean_ic": -0.012303772737190249,
+          "ic_t": -1.4972251182836223
+        },
+        "-1.0": {
+          "months": 17,
+          "mean_net": -0.016894604998287238,
+          "mean_gross": -0.014358956827336247,
+          "alpha": -0.021246053785635002,
+          "alpha_t": -2.3591937466000457,
+          "avg_firms": 1461.0,
+          "missing_long_returns": 0,
+          "missing_short_returns": 0,
+          "missing_return_assumption": -1.0,
+          "mean_ic": -0.012303772737190249,
+          "ic_t": -1.4972251182836223
+        }
       },
       "event_panel_change_on_car60": {
-        "coef": 0.6717382314888746,
-        "t": 1.8789046588071054,
-        "n_events": 4368,
-        "clusters": 17
+        "status": "not_evaluated",
+        "note": "Formation-month residuals are not event-time signals (D8). An event-time neutralization contract must be fixed before this test."
       },
-      "config_hash": "e714ffcef5b59dac"
+      "config_hash": "8f8384bb259b4a37"
     }
   ],
   "n_trials": {
-    "H0": 2,
-    "H1n": 2
-  }
+    "H0": 10,
+    "H1n": 10
+  },
+  "elapsed_seconds": 267.5054501001723
 }

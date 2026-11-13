@@ -39,6 +39,11 @@ class YahooPrices:
         self._last = 0.0
         self._http = httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=60.0)
 
+    def cache_path(self, ticker: str, *, end: date | None = None) -> Path:
+        symbol = _yahoo_symbol(ticker)
+        name = f"{symbol}_to{end:%Y%m%d}_v2.json.gz" if end is not None else f"{symbol}.json.gz"
+        return self.cache_dir / name
+
     def raw(self, ticker: str, *, end: date | None = None, holdout_opened: bool = False,
             refresh: bool = False) -> dict | None:
         """Fetch daily history; with ``end``, price rows after ``end`` are stripped before caching.
@@ -53,9 +58,7 @@ class YahooPrices:
         symbol = _yahoo_symbol(ticker)
         if end is not None:
             price_end_allowed(end, holdout_opened)
-            path = self.cache_dir / f"{symbol}_to{end:%Y%m%d}_v2.json.gz"
-        else:
-            path = self.cache_dir / f"{symbol}.json.gz"
+        path = self.cache_path(ticker, end=end)
         period2 = int(datetime.now(timezone.utc).timestamp())
         if path.exists() and not refresh:
             payload = json.loads(gzip.decompress(path.read_bytes()))

@@ -80,6 +80,33 @@ it returns an empty guarded history, rather than crashing on an empty NumPy inde
 The rebuild produced 2,753 cache files and 2,733 nonempty daily histories; cache-file
 count alone is not price coverage.
 
+### Processed price snapshot and runtime contract
+
+The first full four-variant run produced plausible development estimates but took
+298.7 seconds wall-clock (267.5 seconds inside `main`), missing the 180-second
+target. Its failed timing acceptance is retained as an `ENGINEERING` ledger entry.
+Profiling shared preparation, without re-evaluating strategies, found repeated
+vendor JSON decoding and daily DataFrame construction dominated the remaining cost.
+
+The `prices` stage now also builds a lossless processed snapshot. For existing raw
+caches, rebuild just that step with `python scripts/h0_data.py price_snapshot`.
+It writes three **local-only** files under `data/`: `h0_monthly_prices.parquet`,
+`h0_daily_returns.parquet`, and `h0_price_snapshot.json`. No raw or processed prices
+are committed or redistributed.
+
+- The manifest pins raw-cache SHA-256 fingerprints, universe selection, processing
+  source hashes, cutoff, runtime versions, output checksums, and generation lineage.
+- Generation must see unchanged inputs from start to finish. The full monthly
+  panel and every daily series, including empty series and exclusion counts, are
+  compared with their serialized round-trip before the manifest is published.
+- The analysis refuses missing, stale, corrupt, or post-cutoff snapshots. It does
+  not silently fall back to raw decoding. Rebuild after changing raw data,
+  universe, processing code, or runtime; finish acquisition before generating it.
+- The snapshot preserves values and missingness. It adds no sample, return,
+  cost, or hypothesis change. Full process timing must include validation and
+  loading of this prepared input; acquisition and snapshot construction are
+  separately identified data-preparation steps.
+
 An exhaustive daily-return audit subsequently found a remaining F3 gap, now tracked
 as [F6](FINDINGS.md#f6-the-f3-price-return-guard-did-not-cover-daily-event-inputs)
 and [D9](DEVIATIONS.md#d9-apply-the-existing-price-return-integrity-guard-to-event-inputs).

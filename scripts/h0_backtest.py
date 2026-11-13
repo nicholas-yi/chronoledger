@@ -16,7 +16,6 @@ from time import perf_counter
 
 import numpy as np
 import pandas as pd
-from httpx import HTTPError
 
 from asof import ledger
 from asof.backtest import (
@@ -25,21 +24,20 @@ from asof.backtest import (
     form_portfolios,
     formation_snapshots,
     long_short,
-    monthly_panel,
     values_as_of,
 )
 from asof.config import DATA_DIR, PROJECT_ROOT, RAW_DIR
 from asof.events import CarEngine, event_panel, neutralize, rank_ic
 from asof.factors import ff5_umd_daily, ff5_umd_monthly, nyse_me_breakpoints
 from asof.inference import nw_alpha
+from asof.marketdata import SNAPSHOT_FILES, load_price_snapshot
 from asof.periods import DEV_END, DEV_RETURN_CUTOFF, DEV_START
-from asof.prices import YahooPrices, daily_returns
 from asof.timeutil import close_time_utc, first_tradable_close
 
 FACTORS = ["Mkt_RF", "SMB", "HML", "RMW", "CMA", "UMD"]
 INPUTS = [DATA_DIR / n for n in ("h0_universe.parquet", "h0_signals.parquet", "h0_shares.parquet",
                                  "bulk_entities.parquet", "bulk_filings.parquet",
-                                 "h0_market_inputs.json")]
+                                 "h0_market_inputs.json")] + list(SNAPSHOT_FILES)
 
 
 def fingerprint_market_inputs() -> None:
@@ -68,19 +66,7 @@ def load_inputs():
     ent = pd.read_parquet(DATA_DIR / "bulk_entities.parquet")[["cik", "sic"]]
     fil = pd.read_parquet(DATA_DIR / "bulk_filings.parquet")
     ma = fil[(fil["form"] == "8-K") & fil["items"].fillna("").str.contains(r"\b2\.01\b")][["cik", "knowledge_time"]]
-    y = YahooPrices()
-    frames, daily_ret = [], {}
-    for t in uni["ticker"]:
-        try:
-            d = y.daily(t, end=DEV_RETURN_CUTOFF)
-        except HTTPError as exc:
-            print(f"prices: {t} failed: {exc!r}", file=sys.stderr, flush=True)
-            continue
-        if d.empty:
-            continue
-        daily_ret[t] = daily_returns(d.set_index("date")).dropna()
-        frames.append(d[d["date"] >= pd.Timestamp("2022-11-01").date()])
-    panel = monthly_panel(pd.concat(frames, ignore_index=True)).merge(uni[["cik", "ticker"]], on="ticker")
+    panel, daily_ret = load_price_snapshot(uni)
     return uni, sig, shares, ent, ma, panel, daily_ret
 
 

@@ -16,9 +16,10 @@ import numpy as np
 import pandas as pd
 
 from asof import ledger
-from asof.backtest import Config, form_portfolios, formation_snapshots, long_short
+from asof.backtest import Config, form_portfolios, formation_snapshots, long_short, monthly_panel
 from asof.config import PROJECT_ROOT
 from asof.periods import DEV_END, DEV_START
+from asof.prices import YahooPrices
 
 REFERENCE = "5298d9d9f666c52a3ec2b879c1b85f88f258f15e"
 
@@ -48,7 +49,7 @@ def main() -> None:
     legacy.latest_as_of = backtest.latest_as_of
     uni, sig, shares, ent, ma, panel, _ = current.load_inputs()
     chosen = set(sorted(set(uni["cik"]) & set(sig["cik"]))[:args.firms])
-    y = current.YahooPrices()
+    y = YahooPrices()
     daily = []
     for ticker in uni.loc[uni["cik"].isin(chosen), "ticker"]:
         prices = y.daily(ticker, end=current.DEV_RETURN_CUTOFF)
@@ -59,7 +60,7 @@ def main() -> None:
     old_panel = backtest.monthly_panel(daily)
     old_panel_seconds = perf_counter() - start
     start = perf_counter()
-    new_panel = current.monthly_panel(daily)
+    new_panel = monthly_panel(daily)
     new_panel_seconds = perf_counter() - start
     pd.testing.assert_frame_equal(new_panel, old_panel, rtol=1e-12, atol=1e-12)
     panel_comparison = {

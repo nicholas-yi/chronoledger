@@ -204,6 +204,9 @@ def stage_prices(uni: pd.DataFrame) -> None:
             log(f"prices: {t} failed: {exc!r}")
         if i % 200 == 0:
             log(f"prices: {i}/{len(uni)}")
+    from asof.marketdata import build_price_snapshot
+
+    build_price_snapshot(uni)
 
 
 def main() -> None:
@@ -224,6 +227,10 @@ def main() -> None:
         stage_shares(client)
     if "prices" in stages:
         stage_prices(uni)
+    elif "price_snapshot" in stages:
+        from asof.marketdata import build_price_snapshot
+
+        build_price_snapshot(uni)
 
 
 if __name__ == "__main__":
