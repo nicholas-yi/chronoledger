@@ -53,3 +53,12 @@
 - **Change 2, scope:** the gating representation threat assesses only the vintages this project uses for 2023+ filings (2022, 2023, and 2024). The all-vintage result is still evaluated and reported in every referee run as a **non-gating known issue**.
   - The gate's protection against representation leakage rests mainly on D3: any H1 claim must also hold under the leak-proof TF-IDF representation.
 - **Power caveat, stated with the change:** post-coinage vintages also fail to recognize rare brand names (Kenvue, Solventum, Mounjaro). A clean in-use probe therefore rules out only large, high-frequency leaks.
+
+## D5: operational details for H6 (quiet revisions), fixed before H6 data was examined
+
+- **Logged:** 2026-11-12, after `prereg-v2` and **before any H6 data was loaded**. Pre-registration v2 left these choices open, and they are now fixed in `src/asof/quiet.py`, with tests:
+  - **Tag:** `NetIncomeLoss` only. Revenue is routinely reclassified, for example for discontinued operations, while net income is not.
+  - **Size:** a revision counts if it is more than 1% below the first-reported value, and that first-reported value's absolute size exceeded $1M.
+  - **Form:** only regular 10-K or 10-Q comparative columns count. Amendments themselves are not "quiet."
+  - **Scale changes:** filings that revise three or more income-statement tags by the same ratio (to three decimals) are treated as unit or scale changes and excluded.
+  - **H6(a) outcome:** a 10-K/A or an 8-K Item 4.02 by the same firm within 365 days after the revising filing. Because 10-K/As are often Part III-only amendments, the 4.02-only rate is reported descriptively, but it does not decide success.
