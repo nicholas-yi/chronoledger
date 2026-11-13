@@ -22,12 +22,36 @@ def config_hash(config: dict[str, Any]) -> str:
     return hashlib.sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()[:16]
 
 
+def file_sha256(path: Path, chunk: int = 1 << 20) -> str:
+    h = hashlib.sha256()
+    with Path(path).open("rb") as fh:
+        while block := fh.read(chunk):
+            h.update(block)
+    return h.hexdigest()
+
+
+def lineage(inputs: list[Path] | None = None) -> dict[str, Any]:
+    """Code version and input fingerprints so every logged result is reproducible and auditable."""
+    import subprocess
+
+    def git(*args: str) -> str:
+        r = subprocess.run(["git", *args], cwd=PROJECT_ROOT, capture_output=True, text=True)
+        return r.stdout.strip() if r.returncode == 0 else ""
+
+    return {
+        "git_commit": git("rev-parse", "HEAD"),
+        "git_dirty": bool(git("status", "--porcelain", "--", "src", "scripts")),
+        "inputs": {str(Path(p).name): file_sha256(p) for p in (inputs or []) if Path(p).exists()},
+    }
+
+
 def log_trial(
     hypothesis: str,
     config: dict[str, Any],
     period: str,
     metrics: dict[str, float],
     path: Path = LEDGER_PATH,
+    inputs: list[Path] | None = None,
 ) -> str:
     if period not in ALLOWED_PERIODS:
         raise ValueError(f"period must be one of {ALLOWED_PERIODS}")
@@ -42,6 +66,7 @@ def log_trial(
         "config": config,
         "period": period,
         "metrics": metrics,
+        "lineage": lineage(inputs),
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as fh:

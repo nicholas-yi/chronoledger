@@ -113,6 +113,58 @@ def stage_signals(client: EdgarClient) -> None:
     log(f"signals: done, {len(rows)} pairs")
 
 
+def stage_features() -> None:
+    from asof.features import build
+
+    con = store.connect(str(DB), read_only=True)
+    jobs = con.execute(
+        "SELECT cik, accession, primary_doc, form FROM filings "
+        "WHERE form IN ('10-K', '10-Q') AND knowledge_time BETWEEN ? AND ? ORDER BY knowledge_time",
+        [FILING_FROM, FILING_TO]).fetchall()
+    con.close()
+    log(f"features: {len(jobs)} filings (10-K and 10-Q)")
+    errors = build([(int(c), a, d, f) for c, a, d, f in jobs])
+    log(f"features: done, {len(errors)} errors")
+    (DATA_DIR / "h0_feature_errors.json").write_text(__import__("json").dumps(errors, indent=1))
+
+
+def stage_pairs() -> None:
+    """10-K vs previous 10-K; 10-Q vs the same fiscal quarter one year earlier (Lazy Prices)."""
+    from asof.features import cosine, jaccard, load
+
+    con = store.connect(str(DB), read_only=True)
+    f = con.execute(
+        "SELECT cik, accession, form, report_date, knowledge_time FROM filings "
+        "WHERE form IN ('10-K', '10-Q') AND knowledge_time BETWEEN ? AND ? ORDER BY cik, knowledge_time",
+        [FILING_FROM, FILING_TO]).df()
+    con.close()
+    f["report_date"] = pd.to_datetime(f["report_date"])
+    rows = []
+    for (cik, form), g in f.groupby(["cik", "form"]):
+        g = g.dropna(subset=["report_date"]).sort_values("knowledge_time")
+        for r in g.itertuples():
+            if form == "10-K":
+                prev = g[g["knowledge_time"] < r.knowledge_time].tail(1)
+            else:
+                lag = (r.report_date - g["report_date"]).dt.days
+                prev = g[(g["knowledge_time"] < r.knowledge_time) & lag.between(340, 390)].tail(1)
+            if prev.empty:
+                continue
+            a, b = load(prev["accession"].iloc[0]), load(r.accession)
+            if a is None or b is None:
+                continue
+            rows.append({
+                "cik": int(cik), "form": form, "accession": r.accession, "knowledge_time": r.knowledge_time,
+                "prev_accession": prev["accession"].iloc[0],
+                "cos_full": cosine(a["full"], b["full"]), "jac_full": jaccard(a["full"], b["full"]),
+                "cos_1a": cosine(a.get("sec_1A"), b.get("sec_1A")),
+                "len_full": b["len_full"], "len_1a": b.get("len_1A", 0),
+            })
+    out = pd.DataFrame(rows)
+    out.to_parquet(SIGNALS)
+    log(f"pairs: {len(out)} ({(out['form'] == '10-K').sum()} 10-K, {(out['form'] == '10-Q').sum()} 10-Q)")
+
+
 def stage_shares(client: EdgarClient) -> None:
     frames = []
     for y in (2021, 2022, 2023, 2024):
@@ -156,6 +208,10 @@ def main() -> None:
         stage_filings(client, uni)
     if "signals" in stages:
         stage_signals(client)
+    if "features" in stages:
+        stage_features()
+    if "pairs" in stages:
+        stage_pairs()
     if "shares" in stages:
         stage_shares(client)
     if "prices" in stages:

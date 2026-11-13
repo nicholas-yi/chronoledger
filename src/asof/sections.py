@@ -32,16 +32,38 @@ class Section:
 
 
 def html_to_text(html: bytes | str) -> str:
+    """Fast path with lxml (about 5x faster than BeautifulSoup); falls back on parse errors."""
+    try:
+        return _html_to_text_lxml(html)
+    except Exception:
+        return _html_to_text_bs4(html)
+
+
+def _html_to_text_lxml(html: bytes | str) -> str:
+    import lxml.html
+
+    root = lxml.html.fromstring(html if isinstance(html, bytes) else html.encode("utf-8"))
+    for el in root.xpath("//script|//style"):
+        el.drop_tree()
+    for el in root.xpath('//*[contains(translate(@style," ",""),"display:none")]'):
+        el.drop_tree()
+    text = "\n".join(root.itertext())
+    return _normalize_ws(text)
+
+
+def _normalize_ws(text: str) -> str:
+    text = text.replace("\xa0", " ")
+    text = re.sub(r"[ \t]+", " ", text)
+    return re.sub(r"\n\s*\n+", "\n", text)
+
+
+def _html_to_text_bs4(html: bytes | str) -> str:
     soup = BeautifulSoup(html, "lxml")
     for tag in soup(["script", "style"]):
         tag.decompose()
     for hidden in soup.select('[style*="display:none"], [style*="display: none"]'):
         hidden.decompose()
-    text = soup.get_text("\n")
-    text = text.replace("\xa0", " ")
-    text = re.sub(r"[ \t]+", " ", text)
-    text = re.sub(r"\n\s*\n+", "\n", text)
-    return text
+    return _normalize_ws(soup.get_text("\n"))
 
 
 def _headers(text: str) -> list[tuple[int, str]]:

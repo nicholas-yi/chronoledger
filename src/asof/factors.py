@@ -62,3 +62,29 @@ def nyse_me_breakpoints() -> pd.DataFrame:
     df = pd.DataFrame(rows, columns=["yyyymm"] + [f"p{5 * i}" for i in range(1, 21)])
     df["month"] = pd.PeriodIndex(df.pop("yyyymm"), freq="M")
     return df.set_index("month").astype(float)
+
+
+def _daily_table(text: str) -> pd.DataFrame:
+    rows, header = [], None
+    for line in text.splitlines():
+        parts = [p.strip() for p in line.split(",")]
+        if header is None and len(parts) > 1 and parts[0] == "" and parts[1]:
+            header = parts[1:]
+            continue
+        if header is not None:
+            if len(parts[0]) == 8 and parts[0].isdigit():
+                rows.append(parts)
+            elif rows:
+                break
+    df = pd.DataFrame(rows, columns=["yyyymmdd", *header[: len(rows[0]) - 1]])
+    df["date"] = pd.to_datetime(df.pop("yyyymmdd"), format="%Y%m%d").dt.date
+    return df.set_index("date").astype(float)
+
+
+def ff5_umd_daily() -> pd.DataFrame:
+    ff5 = _daily_table(_fetch("F-F_Research_Data_5_Factors_2x3_daily_CSV.zip"))
+    mom = _daily_table(_fetch("F-F_Momentum_Factor_daily_CSV.zip"))
+    mom.columns = ["UMD"]
+    out = ff5.join(mom, how="inner") / 100.0
+    out.columns = [c.replace("-", "_") for c in out.columns]
+    return out

@@ -71,3 +71,17 @@ def test_ledger_counts_trials_and_seals_holdout(tmp_path) -> None:
         ledger.log_trial("H1", {"q": 10}, "holdout", {"t": 3.5}, path)
     with pytest.raises(ValueError):
         ledger.log_trial("H1", {"q": 5}, "in-sample-peek", {}, path)
+
+
+def test_ledger_records_lineage(tmp_path) -> None:
+    import json
+
+    data = tmp_path / "input.parquet"
+    data.write_bytes(b"abc")
+    path = tmp_path / "ledger.jsonl"
+    ledger.log_trial("H9", {"x": 1}, "development", {}, path, inputs=[data])
+    entry = json.loads(path.read_text().splitlines()[0])
+    lin = entry["lineage"]
+    assert len(lin["git_commit"]) == 40
+    assert lin["inputs"]["input.parquet"] == ledger.file_sha256(data)
+    assert isinstance(lin["git_dirty"], bool)
