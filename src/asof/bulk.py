@@ -101,5 +101,5 @@ def max_public_float(path: Path = BULK / "companyfacts.zip") -> pd.Series:
             facts = data.get("facts", {}).get("dei", {}).get("EntityPublicFloat", {}).get("units", {})
             usd = [f["val"] for f in facts.get("USD", []) if f.get("val") is not None]
             if usd:
-                vals[int(data["cik"])] = max(usd)
+                vals[int(data.get("cik") or name[3:13])] = max(usd)
     return pd.Series(vals, name="max_public_float")

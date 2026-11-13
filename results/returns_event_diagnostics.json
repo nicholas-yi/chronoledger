@@ -1,0 +1,14 @@
+{
+  "placebo_random_dates_car20": {
+    "mean_car": -0.0029882337995816933,
+    "t": -2.1311724415426565,
+    "n": 3962
+  },
+  "placebo_random_dates_car60": {
+    "mean_car": -0.006230160702270752,
+    "t": -1.3409608970810154,
+    "n": 3539
+  },
+  "mean_daily_return_universe": 0.0008193553885822116,
+  "mean_daily_return_market": 0.001008838383838384
+}

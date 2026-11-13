@@ -1,0 +1,30 @@
+{
+  "note": "Development period only; replication tests use |t| >= 2 with Holm across H5a-c and H6b.",
+  "results": {
+    "H5a_friday_evening_8k": {
+      "coef": 0.009721885708915702,
+      "t": 2.013713402937203,
+      "n": 25554,
+      "n_treated": 2205,
+      "clusters": 18
+    },
+    "H5b_nt_filings": {
+      "mean_car": 0.06805767080776,
+      "t": 1.5418926422062542,
+      "n": 252,
+      "clusters": 15
+    },
+    "H5c_item_402": {
+      "mean_car": 0.05906101522534819,
+      "t": 1.1925759429434644,
+      "n": 86,
+      "clusters": 16
+    },
+    "H5c_item_401": {
+      "mean_car": 0.04360086537109827,
+      "t": 0.7313866071870293,
+      "n": 201,
+      "clusters": 17
+    }
+  }
+}
