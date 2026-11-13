@@ -1,10 +1,20 @@
+from dataclasses import replace
 from datetime import date, datetime, timezone
 
 import numpy as np
 import pandas as pd
 import pytest
 
-from asof.backtest import Config, abdi_ranaldo_spread, form_portfolios, latest_as_of, long_short, monthly_panel
+from asof.backtest import (
+    Config,
+    abdi_ranaldo_spread,
+    form_portfolios,
+    formation_snapshots,
+    latest_as_of,
+    long_short,
+    monthly_panel,
+    values_as_of,
+)
 
 
 def test_abdi_ranaldo_recovers_known_spread() -> None:
@@ -100,3 +110,92 @@ def test_strip_after_keeps_future_splits_only() -> None:
     assert out["timestamp"] == ts[:2]
     assert out["indicators"]["quote"][0]["close"] == [1, 2]
     assert "x" in out["events"]["splits"] and out["events"]["dividends"] == {}
+
+
+@pytest.mark.parametrize("exact", [False, True])
+def test_batch_asof_matches_reference_and_preserves_query_order(exact) -> None:
+    t = pd.Timestamp("2023-03-01", tz="UTC")
+    facts = pd.DataFrame({"cik": [1, 2, 1], "val": [10, 20, 30],
+                         "knowledge_time": [t, t, t + pd.Timedelta(days=1)]})
+    queries = pd.DataFrame({"cik": [1, 2, 1, 3], "as_of": [
+        t + pd.Timedelta(days=2), t, t - pd.Timedelta(days=1), t,
+    ]}, index=[8, 2, 9, 1])
+    result = values_as_of(queries, facts, ["val"], allow_exact_matches=exact)
+    expected = []
+    for r in queries.itertuples():
+        cutoff = r.as_of if exact else r.as_of - pd.Timedelta(nanoseconds=1)
+        known = latest_as_of(facts, "cik", cutoff, ["val"]).set_index("cik")["val"]
+        expected.append(known.get(r.cik, np.nan))
+    pd.testing.assert_series_equal(
+        result["val"], pd.Series(expected, index=queries.index, name="val"))
+    assert values_as_of(queries, facts.iloc[:0], ["val"])["val"].isna().all()
+
+
+@pytest.mark.parametrize("signal", ["cos_full", "neg_change_n"])
+@pytest.mark.parametrize("weighting", ["value", "equal"])
+def test_snapshots_match_portfolios_with_ties_missing_and_boundary_data(signal, weighting) -> None:
+    panel = pd.concat([
+        _panel(60).assign(month=pd.Period("2023-03", "M")),
+        _panel(60).assign(month=pd.Period("2023-04", "M"), last_day=date(2023, 4, 28)),
+    ], ignore_index=True)
+    t = pd.Timestamp("2023-03-01", tz="UTC")
+    close = pd.Timestamp("2023-03-31 20:00:00", tz="UTC")
+    sig = pd.DataFrame({"cik": range(60), "cos_full": np.arange(60) % 10 / 10,
+                        "knowledge_time": t})
+    sig.loc[3, "knowledge_time"] = close - pd.Timedelta(days=365)
+    sig.loc[4, "knowledge_time"] = close - pd.Timedelta(days=365, microseconds=1)
+    extra = pd.DataFrame({"cik": [0, 1, 2], "cos_full": [999, 0.01, np.nan],
+                          "knowledge_time": [close, close - pd.Timedelta(seconds=1), t + pd.Timedelta(days=1)]})
+    sig = pd.concat([sig, extra], ignore_index=True)
+    sig["neg_change_n"] = sig["cos_full"] - 0.5
+    sig["month"] = sig["knowledge_time"].dt.tz_localize(None).dt.to_period("M")
+    shares = pd.DataFrame({"cik": range(59), "val": np.arange(59) * 1e6 + 1e8,
+                           "knowledge_time": t})
+    shares = pd.concat([shares, pd.DataFrame({
+        "cik": [0, 1], "val": [2e8, 1e15],
+        "knowledge_time": [close, close + pd.Timedelta(seconds=1)],
+    })], ignore_index=True)
+    cfg = replace(Config(), signal=signal, weighting=weighting)
+    snapshots = formation_snapshots(sig, shares, panel, cfg.max_signal_age_days)
+    for month, pm in panel.groupby("month"):
+        reference = form_portfolios(month, sig, shares, pm, 700.0, cfg)
+        fast = form_portfolios(month, sig, shares, pm, 700.0, cfg, snapshot=snapshots[month])
+        pd.testing.assert_frame_equal(
+            fast.reset_index(drop=True), reference.reset_index(drop=True), check_dtype=False)
+
+
+def test_turnover_alignment_matches_concat_reference_with_exits_and_missing_spreads() -> None:
+    prev = pd.DataFrame({"ticker": ["A", "B", "C", "D"], "q": [1, 1, 5, 5],
+                         "w": [0.4, 0.6, 0.7, 0.3], "ret_next": [-0.1, 0.2, 0.3, -0.1],
+                         "spread": [0.03, np.nan, 0.04, 0.06]})
+    port = pd.DataFrame({"ticker": ["A", "E", "C", "F"], "q": [1, 1, 5, 5],
+                         "w": [0.2, 0.8, 0.5, 0.5], "ret_next": [0.1, 0.2, 0.3, 0.4],
+                         "spread": [0.01, 0.02, np.nan, 0.05]})
+    got = long_short(port, prev, Config())
+    for leg, q in (("long", 5), ("short", 1)):
+        cur = port[port["q"] == q].set_index("ticker")
+        old = prev[prev["q"] == q].set_index("ticker")
+        drift = old["w"] * (1 + old["ret_next"])
+        drift /= drift.sum()
+        both = pd.concat([cur["w"].rename("new"), drift.rename("old")], axis=1).fillna(0)
+        spread = pd.concat([cur["spread"], old["spread"]]).groupby(level=0).last()
+        expected = ((both["new"] - both["old"]).abs() * spread.reindex(both.index).fillna(0) / 2).sum()
+        assert got[f"{leg}_cost"] == pytest.approx(expected, abs=1e-14)
+
+
+def test_share_ties_use_latest_reported_date_not_duplicate_confirmation() -> None:
+    from asof.backtest import clean_shares
+
+    shares = pd.DataFrame({
+        "cik": 1,
+        "knowledge_time": pd.to_datetime([
+            "2023-01-01", "2023-01-01", "2023-04-01", "2023-04-01", "2023-05-01",
+        ], utc=True),
+        "end": ["2022-12-31", "2022-11-30", "2023-03-01", "2023-03-31", "2023-04-30"],
+        "accn": ["first", "first", "typo", "typo", "later"],
+        "val": [90e6, 80e6, 90e9, 91e9, 90e6],
+    })
+    cleaned = clean_shares(shares)
+    assert cleaned["val"].tolist() == [90e6, 90e6]
+    assert cleaned["knowledge_time"].tolist() == list(pd.to_datetime(
+        ["2023-01-01", "2023-05-01"], utc=True))

@@ -80,3 +80,25 @@
   not do so under the correction. Historical entries remain untouched. Rebuilt results
   must be distinguished from the old estimates; this repair does not retroactively
   establish that historical preprocessing respected the holdout boundary.
+
+## D7: deterministic point-in-time share ties and genuinely later confirmation
+
+- **Logged:** 2026-11-13, after the historical F3 development estimates and after
+  examining rebuilt share metadata, but before any rebuilt H0 return estimate.
+- **Observed:** the rebuilt cleaned shares had two conflicting `(cik, knowledge_time)`
+  groups. Across 49,554 engineering snapshot queries, legacy per-query sorting and
+  batch sorting selected different values three times. No return estimate was
+  needed to discover this.
+- **Correction:** within one knowledge instant, use the most recent reported share
+  date (`end`), then accession (`accn`), with stable input order for remaining ties.
+  Keep one candidate per firm and instant before the existing F3 jump check.
+  Confirmation of a large jump must therefore occur at a strictly later knowledge
+  time, never from another fact in the same filing. As-of and signal sorts are
+  stable so appending future rows cannot reorder existing equal-time rows.
+- **Scope:** this is a point-in-time data-cleaning correction, not a new return
+  hypothesis or threshold. Numerical optimization equivalence is assessed on the
+  same corrected shares for both engines. It must not be described as exact
+  replication of the old ambiguous tie handling.
+- **Validation:** `tests/test_backtest.py` covers most-recent reported-date
+  selection and prevents same-filing pseudo-confirmation. Historical ledger
+  entries are retained; fresh trial lineage must pin the corrected code.

@@ -104,6 +104,13 @@ These use verified first-use dates: J&J named Kenvue on 2022-09-28; 3M named Sol
 - The invalid runs remain in the append-only trial ledger, so they still count toward the multiple-testing penalty.
 - The referee now includes a `data_integrity` threat that automatically fails any long-short mean above 5% per month.
 
+**Rebuild update (2026-11-13):** conflicting same-acceptance-time share facts also
+needed a deterministic rule. Two duplicate fact groups produced three legacy/batch
+snapshot mismatches across 49,554 engineering queries. Cleaning now selects the
+latest reported share date at that instant and requires a strictly later instant
+to confirm a large jump; see [D7](DEVIATIONS.md#d7-deterministic-point-in-time-share-ties-and-genuinely-later-confirmation).
+This is a data-cleaning correction, not a new empirical return finding.
+
 ## F4: H4 winsorization used observations outside development
 
 **Status:** implementation bug reproduced with synthetic data on 2026-11-13; corrected
