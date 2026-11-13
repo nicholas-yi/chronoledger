@@ -5,6 +5,12 @@ frames API (`dei:EntityPublicFloat`). Having a current ticker is an upper bound 
 source has the firm's price history. Firms acquired, merged, taken private, or failed since then
 are usually missing.
 
+Rebuild the quarterly index with `python scripts/master_index.py`. It starts in 2011 and
+stops at the current UTC quarter, reusing the EDGAR client's per-URL cache on retries.
+Quarters are streamed into `data/master_index_2011_<current year>.parquet`; a failed request
+leaves any previous completed output unchanged. This index contains filing metadata, not
+prices, and does not open a return holdout.
+
 ## Coverage among public-equity issuers, by public float
 
 | Float year | $1M–50M | $50M–500M | >$500M |
