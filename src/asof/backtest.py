@@ -8,6 +8,7 @@ from datetime import date, datetime
 import numpy as np
 import pandas as pd
 
+from asof.prices import clean_price_returns
 from asof.timeutil import close_time_utc
 
 
@@ -58,7 +59,7 @@ def monthly_panel(daily: pd.DataFrame) -> pd.DataFrame:
     p["ret_next"] = p.groupby("ticker")["adjclose"].shift(-1) / p["adjclose"] - 1.0
     nxt = p.groupby("ticker")["month"].shift(-1)
     p.loc[nxt != p["month"] + 1, "ret_next"] = np.nan  # gaps are not silently bridged
-    p.loc[p["ret_next"] <= -1.0, "ret_next"] = np.nan  # a loss beyond -100% is a data error
+    p["ret_next"] = clean_price_returns(p["ret_next"], "monthly")
     return p
 
 

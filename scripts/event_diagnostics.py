@@ -18,7 +18,7 @@ from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.events import car
 from asof.factors import ff5_umd_daily
 from asof.periods import DEV_END, DEV_RETURN_CUTOFF, DEV_START
-from asof.prices import YahooPrices
+from asof.prices import YahooPrices, daily_returns
 
 
 def clustered_mean(c: pd.DataFrame) -> dict:
@@ -36,7 +36,7 @@ def main(n_placebo: int = 4000, seed: int = 7) -> None:
     for t in uni["ticker"]:
         d = y.daily(t, end=DEV_RETURN_CUTOFF)
         if not d.empty:
-            rets[t] = d.set_index("date")["adjclose"].pct_change().dropna()
+            rets[t] = daily_returns(d.set_index("date")).dropna()
     rng = random.Random(seed)
     tickers = sorted(rets)
     out = {}

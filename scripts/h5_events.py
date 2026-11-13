@@ -14,7 +14,7 @@ from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.events import car, event_panel
 from asof.factors import ff5_umd_daily
 from asof.periods import DEV_END, DEV_RETURN_CUTOFF, DEV_START
-from asof.prices import YahooPrices
+from asof.prices import YahooPrices, daily_returns
 from asof.timeutil import ET, first_tradable_close
 
 
@@ -69,7 +69,7 @@ def main() -> None:
     for t in ev["ticker"].unique():
         d = y.daily(t, end=DEV_RETURN_CUTOFF)
         if not d.empty:
-            rets[t] = d.set_index("date")["adjclose"].pct_change().dropna()
+            rets[t] = daily_returns(d.set_index("date")).dropna()
     ev = ev[ev["ticker"].isin(rets)]
     trading_days = list(factors.index)
 

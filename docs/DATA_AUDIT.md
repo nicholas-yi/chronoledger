@@ -61,10 +61,32 @@ These are component timings during acquisition, not an end-to-end performance cl
 The benchmark CLI repeats a pinned legacy monthly-panel comparison on its selected
 firms and records that evidence separately.
 
+The recorded 100-firm check passed for all four variants across 17 formation
+months, including holdings, quintiles, weights, gross returns, and turnover costs.
+Its separate monthly-panel check covered 2,091 ticker-months. See
+[`results/h0_optimization_equivalence.json`](../results/h0_optimization_equivalence.json)
+for the clean code revision, input hashes, environment, timings, and exact comparison
+scope. It is an engineering check, not a financial finding.
+
 The loader also handles a listing with no pre-cutoff quotes but later split events:
 it returns an empty guarded history, rather than crashing on an empty NumPy index.
 The rebuild produced 2,753 cache files and 2,733 nonempty daily histories; cache-file
 count alone is not price coverage.
+
+An exhaustive daily-return audit subsequently found a remaining F3 gap, now tracked
+as [F6](FINDINGS.md#f6-the-f3-price-return-guard-did-not-cover-daily-event-inputs)
+and [D9](DEVIATIONS.md#d9-apply-the-existing-price-return-integrity-guard-to-event-inputs).
+Daily event loaders had bypassed the monthly return guard. Both frequencies now
+log and exclude unusable vendor price ratios, and the fresh H0 output reports the
+daily count. This does not independently validate the vendor's adjusted series.
+
+### Validation tooling scope
+
+Default `ruff check` under Ruff 0.17.4 reports 62 inherited findings, compared with
+63 on the pinned handoff source. A per-file/rule/message comparison found no new
+findings after cleanup of task-introduced diagnostics. The selected
+`E4,E7,E9,F` checks pass; the full default lint is **not** reported as passing.
+Unrelated baseline style issues are left unchanged.
 
 ## Coverage among public-equity issuers, by public float
 

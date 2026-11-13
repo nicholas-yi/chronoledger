@@ -29,7 +29,7 @@ def test_gate_passes_when_all_threats_at_four() -> None:
 def test_plausibility_rejects_an_incomplete_variant_output(tmp_path, monkeypatch) -> None:
     import json
 
-    import asof.referee as referee
+    from asof import referee
 
     monkeypatch.setattr(referee, "PROJECT_ROOT", tmp_path)
     (tmp_path / "results").mkdir()

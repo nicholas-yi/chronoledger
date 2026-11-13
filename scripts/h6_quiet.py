@@ -65,7 +65,7 @@ def part_b(filings: pd.DataFrame) -> dict:
     from asof.events import car
     from asof.factors import ff5_umd_daily
     from asof.periods import DEV_END, DEV_RETURN_CUTOFF, DEV_START
-    from asof.prices import YahooPrices
+    from asof.prices import YahooPrices, daily_returns
     from asof.timeutil import first_tradable_close
 
     uni = pd.read_parquet(DATA_DIR / "h0_universe.parquet")
@@ -83,7 +83,7 @@ def part_b(filings: pd.DataFrame) -> dict:
         d = y.daily(r.ticker, end=DEV_RETURN_CUTOFF)
         if d.empty:
             continue
-        ret = d.set_index("date")["adjclose"].pct_change().dropna()
+        ret = daily_returns(d.set_index("date")).dropna()
         day = first_tradable_close(pd.Timestamp(r.knowledge_time).to_pydatetime(), days)
         if day:
             cars.append({"car": car(ret, factors, day, horizon=60),

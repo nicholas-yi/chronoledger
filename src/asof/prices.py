@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import gzip
 import json
+import logging
 import time
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -23,6 +24,7 @@ import pandas as pd
 from asof.config import RAW_DIR
 
 YAHOO_CHART = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+logger = logging.getLogger(__name__)
 
 
 def _yahoo_symbol(ticker: str) -> str:
@@ -160,6 +162,19 @@ def as_traded_close(
     return np.asarray(split_adjusted_close, dtype=float) * factors
 
 
+def clean_price_returns(returns: pd.Series, context: str) -> pd.Series:
+    """Mark unusable vendor price ratios as missing, not as realized delisting payoffs."""
+    bad = returns.notna() & ((returns <= -1.0) | ~np.isfinite(returns))
+    count = int(bad.sum())
+    if count:
+        logger.warning("%s: excluded %d unusable price returns (<= -100%% or non-finite)",
+                       context, count)
+    result = returns.mask(bad)
+    result.attrs["excluded_price_returns"] = count
+    return result
+
+
 def daily_returns(df: pd.DataFrame) -> pd.Series:
-    """Total returns from dividend- and split-adjusted closes."""
-    return df["adjclose"].pct_change()
+    """Guarded total-return ratios, preserving missing observations rather than forward-filling."""
+    context = str(df["ticker"].iloc[0]) if "ticker" in df and not df.empty else "daily"
+    return clean_price_returns(df["adjclose"].pct_change(fill_method=None), context)

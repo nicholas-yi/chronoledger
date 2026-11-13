@@ -11,10 +11,10 @@ from pathlib import Path
 from time import perf_counter
 from types import ModuleType
 
+import h0_backtest as current
 import numpy as np
 import pandas as pd
 
-import h0_backtest as current
 from asof import ledger
 from asof.backtest import Config, form_portfolios, formation_snapshots, long_short
 from asof.config import PROJECT_ROOT
@@ -32,7 +32,7 @@ def load_reference(revision: str, path: str) -> ModuleType:
     module = ModuleType(name)
     module.__file__ = str(PROJECT_ROOT / path)
     sys.modules[name] = module
-    exec(compile(source, module.__file__, "exec"), module.__dict__)
+    exec(compile(source, module.__file__, "exec"), module.__dict__)  # noqa: S102 - pinned local Git source
     return module
 
 

@@ -33,7 +33,7 @@ from asof.events import CarEngine, event_panel, neutralize, rank_ic
 from asof.factors import ff5_umd_daily, ff5_umd_monthly, nyse_me_breakpoints
 from asof.inference import nw_alpha
 from asof.periods import DEV_END, DEV_RETURN_CUTOFF, DEV_START
-from asof.prices import YahooPrices
+from asof.prices import YahooPrices, daily_returns
 from asof.timeutil import close_time_utc, first_tradable_close
 
 FACTORS = ["Mkt_RF", "SMB", "HML", "RMW", "CMA", "UMD"]
@@ -78,7 +78,7 @@ def load_inputs():
             continue
         if d.empty:
             continue
-        daily_ret[t] = d.set_index("date")["adjclose"].pct_change().dropna()
+        daily_ret[t] = daily_returns(d.set_index("date")).dropna()
         frames.append(d[d["date"] >= pd.Timestamp("2022-11-01").date()])
     panel = monthly_panel(pd.concat(frames, ignore_index=True)).merge(uni[["cik", "ticker"]], on="ticker")
     return uni, sig, shares, ent, ma, panel, daily_ret
@@ -254,7 +254,9 @@ def main() -> None:
     out = {"note": "Development period only (~18 monthly obs). Raw change panels are descriptive; "
                    "neutralized event panels are not evaluated (D8). These cosine variants are not "
                    "the claim-level H1 signal. No co-primary success claim; holdout sealed.",
-           "coverage": {"universe": len(uni), "with_prices": len(daily_ret)},
+           "coverage": {"universe": len(uni), "with_prices": len(daily_ret),
+                        "unusable_daily_returns_dropped": sum(
+                            r.attrs["excluded_price_returns"] for r in daily_ret.values())},
            "results": results, "n_trials": {"H0": ledger.n_trials("H0"), "H1n": ledger.n_trials("H1n")},
            "elapsed_seconds": perf_counter() - started}
     (PROJECT_ROOT / "results" / "returns_h0_development.json").write_text(json.dumps(out, indent=2, default=float))

@@ -325,6 +325,20 @@ def _shares_clean_unit() -> tuple[bool, str]:
     return out["val"].tolist() == [90e6, 90e6], "a 1,000x share-count typo is rejected"
 
 
+def _daily_returns_unit() -> tuple[bool, str]:
+    import numpy as np
+    import pandas as pd
+
+    from asof.prices import daily_returns
+
+    series = daily_returns(pd.DataFrame({
+        "adjclose": [10.0, 0.0, 10.0, -10.0, 10.0, 11.0], "ticker": "SYNTHETIC"}))
+    valid = series.dropna()
+    ok = series.attrs["excluded_price_returns"] == 4 and len(valid) == 1
+    ok = ok and np.isclose(valid.iloc[0], 0.1)
+    return bool(ok), "four unusable daily ratios are excluded; the valid return and exclusion count remain"
+
+
 def _distress_coverage_parity(min_ratio: float = 0.8) -> tuple[bool, str]:
     """Price-universe coverage of distress-event filers relative to all 10-K filers (F2)."""
     import pandas as pd
@@ -544,6 +558,7 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
         Threat("data_integrity", "Are results driven by data errors rather than economics?", [
             Check("long-short means are plausible (<= 5%/month)", _plausibility),
             Check("share-count typos are cleaned point-in-time", _shares_clean_unit),
+            Check("unusable daily price ratios are excluded and counted", _daily_returns_unit),
         ]),
     ]
 

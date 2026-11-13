@@ -138,3 +138,27 @@
   missing-return assumptions and counts, and post-close filing/share/acquisition
   events that must not alter formation residuals. Historical runs are retained;
   rebuilt results must disclose these corrections as well as fresh-data differences.
+
+## D9: apply the existing price-return integrity guard to event inputs
+
+- **Logged:** 2026-11-13, after the historical event estimates and rebuilt-data
+  engineering comparisons, but before any fresh H0/H4/H6 hypothesis estimate.
+- **Observed:** auditing all 2,733 usable guarded histories found two daily returns
+  below -100% and one non-finite return. One sub--100% return was on 2023-01-03,
+  inside the development period. F3's monthly guard had not been applied to the
+  daily series used by the event engines.
+- **Correction:** daily and monthly price ratios share one guard: ratios producing
+  returns `<= -1` or non-finite values are marked missing, with warning counts.
+  Daily returns do not forward-fill missing adjusted prices. All four event
+  loaders use the shared helper, and H0 reports its daily exclusion count.
+  This is the existing vendor-price cleaning policy, not an assertion that a
+  genuine -100% delisting payoff is impossible; such payoffs require an explicit
+  source or the separately reported missing-return assumption.
+- **Limit:** nonpositive vendor-adjusted levels remain a source-quality warning.
+  Removing an unusable ratio does not validate the rest of that series or fix
+  survivorship. Raw event panels remain development diagnostics; neutralized
+  panels remain unevaluated under D8. H5 is not rerun by this repair, and H6(b)
+  remains invalid under F2.
+- **Validation:** the regression test covers zero/negative denominators,
+  non-finite returns, missing-price gaps, retained valid returns, and visible
+  exclusion counts. Historical ledger entries are not edited.

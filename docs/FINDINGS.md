@@ -140,3 +140,18 @@ controls. Neutralized event panels remain unevaluated pending a time-safe specif
 raw panels are descriptive diagnostics, not the pre-registered neutralized co-primary.
 These repairs do not establish an effect, repair survivorship, or validate historical
 estimates. No formal claim-level H1 result is produced by these cosine variants.
+
+## F6: the F3 price-return guard did not cover daily event inputs
+
+**Status:** confirmed by an exhaustive rebuilt-cache audit before fresh hypothesis
+estimates. Across 2,733 usable daily histories, two returns were below -100% and one
+was non-finite; one sub--100% observation fell on 2023-01-03. The audit also found
+503 nonpositive vendor-adjusted observations during 2021-2022. The vendor-level
+cause is not established.
+
+The monthly guard alone did not protect event-study estimation windows. Daily
+loaders now use the same explicit price-ratio guard, log exclusions, and preserve
+missingness rather than forward-filling; see [D9](DEVIATIONS.md#d9-apply-the-existing-price-return-integrity-guard-to-event-inputs).
+This is not a reconstruction or independent validation of vendor total returns.
+Historical event estimates retain their original lineage and limitations, and F2
+still invalidates distress-event inference with the current-ticker universe.

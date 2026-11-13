@@ -94,12 +94,11 @@ def test_failed_development_execution_keeps_partial_metrics_and_prior_entries(tm
     with ledger.development_trial("HX", {"variant": "complete"}, path=path) as metrics:
         metrics["n"] = 10
     prefix = path.read_bytes()
-    with pytest.raises(RuntimeError, match="event fit failed"):
-        with ledger.development_trial(
-            "HX", {"variant": "failure"}, inputs=[data], path=path,
-        ) as metrics:
-            metrics.update(phase="event_panel", m_months=18)
-            raise RuntimeError("event fit failed")
+    with pytest.raises(RuntimeError, match="event fit failed"), ledger.development_trial(
+        "HX", {"variant": "failure"}, inputs=[data], path=path,
+    ) as metrics:
+        metrics.update(phase="event_panel", m_months=18)
+        raise RuntimeError("event fit failed")
     assert path.read_bytes().startswith(prefix)
     entries = ledger.read_ledger(path)
     assert [e["metrics"]["execution_status"] for e in entries] == ["completed", "failed"]

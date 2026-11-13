@@ -1,6 +1,7 @@
 from datetime import date
 
 import numpy as np
+import pandas as pd
 import pytest
 
 from asof.prices import as_traded_close
@@ -65,3 +66,16 @@ def test_listing_after_cutoff_with_future_split_is_an_empty_history(tmp_path, mo
                "events": {"splits": {"s": {"date": 1751328000, "numerator": 2, "denominator": 1}}}}
     monkeypatch.setattr(y, "raw", lambda *args, **kwargs: payload)
     assert y.daily("SYNTHETIC", end=DEV_RETURN_CUTOFF).empty
+
+
+def test_daily_returns_reject_unusable_ratios_and_log_exclusions(caplog) -> None:
+    from asof.prices import daily_returns
+
+    frame = pd.DataFrame({
+        "adjclose": [10.0, 11.0, 0.0, 10.0, -10.0, 10.0, np.nan, 11.0, 12.0],
+        "ticker": "SYNTHETIC",
+    })
+    result = daily_returns(frame)
+    assert result.dropna().tolist() == pytest.approx([0.1, 12 / 11 - 1])
+    assert result.dropna().attrs["excluded_price_returns"] == 4
+    assert "SYNTHETIC: excluded 4 unusable price returns" in caplog.text

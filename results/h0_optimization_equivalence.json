@@ -1,0 +1,64 @@
+{
+  "note": "Numerical equivalence on a development subsample, not a hypothesis result. Checks formation rows, signals, quintiles, weights, gross returns and turnover costs. Uses complete-return rows only for this engineering comparison; production formation must not select on future return availability (D8). Legacy cohort residuals are compared separately; production neutralization uses formation-time cross-sections. This is not the full four-variant wall-clock benchmark.",
+  "reference": "5298d9d9f666c52a3ec2b879c1b85f88f258f15e",
+  "sample_firms": 100,
+  "monthly_panel_comparison": {
+    "rows": 2091,
+    "reference_seconds": 2.4080962003208697,
+    "optimized_seconds": 0.04224009998142719
+  },
+  "neutralization_comparison_seconds": 0.6884343000128865,
+  "variants": [
+    {
+      "variant": "v1_10K_raw",
+      "months": 17,
+      "rows": 1178,
+      "reference_seconds": 0.42157380003482103,
+      "optimized_seconds": 0.2554586003534496
+    },
+    {
+      "variant": "v2_latest_raw",
+      "months": 17,
+      "rows": 1313,
+      "reference_seconds": 0.4450503997504711,
+      "optimized_seconds": 0.27655949955806136
+    },
+    {
+      "variant": "v2_latest_neutral",
+      "months": 17,
+      "rows": 1282,
+      "reference_seconds": 0.46494839945808053,
+      "optimized_seconds": 0.29456379916518927
+    },
+    {
+      "variant": "v2_10K_neutral",
+      "months": 17,
+      "rows": 1140,
+      "reference_seconds": 0.44096199981868267,
+      "optimized_seconds": 0.2615836001932621
+    }
+  ],
+  "lineage": {
+    "git_commit": "17065dafcf6a506ed40fc1104c1a54e51d2c9dd2",
+    "git_dirty": false,
+    "inputs": {
+      "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017",
+      "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+      "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+      "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+      "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+      "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c"
+    },
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  }
+}
