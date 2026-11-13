@@ -62,8 +62,16 @@ def stage_universe(client: EdgarClient) -> pd.DataFrame:
 
 
 def stage_filings(client: EdgarClient, uni: pd.DataFrame) -> None:
+    from asof.bulk import BULK, iter_submissions
+
     con = store.connect(str(DB))
     done = set(con.execute("SELECT DISTINCT cik FROM filings").df()["cik"])
+    if (BULK / "submissions.zip").exists():
+        missing = set(uni["cik"]) - done
+        for cik, rows in iter_submissions(missing):
+            store.ingest_submissions(con, rows)
+            done.add(cik)
+        log(f"filings: bulk archive supplied {len(done & missing)} additional firms")
     for i, cik in enumerate(uni["cik"]):
         if cik in done:
             continue

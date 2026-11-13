@@ -117,7 +117,7 @@ def _strip_after(payload: dict, end: date) -> dict:
     ts = payload.get("timestamp") or []
     days = pd.to_datetime(ts, unit="s", utc=True).tz_convert(tz).date if ts else []
     keep = [i for i, d in enumerate(days) if d <= end]
-    out = {k: v for k, v in payload.items() if k not in ("timestamp", "indicators", "events")}
+    out = {"meta": {"exchangeTimezoneName": tz}}
     out["timestamp"] = [ts[i] for i in keep]
     ind = payload.get("indicators", {})
     out["indicators"] = {

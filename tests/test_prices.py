@@ -42,3 +42,13 @@ def test_price_requests_past_dev_cutoff_are_refused(tmp_path) -> None:
     with pytest.raises(HoldoutAccessError):
         y.daily("AAPL", end=date(2026, 1, 1))
     assert DEV_RETURN_CUTOFF == date(2024, 7, 31)
+
+
+def test_guarded_payload_does_not_cache_current_price_metadata() -> None:
+    from asof.prices import _strip_after
+
+    payload = {"meta": {"exchangeTimezoneName": "UTC", "regularMarketPrice": 9999,
+                        "fiftyTwoWeekHigh": 12345}, "timestamp": [],
+               "indicators": {}, "events": {}}
+    out = _strip_after(payload, date(2024, 7, 31))
+    assert out["meta"] == {"exchangeTimezoneName": "UTC"}

@@ -75,6 +75,31 @@ def read_submissions(path: Path = BULK / "submissions.zip") -> tuple[pd.DataFram
     return pd.DataFrame(entities), f.drop_duplicates("accession")
 
 
+def iter_submissions(ciks: set[int], path: Path = BULK / "submissions.zip"):
+    """Yield the same complete per-CIK rows as EdgarClient.submissions from the bulk archive."""
+    with zipfile.ZipFile(path) as zf:
+        names = set(zf.namelist())
+        for cik in sorted(ciks):
+            name = f"CIK{cik:010d}.json"
+            if name not in names:
+                continue  # The caller can fetch CIKs absent from this archive through the API.
+            data = _load(zf, name)
+            if data is None:
+                raise ValueError(f"malformed submissions archive member: {name}")
+            blocks = [data["filings"]["recent"]]
+            for page in data["filings"].get("files", []):
+                block = _load(zf, page["name"])
+                if block is None:
+                    raise ValueError(f"malformed submissions archive member: {page['name']}")
+                blocks.append(block)
+            meta = {k: data.get(k) for k in ("cik", "name", "tickers", "exchanges", "sic", "entityType")}
+            rows = []
+            for block in blocks:
+                for i in range(len(block["accessionNumber"])):
+                    rows.append({**{k: block[k][i] for k in block}, "_entity": meta})
+            yield cik, rows
+
+
 def iter_companyfacts(ciks: set[int], path: Path = BULK / "companyfacts.zip"):
     """Yield (cik, facts JSON) one firm at a time, keeping memory flat."""
     with zipfile.ZipFile(path) as zf:

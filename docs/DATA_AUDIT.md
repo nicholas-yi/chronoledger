@@ -11,6 +11,14 @@ Quarters are streamed into `data/master_index_2011_<current year>.parquet`; a fa
 leaves any previous completed output unchanged. This index contains filing metadata, not
 prices, and does not open a return holdout.
 
+When `data/raw/bulk/submissions.zip` exists, the H0 `filings` stage reads missing
+firms directly from it, including every form, historical page, and exact acceptance
+time. It uses the individual submissions API only for firms absent from that archive.
+This avoids re-downloading metadata already obtained from the same public source;
+malformed requested archive members fail explicitly rather than silently dropping a firm.
+Overlapping recent/history pages are deduplicated by accession at ingestion, retaining
+the recent-page row first, as in the bulk metadata reader.
+
 ## Coverage among public-equity issuers, by public float
 
 | Float year | $1M–50M | $50M–500M | >$500M |
@@ -50,3 +58,11 @@ From then on, `asof.periods.price_end_allowed` refuses any price request past 20
 Yahoo adjusts *all* historical prices for every split up to today. A request that stopped at the development cutoff therefore returned prices already adjusted for later splits, but not the later split *events*. That made as-traded price reconstruction impossible for stocks that split afterward; for example, FFAI showed $1,200 when it traded at pennies.
 
 From 2026-11-13, each request spans the full history. **Every quote and dividend after the cutoff is discarded in memory before caching**, and only split events (date and ratio) are kept. Those later split events are used solely to reverse the vendor's own adjustment. No post-cutoff price, return, or dividend is stored or used.
+
+The devbox rebuild also exposed a metadata gap in that implementation:
+Yahoo's `meta` object can contain a current price and current 52-week range even
+when the quote arrays are truncated. The strip function now retains only
+`exchangeTimezoneName` from metadata, which is all date reconstruction requires.
+This correction was made before price acquisition began on this devbox. Historical
+cache hygiene is not established by this fix; old price caches should be rebuilt
+with the corrected code. No metadata price is used to calculate returns.

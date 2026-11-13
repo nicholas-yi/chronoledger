@@ -85,7 +85,7 @@ def ingest_submissions(con: duckdb.DuckDBPyConnection, rows: Iterable[dict[str, 
         )
     if not records:
         return 0
-    df = pd.DataFrame.from_records(records)
+    df = pd.DataFrame.from_records(records).drop_duplicates("accession")
     con.register("_new_filings", df)
     con.execute(
         "INSERT INTO filings SELECT * FROM _new_filings "
