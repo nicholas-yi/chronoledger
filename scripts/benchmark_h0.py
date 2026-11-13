@@ -48,6 +48,24 @@ def main() -> None:
     legacy.latest_as_of = backtest.latest_as_of
     uni, sig, shares, ent, ma, panel, _ = current.load_inputs()
     chosen = set(sorted(set(uni["cik"]) & set(sig["cik"]))[:args.firms])
+    y = current.YahooPrices()
+    daily = []
+    for ticker in uni.loc[uni["cik"].isin(chosen), "ticker"]:
+        prices = y.daily(ticker, end=current.DEV_RETURN_CUTOFF)
+        if not prices.empty:
+            daily.append(prices[prices["date"] >= pd.Timestamp("2022-11-01").date()])
+    daily = pd.concat(daily, ignore_index=True)
+    start = perf_counter()
+    old_panel = backtest.monthly_panel(daily)
+    old_panel_seconds = perf_counter() - start
+    start = perf_counter()
+    new_panel = current.monthly_panel(daily)
+    new_panel_seconds = perf_counter() - start
+    pd.testing.assert_frame_equal(new_panel, old_panel, rtol=1e-12, atol=1e-12)
+    panel_comparison = {
+        "rows": len(new_panel), "reference_seconds": old_panel_seconds,
+        "optimized_seconds": new_panel_seconds,
+    }
     sig, shares, ent, ma, panel = [
         d[d["cik"].isin(chosen)].copy() for d in (sig, shares, ent, ma, panel)]
     started = perf_counter()
@@ -126,6 +144,7 @@ def main() -> None:
                 "compared separately; production neutralization uses formation-time cross-sections. "
                 "This is not the full four-variant wall-clock benchmark.",
         "reference": args.reference, "sample_firms": len(chosen),
+        "monthly_panel_comparison": panel_comparison,
         "neutralization_comparison_seconds": neutral_seconds, "variants": summaries,
         "lineage": ledger.lineage(current.INPUTS),
     }

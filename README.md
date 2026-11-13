@@ -2,10 +2,13 @@
 
 **A research engine that can't see the future.** ChronoLedger turns SEC filings into a point-in-time,
 provenance-tracked record of public companies, then tests whether filing-derived signals predict
-returns, with look-ahead bias ruled out by tests rather than by assumption.
+returns, with explicit time-travel tests for look-ahead bias rather than an assumption of safety.
 
-**Status:** early development. No return results yet. See [docs/PREREGISTRATION.md](docs/PREREGISTRATION.md),
-[docs/DEVIATIONS.md](docs/DEVIATIONS.md), and [docs/DATA_AUDIT.md](docs/DATA_AUDIT.md).
+**Status:** development diagnostics only; no supported return claim. The public-data rebuild and
+corrected reruns are in progress. Holdouts remain sealed. Historical estimates are not fresh-data
+results; [F2-F5](docs/FINDINGS.md) document survivorship and point-in-time defects, including
+corrections [D6-D8](docs/DEVIATIONS.md). See [pre-registration](docs/PREREGISTRATION.md) and
+[data audit / rebuild provenance](docs/DATA_AUDIT.md).
 
 The Python package is named `asof`, after the `as_of` queries everything is built on.
 
@@ -46,9 +49,13 @@ Centering ChronoBERT embeddings fixes their anisotropy. Similarity between unrel
 
 `python -m asof.referee` evaluates 8 threats with executable checks and mutation tests; see `results/REFEREE.md`.
 
+The counts below describe the historical report, not a referee rerun on rebuilt inputs.
+The formation-time checks and expanded threat map must be evaluated before updating gate status.
+
 - **7 of 8 threats are at level 4 or higher.**
 - **Representation look-ahead is at level 1.** A neologism probe found context-specific "COVID" knowledge in the 2018 and 2019 ChronoBERT vintages; see [docs/FINDINGS.md](docs/FINDINGS.md).
-- No return-based result will be reported until the gate passes.
+- Development diagnostics are not supported hypotheses. Scientific acceptance requires the applicable
+  referee checks, pre-registered tests, and untouched evaluation periods; a test-suite pass is not enough.
 
 ## Setup
 

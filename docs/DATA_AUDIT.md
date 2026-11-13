@@ -48,6 +48,21 @@ neutralized portfolios. Production reports the 0%, -30%, and -100% missing-retur
 assumptions and missing-observation counts; these do not repair the missing-firm
 selection documented in F2.
 
+Profiling the rebuilt 2,753-ticker price cache found another preparation bottleneck:
+the per-window spread loop took 63.0 seconds for 57,195 ticker-months, in addition
+to 74.7 seconds loading prices. Spread aggregation is now batched with the same
+adjacent-valid-quote formula and minimum of three quotes. An independent real-data
+100-ticker comparison (2,069 ticker-months) matched the legacy window calculation
+to `rtol=atol=1e-12` and reduced that aggregation from 2.43 seconds to 0.032 seconds.
+These are component timings during acquisition, not an end-to-end performance claim.
+The benchmark CLI repeats a pinned legacy monthly-panel comparison on its selected
+firms and records that evidence separately.
+
+The loader also handles a listing with no pre-cutoff quotes but later split events:
+it returns an empty guarded history, rather than crashing on an empty NumPy index.
+The rebuild produced 2,753 cache files and 2,733 nonempty daily histories; cache-file
+count alone is not price coverage.
+
 ## Coverage among public-equity issuers, by public float
 
 | Float year | $1M–50M | $50M–500M | >$500M |

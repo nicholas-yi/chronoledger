@@ -155,7 +155,7 @@ def as_traded_close(
     """
     factors = np.ones(len(dates))
     for ex_date, ratio in splits:
-        mask = np.array([d < ex_date for d in dates])
+        mask = np.array([d < ex_date for d in dates], dtype=bool)
         factors[mask] *= ratio
     return np.asarray(split_adjusted_close, dtype=float) * factors
 

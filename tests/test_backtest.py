@@ -227,3 +227,49 @@ def test_missing_returns_use_declared_sensitivity_and_report_counts(assumption) 
     assert result["ls_net"] == pytest.approx(0.1 - assumption)
     assert result["short_missing"] == 1
     assert result["long_missing"] == 0
+
+
+def test_monthly_panel_matches_window_reference_with_invalid_quotes_and_gaps() -> None:
+    rng = np.random.default_rng(12)
+    days = pd.bdate_range("2023-01-02", "2023-03-31")
+    daily = pd.DataFrame({
+        "ticker": np.repeat(["A", "B"], len(days)), "date": list(days.date) * 2,
+        "close": rng.uniform(10, 20, 2 * len(days)),
+        "high": rng.uniform(20, 25, 2 * len(days)),
+        "low": rng.uniform(5, 10, 2 * len(days)),
+    })
+    daily["adjclose"] = daily["close"]
+    daily = daily[~((daily["ticker"] == "B") & (pd.to_datetime(daily["date"]).dt.month == 2))]
+    daily.loc[3, "high"] = np.nan
+    daily.loc[7, "low"] = 0.0
+    daily.loc[11, "close"] = 0.0
+    daily.loc[len(days) - 1, "close"] = np.nan
+    daily = daily.sample(frac=1, random_state=4)
+    ordered = daily.sort_values(["ticker", "date"]).assign(
+        month=lambda d: pd.PeriodIndex(pd.to_datetime(d["date"]), freq="M"))
+    rows = []
+    with np.errstate(divide="ignore", invalid="ignore"):
+        for (ticker, month), group in ordered.groupby(["ticker", "month"]):
+            rows.append({"ticker": ticker, "month": month, "last_day": group["date"].iloc[-1],
+                         "close": group["close"].iloc[-1], "adjclose": group["adjclose"].iloc[-1],
+                         "spread": abdi_ranaldo_spread(group)})
+        expected = pd.DataFrame(rows)
+        expected["ret_next"] = expected.groupby("ticker")["adjclose"].shift(-1) / expected["adjclose"] - 1
+        following = expected.groupby("ticker")["month"].shift(-1)
+        expected.loc[(following != expected["month"] + 1) | (expected["ret_next"] <= -1), "ret_next"] = np.nan
+        actual = monthly_panel(daily)
+    pd.testing.assert_frame_equal(actual, expected, rtol=1e-12, atol=1e-12)
+
+
+def test_monthly_panel_batches_many_small_windows() -> None:
+    from time import perf_counter
+
+    daily = pd.DataFrame({
+        "ticker": np.repeat(np.arange(5000).astype(str), 4),
+        "date": list(pd.bdate_range("2023-03-01", periods=4).date) * 5000,
+        "close": 20.0, "adjclose": 20.0, "high": 20.1, "low": 19.9,
+    })
+    start = perf_counter()
+    panel = monthly_panel(daily)
+    assert perf_counter() - start < 2.0
+    assert len(panel) == 5000

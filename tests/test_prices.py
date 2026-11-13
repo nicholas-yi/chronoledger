@@ -52,3 +52,16 @@ def test_guarded_payload_does_not_cache_current_price_metadata() -> None:
                "indicators": {}, "events": {}}
     out = _strip_after(payload, date(2024, 7, 31))
     assert out["meta"] == {"exchangeTimezoneName": "UTC"}
+
+
+def test_listing_after_cutoff_with_future_split_is_an_empty_history(tmp_path, monkeypatch) -> None:
+    from asof.periods import DEV_RETURN_CUTOFF
+    from asof.prices import YahooPrices
+
+    y = YahooPrices(cache_dir=tmp_path)
+    payload = {"meta": {"exchangeTimezoneName": "UTC"}, "timestamp": [],
+               "indicators": {"quote": [{"open": [], "high": [], "low": [], "close": [], "volume": []}],
+                              "adjclose": [{"adjclose": []}]},
+               "events": {"splits": {"s": {"date": 1751328000, "numerator": 2, "denominator": 1}}}}
+    monkeypatch.setattr(y, "raw", lambda *args, **kwargs: payload)
+    assert y.daily("SYNTHETIC", end=DEV_RETURN_CUTOFF).empty

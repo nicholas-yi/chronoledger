@@ -30,12 +30,31 @@ def monthly_panel(daily: pd.DataFrame) -> pd.DataFrame:
     """One row per (ticker, month): last trading day, as-traded close, total return, spread."""
     d = daily.sort_values(["ticker", "date"]).copy()
     d["month"] = pd.PeriodIndex(pd.to_datetime(d["date"]), freq="M")
-    rows = []
-    for (t, m), g in d.groupby(["ticker", "month"], sort=True):
-        rows.append({"ticker": t, "month": m, "last_day": g["date"].iloc[-1],
-                     "close": g["close"].iloc[-1], "adjclose": g["adjclose"].iloc[-1],
-                     "spread": abdi_ranaldo_spread(g)})
-    p = pd.DataFrame(rows).sort_values(["ticker", "month"])
+    d = d.dropna(subset=["ticker", "month"]).reset_index(drop=True)
+    groups = d.groupby(["ticker", "month"], sort=True)
+    if not groups.ngroups:
+        raise ValueError("monthly_panel requires dated price observations")
+    codes = groups.ngroup().to_numpy()
+    valid = d[["close", "high", "low"]].notna().all(axis=1).to_numpy()
+    quote_codes = codes[valid]
+    counts = np.bincount(quote_codes, minlength=groups.ngroups)
+    usable = counts[quote_codes] >= 3
+    quote_codes = quote_codes[usable]
+    quotes = d.loc[valid, ["close", "high", "low"]].to_numpy(dtype=float)[usable]
+    c = np.log(quotes[:, 0])
+    eta = 0.5 * (np.log(quotes[:, 1]) + np.log(quotes[:, 2]))
+    same = quote_codes[:-1] == quote_codes[1:]
+    terms = (c[:-1] - eta[:-1]) * (c[:-1] - eta[1:])
+    totals = np.bincount(
+        quote_codes[:-1][same], weights=terms[same], minlength=groups.ngroups)
+    spread = np.full(groups.ngroups, np.nan)
+    enough = counts >= 3
+    spread[enough] = np.sqrt(np.maximum(4 * totals[enough] / (counts[enough] - 1), 0.0))
+    last = groups.tail(1)
+    p = last.rename(columns={"date": "last_day"})[
+        ["ticker", "month", "last_day", "close", "adjclose"]].copy()
+    p["spread"] = spread[codes[last.index.to_numpy()]]
+    p = p.reset_index(drop=True).sort_values(["ticker", "month"])
     p["ret_next"] = p.groupby("ticker")["adjclose"].shift(-1) / p["adjclose"] - 1.0
     nxt = p.groupby("ticker")["month"].shift(-1)
     p.loc[nxt != p["month"] + 1, "ret_next"] = np.nan  # gaps are not silently bridged
