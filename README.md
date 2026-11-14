@@ -49,7 +49,7 @@ application; the infrastructure for answering it honestly is the main contributi
 ## Approach
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["SEC EDGAR<br/>filings + XBRL facts"] --> B[("Bitemporal store<br/>valid time × knowledge time")]
     P["Daily prices"] --> Q["As-traded price<br/>reconstruction"]
     B --> C["Text-change signals<br/>cosine · ChronoBERT · LLM claims"]
