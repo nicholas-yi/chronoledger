@@ -14,6 +14,61 @@ cleared, no account was requested, no vendor was contacted and no new run, sandb
 access occurred. A longer internal working draft is kept outside the public repository. The
 existing queue, protocols and append-only ledger are unchanged.
 
+### Approved offline P0 assignment planner
+
+**2026-11-14: owner selected `p0_first`.** This permits a bounded cached-metadata
+screen, not another SEC audit, timestamp repair or empirical evaluation. New
+APIs in [p0.py](../src/asof/p0.py) and the
+[planner](../scripts/plan_p0_assignments.py) construct R1-style CORRECT/LATE/EARLY
+candidate instants from both stored source clocks. Internal agreement is never
+treated as authority.
+
+- Named `America/New_York` historical rules; LATE conversion is self-consistent
+  at the corrected candidate, not today's offset. Valid fall folds remain
+  distinct; nonexistent local clocks are flagged, not shifted.
+- Registered nominal 16:00 ET entry uses cached French **date fields only**.
+  This is not an independently certified venue/early-close calendar.
+- Joint development eligibility and formation freshness use the current runner's
+  signal window plus `[close-365d,close)`; exact latest-record possibilities
+  preserve stable input order on ties. Include uncertain competing records, not
+  merely raw timestamp disagreements or possible winners.
+- Prior `[focal-120d,focal)` and future `(focal,focal+365d]` checks vary both
+  clocks. These are explicit R1 **metadata** operators, not changes to frozen
+  H6 label definitions.
+- Input is the original cached H0 signal metadata/order and matching audit
+  comparison sidecar. Read only CIK/accession/form/times, never signal scores,
+  stock prices/returns or outcomes. Mismatch/duplicate/missing inputs fail
+  explicitly; no silent remap/drop.
+
+The independent-accession candidate model is a conservative screening scenario,
+not a probability model or a proven description of correlated source errors.
+The per-CIK 120/365-day pair screen uses **H0 filing metadata**, not H5 event
+filters or independently complete H4/H6 amendment/outcome envelopes. It cannot
+clear dated shares/SIC/acquisition-control clocks, co-registrant identity or
+source accuracy.
+
+Expected outputs: `results/p0_assignment_plan.json` with aggregate counts,
+resource/source lineage and explicit limits; ignored local
+`data/p0_assignment_queue.parquet` with accession candidates/context reasons.
+An insensitive record is **not certified**. Sensitive counts are possible
+assignment changes, **not actual look-ahead size or revised portfolio results**.
+No correction is written and no trial row is appended.
+
+Run with OPENBLAS/OMP/MKL/NUMEXPR thread flags set to 1:
+
+```powershell
+python scripts\plan_p0_assignments.py
+```
+
+The runner checks <=780 CPU seconds and 1 GiB peak RSS before/after bounded blocks,
+reserving two minutes of the approved 15 CPU-minute batch envelope for tests.
+These are cooperative resource checks, not an installed OS sandbox/quota.
+Load is checked before launch; a ceiling or discrepancy preserves an incomplete
+report, raises and does not certify an older queue output. No request budget
+is consumed. Pre-execution validation passed **51 focused tests in 2.37s** and
+configured changed-file Ruff. Execution and final validation receipts are
+recorded separately, not implied by these tests.
+
 Generated from EDGAR full-index files (2011–2026), SEC's current CIK-ticker map, and the XBRL
 frames API (`dei:EntityPublicFloat`). Having a current ticker is an upper bound on whether a free
 source has the firm's price history. Firms acquired, merged, taken private, or failed since then

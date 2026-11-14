@@ -2,8 +2,10 @@
 
 This document describes how new experiments are proposed, tested and reported in Filing Time
 Machine, what it would take to close the gaps listed in the [README](../README.md#caveats), three
-new study ideas, and candidate data sources. Everything here is a plan: none of these studies has
-been run, and no new data source has been adopted.
+new study ideas, and candidate data sources. None of these proposed studies has
+been run, and no new data source has been adopted. The separately approved
+[offline P0 planner](DATA_AUDIT.md#approved-offline-p0-assignment-planner) implements
+a cached-metadata sensitivity screen; it is not timestamp authority or a return test.
 
 ## How an idea becomes a result
 
@@ -69,7 +71,7 @@ cutoff, and confirming that each attempt fails.
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | Fetch the SEC header for every filing where a 4-5 hour offset could change its trading day or portfolio month | A per-filing table of verified times, with counts of assignments that changed and any filings left unresolved |
+| Filing timestamps | First screen cached clock candidates for entry, period, latest-signal and window sensitivity, including internally agreeing records; fetch authority only under a separately approved audit | Candidate/sensitivity counts are not certified times or actual impact; qualified authority and unresolved cases remain necessary |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Two people independently label claim changes in 60 real filing pairs, with disagreements adjudicated | Measured precision and recall of claim extraction on real text, not synthetic benchmarks |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
