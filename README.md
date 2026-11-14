@@ -1,277 +1,422 @@
-# ChronoLedger
+<div align="center">
 
-**A point-in-time research engine with an executable self-audit.** ChronoLedger turns SEC filings into a point-in-time,
-provenance-tracked record of public companies, then tests whether filing-derived signals predict
-returns, with explicit time-travel tests for look-ahead bias rather than an assumption of safety.
+# Filing Time Machine
 
-**Status: DEVELOPMENT ONLY (2026-11-13).** Public inputs were rebuilt and the development runs
-completed. No supported hypothesis or tradable edge is claimed. All four monthly variants,
-including three missing-return assumptions each, ran in **61.1 seconds wall-clock** with validated
-prepared inputs; building that input snapshot separately took 155.0 seconds.
-No holdout test has been executed. Historical H4 preprocessing
-contaminated its isolation ([F4](docs/FINDINGS.md#f4-h4-winsorization-used-observations-outside-development));
-the correction does not restore an untouched sample. Historical estimates are not fresh-data
-results; [F2-F6](docs/FINDINGS.md) document survivorship and point-in-time defects, including
-corrections [D6-D9](docs/DEVIATIONS.md). See [pre-registration](docs/PREREGISTRATION.md) and
-[data audit / rebuild provenance](docs/DATA_AUDIT.md).
+**Do changes in what companies tell the SEC predict their stock returns?<br>
+And can we answer that without the backtest quietly peeking at the future?**
 
-**Batch B update: release gates BLOCKED.** The one-time reruns did not match every
-recorded summary exactly, and the metadata-only claims preflight found305CIK and
-124acceptance disagreements. Claims selection stopped before drawing; DSR was not
-computed. See [F7/F8](docs/FINDINGS.md#f7-h0-pair-metadata-disagrees-with-the-bulk-filing-identityacceptance-metadata)
-and the [bounded Batch B evidence](docs/DATA_AUDIT.md#batch-b-completion-and-stopped-gates).
-**Batch B's pinned full suite passed179tests**, but that does not resolve source
-or numerical-reconciliation failures.
-That full-suite result is pinned to Batch B's tested source. The later
-[independent synthetic oracle cross-check](docs/DATA_AUDIT.md#independent-oracle-cross-check-r1-synthetic-only)
-passed 56 focused tests after offline-helper fixes; no study/referee or stopped
-step was repeated in that cross-check.
+[![tests](https://github.com/nicholas-yi/chronoledger/actions/workflows/tests.yml/badge.svg)](https://github.com/nicholas-yi/chronoledger/actions/workflows/tests.yml)
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-**P0 UPDATE — time-integrity BLOCKED.** The broad "JSON acceptance timestamps
-verified UTC" claim is withdrawn: own filing headers/indexes reveal source-clock
-inconsistencies even when both internal tables agree. A blind 4/5-hour shift is
-unsafe. See [F9/P0 evidence](docs/FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-by-json-z-fields).
-No production timestamp, CIK, snapshot or study was changed/rerun under Batch C;
-Parts 2-3, including manifest refresh and new calibration, stopped behind P0.
-The final P0 validation passed **18 focused tests and 213 full-suite tests**
-(including post-`8642597` code), with two existing synthetic warnings; selected
-Ruff passed. Passing tests do not clear the source-clock gate.
+</div>
 
-**Batch E update — verification complete, adoption mostly failed:** established robust significance
-tests replace the unexecuted c* proposal. [D12](docs/DEVIATIONS.md#d12-require-established-robust-significance-checks-for-future-acceptance)
-and the [frozen seed/allocation](docs/DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract)
-preserve all registered statistics/N/signs and add stricter future requirements.
-EWC uses floor nu; NW uses ceil S with maxlags S-1 and KV table interpolation;
-IM-by-month is non-deciding. **No robust procedure is applied to development data;
-P0 and Batch C Part 2 remain blocked.** The [single synthetic verification](results/robust_inference_calibration.json)
-completed 250,000 charges in 156.78 CPU seconds with its exact-t harness passing.
-All monthly procedures fail the frozen 5% qualification rule at T=17/18/28;
-only panel IM passes that limited criterion. WCR does not qualify. These are
-not project inference, scientific approval or rare-tail validation; see [F10](docs/FINDINGS.md#f10-synthetic-finite-sample-size-distortion-of-the-registered-tests).
-The later duplicate R3 cross-check added four deterministic boundary/numeric
-cases: **21 focused tests passed**, with no method or outcome change. It did
-not rerun the full suite or E3 and did not authorize P0.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/time-machine-dark.svg">
+  <img alt="Timeline showing a fiscal-year-2022 10-K accepted in February 2023 and amended in June 2023; queries dated January, April and August 2023 return nothing, the original revenue, and the restated revenue respectively." src="docs/figures/time-machine-light.svg" width="100%">
+</picture>
 
-The Python package is named `asof`, after the `as_of` queries everything is built on.
+<sub><b>Figure 1.</b> The core idea. Every number from a filing is stored with two dates: the period it
+describes and the moment the SEC accepted it. A backtest asks "what was known <i>as of</i> this
+instant?" and gets only that, so a restatement filed in June cannot leak into a trade made in April.
+(Illustration, not real data.)</sub>
 
-## Principles
+---
 
-- **Bitemporal research facts.** Temporal filing facts carry *valid time* (the period described) and *knowledge time* (EDGAR acceptance in UTC). Time-filtered queries protect these records; current-ticker and current-SIC proxies remain explicit limitations, not historical point-in-time guarantees.
-- **Look-ahead is tested, not assumed away.** Time-travel checks compare full and as-of-truncated inputs, with canaries for known leaks. Passing checks are evidence for the tested paths, not a universal proof.
-- **Pre-registered.** Hypotheses, thresholds, and sample splits are fixed and git-tagged before returns are examined. Deviations are logged with a timestamp and tag.
-- **Every trial counts.** An append-only trial ledger feeds the Deflated Sharpe Ratio and probability-of-overfitting estimates, and the holdout can be opened only once.
-- **As-traded prices.** Vendor prices adjusted for later splits are converted back to the prices that actually traded, so price filters and market caps don't leak future corporate actions.
+## The problem
 
-## Verified so far
+Every public company files annual (10-K) and quarterly (10-Q) reports with the SEC. Most of each
+report is copied from the previous one. [Cohen, Malloy & Nguyen (2020), *Lazy Prices*](https://dash.harvard.edu/entities/publication/576a041c-19c4-47d8-b28d-2a5ef079f54f),
+found that the firms that *do* change their language tend to underperform afterwards: investors
+seem to miss the signal in the edits.
 
-- A newly built five-issuer pilot has **132,527 facts**, all joined to stored acceptance timestamps.
-  Ten fact and six revision as-of checks found zero violations; the planted period-end leak was caught.
-  This is a new fixture, not a byte-for-byte restoration of the original pilot.
-  Its source-clock accuracy was not re-certified by the P0 audit.
-- The rebuild processed 32,508 H0 filing features and 12,184 H4 annual filings with zero feature
-  errors. A 100-firm [pinned legacy comparison](results/h0_optimization_equivalence.json) passed
-  across all four variants and 17 formation months, within its documented D7/D8 comparison scope.
-- The local processed-price snapshot round-tripped **57,195 monthly rows and 14,433,060 daily
-  returns** exactly. All 12 full-sample configurations then matched raw-preparation metrics exactly.
-  The earlier 298.7-second timing miss remains in the [append-only ledger](results/trial_ledger.jsonl).
-- There are 2,733 usable price histories among 2,753 **already current-ticker-selected** firms.
-  That is not survivorship coverage. [F2](docs/FINDINGS.md#f2-distress-event-tests-are-invalid-under-a-current-ticker-universe)
-  remains unresolved; [F3](docs/FINDINGS.md#f3-three-data-bugs-caught-by-an-implausible-backtest)
-  records the original implausible-backtest failures.
-- Latest Batch E local regression tests: **234 passed**, with two existing synthetic
-  rank-deficiency warnings. Selected changed-file Ruff `E4,E7,E9,F` checks pass.
-  Full-repository default Ruff was not rerun here; its last recorded baseline
-  had 62 inherited findings versus 63 at the handoff.
-  See [validation and rebuild provenance](docs/DATA_AUDIT.md).
+Testing ideas like this sounds easy: download filings, download prices, run a backtest. In practice
+a backtest can quietly cheat in at least six ways, and each one makes a strategy look better than it is:
 
-Historical header cross-checks matched the sampled JSON instants to header-derived UTC;
-they did **not** establish a universal guarantee for all JSON paths/vintages.
-The later P0 counterexamples supersede that broad interpretation. The section
-parser's historical30/30 real10-K result was not repeated here.
+| Pitfall | How it sneaks in |
+|---|---|
+| **Look-ahead in time** | Using a filing before it was public, e.g. treating an 8 p.m. filing as known at that afternoon's close |
+| **Restated history** | Databases overwrite numbers when companies amend them, so the past "knows" later corrections |
+| **Survivorship** | Free price data mostly covers companies that still exist; the ones that failed quietly vanish |
+| **Split-adjusted prices** | Vendors rescale old prices for later stock splits, so a $5 price filter uses future information |
+| **Model memory** | A language model trained on later text can "know" events that had not happened yet |
+| **Too many tries** | Test enough variants and one will look significant by luck |
 
-### Development results, not confirmatory findings
+**This project builds a research engine where those mistakes are structurally hard to make, and
+tests for them automatically where they are not.** The signal question is the motivating
+application; the infrastructure for answering it honestly is the main contribution.
 
-H0 signals are accepted in **2023-01-01 through 2024-06-30 UTC**; returns end by **2024-07-31**.
-The expected long-short sign is positive: long low-change firms, short high-change firms.
-Primary results are value-weighted and net of estimated costs.
+## Approach
 
-| Cosine variant | Return months | Mean net / month | FF5+UMD alpha t |
-|---|---:|---:|---:|
-| `v1_10K_raw` | 17 | -0.805% | -0.45 |
-| `v2_latest_raw` | 18 | +0.291% | +1.46 |
-| `v2_latest_neutral` | 18 | -0.294% | -2.33 |
-| `v2_10K_neutral` | 17 | -1.689% | -2.36 |
+```mermaid
+flowchart LR
+    A["SEC EDGAR<br/>filings + XBRL facts"] --> B[("Bitemporal store<br/>valid time × knowledge time")]
+    P["Daily prices"] --> Q["As-traded price<br/>reconstruction"]
+    B --> C["Text-change signals<br/>cosine · ChronoBERT · LLM claims"]
+    C --> D["Point-in-time portfolios<br/>monthly, value-weighted, net of costs"]
+    Q --> D
+    D --> E["Small-sample inference<br/>robust HAC · clustering · deflated Sharpe"]
+    L[("Append-only<br/>trial ledger")] --> E
+    E --> R{"Automated<br/>referee"}
+    R -->|all checks pass| OUT["Reported result"]
+    R -->|any check fails| BUG["Investigate"]
+```
 
-No positive-direction support is established. The zero, -30%, and -100% missing-return assumptions
-coincide here because no held long/short leg lacks its next-month return; that does **not** repair
-firms missing from the universe. Raw change event panels are descriptive; neutralized event panels
-are **not evaluated** under D8. These neutralized cosine variants, historically logged as `H1n`,
-are **not the claim-level H1 signal**. See the [full H0 output](results/returns_h0_development.json)
-and [execution source](scripts/h0_backtest.py).
+### 1. Every fact gets two clocks
 
-| Test | Development result | Interpretation |
+Facts from SEC XBRL data carry a **valid time** (the fiscal period described) and a **knowledge
+time** (when EDGAR accepted the filing, in UTC). Research code reads facts through `as_of(t)`
+queries that return only what was public at instant `t`. Amendments are stored as new rows, never
+overwrites, so history cannot be rewritten after the fact.
+
+A signal becomes tradable at the **first 16:00 ET market close strictly after acceptance**. A filing
+accepted at 4:01 p.m. waits for the next day.
+
+### 2. Prices as they actually traded
+
+Free price vendors adjust all history for every later stock split. Left alone, a stock that later
+split 10-for-1 appears to have traded at a tenth of its real price, which corrupts price filters and
+market caps. The engine keeps the vendor's later split *events* (never later prices), reverses the
+adjustment, and reconstructs the as-traded price. It is verified against the historical record:
+Apple's reconstructed 2014-06-06 close matches it exactly.
+
+### 3. Measuring how much a filing changed
+
+Three representations, from simplest to richest:
+
+- **Bag-of-words cosine similarity** between a report and its predecessor (the original *Lazy Prices* measure):
+
+  $$\text{change}_i = 1 - \frac{\mathbf{w}_{i,t}\cdot\mathbf{w}_{i,t-1}}{\lVert\mathbf{w}_{i,t}\rVert\,\lVert\mathbf{w}_{i,t-1}\rVert}$$
+
+- **Chronologically consistent embeddings.** [ChronoBERT](https://arxiv.org/abs/2502.21206) is a family of
+  BERT models, each trained only on text up to a given year-end. Each filing is embedded with the latest
+  vintage *strictly before* its acceptance date.
+- **Claim-level change.** A local LLM (Qwen 3.5) extracts claims such as "Customer X accounts for
+  12% of revenue". Every accepted claim must be backed by a verbatim quote found in the filing, and
+  a provenance graph tracks which claims are new, superseded or retracted.
+
+Industry-neutral variants regress each month's scores on two-digit SIC industry, log market cap
+and recent acquisitions, then rank the residuals, so that rule changes affecting a whole sector
+(new lease accounting, cybersecurity disclosures) are not mistaken for firm-specific news.
+
+### 4. Point-in-time portfolios
+
+At each month-end close:
+
+- Sort firms with a current signal into quintiles.
+- Go long the least-changed fifth and short the most-changed fifth.
+- Weight by market value: point-in-time XBRL shares outstanding × as-traded price.
+- Require a price of at least $5 and a market cap at or above the NYSE 20th-percentile breakpoint.
+- Charge transaction costs of 2 × half-spread × turnover, with spreads estimated from daily
+  high/low/close prices ([Abdi & Ranaldo 2017](https://alexandria.unisg.ch/entities/publication/734062b6-b25a-46fb-95cf-9f75bfd12ff6/full)).
+
+Portfolio formation is tested to ignore future information: hiding any future return must leave the
+holdings unchanged, and an automated test plants exactly that leak to confirm it is caught.
+
+### 5. Statistics built for small samples
+
+- **Pre-registration.** Hypotheses, sample splits and thresholds were fixed in git-tagged documents
+  ([v1](docs/PREREGISTRATION.md), [v2](docs/PREREGISTRATION_V2.md)) *before* any return was
+  computed. Later changes are logged with timestamps in [DEVIATIONS.md](docs/DEVIATIONS.md).
+- **Every trial counts.** Each configuration ever evaluated, including failed and invalid runs, is
+  appended to a [trial ledger](results/trial_ledger.jsonl) that feeds the
+  [deflated Sharpe ratio](https://www.davidhbailey.com/dhbpapers/deflated-sharpe.pdf) and
+  probability-of-backtest-overfitting calculations.
+- **High bars.** New signals need |t| ≥ 3.0 ([Harvey, Liu & Zhu 2016](https://people.duke.edu/~charvey/Research/Published_Papers/P118_and_the_cross.PDF)),
+  and claim-level results must also hold under a bag-of-words representation that cannot leak
+  future information.
+- **Tests that hold their size.** With only 17-28 months of data, textbook Newey-West t-tests are badly
+  over-confident (see the [test-size simulation](#4-textbook-tests-cry-wolf-with-short-samples) below).
+  The engine also implements equal-weighted cosine and fixed-b inference
+  ([Lazarus, Lewis, Stock & Watson 2018](https://www.princeton.edu/~mwatson/papers/HAR_Inference_Recommendations_for_Practice.pdf)),
+  [Ibragimov-Müller](https://spiral.imperial.ac.uk/entities/publication/651db680-95fd-4163-b596-ae55ddef49aa)
+  group tests and the wild cluster bootstrap. Each is checked against hand-derived oracle cases.
+- **A sealed holdout.** July 2024 through October 2026 is reserved for one final, single-use test
+  and has never been opened.
+
+### 6. An automated referee
+
+[`asof.referee`](src/asof/referee.py) is a skeptical reviewer written as code. It scores each threat
+to validity from 1 to 5 and blocks any result unless every gating threat reaches level 4. Many
+checks come with a **mutation test**: a deliberately planted bug that the check must catch.
+
+| Threat | Example check |
+|---|---|
+| Look-ahead in the store | Random as-of queries; a planted period-end leak must be caught |
+| Look-ahead in portfolios | Hiding a future return must not change today's holdings |
+| Model memory | Every ChronoBERT vintage used must predate the filing; probe for words coined later |
+| LLM hallucination | Fabricated partners and invented quotes must be rejected |
+| Split-price leakage | A $5 price-filter canary: $1.00 adjusted vs. $28.00 as traded |
+| Data integrity | Any long-short mean beyond ±5% a month fails automatically |
+| Multiple testing | The deflated Sharpe ratio must reject the best of 500 noise strategies |
+
+The latest [referee report](results/REFEREE.md) records each check's outcome.
+
+## Hypotheses
+
+| | Question | Test |
 |---|---|---|
-| H4: text change and next-year fundamentals, 2012-2018 | All six absolute t values <= 1.23; primary neutralized-score -> dROA t = -1.20 | No support at the 3.0 bar in these conditional diagnostics |
-| H6(a): quiet revision and a formal outcome within 365 days, 2012-2018 | Adjusted association +4.20 percentage points, t = 1.74; 22,745 filings, 499 quiet, 1,103 firms | Exactly reproduces the earlier estimate; below the 3.0 bar |
-| H6(b): subsequent CAR(+1..+60), 2023-Jun 2024 | Pipeline diagnostic +4.58%, t = 1.77, 316 events | **INVALID under F2**, not a return finding |
-| H5(a), historical; not rerun here | Friday-evening difference +0.97 percentage points, t = 2.01 | Opposite the expected sign; not a replication |
-| H5(b)/(c), historical; not rerun here | **INVALID under F2** | Current-ticker distress selection prevents interpretation |
+| **H0** | Do firms that change their reports most underperform those that change least? (*Lazy Prices* replication) | Monthly long-short portfolio, FF5 + momentum alpha |
+| **H1** | Does claim-level change add information beyond word-level change? | Same portfolio, claim-level score |
+| **H2-H3** | Do customer links extracted by an LLM below the 10%-of-revenue disclosure threshold carry return information? Does a customer's change propagate to its suppliers? | Customer-supplier portfolios |
+| **H4** | Does text change predict worse fundamentals the next year? | Pooled regression on next-year ROA, earnings declines, goodwill impairments |
+| **H5** | Do late-filing notices, auditor changes, restatement warnings and Friday-evening 8-Ks precede negative returns? | Event study, cumulative abnormal returns |
+| **H6** | Do quiet downward revisions of prior-year net income predict formal restatements? | Regression with year effects; event study |
 
-H6(a)'s observed formal-outcome rates are 17.84% versus 13.72%; the 4.02-only descriptive rates are
-4.81% versus 1.82%. The broad outcome includes 10-K/A filings that may be Part III-only amendments.
-H4 retains its no-support conclusion, but D6 changes its winsorized dROA mean and coefficients.
-H4 and neutralized H0 also use current SIC as a fixed proxy, not verified historical classifications.
-See [H4 output](results/h4_development.json), [H6 output](results/h6_development.json),
-and [historical-versus-rebuilt reconciliation](docs/FINDINGS.md#development-rerun-reconciliation-2026-11-13).
+## Data
 
-### Relationship extraction (local Qwen 3.5, synthetic benchmark on real 10-K text)
+| Source | Used for |
+|---|---|
+| [SEC EDGAR](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) submissions, full-text filings and XBRL company facts | Filing text, acceptance times, shares outstanding, fundamentals |
+| Free daily prices (Yahoo chart API) | Returns, market caps, spread estimates |
+| [Kenneth French Data Library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html) | Fama-French five factors, momentum, NYSE size breakpoints |
+| [ChronoBERT](https://arxiv.org/abs/2502.21206) vintages (`manelalab/chrono-bert-v1-YYYYMMDD`) | Time-consistent text embeddings |
+| Qwen 3.5 4B / 9B via Ollama, run locally | Claim and relationship extraction |
 
-**Historical artifacts, not model runs repeated in this continuation.**
+Raw vendor data stays local and is never redistributed. Only derived statistics are published.
 
-Ground truth comes from construction: fictitious companies are injected into real filing text, with no human labels.
+**Scale of the current build:** 32,508 filings with text features · 21,502 consecutive-filing pairs ·
+2,733 price histories (14.4 million daily returns) · a 132,527-fact verification store in which
+every fact is joined to its filing's acceptance timestamp. The complete four-variant H0 backtest runs in
+**61 seconds** from a validated, checksummed price snapshot.
 
-| | Qwen 3.5 4B (300 cases) | Qwen 3.5 9B (80 cases) | Gate |
-|---|---|---|---|
+## Results
+
+All results below come from the **development sample** (signals accepted January 2023 to June 2024;
+returns through July 2024). They are where methods get debugged, not confirmatory evidence.
+
+### Lazy Prices replication (H0)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/development-returns-dark.svg">
+  <img alt="Cumulative net returns of four long-short text-change portfolios from early 2023 to July 2024; they end between about +4% and -26%, with no consistent positive trend." src="docs/figures/development-returns-light.svg" width="100%">
+</picture>
+
+<sub><b>Figure 2.</b> Cumulative net return of the long-low-change / short-high-change portfolio for each
+signal variant. "v1" compares consecutive 10-Ks; "v2" uses each firm's latest 10-K or 10-Q, compared
+with the same period a year earlier. "Neutral" variants first remove industry, size and acquisition effects.
+Source: <a href="results/returns_h0_development.json">returns_h0_development.json</a>.</sub>
+
+| Variant | Months | Mean net return / month | Alpha t-stat* |
+|---|---:|---:|---:|
+| 10-K, raw | 17 | -0.80% | -0.45 |
+| Latest filing, raw | 18 | +0.29% | +1.46 |
+| Latest filing, neutral | 18 | -0.29% | -2.33 |
+| 10-K, neutral | 17 | -1.69% | -2.36 |
+
+**No variant supports the hypothesis.** The two neutral variants even point the wrong way, but
+\*at this sample length the textbook t-test shown here flags pure noise as significant about 30% of
+the time instead of 5% (Figure 6), so values near ±2.3 are within the range of chance. Missing-return
+sensitivities (0%, -30%, -100%) give identical answers because every held stock had a next-month
+return.
+
+### Other hypotheses
+
+- **H4, text change → next-year fundamentals (2012-2018).** 2,655 firm-years from a random sample
+  of 1,500 companies, including ones later delisted. All six |t| ≤ 1.23: no detectable relationship.
+- **H6, quiet revisions → restatements (2012-2018).** Of 22,745 filings, 499 quietly revised the
+  prior year's net income downward. Those were followed by a formal amendment or restatement warning
+  within a year 17.8% of the time, versus 13.7% for other filings (+4.2 points, t = 1.74). This is
+  suggestive but below the pre-set bar of 3.0.
+- **H5 and the distress events.** Late-filing notices, auditor changes and restatement warnings
+  cannot be tested with free price data. Distressed companies that later delisted are 1.3-3.3× less
+  likely to have prices, so the survivors that remain are disproportionately rebounders. All three
+  tests showed *positive* returns, the opposite of the published effects, and are reported as
+  **invalid**, not as evidence ([F2](docs/FINDINGS.md#f2-distress-event-tests-are-invalid-under-a-current-ticker-universe)).
+
+### LLM extraction benchmark
+
+Fictitious companies are injected into real 10-K text, so the correct answer is known by
+construction. A separate test swaps famous real partners for fictitious ones to see whether the model
+"remembers" the real partner instead of reading the page.
+
+| | Qwen 3.5 4B (300 cases) | Qwen 3.5 9B (80 cases) | Required |
+|---|---:|---:|---:|
 | Recall | 0.942 | 0.835 | ≥ 0.80 |
 | Precision | 0.956 | 0.981 | ≥ 0.90 |
-| Prior-knowledge hallucination | 0.5% | 0.0% | < 2% |
-| All ungrounded raw outputs | 5.0% | 0.8% | reported |
-| Entity-swap probe: famous real partner leaked | 0/159 | 0/40 | < 2% |
+| Names a partner absent from the text | 0.5% | 0.0% | < 2% |
+| Leaks the famous real partner after a swap | 0 / 159 | 0 / 40 | < 2% |
 
-Every accepted link is verified by deterministic quote grounding.
+## What the time machine caught
 
-### Change detection
+The most useful output so far is a list of ways the analysis would have fooled itself. Each was
+caught by a test, a plausibility check or an audit, then fixed and recorded in
+[FINDINGS.md](docs/FINDINGS.md).
 
-**Historical calibration, not re-executed in this continuation.**
+### 1. A +27%-a-month strategy that was really three bugs
 
-Centering ChronoBERT embeddings fixes their anisotropy. Similarity between unrelated risks drops from 0.971 to 0.045, and AUC on synthetic same-risk vs. different-risk pairs is 0.9999. See `results/change_calibration.json`.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/caught-bug-dark.svg">
+  <img alt="Bar chart: the first backtest runs showed mean long-short returns of +27.4%, +25.9%, +19.6% and +1.3% a month; after the fixes the same variants show between -1.7% and +0.3%." src="docs/figures/caught-bug-light.svg" width="100%">
+</picture>
 
-### Executable referee: scoped checks are not release or scientific acceptance
+<sub><b>Figure 3.</b> First recorded run versus the corrected run for each variant, both read from the
+append-only trial ledger.</sub>
 
-The [executed report](results/REFEREE.md) records its actual source/input provenance.
-[Batch B validation](results/batch_b_validation.json) compares its bounded rerun
-with the prior defined-gate result. Historical gate PASS did not establish scientific
-acceptance. The unused ChronoBERT-vintage and distress-coverage issues persist;
-representation/extraction checks read recorded artifacts, not fresh model executions.
-**F7 source disagreement and F8 exact-reconciliation failures are release blockers
-not automatically covered by the existing referee checks.** No gate was retuned
-to explain away those observed failures.
+The first backtest reported alpha t-statistics up to 4.6. No credible text signal earns 27% a month,
+so it was treated as a bug until proven otherwise. There were three:
 
-A pass covers the defined checks, not all possible biases, historical SIC availability, scientific
-approval, or holdout authorization. Project-level DSR/PBO results, formal claim-level H1, and the
-neutralized event co-primary are not established by these runs. The current session-clock helper
-uses the fixed 16:00 ET convention and CAR windows index valid observations; early-close and
-calendar-gap handling must be qualified before execution or confirmatory event-study claims.
-H4's year-cohort neutralization is retrospective, not claimed observable at each filing time.
+- A company reported **89.8 billion** shares instead of 89.8 million in one filing, which made its
+  value weight meaningless. Share-count jumps of more than 10× now take effect only after a later
+  filing confirms them.
+- Split-adjusted vendor prices made a stock that traded in pennies appear to cost $1,200 (the
+  as-traded reconstruction in step 2 fixes this).
+- Some monthly returns were below -100%, which is impossible.
 
-## Setup
+The original runs stay in the ledger and still count toward the multiple-testing penalty. A
+plausibility check now fails any long-short mean above 5% a month automatically.
 
-Windows PowerShell:
+### 2. A language model that knew about COVID in 2018
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/leak-probe-dark.svg">
+  <img alt="Three panels showing the rank of a masked word by model vintage. For COVID, the 2018 and 2019 models rank it first in a pandemic sentence but below 1,000th in a control sentence. Coronavirus and Brexit are not known before they were coined." src="docs/figures/leak-probe-light.svg" width="100%">
+</picture>
+
+<sub><b>Figure 4.</b> A masked word is hidden in a sentence that evokes it ("lockdowns in 2020 slowed the
+spread of ___-19") and in a control sentence with the same pattern but unrelated meaning ("part number
+___-19"). Rank 1 means the model's top guess; the scale is logarithmic. Shaded vintages were trained
+before the word was coined. Source: <a href="results/leakprobe_chronobert.json">leakprobe_chronobert.json</a>.</sub>
+
+The 2018 and 2019 ChronoBERT vintages complete the pandemic sentence with "COVID" at 94-98%
+probability, yet the same models do not know "coronavirus", and Brexit is clean. The leak is narrow
+and context-specific, plausibly from older documents later edited to mention the pandemic. The
+vintages this project actually uses (2022-2024) show no such leak in the probe, although the probe
+has limited power, and any claim-level result must also hold with a bag-of-words representation
+that cannot leak at all.
+
+### 3. The SEC's own clocks disagree
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/timestamps-dark.svg">
+  <img alt="Left: of 21,502 filings, 165 have different acceptance times in the SEC bulk archive and the per-company API, all by exactly 4 or 5 hours. Right: in an audit of 22 filings, the API record matched the filing's own SEC header 21 times and the bulk archive 7 times." src="docs/figures/timestamps-light.svg" width="100%">
+</picture>
+
+<sub><b>Figure 5.</b> Acceptance times for the same filings from two official SEC JSON sources, and an audit
+against each filing's own SGML header. Source: <a href="results/p0_acceptance_authority_audit.json">p0_acceptance_authority_audit.json</a>.</sub>
+
+The engine assumed the SEC's `acceptanceDateTime` field was true UTC, as its `Z` suffix says. A
+consistency check found 165 filings whose time differs between the SEC bulk archive and the
+per-company API, always by exactly one Eastern-time offset: 4 hours in summer, 5 in winter. Checking
+each filing's own header showed the API copy right in 21 of 22 cases, the bulk copy late, and one
+filing that both sources got wrong.
+
+Others have since documented the same defect: SEC submission files can be correct, late or early by
+one Eastern offset, varying by file and by download date
+([edgartools #1501](https://github.com/dgunning/edgartools/issues/1501),
+[Canli Capital](https://canlicapital.com/notes/edgar-acceptance-times),
+[Gow](https://iangow.github.io/sec_submissions/timestamps/)). For a strategy that trades at the
+close, a late timestamp merely delays a signal, but an early one creates look-ahead. Each filing's
+own header is the authority, and verifying every filing whose trading day the offset could change
+is next on the roadmap.
+
+### 4. Textbook tests cry wolf with short samples
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/test-size-dark.svg">
+  <img alt="Bar chart of false-positive rates on simulated data with no true effect: textbook Newey-West rejects 20-32% of the time instead of 5%; fixed-b and equal-weighted cosine corrections reduce this to 8-14%. In a 7-cluster panel, the textbook two-way cluster test rejects about 10%, the wild bootstrap and Ibragimov-Müller tests about 3-4%." src="docs/figures/test-size-light.svg" width="100%">
+</picture>
+
+<sub><b>Figure 6.</b> Share of simulated datasets with <i>no</i> true effect in which each test reports
+significance at the 5% level. Bars are averages over four data-generating processes (normal, AR(1),
+fat-tailed t₃, and factor exposure); dots show each process. 2,000 datasets per cell, fixed seed.
+Source: <a href="results/robust_inference_calibration.json">robust_inference_calibration.json</a>.</sub>
+
+The monthly test regresses 17-28 returns on six factor controls with Newey-West standard errors, the
+standard approach in empirical finance. With so few months, it finds an "effect" in pure noise
+**18-37% of the time** instead of 5%. Modern corrections help but do not fully fix it. For the
+7-year fundamentals panel, Ibragimov-Müller's year-by-year t-test keeps its size; the textbook
+two-way clustered test does not. The practical lesson: with fewer than about 30 independent
+periods, a t-statistic near 2 is weak evidence, and more data matters more than a better estimator.
+
+### Also caught
+
+- **Outliers trimmed with future data.** H4 winsorized ratios using the full 2012-2025 sample before
+  selecting the 2012-2018 development years, so future observations shaped the development regressors
+  ([F4](docs/FINDINGS.md#f4-h4-winsorization-used-observations-outside-development)).
+- **Portfolios chosen by the future.** The first portfolio code dropped stocks without a known
+  next-month return before ranking, which secretly selects on the outcome
+  ([F5](docs/FINDINGS.md#f5-formation-selected-on-future-outcomes-monthly-residuals-were-not-event-time-signals)).
+- **Impossible daily returns.** The -100% guard covered monthly but not daily event-study returns
+  ([F6](docs/FINDINGS.md#f6-the-f3-price-return-guard-did-not-cover-daily-event-inputs)).
+
+## Limitations
+
+- **Survivorship.** Free price data covers mostly companies that still trade today. Return tests are
+  restricted to 2023 onwards, when coverage of large issuers reaches 88-97%, and distress-event tests
+  are reported as invalid ([coverage audit](docs/DATA_AUDIT.md#coverage-among-public-equity-issuers-by-public-float)).
+- **Short samples, low power.** Assuming 3% monthly volatility, 17-18 development months can only
+  reliably detect effects of roughly 2.8-2.9% a month. Anomaly returns typically shrink by more
+  than half after publication ([McLean & Pontiff 2016](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2156623)),
+  so a realistic effect would be far smaller.
+- **Industry codes are today's.** Industry neutralization uses current SIC codes, not those in force
+  at each filing date.
+- **Costs are a spread estimate.** Turnover costs use a daily high/low/close proxy; price impact,
+  borrow fees and short availability are not modeled.
+- **Synthetic extraction labels.** The LLM benchmark's ground truth comes from injected fictitious
+  companies, not human annotation.
+
+## Reproduce
 
 ```powershell
 uv venv --python 3.12
-uv pip install -e ".[dev]"
-$env:ASOF_USER_AGENT = "Your Name your.email@example.com"
-.\.venv\Scripts\python.exe -m pytest -q
+uv pip install -e ".[dev,figures]"
+uv run pytest -q                       # 238 tests, no data or network needed
+uv run python scripts/make_figures.py  # rebuild every chart from results/
+uv run python -m asof.referee          # the automated referee (needs the local data build)
 ```
 
-Use the project interpreter for every command. The `embed` extra is needed only for ChronoBERT,
-not these development runs. Raw vendor data and processed price datasets stay under ignored `data/`.
-Follow the [rebuild runbook](docs/DATA_AUDIT.md#data-rebuild-runbook), including the pilot fixture
-and safe Windows process-pool invocation, before running the backtests and referee.
-The `prices` stage creates the validated processed snapshot; after a processing/runtime change,
-rebuild it with `python scripts/h0_data.py price_snapshot`. Missing or stale snapshots fail explicitly.
+Rebuilding the data from SEC EDGAR takes several hours and needs a contact email in
+`ASOF_USER_AGENT`, as the SEC requires. Follow the step-by-step
+[runbook](docs/DATA_AUDIT.md#data-rebuild-runbook). The package is called `asof`, after the
+point-in-time queries everything is built on.
 
-## Proposed next gates: approval required, not executed
+## Repository map
 
-**Local continuation:** the [bounded gate packet](docs/DATA_AUDIT.md#bounded-gate-advancement-2026-11-13)
-contains a proposed development-only source contract, exact method blockers and
-reproducibility/holdout decisions. Two narrow implementation corrections have
-synthetic-only validation (13 focused tests); they are uncommitted, and the earlier
-CI/referee/empirical results above are evidence for their recorded revisions, not
-reruns of these changes. No vendor pilot, new study, holdout opening, commit or
-publication was authorized or performed by that bounded turn. Hourly automation
-is unavailable; completion-triggered Lead handoff is not an always-on monitor.
-The [six-package dependency queue](docs/DATA_AUDIT.md#six-package-dependency-queue)
-now keeps stable CL-P1 through CL-P6 IDs, versioned designs and blocked operations
-explicit. The completed **Research design cards v1** have full design review, not
-source revalidation or wholesale scientific approval. Proposed resource/human
-ceilings do not release rights or run permissions. Execution's
-[P2 source/fixture map](docs/DATA_AUDIT.md#p2-source-to-contract-and-fixture-map)
-retains unresolved choices. **Lead-D3a's explicitly approved separate synthetic
-planner is now implemented and verified**:
-[`asof.timing.plan_return_window`](src/asof/timing.py) uses supplied aware session
-closes/readiness/deadlines, post-entry fixed-session intervals and explicit missing/
-censored support. It is not wired into historical runners and claims no fill/borrow
-feasibility. Queue/P2 v0.2, exact test results and the frozen-runner boundary are in
-the [planner contract](docs/DATA_AUDIT.md#lead-d3a-opt-in-synthetic-planner-v02).
-That D3a release did not authorize an empirical study, vendor access, simulation
-budget, holdout opening or publication. Batch A's later prospective decisions
-are recorded below; reserved operational permissions remain separate.
+```text
+src/asof/
+├── store.py            bitemporal fact store and as-of queries
+├── edgar.py, bulk.py   rate-limited, cached SEC EDGAR clients
+├── prices.py           as-traded price reconstruction
+├── sections.py         10-K section parsing and Lazy Prices similarity
+├── chrono.py           ChronoBERT vintage selection and embeddings
+├── extraction.py       quote-grounded LLM claim extraction
+├── reconcile.py        provenance graph: new, superseded and retracted claims
+├── backtest.py         point-in-time portfolio formation and costs
+├── events.py           event studies and neutralization
+├── inference.py        alpha tests, deflated Sharpe, backtest-overfitting probability
+├── robust_inference.py small-sample HAC, Ibragimov-Müller, wild cluster bootstrap
+├── invariance.py       time-travel invariance harness for look-ahead tests
+├── leakprobe.py        language-model neologism probe
+├── ledger.py           append-only trial ledger
+└── referee.py          the automated referee
+scripts/                data builds, study runners, figure generation
+docs/                   pre-registration, deviations, findings, data audit
+results/                every published number, the trial ledger, the referee report
+tests/                  unit, invariance and mutation tests
+```
 
-**Batch A v0.3:** prospective overlap/control/industry, decision, observation and
-economic contracts are now recorded in the
-[bounded offline release](docs/DATA_AUDIT.md#batch-a-prospective-decisions-and-bounded-release).
-Supplementary manifest/decision gates, future evidence-label validation,
-component-cost arithmetic and a data-free study registry passed **76 focused tests**.
-The [supplementary manifest](results/trial_manifest.json) preserves all56attempts
-and registered counts; project DSR/PBO remain unavailable.
-The [fixed synthetic calibration](results/synthetic_inference_calibration.json)
-completed **2,000 attempts in12.625CPU seconds /197.43MiB peak memory**, retaining
-six nonfinite panel estimates. Null rejection substantially exceeded normal-reference
-nominal rates in these designs: **execution complete is not calibration passed**.
-See the [full bounded evidence](docs/DATA_AUDIT.md#batch-a-completion-evidence-offline-not-project-inference).
-No additional inference method or empirical claim is validated by that result.
-Frozen studies and their labels/costs remain unchanged. D10 discloses the
-historical10-Q/A quiet-exclusion wording discrepancy after results, without a rerun.
-Vendor contact/keys/spending, human annotation, publication, push/tags and holdout
-access remain reserved; this release permits validated **local commits only**.
+## Roadmap
 
-1. **Rights and historical-source feasibility first; no approved vendor pilot.**
-   The earlier free-Tiingo suggestion is a historical premise, not a viable durable
-   pilot authorization. [Posted Tiingo terms](https://www.tiingo.com/tos/) updated
-   2026-11-05 prohibit Starter/trial durable storage of both data and derived products;
-   Power predictive-model permission is internal-use-only, not established public-project
-   permission. Sharadar also has disclosure and retention restrictions. See the
-   [dated rights reconciliation](docs/DATA_AUDIT.md#current-source-rights-reconciliation-2026-11-13).
-   No account-specific/supplemental rights, license, key use, purchase, or publication
-   is approved. User approval cannot waive vendor rights. Only after rights are resolved
-   could an explicitly approved development-only source pilot qualify dated identities,
-   actions and terminal payoffs; F2 coverage >= 0.8 alone is insufficient.
-2. **Holdout readiness.** Resolve F2 where applicable, the current-SIC proxy, early-close session
-   timing/calendar-gap handling, the event-time neutralization contract, outstanding preregistered inference outputs,
-   and F4's historical H4 contamination. Review the ledger, freeze/tag code/config/data/windows,
-   and obtain explicit owner approval. Do not silently reseal or relabel contaminated data.
-3. **Timing, not authorization.** The October 2026 monthly formation needs returns through
-   **2026-11-30**. Under the [scheduled NYSE calendar](https://www.nyse.com/trade/hours-calendars),
-   a final late-October event anchored on 2026-11-02 needs its +60th session through
-   **2027-01-29**. Recheck actual closures and data finalization before an early-February-2027
-   review; valid-observation windows with gaps may extend later until that contract is fixed.
-   This is not an automatic opening date. H4/H6(a) require separate label-readiness and
-   isolation decisions. Audit July 2024 event-label overlap with the permitted development tail.
+- [x] Bitemporal store, as-traded prices and look-ahead tests with planted leaks
+- [x] Lazy Prices replication on the development sample
+- [x] Automated referee and append-only trial ledger
+- [x] Small-sample inference checked against simulation and hand-derived oracles
+- [ ] Verify every filing's acceptance time against its own SEC header where it matters
+- [ ] Survivorship-free prices to open the 2011-2022 periods (≈ 8× more months)
+- [ ] Claim-level change signal (H1) with a human-labelled audit set
+- [ ] Customer-supplier network signals (H2-H3)
+- [ ] One-time evaluation on the sealed July 2024 - October 2026 holdout
 
-Research priorities remain gated: **rights + historical identity/terminal payoffs**
-before **calendar/dissemination/event-anchor/gaps + observable labels**, then
-**power/dependence/trial families + co-primary inference**, then **blinded human
-labels and cheap structural baselines**. Complex modeling comes only after
-preregistered evidence gates. These are priorities, not activated studies.
+## Further reading
 
-## Data sources and licenses
-
-- SEC EDGAR filings and XBRL APIs: public records.
-- Prices: raw prices are not redistributed. **Derived does not automatically mean
-  retainable or publishable**; each provider's applicable rights must cover the proposed
-  storage, analysis, model use, validation and disclosure. The current terms review is
-  not a retroactive rights clearance for historical artifacts or a vendor fitness test.
-- Factors: Kenneth French Data Library, which is linked and cited but not re-hosted.
-
-## Provenance of ideas and code
-
-All code in this repository was written from scratch for this project. It contains no code, data, or
-unpublished material from any employer. Methods are implemented from public sources and cited
-where used: SEC EDGAR documentation, peer-reviewed finance and statistics papers, and public arXiv
-preprints (for example, the episode-provenance reconciliation idea described in arXiv:2609.34242).
+- [FINDINGS.md](docs/FINDINGS.md): every finding, including the ones that weaken this project
+- [PREREGISTRATION.md](docs/PREREGISTRATION.md) and [DEVIATIONS.md](docs/DEVIATIONS.md): what was
+  decided in advance, and every later change
+- [DATA_AUDIT.md](docs/DATA_AUDIT.md): data provenance, coverage audits and the rebuild runbook
+- [REFEREE.md](results/REFEREE.md): the latest automated referee report
 
 ## License
 
-MIT for code.
+Code is MIT-licensed. SEC data is public. Price data is used for personal research and is not
+redistributed; Fama-French factors are cited and linked, not re-hosted.
