@@ -1,0 +1,425 @@
+{
+  "note": "SEC ONLY development candidate evidence; no vendor/price data, annotation, independent gold, terminal payoff validation or F2 clearance.",
+  "seed": 20261113,
+  "spawn_key": [
+    2
+  ],
+  "target_cases": 24,
+  "cases": [
+    {
+      "cik": 1201792,
+      "accession": "0001201792-23-000004",
+      "form": "10-K",
+      "knowledge_time": "2023-03-14T20:04:25.000Z",
+      "report_date": "2022-12-31",
+      "primary_doc": "apei-20221231.htm",
+      "items": "",
+      "category": "continuing",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001201792-23-000004",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1201792/000120179223000004/apei-20221231.htm",
+      "consideration": "not_assessed",
+      "evidence": [
+        {
+          "kind": "common_equity_language",
+          "quote": "mbol(s) Name of each exchange on which registered Common Stock, $0.01 par value APEI Nasdaq Global Select Market Securities registered pursuan"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1788028,
+      "accession": "0001213900-24-020114",
+      "form": "10-K",
+      "knowledge_time": "2024-03-05T21:02:41.000Z",
+      "report_date": "2023-12-31",
+      "primary_doc": "f10k2023_jaspertherap.htm",
+      "items": "",
+      "category": "continuing",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001213900-24-020114",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1788028/000121390024020114/f10k2023_jaspertherap.htm",
+      "consideration": "not_assessed",
+      "evidence": [
+        {
+          "kind": "common_equity_language",
+          "quote": "Name of each exchange on which registered Voting Common Stock, par value $0.0001 per share JSPR The Nasdaq Stock Market LLC Redeemable Warr"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1392449,
+      "accession": "0001654954-23-003905",
+      "form": "10-K",
+      "knowledge_time": "2023-03-30T16:22:56.000Z",
+      "report_date": "2022-12-31",
+      "primary_doc": "gplb_10k.htm",
+      "items": "",
+      "category": "continuing",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001654954-23-003905",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1392449/000165495423003905/gplb_10k.htm",
+      "consideration": "not_assessed",
+      "evidence": [
+        {
+          "kind": "common_equity_language",
+          "quote": "\u2610 The aggregate market value of the registrant\u2019s common stock held by non-affiliates was $ 459,585 based on the closing sale price of common"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 939767,
+      "accession": "0000939767-23-000019",
+      "form": "10-K",
+      "knowledge_time": "2023-02-07T21:22:01.000Z",
+      "report_date": "2022-12-30",
+      "primary_doc": "exel-20221230.htm",
+      "items": "",
+      "category": "continuing",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0000939767-23-000019",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/939767/000093976723000019/exel-20221230.htm",
+      "consideration": "not_assessed",
+      "evidence": [
+        {
+          "kind": "common_equity_language",
+          "quote": "mbol(s) Name of each exchange on which registered Common Stock $.001 Par Value per Share EXEL The Nasdaq Stock Market LLC Securities registere"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1049011,
+      "accession": "0001493152-24-022281",
+      "form": "8-K",
+      "knowledge_time": "2024-06-03T06:02:39.000Z",
+      "report_date": "2024-05-31",
+      "primary_doc": "form8-k.htm",
+      "items": "2.01,9.01",
+      "category": "cash_acquisition",
+      "oracle_status": "unresolved",
+      "evidence_accession": "0001493152-24-022281",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1049011/000149315224022281/form8-k.htm",
+      "consideration": "unknown",
+      "evidence": [],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1802665,
+      "accession": "0001140361-23-047683",
+      "form": "8-K",
+      "knowledge_time": "2023-10-11T12:15:16.000Z",
+      "report_date": "2023-10-10",
+      "primary_doc": "ny20012277x2_8k.htm",
+      "items": "2.01,7.01,9.01",
+      "category": "cash_acquisition",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001140361-23-047683",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1802665/000114036123047683/ny20012277x2_8k.htm",
+      "consideration": "share_terms_candidate",
+      "evidence": [
+        {
+          "kind": "share_terms",
+          "quote": "r (the \u201cOffer\u201d) to acquire all of the outstanding shares of common stock of Zynerba , par value $0.001 per share (the \u201cShares\u201d), at a price of (i) $ 1"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1759186,
+      "accession": "0001683168-23-005994",
+      "form": "8-K",
+      "knowledge_time": "2023-08-22T20:01:22.000Z",
+      "report_date": "2023-08-16",
+      "primary_doc": "coeptis_8k.htm",
+      "items": "1.01,2.01,8.01,9.01",
+      "category": "cash_acquisition",
+      "oracle_status": "unresolved",
+      "evidence_accession": "0001683168-23-005994",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1759186/000168316823005994/coeptis_8k.htm",
+      "consideration": "unknown",
+      "evidence": [],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 878828,
+      "accession": "0001493152-23-026721",
+      "form": "8-K",
+      "knowledge_time": "2023-08-04T09:17:37.000Z",
+      "report_date": "2023-08-04",
+      "primary_doc": "form8-k.htm",
+      "items": "2.01,3.01,3.03,5.01,5.02,9.01",
+      "category": "cash_acquisition",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001493152-23-026721",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/878828/000149315223026721/form8-k.htm",
+      "consideration": "cash_terms_candidate",
+      "evidence": [
+        {
+          "kind": "cash_terms",
+          "quote": "tically converted into the right to receive $2.13 per share in cash (the \u201cMerger Consideration\u201d), without interest and less applicable withholding"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1038357,
+      "accession": "0001193125-24-130052",
+      "form": "8-K",
+      "knowledge_time": "2024-05-03T08:56:04.000Z",
+      "report_date": "2024-05-01",
+      "primary_doc": "d803313d8k.htm",
+      "items": "1.01,1.02,2.01,3.01,3.03,5.01,5.02,5.03,5.04,9.01",
+      "category": "stock_mixed_acquisition",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001193125-24-130052",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1038357/000119312524130052/d803313d8k.htm",
+      "consideration": "share_terms_candidate",
+      "evidence": [
+        {
+          "kind": "share_terms",
+          "quote": "of ExxonMobil restricted stock units equal to the Exchange Ratio multiplied by the total number of shares of Pioneer Common Stock subject to suc"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 731122,
+      "accession": "0001999371-23-000280",
+      "form": "8-K",
+      "knowledge_time": "2023-11-16T18:42:26.000Z",
+      "report_date": "2023-11-11",
+      "primary_doc": "ccfnb_8k-111123.htm",
+      "items": "2.01,5.02,5.03,9.01",
+      "category": "stock_mixed_acquisition",
+      "oracle_status": "unresolved",
+      "evidence_accession": "0001999371-23-000280",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/731122/000199937123000280/ccfnb_8k-111123.htm",
+      "consideration": "unknown",
+      "evidence": [],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1642375,
+      "accession": "0001493152-24-022933",
+      "form": "8-K",
+      "knowledge_time": "2024-06-06T16:11:41.000Z",
+      "report_date": "2024-05-31",
+      "primary_doc": "form8-k.htm",
+      "items": "1.01,2.01,5.07,8.01,9.01",
+      "category": "stock_mixed_acquisition",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001493152-24-022933",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1642375/000149315224022933/form8-k.htm",
+      "consideration": "cash_terms_candidate",
+      "evidence": [
+        {
+          "kind": "cash_terms",
+          "quote": "ity interests of Activ from Viactiv for aggregate cash consideration to the Company of $17,200,000, of which $225,000 remains in a third-party escro"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1695357,
+      "accession": "0001493152-23-013783",
+      "form": "8-K",
+      "knowledge_time": "2023-04-27T09:17:20.000Z",
+      "report_date": "2023-04-27",
+      "primary_doc": "form8-k.htm",
+      "items": "1.02,2.01,3.01,3.03,5.01,5.02,5.03,9.01",
+      "category": "stock_mixed_acquisition",
+      "oracle_status": "unresolved",
+      "evidence_accession": "0001493152-23-013783",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1695357/000149315223013783/form8-k.htm",
+      "consideration": "unknown",
+      "evidence": [],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1711291,
+      "accession": "0001104659-24-038503",
+      "form": "8-K",
+      "knowledge_time": "2024-03-25T17:24:22.000Z",
+      "report_date": "2024-03-22",
+      "primary_doc": "tm249524d1_8k.htm",
+      "items": "1.01,1.03,2.04,7.01,9.01",
+      "category": "OTC_bankruptcy",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001104659-24-038503",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1711291/000110465924038503/tm249524d1_8k.htm",
+      "consideration": "not_assessed",
+      "evidence": [
+        {
+          "kind": "bankruptcy_language",
+          "quote": "of the Company Parties of voluntary cases (the \u201c Chapter 11 Cases \u201d) under chapter 11 of title 11 of the United States Code (the \u201c Bankrupt"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1519401,
+      "accession": "0000950170-24-075316",
+      "form": "8-K",
+      "knowledge_time": "2024-06-20T11:59:51.000Z",
+      "report_date": "2024-06-13",
+      "primary_doc": "rm-20240613.htm",
+      "items": "1.03,2.03,7.01,9.01",
+      "category": "OTC_bankruptcy",
+      "oracle_status": "unresolved",
+      "evidence_accession": "0000950170-24-075316",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1519401/000095017024075316/rm-20240613.htm",
+      "consideration": "not_assessed",
+      "evidence": [],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1790665,
+      "accession": "0001213900-24-054658",
+      "form": "8-K",
+      "knowledge_time": "2024-06-21T14:03:32.000Z",
+      "report_date": "2024-06-18",
+      "primary_doc": "ea0208206-8k_greenrose.htm",
+      "items": "1.03,9.01",
+      "category": "OTC_bankruptcy",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001213900-24-054658",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1790665/000121390024054658/ea0208206-8k_greenrose.htm",
+      "consideration": "not_assessed",
+      "evidence": [
+        {
+          "kind": "bankruptcy_language",
+          "quote": "xercise price of $11.50 per share OTCQB Item 1.03 Bankruptcy or Receivership As previously disclosed in The Greenrose Holding Company Inc."
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1634447,
+      "accession": "0001493152-24-023164",
+      "form": "8-K",
+      "knowledge_time": "2024-06-07T17:05:33.000Z",
+      "report_date": "2024-06-07",
+      "primary_doc": "form8-k.htm",
+      "items": "1.03,2.04,3.01,5.02,8.01",
+      "category": "OTC_bankruptcy",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001493152-24-023164",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1634447/000149315224023164/form8-k.htm",
+      "consideration": "not_assessed",
+      "evidence": [
+        {
+          "kind": "bankruptcy_language",
+          "quote": "Section 13(a) of the Exchange Act. \u2610 Item 1.03. Bankruptcy or Receivership. Voluntary Petitions for Bankruptcy On June 3, 2024 (the \u201cPetit"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 895456,
+      "accession": "0001437749-23-006169",
+      "form": "10-K",
+      "knowledge_time": "2023-03-10T21:07:52.000Z",
+      "report_date": "2022-12-31",
+      "primary_doc": "rcky20221231_10k.htm",
+      "items": "",
+      "category": "multiple_classes",
+      "oracle_status": "unresolved",
+      "evidence_accession": "0001437749-23-006169",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/895456/000143774923006169/rcky20221231_10k.htm",
+      "consideration": "not_assessed",
+      "evidence": [],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 50471,
+      "accession": "0001437749-23-027054",
+      "form": "10-K",
+      "knowledge_time": "2023-09-29T01:15:32.000Z",
+      "report_date": "2023-06-30",
+      "primary_doc": "pcyg20230630_10k.htm",
+      "items": "",
+      "category": "multiple_classes",
+      "oracle_status": "unresolved",
+      "evidence_accession": "0001437749-23-027054",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/50471/000143774923027054/pcyg20230630_10k.htm",
+      "consideration": "not_assessed",
+      "evidence": [],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 850429,
+      "accession": "0000850429-24-000004",
+      "form": "10-K",
+      "knowledge_time": "2024-03-15T12:23:18.000Z",
+      "report_date": "2023-12-31",
+      "primary_doc": "tg-20231231.htm",
+      "items": "",
+      "category": "multiple_classes",
+      "oracle_status": "unresolved",
+      "evidence_accession": "0000850429-24-000004",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/850429/000085042924000004/tg-20231231.htm",
+      "consideration": "not_assessed",
+      "evidence": [],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    },
+    {
+      "cik": 1913577,
+      "accession": "0001575872-23-000375",
+      "form": "10-K",
+      "knowledge_time": "2023-03-17T20:06:02.000Z",
+      "report_date": "2022-12-31",
+      "primary_doc": "deca-20221231.htm",
+      "items": "",
+      "category": "multiple_classes",
+      "oracle_status": "partial_text_support",
+      "evidence_accession": "0001575872-23-000375",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1913577/000157587223000375/deca-20221231.htm",
+      "consideration": "not_assessed",
+      "evidence": [
+        {
+          "kind": "multiple_class_language",
+          "quote": "eemable warrant DECAU The Nasdaq Stock Market LLC Class A ordinary shares, par value $0.0001 per share DECA The Nasdaq Stock Market LLC Warrants, each wh"
+        }
+      ],
+      "reason": "Literal documentary hints only: issuer/security mapping, completion, per-share entitlement, elections, CVRs, successor/recovery and final economic payoff are not independently certified; no case is gold."
+    }
+  ],
+  "selection_shortfalls": {
+    "continuing": 0,
+    "cash_acquisition": 0,
+    "stock_mixed_acquisition": 0,
+    "OTC_bankruptcy": 0,
+    "ticker_change_reuse": 4,
+    "multiple_classes": 0
+  },
+  "infeasible_strata": {
+    "ticker_change_reuse": "No dated historical security master in the selected SEC metadata; no substitute roster was drawn."
+  },
+  "limits": {
+    "actual_HTTP_attempts": 300,
+    "max_requests_per_second": 2
+  },
+  "source_vintage": "Current cached/downloaded SEC document at the pre-cutoff accession; historical content immutability is not independently established.",
+  "status": "candidate_evidence_only_with_shortfalls",
+  "stop_reason": null,
+  "actual_HTTP_attempts": 16,
+  "lineage": {
+    "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+    "git_dirty": false,
+    "inputs": {},
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  }
+}

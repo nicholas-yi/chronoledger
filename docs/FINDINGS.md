@@ -2,6 +2,12 @@
 
 Findings are recorded as they occur, including ones that weaken this project's own design.
 
+**Latest Batch B status:** development reruns completed once, but exact numerical
+reconciliation and claims-roster identity gates are **BLOCKED**; see F7/F8 below.
+No retry, tolerance relaxation, identity remapping or DSR calculation was used to
+make them pass. Earlier successful engineering checks remain evidence for their
+own revisions, not resolution of these new discrepancies.
+
 ## Development rerun reconciliation (2026-11-13)
 
 **Current status: development diagnostics only, no supported hypothesis or tradable edge.**
@@ -234,3 +240,61 @@ missingness rather than forward-filling; see [D9](DEVIATIONS.md#d9-apply-the-exi
 This is not a reconstruction or independent validation of vendor total returns.
 Historical event estimates retain their original lineage and limitations, and F2
 still invalidates distress-event inference with the current-ticker universe.
+
+## F7: H0 pair metadata disagrees with the bulk filing identity/acceptance metadata
+
+**Status:** observed during the metadata-only claims-roster preflight in Batch B,
+before any claims draw. Of16,226 permitted-development candidate pairs, all
+accessions matched and all forms agreed, but **305CIK fields and124acceptance
+timestamps** differed between the pair input and current bulk filing metadata.
+These counts can overlap; they are not summed as distinct events.
+
+The [blocker artifact](../results/batch_b_claims_roster_blocker.json) preserves
+counts, dtypes and ten metadata-only examples. The two CIK columns are both int64,
+so this is not explained by a float/int comparison. Neither source has been
+adjudicated as correct. Co-registration, historical source changes or other causes
+are possibilities, **not established explanations**. Impact on historical signals,
+identity joins or return attribution has not been evaluated.
+
+The60-case claims selection stopped before sampling; its
+[roster status](../results/claims_audit_roster.json) has zero cases and an explicit
+blocker. A header-only blank annotation template is not a completed roster.
+No CIK/time was remapped and no difficult case dropped. The independent20-case
+endpoint metadata roster was drawn once under its separate fixed seed stream;
+it contains no endpoint labels or certified complete observation.
+
+This is a new source-integrity release blocker, not proof that all prior results
+are wrong or a reason to silently replace their inputs after seeing returns.
+F2/F4/F6 and holdout-isolation restrictions remain. The existing technical referee
+does not automatically test this cross-source discrepancy; a technical PASS does
+not clear F7.
+
+## F8: single-thread Batch B does not reproduce every recorded summary bit-for-bit
+
+**Status:** exact-comparison stop gates triggered; no empirical retry or tuning.
+Source/protocol checkpoint `fb0a333` records D11 before the one H4 and one H0 run.
+
+- **H4:**399development panel rows lack current NI, and all399 also lack the
+  existing current-ROA control. Sample counts and outcome means matched, but
+  12coefficient/t fields differed from the recorded revision, maximum absolute
+  difference **6.466e-13**. [H4 impact evidence](../results/batch_b_h4_impact.json).
+- **H0:** all net/gross means, alphas and raw event summaries matched exactly.
+  Neutralized variants' mean IC and IC-t did not:16stored field differences
+  across primary and sensitivity copies, representing four unique metric paths.
+  [Exact comparison](../results/batch_b_rerun_comparison.json). Changes are small,
+  but they fail the required **exact** contract; no tolerance was substituted.
+- The factor audit found no missing or non-finite factor rows in the fingerprinted
+  permitted prefix, so the CAR missing-factor fix cannot explain these changes
+  for that vintage. A numerical-order/near-tie explanation is **unverified**;
+  no post-result thread/tie/rounding change was attempted.
+
+Current-vintage DSR was **not calculated** after the failed gate; the
+[diagnostic status](../results/current_vintage_diagnostics.json) records the stop,
+not a computed probability. PBO remains not_estimable with17/18monthly observations.
+Monthly series were persisted as output only (210rows across12existing configurations),
+without changing config hashes; new attempts remain in the append-only ledger.
+
+The rounded no-support interpretation is unchanged, but that is not exact
+reproducibility or scientific acceptance. Numerical provenance and the source
+disagreement in F7 need explicit review before additional affected evaluations.
+No holdout was opened or new source substituted.

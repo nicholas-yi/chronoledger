@@ -1,0 +1,122 @@
+{
+  "status": "claims_selection_stopped_before_draw",
+  "seed": 20261113,
+  "spawn_key": [
+    0
+  ],
+  "candidate_pairs": 16226,
+  "difference_counts": {
+    "missing_accession": 0,
+    "CIK_difference": 305,
+    "form_difference": 0,
+    "acceptance_difference": 124
+  },
+  "CIK_dtypes": [
+    "int64",
+    "int64"
+  ],
+  "CIK_series_equals": false,
+  "examples": [
+    {
+      "cik": 6201,
+      "accession": "0000006201-23-000018",
+      "form": "10-K",
+      "knowledge_time": "2023-02-22T13:01:45.000Z",
+      "prev_accession": "0000006201-22-000026",
+      "cik_metadata": 4515,
+      "form_metadata": "10-K",
+      "knowledge_time_metadata": "2023-02-22T13:01:45.000Z"
+    },
+    {
+      "cik": 6201,
+      "accession": "0000006201-24-000010",
+      "form": "10-K",
+      "knowledge_time": "2024-02-21T12:59:46.000Z",
+      "prev_accession": "0000006201-23-000018",
+      "cik_metadata": 4515,
+      "form_metadata": "10-K",
+      "knowledge_time_metadata": "2024-02-21T12:59:46.000Z"
+    },
+    {
+      "cik": 6201,
+      "accession": "0000006201-23-000042",
+      "form": "10-Q",
+      "knowledge_time": "2023-04-27T11:01:48.000Z",
+      "prev_accession": "0000006201-22-000046",
+      "cik_metadata": 4515,
+      "form_metadata": "10-Q",
+      "knowledge_time_metadata": "2023-04-27T11:01:48.000Z"
+    },
+    {
+      "cik": 6201,
+      "accession": "0000006201-23-000070",
+      "form": "10-Q",
+      "knowledge_time": "2023-07-20T11:01:30.000Z",
+      "prev_accession": "0000006201-22-000071",
+      "cik_metadata": 4515,
+      "form_metadata": "10-Q",
+      "knowledge_time_metadata": "2023-07-20T11:01:30.000Z"
+    },
+    {
+      "cik": 6201,
+      "accession": "0000006201-23-000092",
+      "form": "10-Q",
+      "knowledge_time": "2023-10-19T11:01:27.000Z",
+      "prev_accession": "0000006201-22-000086",
+      "cik_metadata": 4515,
+      "form_metadata": "10-Q",
+      "knowledge_time_metadata": "2023-10-19T11:01:27.000Z"
+    },
+    {
+      "cik": 6201,
+      "accession": "0000006201-24-000032",
+      "form": "10-Q",
+      "knowledge_time": "2024-04-25T11:03:26.000Z",
+      "prev_accession": "0000006201-23-000042",
+      "cik_metadata": 4515,
+      "form_metadata": "10-Q",
+      "knowledge_time_metadata": "2024-04-25T11:03:26.000Z"
+    },
+    {
+      "cik": 56873,
+      "accession": "0001558370-23-004767",
+      "form": "10-K",
+      "knowledge_time": "2023-03-28T12:09:40.000Z",
+      "prev_accession": "0001558370-22-004595",
+      "cik_metadata": 56873,
+      "form_metadata": "10-K",
+      "knowledge_time_metadata": "2023-03-28T16:09:40.000Z"
+    },
+    {
+      "cik": 56873,
+      "accession": "0001558370-24-004603",
+      "form": "10-K",
+      "knowledge_time": "2024-04-02T20:15:17.000Z",
+      "prev_accession": "0001558370-23-004767",
+      "cik_metadata": 56873,
+      "form_metadata": "10-K",
+      "knowledge_time_metadata": "2024-04-03T00:15:17.000Z"
+    },
+    {
+      "cik": 56873,
+      "accession": "0001558370-23-011335",
+      "form": "10-Q",
+      "knowledge_time": "2023-06-23T15:15:14.000Z",
+      "prev_accession": "0001558370-22-010253",
+      "cik_metadata": 56873,
+      "form_metadata": "10-Q",
+      "knowledge_time_metadata": "2023-06-23T19:15:14.000Z"
+    },
+    {
+      "cik": 56873,
+      "accession": "0001558370-23-015803",
+      "form": "10-Q",
+      "knowledge_time": "2023-09-15T18:48:16.000Z",
+      "prev_accession": "0001558370-22-014443",
+      "cik_metadata": 56873,
+      "form_metadata": "10-Q",
+      "knowledge_time_metadata": "2023-09-15T22:48:16.000Z"
+    }
+  ],
+  "note": "No preferred resampling or identity remap; unexplained metadata mismatch preserved for Lead."
+}

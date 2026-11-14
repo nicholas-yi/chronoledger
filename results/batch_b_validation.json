@@ -1,0 +1,32 @@
+{
+  "note": "Batch B validation, not scientific/release acceptance. F7/F8 remain blocking even if defined referee checks pass.",
+  "source_code_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+  "pytest": {
+    "command": "python -m pytest -q",
+    "threads": 1,
+    "passed": 179,
+    "warnings": 2,
+    "seconds": 25.45
+  },
+  "lint": {
+    "selected_changed_file": "passed",
+    "new_file_configured": "passed"
+  },
+  "stopped_steps": {
+    "B1_H4": "12 exact coef/t differences; no retry",
+    "B2_H0": "16 neutralized IC/IC-t stored differences; no DSR/retry",
+    "B3_claims": "305CIK/124acceptance mismatches; no draw"
+  },
+  "independent_steps": {
+    "endpoint_metadata_cases": 20,
+    "SEC_candidate_cases": 20,
+    "SEC_HTTP_attempts": 16,
+    "gold_oracle_cases": 0
+  },
+  "referee": {
+    "status": "pending_bounded_execution",
+    "timeout_seconds": 900,
+    "HTTP_policy": "disabled before module main"
+  },
+  "remote_actions": "no push, tags, publication or owner-reserved access"
+}

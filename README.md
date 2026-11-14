@@ -15,6 +15,13 @@ results; [F2-F6](docs/FINDINGS.md) document survivorship and point-in-time defec
 corrections [D6-D9](docs/DEVIATIONS.md). See [pre-registration](docs/PREREGISTRATION.md) and
 [data audit / rebuild provenance](docs/DATA_AUDIT.md).
 
+**Batch B update: release gates BLOCKED.** The one-time reruns did not match every
+recorded summary exactly, and the metadata-only claims preflight found305CIK and
+124acceptance disagreements. Claims selection stopped before drawing; DSR was not
+computed. See [F7/F8](docs/FINDINGS.md#f7-h0-pair-metadata-disagrees-with-the-bulk-filing-identityacceptance-metadata)
+and the [bounded Batch B evidence](docs/DATA_AUDIT.md#batch-b-completion-and-stopped-gates).
+**179 tests pass**, but that does not resolve source or numerical-reconciliation failures.
+
 The Python package is named `asof`, after the `as_of` queries everything is built on.
 
 ## Principles
@@ -40,7 +47,8 @@ The Python package is named `asof`, after the `as_of` queries everything is buil
   That is not survivorship coverage. [F2](docs/FINDINGS.md#f2-distress-event-tests-are-invalid-under-a-current-ticker-universe)
   remains unresolved; [F3](docs/FINDINGS.md#f3-three-data-bugs-caught-by-an-implausible-backtest)
   records the original implausible-backtest failures.
-- Local regression tests: **123 passed**. Selected Ruff `E4,E7,E9,F` checks pass; default Ruff
+- Latest Batch B local regression tests: **179 passed**, with two existing synthetic
+  rank-deficiency warnings. Selected changed-file Ruff `E4,E7,E9,F` checks pass; default Ruff
   retains 62 inherited findings versus 63 at the handoff, with no new findings.
   See [validation and rebuild provenance](docs/DATA_AUDIT.md).
 
@@ -104,12 +112,16 @@ Every accepted link is verified by deterministic quote grounding.
 
 Centering ChronoBERT embeddings fixes their anisotropy. Similarity between unrelated risks drops from 0.971 to 0.045, and AUC on synthetic same-risk vs. different-risk pairs is 0.9999. See `results/change_calibration.json`.
 
-### Executable referee: PASS is not scientific acceptance
+### Executable referee: scoped checks are not release or scientific acceptance
 
-The [executed report](results/REFEREE.md) has all **10 gating threats at level 4 or higher**.
-Two known, non-gating issues remain at level 1: the unused 2018/2019 ChronoBERT vintages' COVID
-knowledge, and distress-event coverage failure that blocks H5(b), H5(c), and H6(b).
-The representation/extraction checks read recorded benchmark artifacts; no model was rerun.
+The [executed report](results/REFEREE.md) records its actual source/input provenance.
+[Batch B validation](results/batch_b_validation.json) compares its bounded rerun
+with the prior defined-gate result. Historical gate PASS did not establish scientific
+acceptance. The unused ChronoBERT-vintage and distress-coverage issues persist;
+representation/extraction checks read recorded artifacts, not fresh model executions.
+**F7 source disagreement and F8 exact-reconciliation failures are release blockers
+not automatically covered by the existing referee checks.** No gate was retuned
+to explain away those observed failures.
 
 A pass covers the defined checks, not all possible biases, historical SIC availability, scientific
 approval, or holdout authorization. Project-level DSR/PBO results, formal claim-level H1, and the

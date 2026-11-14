@@ -1,0 +1,68 @@
+{
+  "note": "One H4 test rerun after D11; missing-current-NI rows already fail the existing current-ROA control. No other H4 design change.",
+  "missing_current_NI_development_rows": 399,
+  "missing_NI_rows_with_observed_ROA": 0,
+  "exact_metric_differences": [
+    {
+      "path": "/change_n->d_roa/coef",
+      "old": -36.17101052256628,
+      "new": -36.171010522566924
+    },
+    {
+      "path": "/change_n->d_roa/t",
+      "old": -1.2006854830521336,
+      "new": -1.2006854830520999
+    },
+    {
+      "path": "/change_n->decline/coef",
+      "old": -0.06129487818527779,
+      "new": -0.06129487818527957
+    },
+    {
+      "path": "/change_n->decline/t",
+      "old": -0.06159856188226434,
+      "new": -0.061598561882343125
+    },
+    {
+      "path": "/change_n->impair_next/coef",
+      "old": 1.977324084505672,
+      "new": 1.9773240845057312
+    },
+    {
+      "path": "/change_n->impair_next/t",
+      "old": 1.2221022878996899,
+      "new": 1.2221022878998746
+    },
+    {
+      "path": "/change->d_roa/coef",
+      "old": -39.18726790715555,
+      "new": -39.187267907155594
+    },
+    {
+      "path": "/change->d_roa/t",
+      "old": -1.151967401502785,
+      "new": -1.1519674015027896
+    },
+    {
+      "path": "/change->decline/coef",
+      "old": -0.10910700086629066,
+      "new": -0.10910700086629399
+    },
+    {
+      "path": "/change->decline/t",
+      "old": -0.18362255057493412,
+      "new": -0.18362255057526422
+    },
+    {
+      "path": "/change->impair_next/coef",
+      "old": 1.8552534648207741,
+      "new": 1.8552534648207746
+    },
+    {
+      "path": "/change->impair_next/t",
+      "old": 1.0603811446371902,
+      "new": 1.060381144637406
+    }
+  ],
+  "source_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b"
+}

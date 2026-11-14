@@ -729,6 +729,45 @@ PBO remains not_estimable below32aligned months. Do not feed raw descriptive
 event panels into the required neutralized co-primary: D4 reports unavailable
 where that registered evidence is missing; H1n is not formal H1. No support claim.
 
+##### Batch B completion and stopped gates
+
+This is a **mixed completion**, not an all-gates-pass claim. B1/H4 and B2/H0 each
+ran exactly once from source checkpoint `fb0a333`; no source/config/date/scoring
+change or empirical retry followed discrepancies.
+
+| Step | Evidence / current status |
+|---|---|
+| B1 factor impact | [Factor audit](../results/batch_b_factor_audit.json):15,375permitted-prefix rows,1963-07-01..2024-07-31; zero missing/nonfinite values in all7columns. Both daily archive fingerprints and the recorded market manifest matched. No CAR missing-factor parity effect for panels using this vintage; no certification of earlier unfingerprinted laptop vintages or scheduled-calendar completeness. |
+| B1 H4 | D11 logged/committed before run.399current-NI-missing rows all lack ROA and fail the existing control gate. All sample counts/means matched;12coef/t fields changed, maxabs6.466e-13. **Exact comparison stopped**, numerical cause not adjudicated. [Impact](../results/batch_b_h4_impact.json). |
+| B2 H0 | One validated-snapshot run appends12existing-config attempts and persists210monthly net/gross rows with month labels. Net/gross/alpha/event summaries exactly matched; neutralized IC/IC-t differ in16stored fields (four unique metric paths). **B2 stopped without DSR**, no tolerance/tie/rounding or thread retuning. [Comparison](../results/batch_b_rerun_comparison.json), [blocked diagnostic](../results/current_vintage_diagnostics.json). PBO not_estimable below32months; required neutralized co-primary remains unrun. |
+| B3 claims | **Stopped before draw:** among16,226candidate pairs,305CIK and124acceptance fields disagree with bulk metadata, with0missing accessions/0form differences. Counts may overlap. [Examples/counts](../results/batch_b_claims_roster_blocker.json); [claims roster](../results/claims_audit_roster.json) has0cases/blocked status and [template](../results/claims_annotation_template.csv) header only. No preferred resampling/remapping. |
+| B3 endpoints | Independent fixed stream1 produced20unique-issuer metadata cases,5in each prespecified envelope/report category; [roster](../results/endpoints_audit_roster.json) and [blank template](../results/endpoints_annotation_template.csv). No NI/impairment/quiet/formal-endpoint values selected or annotated; envelope categories do not certify label observation completeness. |
+| B4 SEC-only | [Candidate evidence](../results/sec_identity_oracle.json):20preselected slots,16actual HTTP attempts, project limiter<=2requests/sec and cap300.12partial textual supports/8unresolved; **zero independent gold/terminal-payoff certifications**. Ticker-reuse stratum has4infeasible slots, not replacements. Cash/share mentions come only from the selected Item2.01 text; no provider, prices, exact terminal values or F2 clearance. Raw documents stay in ignored cache; only short evidence quotes/accessions/URLs retained here. |
+| B5 local validation | Full `pytest -q` with numerical threads1: **179passed,2existing synthetic rank-deficiency warnings**. Selected Ruff on8Batch B Python files passed; prior new-file configured lint passed. No new packages. The [validation record](../results/batch_b_validation.json) contains the actual bounded referee comparison and command/result provenance. |
+
+CI was **not** rerun (no push). Existing model/extraction/H5/H6 results are inherited,
+not rerun by Batch B. All56pre-Batch-B ledger lines remain unchanged, with6H4 and
+12H0append-only attempts:74total, classified as repeat_vintage for the new attempts;
+registered distinct-config counts unchanged. The supplementary manifest's
+unavailable-inference fields reflect no series supplied to that classifier, not
+denial that the new current-only JSON series exist. Full historical aligned series
+and exact B2 reconciliation remain missing requirements.
+
+Machine checks before H4/H0/SEC/full-tests reported4%/9%/21%/6%CPU respectively
+and no competing named research workload. The initial Batch B check reported51%;
+no process was terminated. No new simulation budget was consumed. Referee runs
+only if expected under15minutes, with a900second timeout and HTTP disabled; its
+actual result is recorded independently. Technical PASS, if reported, **does not**
+clear F7/F8. The referee protocol was not changed after observing those blockers.
+
+Interpretation and next owner/Lead decisions: adjudicate the CIK/acceptance sources
+and numerical/near-tie provenance without changing rules to make results match;
+decide any later bounded diagnostic before rerunning affected work. No source was
+declared authoritative or silently substituted. P1 licensing/identity/payoff and
+P4 human/observation gates remain unmet; no labels were assigned, no vendor/human
+contact made, no key/account/spend/push/tag/publication authorized. Holdout stays
+sealed and prices<=2024-07-31. See [F7/F8](FINDINGS.md#f7-h0-pair-metadata-disagrees-with-the-bulk-filing-identityacceptance-metadata).
+
 ### Source-pilot contract: proposed, not activated
 
 The minimal next source decision is a **development-only coverage and identity

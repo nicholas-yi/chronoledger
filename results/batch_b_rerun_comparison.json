@@ -1,0 +1,164 @@
+{
+  "baseline_commit": "15b8a2d0b53942dda7627fdabbaf934334beceef",
+  "H4_deltas": [
+    {
+      "path": "/change_n->d_roa/coef",
+      "old": -36.17101052256628,
+      "new": -36.171010522566924
+    },
+    {
+      "path": "/change_n->d_roa/t",
+      "old": -1.2006854830521336,
+      "new": -1.2006854830520999
+    },
+    {
+      "path": "/change_n->decline/coef",
+      "old": -0.06129487818527779,
+      "new": -0.06129487818527957
+    },
+    {
+      "path": "/change_n->decline/t",
+      "old": -0.06159856188226434,
+      "new": -0.061598561882343125
+    },
+    {
+      "path": "/change_n->impair_next/coef",
+      "old": 1.977324084505672,
+      "new": 1.9773240845057312
+    },
+    {
+      "path": "/change_n->impair_next/t",
+      "old": 1.2221022878996899,
+      "new": 1.2221022878998746
+    },
+    {
+      "path": "/change->d_roa/coef",
+      "old": -39.18726790715555,
+      "new": -39.187267907155594
+    },
+    {
+      "path": "/change->d_roa/t",
+      "old": -1.151967401502785,
+      "new": -1.1519674015027896
+    },
+    {
+      "path": "/change->decline/coef",
+      "old": -0.10910700086629066,
+      "new": -0.10910700086629399
+    },
+    {
+      "path": "/change->decline/t",
+      "old": -0.18362255057493412,
+      "new": -0.18362255057526422
+    },
+    {
+      "path": "/change->impair_next/coef",
+      "old": 1.8552534648207741,
+      "new": 1.8552534648207746
+    },
+    {
+      "path": "/change->impair_next/t",
+      "old": 1.0603811446371902,
+      "new": 1.060381144637406
+    }
+  ],
+  "H0_summary_differences": [
+    {
+      "path": "/2/monthly/mean_ic",
+      "old": -0.004142337259517049,
+      "new": -0.004142428285648768
+    },
+    {
+      "path": "/2/monthly/ic_t",
+      "old": -0.3306059466858673,
+      "new": -0.3306136301624041
+    },
+    {
+      "path": "/2/monthly_missing_return_sensitivity/0.0/mean_ic",
+      "old": -0.004142337259517049,
+      "new": -0.004142428285648768
+    },
+    {
+      "path": "/2/monthly_missing_return_sensitivity/0.0/ic_t",
+      "old": -0.3306059466858673,
+      "new": -0.3306136301624041
+    },
+    {
+      "path": "/2/monthly_missing_return_sensitivity/-0.3/mean_ic",
+      "old": -0.004142337259517049,
+      "new": -0.004142428285648768
+    },
+    {
+      "path": "/2/monthly_missing_return_sensitivity/-0.3/ic_t",
+      "old": -0.3306059466858673,
+      "new": -0.3306136301624041
+    },
+    {
+      "path": "/2/monthly_missing_return_sensitivity/-1.0/mean_ic",
+      "old": -0.004142337259517049,
+      "new": -0.004142428285648768
+    },
+    {
+      "path": "/2/monthly_missing_return_sensitivity/-1.0/ic_t",
+      "old": -0.3306059466858673,
+      "new": -0.3306136301624041
+    },
+    {
+      "path": "/3/monthly/mean_ic",
+      "old": -0.012303772737190249,
+      "new": -0.012302692054807066
+    },
+    {
+      "path": "/3/monthly/ic_t",
+      "old": -1.4972251182836223,
+      "new": -1.4971314052134872
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/mean_ic",
+      "old": -0.012303772737190249,
+      "new": -0.012302692054807066
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/ic_t",
+      "old": -1.4972251182836223,
+      "new": -1.4971314052134872
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/mean_ic",
+      "old": -0.012303772737190249,
+      "new": -0.012302692054807066
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/ic_t",
+      "old": -1.4972251182836223,
+      "new": -1.4971314052134872
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/mean_ic",
+      "old": -0.012303772737190249,
+      "new": -0.012302692054807066
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/ic_t",
+      "old": -1.4972251182836223,
+      "new": -1.4971314052134872
+    }
+  ],
+  "note": "Elapsed time is not a summary metric. New monthly series are output-only. No tolerance-based matching or rerun toward a preferred answer.",
+  "lineage": {
+    "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+    "git_dirty": false,
+    "inputs": {},
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  }
+}

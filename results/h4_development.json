@@ -2,48 +2,48 @@
   "note": "Development period (10-Ks accepted 2012-2018) only. Primary: change_n -> d_roa; expected sign: negative for d_roa, positive for decline and impair_next. SIC controls use current bulk metadata, not verified historical classifications; interpret these as conditional development diagnostics.",
   "results": {
     "change_n->d_roa": {
-      "coef": -36.17101052256628,
-      "t": -1.2006854830521336,
+      "coef": -36.171010522566924,
+      "t": -1.2006854830520999,
       "n": 2655,
       "firms": 607,
       "years": 7,
       "outcome_mean": -0.04099579878349264
     },
     "change_n->decline": {
-      "coef": -0.06129487818527779,
-      "t": -0.06159856188226434,
+      "coef": -0.06129487818527957,
+      "t": -0.061598561882343125,
       "n": 2658,
       "firms": 608,
       "years": 7,
       "outcome_mean": 0.4717832957110609
     },
     "change_n->impair_next": {
-      "coef": 1.977324084505672,
-      "t": 1.2221022878996899,
+      "coef": 1.9773240845057312,
+      "t": 1.2221022878998746,
       "n": 2689,
       "firms": 614,
       "years": 7,
       "outcome_mean": 0.08516177017478617
     },
     "change->d_roa": {
-      "coef": -39.18726790715555,
-      "t": -1.151967401502785,
+      "coef": -39.187267907155594,
+      "t": -1.1519674015027896,
       "n": 2655,
       "firms": 607,
       "years": 7,
       "outcome_mean": -0.04099579878349264
     },
     "change->decline": {
-      "coef": -0.10910700086629066,
-      "t": -0.18362255057493412,
+      "coef": -0.10910700086629399,
+      "t": -0.18362255057526422,
       "n": 2658,
       "firms": 608,
       "years": 7,
       "outcome_mean": 0.4717832957110609
     },
     "change->impair_next": {
-      "coef": 1.8552534648207741,
-      "t": 1.0603811446371902,
+      "coef": 1.8552534648207746,
+      "t": 1.060381144637406,
       "n": 2689,
       "firms": 614,
       "years": 7,

@@ -1896,11 +1896,719 @@
       "matrix_eligibility": "unavailable",
       "matrix_reason": "ledger summaries are not persisted aligned return series",
       "formal_H1": null
+    },
+    {
+      "ledger_row": 57,
+      "logged_at": "2026-11-14T01:55:05.895931+00:00",
+      "hypothesis": "H4",
+      "period": "development",
+      "config_hash": "0aeca923c5cf9ada",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 7,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "h4_outcomes.parquet": "daeff1961e52ea9cbfe8d8bad979bbee95bc26392c52a60ee7965a3d747422fe",
+          "h4_pairs.parquet": "8326278412be317d405aac1056a52e1bfbf6e96f78eccdde8fc72b393de04e1b",
+          "h4_sample.parquet": "119853826730c7aed429dc6c59e23f7f2c60efb98d7ad0bb149da21059b15a34"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 58,
+      "logged_at": "2026-11-14T01:55:06.162323+00:00",
+      "hypothesis": "H4",
+      "period": "development",
+      "config_hash": "05a56fd1753602dd",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 8,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "h4_outcomes.parquet": "daeff1961e52ea9cbfe8d8bad979bbee95bc26392c52a60ee7965a3d747422fe",
+          "h4_pairs.parquet": "8326278412be317d405aac1056a52e1bfbf6e96f78eccdde8fc72b393de04e1b",
+          "h4_sample.parquet": "119853826730c7aed429dc6c59e23f7f2c60efb98d7ad0bb149da21059b15a34"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 59,
+      "logged_at": "2026-11-14T01:55:06.401915+00:00",
+      "hypothesis": "H4",
+      "period": "development",
+      "config_hash": "6d654b11e3c27a09",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 9,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "h4_outcomes.parquet": "daeff1961e52ea9cbfe8d8bad979bbee95bc26392c52a60ee7965a3d747422fe",
+          "h4_pairs.parquet": "8326278412be317d405aac1056a52e1bfbf6e96f78eccdde8fc72b393de04e1b",
+          "h4_sample.parquet": "119853826730c7aed429dc6c59e23f7f2c60efb98d7ad0bb149da21059b15a34"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 60,
+      "logged_at": "2026-11-14T01:55:06.644741+00:00",
+      "hypothesis": "H4",
+      "period": "development",
+      "config_hash": "edc30c03c08ea04a",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 10,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "h4_outcomes.parquet": "daeff1961e52ea9cbfe8d8bad979bbee95bc26392c52a60ee7965a3d747422fe",
+          "h4_pairs.parquet": "8326278412be317d405aac1056a52e1bfbf6e96f78eccdde8fc72b393de04e1b",
+          "h4_sample.parquet": "119853826730c7aed429dc6c59e23f7f2c60efb98d7ad0bb149da21059b15a34"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 61,
+      "logged_at": "2026-11-14T01:55:06.878691+00:00",
+      "hypothesis": "H4",
+      "period": "development",
+      "config_hash": "7591216006ec0e89",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 11,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "h4_outcomes.parquet": "daeff1961e52ea9cbfe8d8bad979bbee95bc26392c52a60ee7965a3d747422fe",
+          "h4_pairs.parquet": "8326278412be317d405aac1056a52e1bfbf6e96f78eccdde8fc72b393de04e1b",
+          "h4_sample.parquet": "119853826730c7aed429dc6c59e23f7f2c60efb98d7ad0bb149da21059b15a34"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 62,
+      "logged_at": "2026-11-14T01:55:07.114893+00:00",
+      "hypothesis": "H4",
+      "period": "development",
+      "config_hash": "8d89a73990417107",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 12,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "h4_outcomes.parquet": "daeff1961e52ea9cbfe8d8bad979bbee95bc26392c52a60ee7965a3d747422fe",
+          "h4_pairs.parquet": "8326278412be317d405aac1056a52e1bfbf6e96f78eccdde8fc72b393de04e1b",
+          "h4_sample.parquet": "119853826730c7aed429dc6c59e23f7f2c60efb98d7ad0bb149da21059b15a34"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 63,
+      "logged_at": "2026-11-14T01:56:37.994122+00:00",
+      "hypothesis": "H0",
+      "period": "development",
+      "config_hash": "5652983298aed336",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 23,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 64,
+      "logged_at": "2026-11-14T01:56:38.806713+00:00",
+      "hypothesis": "H0",
+      "period": "development",
+      "config_hash": "9080b4409fd61247",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 24,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 65,
+      "logged_at": "2026-11-14T01:56:39.628007+00:00",
+      "hypothesis": "H0",
+      "period": "development",
+      "config_hash": "030846e89e0e1eaf",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 25,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 66,
+      "logged_at": "2026-11-14T01:56:42.988607+00:00",
+      "hypothesis": "H0",
+      "period": "development",
+      "config_hash": "1187a0e477a8efc2",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 26,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 67,
+      "logged_at": "2026-11-14T01:56:43.810379+00:00",
+      "hypothesis": "H0",
+      "period": "development",
+      "config_hash": "10148d2893342651",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 27,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 68,
+      "logged_at": "2026-11-14T01:56:44.711542+00:00",
+      "hypothesis": "H0",
+      "period": "development",
+      "config_hash": "5ad04cb9fbb8f08c",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 28,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": null
+    },
+    {
+      "ledger_row": 69,
+      "logged_at": "2026-11-14T01:56:45.521946+00:00",
+      "hypothesis": "H1n",
+      "period": "development",
+      "config_hash": "81d2e16f13489260",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 29,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": false
+    },
+    {
+      "ledger_row": 70,
+      "logged_at": "2026-11-14T01:56:46.351820+00:00",
+      "hypothesis": "H1n",
+      "period": "development",
+      "config_hash": "bef21ec152a01f0b",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 30,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": false
+    },
+    {
+      "ledger_row": 71,
+      "logged_at": "2026-11-14T01:56:47.174579+00:00",
+      "hypothesis": "H1n",
+      "period": "development",
+      "config_hash": "cd4dcb49f3175b98",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 31,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": false
+    },
+    {
+      "ledger_row": 72,
+      "logged_at": "2026-11-14T01:56:47.971068+00:00",
+      "hypothesis": "H1n",
+      "period": "development",
+      "config_hash": "8f8384bb259b4a37",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 32,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": false
+    },
+    {
+      "ledger_row": 73,
+      "logged_at": "2026-11-14T01:56:48.767775+00:00",
+      "hypothesis": "H1n",
+      "period": "development",
+      "config_hash": "d3cd9631eec43f16",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 33,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": false
+    },
+    {
+      "ledger_row": 74,
+      "logged_at": "2026-11-14T01:56:49.570269+00:00",
+      "hypothesis": "H1n",
+      "period": "development",
+      "config_hash": "41bebb43f4fe0de8",
+      "purpose": "repeat_vintage",
+      "classification_reason": "same_hypothesis_period_configuration",
+      "previous_attempt_row": 34,
+      "output_status": "completed",
+      "recorded_scientific_status": null,
+      "lineage": {
+        "environment": {
+          "duckdb": "2.0.0",
+          "httpx": "0.28.1",
+          "lxml": "6.1.3",
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "pyarrow": "26.0.1",
+          "python": "3.12.10",
+          "scipy": "1.18.1",
+          "statsmodels": "0.15.0"
+        },
+        "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
+        "git_dirty": false,
+        "inputs": {
+          "bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc",
+          "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+          "h0_daily_returns.parquet": "232061cbc8510fc1a680a8e1687a05a52f626b6bf7f3e3bd8097dc4f1199b556",
+          "h0_market_inputs.json": "68f5e53ce2e0ffcb7006a146e32fcefb2a43d328ab10ff872404c8e70082562c",
+          "h0_monthly_prices.parquet": "61a487881ea469d32b9c15db1fdeb6dad107c6e05d269f01089bc081067d48ec",
+          "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+          "h0_shares.parquet": "4935badf1492d1df06cd65481b463045dc98c5f3c459c1af4587bc35881b3d3d",
+          "h0_signals.parquet": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+          "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+        }
+      },
+      "matrix_eligibility": "unavailable",
+      "matrix_reason": "ledger summaries are not persisted aligned return series",
+      "formal_H1": false
     }
   ],
   "source_ledger": "results/trial_ledger.jsonl",
   "generation_lineage": {
-    "git_commit": "196d1df640d216540dcc680bf3caf082a2200230",
+    "git_commit": "fb0a333e6e63b1659d2e66aa88eb3878bf72923b",
     "git_dirty": false,
     "inputs": {},
     "environment": {

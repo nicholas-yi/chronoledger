@@ -1,0 +1,11 @@
+{
+  "status": "blocked_metadata_mismatch",
+  "seed": 20261113,
+  "spawn_key": [
+    0
+  ],
+  "selection_performed": false,
+  "target": 60,
+  "cases": [],
+  "evidence": "batch_b_claims_roster_blocker.json"
+}

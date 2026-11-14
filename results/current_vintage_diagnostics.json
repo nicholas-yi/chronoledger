@@ -1,0 +1,19 @@
+{
+  "label": "DEVELOPMENT ONLY; blocked, no DSR calculated",
+  "status": "blocked_exact_reconciliation",
+  "DSR": {
+    "status": "unavailable",
+    "reason": "H0 exact summary gate failed; no diagnostic calculated or retry performed"
+  },
+  "PBO": {
+    "status": "not_estimable",
+    "reason": "recorded variants have only17/18months, below32; no calculation"
+  },
+  "D4": {
+    "status": "unavailable",
+    "reason": "required neutralized event co-primary remains not_evaluated; H1n is not formalH1"
+  },
+  "comparison_artifact": "batch_b_rerun_comparison.json",
+  "H0_difference_count": 16,
+  "note": "Status record following the stopped step, not a second run or post-selection change."
+}
