@@ -23,7 +23,7 @@ have cached headers. Conditional on an Eastern header clock, 21 match the pair
 column, seven match bulk, and one matches neither; counts overlap. These are
 rechecked old caches, not new independent observations or global clock clearance.
 
-The header parser now rejects short fields, ambiguous fall clocks and nonexistent
+The header parser now rejects short or overlong fields, ambiguous fall clocks and nonexistent
 spring clocks rather than guessing; the P0 scenario planner reuses the same
 round-trip logic while retaining both valid hypothetical folds. Three synthetic
 regressions failed before the fix. Ordinary seasonal conversions are unchanged.

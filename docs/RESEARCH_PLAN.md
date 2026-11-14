@@ -297,6 +297,60 @@ establish formal H1, benchmark leadership or historical usability. A benchmark's
 own reference calculations would test the scorer, not prediction skill. This
 diagnostic did not inspect prices, returns or the sealed test period.
 
+### Existing local reader: incomplete first check
+
+The already-installed Qwen 3.5 4B was tested on ten fresh development questions,
+excluding the earlier sixty question IDs. Each question had a report-supplied
+condition and a no-report control; unchanged symbolic rules used the same ten.
+The [prospective contract](../results/reader_diagnostic_config_v2.json) pins the
+model digest, server version, options, selection and native scorer. Its technical
+revision before inference kept the first contract's items and model unchanged.
+
+| Condition, ten selected questions each | Correct | Wrong | Abstained | Failed | Not attempted |
+|---|---:|---:|---:|---:|---:|
+| Local reader with report | 0 | 0 | 4 | 1 | 5 |
+| Local reader without report | 0 | 0 | 4 | 0 | 6 |
+| Unchanged symbolic rules | 1 | 1 | 8 | 0 | 0 |
+
+Eight model requests completed, all with abstentions. The ninth request, with a
+report, exceeded its 90-second limit; the run stopped without retrying and left
+eleven condition/question cases unattempted. Thus model exact match, F1, scale
+accuracy and coverage are zero on the fixed ten-question denominator, counting
+failures and unattempted cases as misses. **That is an incomplete pipeline result,
+not an estimate that the model has zero reading skill.** The rules scored 10%
+EM/F1/scale and 20% coverage; its descriptive EM Wilson interval is 1.8-40.4%.
+The model's all-selected binary interval is 0-27.8%, not a competence interval.
+
+The [original result](../results/reader_diagnostic_status.json) is preserved.
+The [post-run review](../results/reader_diagnostic_review.json) explains an
+incorrect generic resource label on skipped cases: they followed the transport
+timeout, not a memory or total-wall-time ceiling. The current runner propagates
+that cause correctly; no predictions or native scores were rerun.
+
+The single-CPU-thread run took 6.1 minutes. Completed requests averaged 53.4
+seconds with the report and 15.5 seconds without it; the largest isolated model
+process peaked near 4.7 GiB. Its separate server was stopped afterwards. These
+are operational observations, not matched-quality model comparisons.
+
+The ten questions came from nine contexts, two also used by earlier questions.
+The current model may have seen this public benchmark during training.
+No-report abstention cannot prove otherwise. Location/quote checks are not
+proof of answer support, and no non-abstained model answer exercised them here.
+Before another real-data reader test, a separately specified trivial answerable
+model control and human-reviewed support checks are needed. Neither model
+acquisition, training, formal H1, historical usability nor a return test follows.
+The run used no prices, returns or sealed test data.
+
+Software checks need no model service:
+
+```powershell
+python -m pytest -q tests\test_reader_diagnostic.py tests\test_cached_timestamps.py tests\test_timeutil.py
+```
+
+The saved inference used source revision `9c14fec`; reproducing model requests
+requires that revision, the pinned existing model/server and a separate run
+decision. Changing the timeout or rerunning the exposed questions was not done.
+
 ### Three measurement ideas worth testing
 
 | Idea | What it compares | Cheapest first check |

@@ -131,6 +131,12 @@ def test_transport_failure_stops_calls_without_retry_and_keeps_all_selected_item
     result = json.loads(module.RECEIPT.read_text())
     assert result["generation_attempts"] == len(calls) == 1
     assert len(result["items"]) == 10 and result["status"] == "partial"
+    assert result["stop_reason"] == "ReadTimeout"
+    reasons = [
+        row[arm]["reason"] for row in result["items"] for arm in ("grounded", "no_context")
+        if row[arm]["outcome"] == "not_attempted"
+    ]
+    assert reasons and set(reasons) == {"prior_stop:ReadTimeout"}
     assert result["lineage"]["git_dirty"] is False
     assert result["frozen_source_and_config_unchanged"] is True
     assert "PRIVATE_GOLD" not in calls[0].decode()

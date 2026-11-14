@@ -26,6 +26,15 @@ def test_header_candidate_preserves_raw_field_and_seasonal_offset(monkeypatch) -
         assert parsed["header_CIKs"] == ["0000000001"]
 
 
+def test_header_metadata_does_not_accept_a_prefix_of_an_overlong_clock(monkeypatch) -> None:
+    script = _script(monkeypatch)
+    for raw in ("2024010101010", "202401010101010"):
+        parsed = script.header_fields(f"<ACCEPTANCE-DATETIME>{raw}")
+        assert parsed["header_raw"] is None
+        assert parsed["UTC_if_header_ET"] is None
+        assert parsed["header_clock_issue"] == "missing_or_malformed_header_clock"
+
+
 def test_impact_counts_closes_and_latest_signal_not_just_raw_mismatches(monkeypatch) -> None:
     script = _script(monkeypatch)
     frame = pd.DataFrame({

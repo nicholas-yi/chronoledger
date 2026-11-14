@@ -24,9 +24,10 @@ RECEIPT = DATA_DIR / "p0_SEC_request_receipt.json"
 
 def header_fields(raw: str) -> dict:
     text = html.unescape(raw)
-    match = re.search(r"ACCEPTANCE-DATETIME[^0-9]{0,100}(\d{14})", text, re.IGNORECASE)
+    match = re.search(r"ACCEPTANCE-DATETIME[^0-9]{0,100}([0-9]{14})(?![0-9])",
+                      text, re.IGNORECASE)
     value = None if match is None else match.group(1)
-    candidate, issue = None, None
+    candidate, issue = None, "missing_or_malformed_header_clock" if value is None else None
     if value is not None:
         try:
             candidate = parse_header_acceptance_et(value).isoformat()

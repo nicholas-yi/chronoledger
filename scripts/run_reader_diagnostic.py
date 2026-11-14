@@ -138,6 +138,7 @@ def run() -> None:
     PRIVATE.mkdir(parents=True, exist_ok=True)
     wall, cpu = time.monotonic(), time.process_time()
     peak, stopped = 0, False
+    stop_reason = None
     order = random.Random(config["seed"] + 1)
 
     def persist() -> None:
@@ -164,9 +165,12 @@ def run() -> None:
                     row[arm]["request_sha256"] = hashlib.sha256(encoded).hexdigest()
                     remaining = WALL_LIMIT - (time.monotonic() - wall)
                     peak = max(peak, resident_bytes())
-                    if stopped or remaining <= 1 or peak >= 1 << 30:
+                    if stopped:
+                        row[arm]["reason"] = f"prior_stop:{stop_reason}"
+                    elif remaining <= 1 or peak >= 1 << 30:
                         stopped = True
-                        row[arm]["reason"] = "wall_or_Python_memory_ceiling"
+                        stop_reason = "wall_ceiling" if remaining <= 1 else "Python_RSS_ceiling"
+                        row[arm]["reason"] = stop_reason
                     elif len(encoded) > config["limits"]["serialized_request_bytes"]:
                         row[arm].update(outcome="failed", reason="oversized_input_not_truncated")
                     else:
@@ -185,6 +189,7 @@ def run() -> None:
                         except httpx.HTTPError as exc:
                             row[arm].update(outcome="failed", reason=type(exc).__name__)
                             stopped = True
+                            stop_reason = type(exc).__name__
                         else:
                             raw = response.json()
                             (PRIVATE / f"{row['id']}_{arm}.json").write_text(
@@ -230,7 +235,8 @@ def run() -> None:
                 "EM_Wilson95": wilson95(counts["correct"], COUNT),
                 "coverage_Wilson95": wilson95(answered, COUNT),
             }
-        receipt.update(status="partial" if stopped else "complete", summaries=summaries)
+        receipt.update(status="partial" if stopped else "complete",
+                       stop_reason=stop_reason, summaries=summaries)
     except (ValueError, KeyError, TypeError, RuntimeError) as exc:
         receipt["stop_reason"] = type(exc).__name__
         raise
