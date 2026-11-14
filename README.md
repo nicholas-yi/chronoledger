@@ -334,7 +334,9 @@ is weak evidence, and more data matters more than a better estimator.
   bugs, but they can't measure reading skill.
   A later local-model check stopped after abstentions and a timeout. An invented positive
   control then met its fixed pass rule; that checks the harness, not financial-reading
-  skill. The research plan records both results and their limits.
+  skill. The thirty-question follow-up stopped on shared-host load before any report-supplied
+  generation completed, so it provides no reading-ability estimate. The research plan records
+  these results and their limits.
 
 ## What would change the answer
 
