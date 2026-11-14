@@ -14,6 +14,24 @@ cleared, no account was requested, no vendor was contacted and no new run, sandb
 access occurred. A longer internal working draft is kept outside the public repository. The
 existing queue, protocols and append-only ledger are unchanged.
 
+### Cached timestamp recheck
+
+The [cached-only recheck](../results/p0_cached_authority_audit_v2.json) covers all
+21,502 metadata rows: 22 have an existing own-header cache and 21 have observed
+header/index wall-clock agreement. Only 17 of the 17,389 sensitive accessions
+have cached headers. Conditional on an Eastern header clock, 21 match the pair
+column, seven match bulk, and one matches neither; counts overlap. These are
+rechecked old caches, not new independent observations or global clock clearance.
+
+The header parser now rejects short fields, ambiguous fall clocks and nonexistent
+spring clocks rather than guessing; the P0 scenario planner reuses the same
+round-trip logic while retaining both valid hypothetical folds. Three synthetic
+regressions failed before the fix. Ordinary seasonal conversions are unchanged.
+The [first audit attempt](../results/p0_cached_authority_audit.json) stopped at a
+large cached index; the completed recheck keeps the 64 KiB read bound and marks
+that index explicitly unread/unknown. Zero new SEC requests, timestamp repairs,
+CIK remaps, score/price/outcome reads or ledger appends. **P0 remains blocked.**
+
 ### Approved offline P0 assignment planner
 
 **2026-11-14: owner selected `p0_first`.** This permits a bounded cached-metadata
