@@ -114,7 +114,50 @@ def predict_table(item: TableInput) -> BaselineAnswer:
         if direction:
             old, new = (columns[y][0] for y in direction.groups())
         if "average" in question:
-            value, reason = (old + new) / 2, "two_year_average"
+            if re.search(r"\brespectively\b|\bweighted[\s-]+average\b", question):
+                return BaselineAnswer(None, "", "average_metric_or_ordered_lookup")
+            range_query = re.search(
+                r"\b(?:between|from)\s+(?:the\s+years?\s+)?((?:19|20)\d{2})"
+                r"\s*(?:-|to|and|\u2013|\u2014)\s*((?:19|20)\d{2})", question)
+            if range_query is None:
+                range_query = re.search(
+                    r"\b((?:19|20)\d{2})\s*[-\u2013\u2014]\s*((?:19|20)\d{2})\b", question)
+            average_years = years
+            if range_query:
+                first, last = sorted(int(y) for y in range_query.groups())
+                average_years = [str(y) for y in range(first, last + 1)]
+            average_values = []
+            average_scales = set()
+            for year in average_years:
+                possible = {i for header in item.table[:3] for i, text in enumerate(header)
+                            if i > 0 and year in YEAR.findall(text)}
+                if len(possible) != 1:
+                    return BaselineAnswer(None, "", "average_range_year_not_observed")
+                index = possible.pop()
+                parsed = _cell(row[index]) if index < len(row) else None
+                if parsed is None:
+                    return BaselineAnswer(None, "", "average_range_value_unavailable")
+                average_values.append(parsed[0])
+                if parsed[1]:
+                    average_scales.add(parsed[1])
+            if len(average_scales) > 1:
+                return BaselineAnswer(None, "", "average_mixed_inline_units")
+            prefix = " ".join(" ".join(r) for r in item.table[:item.table.index(row)])
+            banners = set(re.findall(r"\bin\s+(thousand|million|billion)s?\b", prefix.lower()))
+            if not re.search(r"\bper\s+(?:common\s+)?share\b", question):
+                if len(banners) > 1:
+                    return BaselineAnswer(None, "", "average_unit_evidence_conflict")
+                if not average_scales and banners:
+                    scale = next(iter(banners))
+            if any(v < 0 for v in average_values) and re.search(
+                r"\b(?:expense|expenses|cost|costs)\b", question
+            ):
+                if re.search(r"\b(?:absolute|magnitude)\b", question):
+                    average_values = [abs(v) for v in average_values]
+                elif not re.search(r"\b(?:signed|net)\b", question):
+                    return BaselineAnswer(None, "", "average_expense_sign_ambiguous")
+            value = sum(average_values) / len(average_values)
+            reason = "year_range_average" if range_query else "two_year_average"
         elif "sum" in question:
             value, reason = old + new, "two_year_sum"
         elif "change" in question or "difference" in question:

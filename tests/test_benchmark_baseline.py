@@ -37,3 +37,36 @@ def test_zero_and_negative_cells_are_explicit_answers_not_false_abstentions():
     assert predict_table(item).answer == "-2"
     item = replace(item, question="What were sales in 2018?")
     assert predict_table(item).answer == "0"
+
+
+def test_average_explicit_range_includes_middle_year_but_listed_endpoints_do_not():
+    item = TableInput(
+        "What was the average sales between 2017-2019?",
+        (("Metric", "2019", "2018", "2017"), ("sales", "30", "15", "0")), ())
+    assert predict_table(item).answer == "15"
+    assert predict_table(replace(item, question="What was average sales for 2017 and 2019?")).answer == "15"
+    item = replace(item, table=(("Metric", "2019", "2018", "2017"), ("sales", "30", "6", "0")))
+    assert predict_table(item).answer == "12"
+    assert predict_table(replace(item, question="What was average sales for 2017 and 2019?")).answer == "15"
+    assert predict_table(replace(item, table=(("Metric", "2019", "2017"), ("sales", "30", "0")))).reason == (
+        "average_range_year_not_observed")
+
+
+def test_weighted_average_metric_and_respectively_are_not_scalar_means():
+    item = _input("What was the weighted-average sales in 2018 and 2019, respectively?")
+    assert predict_table(item).reason == "average_metric_or_ordered_lookup"
+
+
+def test_average_signed_expense_ambiguity_abstains_and_table_unit_banner_is_local():
+    item = TableInput(
+        "What were average service costs for 2008 and 2009?",
+        (("Metric", "2009", "2008"), ("Amount", "Amount", "Amount"), ("", "", ""),
+         ("", "In thousands", ""), ("service costs", "(30)", "(10)")),
+        ("Unrelated amounts in millions.",))
+    assert predict_table(item).reason == "average_expense_sign_ambiguous"
+    explicit = replace(item, question="What were the average absolute service costs for 2008 and 2009?")
+    result = predict_table(explicit)
+    assert result.answer == "20" and result.scale == "thousand"
+    nonaverage = replace(item, question="What were service costs in 2009?")
+    result = predict_table(nonaverage)
+    assert result.answer == "-30" and result.scale == "million"  # unchanged non-average behavior

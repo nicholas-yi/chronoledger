@@ -1,4 +1,6 @@
+import importlib.util
 from dataclasses import replace
+from pathlib import Path
 
 import pytest
 
@@ -46,3 +48,19 @@ def test_wilson_descriptive_interval_handles_small_support_and_invalid_denominat
     assert wilson95(0, 10)[1] > 0.25
     with pytest.raises(ValueError):
         wilson95(11, 10)
+
+
+def test_paired_scope_guard_rejects_changes_outside_average_rule(monkeypatch, tmp_path):
+    scripts = Path(__file__).resolve().parents[1] / "scripts"
+    monkeypatch.syspath_prepend(str(scripts))
+    spec = importlib.util.spec_from_file_location(
+        "run_tatqa_average_comparison", scripts / "run_tatqa_average_comparison.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    old, new = tmp_path / "old.py", tmp_path / "new.py"
+    old.write_text('x=1\nif "average" in question:\n    value=2\nelse:\n    value=3\n')
+    new.write_text('x=1\nif "average" in question:\n    value=4\nelse:\n    value=3\n')
+    module.assert_average_only(old, new)
+    new.write_text('x=9\nif "average" in question:\n    value=4\nelse:\n    value=3\n')
+    with pytest.raises(ValueError, match="outside"):
+        module.assert_average_only(old, new)
