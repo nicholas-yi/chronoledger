@@ -13,7 +13,7 @@ from asof.config import DATA_DIR
 EXPECTED_BLOB = "970f239f591c782b17df420c0d343b780737f3da"
 QUARANTINE = DATA_DIR / "bench_1" / "quarantine" / "finqa_dev.json"
 SUMMARY = DATA_DIR / "bench_1" / "finqa_years.json"
-MAX_BYTES = 50 * 1024 * 1024
+MAX_BYTES = 50_000_000
 # Pinned README: report name plus example index, e.g. ETR/2016/page_23.pdf-2.
 REPORT_ID = re.compile(r"[A-Za-z][A-Za-z0-9._-]*/([0-9]{4})/page_[0-9]+\.pdf-[0-9]+")
 
