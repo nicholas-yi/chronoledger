@@ -13,6 +13,7 @@ import pandas as pd
 
 from asof import ledger
 from asof.config import PROJECT_ROOT
+from asof.robust_inference import RobustGate
 
 Purpose = Literal["scientific", "repeat_vintage", "engineering", "timing", "unknown"]
 
@@ -66,12 +67,12 @@ def build_manifest(entries: Sequence[dict[str, Any]]) -> dict[str, Any]:
 
 @dataclass(frozen=True)
 class ProtocolDecision:
-    status: Literal["supported", "not_supported", "unavailable"]
+    status: Literal["supported", "not_supported", "unavailable", "undetermined"]
     reasons: tuple[str, ...]
     supplementary_holm_p: tuple[float, float] | None
 
 
-def co_primary_decision(
+def registered_co_primary_decision(
     hypothesis: str,
     *,
     monthly_t: float | None,
@@ -81,7 +82,7 @@ def co_primary_decision(
     requires_tfidf: bool,
     tfidf_t: float | None,
 ) -> ProtocolDecision:
-    """Apply Lead-D4 to supplied evidence, not to the existing development outputs.
+    """Frozen Lead-D4 predicate only; not the post-D12 future acceptance gate.
 
     Monthly/scenario/TF-IDF effects are oriented positive; event_change_t is on an
     increasing-change score (expected negative). Scenario effects must be the same
@@ -129,6 +130,52 @@ def co_primary_decision(
     if unknown:
         reasons.append("missing_or_nonfinite_required_evidence")
     return ProtocolDecision(status, tuple(reasons), supplementary)
+
+
+def co_primary_decision(
+    hypothesis: str, *,
+    monthly_t: float | None, event_change_t: float | None,
+    delisting_effects: Mapping[float, float | None], referee_passed: bool | None,
+    requires_tfidf: bool, tfidf_t: float | None,
+    robust_gates: Mapping[str, RobustGate] | None = None,
+) -> ProtocolDecision:
+    """Conjoin frozen D4 with explicit registered robust endpoint checks.
+
+    No default co-secondary significance allocation is invented: both endpoint
+    thresholds must be supplied from registration. The monthly v1 threshold and
+    the qualifying v2 endpoint's 3.2 threshold cannot be weakened.
+    """
+    base = registered_co_primary_decision(
+        hypothesis, monthly_t=monthly_t, event_change_t=event_change_t,
+        delisting_effects=delisting_effects, referee_passed=referee_passed,
+        requires_tfidf=requires_tfidf, tfidf_t=tfidf_t)
+    if base.status == "not_supported":
+        return base
+    reasons = list(base.reasons)
+    if robust_gates is None or set(robust_gates) != {"monthly", "event"}:
+        reasons.append("registered_robust_endpoint_checks_missing")
+        return ProtocolDecision("undetermined", tuple(reasons), base.supplementary_holm_p)
+    if any(not isinstance(g, RobustGate) or g.endpoint != endpoint
+           for endpoint, g in robust_gates.items()):
+        raise ValueError("robust checks must match their registered endpoint")
+    if any(g.status == "not_supported" for g in robust_gates.values()):
+        return ProtocolDecision("not_supported", ("robust_requirement_failed",),
+                                base.supplementary_holm_p)
+    if base.status != "supported" or any(g.status != "supported" for g in robust_gates.values()):
+        return ProtocolDecision("undetermined", tuple(reasons + ["robust_evidence_undetermined"]),
+                                base.supplementary_holm_p)
+    monthly, event = robust_gates["monthly"], robust_gates["event"]
+    if monthly.expected_direction != 1 or event.expected_direction != -1:
+        return ProtocolDecision("undetermined", ("registered_robust_direction_missing_or_mismatched",),
+                                base.supplementary_holm_p)
+    minimum = 2.0 if hypothesis == "H0" else 3.0
+    assert monthly_t is not None and event_change_t is not None
+    if (monthly.registered_threshold < minimum
+            or not ((monthly_t >= 3.2 and monthly.registered_threshold >= 3.2)
+                    or (-event_change_t >= 3.2 and event.registered_threshold >= 3.2))):
+        return ProtocolDecision("undetermined", ("registered_robust_threshold_allocation_missing",),
+                                base.supplementary_holm_p)
+    return ProtocolDecision("supported", (), base.supplementary_holm_p)
 
 
 def inference_availability(

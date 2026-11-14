@@ -403,3 +403,28 @@ post-`8642597` helper code; selected Ruff checks passed. Two pre-existing synthe
 rank-deficiency warnings remain. These tests validate audit arithmetic and code
 contracts, not the correctness of all live timestamps. No referee rerun was needed:
 research inputs were unchanged, and the prior referee does not certify P0.
+
+## F10: synthetic finite-sample size distortion of the registered tests
+
+**SYNTHETIC / METHODOLOGICAL, not project inference or a tradable finding.**
+The [Batch A verification](../results/synthetic_inference_calibration.json)
+completed 2,000 attempts: 1,994 finite and six nonfinite panel statistics, without
+redraw. It tested the project's NW-six-lag monthly alpha (T=18/28) and H4-style
+firm/year clustered panel (40 firms, seven years) under fixed invented DGPs.
+
+At the registered |t|>=3.2 bar, monthly null rejection ranged **4-16%** across
+the eight small simulation cells; panel finite-statistic rates were about
+**2.04-3.03%**, versus a normal-reference nominal **0.1374%**. These estimates
+have substantial Monte Carlo error (150/200 attempts per null cell), and the six
+nonfinite statistics are not successes or silently counted as non-rejections.
+This is evidence that these reference bars can substantially overreject in
+these toy geometries, not proof of a particular real strategy's false-positive
+rate or universal failure of asymptotic methods.
+
+[D12](DEVIATIONS.md#d12-require-established-robust-significance-checks-for-future-acceptance)
+therefore adds established robust tests prospectively, instead of the retired
+ad-hoc c* plan. Their own finite-sample behavior is to be checked under the
+[frozen Batch E contract](DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract).
+Before that run, no new size/power rates or reliability verdicts are claimed.
+Neither citing a paper nor passing implementation tests proves its assumptions
+for the project. P0 and all empirical release holds remain unresolved.

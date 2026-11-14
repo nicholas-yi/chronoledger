@@ -25,7 +25,7 @@ from asof.studies import STUDIES, study_readiness
     ],
 )
 def test_p3_d01_d10(monthly, directed_event, scenario, tfidf, expected) -> None:
-    result = trial_manifest.co_primary_decision(
+    result = trial_manifest.registered_co_primary_decision(
         "H1", monthly_t=monthly, event_change_t=-directed_event,
         delisting_effects={0.0: 1.0, -0.3: 1.0, -1.0: scenario},
         referee_passed=True, requires_tfidf=True, tfidf_t=tfidf,

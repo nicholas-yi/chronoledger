@@ -37,6 +37,14 @@ The final P0 validation passed **18 focused tests and 213 full-suite tests**
 (including post-`8642597` code), with two existing synthetic warnings; selected
 Ruff passed. Passing tests do not clear the source-clock gate.
 
+**Batch E prospective update:** user-approved established robust significance
+tests replace the unexecuted c* proposal. [D12](docs/DEVIATIONS.md#d12-require-established-robust-significance-checks-for-future-acceptance)
+and the [frozen seed/allocation](docs/DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract)
+preserve all registered statistics/N/signs and add stricter future requirements.
+EWC uses floor nu; NW uses ceil S with maxlags S-1 and KV table interpolation;
+IM-by-month is non-deciding. **No robust procedure is applied to development data;
+P0 and Batch C Part 2 remain blocked.** E3 size/power verification has not run yet.
+
 The Python package is named `asof`, after the `as_of` queries everything is built on.
 
 ## Principles

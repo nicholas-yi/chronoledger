@@ -247,3 +247,62 @@ Lead-D2/D4-D9 stay open.
   Compare all H0 pre-existing summary fields exactly; unexpected differences stop
   that step, with no tuning or retry toward a preferred number. No H6/H5 rerun,
   source substitution, new hypothesis, tag or holdout access is authorized.
+
+## D12: require established robust significance checks for future acceptance
+
+- **Approval/provenance:** user approval through Lead, 2026-11-13 23:57 ET,
+  followed by the Lead's primary-source rounding/tail correction. Recorded after
+  prior development estimates and Batch A synthetic size results, **before**
+  Batch E verification and any holdout evaluation. This is future-only; no
+  frozen estimate, statistic, sign, registered N, split, cost or result is changed.
+- **Supersession:** the unexecuted **Lead-D10 c*** proposal is retired. Do not run
+  its 216,000 + 30,000 + 4,000 allocation or introduce empirical max-DGP critical
+  values. Lead-D10 is a coordination label, not the already occupied D10 number.
+- **Additional necessary condition:** retain every original registered gate and
+  additionally require the matching robust procedure to reject in the registered
+  expected direction at the original bar's two-sided-equivalent normal level:
+  `2*norm.sf(bar)` (2.0: 4.550%, 3.0: 0.270%, 3.2: 0.137%). This cannot rescue a
+  registered failure. Missing evidence, infeasibility, unqualified assumptions,
+  unreliable geometry or unattainable resolution yields **undetermined**, never pass.
+- **Monthly:** EWC uses the full alpha-regression score/bread with all six factors,
+  unrestricted residuals, type-II cosine weights, `floor(0.4*T**(2/3))` and Student
+  `t_nu`. At T=17/18/28, nu=2/2/3. The initial nearest-rounding instruction was
+  corrected before commitment/execution; no E3 run used it. NW-fixed-b is reported,
+  not the deciding monthly test: `S=ceil(1.3*sqrt(T))`, `maxlags=S-1`, weights
+  `1-j/S`, and KV(2005) Table I interpolation in b. Frozen NW six-lag behavior
+  still means S=7 and is unchanged. The table lacks the 99.5th and rarer percentiles:
+  NW two-sided 1%/0.27% are unavailable, not ordinary-t/normal substitutes.
+- **H4:** an additional IM test uses seven year-group coefficient estimates,
+  equal weighting and `t_6`. Within-group constants/redundancies can be absorbed
+  without changing the nuisance column space; an unidentified signal or any
+  infeasible registered group prevents evaluation. No opportunistic q reduction.
+  Independent approximately Gaussian, unbiased common-target group estimates
+  remain substantive assumptions; group count does not establish them.
+- **Event panels:** WCR bootstrap clusters by registered month with Webb
+  six-point weights, restricted-null generation and re-studentization. Inclusive
+  absolute tails, full enumeration when bounded, otherwise explicit-seed
+  `(1+exceedances)/(B+1)` are fixed API conventions. IM-by-month is a required
+  **reported cross-check**, never the deciding statistic, a veto or a rescue.
+  The unrestricted one-sided 5% heteroskedastic-Gaussian IM guarantee is limited
+  to q<=14; q=17/28 is not presented as covered.
+- **Attainability/precision:** retain bootstrap granularity floors (seven-cluster
+  Rademacher cannot go below 1/64; B=399 plus-one cannot go below 1/400). For EWC
+  nu<=3, future bars>=3 remain undetermined pending rare-level qualification:
+  `t_2` critical values are about 19.207/26.947 at bars3/3.2; `t_3` about
+  9.219/11.605. These are finite mathematical critical values, **not** a proof of
+  mathematical impossibility or an implementation bug. The hold is conservative,
+  not a new simulated cutoff. Zero/numerically-zero variance is explicitly
+  unavailable, including IM's otherwise paper-specific zero-statistic convention.
+- **Decision interface:** endpoint-specific robust thresholds must be supplied
+  from future registration, not selected after outcomes. The monthly v1 bar and
+  the qualifying co-primary's 3.2 requirement cannot be weakened. The old D4
+  predicate is named `registered_co_primary_decision` for historical/diagnostic
+  use only; `co_primary_decision` now requires robust endpoint checks.
+- **Qualification:** Batch E's frozen 5% Monte Carlo adoption rule and estimator
+  assumptions are additional requirements, not scientific acceptance. A
+  synthetic reliability label cannot clear P0, F2/F4, measurement, economic
+  effects, source rights, borrow/fill or holdout permission. No robust procedure
+  is applied to development data in this batch. No push or tags.
+
+Equations, source pins, the pre-execution allocation and its limits are in the
+[Batch E contract](DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract).

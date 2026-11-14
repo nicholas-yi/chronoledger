@@ -389,7 +389,7 @@ default repo/data/run writer; Research supplies read-only design cards, Lead
 reconciles design choices, and the owner retains reserved permissions. No new
 queue service, chat, agent or planning file is created.
 
-**Queue snapshot v0.4 (P0 time-integrity stop); stable IDs CL-P1 through CL-P6.** Lead decision
+**Queue snapshot v0.5 (Batch E robust-test verification; P0 still blocked); stable IDs CL-P1 through CL-P6.** Lead decision
 **Lead-D1** accepts this organization only. These `Lead-D*` identifiers are
 coordination decisions, **not** pre-registration deviations D1-D9 or new tags.
 Research's **CL-P1 through CL-P6 decision-ready design cards v1**, completed
@@ -905,20 +905,137 @@ unit fixtures are validation, not executions of the queued C1/C2 experiments.
   exactly-once corrected manifest refresh remain **P0-blocked**. The 74-row
   real ledger and older manifest are unchanged; corrected CLI guard is active
   but was not invoked on them.
-- Part 3: future conservative calibrated-threshold rule, next numbered deviation,
-  C1 harness and C2 seed/allocation/critical-value computation remain **P0-blocked**.
-  No 250,000-replicate budget was consumed or calibrated gate silently added.
-  The stated mandatory allocation itself totals 250,000 (216,000 monthly +
-  30,000 panel + 4,000 harness), leaving no automatic replicate allowance for power.
-  No new threshold, source estimator, N, sign, split or holdout exposure changed.
+- Part 3's c* plan was never executed and is now **SUPERSEDED** by user-approved
+  Batch E. Do not run its historical 216,000 + 30,000 + 4,000 allocation.
+  The independent synthetic significance-test contract below replaces it; this
+  does not release P0 or Part 2 and does not alter frozen statistics/N/signs/splits.
 - A new generic ingestion correction is not adjudicated, so no numbered
   time-correction deviation, input rebuild or H0 rerun is falsely logged as done.
-  D12/next numbering remains for the actual accepted next change, not a tag.
+  D12 is now the prospective robust-test requirement; a later accepted
+  timestamp repair still needs the next free numbered deviation before rerunning.
 
 The single Part 1 handoff reports this integrity verdict. The final Parts 2-3 handoff
 is not fabricated for unexecuted work; further scope requires Lead review.
 Source rights, human annotation, keys/spending/publication/push/tags and
 holdout access remain owner-reserved; the holdout stays sealed.
+
+##### Batch E: established tests and frozen verification contract
+
+**Prospective source/seed/allocation freeze, before E3 execution.** Approval:
+2026-11-13 23:57 ET through Lead, with the subsequent floor/ceil/tail correction.
+[D12](DEVIATIONS.md#d12-require-established-robust-significance-checks-for-future-acceptance)
+supersedes the never-run Lead-D10 c* plan. No P0 SEC header requests, Batch C
+Part 2 diagnostics/manifest/rosters, or application to real development data.
+
+Implementation:
+[`robust_inference.py`](../src/asof/robust_inference.py),
+[`KV numeric table`](../src/asof/nw_fixed_b_kv2005.csv),
+[`verification runner`](../scripts/verify_robust_inference.py).
+The functions require already eligible finite arrays; they do not merge dates,
+drop missing rows, infer exposure/source quality or launch a study.
+
+| Procedure | Reference and exact contract |
+|---|---|
+| EWC | LLWS (2018), eq.(10), footnote3: score/bread with all regressors; floor nu=0.4*T^(2/3), type-II cosines, unrestricted residuals, t_nu. nu=2/2/3 at T=17/18/28. No extra cosine, ordinary-normal fallback or silent degeneracy. |
+| NW-fixed-b | LLWS eqs.(3),(6): ceil S=1.3*sqrt(T), maxlags S-1, weights1-j/S. Registered six lags remains S=7. KV working paper Table I, p24, linear interpolation **in b only**, correct right-tail versus absolute-tail interpretation. Two-sided5% uses97.5th percentile; two-sided1%/0.27% unavailable because99.5th/rarer percentiles are absent. No unverified polynomial, new simulation or tail extrapolation. |
+| H4 IM | IM(2010) eq.(2): seven explicitly registered groups, unweighted mean of separately identified common-target coefficients, t_6. Preserve within-group nuisance span; absorb only constants/redundancy, never drop failed groups or the signal. Group assumptions not established by code. |
+| WCR | Webb(2014) eq.(4), MNW(2021) restricted algorithm; CV1 re-studentization. Six equiprobable weights ±sqrt(1/2),±1,±sqrt(3/2). Enumerate when support<=10,000; otherwise explicit seed, inclusive absolute tail, plus-one MC. Invalid variances are retained as unavailable, not dropped or silently PSD-repaired. |
+| Future decisions | Monthly EWC decides (NW diagnostic); H4 IM decides; event WCR at month clusters decides with IM-by-month **reported only**. q>14 is not covered by the unrestricted one-sided5% IM guarantee. Explicit registered endpoint thresholds, qualified assumptions, reliable geometry and attainable level required. Low-nu EWC rare-level qualification stays undetermined; bootstrap resolution is not small-cluster validity. |
+
+Primary sources read directly (PDF SHA256 pin; full PDFs remain session research
+scratch, not redistributed in Git):
+
+- [LLWS author manuscript, 2018-07-14](https://www.princeton.edu/~mwatson/papers/LLSW_har_JBES_Final_071418.pdf):
+  `8175998586eb78737eaafd6e1053d708a213d5bed31cd749a630a41c71131b6f`.
+- [KV Cornell WP05-08, January2005](https://cae.economics.cornell.edu/05-08.pdf):
+  `3c73702215d03a4cd9a14d4b8d7743021a9928e369bf9af41293dbfb5b5a4356`.
+- [IM published paper, 2010](https://www.princeton.edu/~umueller/tstat.pdf):
+  `6d51d57e899e1f695e86a66a9ec68fd7164d189deb7f1d2314425fb0c8ac864a`.
+- [Webb working paper, 2014-11-13](https://www.econ.queensu.ca/sites/econ.queensu.ca/files/qed_wp_1315.pdf):
+  `8cd7cbbafc43159e56464e6bb6dd2efa6f1ff71328308222c05961e0d45b2427`.
+- [MNW multiway author draft, 2019-09-13 / published2021](https://econ.queensu.ca/pub/faculty/mackinnon/working-papers/qed_wp_1415.pdf):
+  `e38a18e8017cd46a8c434182e0cd7602a0cda812368a17746f85a8d49fb90610`.
+- [Canay-Santos-Shaikh, 2021](https://ivancanay.com/papers/wild-bootstrap-clusters-2021.pdf):
+  `c5eec171d29c4bab0d58a9794bc580ca1b316c8ff695a95877ab05551256ed91`.
+
+The attributed KV asset contains numeric table facts, not copied implementation
+code. Interpolation reproduces three-decimal published tabulation, not an
+infinite-precision distribution. Author-supplement NW tables were inspected but
+are **not** the adopted critical-value source after Lead's correction. No new
+runtime dependency; research-only pypdf/font decoding tools were restored after
+missing-tool/TLS failures, outside the package manifest.
+
+**Frozen E3 seed:** `2026111401`. Deterministic SeedSequence child streams per
+case, separate data/bootstrap streams; all procedures see the same dataset.
+No seed/level/bandwidth/estimator/adoption tuning after results.
+
+| Allocation | Data replicates | Inner bootstrap draws | Charge |
+|---|---:|---:|---:|
+| Classical iid OLS harness: T17/18/28,1334/1333/1333 |4,000|0|4,000|
+| Monthly null:4DGPs x3T x2,000 |24,000|0|24,000|
+| Monthly iid power:3T x4effects x500 |6,000|0|6,000|
+| Panel null:2DGPs x250 |500|199,500|200,000|
+| Panel iid power:4effects x10 |40|15,960|16,000|
+| **Total ceiling** |**34,540**|**215,460**|**250,000**|
+
+A charge is one data-generation attempt **plus every nested bootstrap draw**;
+three paired tests of one dataset are not three independent MC observations.
+Webb B=399; G=7 has279,936 support vectors, so full enumeration is not feasible
+under this experiment's budget. Early-invalid fits may leave unspent charges;
+they do not authorize reallocating toward a favorable result.
+
+Monthly DGPs exactly retain Batch A's iid Gaussian, stationary AR(1)phi=.3,
+scaled t3, and common-factor exposure generation: six iid factor regressors
+(SD.02), error SD.03, and exposures[.8,.4,-.2,.3,.1,.2]. Panel DGPs retain40firms
+over7years, four Gaussian covariates, SIC-like4groups/year FE, firm intercepts,
+and either no year shock or the prior heterogeneous-loading year shock.
+The registered comparison is the actual `nw_alpha(lags=6)` and H4-style two-way
+firm/year statistic, using normal reference levels. Panel WCR is **one-way year
+CV1**, not a claim to preserve cross-year firm dependence. IM-by-period is not
+the old pooled estimator. Positive planted power effects are .25/.5/.75/1.0 SD;
+panel10replicates/effect gives very wide intervals, not an economic power study.
+
+Harness first: classical OLS t with T-7 df at5%/1%; six exact-binomial checks
+(three T, two levels), familywise99% Bonferroni reference interval; zero invalids.
+Failure stops the experiment, retains evidence and forbids a seed retry.
+
+Report null rates at5%/1% primary and0.27% with MCSE and two-sided95%
+Clopper-Pearson intervals. Unsupported levels have unavailable counts and null
+rates, never false zero-rejection claims. Invalid estimates stay in the attempt
+history and are not redrawn or non-rejections. For **adoption only**, use a
+worst-case upper bound treating uncomputed draws as possible rejections.
+Prespecified adoption: reliable at this geometry iff the upper95% CP endpoint
+of5% null rejection is<=7.5% across **all** fixed DGPs; otherwise unreliable.
+Incomplete verification is not_evaluated. This label covers only the synthetic
+geometry/5% criterion, not rare tails, real dependence or scientific acceptance.
+
+Hard limits:<=250,000 charges,<=2,700CPU seconds,<=2GiB OS peak resident memory,
+single pytest/runner process with BLAS thread flags1; check before/after every
+small fit/block and stop at the first observed ceiling. Check machine load before
+launch; AfterEvidence's authorized network-bound work is not a CPU release for
+unrelated jobs. No source/data/model/price/holdout job.
+
+Safe run only after this seed/allocation/source revision is locally committed:
+
+```powershell
+$env:OPENBLAS_NUM_THREADS='1'
+$env:OMP_NUM_THREADS='1'
+$env:MKL_NUM_THREADS='1'
+python scripts\verify_robust_inference.py
+```
+
+Expected output: `results/robust_inference_calibration.json`, labeled SYNTHETIC;
+complete/incomplete status, actual charge breakdown, resource observations,
+harness result, per-case unavailable/invalid/warnings, intervals and fixed
+adoption labels. Errors/ceilings preserve partial evidence and raise; no ledger
+row, DSR/PBO, accepted hypothesis or live-data evidence is produced. No rerun
+toward preferred size/power. **Pre-execution status: not run yet.**
+
+Pre-freeze validation: **63 focused tests passed in 15.43s** across robust
+inference, resource guards, original inference, D4 predicates and independent
+oracle fixtures. Configured new-file and selected changed-file Ruff passed.
+Wheel inspection confirmed the attributed KV numeric asset is included.
+This checks code/formula contracts, not statistical size or live assumptions.
 
 ### Source-pilot contract: proposed, not activated
 
@@ -1209,9 +1326,12 @@ The decision is **NO OPENING AUTHORIZATION**, not a new experiment or a new seal
 record-level correction scope and actual anchor/formation impact must be resolved
 before an affected evaluation. Internal timestamp equality, unit tests and the
 old referee PASS do not clear [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-by-json-z-fields).
-Lead-D10's future calibrated-critical-value requirement is also still unsatisfied:
-no new harness, critical values or calibrated decision-function gate has run here.
-Recording these outstanding requirements is not their registration or completion.
+Lead-D10's c* plan is **superseded, not pending execution**. The [D12 established
+robust-test gate](DEVIATIONS.md#d12-require-established-robust-significance-checks-for-future-acceptance)
+instead requires matching qualified significance checks without weakening any
+original statistic/N/sign/threshold rule. Batch E synthetic validation does not
+authorize applying the procedures to unresolved development inputs or opening
+the holdout. It cannot establish source, group-independence or economic readiness.
 These independent gates must be recorded before any future command is approved:
 
 1. **Isolation/window gate (owner + Lead):** price cutoff stays 2024-07-31;

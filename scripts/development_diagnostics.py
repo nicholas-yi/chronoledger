@@ -13,7 +13,7 @@ from scipy import stats
 from asof import ledger
 from asof.config import PROJECT_ROOT
 from asof.inference import expected_max_sharpe, probabilistic_sharpe_ratio, sharpe
-from asof.trial_manifest import co_primary_decision
+from asof.trial_manifest import registered_co_primary_decision
 
 BASELINE = "15b8a2d0b53942dda7627fdabbaf934334beceef"
 
@@ -109,7 +109,7 @@ def main() -> None:
                 raise ValueError("persisted series exceeds permitted return cutoff")
             families[family][f"{name}:{assumption}"] = pd.Series(frame["ls_net"].to_numpy(), index=idx)
         if family == "H0":
-            decision = co_primary_decision(
+            decision = registered_co_primary_decision(
                 "H0", monthly_t=variant["monthly"]["alpha_t"], event_change_t=None,
                 delisting_effects={float(a): m["alpha"] for a, m in
                                    variant["monthly_missing_return_sensitivity"].items()},

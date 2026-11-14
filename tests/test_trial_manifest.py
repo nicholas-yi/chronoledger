@@ -5,7 +5,13 @@ import pandas as pd
 import pytest
 
 from asof import ledger
-from asof.trial_manifest import build_manifest, co_primary_decision, inference_availability
+from asof.robust_inference import RobustGate
+from asof.trial_manifest import (
+    build_manifest,
+    co_primary_decision,
+    inference_availability,
+    registered_co_primary_decision,
+)
 
 
 def _entry(config, metrics=None):
@@ -40,7 +46,7 @@ def _decision(**overrides):
             "delisting_effects": {0.0: 0.01, -0.3: 0.009, -1.0: 0.002},
             "referee_passed": True, "requires_tfidf": False, "tfidf_t": None}
     args.update(overrides)
-    return co_primary_decision("H0", **args)
+    return registered_co_primary_decision("H0", **args)
 
 
 @pytest.mark.parametrize(
@@ -67,12 +73,29 @@ def test_formal_h1_cannot_skip_tfidf_or_accept_h1n_alias() -> None:
     args = {"monthly_t": 3.2, "event_change_t": -1.0,
             "delisting_effects": {0.0: 1.0, -0.3: 1.0, -1.0: 1.0},
             "referee_passed": True, "requires_tfidf": True, "tfidf_t": 1.99}
-    assert co_primary_decision("H1", **args).status == "not_supported"
+    assert registered_co_primary_decision("H1", **args).status == "not_supported"
     args["requires_tfidf"] = False
     with pytest.raises(ValueError, match="requires D3"):
-        co_primary_decision("H1", **args)
+        registered_co_primary_decision("H1", **args)
     with pytest.raises(ValueError, match="H1n"):
-        co_primary_decision("H1n", **args)
+        registered_co_primary_decision("H1n", **args)
+
+
+def test_future_co_primary_cannot_pass_without_registered_robust_checks() -> None:
+    args = {"monthly_t": 3.3, "event_change_t": -1.0,
+            "delisting_effects": {0.0: 1.0, -0.3: 1.0, -1.0: 1.0},
+            "referee_passed": True, "requires_tfidf": False, "tfidf_t": None}
+    assert co_primary_decision("H0", **args).status == "undetermined"
+    gates = {"monthly": RobustGate("monthly", 3.2, "supported", (), 1),
+             "event": RobustGate("event", 3.0, "supported", (), -1)}
+    assert co_primary_decision("H0", **args, robust_gates=gates).status == "supported"
+    weak = {**gates, "monthly": RobustGate("monthly", 2.0, "supported", (), 1)}
+    assert co_primary_decision("H0", **args, robust_gates=weak).status == "undetermined"
+    unattainable = {**gates, "event": RobustGate("event", 3.0, "undetermined", ("granularity",), -1)}
+    assert co_primary_decision("H0", **args, robust_gates=unattainable).status == "undetermined"
+    wrong_direction = {**gates, "event": RobustGate("event", 3.0, "supported", (), 1)}
+    assert co_primary_decision("H0", **args, robust_gates=wrong_direction).status == "undetermined"
+    assert co_primary_decision("H0", **{**args, "monthly_t": 1.0}).status == "not_supported"
 
 
 def test_inference_requires_persisted_comparable_complete_series_and_long_enough_pbo() -> None:
