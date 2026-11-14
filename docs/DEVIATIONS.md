@@ -228,3 +228,22 @@ Lead-D2/D4-D9 stay open.
 - **Boundary:** no tag or holdout opening is authorized. This numbered protocol
   discrepancy disclosure is not a new coordination decision; the operative
   future decision is Lead-D6. No source/rights or scientific acceptance follows.
+
+## D11: apply the missing-income label and missing-factor parity corrections
+
+- **Logged:** 2026-11-13, after the historical development results and synthetic
+  regression tests, **before** the single Batch B H4/H0 development reruns.
+- **H4 correction:** a decline label requires observed NI(t) and NI(t+1).
+  Missing current income previously compared false and became zero. The formula,
+  dates, controls, winsorization, outcomes and configuration otherwise stay fixed.
+  Existing current-ROA controls may already exclude affected rows; impact is to
+  be measured, not assumed zero.
+- **CAR parity:** the fast engine now excludes missing factor/RF rows just as
+  reference `car()` does. This fixes synthetic SVD/NaN mismatches without moving
+  to the prospective session planner or changing legacy valid-observation windows.
+  Cached permitted-period factor missingness is inspected before the rerun.
+- **Execution boundary:** one H4 test stage and one output-only-extended H0 run;
+  original entries/results remain recoverable by revision, new attempts append.
+  Compare all H0 pre-existing summary fields exactly; unexpected differences stop
+  that step, with no tuning or retry toward a preferred number. No H6/H5 rerun,
+  source substitution, new hypothesis, tag or holdout access is authorized.

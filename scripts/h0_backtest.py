@@ -122,7 +122,8 @@ def neutralize_formations(
     return {m: g.drop(columns=["as_of"]) for m, g in rows.groupby("month")}
 
 
-def monthly_test(cfg: Config, sig, shares, panel, bp, factors, snapshots=None) -> dict:
+def monthly_test(cfg: Config, sig, shares, panel, bp, factors, snapshots=None, *,
+                 series_out: list[dict[str, str | float]] | None = None) -> dict:
     months = pd.period_range(pd.Period(DEV_START, "M"), pd.Period(DEV_END, "M"), freq="M")
     rows, prev, ics = [], None, []
     panels = {m: g for m, g in panel.groupby("month")}
@@ -137,6 +138,9 @@ def monthly_test(cfg: Config, sig, shares, panel, bp, factors, snapshots=None) -
         r = long_short(port, prev, cfg)
         r.update(return_month=str(m + 1), n_firms=len(port))
         rows.append(r)
+        if series_out is not None:
+            series_out.append({"return_month": str(m + 1), "ls_net": r["ls_net"],
+                               "ls_gross": r["ls_gross"]})
         ics.append(rank_ic(port[cfg.signal], port["ret_next"]) * (1 if cfg.long_high else -1))
         prev = port
     res = pd.DataFrame(rows)
@@ -207,6 +211,7 @@ def main() -> None:
         t0 = perf_counter()
         formation = snapshots["10-K" if name in ("v1_10K_raw", "v2_10K_neutral") else "latest"]
         sensitivity = {}
+        return_series = {}
         e = {}
         for missing_return in (0.0, -0.3, -1.0):
             cfg = replace(Config(), signal=col, long_high=long_high, missing_return=missing_return)
@@ -215,7 +220,8 @@ def main() -> None:
                 "H0" if "raw" in name else "H1n", config, inputs=INPUTS,
             ) as metrics:
                 metrics["phase"] = "monthly"
-                m = monthly_test(cfg, s, shares, panel, bp, factors, formation)
+                series = []
+                m = monthly_test(cfg, s, shares, panel, bp, factors, formation, series_out=series)
                 metrics.update({f"m_{k}": v for k, v in m.items()})
                 if abs(m.get("mean_net", 0.0)) > 0.05 or abs(m.get("mean_gross", 0.0)) > 0.05:
                     raise ValueError(f"{name}: implausible long-short mean; inspect failed ledger entry")
@@ -232,9 +238,11 @@ def main() -> None:
                 metrics.update({f"e_{k}": v for k, v in e.items()})
                 metrics["phase"] = "finished"
             sensitivity[str(missing_return)] = m
+            return_series[str(missing_return)] = series
         print(f"{name}: {perf_counter() - t0:.2f}s", file=sys.stderr, flush=True)
         entry = {"variant": name, "config": primary_config, "monthly": primary,
                  "monthly_missing_return_sensitivity": sensitivity,
+                 "monthly_return_series": return_series,
                  "event_panel_change_on_car60": e, "config_hash": primary_hash}
         results.append(entry)
     out = {"note": "Development period only (~18 monthly obs). Raw change panels are descriptive; "

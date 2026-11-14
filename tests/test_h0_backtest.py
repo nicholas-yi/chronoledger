@@ -86,3 +86,32 @@ def test_formation_neutralization_ignores_post_close_events_and_future_returns()
     actual = script.neutralize_formations(snapshots, ent, ma, bp, Config())[month]
     columns = ["cik", "shares", "neg_change_n", "ma_flag"]
     pd.testing.assert_frame_equal(actual[columns], expected[columns], rtol=1e-12, atol=1e-12)
+
+
+def test_monthly_series_persistence_does_not_change_summary(monkeypatch) -> None:
+    script = _script()
+    months = pd.period_range("2023-01", "2024-06", freq="M")
+    panel = pd.DataFrame({"month": months})
+    bp = pd.DataFrame({"p20": 0.0}, index=months)
+    factors = pd.DataFrame(np.random.default_rng(2).normal(0, 0.01, (20, 6)),
+                           index=pd.period_range("2023-01", periods=20, freq="M"),
+                           columns=script.FACTORS)
+
+    def portfolios(month, *args, **kwargs):
+        rng = np.random.default_rng(month.ordinal)
+        return pd.DataFrame({
+            "ticker": [f"S{i}" for i in range(50)], "q": np.repeat(np.arange(1, 6), 10),
+            "w": 0.1, "ret_next": rng.normal(0, 0.02, 50),
+            "cos_full": rng.normal(size=50), "spread": 0.001,
+        })
+
+    monkeypatch.setattr(script, "form_portfolios", portfolios)
+    cfg = Config()
+    plain = script.monthly_test(cfg, None, None, panel, bp, factors)
+    series = []
+    persisted = script.monthly_test(cfg, None, None, panel, bp, factors, series_out=series)
+    assert persisted == plain
+    assert len(series) == persisted["months"] == 18
+    assert [r["return_month"] for r in series] == [str(m + 1) for m in months]
+    assert np.mean([r["ls_net"] for r in series]) == persisted["mean_net"]
+    assert set(series[0]) == {"return_month", "ls_net", "ls_gross"}

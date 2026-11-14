@@ -677,6 +677,58 @@ identifiable. **Next:** Lead reviews this evidence and the queued Batch B scope;
 no human/vendor contact, source access, empirical integration or reserved
 authorization follows automatically.
 
+##### Batch B bounded development plan (recorded before draws/reruns)
+
+Batch B releases exactly: B1 cached-factor impact inspection and one unchanged
+H4 test run after D11; B2 output-only monthly-series persistence and one validated-
+snapshot H0 run with exact legacy-summary comparison; B3 metadata-only blinded
+rosters/templates; B4 SEC-only candidate identity/exit oracles; B5 full single-thread
+tests, selected lint and bounded referee comparison. No held-out observations,
+vendor/key/account/paid access, human contact, push, tag or publication is released.
+Check load before commands expected over one minute and defer competing heavy work.
+
+**Roster seed20261113, fixed before selection.** Independent `SeedSequence`
+spawn keys0=claims,1=endpoint feasibility,2=SEC candidates. Sort candidates by
+CIK/acceptance/accession; sample eligible issuers uniformly without replacement,
+then one eligible row per sampled issuer. Preserve shortfalls, no replacement
+from favorable outcomes. No signal-value, price, return, model-score or endpoint-
+value column is used to select these rosters.
+
+- Claims:30existing10-K pairs then30existing same-quarter/year-ago10-Q pairs,
+  no issuer repeated across the60. Current acceptance2023-01-01..2024-06-30UTC.
+  Use the existing pair's previous accession; verify document/form/time metadata.
+  10-Q year-ago metadata uses the existing340-390day report-date rule, not a
+  newly invented calendar-quarter filter. Existing current-ticker conditioning
+  is disclosed rather than called a new historical-universe sample.
+- Separate endpoint20case feasibility: five each in H4 next-annual-report metadata
+  available versus absent in the **2012-2018 selection envelope**, and H6-style
+  regular filings whose nominal365day follow-up ends inside versus outside that
+  envelope. Use the existing H4 issuer sample, dates/forms/accessions only.
+  These categories are neither endpoint labels nor independently verified complete
+  observation; a report outside the selection envelope is not a nonexistent report.
+- SEC-only P1: target four cases in each original stratum. Continuing and multiple-
+  class candidates come from development10-K metadata; acquisition candidates from
+  Item2.01 and distress candidates from Item1.03. Metadata cannot distinguish cash
+  from stock consideration: preassign candidate slots and preserve contradictory/
+  unknown text evidence rather than redraw to fill a stratum. Historical ticker
+  reuse is infeasible from this metadata alone; report it, do not substitute.
+  All event acceptances2023-01-01..2024-06-30, evidence filings accepted<=2024-07-31.
+  At most300actual SEC HTTP attempts, including retries, at<=2requests/sec through
+  the cached project client/contact user agent. No provider/price request. Exact
+  consideration is not inferred from missing quotes; text hits are candidate
+  evidence, not independent gold or terminal-payoff completeness.
+
+**B2 diagnostic scope fixed before returns are persisted:** retain all17/18
+original months per configuration. Within each existing H0/H1n family, align the
+current six configurations by calendar intersection only for a separately labeled
+development DSR diagnostic. Use the unchanged registered per-hypothesis N, not
+six independent strategies, and disclose that SR variance is estimated from this
+current-vintage slice with identical sensitivity streams. Full historical-family
+DSR remains unavailable while invalid/older aligned streams are absent.
+PBO remains not_estimable below32aligned months. Do not feed raw descriptive
+event panels into the required neutralized co-primary: D4 reports unavailable
+where that registered evidence is missing; H1n is not formal H1. No support claim.
+
 ### Source-pilot contract: proposed, not activated
 
 The minimal next source decision is a **development-only coverage and identity
