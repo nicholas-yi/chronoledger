@@ -352,7 +352,7 @@ agent workflow used to run experiments, three new study ideas and candidate data
 
 ```powershell
 uv venv --python 3.12
-uv pip install -e ".[dev,figures]"
+uv pip install -e ".[dev,figures,benchmarks]"
 uv run pytest -q                       # Unit tests need no benchmark data or network
 uv run python scripts/make_figures.py  # rebuild every chart from results/
 uv run python -m asof.referee          # the automated referee (needs the local data build)

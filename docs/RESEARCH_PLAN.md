@@ -223,10 +223,18 @@ stay local; [configuration](../results/benchmark_diagnostic_config.json) and
 [results](../results/benchmark_diagnostic_status.json) record versions,
 checksums and every item's outcome without copying the questions or answers.
 
-FinQA was **not scored**: its official evaluator needs `tqdm`, which is not
-installed. We did not install it or substitute another scorer. The development
-file was retained after its report-ID check, not deleted. Its execution accuracy
-is unmeasured; no gold programs were run as predictions.
+FinQA was **not scored in that first diagnostic**: its official evaluator lacked
+`tqdm`. No scorer was substituted. The development file was retained after its
+report-ID check, not deleted, and no gold programs were run as predictions.
+
+A follow-up now has its dependencies available through the pinned `benchmarks`
+extra (`tqdm`, `sympy` and its `mpmath` dependency). Before scoring, ten
+unfiltered development IDs are frozen with a new seed, the original table
+baseline and deterministic input/program adapters. Raw text/table inputs are
+kept separate from reference answers and retrieved annotations; percentages
+are encoded as ratios in FinQA's calculation language. The metric uses the
+official program executor and exact reference comparison. No result from this
+follow-up is implied until it has run.
 
 This is a useful first check of a very limited baseline, not evidence of broad
 financial-reading skill. Thirty to forty items can expose bugs; they cannot
