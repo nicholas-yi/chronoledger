@@ -19,7 +19,6 @@ flowchart TD
     card --> scope["Lead agent<br/>scope, dependencies, information value"]
     scope --> ready{"Data, labels and<br/>statistical power adequate?"}
     ready -->|no| gap["Record what is missing<br/>and the smallest next check"]
-    gap --> research
     ready -->|yes| freeze["Freeze protocol, metrics,<br/>data versions and budget"]
     freeze --> run["Execution agent<br/>one bounded run"]
     run --> record["Record every attempt,<br/>log and output"]
@@ -28,9 +27,10 @@ flowchart TD
     verdict -->|supported| supported["Supported under the<br/>stated conditions"]
     verdict -->|null or imprecise| unsupported["Unsupported or inconclusive"]
     verdict -->|discrepancy| invalid["Invalid<br/>investigate, do not retune"]
-    invalid --> gap
-    supported --> evidence[("Shared evidence log")]
+    gap --> evidence[("Shared evidence log<br/>feeds the next question")]
+    supported --> evidence
     unsupported --> evidence
+    invalid --> evidence
 ```
 
 Three rules keep the workflow honest:
