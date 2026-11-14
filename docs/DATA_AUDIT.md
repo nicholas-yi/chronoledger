@@ -6,6 +6,14 @@ and [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-
 Older rebuild receipts and the frozen preregistration describe historical claims,
 not current source-clock certification. The registered first-close rule is unchanged.
 
+**2026-11-14 research plan:** the [research plan](RESEARCH_PLAN.md) records the proposed
+experiment workflow and diagram, prerequisites for closing the data/label/power gaps, three
+prospective study ideas and candidate data sources. Acquisition stays on free public sources for
+now; paid and request-based options were researched from public documentation only. No source is
+cleared, no account was requested, no vendor was contacted and no new run, sandbox or holdout
+access occurred. A longer internal working draft is kept outside the public repository. The
+existing queue, protocols and append-only ledger are unchanged.
+
 Generated from EDGAR full-index files (2011–2026), SEC's current CIK-ticker map, and the XBRL
 frames API (`dei:EntityPublicFloat`). Having a current ticker is an upper bound on whether a free
 source has the firm's price history. Firms acquired, merged, taken private, or failed since then

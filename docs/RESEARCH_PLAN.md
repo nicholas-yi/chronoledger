@@ -1,0 +1,177 @@
+# Research plan
+
+This document describes how new experiments are proposed, tested and reported in Filing Time
+Machine, what it would take to close the gaps listed in the [README](../README.md#caveats), three
+new study ideas, and candidate data sources. Everything here is a plan: none of these studies has
+been run, and no new data source has been adopted.
+
+## How an idea becomes a result
+
+The project is developed with a small team of AI agents that each play one role: a research agent
+proposes ideas and checks the literature, a lead agent scopes them, and an execution agent writes
+the code and runs approved jobs. The workflow below is designed so that adding agents produces
+better-documented answers, not more chances to find a lucky backtest.
+
+```mermaid
+flowchart TD
+    Q["Question or known limitation"] --> R["Research: mechanism,<br/>competing explanations, sources"]
+    R --> C["Study card written<br/>before any outcome is seen"]
+    C --> S["Lead: scope, dependencies,<br/>expected information value"]
+    S --> D{"Data, labels and statistical<br/>power good enough?"}
+    D -->|no| G["Record what is missing<br/>and the smallest next check"]
+    G --> R
+    D -->|yes| F["Freeze protocol, metrics,<br/>data versions and budget"]
+    F --> X["Execution: one bounded run"]
+    X --> L["Record every attempt,<br/>log and output"]
+    L --> V["Independent review<br/>and automated referee"]
+    V --> O{"Compare with the<br/>frozen decision rule"}
+    O -->|supported| A["Supported under the<br/>stated conditions"]
+    O -->|null or imprecise| N["Unsupported or inconclusive"]
+    O -->|discrepancy| I["Invalid: investigate,<br/>do not retune"]
+    I --> G
+    A --> K[("Shared evidence log")]
+    N --> K
+    K --> R
+```
+
+Three rules keep the workflow honest:
+
+- **Outcomes come last.** A study card fixes the question, data, measurement, baseline, test and
+  budget before anyone looks at results. If any of these is undecided, the study does not run.
+- **Nothing is deleted.** Every attempt, including failed and null runs, is appended to the
+  [trial ledger](../results/trial_ledger.jsonl) and counts toward the multiple-testing penalty.
+- **Three separate verdicts.** Whether a job *ran*, what it *showed scientifically* (supported,
+  unsupported, inconclusive or invalid) and whether it is *ready to publish* are tracked separately.
+  A completed run can still be invalid evidence.
+
+### What every study card must specify
+
+| Field | Example of what it pins down |
+|---|---|
+| Question | Mechanism, expected direction, unit of analysis, what the study does *not* claim, and what would falsify it |
+| Information set | Data versions, security identifiers, availability clocks and exact time windows |
+| Measurement | Feature definition, units, how missing or unknown values are handled, and how labels were validated |
+| Comparison | A cheap baseline, the smallest economically meaningful effect, and costs |
+| Inference | Unit of dependence, number of independent periods, the test and threshold, and multiple-testing family |
+| Execution | Code and environment versions, seed, output schema, and CPU/memory/time limits |
+| Prior exposure | Which data has already been looked at, and why the proposed split is still clean |
+
+### Running experiments in isolation
+
+Today the agents share one machine and one repository, with one designated agent writing code and
+running jobs.
+The planned next step is to run each experiment in a disposable container that has read-only
+access to a checksum-pinned data snapshot, no network access, no access to the sealed holdout or
+any credentials, and hard CPU/memory/time limits. Before relying on it, the container would be
+tested by deliberately trying to read a protected file, reach the network and query data past the
+cutoff, and confirming that each attempt fails.
+
+## Closing the known gaps
+
+| Gap | First step | What "done" looks like |
+|---|---|---|
+| Filing timestamps | Fetch the SEC header for every filing where a 4-5 hour offset could change its trading day or portfolio month | A per-filing table of verified times, with counts of assignments that changed and any filings left unresolved |
+| Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
+| Real measurement labels | Two people independently label claim changes in 60 real filing pairs, with disagreements adjudicated | Measured precision and recall of claim extraction on real text, not synthetic benchmarks |
+| Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
+| Claim-level signal (H1) | Register the exact comparison, data, effect size and test | One evaluation, reported whatever the outcome |
+| More independent periods | Plan a separate older-period study with survivorship-free data | More real, independent months; nominal date ranges alone do not count |
+| Model training | Train a small claim matcher only if the labelled audit shows errors it could fix | Splits separated by time and by company, compared against the frozen baselines |
+| Trading costs | Record which cost components are observed and which are assumed; compute break-even costs | A realistic net comparison, plus a long-only version that needs no borrowing |
+
+A fine-tuned modern model is not automatically free of look-ahead for old filings, even if its
+fine-tuning data is old, because its pretraining may include later text. Measurement models are
+trained to read filings correctly, never to predict historical returns.
+
+## Three new study ideas
+
+These are proposals only. Each would need its own study card and must clear the gaps above before
+any return is examined.
+
+### Does attention speed up how fast disclosures are priced?
+
+- **Question:** when a company's filing contains meaningful changes, are they priced faster if the
+  topics it discusses are already getting heavy news coverage?
+- **Mechanism:** investor attention is limited; coverage may reduce the delay before information is
+  reflected in prices.
+- **Competing explanations:** coverage that follows earlier price moves, sector-wide news, the
+  severity of the disclosure itself, and syndicated duplicate stories.
+- **Data:** news-volume metadata from [GDELT](https://www.gdeltproject.org/) or official feeds,
+  matched to topics already present in earlier filings, plus prices and factors. Publication,
+  first-seen and ingestion times are kept separate.
+- **Test:** disclosure-only and attention-only baselines against their interaction, measured over
+  pre-set early and late return windows.
+- **What would falsify it:** coverage that simply tracks past returns, no gain over the baselines,
+  or placebo topics working just as well.
+
+### When the story improves but the numbers don't
+
+- **Question:** when management's specific claims become more positive while the accounts already
+  known at the time deteriorate, do later fundamentals confirm the story, or is it just disclosure
+  style?
+- **Mechanism:** delayed recognition or selective framing. Alternatives include genuine turnarounds,
+  cyclical businesses, template edits and accounting measurement error. An association would not be
+  evidence of misconduct.
+- **Data:** report pairs with claims tied to quoted text, and accounting values as first reported,
+  with unknown values kept as unknown.
+- **Test:** first a measurement-only audit of the divergence indicator; later, separately
+  registered, its association with next-year fundamentals against accounting-only and text-only
+  baselines.
+- **What would falsify it:** the divergence disappears once units and first-reported values are
+  corrected, or it is driven by boilerplate.
+
+### Customer shocks travelling to suppliers
+
+- **Question:** when a customer suffers a shock, do suppliers whose relationship was disclosed
+  *before* the shock react with a delay, beyond their own news and sector moves? This extends
+  hypotheses H2 and H3.
+- **Mechanism:** investors may not trace economic links between companies quickly.
+- **Data:** customer-supplier links grounded in earlier filings, with dated security identities for
+  both companies.
+- **Test:** linked suppliers against matched unlinked firms and randomly rewired networks.
+- **What would falsify it:** links discovered only later predict just as well, the effect vanishes
+  after sector controls, or reversed link direction works equally well.
+
+## Data sources
+
+Survivorship-free historical prices are the single biggest constraint. The project currently uses
+free public sources only. Prices below are as listed on the providers' public pages on
+2026-11-14; every option's licence must be checked before publishing results derived from it.
+
+### Free and public
+
+| Source | Useful for | Caveat |
+|---|---|---|
+| [SEC EDGAR](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | Filings, headers, accounting facts, acceptance times | No historical ticker or delisting-payoff master; JSON acceptance times need header verification |
+| [GDELT](https://www.gdeltproject.org/) | News attention and event metadata | Its `DATEADDED` field is when an event entered the database, not when the article was published |
+| [Federal Reserve feeds](https://www.federalreserve.gov/feeds/feeds.htm) | Scheduled policy-event times | Rolling feeds do not preserve history or corrections |
+| [ALFRED](https://alfred.stlouisfed.org/) | Macro data as it was known on each date | Needs an API key; its API terms restrict caching and use for model training |
+
+### Paid or request-based
+
+| Source | What it offers | Main limitation |
+|---|---|---|
+| [Norgate Data](https://norgatedata.com/stockmarketpackages.php) US Platinum | Advertises delisted securities, history back to 1990 and historical index membership; about $347 for 6 months or $630 a year | Personal use only, and data must be deleted when the subscription ends; delisting payoffs need checking |
+| [EODHD](https://eodhd.com/pricing) | Low-cost API, about $20 a month for historical end-of-day prices | Delisted coverage before 2018 is end-of-day prices only |
+| [Sharadar](https://data.nasdaq.com/publishers/SHARADAR) via Nasdaq Data Link | Prices and fundamentals with permanent security identifiers | Personal-use terms restrict publishing evaluations of the data |
+| [CRSP](https://indexes.morningstar.com/research-data-products/crsp-us-stock-databases) | The academic standard: active and inactive securities, permanent identifiers, corporate actions | Institutional subscription; individual access is by request |
+| [Compustat Point-in-Time](https://www.marketplace.spglobal.com/en/datasets/compustat-financials-%288%29) | Accounting values as originally reported, not later revised | Separate product from ordinary Compustat; by quote |
+
+### Dataset platforms
+
+[Mozilla Data Collective](https://mozilladatacollective.com/datasets),
+[Hugging Face](https://huggingface.co/datasets) and [Kaggle](https://www.kaggle.com/datasets) are
+useful for finding labelled text for measurement work. Each dataset carries its own licence: for
+example, [Financial PhraseBank](https://huggingface.co/datasets/takala/financial_phrasebank) is
+CC BY-NC-SA 3.0, which rules out commercial use. None offers a survivorship-free, point-in-time
+equity panel, and a generic finance sentiment dataset is not a substitute for labelled pairs of
+company disclosures.
+
+## Testing the workflow itself
+
+Whether a team of agents does better research than a single agent is itself a testable question.
+A fair comparison would give both the same tools, data and total compute; run them on
+method and measurement tasks that involve no market outcomes; and score them blind on time to a
+well-specified study, defects caught before evaluation, reproducibility, and how faithfully null
+results are reported. The number of statistically significant strategies found would be a bad
+metric, because it rewards searching until something works.

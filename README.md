@@ -327,11 +327,16 @@ is weak evidence, and more data matters more than a better estimator.
 
 | Open question | What it needs | Why it matters |
 |---|---|---|
-| Is every trading-day assignment right? | Check each filing's own SEC header wherever a 4-5 hour offset could move its first tradable close | Removes the last known look-ahead risk |
-| Is there an effect of realistic size? | Survivorship-free prices back to 2011 (about eight times more months) | The current sample can only detect implausibly large effects |
-| Does *what* changes matter more than *how much*? | Claim-level signal (H1) with a human-labelled audit set | Tests the project's main new idea |
-| Do customers' disclosures move their suppliers? | Customer-supplier links with dated identities (H2-H3) | Extends the signal across firms |
-| Does any of it survive out of sample? | One evaluation on the sealed July 2024 - October 2026 holdout | The only confirmatory test |
+| Is every trading-day assignment right? | Verify each filing's acceptance time against its own SEC header wherever an offset could move its first tradable close | Rules out the remaining timestamp-driven look-ahead |
+| Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2011 | The current sample can only detect implausibly large effects |
+| Does *what* changes matter more than *how much*? | The claim-level signal (H1), first checked against human-labelled real filing pairs and simple baselines | Synthetic benchmark scores are not real measurement accuracy |
+| Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
+| Would a trained model measure change better? | Real labelled claim pairs and training/test splits separated by time and by company | A bigger model does not create more independent market evidence |
+| Could anyone actually trade it? | Observed spreads, price impact, fees and borrow availability, plus a long-only version | A spread estimate does not show a short strategy is executable |
+| Does any of it survive out of sample? | One evaluation on the sealed July 2024 - October 2026 holdout, run once after the design is frozen | The only confirmatory test |
+
+The [research plan](docs/RESEARCH_PLAN.md) describes how each of these will be tested, the
+agent workflow used to run experiments, three new study ideas and candidate data sources.
 
 ## Run it
 
@@ -369,6 +374,7 @@ point-in-time queries everything is built on.
   decided in advance, and every later change
 - [FINDINGS.md](docs/FINDINGS.md): the research log, including issues that weaken this project
 - [DATA_AUDIT.md](docs/DATA_AUDIT.md): data provenance, coverage audits and the rebuild runbook
+- [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
 - [REFEREE.md](results/REFEREE.md): the latest automated referee report
 
 ## License
