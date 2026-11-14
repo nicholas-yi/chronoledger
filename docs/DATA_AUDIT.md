@@ -1,5 +1,11 @@
 # Data audit: survivorship coverage of free price data
 
+**Current override: P0 time-integrity BLOCKED.** The broad JSON-UTC verification
+claim is withdrawn; see the [P0 verdict](#batch-c-part-1-p0-integrity-verdict--stop)
+and [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-by-json-z-fields).
+Older rebuild receipts and the frozen preregistration describe historical claims,
+not current source-clock certification. The registered first-close rule is unchanged.
+
 Generated from EDGAR full-index files (2011–2026), SEC's current CIK-ticker map, and the XBRL
 frames API (`dei:EntityPublicFloat`). Having a current ticker is an upper bound on whether a free
 source has the firm's price history. Firms acquired, merged, taken private, or failed since then
@@ -16,8 +22,9 @@ leaves any previous completed output unchanged. This index contains filing metad
 prices, and does not open a return holdout.
 
 When `data/raw/bulk/submissions.zip` exists, the H0 `filings` stage reads missing
-firms directly from it, including every form, historical page, and exact acceptance
-time. It uses the individual submissions API only for firms absent from that archive.
+firms directly from it, including every form, historical page, and stored acceptance
+field. The field's true instant is not certified by import or by a Z suffix.
+It uses the individual submissions API only for firms absent from that archive.
 This avoids re-downloading metadata already obtained from the same public source;
 malformed requested archive members fail explicitly rather than silently dropping a firm.
 Overlapping recent/history pages are deduplicated by accession at ingestion, retaining
@@ -382,7 +389,7 @@ default repo/data/run writer; Research supplies read-only design cards, Lead
 reconciles design choices, and the owner retains reserved permissions. No new
 queue service, chat, agent or planning file is created.
 
-**Queue snapshot v0.3.1 (independent synthetic cross-check); stable IDs CL-P1 through CL-P6.** Lead decision
+**Queue snapshot v0.4 (P0 time-integrity stop); stable IDs CL-P1 through CL-P6.** Lead decision
 **Lead-D1** accepts this organization only. These `Lead-D*` identifiers are
 coordination decisions, **not** pre-registration deviations D1-D9 or new tags.
 Research's **CL-P1 through CL-P6 decision-ready design cards v1**, completed
@@ -812,6 +819,107 @@ P4 human/observation gates remain unmet; no labels were assigned, no vendor/huma
 contact made, no key/account/spend/push/tag/publication authorized. Holdout stays
 sealed and prices<=2024-07-31. See [F7/F8](FINDINGS.md#f7-h0-pair-metadata-disagrees-with-the-bulk-filing-identityacceptance-metadata).
 
+##### Batch C Part 1: P0 integrity verdict — STOP
+
+**P0 BLOCKED; Parts 2-3 not started.** The universal JSON-"true UTC" claim is
+withdrawn, not silently repaired. [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-by-json-z-fields)
+and the [authority packet](../results/p0_acceptance_authority_audit.json) distinguish
+raw source disagreement, directly checked header/index observations, conditional
+column substitution and still-unknown global impact. No production timestamp,
+CIK, universe, share/price snapshot or ledger row was changed. No H0/H4/H5/H6,
+near-tie, DSR, manifest-refresh or calibration run followed the P0 stop.
+
+| P0 check | Observed evidence / limitation |
+|---|---|
+| Full H0 signal metadata | 21,502 rows, 165 timestamp disagreements: 105 at +4h / 60 at +5h (bulk minus pair). The recorded development slice has 16,226 rows and 124 disagreements: 75 at +4h / 49 at +5h, matching the seasonal ET offset. [Raw bulk sample](../results/p0_raw_bulk_sample.json) already contains shifted Z strings; not merely a pandas display conversion. |
+| Own-header/index sample | 26 planned across differing/agreeing, EDT/EST, several submitter prefixes and historical H4 metadata; 23 attempted. There are 22 header/index wall matches: 21 ET-derived UTC instants match pair, 7 match bulk. All 14 sampled differing cases favor pair. One agreeing case (`0000003545-24-000034`) is 5h late in **both** internal paths. The first historical H4 header URL returned 404 and stopped network sample expansion; all four historical-H4 checks remain incomplete. |
+| Authority/timezone sources | Official PDS specification section 2.1 calls Acceptance Time EST; the 2023 SEC rule describes EST/EDT currently effective (both indexed official PDF text, not newly parsed PDFs). SEC ET operating-clock page read directly through project client; raw header/index wall fields retrieved directly. No universal JSON-field correctness follows; no new PDF dependency installed. |
+| Source paths | 118 original cached API records inspected: 112 root-recent / 6 historical-page, all equal stored pair and not bulk. Six other differing CIKs lacked that API cache. Cache/value consistency is not a recorded ingest-branch receipt. Both API and bulk paths populated the DB; path provenance was not persisted per row, and source disagreement is nonuniform. |
+| Actual versus conditional impact | 22 successful header/index cases have 0 pair-to-ET-header first-close/eligibility changes and 0 **sample-local** latest-filing changes. This is **not** a global zero-look-ahead finding or a full-cross-section selector check. Pair-to-bulk substitution instead changes 22 development closes / 2 latest-signal firm-month choices (31 closes for full signal table); those are conditional alternatives, not authoritative correction impacts. Price/size filters, scores, weights and returns were not evaluated. |
+| Other event tables | 49,821 H5 DB/bulk-overlap events: 235 time disagreements, 16 conditional close changes. 222,729 older 2012-2018 overlap rows: 5,637 time disagreements in both directions, 939 conditional close changes and 3 UTC-year changes. All 5,270 H4 development pairs agree with their bulk source, a tautological path check; H6a shares that source. 24,432 regular/amendment input rows counted. Bulk-only filers and H6 quiet-selected events not exhaustively certified or rerun. |
+| Co-registrants | No full-H0 signal accession under two CIKs. There are 404 full / 305 development CIK disagreements; 4 sampled co-filed headers list both CIKs. Bulk's accession-only dedup loses that one-to-many relationship. Bulk-side CIKs have 0 rows in the current price universe/share metadata; 380 pair-side rows have share metadata. CIK 6201 maps to AAL; 4515 is absent. No blind remap or duplicate deletion is justified. |
+
+**Why no generic fix:** a Z suffix, agreement between tables, a submitter prefix,
+or a single 4/5-hour transform cannot distinguish the valid and shifted records.
+Raw source field values can already be wrong, and an agreeing pair/bulk case
+demonstrates that selecting either entire column can fail. The bounded sample
+does not identify every affected record or a complete safe canonical mapping.
+Neither early-pair look-ahead nor universal conservative delay is asserted for
+the whole population. A header-validated repair needs a qualified record-level
+scope before another empirical evaluation; no convenient side is chosen here.
+
+Read-only audit utility:
+[`p0_acceptance_audit.py`](../scripts/p0_acceptance_audit.py).
+Synthetic parser/impact tests validate seasonal conversion and strict-close/
+latest-signal counting **under declared timezone assumptions**, not source truth.
+The existing time parser's behavior remains unchanged; its documentation now
+states that parsing Z syntax is not source-clock certification.
+
+The collector requires operator-prepared, ignored metadata comparison/sample
+sidecars and the existing caches; it is not a standalone fresh-repo rebuild.
+Its collection lineage records the dirty `8642597` worktree. The final JSON also
+contains explicitly identified offline verdict/aggregation annotations. Do not
+replay its networked `main` as a validation command: it consumes the persisted
+request budget and overwrites the report. Preserve the existing packet first.
+
+An audit-only correction added CIK/accession to the sampled impact calculation
+and made missing identity fail rather than report an unmeasured zero. Recalculation
+from the same saved 22 headers confirmed the zero sample-local counts above;
+it made **no new SEC requests**. A synthetic same-eligibility/reordered-signal
+case confirms that latest selection can change even without a close change.
+
+**Validation now performed** (single-thread BLAS flags set to 1):
+
+```powershell
+python -m pytest -q tests\test_p0_acceptance_audit.py tests\test_timeutil.py tests\test_sec_identity_audit.py
+python -m pytest -q
+python -m ruff check scripts\p0_acceptance_audit.py tests\test_p0_acceptance_audit.py
+python -m ruff check --select E4,E7,E9,F scripts\p0_acceptance_audit.py tests\test_p0_acceptance_audit.py src\asof\timeutil.py
+```
+
+Results: **18 focused passed in 2.28s; 213 full-suite passed in 29.54s**, including
+post-`8642597` code; both Ruff commands passed. Two inherited synthetic
+rank-deficiency warnings remain. These are local code/arithmetic checks, not
+source-clock, cloud-execution or scientific-acceptance certification. The prior
+referee was not rerun because research inputs did not change; its existing PASS
+does not cover this P0 source-integrity stop.
+All 111 local links/anchors in the three updated documents passed checks.
+The three new JSON packets parsed; the ledger remains at 74 rows, original
+signal/bulk/share input hashes match the latest recorded lineage, and the prior
+ledger, manifest, H0 results and referee files have no tracked changes.
+
+**Requests/resources:** 46 audited project-client HTTP attempts cumulatively,
+cap 150, rate <=2/sec including redirects/retries; 104 remain unspent, not a new
+authorization. Receipt in ignored `data/p0_SEC_request_receipt.json`; raw API/
+header/index caches and metadata comparison sidecars remain local. Header sample
+run started after a 20% CPU/no-competing-research-job check; final full-suite
+validation started at 4% CPU with no competing research job detected. No companyfacts load,
+vendor/price request or research/calibration job was started by P0. Synthetic
+unit fixtures are validation, not executions of the queued C1/C2 experiments.
+
+**Queued but NOT executed, preserving order:**
+
+- Part 2: Lead accepts H4's <=6.5e-13 differences as numerical-equivalent/no material
+  missing-NI impact; that is an adjudication receipt, not another H4 run.
+  The formation-only near-tie diagnostic, current-vintage DSR, claims draw and
+  exactly-once corrected manifest refresh remain **P0-blocked**. The 74-row
+  real ledger and older manifest are unchanged; corrected CLI guard is active
+  but was not invoked on them.
+- Part 3: future conservative calibrated-threshold rule, next numbered deviation,
+  C1 harness and C2 seed/allocation/critical-value computation remain **P0-blocked**.
+  No 250,000-replicate budget was consumed or calibrated gate silently added.
+  The stated mandatory allocation itself totals 250,000 (216,000 monthly +
+  30,000 panel + 4,000 harness), leaving no automatic replicate allowance for power.
+  No new threshold, source estimator, N, sign, split or holdout exposure changed.
+- A new generic ingestion correction is not adjudicated, so no numbered
+  time-correction deviation, input rebuild or H0 rerun is falsely logged as done.
+  D12/next numbering remains for the actual accepted next change, not a tag.
+
+The single Part 1 handoff reports this integrity verdict. The final Parts 2-3 handoff
+is not fabricated for unexecuted work; further scope requires Lead review.
+Source rights, human annotation, keys/spending/publication/push/tags and
+holdout access remain owner-reserved; the holdout stays sealed.
+
 ### Source-pilot contract: proposed, not activated
 
 The minimal next source decision is a **development-only coverage and identity
@@ -1097,6 +1205,13 @@ budget or hourly scheduler is supplied by this implementation.
 ### Holdout and reproducibility decision packet: release remains blocked
 
 The decision is **NO OPENING AUTHORIZATION**, not a new experiment or a new seal.
+**P0 is an additional hard stop:** filing-level clock authority, qualified
+record-level correction scope and actual anchor/formation impact must be resolved
+before an affected evaluation. Internal timestamp equality, unit tests and the
+old referee PASS do not clear [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-by-json-z-fields).
+Lead-D10's future calibrated-critical-value requirement is also still unsatisfied:
+no new harness, critical values or calibrated decision-function gate has run here.
+Recording these outstanding requirements is not their registration or completion.
 These independent gates must be recorded before any future command is approved:
 
 1. **Isolation/window gate (owner + Lead):** price cutoff stays 2024-07-31;

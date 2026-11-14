@@ -1,8 +1,8 @@
-"""Time handling: every fact's knowledge time is an aware UTC timestamp.
+"""Aware-UTC time handling; timestamp syntax is not source-clock certification.
 
-EDGAR's submissions JSON reports ``acceptanceDateTime`` in true UTC (verified against the
-US/Eastern ``ACCEPTANCE-DATETIME`` in filing headers, across EST and EDT). Header values are
-US/Eastern local time.
+The P0 audit found inconsistent acceptance instants in cached SEC JSON sources despite Z
+suffixes. Parse the declared representation here; adjudicate accuracy against filing-level
+header/index evidence and source provenance before treating it as knowledge time.
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ MARKET_CLOSE_ET = time(16, 0)
 
 
 def parse_acceptance_utc(value: str) -> datetime:
-    """Parse submissions-JSON ``acceptanceDateTime`` (e.g. '2026-11-09T21:30:40.000Z')."""
+    """Parse a Z-labeled representation; this does not certify the underlying acceptance instant."""
     if not value.endswith("Z"):
         raise ValueError(f"expected UTC 'Z' suffix: {value!r}")
     return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)

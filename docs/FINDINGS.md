@@ -298,3 +298,108 @@ The rounded no-support interpretation is unchanged, but that is not exact
 reproducibility or scientific acceptance. Numerical provenance and the source
 disagreement in F7 need explicit review before additional affected evaluations.
 No holdout was opened or new source substituted.
+
+## F9: P0 acceptance-time authority is not uniformly certified by JSON Z fields
+
+**Status: P0 BLOCKED; no safe global time correction selected.** The read-only
+[authority audit](../results/p0_acceptance_authority_audit.json) used 46 audited SEC
+HTTP attempts cumulatively, bounded at 150 and <=2 requests/sec through the project
+client/cache. No vendor/price request, ingestion mutation or empirical evaluation.
+This discovery is **after the recorded development results**. A later accepted
+input correction needs a numbered deviation before rerunning; existing ledger
+rows and the frozen preregistration are not rewritten.
+
+The 124 development pair/bulk acceptance disagreements are 75 offsets of +4 hours and
+49 of +5 hours (bulk minus pair), matching seasonal ET/UTC offsets. Across the full
+21,502 H0 signal rows, 165 differ: 105 at +4 and 60 at +5. That pattern alone does **not**
+establish which side is wrong or that pair times are early.
+
+Of 26 planned authority samples, 23 were attempted: 22 filings' own header and index
+wall times agreed; the first historical H4 header URL returned 404, leaving all four
+historical-H4 checks incomplete. Under the documented Eastern acceptance-clock
+interpretation, 21 of 22 sampled pair instants match header-derived UTC, versus 7 bulk
+instants. In all 14 sampled differing cases, **pair matches and bulk is 4/5 hours late**.
+The two originally reported Kroger examples are in this category:
+
+- `0001558370-23-004767`: header/index 2023-03-28 08:09:40, ET-derived 12:09:40 UTC;
+  pair 12:09:40Z, bulk 16:09:40Z.
+- `0001558370-24-004603`: header/index 2024-04-02 16:15:17, ET-derived 20:15:17 UTC;
+  pair 20:15:17Z, bulk 2024-04-03 00:15:17Z.
+
+One **internally agreeing** case is also wrong under that clock:
+`0000003545-24-000034` has header/index 2024-02-07 16:54:22, ET-derived 21:54:22 UTC,
+while both tables say 2024-02-08 02:54:22Z, five hours late. Agreement between
+internal paths therefore cannot certify the source time.
+
+Original cached API traces for 118 differing full-signal records (112 root-recent,
+6 historical-page) all equal the stored pair timestamp, not bulk. Six other
+differing CIKs lacked that API cache. Cache presence/value agreement is not a
+per-row ingest-branch receipt: the DB did not persist the path/source vintage
+that wrote each row. Raw bulk sample values already contain the discrepancy,
+so changing only an ISO parser cannot reconstruct an unknown true instant.
+
+### Actual impact versus conditional column substitution
+
+For the 22 successful header/index cases, pair-to-ET-header comparison changes
+**0 first registered closes, 0 formation-eligibility decisions and 0 sample-local
+latest-filing choices**. The selector uses only sampled records, not complete
+formation cross-sections. This is sample evidence,
+**not proof of zero full-sample look-ahead**. No early-information close was
+identified in that sample; the global size/direction remains unknown.
+
+Replacing pair/DB times with bulk would change 22 development first-close
+assignments and 2 latest-signal firm/month choices (31 closes over all H0 rows).
+These are **conditional internal-column comparisons, not measured true correction
+or look-ahead impacts**. For 49,821 H5-event metadata rows in the DB/bulk overlap,
+235 timestamps differ and 16 registered-close assignments differ conditionally.
+For 222,729 older 2012-2018 metadata overlap rows, 5,637 times differ in both directions,
+939 closes and 3 UTC-year assignments differ conditionally. That older overlap is
+not the complete H4/H6 population or an H6 quiet-event rerun.
+
+All 5,270 H4 development pairs agree with their bulk source, a path-consistency
+tautology, not independent authority. H6a uses the same bulk path; 24,432 regular/
+amendment input rows were counted for the existing H4 issuer sample. Bulk-only
+issuers/quiet-event dates were not exhaustively header-certified. No timestamp,
+CIK, production table or snapshot was rewritten, and no H0/H4/H5/H6 rerun followed.
+
+### Co-registrants and authority limits
+
+No H0 signal accession appears under multiple CIKs. There are 404 full-signal
+pair/bulk CIK disagreements (305 in development); in 4 sampled co-filed headers both
+CIKs appear. This supports a one-accession/multiple-filer representation issue,
+not an unambiguous duplicate signal to delete. Bulk's accession-only dedup
+can collapse those relationships. Choosing the surviving bulk CIK is not a
+security-identity adjudication.
+
+All 404 bulk-side CIK rows are absent from the approved current price universe
+and share metadata, whereas 380 pair-side rows have share metadata. For 6201/4515,
+the existing universe maps 6201 to AAL and does not contain 4515. A blind CIK remap
+would lose joins; no such remap or new price/share valuation was performed.
+
+Official source scope is recorded in the audit:
+
+- [SEC PDS specification, section 2.1](https://www.sec.gov/files/info/edgar/pdsdissemspec051310.pdf)
+  labels Acceptance Time as EST (indexed official PDF text).
+- [SEC 2023 rule](https://www.sec.gov/files/rules/final/2023/33-11159.pdf)
+  describes EST/EDT as currently effective (indexed official text).
+- [SEC EDGAR access guidance](https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data)
+  describes the ET operating clock (direct retrieval).
+
+Own header/index wall fields were retrieved directly. These sources do not
+guarantee that every JSON value ending in Z is correctly normalized. The PDFs
+were not directly parsed with a new tool/dependency; historical source coverage
+remains incomplete.
+
+**Action:** withdraw the universal-UTC claim, keep the parser's syntactic behavior
+unchanged, retain both raw sources and header evidence, and stop Batch C before
+Parts 2-3. No new numbered ingestion/calibration deviation or conservative
+critical-value gate is applied prematurely; those require a safely adjudicated
+scope and the ordered next step. In particular, do not advance all pair times,
+subtract an offset from every bulk row, pick latest metadata as truth, or infer
+global safety from the previously tested five filers. The holdout remains sealed.
+
+Validation: **18 focused tests and 213 full-suite tests passed**, including the
+post-`8642597` helper code; selected Ruff checks passed. Two pre-existing synthetic
+rank-deficiency warnings remain. These tests validate audit arithmetic and code
+contracts, not the correctness of all live timestamps. No referee rerun was needed:
+research inputs were unchanged, and the prior referee does not certify P0.

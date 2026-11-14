@@ -24,8 +24,18 @@ and the [bounded Batch B evidence](docs/DATA_AUDIT.md#batch-b-completion-and-sto
 or numerical-reconciliation failures.
 That full-suite result is pinned to Batch B's tested source. The later
 [independent synthetic oracle cross-check](docs/DATA_AUDIT.md#independent-oracle-cross-check-r1-synthetic-only)
-passed56focused tests after offline-helper fixes; no study/referee or stopped
-step was repeated, and no new full-suite result is claimed.
+passed 56 focused tests after offline-helper fixes; no study/referee or stopped
+step was repeated in that cross-check.
+
+**P0 UPDATE — time-integrity BLOCKED.** The broad "JSON acceptance timestamps
+verified UTC" claim is withdrawn: own filing headers/indexes reveal source-clock
+inconsistencies even when both internal tables agree. A blind 4/5-hour shift is
+unsafe. See [F9/P0 evidence](docs/FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-by-json-z-fields).
+No production timestamp, CIK, snapshot or study was changed/rerun under Batch C;
+Parts 2-3, including manifest refresh and new calibration, stopped behind P0.
+The final P0 validation passed **18 focused tests and 213 full-suite tests**
+(including post-`8642597` code), with two existing synthetic warnings; selected
+Ruff passed. Passing tests do not clear the source-clock gate.
 
 The Python package is named `asof`, after the `as_of` queries everything is built on.
 
@@ -39,9 +49,10 @@ The Python package is named `asof`, after the `as_of` queries everything is buil
 
 ## Verified so far
 
-- A newly built five-issuer pilot has **132,527 facts**, all matched to exact acceptance timestamps.
+- A newly built five-issuer pilot has **132,527 facts**, all joined to stored acceptance timestamps.
   Ten fact and six revision as-of checks found zero violations; the planted period-end leak was caught.
   This is a new fixture, not a byte-for-byte restoration of the original pilot.
+  Its source-clock accuracy was not re-certified by the P0 audit.
 - The rebuild processed 32,508 H0 filing features and 12,184 H4 annual filings with zero feature
   errors. A 100-firm [pinned legacy comparison](results/h0_optimization_equivalence.json) passed
   across all four variants and 17 formation months, within its documented D7/D8 comparison scope.
@@ -52,13 +63,16 @@ The Python package is named `asof`, after the `as_of` queries everything is buil
   That is not survivorship coverage. [F2](docs/FINDINGS.md#f2-distress-event-tests-are-invalid-under-a-current-ticker-universe)
   remains unresolved; [F3](docs/FINDINGS.md#f3-three-data-bugs-caught-by-an-implausible-backtest)
   records the original implausible-backtest failures.
-- Latest Batch B local regression tests: **179 passed**, with two existing synthetic
-  rank-deficiency warnings. Selected changed-file Ruff `E4,E7,E9,F` checks pass; default Ruff
-  retains 62 inherited findings versus 63 at the handoff, with no new findings.
+- Latest P0 local regression tests: **213 passed**, with two existing synthetic
+  rank-deficiency warnings. Selected changed-file Ruff `E4,E7,E9,F` checks pass.
+  Full-repository default Ruff was not rerun here; its last recorded baseline
+  had 62 inherited findings versus 63 at the handoff.
   See [validation and rebuild provenance](docs/DATA_AUDIT.md).
 
-Historical header cross-checks established that EDGAR acceptance timestamps are UTC, and the parser
-found the requested sections in 30/30 real 10-Ks. Those original live-data checks were not repeated.
+Historical header cross-checks matched the sampled JSON instants to header-derived UTC;
+they did **not** establish a universal guarantee for all JSON paths/vintages.
+The later P0 counterexamples supersede that broad interpretation. The section
+parser's historical30/30 real10-K result was not repeated here.
 
 ### Development results, not confirmatory findings
 

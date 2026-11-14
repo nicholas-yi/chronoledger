@@ -1,0 +1,20 @@
+{
+  "scope": "Initial own-header observations only, no chosen authoritative internal side or fixes",
+  "cases": [
+    {
+      "cik": 56873,
+      "accession": "0001558370-23-004767",
+      "header_field_found": true,
+      "header_acceptance_raw": "20230328080940",
+      "candidate_UTC_if_header_ET": "2023-03-28T12:09:40+00:00"
+    },
+    {
+      "cik": 56873,
+      "accession": "0001558370-24-004603",
+      "header_field_found": true,
+      "header_acceptance_raw": "20240402161517",
+      "candidate_UTC_if_header_ET": "2024-04-02T20:15:17+00:00"
+    }
+  ],
+  "actual_HTTP_attempts": 2
+}
