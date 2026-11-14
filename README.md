@@ -326,6 +326,9 @@ is weak evidence, and more data matters more than a better estimator.
   borrow fees and short availability are not modeled.
 - **Synthetic extraction labels.** The LLM benchmark's ground truth comes from injected fictitious
   companies, not human annotation.
+  [Free real component benchmarks](docs/RESEARCH_PLAN.md#free-real-measurement-evaluations)
+  can test financial QA, arithmetic or claim verification after release/rights
+  qualification; none has been run here or replaces the paired-disclosure gold audit.
 
 ## What would change the answer
 
@@ -370,6 +373,7 @@ point-in-time queries everything is built on.
 | [`inference.py`](src/asof/inference.py), [`robust_inference.py`](src/asof/robust_inference.py) | Alpha tests, deflated Sharpe, small-sample HAC and cluster methods |
 | [`invariance.py`](src/asof/invariance.py), [`leakprobe.py`](src/asof/leakprobe.py) | Time-travel invariance harness and language-model leak probe |
 | [`ledger.py`](src/asof/ledger.py), [`referee.py`](src/asof/referee.py) | Append-only trial ledger and the automated referee |
+| [`costs.py`](src/asof/costs.py), [`studies.py`](src/asof/studies.py), [`measurement.py`](src/asof/measurement.py) | Prospective cost/P&L receipts, offline run-contract checks and evidence-linked measurement scoring; not real execution or sandbox verification |
 | [`scripts/`](scripts) · [`results/`](results) · [`tests/`](tests) | Data builds and study runners · every published number · unit, invariance and mutation tests |
 
 ## Documentation

@@ -141,6 +141,91 @@ frames API (`dei:EntityPublicFloat`). Having a current ticker is an upper bound 
 source has the firm's price history. Firms acquired, merged, taken private, or failed since then
 are usually missing.
 
+### Offline cost, run-contract and measurement fixes
+
+**2026-11-14 owner request: implement the three remaining offline proposals.**
+These changes prepare safe evaluation; they do not run a model, repair P0,
+adopt a source, annotate gold, train or evaluate a strategy.
+
+#### Cost receipts
+
+[costs.py](../src/asof/costs.py) remains separate from frozen portfolio costs.
+Existing long-short calls keep their behavior; an explicitly declared
+`exposure="long_only"` reports borrow **not applicable**, rather than requiring
+unsupported historical shortability. Nonzero short-borrow costs contradict
+long-only and fail; fill evidence and financing costs still apply.
+
+`reconcile_turnover` compares observed absolute traded notional Q with
+T=Q/(2*capital), without renormalizing the supplied frozen turnover. The T07
+fixture (capital10,000, Q2,000, half-spread4bp, frozenT.2) preserves frozen
+spread cost1.60 versus observed0.80 and reports **basis_mismatch**, not1.60+.80
+or a silently halved frozenT. Numerical equality tolerance is arithmetic,
+not an economic acceptance threshold.
+
+`reconcile_net_return` requires a declared distribution basis. The component
+ledger still reports all cash costs; net P&L deducts distributions only if they
+are not already in gross total return. Toy spread4 +fees1 +borrow15 +financing10
++distributions50 gives full drag80; total-return gross-50 deducts only30more,
+not another50. Unknown basis or unavailable components returns explicit
+unavailable/null fields. The older component break-even field retains its
+caller-basis contract; use the new basis-aware receipt for netting.
+
+#### Frozen run-contract checks, not a launcher
+
+[studies.py](../src/asof/studies.py) now provides typed RunRequest, RunPermit,
+RunBudget and validation/receipt records. They check exact request identity,
+source/config/input hashes, finite budgets, expiry, scope, completed
+prerequisites, required gates, access restrictions and development cutoff.
+Synthetic permit receipts cannot qualify real work. A validation is bound to
+its exact request and cannot be reused to expand another request.
+
+The design-readiness helper remains distinct: execution-contract checks require
+**completed**, not merely ready, prerequisite studies. `contract_complete`
+means supplied fields/assertions passed validation, **not authentic permission,
+physical source verification or proof of an enforced sandbox**. An external
+supervisor still has to verify receipts and enforce access/quotas.
+
+`contract_dry_run` compares supplied synthetic usage/metrics and preserves
+partial failures and simulated nulls. It launches no callback, process, worker,
+network or filesystem operation. A missing output is not zero; budget excess,
+expired/mismatched permit and execution failure cannot become successful
+evidence. It cannot declare real scientific support.
+
+#### Measurement-only scoring
+
+[measurement.py](../src/asof/measurement.py) evaluates supplied exact claim-ID
+sets on paired cases with issuer/time/split and evidence metadata. It is not
+a semantic labeler or source-verification service.
+
+- Only complete, declared-verified gold enters scoring. Unknown, unverified
+  and incomplete gold have separate counts and never become negative labels.
+- Abstention is distinct from an emitted empty prediction: it reduces coverage,
+  retains missed gold claims as false negatives and is not an exact match.
+- Precision/recall with zero denominator is null, not100%. Report prediction
+  coverage and both unconditional/selected exact-match accuracy together.
+- Duplicate cases fail. Explicit half-open chronological boundaries and
+  issuer-disjoint partitions are checked; no dates or split inferred.
+- Evidence refs and verification flags are caller declarations, not independently
+  checked quotes or annotation independence. Split hygiene alone does not prove
+  a model's pretraining or historical availability is clean.
+
+The real60-pair roster/gold audit remains P0/human-protocol blocked. No real
+labels were generated or current/future outcomes read by these helpers.
+
+#### Validation and reproducible synthetic receipt
+
+Before the demonstration, **60 focused tests passed in3.20s** across costs,
+studies, measurement, prior independent oracles, D4 and labels. Configured new-file
+and selected changed-file Ruff passed. Final full-suite/run receipts will be
+recorded after execution; this is not evidence those steps already ran.
+
+The bounded [fixture script](../scripts/check_offline_contracts.py) writes
+`results/offline_contract_fixtures.json` from invented unit values only. It
+demonstrates blocked request expansion, missing metrics, usage overrun,
+preserved partial errors, a simulated null and cost/measurement reconciliation.
+It is not real-label accuracy, a training experiment, permission to access
+financial data or a real sandbox test. No ledger row is appended.
+
 The float-bucket coverage table is the historical audit that motivated D1, not a
 bucket table regenerated during this continuation. Fresh reconstruction,
 runtime/lineage checks, and the referee's distress contrasts are identified separately.
