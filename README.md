@@ -332,9 +332,9 @@ is weak evidence, and more data matters more than a better estimator.
   declined all 10 FinQA questions. Human experts score about
   [84% on TAT-QA](https://arxiv.org/html/2105.07624v2#S4.T3). Samples this small can expose
   bugs, but they can't measure reading skill.
-  A later local-model check produced eight abstentions and stopped on a ninth-request
-  timeout; it did not establish reading ability. The same research-plan section records
-  the incomplete run and its limits.
+  A later local-model check stopped after abstentions and a timeout. An invented positive
+  control then met its fixed pass rule; that checks the harness, not financial-reading
+  skill. The research plan records both results and their limits.
 
 ## What would change the answer
 

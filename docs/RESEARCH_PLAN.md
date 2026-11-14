@@ -336,8 +336,8 @@ The ten questions came from nine contexts, two also used by earlier questions.
 The current model may have seen this public benchmark during training.
 No-report abstention cannot prove otherwise. Location/quote checks are not
 proof of answer support, and no non-abstained model answer exercised them here.
-Before another real-data reader test, a separately specified trivial answerable
-model control and human-reviewed support checks are needed. Neither model
+That failure motivated the invented positive control below; human-reviewed
+support checks are still needed. Neither model
 acquisition, training, formal H1, historical usability nor a return test follows.
 The run used no prices, returns or sealed test data.
 
@@ -350,6 +350,38 @@ python -m pytest -q tests\test_reader_diagnostic.py tests\test_cached_timestamps
 The saved inference used source revision `9c14fec`; reproducing model requests
 requires that revision, the pinned existing model/server and a separate run
 decision. Changing the timeout or rerunning the exposed questions was not done.
+
+### Invented positive control: can the reader answer at all?
+
+An [offline check of the eight saved responses](../results/reader_pc1_diagnosis.json)
+found explicit, valid abstentions: normal endings, only 23-24 generated tokens,
+no visible thinking or empty output, and no token-limit hit. They were not
+parse failures converted into abstentions.
+
+The [next control was specified before running](../results/reader_pc1_config.json):
+twelve invented reports, with four cell lookups, four arithmetic questions,
+two text lookups and two missing-answer controls. The answer-first instruction
+and output-field ordering passed the fixed rule: **9/10 answerable items correct,
+including units, and 2/2 correct abstentions**. One answer had the right count
+but incorrectly labelled it percent. It remains wrong; nothing was tuned or rerun.
+
+The old instruction/schema, tested with the same four-thread runtime, scored
+1/10 plus both abstentions. Five outputs were singleton lists rejected by the
+declared scalar-only scoring rule, so the score difference also reflects format,
+not just factual accuracy. Prompt wording and field ordering changed together; the test
+cannot identify which caused the difference.
+
+All 24 requests completed in 2.75 minutes. Actual launch CPU averaged 68.3%;
+brief peaks reached 98.5%, but the fixed three-consecutive-second stop did not
+fire. The largest isolated model process peaked near 4.2 GiB and was stopped
+afterward. The [per-item result](../results/reader_pc1_status.json) preserves
+every outcome. **This establishes trivial harness function, not reading skill.**
+
+A [proposal for thirty fresh real questions](../results/reader_next_real_proposal.json)
+excludes all seventy earlier question IDs and compares report-supplied versus
+no-report answers with the native scorer. It is a proposal only: no questions
+were selected, corpus opened or model requests made for it. No training or
+historical-use claim follows.
 
 ### Three measurement ideas worth testing
 
