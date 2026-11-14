@@ -22,7 +22,8 @@ from asof.benchmark_reporting import wilson95
 from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.reader_diagnostic import ReaderAnswer, references_locally_valid, request_body
 
-CONFIG = PROJECT_ROOT / "results" / "reader_diagnostic_config.json"
+CONFIG = PROJECT_ROOT / "results" / "reader_diagnostic_config_v2.json"
+FIRST_CONFIG = PROJECT_ROOT / "results" / "reader_diagnostic_config.json"
 RECEIPT = PROJECT_ROOT / "results" / "reader_diagnostic_status.json"
 PRIVATE = DATA_DIR / "reader_diagnostic"
 ENDPOINT = "http://127.0.0.1:11435"
@@ -59,14 +60,23 @@ def freeze() -> None:
     if len(set(ids)) != len(ids) or len(excluded) != 60:
         raise ValueError("unique development IDs and exactly sixty prior exclusions required")
     chosen = random.Random(SEED).sample(sorted(set(ids) - excluded), COUNT)
+    first = json.loads(FIRST_CONFIG.read_text())
+    if chosen != first["ids"]:
+        raise ValueError("pre-inference technical amendment must preserve the first selected items")
     with httpx.Client(base_url=ENDPOINT, timeout=5) as client:
         model = model_metadata(client)
     options = {
         "temperature": 0, "seed": SEED, "num_predict": 256, "num_ctx": 16384,
         "num_thread": 1, "num_gpu": 0, "num_batch": 128,
     }
+    if model != first["model"] or options != first["options"] or assets != first["assets"]:
+        raise ValueError("technical amendment must not change model, options or benchmark assets")
     config = {
         "kind": "SMALL CURRENT-MODEL DEVELOPMENT QA DIAGNOSTIC; not formal H1 or historical usability",
+        "previous_config_sha256": ledger.file_sha256(FIRST_CONFIG),
+        "pre_inference_amendment": "Capture clean start lineage before self-generated result writes; "
+                                  "verify frozen source/config again at finish. No model call or "
+                                  "question scoring occurred; IDs, model, prompts, metrics and limits unchanged.",
         "ids": chosen, "excluded_ids": sorted(excluded), "seed": SEED, "count": COUNT,
         "selection": "Random(seed).sample(sorted(all devUIDs minus prior60),10); no type/answer filter",
         "model": model, "endpoint": ENDPOINT, "options": options, "arms": ARMS,
@@ -116,6 +126,8 @@ def run() -> None:
         raise ValueError("fresh deterministic selection does not reconcile")
     native = load_native(ROOT / "tatqa" / "tatqa_metric.py", "tatqa_reader_native")
     scorers = {a: native.TaTQAEmAndF1() for a in (*ARMS, "symbolic_v2")}
+    start_lineage = ledger.lineage([CONFIG, *SOURCE_FILES])
+    config_hash = ledger.file_sha256(CONFIG)
     receipt = {"status": "incomplete", "generation_attempts": 0, "items": [],
                "config_sha256": ledger.file_sha256(CONFIG)}
     for uid in expected:
@@ -228,10 +240,20 @@ def run() -> None:
                        "wall_seconds": time.monotonic() - wall,
                        "Python_peak_resident_bytes": max(peak, resident_bytes()),
                        "note": "Ollama durations are not CPU measurements; model memory is separate."},
-            lineage=ledger.lineage([CONFIG, *SOURCE_FILES]),
+            lineage=start_lineage,
+            frozen_source_and_config_unchanged=(
+                ledger.file_sha256(CONFIG) == config_hash and all(
+                    ledger.file_sha256(PROJECT_ROOT / p) == digest
+                    for p, digest in config["source_sha256"].items()
+                )
+            ),
         )
+        if not receipt["frozen_source_and_config_unchanged"]:
+            receipt.update(status="invalid_source_changed", stop_reason="source_or_config_changed")
         persist()
         print({"status": receipt["status"], "generation_attempts": receipt["generation_attempts"]})
+        if not receipt["frozen_source_and_config_unchanged"]:
+            raise RuntimeError("frozen reader source or configuration changed during inference")
 
 
 if __name__ == "__main__":

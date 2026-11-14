@@ -20,7 +20,9 @@ def test_cached_audit_never_constructs_network_client_and_preserves_missing(monk
     module = _script(monkeypatch)
     monkeypatch.setattr(httpx, "Client", lambda *a, **k: (_ for _ in ()).throw(AssertionError("network")))
     missing = module.cached_evidence(1, "0000000001-20-000001", tmp_path)
-    assert missing == {"header_cached": False, "index_cached": False, "assets": []}
+    assert missing == {
+        "header_cached": False, "index_cached": False, "assets": [], "cache_read_issues": [],
+    }
 
 
 def test_cached_fields_match_own_index_without_promoting_clock_authority(monkeypatch, tmp_path):
@@ -51,3 +53,21 @@ def test_ambiguous_cached_clock_is_explicit_not_a_chosen_UTC(monkeypatch, tmp_pa
     result = module.cached_evidence(1, acc, tmp_path)
     assert result["UTC_if_header_ET"] is None
     assert "ambiguous" in result["header_clock_issue"]
+
+
+def test_large_cached_index_is_explicitly_unread_not_absent_or_a_false_clock_match(monkeypatch, tmp_path):
+    module = _script(monkeypatch)
+    acc = "0000000001-20-000001"
+    base = f"https://www.sec.gov/Archives/edgar/data/1/{acc.replace('-', '')}/{acc}"
+    for suffix, raw in (
+        ("-index-headers.html", b"<ACCEPTANCE-DATETIME>20200102163000"),
+        ("-index.html", b"x" * 65537),
+    ):
+        path = response_cache_path(base + suffix, tmp_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(gzip.compress(raw))
+    result = module.cached_evidence(1, acc, tmp_path)
+    assert result["index_cached"] is True
+    assert result["header_index_wall_match"] is None
+    assert result["cache_read_issues"] == ["index_metadata_exceeds_65536_byte_read_bound"]
+    assert result["UTC_if_header_ET"] == "2020-01-02T21:30:00+00:00"
