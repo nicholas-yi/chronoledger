@@ -1,0 +1,297 @@
+{
+  "kind": "INVENTED POSITIVE CONTROL, not benchmark/financial-reading evidence",
+  "items": [
+    {
+      "id": "PC01",
+      "category": "lookup",
+      "item": {
+        "question": "What is fictional FableWren Works' 2020 revenue in the table's units?",
+        "table": [
+          [
+            "Revenue (million)",
+            "2019",
+            "2020"
+          ],
+          [
+            "Revenue",
+            "12",
+            "17"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": "17",
+      "scale": "million",
+      "numeric": true
+    },
+    {
+      "id": "PC02",
+      "category": "lookup",
+      "item": {
+        "question": "How many staff did fictional AmberKite Demo have in 2020?",
+        "table": [
+          [
+            "Staff",
+            "2019",
+            "2020"
+          ],
+          [
+            "Headcount",
+            "8",
+            "11"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": "11",
+      "scale": "",
+      "numeric": true
+    },
+    {
+      "id": "PC03",
+      "category": "lookup",
+      "item": {
+        "question": "What is fictional CloudMica Toy's 2019 cost in the table's units?",
+        "table": [
+          [
+            "Cost (thousand)",
+            "2019",
+            "2020"
+          ],
+          [
+            "Cost",
+            "6",
+            "9"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": "6",
+      "scale": "thousand",
+      "numeric": true
+    },
+    {
+      "id": "PC04",
+      "category": "lookup",
+      "item": {
+        "question": "How many demo units did fictional TernPetal ship in 2020?",
+        "table": [
+          [
+            "Units",
+            "2019",
+            "2020"
+          ],
+          [
+            "Shipments",
+            "14",
+            "19"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": "19",
+      "scale": "",
+      "numeric": true
+    },
+    {
+      "id": "PC05",
+      "category": "arithmetic",
+      "item": {
+        "question": "For fictional MossLantern, what is 2020 revenue minus 2019 revenue, in table units?",
+        "table": [
+          [
+            "Revenue (million)",
+            "2019",
+            "2020"
+          ],
+          [
+            "Revenue",
+            "10",
+            "18"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": "8",
+      "scale": "million",
+      "numeric": true
+    },
+    {
+      "id": "PC06",
+      "category": "arithmetic",
+      "item": {
+        "question": "For fictional OpalFinch, what is 2020 cost minus 2019 cost? Keep the sign and table units.",
+        "table": [
+          [
+            "Cost (thousand)",
+            "2019",
+            "2020"
+          ],
+          [
+            "Cost",
+            "30",
+            "21"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": "-9",
+      "scale": "thousand",
+      "numeric": true
+    },
+    {
+      "id": "PC07",
+      "category": "arithmetic",
+      "item": {
+        "question": "What is fictional BrambleQuartz's percent change in demo units from 2019 to 2020?",
+        "table": [
+          [
+            "Units",
+            "2019",
+            "2020"
+          ],
+          [
+            "Units",
+            "20",
+            "25"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": "25",
+      "scale": "percent",
+      "numeric": true
+    },
+    {
+      "id": "PC08",
+      "category": "arithmetic",
+      "item": {
+        "question": "What is fictional WillowComet's percent change in demo units from 2019 to 2020?",
+        "table": [
+          [
+            "Units",
+            "2019",
+            "2020"
+          ],
+          [
+            "Units",
+            "80",
+            "60"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": "-25",
+      "scale": "percent",
+      "numeric": true
+    },
+    {
+      "id": "PC09",
+      "category": "text",
+      "item": {
+        "question": "What project name does fictional FernCompass use?",
+        "table": [],
+        "paragraphs": [
+          "FernCompass uses the project name Copper Ladder."
+        ]
+      },
+      "expected": "Copper Ladder",
+      "scale": "",
+      "numeric": false
+    },
+    {
+      "id": "PC10",
+      "category": "text",
+      "item": {
+        "question": "What material does fictional VelaAcorn use for its demo cases?",
+        "table": [],
+        "paragraphs": [
+          "VelaAcorn makes its demo cases from recycled cork."
+        ]
+      },
+      "expected": "recycled cork",
+      "scale": "",
+      "numeric": false
+    },
+    {
+      "id": "PC11",
+      "category": "unanswerable",
+      "item": {
+        "question": "What is fictional SlateWisp's 2021 revenue?",
+        "table": [
+          [
+            "Revenue (million)",
+            "2019",
+            "2020"
+          ],
+          [
+            "Revenue",
+            "4",
+            "5"
+          ]
+        ],
+        "paragraphs": []
+      },
+      "expected": null,
+      "scale": "",
+      "numeric": true
+    },
+    {
+      "id": "PC12",
+      "category": "unanswerable",
+      "item": {
+        "question": "In which city is fictional LarkPrism headquartered?",
+        "table": [],
+        "paragraphs": [
+          "LarkPrism uses biodegradable packaging for its demonstration products."
+        ]
+      },
+      "expected": null,
+      "scale": "",
+      "numeric": false
+    }
+  ],
+  "seed": 2026111411,
+  "arms": [
+    "old_prompt_schema",
+    "answer_first"
+  ],
+  "primary_arm": "answer_first",
+  "model": "qwen3.5:4b",
+  "model_API_digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+  "endpoint": "http://127.0.0.1:11435",
+  "expected_Ollama_version": "0.40.16",
+  "options": {
+    "temperature": 0,
+    "seed": 2026111411,
+    "num_predict": 512,
+    "num_ctx": 8192,
+    "num_thread": 4,
+    "num_gpu": 0,
+    "num_batch": 128
+  },
+  "matched_arm_note": "Both arms use identical new runtime options and240s call limit. Old arm preserves original prompt/schema, not its1thread/90s limits. New arm changes only system guidance plus schema property/required order. This bundle comparison cannot isolate those two components.",
+  "thinking": "think=false in both arms, as it already was in the prior run.",
+  "normalization": "Numeric Decimal exact after comma/$ removal; trailing% implies percent unless conflicting scale. Numeric value and scale must both match; no rescaling/tolerance. Text casefold/collapse whitespace/strip terminal periods. Scalar only. No fuzzy matching or synonym substitution.",
+  "pass": "Primary arm:>=9of10 answerable exact+scale AND2of2 unanswerable explicitabstain; all12attempted, no missing/errors substituted. Old arm descriptive, samecriterion.",
+  "order": "Fixed item order; per-item arm order shuffled by Random(seed). No retries.",
+  "limits": {
+    "calls": 24,
+    "wall_seconds": 1200,
+    "per_call_seconds": 240,
+    "launch_host_CPU_mean3samples_below_percent": 70,
+    "abort_host_CPU_percent_above": 90,
+    "consecutive_1second_samples": 3,
+    "expected_model_RAM_GiB": "~5",
+    "note": "Cooperative watchdog, not OS sandbox."
+  },
+  "source_sha256": {
+    "scripts\\run_reader_positive_control.py": "8ac3488548c3227e25f3bc483ddbf8f42c32bbf6eeba7ded462d3704e1ecd669",
+    "src\\asof\\reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+    "src\\asof\\reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+    "src\\asof\\benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+    "src\\asof\\extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad"
+  },
+  "diagnosis_sha256": "b1379e4bb49910caecde8757ad51d34197a6eeb9e69934bce7615aead2a602ae",
+  "scope": "No benchmark dataset opened or questions rerun, model pull, training, keys, paid calls, market data, sealed data, push, tag or trial-ledger append."
+}

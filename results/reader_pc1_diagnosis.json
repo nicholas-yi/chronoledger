@@ -1,0 +1,150 @@
+{
+  "kind": "Offline metadata/parse diagnosis only; raw text stays ignored/local.",
+  "responses": [
+    {
+      "file": "2f25de01-c367-4011-8749-a1132424b6d0_grounded.json",
+      "sha256": "71fd93a8fe584689b3d9930670f1c33bff854ea66d6b747f0a54e9c3d58b3f56",
+      "done_reason": "stop",
+      "eval_count": 23,
+      "token_limit_hit": false,
+      "thinking_field_present": false,
+      "nonempty_thinking_field": false,
+      "visible_think_markup": false,
+      "empty_visible_text": false,
+      "parse_rule": "valid",
+      "explicit_abstain": true,
+      "answer_is_null": true
+    },
+    {
+      "file": "2f25de01-c367-4011-8749-a1132424b6d0_no_context.json",
+      "sha256": "fabdbb02b30963c81f4b7172587ff373da5bcea3db086e98147a4d945a01f3a2",
+      "done_reason": "stop",
+      "eval_count": 23,
+      "token_limit_hit": false,
+      "thinking_field_present": false,
+      "nonempty_thinking_field": false,
+      "visible_think_markup": false,
+      "empty_visible_text": false,
+      "parse_rule": "valid",
+      "explicit_abstain": true,
+      "answer_is_null": true
+    },
+    {
+      "file": "2f4e9dbb-92fc-4ade-873d-83a1cb1c0a21_grounded.json",
+      "sha256": "1658e1071253e03618b10be4970c9088fb08fc3b5b2a61964d29b549650cef2d",
+      "done_reason": "stop",
+      "eval_count": 23,
+      "token_limit_hit": false,
+      "thinking_field_present": false,
+      "nonempty_thinking_field": false,
+      "visible_think_markup": false,
+      "empty_visible_text": false,
+      "parse_rule": "valid",
+      "explicit_abstain": true,
+      "answer_is_null": true
+    },
+    {
+      "file": "2f4e9dbb-92fc-4ade-873d-83a1cb1c0a21_no_context.json",
+      "sha256": "5dd3e340330b28a8a74647b284f78c632aec7b6f913cad0248f1cd4be7f80910",
+      "done_reason": "stop",
+      "eval_count": 23,
+      "token_limit_hit": false,
+      "thinking_field_present": false,
+      "nonempty_thinking_field": false,
+      "visible_think_markup": false,
+      "empty_visible_text": false,
+      "parse_rule": "valid",
+      "explicit_abstain": true,
+      "answer_is_null": true
+    },
+    {
+      "file": "407d43ea-c405-4b88-95ae-d15b1f25fb25_grounded.json",
+      "sha256": "55a62e1f0f20e08b0e7e929cca18540870f8d2658de9d1a4fd31eb35931ef71f",
+      "done_reason": "stop",
+      "eval_count": 24,
+      "token_limit_hit": false,
+      "thinking_field_present": false,
+      "nonempty_thinking_field": false,
+      "visible_think_markup": false,
+      "empty_visible_text": false,
+      "parse_rule": "valid",
+      "explicit_abstain": true,
+      "answer_is_null": true
+    },
+    {
+      "file": "407d43ea-c405-4b88-95ae-d15b1f25fb25_no_context.json",
+      "sha256": "653015c89949cc5e6c0acac9aea466314893e2bca86da3f0c1d050df2a648069",
+      "done_reason": "stop",
+      "eval_count": 23,
+      "token_limit_hit": false,
+      "thinking_field_present": false,
+      "nonempty_thinking_field": false,
+      "visible_think_markup": false,
+      "empty_visible_text": false,
+      "parse_rule": "valid",
+      "explicit_abstain": true,
+      "answer_is_null": true
+    },
+    {
+      "file": "a1a74a36-62d8-4b1f-b438-2ea8890bcb39_grounded.json",
+      "sha256": "460778f1235ee73a51d2f8acf335e155e08c21d4dc7c139116c2ab4a8c8f5a18",
+      "done_reason": "stop",
+      "eval_count": 23,
+      "token_limit_hit": false,
+      "thinking_field_present": false,
+      "nonempty_thinking_field": false,
+      "visible_think_markup": false,
+      "empty_visible_text": false,
+      "parse_rule": "valid",
+      "explicit_abstain": true,
+      "answer_is_null": true
+    },
+    {
+      "file": "a1a74a36-62d8-4b1f-b438-2ea8890bcb39_no_context.json",
+      "sha256": "e1c58f9cbac24e5cdf4c6f9a0df16cb222e30dd405efe249e1832ccc721ec774",
+      "done_reason": "stop",
+      "eval_count": 23,
+      "token_limit_hit": false,
+      "thinking_field_present": false,
+      "nonempty_thinking_field": false,
+      "visible_think_markup": false,
+      "empty_visible_text": false,
+      "parse_rule": "valid",
+      "explicit_abstain": true,
+      "answer_is_null": true
+    }
+  ],
+  "counts": {
+    "responses": 8,
+    "done_reason": {
+      "stop": 8
+    },
+    "eval_count": {
+      "23": 7,
+      "24": 1
+    },
+    "valid_parse": 8,
+    "explicit_abstain_true": 8,
+    "thinking_field_present": 0,
+    "nonempty_thinking": 0,
+    "empty_visible_text": 0,
+    "token_limit_hits": 0
+  },
+  "conclusion": "All eight are explicit schema-valid abstentions with normal stops, not parse-to-abstain fallbacks, hidden-thinking text or token-cap truncation. Prompt/schema conservatism is a hypothesis; timeout/slowness is separate.",
+  "lineage": {
+    "git_commit": "4e27a2e06b38de81ed22dff70d61c8f6211df7a3",
+    "git_dirty": true,
+    "inputs": {},
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  }
+}
