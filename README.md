@@ -315,13 +315,11 @@ is weak evidence, and more data matters more than a better estimator.
   half after publication ([McLean & Pontiff 2016](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2156623)),
   so a realistic effect would be far smaller.
 - **Timestamps not yet verified filing by filing.** Acceptance times come from SEC JSON, which is
-  known to be wrong by one Eastern-time offset for some filings.
-  The [offline assignment planner](docs/DATA_AUDIT.md#approved-offline-p0-assignment-planner)
-  screens cached candidate clocks and joint selection/window decisions; it does
-  not repair inputs or establish the actual look-ahead impact. Its
-  [completed metadata screen](results/p0_assignment_plan.json) flags 17,389
-  potentially sensitive accessions under a broad hypothetical error model,
-  including internally agreeing records; these are not verified errors.
+  known to be wrong by one Eastern-time offset for some filings. An
+  [offline screen](results/p0_assignment_plan.json) found that, if any filing's time could be off
+  by that offset, most filings' trading-day assignment could change, including filings where both
+  SEC sources agree. A small targeted fix is therefore not enough; the times need checking against
+  each filing's own header ([details](docs/DATA_AUDIT.md#approved-offline-p0-assignment-planner)).
 - **Industry codes are today's.** Industry neutralization uses current SIC codes, not those in force
   at each filing date.
 - **Costs are a spread estimate.** Turnover costs use a daily high/low/close proxy; price impact,
