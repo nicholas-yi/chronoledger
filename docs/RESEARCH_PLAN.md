@@ -167,108 +167,52 @@ free public sources only. Prices below are as listed on the providers' public pa
 [Hugging Face](https://huggingface.co/datasets) and [Kaggle](https://www.kaggle.com/datasets) are
 useful for finding labelled text for measurement work. Each dataset carries its own licence: for
 example, [Financial PhraseBank](https://huggingface.co/datasets/takala/financial_phrasebank) is
-CC BY-NC-SA 3.0, which rules out commercial use. No survivorship-free,
-point-in-time equity panel on these platforms was qualified by this review;
-a generic finance sentiment dataset is not a substitute for labelled pairs
-of company disclosures. This is not
-proof that a suitable freely licensed source cannot exist.
+CC BY-NC-SA 3.0, which rules out commercial use. None of the platforms offered a survivorship-free,
+point-in-time equity panel, and a generic finance sentiment dataset is not a substitute for labelled
+pairs of company disclosures.
 
-## Free real measurement evaluations
+## Free benchmarks for testing measurement on real data
 
-**Public research completed 2026-11-14; no datasets/models downloaded or
-evaluations run.** Research's `CL-FREE-EVAL-20261114-R1` report
-(`2f7ee5e7-1b84-4c24-863c-4a4f380c2419`) was read in full. Pins below are
-reference revisions, not downloaded-byte checksums or source clearance.
+The project's extraction benchmark uses synthetic labels. Before testing new return signals, the
+cheapest real check is whether the measurement tools read financial documents correctly. Several
+free, human-annotated benchmarks can test that. None has been run yet, and each one's licence and
+release version must be pinned first.
 
-The most practical next real evaluation is a **component measurement benchmark**,
-not another return backtest. These provide genuine annotations, but not
-representative gold for paired disclosure changes, missing endpoints or H6
-follow-up completeness. They are independently constructed datasets, not
-necessarily unseen by a model's pretraining.
+| Benchmark | What it labels | How it is scored | Watch out for |
+|---|---|---|---|
+| [TAT-QA](https://github.com/NExTplusplus/TAT-QA) ([paper](https://aclanthology.org/2021.acl-long.254/)) | 16,552 questions over tables and text from 182 annual reports, written by financially trained annotators and checked by two verifiers | Exact match and F1, including scale, units and arithmetic | Splits are random, not by company or date; data is CC BY 4.0 |
+| [FinQA](https://github.com/czyssrs/FinQA) ([paper](https://arxiv.org/abs/2109.00122)) | 8,281 expert-written questions with the facts and the calculation that answers each one, from 1999-2019 reports | Execution accuracy of the calculation | Use the corrected preprocessing: the authors disclosed and corrected a label-leak bug in 2022 |
+| [FinDVer](https://github.com/yilunzhao/FinDVer) ([paper](https://arxiv.org/abs/2411.05764)) | 2,400 true-or-false financial claims with supporting evidence, from early-2024 filings | Balanced accuracy and macro-F1, plus whether the cited evidence is right | Recent documents may already be in a modern model's training data |
+| [FinanceBench](https://huggingface.co/datasets/PatronusAI/financebench) ([paper](https://arxiv.org/abs/2311.11944)) | 150 public question-answer pairs with evidence (the full set is gated) | Answer correctness and refusal rate | Non-commercial licence (CC BY-NC 4.0) and a small sample |
+| [FinCausal 2020](https://github.com/yseop/YseopLab/tree/develop/FNP_2020_FinCausal) ([paper](https://arxiv.org/abs/2012.02505)) | Cause-and-effect spans in 2019 financial news | Weighted precision, recall and F1 | Linguistic cause and effect is not economic causation |
+| [ConvFinQA](https://github.com/czyssrs/ConvFinQA) ([paper](https://arxiv.org/abs/2210.03849)) | 3,892 multi-turn conversations built on FinQA | Turn-level and conversation-level accuracy | Derived from FinQA, so not an independent check; its test answers are held back |
 
-| Priority / reference pin | Real annotation and unit | Native metrics / important limits |
+**A first, small diagnostic.** Score 30 TAT-QA development questions, and possibly 10 from FinQA,
+with a simple deterministic baseline before trying any language model. Every item would be reported,
+including the ones the method declines to answer. Two precautions apply:
+
+- Check that the source reports don't overlap the project's sealed holdout years before opening
+  any files.
+- Running a benchmark's own reference calculations only tests the scorer, not the model.
+
+Forty items can expose bugs; they cannot establish that the claim-level signal works or that it
+would have been usable historically.
+
+### Three measurement ideas worth testing
+
+| Idea | What it compares | Cheapest first check |
 |---|---|---|
-| TAT-QA: [paper](https://aclanthology.org/2021.acl-long.254/) and [author release](https://github.com/NExTplusplus/TAT-QA/tree/870accc41953dcde885aabeb963d94aabdc0fbc3) |16,552questions over2,757table/text contexts from182reports; financially knowledgeable annotators and two verifiers. Dataset explicitly CC BY4.0, distinct from repository MIT. |Official EM/F1, scale/unit/arithmetic and evidence errors. Random context splits are not chronological/report/issuer-disjoint assurance. README says January2024test release, but the [gold-test commit](https://github.com/NExTplusplus/TAT-QA/commit/12fd7c8bb474e8b45e9f54dbf7c281c178f1a510) is dated2024-02-14; preserve both provenance statements. |
-| FinQA: [paper v3](https://arxiv.org/html/2109.00122v3) and [author release](https://github.com/czyssrs/FinQA/tree/0f16e2867befa6840783e58be38c9efb9229d742) |8,281expert-authored questions with facts, executable programs and answers; selected1999-2019reports. Public gold test is distinct from the private challenge test. Repository advertises MIT; data/report rights need scoped qualification. |Execution accuracy plus program equivalence and evidence support. Use corrected preprocessing: authors disclose a2022label-leakage bug. Report-disjoint does not prove issuer-disjoint or chronological separation. |
-| FinDVer: [paper v1](https://arxiv.org/html/2411.05764v1) and [2026author release](https://github.com/yilunzhao/FinDVer/tree/e8bb237def4ce555a606a45edba22666e31df248) |2,400entailed/refuted financial claims and evidence, based on523early2024filings. Public gold became available inJuly2026; README/history adds MIT. Expert annotation includes GPT-4o refinement and human validation, not purely human-only creation. |Balanced accuracy/macro-F1 and joint label/evidence correctness. No unknown class or temporal claim-change gold. Recent2024documents are not automatically unseen by a2026model; underlying processing/document rights still matter. |
-| FinanceBench: [paper](https://arxiv.org/html/2311.11944v1), [official card pin](https://huggingface.co/datasets/PatronusAI/financebench/blob/e04404e3a97f69f79c14d42f24981a1c9c3bcd18/README.md) |Only150public examples, not the full10,231question corpus. Human answers/evidence and some programmatically generated question templates. Card declares CC BY-NC4.0. |Supported answer/numeric correctness and refusal/unsupported-answer rates. Noncommercial restrictions and full-corpus contact gate; open sample not company/year/industry-stratified. Do not mix HF version with later GitHub gold/PDF corrections silently. |
-| FinCausal2020: [organizer paper](https://arxiv.org/html/2012.02505v1), [annotation guide](https://arxiv.org/html/2012.02498v1), [organizer repo](https://github.com/yseop/YseopLab/tree/develop/FNP_2020_FinCausal) |Manually labeled2019news sections, causal-language classification and cause/effect spans; organizer declares data CC0. Exact local gold/version and underlying publisher rights not independently qualified here. |Official weighted P/R/F1 and span EM, plus rare positive-class metrics. Group repeated sections/documents. Linguistic cause/effect does not identify economic causation. |
-| ConvFinQA: [paper](https://arxiv.org/html/2210.03849v1), [author release](https://github.com/czyssrs/ConvFinQA/tree/cf3eed2d5984960bf06bb8145bcea5e80b0222a6) |3,892conversations/14,115turns derived from FinQA; simulated skeletons realized as annotated questions. MIT repository, but original test evaluation is withheld/CodaLab. |Turn and all-conversation program/execution accuracy; development diagnostic only until local test gold qualified. Not an independent replication of FinQA or automatically account-free test access. |
+| Claims that keep their history | Plain retrieval against claims that track which filings support them and drop out when a later filing withdraws or corrects them | Synthetic sequences of repeated, corrected and withdrawn claims, then real labelled disclosures |
+| Arithmetic that shows its work | A bare numeric answer against one that names each operand's company, period, unit and source | A deterministic checker on TAT-QA and FinQA labels, reporting how often it abstains |
+| Taking the evidence away | Answers with the correct evidence against answers with that evidence removed, replaced, or swapped for the wrong year | First confirm the control truly lacks another valid source; an unchanged answer suggests the model isn't grounded, but doesn't prove it memorised |
 
-**Smallest proposed diagnostic:** after explicit release/rights and download/run
-approval, start with 30 TAT-QA development questions and, if its release scope is
-qualified, 10 FinQA development questions selected by frozen metadata rules.
-Review source-report overlap with this project's sealed **fundamental as well
-as return** periods before reading any files. A whole-dataset download followed
-by selecting 30 items can still expose forbidden material; require a qualified,
-isolated measurement snapshot and an exposure inventory first.
-Use a deterministic CPU baseline first, separate prediction inputs from gold,
-and report every item, coverage/abstention and native metrics. No training,
-model acquisition or hosted inference is needed for an initial parser/scorer
-diagnostic. Executing the gold program checks the scorer; it does **not**
-demonstrate prediction skill.
+### Still missing for return tests
 
-A separately approved non-overlapping retrospective component benchmark need
-not wait for a trading timestamp correction: it can test current financial
-reading or arithmetic, with exposure caveats. It cannot validate historical
-deployability or replace the P0-blocked project-specific claim-change roster.
-
-The new [exact-ID measurement scorer](../src/asof/measurement.py) provides
-completeness/evidence/abstention and split contracts, but it is **not** the
-native TAT-QA/FinQA answer/program or FinDVer balanced/macro scorer. A benchmark-specific adapter and
-separately frozen baseline are still needed. Forty items can expose defects,
-not establish leadership, formal H1, economic predictability or deployment.
-
-## What public Stashbird and CorpGen contribute
-
-Only public papers were used; no private implementations, employer material
-or unrestricted code/data/model license was inferred.
-
-- **[Stashbird](https://arxiv.org/html/2609.34242v2)**, *Episode-Grounded Lifecycle
-  Reconciliation for Conversational Agent Memory*, revised 2026-10-17:
-  retain supporting episodes, multiple support, supersession history and
-  invalidation of unsupported searchable state. Transfer that discipline to
-  financial claims and historical as-of replay. Its semantic decisions/provenance
-  assumptions are not extraction-accuracy proof; reported deletion leaves some
-  summaries/checkpoints unchanged, so it is not complete erasure. No original
-  freely licensed implementation was qualified.
-- **[CorpGen](https://arxiv.org/html/2602.14229v1)**, submitted 2026-02-15:
-  task-scoped context, preserved failures/decisions, verified demonstrations
-  and evaluation of final artifacts rather than success narratives. Its
-  15.2 versus 4.3 figures are task-completion **percentages**, not completed-task
-  counts; controlled single-day sessions do not validate an unattended
-  multi-agent quant fleet. No original open implementation was qualified.
-
-### Three additional exploratory measurement methods
-
-These are proposed methods, not extra registered return hypotheses:
-
-| Method | Falsifiable comparison | Cheap-first check and stop |
-|---|---|---|
-| Support-aware bitemporal reconciliation |Append-only retrieval versus source-supported claim versions after repeat/correction/withdrawal; stale-active/unsupported claims and retained valid support |Synthetic mechanics, then independently labeled temporal disclosures. Stop on retroactive signal rewriting or semantic matching that erases valid support. FinDVer alone is not temporal gold. |
-| Proof-carrying financial arithmetic |Answer-only versus typed expressions with entity, period, unit, scale and operand evidence; joint numerical/support correctness |Deterministic verifier on qualified TAT-QA/FinQA labels. Reject inconsistent or unsupported operands, but report coverage so abstaining on hard cases cannot create an apparent victory. |
-| Evidence-knockout / wrong-period controls |Correct evidence versus indispensable-evidence removal, unrelated replacement and same-entity/wrong-period material |First verify the control truly lacks alternate valid evidence. Unchanged answers can suggest a grounding problem, not prove memorization or causality by themselves. |
-
-No acceptance margin or dataset/model-resource approval comes from this
-research. Pretraining/benchmark exposure, preprocessing versions and source
-overlap must accompany any result. Current P0 and return holds remain.
-
-### What remains missing for free return evaluation
-
-No free complete terminal-payoff source was certified in the bounded review;
-this is not proof none exists. [Nasdaq directory docs](https://www.nasdaqtrader.com/Trader.aspx?id=SymbolDirDefs)
-describe current status/files, not a historical permanent-security/payoff master.
-[Alpaca docs](https://docs.alpaca.markets/us/docs/about-market-data-api) describe
-market-history/feed access but require authentication and do not establish
-complete inactive/cash/stock/CVR payoff coverage. A public
-[verifiable-data architecture](https://github.com/Szigor-Research/verifiable-equity-data)
-explicitly lacks earlier survivorship-free membership and complete terminal
-actions; its code license does not grant vendor data rights.
-
-Free component benchmarks can unblock real **measurement evaluation** once
-qualified. They cannot clear timestamp authority, historical security/payoffs,
-real project gold, economic costs, sample-size qualification or sealed-holdout
-permission.
+No free source found so far provides a complete, survivorship-free history of US stocks with
+delisting payoffs. Current exchange symbol directories describe today's listings only, and free
+brokerage market-data APIs need an account and don't document full delisting and merger payoffs.
+Free measurement benchmarks can improve how filings are read, but they can't fix the return sample,
+the timestamp checks, trading costs or the sample-size limits described in the README.
 
 ## Testing the workflow itself
 
