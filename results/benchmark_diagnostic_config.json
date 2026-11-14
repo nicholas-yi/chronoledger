@@ -1,0 +1,151 @@
+{
+  "kind": "NON-MODEL DEVELOPMENT DIAGNOSTIC; not strategy inference or a trained system",
+  "seed": 2026111403,
+  "tatqa_items": 30,
+  "tatqa_ids": [
+    "81fafa03-6f80-4fdf-b025-4a37d0bd184e",
+    "a696f558-43cb-46b7-9834-def99a3dde08",
+    "4bb9ca4a-a5d3-4cf4-9d42-bca4707bf585",
+    "0b72b5e6-51d3-45fa-bd67-6f44b78e25fb",
+    "511beaff-af2b-46f9-9eea-268e338270b2",
+    "276f39d7-5428-46cf-b808-7dd9eefab430",
+    "028bf685-261d-420f-a080-1a9b62147d53",
+    "7c540b6e-6f7f-421a-9aa8-b173f882dbac",
+    "82c155de-a907-4b3f-b89f-1984bd97ddc5",
+    "bf7abd62-d9cd-48d2-8826-1457684019a3",
+    "95f11a7d-d59b-4123-9e64-561a4c91a839",
+    "fb46f62a-fd52-49d3-9394-844db5a3254e",
+    "1427bbad-0def-4340-a537-4713dad96ea7",
+    "d4f18464-2a67-4768-8540-1a9bf577e14d",
+    "b01cfc26-4c45-4331-868a-432b93e272e9",
+    "cc0bdcfe-1ad1-4a36-8169-50270dad8b75",
+    "88d66deb-980a-41c8-b41a-0e9610526f0f",
+    "2cefe0db-9e87-47d9-b441-844a5d6b6d5c",
+    "438d631c-1dd3-4620-b851-d9ea5cec4ad5",
+    "20092aeb-d39f-4b50-b927-0602b8a95c08",
+    "77b14f34-b206-4b50-babb-aa9ee379410a",
+    "efbe38bb-e6a7-4a21-ade3-6b962a11b690",
+    "5dc7a9ae-acd0-4b54-9721-ff522aaef3f5",
+    "a79b1b03-fe81-471b-bc71-4951e8c43813",
+    "430ae0ff-c719-4b6c-a1e3-64dbfce036cc",
+    "97125a03-6fc4-4782-a1d7-77fea738df4f",
+    "75716aca-67de-45ad-a624-3e95c050478d",
+    "342d9ac7-1621-4585-87f8-83b1040555ba",
+    "747db6b5-48bb-44ed-a8c3-c60fcf264d2e",
+    "d5072c93-36bb-432c-adc8-6334fd6fe7ac"
+  ],
+  "selection": "Python Random(seed).sample(sorted(all unique dev question UIDs),30); no type/answer/success filtering, resampling or training",
+  "baseline": "Unique positive row-header token overlap, one/two explicit year columns within first3 table rows. Numeric lookup or average/sum/change/percentage-change; oldest-to-latest unless explicit from-to. Scale from inline cell, per-share exception or unique context unit; blank if unmarked. Unsupported/tied/mixed/zero-denominator cases abstain. No gold, retrieval labels, embeddings, model or external access.",
+  "baseline_file_sha256": "610916980fbeba6329db8076491d7017d40503cff204cb377da3fef2203da217",
+  "runner_file_sha256": "6c63503d388a496d3b883883e6c9583863e962d6066a59fafc33918f1b8a0ead",
+  "native_metrics": "Unmodified TaTQAEmAndF1 on all30attempted items, including abstentions; official EM/F1/scale. No native metric substitute.",
+  "native_missing_dependency_policy": "report and do not install/stub/copy around imports",
+  "asset_hashes": {
+    "tatqa\\dev.json": {
+      "source_path": "dataset_raw/tatqa_dataset_dev.json",
+      "bytes": 1637431,
+      "sha256": "8da095a819af6db3c14877c6df2d4d29960e41d1a63dd1fa853507bd2a616af5",
+      "git_blob_sha1": "48075c812af3fe6698b1d5cb50d9dbf358d52784"
+    },
+    "tatqa\\tatqa_eval.py": {
+      "source_path": "tatqa_eval.py",
+      "bytes": 2236,
+      "sha256": "a4110626c477e7ed88f42b5edeb8449eaa9a4370740a627631b4a462bcf43762",
+      "git_blob_sha1": "5d40665e0a52630ba078aefa0a31144bc7cba8bc"
+    },
+    "tatqa\\tatqa_metric.py": {
+      "source_path": "tatqa_metric.py",
+      "bytes": 14129,
+      "sha256": "2aeeac479f89f8c76300af1cc0e8d098eb86af84bc386b38b6ab4af484a6dea8",
+      "git_blob_sha1": "80f45360fd5303110b9e31ad1b54ad6dfd3f9d18"
+    },
+    "tatqa\\tatqa_utils.py": {
+      "source_path": "tatqa_utils.py",
+      "bytes": 3807,
+      "sha256": "a84bb2f960737cf0a53733637a674cc4b20ef030a2be6a4b21dc2c4356f415ec",
+      "git_blob_sha1": "2c7c7246a73330af3bd290bf746ca9014ef73ebb"
+    },
+    "tatqa\\LICENSE": {
+      "source_path": "LICENSE",
+      "bytes": 1068,
+      "sha256": "46e27ffbc49c3fd44a9595c2213f8a5f4319a81b53238e49ce1eec39e7e25662",
+      "git_blob_sha1": "7855a66ee0e672eda63b018d8b0d37f848b4015a"
+    },
+    "tatqa\\README.md": {
+      "source_path": "README.md",
+      "bytes": 4689,
+      "sha256": "85c398173d771a2531abea5b81f3696914296642da2af78c2c34545715c14d5f",
+      "git_blob_sha1": "13718343e75798a4708851c54af99e1daf7b4397"
+    },
+    "quarantine\\finqa_dev.json": {
+      "source_path": "dataset/dev.json",
+      "bytes": 10954658,
+      "sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+      "git_blob_sha1": "970f239f591c782b17df420c0d343b780737f3da"
+    },
+    "finqa\\evaluate.py": {
+      "source_path": "code/evaluate/evaluate.py",
+      "bytes": 14305,
+      "sha256": "845cd131cab843eceff256cf6d392978cc470a7da4a80107beb56027fdca5c13",
+      "git_blob_sha1": "4829a4ca58a5725fb3f7a46b3b23b7f7e848a512"
+    },
+    "finqa\\general_utils.py": {
+      "source_path": "code/utils/general_utils.py",
+      "bytes": 607,
+      "sha256": "98bac4efec9f4b56e11fc50564ebdf1a067cdce565232a10430f3e5343c5f4cc",
+      "git_blob_sha1": "bcd54fab833ae6dbcecd0dc562014fff59a96e15"
+    },
+    "finqa\\LICENSE": {
+      "source_path": "LICENSE",
+      "bytes": 1067,
+      "sha256": "92c0e67bd762c15c07ba60de09558338315a8ebf99aac4f51f487179809ac087",
+      "git_blob_sha1": "fb3b513238ba5ec7e0799cb1190ff30c759a5bdf"
+    },
+    "finqa\\README.md": {
+      "source_path": "README.md",
+      "bytes": 6518,
+      "sha256": "eb86779cfed6f0a253913761d8e4fabe032a29d9fcf2944e56c23bf007064605",
+      "git_blob_sha1": "8fc89f8402714c39385a80c3d7d5e947ae27fcab"
+    }
+  },
+  "finqa": {
+    "year_check": {
+      "item_count": 883,
+      "year_histogram": {
+        "2001": 2,
+        "2002": 14,
+        "2003": 15,
+        "2004": 17,
+        "2005": 27,
+        "2006": 42,
+        "2007": 64,
+        "2008": 70,
+        "2009": 59,
+        "2010": 40,
+        "2011": 58,
+        "2012": 57,
+        "2013": 73,
+        "2014": 61,
+        "2015": 72,
+        "2016": 58,
+        "2017": 101,
+        "2018": 43,
+        "2019": 10
+      },
+      "nonmatching": 0
+    },
+    "retained": true,
+    "selected_items": 0,
+    "scored_items": 0,
+    "skip_reason": "missing_native_dependency:tqdm"
+  },
+  "resources": {
+    "runner_CPU_seconds": 780,
+    "resident_bytes": 1073741824,
+    "batch_CPU_minutes": 15,
+    "threads": 1,
+    "note": "Reserve120CPU seconds for intake/checks; cooperative checks, no Docker."
+  },
+  "rights": "TAT-QA data CC BY4.0; code MIT copies/licences retained in ignoreddata. FinQA repo MIT; underlying report rights limit remains stated.",
+  "source_acceptance": "TAT-QA fixed2021dev bytes verified; FinQA committed ID-only check before nonidentity fields; all checked years<=2020 required."
+}
