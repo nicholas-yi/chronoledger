@@ -1,8 +1,8 @@
 {
-  "status": "stopped_before_download_overlap_unresolved",
+  "status": "completed_tatqa_optional_finqa_not_scored",
   "checked_date": "2026-11-14",
-  "scope": "Public provenance metadata only; no dataset or official scorer file opened.",
-  "stop_condition": "Overlap possible or unclear must stop acquisition and scoring. No uncertainty was waived.",
+  "scope": "Thirty native-scored TAT-QA dev items; optional FinQA has no model/scorer substitute.",
+  "stop_condition": "Optional FinQA scoring stopped because the official evaluator requires missing dependency tqdm; no installation or substitute used.",
   "baseline_commit": "b012de554718712beabf0dd40a52d07eab5b9d90",
   "local_definition_sha256": {
     "PREREGISTRATION.md": "9d652bcdd9c33ef18b76448d3a428ab92c4989e1c614bf2ac730b2aa42161403",
@@ -55,23 +55,23 @@
         "url": "https://raw.githubusercontent.com/NExTplusplus/TAT-QA/870accc41953dcde885aabeb963d94aabdc0fbc3/dataset_raw/tatqa_dataset_dev.json",
         "git_blob_sha1": "48075c812af3fe6698b1d5cb50d9dbf358d52784",
         "declared_bytes": 1637431,
-        "sha256": null,
-        "downloaded": false
+        "sha256": "8da095a819af6db3c14877c6df2d4d29960e41d1a63dd1fa853507bd2a616af5",
+        "downloaded": true
       },
       "official_scorer_files": [
         {
           "url": "https://raw.githubusercontent.com/NExTplusplus/TAT-QA/870accc41953dcde885aabeb963d94aabdc0fbc3/tatqa_eval.py",
           "git_blob_sha1": "5d40665e0a52630ba078aefa0a31144bc7cba8bc",
           "declared_bytes": 2236,
-          "sha256": null,
-          "downloaded": false
+          "sha256": "a4110626c477e7ed88f42b5edeb8449eaa9a4370740a627631b4a462bcf43762",
+          "downloaded": true
         },
         {
           "url": "https://raw.githubusercontent.com/NExTplusplus/TAT-QA/870accc41953dcde885aabeb963d94aabdc0fbc3/tatqa_metric.py",
           "git_blob_sha1": "80f45360fd5303110b9e31ad1b54ad6dfd3f9d18",
           "declared_bytes": 14129,
-          "sha256": null,
-          "downloaded": false
+          "sha256": "2aeeac479f89f8c76300af1cc0e8d098eb86af84bc386b38b6ab4af484a6dea8",
+          "downloaded": true
         }
       ],
       "licences": {
@@ -96,8 +96,13 @@
           "statement": "Public path history lists a release in 2021; this points to an earlier development corpus, not a verified per-report source inventory."
         }
       ],
-      "overlap_assessment": "Earlier source material is indicated, but a comprehensive issuer and exact report-publication/correction inventory was not established. No affirmative overlap finding is made.",
-      "native_metrics": {"items": 0, "EM": null, "F1": null, "scale_accuracy": null}
+      "overlap_assessment": "Unchanged2021dev blob accepted and verified before parse.",
+      "native_metrics": {
+        "items": 30,
+        "EM": 0.16666666666666666,
+        "F1": 0.16666666666666666,
+        "scale_accuracy": 0.26666666666666666
+      }
     },
     "FinQA": {
       "repository_commit": "0f16e2867befa6840783e58be38c9efb9229d742",
@@ -107,22 +112,24 @@
         "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
         "git_blob_sha1": "970f239f591c782b17df420c0d343b780737f3da",
         "declared_bytes": 10954658,
-        "sha256": null,
-        "downloaded": false
+        "sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+        "downloaded": true
       },
       "official_scorer_files": [
         {
           "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/code/evaluate/evaluate.py",
           "git_blob_sha1": "4829a4ca58a5725fb3f7a46b3b23b7f7e848a512",
           "declared_bytes": 14305,
-          "sha256": null,
-          "downloaded": false
+          "sha256": "845cd131cab843eceff256cf6d392978cc470a7da4a80107beb56027fdca5c13",
+          "downloaded": true
         }
       ],
       "corrected_preprocessing": {
         "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/code/utils/general_utils.py",
         "git_blob_sha1": "bcd54fab833ae6dbcecd0dc562014fff59a96e15",
-        "statement": "Pinned README records the 2022-05-04 table_row_to_text correction; no preprocessing was run or older leaky version used."
+        "statement": "Pinned README records the 2022-05-04 table_row_to_text correction; no preprocessing was run or older leaky version used.",
+        "sha256": "98bac4efec9f4b56e11fc50564ebdf1a067cdce565232a10430f3e5343c5f4cc",
+        "downloaded": true
       },
       "licences": {
         "repository": "MIT",
@@ -143,42 +150,402 @@
           "statement": "The pinned development file was updated during the earliest reserved fundamental window. The update alone does not prove protected financial material was introduced; its source-version effect is not established by the inspected metadata."
         }
       ],
-      "overlap_assessment": "Unresolved publication/revision provenance; a fiscal-year range alone cannot waive the stop rule. Issuer sampling is broad S&P 500 rather than a project-specific exclusion list.",
-      "native_metrics": {"items": 0, "execution_accuracy": null},
-      "gold_program_check_performed": false
+      "overlap_assessment": "Committed documented-ID year check passed before nonidentity fields; no year>=2021.",
+      "native_metrics": {
+        "items": 0,
+        "execution_accuracy": null
+      },
+      "gold_program_check_performed": false,
+      "identity_year_check": {
+        "item_count": 883,
+        "year_histogram": {
+          "2001": 2,
+          "2002": 14,
+          "2003": 15,
+          "2004": 17,
+          "2005": 27,
+          "2006": 42,
+          "2007": 64,
+          "2008": 70,
+          "2009": 59,
+          "2010": 40,
+          "2011": 58,
+          "2012": 57,
+          "2013": 73,
+          "2014": 61,
+          "2015": 72,
+          "2016": 58,
+          "2017": 101,
+          "2018": 43,
+          "2019": 10
+        },
+        "nonmatching": 0
+      },
+      "file_deleted": false,
+      "skip_reason": "missing_native_dependency:tqdm"
     }
   },
   "download_and_run_state": {
-    "dataset_files_downloaded": 0,
-    "scorer_files_downloaded": 0,
-    "selected_items": 0,
-    "scored_items": 0,
-    "correct": 0,
-    "wrong": 0,
-    "abstain": 0,
-    "per_item_outcomes": [],
-    "selection_rule_or_baseline_freeze_performed": false,
+    "dataset_files_downloaded": 2,
+    "scorer_files_downloaded": 5,
+    "selected_items": 30,
+    "scored_items": 30,
+    "correct": 5,
+    "wrong": 4,
+    "abstain": 21,
+    "failed": 0,
+    "per_item_outcomes": [
+      {
+        "id": "81fafa03-6f80-4fdf-b025-4a37d0bd184e",
+        "outcome": "abstain",
+        "baseline_reason": "requires_one_or_two_explicit_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "a696f558-43cb-46b7-9834-def99a3dde08",
+        "outcome": "abstain",
+        "baseline_reason": "ambiguous_row_mapping",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "4bb9ca4a-a5d3-4cf4-9d42-bca4707bf585",
+        "outcome": "correct",
+        "baseline_reason": "unique_row_year_lookup",
+        "native_EM": 1.0,
+        "native_F1": 1.0
+      },
+      {
+        "id": "0b72b5e6-51d3-45fa-bd67-6f44b78e25fb",
+        "outcome": "abstain",
+        "baseline_reason": "ambiguous_row_mapping",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "511beaff-af2b-46f9-9eea-268e338270b2",
+        "outcome": "correct",
+        "baseline_reason": "unique_row_year_lookup",
+        "native_EM": 1.0,
+        "native_F1": 1.0
+      },
+      {
+        "id": "276f39d7-5428-46cf-b808-7dd9eefab430",
+        "outcome": "abstain",
+        "baseline_reason": "unsupported_two_year_operation",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "028bf685-261d-420f-a080-1a9b62147d53",
+        "outcome": "wrong",
+        "baseline_reason": "two_year_average",
+        "native_EM": 0.0,
+        "native_F1": 0.0
+      },
+      {
+        "id": "7c540b6e-6f7f-421a-9aa8-b173f882dbac",
+        "outcome": "wrong",
+        "baseline_reason": "two_year_average",
+        "native_EM": 0.0,
+        "native_F1": 0.0
+      },
+      {
+        "id": "82c155de-a907-4b3f-b89f-1984bd97ddc5",
+        "outcome": "abstain",
+        "baseline_reason": "unsupported_two_year_operation",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "bf7abd62-d9cd-48d2-8826-1457684019a3",
+        "outcome": "abstain",
+        "baseline_reason": "arithmetic_requires_two_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "95f11a7d-d59b-4123-9e64-561a4c91a839",
+        "outcome": "abstain",
+        "baseline_reason": "ambiguous_row_mapping",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "fb46f62a-fd52-49d3-9394-844db5a3254e",
+        "outcome": "abstain",
+        "baseline_reason": "unsupported_two_year_operation",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "1427bbad-0def-4340-a537-4713dad96ea7",
+        "outcome": "wrong",
+        "baseline_reason": "two_year_average",
+        "native_EM": 0.0,
+        "native_F1": 0.0
+      },
+      {
+        "id": "d4f18464-2a67-4768-8540-1a9bf577e14d",
+        "outcome": "correct",
+        "baseline_reason": "two_year_difference",
+        "native_EM": 1.0,
+        "native_F1": 1.0
+      },
+      {
+        "id": "b01cfc26-4c45-4331-868a-432b93e272e9",
+        "outcome": "wrong",
+        "baseline_reason": "unique_row_year_lookup",
+        "native_EM": 0.0,
+        "native_F1": 0.0
+      },
+      {
+        "id": "cc0bdcfe-1ad1-4a36-8169-50270dad8b75",
+        "outcome": "abstain",
+        "baseline_reason": "requires_one_or_two_explicit_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "88d66deb-980a-41c8-b41a-0e9610526f0f",
+        "outcome": "abstain",
+        "baseline_reason": "requires_one_or_two_explicit_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "2cefe0db-9e87-47d9-b441-844a5d6b6d5c",
+        "outcome": "abstain",
+        "baseline_reason": "requires_one_or_two_explicit_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "438d631c-1dd3-4620-b851-d9ea5cec4ad5",
+        "outcome": "abstain",
+        "baseline_reason": "ambiguous_context_units",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "20092aeb-d39f-4b50-b927-0602b8a95c08",
+        "outcome": "correct",
+        "baseline_reason": "percentage_change",
+        "native_EM": 1.0,
+        "native_F1": 1.0
+      },
+      {
+        "id": "77b14f34-b206-4b50-babb-aa9ee379410a",
+        "outcome": "abstain",
+        "baseline_reason": "ambiguous_row_mapping",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "efbe38bb-e6a7-4a21-ade3-6b962a11b690",
+        "outcome": "abstain",
+        "baseline_reason": "requires_one_or_two_explicit_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "5dc7a9ae-acd0-4b54-9721-ff522aaef3f5",
+        "outcome": "abstain",
+        "baseline_reason": "ambiguous_row_mapping",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "a79b1b03-fe81-471b-bc71-4951e8c43813",
+        "outcome": "abstain",
+        "baseline_reason": "requires_one_or_two_explicit_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "430ae0ff-c719-4b6c-a1e3-64dbfce036cc",
+        "outcome": "abstain",
+        "baseline_reason": "requires_one_or_two_explicit_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "97125a03-6fc4-4782-a1d7-77fea738df4f",
+        "outcome": "abstain",
+        "baseline_reason": "ambiguous_row_mapping",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "75716aca-67de-45ad-a624-3e95c050478d",
+        "outcome": "abstain",
+        "baseline_reason": "requires_one_or_two_explicit_years",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "342d9ac7-1621-4585-87f8-83b1040555ba",
+        "outcome": "abstain",
+        "baseline_reason": "ambiguous_context_units",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "747db6b5-48bb-44ed-a8c3-c60fcf264d2e",
+        "outcome": "abstain",
+        "baseline_reason": "unsupported_numeric_cell",
+        "native_EM": 0,
+        "native_F1": 0
+      },
+      {
+        "id": "d5072c93-36bb-432c-adc8-6334fd6fe7ac",
+        "outcome": "correct",
+        "baseline_reason": "two_year_difference",
+        "native_EM": 1.0,
+        "native_F1": 1.0
+      }
+    ],
+    "selection_rule_or_baseline_freeze_performed": true,
     "models_or_training_used": false,
     "ledger_rows_appended": 0
   },
-  "hash_note": "Listed file identities are Git blob SHA-1 metadata, not downloaded-byte SHA-256 hashes. SHA-256 is null because acquisition stopped.",
+  "hash_note": "Downloaded files have verified Git blob SHA-1 and content SHA-256. Data, upstream code and predictions remain under ignoreddata only.",
   "validation": {
     "status_receipt_JSON_and_metadata_shapes": "passed",
-    "local_document_links_and_anchors_checked": 46,
+    "local_document_links_and_anchors_checked": 47,
     "local_definition_sha256_reconciliation": "passed",
     "git_whitespace_check": "passed",
-    "tests_rerun": false,
-    "ruff_rerun": false,
-    "reason": "Documentation and metadata stop receipt only; no code, baseline, scorer or dataset processing implemented.",
+    "tests_rerun": true,
+    "scoped_tests_passed": 14,
+    "scoped_test_seconds": 0.83,
+    "ruff_rerun": true,
+    "ruff_result": "passed on all changed benchmark source/test files",
+    "reason": "Scoped synthetic intake/identity/baseline/gold-isolation tests; no full-suite model or unrelated jobs.",
     "ledger_rows_unchanged": 74,
     "previous_results_and_frozen_definitions": "unchanged"
   },
   "resources": {
-    "stage": "metadata-only preflight",
-    "scoring_CPU_seconds": 0,
-    "scoring_peak_resident_bytes": null,
-    "total_metadata_wall_CPU_RSS_measured": false,
-    "note": "No baseline or scoring job started; metadata review was not instrumented as a compute experiment."
+    "stage": "single-thread native TAT-QA scoring; no FinQA scoring",
+    "scoring_CPU_seconds": 1.578125,
+    "scoring_wall_seconds": 3.6880000000819564,
+    "scoring_peak_resident_bytes": 124579840,
+    "runner_CPU_seconds": 780,
+    "resident_bytes": 1073741824,
+    "batch_CPU_minutes": 15,
+    "threads": 1,
+    "note": "Reserve120CPU seconds for intake/checks; cooperative checks, no Docker. Scoring resources measured; intake/check/test CPU and RSS not jointly instrumented."
   },
-  "interpretation": "No real benchmark result exists. Thirty to forty items could expose defects, not establish skill, formal H1 or historical usability. The pre-download uncertainty is preserved for review rather than resolved by inspecting potentially reserved data."
+  "interpretation": "Small untrained table baseline diagnostic, not benchmark skill, formal H1, return evidence or historical deployability. Full relative-path asset hashes preserve distinct same-basename files in addition to conventional lineage.",
+  "history": [
+    {
+      "status": "stopped_before_download_overlap_unresolved",
+      "scored_items": 0,
+      "stop_condition": "Overlap possible or unclear must stop acquisition and scoring. No uncertainty was waived.",
+      "note": "Earlier public-metadata stop; subsequently clarified."
+    }
+  ],
+  "scoring_run_attempted": true,
+  "resume_config": {
+    "path": "results/benchmark_diagnostic_config.json",
+    "sha256": "593b6670c725cc5fa4ee34f12e418c2a2ed063befc805500f525c3906cbd1108",
+    "seed": 2026111403,
+    "baseline": "Unique positive row-header token overlap, one/two explicit year columns within first3 table rows. Numeric lookup or average/sum/change/percentage-change; oldest-to-latest unless explicit from-to. Scale from inline cell, per-share exception or unique context unit; blank if unmarked. Unsupported/tied/mixed/zero-denominator cases abstain. No gold, retrieval labels, embeddings, model or external access.",
+    "selection": "Python Random(seed).sample(sorted(all unique dev question UIDs),30); no type/answer/success filtering, resampling or training"
+  },
+  "lineage": {
+    "git_commit": "a36126d3b48ed4336b98db2e9841fb8f6732505a",
+    "git_dirty": false,
+    "inputs": {
+      "benchmark_diagnostic_config.json": "593b6670c725cc5fa4ee34f12e418c2a2ed063befc805500f525c3906cbd1108",
+      "dev.json": "8da095a819af6db3c14877c6df2d4d29960e41d1a63dd1fa853507bd2a616af5",
+      "tatqa_eval.py": "a4110626c477e7ed88f42b5edeb8449eaa9a4370740a627631b4a462bcf43762",
+      "tatqa_metric.py": "2aeeac479f89f8c76300af1cc0e8d098eb86af84bc386b38b6ab4af484a6dea8",
+      "tatqa_utils.py": "a84bb2f960737cf0a53733637a674cc4b20ef030a2be6a4b21dc2c4356f415ec",
+      "LICENSE": "92c0e67bd762c15c07ba60de09558338315a8ebf99aac4f51f487179809ac087",
+      "README.md": "eb86779cfed6f0a253913761d8e4fabe032a29d9fcf2944e56c23bf007064605",
+      "finqa_dev.json": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+      "evaluate.py": "845cd131cab843eceff256cf6d392978cc470a7da4a80107beb56027fdca5c13",
+      "general_utils.py": "98bac4efec9f4b56e11fc50564ebdf1a067cdce565232a10430f3e5343c5f4cc"
+    },
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  },
+  "downloaded_asset_hashes": {
+    "tatqa\\dev.json": {
+      "source_path": "dataset_raw/tatqa_dataset_dev.json",
+      "bytes": 1637431,
+      "sha256": "8da095a819af6db3c14877c6df2d4d29960e41d1a63dd1fa853507bd2a616af5",
+      "git_blob_sha1": "48075c812af3fe6698b1d5cb50d9dbf358d52784"
+    },
+    "tatqa\\tatqa_eval.py": {
+      "source_path": "tatqa_eval.py",
+      "bytes": 2236,
+      "sha256": "a4110626c477e7ed88f42b5edeb8449eaa9a4370740a627631b4a462bcf43762",
+      "git_blob_sha1": "5d40665e0a52630ba078aefa0a31144bc7cba8bc"
+    },
+    "tatqa\\tatqa_metric.py": {
+      "source_path": "tatqa_metric.py",
+      "bytes": 14129,
+      "sha256": "2aeeac479f89f8c76300af1cc0e8d098eb86af84bc386b38b6ab4af484a6dea8",
+      "git_blob_sha1": "80f45360fd5303110b9e31ad1b54ad6dfd3f9d18"
+    },
+    "tatqa\\tatqa_utils.py": {
+      "source_path": "tatqa_utils.py",
+      "bytes": 3807,
+      "sha256": "a84bb2f960737cf0a53733637a674cc4b20ef030a2be6a4b21dc2c4356f415ec",
+      "git_blob_sha1": "2c7c7246a73330af3bd290bf746ca9014ef73ebb"
+    },
+    "tatqa\\LICENSE": {
+      "source_path": "LICENSE",
+      "bytes": 1068,
+      "sha256": "46e27ffbc49c3fd44a9595c2213f8a5f4319a81b53238e49ce1eec39e7e25662",
+      "git_blob_sha1": "7855a66ee0e672eda63b018d8b0d37f848b4015a"
+    },
+    "tatqa\\README.md": {
+      "source_path": "README.md",
+      "bytes": 4689,
+      "sha256": "85c398173d771a2531abea5b81f3696914296642da2af78c2c34545715c14d5f",
+      "git_blob_sha1": "13718343e75798a4708851c54af99e1daf7b4397"
+    },
+    "quarantine\\finqa_dev.json": {
+      "source_path": "dataset/dev.json",
+      "bytes": 10954658,
+      "sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+      "git_blob_sha1": "970f239f591c782b17df420c0d343b780737f3da"
+    },
+    "finqa\\evaluate.py": {
+      "source_path": "code/evaluate/evaluate.py",
+      "bytes": 14305,
+      "sha256": "845cd131cab843eceff256cf6d392978cc470a7da4a80107beb56027fdca5c13",
+      "git_blob_sha1": "4829a4ca58a5725fb3f7a46b3b23b7f7e848a512"
+    },
+    "finqa\\general_utils.py": {
+      "source_path": "code/utils/general_utils.py",
+      "bytes": 607,
+      "sha256": "98bac4efec9f4b56e11fc50564ebdf1a067cdce565232a10430f3e5343c5f4cc",
+      "git_blob_sha1": "bcd54fab833ae6dbcecd0dc562014fff59a96e15"
+    },
+    "finqa\\LICENSE": {
+      "source_path": "LICENSE",
+      "bytes": 1067,
+      "sha256": "92c0e67bd762c15c07ba60de09558338315a8ebf99aac4f51f487179809ac087",
+      "git_blob_sha1": "fb3b513238ba5ec7e0799cb1190ff30c759a5bdf"
+    },
+    "finqa\\README.md": {
+      "source_path": "README.md",
+      "bytes": 6518,
+      "sha256": "eb86779cfed6f0a253913761d8e4fabe032a29d9fcf2944e56c23bf007064605",
+      "git_blob_sha1": "8fc89f8402714c39385a80c3d7d5e947ae27fcab"
+    }
+  }
 }

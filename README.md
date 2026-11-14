@@ -326,10 +326,12 @@ is weak evidence, and more data matters more than a better estimator.
   borrow fees and short availability are not modeled.
 - **Synthetic extraction labels.** The LLM benchmark's ground truth comes from injected fictitious
   companies, not human annotation. Free human-annotated benchmarks for reading financial documents
-  are listed in the [research plan](docs/RESEARCH_PLAN.md#free-benchmarks-for-testing-measurement-on-real-data);
-  none has been scored yet. The first small diagnostic stopped after reviewing
-  public source metadata because publication/revision overlap with reserved
-  financial material remained uncertain; no question files were opened.
+  are listed in the [research plan](docs/RESEARCH_PLAN.md#free-benchmarks-for-testing-measurement-on-real-data).
+  A separate non-model baseline now matched 5 of 30 TAT-QA development answers,
+  gave 4 wrong answers and abstained on 21; official EM/F1 were both 16.7%.
+  FinQA was not scored because a dependency of its official evaluator is missing.
+  This small diagnostic tests limited reading rules, not formal H1 or historical
+  usability; it did not inspect the sealed test period.
 
 ## What would change the answer
 
@@ -351,7 +353,7 @@ agent workflow used to run experiments, three new study ideas and candidate data
 ```powershell
 uv venv --python 3.12
 uv pip install -e ".[dev,figures]"
-uv run pytest -q                       # 262 tests, no data or network needed
+uv run pytest -q                       # Unit tests need no benchmark data or network
 uv run python scripts/make_figures.py  # rebuild every chart from results/
 uv run python -m asof.referee          # the automated referee (needs the local data build)
 ```

@@ -175,10 +175,10 @@ pairs of company disclosures.
 
 The project's extraction benchmark uses synthetic labels. Before testing new return signals, the
 cheapest real check is whether the measurement tools read financial documents correctly. Several
-free, human-annotated benchmarks can test that. A first attempt checked public
-source and release metadata, but stopped before opening any question files:
-the reports' publication and revision histories could not be settled from that
-metadata alone. No benchmark has been scored.
+free, human-annotated benchmarks can test that. A small deterministic baseline
+has now been tested on 30 TAT-QA development questions. It matched five reference
+answers, gave four wrong answers and declined the other 21. No language model
+or training was used.
 
 | Benchmark | What it labels | How it is scored | Watch out for |
 |---|---|---|---|
@@ -189,31 +189,50 @@ metadata alone. No benchmark has been scored.
 | [FinCausal 2020](https://github.com/yseop/YseopLab/tree/develop/FNP_2020_FinCausal) ([paper](https://arxiv.org/abs/2012.02505)) | Cause-and-effect spans in 2019 financial news | Weighted precision, recall and F1 | Linguistic cause and effect is not economic causation |
 | [ConvFinQA](https://github.com/czyssrs/ConvFinQA) ([paper](https://arxiv.org/abs/2210.03849)) | 3,892 multi-turn conversations built on FinQA | Turn-level and conversation-level accuracy | Derived from FinQA, so not an independent check; its test answers are held back |
 
-**A first, small diagnostic.** Score 30 TAT-QA development questions, and possibly 10 from FinQA,
-with a simple deterministic baseline before trying any language model. Every item would be reported,
-including the ones the method declines to answer. Two precautions apply:
+### The first real-data diagnostic
 
-- Check that the source reports don't overlap the project's sealed holdout years before opening
-  any files.
-- Running a benchmark's own reference calculations only tests the scorer, not the model.
+Before opening files, we checked their source history against the sealed test
+period, including the fundamental study rather than just stock prices. The
+TAT-QA development file has been unchanged since May 2021. FinQA was initially
+paused because its file changed in 2022; a check of report IDs alone found all
+883 IDs named report years 2001-2019, with none unparseable. Its other fields were not
+read before that check.
 
-**What happened in the first attempt:** repository, development-file and scorer
-revisions were recorded, along with the licence sources. TAT-QA's development
-history points to a 2021 release; FinQA describes 1999-2019 reports, but its
-pinned development file was updated in June 2022. That later update does not
-prove overlap with reserved financial material. It leaves a source-version
-question that cannot safely be answered by opening the file to check.
+We then froze a seed and randomly selected 30 TAT-QA development questions,
+without filtering by question type or answer. The baseline looks for a unique
+table-row label and an explicit year, then applies a few fixed arithmetic and
+unit rules. It receives no reference answers, calculation steps or answer-type
+labels. Unsupported or ambiguous questions produce an abstention.
 
-The comparison included both reserved return periods and the fundamental study's
-filing and follow-up periods, not just stock-price dates. No dataset or scorer
-files were downloaded, no questions selected, and no answers scored. The
-[status receipt](../results/benchmark_diagnostic_status.json) distinguishes known
-repository identities from the data-byte hashes that have not been collected.
-The next step is to resolve this provenance question, not to treat the missing
-scores as zero or as evidence that a baseline performs poorly.
+| Result on the 30 items | Value |
+|---|---:|
+| Reference answer matched |5 |
+| Wrong answer |4 |
+| Abstained |21 |
+| Official exact match |16.7% |
+| Official F1 |16.7% |
+| Official scale accuracy |26.7% |
 
-Forty items can expose bugs; they cannot establish that the claim-level signal works or that it
-would have been usable historically.
+The unmodified TAT-QA scorer includes the abstentions in these scores.
+The baseline answered only nine questions; quoting five correct out of those
+nine alone would hide its low coverage. Scores cover the selected 30 IDs;
+running the upstream command on the entire development file would use a
+different denominator. The run took about 1.58 CPU seconds
+and used about 119 MiB of memory. Data, official scorer code and predictions
+stay local; [configuration](../results/benchmark_diagnostic_config.json) and
+[results](../results/benchmark_diagnostic_status.json) record versions,
+checksums and every item's outcome without copying the questions or answers.
+
+FinQA was **not scored**: its official evaluator needs `tqdm`, which is not
+installed. We did not install it or substitute another scorer. The development
+file was retained after its report-ID check, not deleted. Its execution accuracy
+is unmeasured; no gold programs were run as predictions.
+
+This is a useful first check of a very limited baseline, not evidence of broad
+financial-reading skill. Thirty to forty items can expose bugs; they cannot
+establish formal H1, benchmark leadership or historical usability. A benchmark's
+own reference calculations would test the scorer, not prediction skill. This
+diagnostic did not inspect prices, returns or the sealed test period.
 
 ### Three measurement ideas worth testing
 
