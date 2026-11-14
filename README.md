@@ -159,17 +159,24 @@ closes/readiness/deadlines, post-entry fixed-session intervals and explicit miss
 censored support. It is not wired into historical runners and claims no fill/borrow
 feasibility. Queue/P2 v0.2, exact test results and the frozen-runner boundary are in
 the [planner contract](docs/DATA_AUDIT.md#lead-d3a-opt-in-synthetic-planner-v02).
-No empirical study, vendor access, new budget, holdout opening or publication is
-released; neutralization/overlap and Lead-D2/D4-D9/rest of D3 remain open.
+That D3a release did not authorize an empirical study, vendor access, simulation
+budget, holdout opening or publication. Batch A's later prospective decisions
+are recorded below; reserved operational permissions remain separate.
 
 **Batch A v0.3:** prospective overlap/control/industry, decision, observation and
 economic contracts are now recorded in the
 [bounded offline release](docs/DATA_AUDIT.md#batch-a-prospective-decisions-and-bounded-release).
 Supplementary manifest/decision gates, future evidence-label validation,
-component-cost arithmetic and a data-free study registry passed73focused tests.
-The fixed synthetic inference calibration is separately authorized and specified
-before execution; its actual completion/resource/result record is not an empirical
-finding. Frozen studies and their labels/costs remain unchanged. D10 discloses the
+component-cost arithmetic and a data-free study registry passed **76 focused tests**.
+The [supplementary manifest](results/trial_manifest.json) preserves all56attempts
+and registered counts; project DSR/PBO remain unavailable.
+The [fixed synthetic calibration](results/synthetic_inference_calibration.json)
+completed **2,000 attempts in12.625CPU seconds /197.43MiB peak memory**, retaining
+six nonfinite panel estimates. Null rejection substantially exceeded normal-reference
+nominal rates in these designs: **execution complete is not calibration passed**.
+See the [full bounded evidence](docs/DATA_AUDIT.md#batch-a-completion-evidence-offline-not-project-inference).
+No additional inference method or empirical claim is validated by that result.
+Frozen studies and their labels/costs remain unchanged. D10 discloses the
 historical10-Q/A quiet-exclusion wording discrepancy after results, without a rerun.
 Vendor contact/keys/spending, human annotation, publication, push/tags and holdout
 access remain reserved; this release permits validated **local commits only**.

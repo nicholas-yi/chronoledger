@@ -471,13 +471,13 @@ missing-impairment policy and disclose the 10-Q/A discrepancy until decided.
 | **Lead-D1** | Accepted **queue organization only**: stable CL-P IDs, versioned designs, readiness versus decision-blocked state and proposed ceilings. No operational gate released. |
 | **Lead-D2** | Open: source-rights inquiry wording and exact recipient approval, before contact. |
 | **Lead-D3a** | Explicit owner selection `separate-synthetic-planner`; implemented and synthetically verified **only** for the separate opt-in API below. No legacy defaults or empirical runner changed. |
-| **Lead-D3b / rest of D3** | Open: empirical timing integration/availability evidence, actual execution/auction feasibility, overlap/dedup, SIC and filing-time neutralization choices. D6 label/observation decisions remain separate. |
-| **Lead-D4** | Open: exact multiplicity interfaces without rewriting the registered threshold/N. |
-| **Lead-D5** | Open: economic effect sizes, tails, power and null allocation; proposed compute caps are not permission. |
-| **Lead-D6** | Open: observation-completeness evidence, censoring and amendment/endpoint definitions. |
+| **Lead-D3b/c/d** | Resolved prospectively in Batch A below:20-session first-kept strict overlap, other-firm strictly-prior residual fit, dated SIC/unknown abstention. Legacy paths unchanged; empirical integration still requires registration, dated inputs, support parameters and run permission. Actual fill feasibility remains unproved. |
+| **Lead-D4** | Prospective conjunction/supplementary interfaces implemented in A1. Actual project DSR/PBO remain unavailable; registered rules/N are not weakened. |
+| **Lead-D5** | Only the fixed A5 synthetic allocation/budget was released and executed; future study economic effects and any further simulation remain registration/approval decisions. |
+| **Lead-D6** | Future evidence-status/observation/amendment principles resolved; A2 validator implemented. Real observation evidence and human protocol remain blocked; frozen labels unchanged, discrepancy disclosed in D10. |
 | **Lead-D7** | Open: human protocol and claims/endpoint annotation time. |
-| **Lead-D8** | Open: study registry and incremental margins before outcome evaluations. |
-| **Lead-D9** | Open: costs, historical borrow/shortability and capital/size contract. |
+| **Lead-D8** | Ordered prospective registry implemented in A4; actual study estimators/margins fixed at registration, no outcomes authorized. |
+| **Lead-D9** | Future component normalization/helper implemented in A3; actual capital, borrow, fill and cost evidence remain unavailable/unapproved, frozen cost path unchanged. |
 
 #### Batch A prospective decisions and bounded release
 
@@ -593,6 +593,89 @@ This generic draft is not approval to email, log in, open an account or accept t
 
 No recipient/vendor is selected, no terms waived, no product recommendation or
 fitness test result is implied. Lead-D2 and D7 remain owner-only.
+
+##### Batch A completion evidence (offline, not project inference)
+
+**A1-A5 completed in the bounded offline scope.** Tested source plus the
+pre-execution seed/allocation were committed locally as `196d1df`.
+The supplementary manifest and calibration both identify that **clean source**
+revision and its runtime. No remote push/tag, empirical study, ledger append,
+vendor/human contact or holdout access occurred.
+
+- [`trial_manifest.json`](../results/trial_manifest.json): all56 ledger attempts
+  retained; ledger bytes compared equal before/after generation. Registered
+  distinct-config counts exactly match the unchanged `ledger.n_trials`: ENGINEERING1,
+  H0=10, H1n=10, H4=6, H5a=1, H5b=1, H5c=2, H6=2. These include everything
+  originally logged under each hypothesis, not an independence estimate or a
+  reduced effective N. Classified28scientific /22repeat_vintage /4engineering /
+  2timing; unknown0 for this ledger. Recognized legacy-purpose classification is
+  disclosed as inferred, not proof of scientific validity. Historical F2/F3 and
+  other limitations persist; no failed/invalid row is erased or promoted.
+- Project DSR/PBO remain **unavailable**, with persisted aligned-series missing;
+  no return matrix is reconstructed from summaries, no families silently pooled
+  and no statistic computed on an attractive subset.
+- [`synthetic_inference_calibration.json`](../results/synthetic_inference_calibration.json):
+  **complete execution, not a passed calibration**. Exactly2,000attempts over all14
+  prespecified streams;1,994finite statistics and6nonfinite panel statistics.
+  No redraws; valid denominators198/196 are explicit for the two panel cases.
+  Their causes are recorded as nonfinite statistics, not retrospectively explained
+  by an unexecuted covariance diagnostic. No warnings were captured in this run.
+- **12.625CPU seconds,13.797wall seconds,207,020,032bytes (197.43MiB) observed OS peak
+  resident memory**, below900CPU seconds/1GiB; numerical thread settings1. Fresh
+  pre-run machine check reported37%CPU load, about38.4GiB free physical memory and
+  no matching heavy Python research job. No AfterEvidence heavy-resource permission
+  or general scheduler was inferred from this light release.
+
+Rates below are synthetic |t| rejection frequencies. Normal two-sided reference
+rates at2.0/3.0/3.2 are **4.5500% /0.2700% /0.1374%**. The last column is plug-in
+Monte Carlo SE for the3.2 frequency in **percentage points**; the JSON includes
+counts, denominators, nominal rates and SE for every threshold.
+
+| Synthetic case | Finite / attempted | Rejection% at2.0 /3.0 /3.2 | MCSE at3.2 (pp) |
+|---|---:|---:|---:|
+| iid null,T18 |150/150|26.67 /13.33 /10.67|2.52|
+| iid null,T28 |150/150|20.67 /8.67 /7.33|2.13|
+| AR0.3 null,T18 |150/150|32.00 /18.67 /16.00|2.99|
+| AR0.3 null,T28 |150/150|18.67 /7.33 /6.00|1.94|
+| scaled-t3 null,T18 |150/150|28.67 /14.67 /12.67|2.72|
+| scaled-t3 null,T28 |150/150|12.67 /6.67 /6.00|1.94|
+| factor exposure null,T18 |150/150|30.00 /14.67 /12.00|2.65|
+| factor exposure null,T28 |150/150|18.67 /5.33 /4.00|1.60|
+| iid power0.5SD,T18 |100/100|69.00 /46.00 /43.00|4.95|
+| iid power1.0SD,T18 |100/100|97.00 /90.00 /88.00|3.25|
+| iid power0.5SD,T28 |100/100|77.00 /55.00 /50.00|5.00|
+| iid power1.0SD,T28 |100/100|100.00 /100.00 /100.00|0.00|
+| panel null,no year shock |198/200|10.10 /3.54 /3.03|1.22|
+| panel null,year shock |196/200|10.20 /3.06 /2.04|1.01|
+
+**Interpretation:** these fixed short-series/few-cluster synthetic designs do not
+support treating the normal-reference bars as well-calibrated rejection levels.
+Power is reported together with that over-rejection, not as evidence the procedure
+is reliable or a project signal works. A plug-in SE of0 at observed100% is not
+certainty about true power; rare nominal tails are poorly resolved by100-200draws.
+No threshold, source estimator, seed, allocation or historical conclusion was
+adjusted to make this result better. Any inference-method alternative needs its
+own accepted design and bounded authorization; no additional simulation budget
+was created.
+
+Evidence commands after source commit:
+
+```powershell
+.\.venv\Scripts\python.exe -m asof.trial_manifest
+$env:OPENBLAS_NUM_THREADS = "1"
+$env:OMP_NUM_THREADS = "1"
+$env:MKL_NUM_THREADS = "1"
+$env:NUMEXPR_NUM_THREADS = "1"
+.\.venv\Scripts\python.exe scripts\calibrate_inference.py
+```
+
+Final artifact checks verified all14allocations, requested/attempted totals,
+finite+invalid reconciliation, per-threshold denominators and unchanged registered
+counts/ledger. They are output checks, not a new experiment or a second set of
+replicates. Existing reports, raw-data cutoffs, D3a planner and all failures remain
+identifiable. **Next:** Lead reviews this evidence and the queued Batch B scope;
+no human/vendor contact, source access, empirical integration or reserved
+authorization follows automatically.
 
 ### Source-pilot contract: proposed, not activated
 
