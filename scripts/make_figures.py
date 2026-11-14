@@ -43,6 +43,7 @@ def _use_theme(name: str) -> None:
     BLUE = SKY if name == "dark" else "#0072B2"
     plt.rcParams.update({
         "svg.fonttype": "none",
+        "svg.hashsalt": "filing-time-machine",
         "font.family": "sans-serif",
         "font.size": 11,
         "figure.facecolor": T["bg"],
@@ -97,42 +98,6 @@ def time_machine(theme: str):
     ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=(1, 4, 7, 10)))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
     _title(fig, "Every fact carries two clocks, and a query only sees what was public then")
-    return fig
-
-
-def caught_bug(theme: str):
-    """First H0 backtest versus the corrected run, from the append-only trial ledger."""
-    first: dict[str, float] = {}
-    for line in (RESULTS / "trial_ledger.jsonl").read_text(encoding="utf-8").splitlines():
-        row = json.loads(line)
-        variant = row.get("config", {}).get("variant")
-        value = row.get("metrics", {}).get("m_mean_net")
-        if variant and value is not None and variant not in first and "purpose" not in row["config"]:
-            first[variant] = value
-    current = {r["variant"]: r["monthly"]["mean_net"]
-               for r in _load("returns_h0_development.json")["results"]}
-    variants = [v for v in current if v in first]
-    fig, ax = plt.subplots(figsize=(10, 4), layout="constrained")
-    ax.grid(axis="x", visible=False)
-    xs = range(len(variants))
-    before = [100 * first[v] for v in variants]
-    after = [100 * current[v] for v in variants]
-    ax.bar([x - 0.2 for x in xs], before, width=0.38, color=VERMILLION)
-    ax.bar([x + 0.2 for x in xs], after, width=0.38, color=BLUE)
-    for x, b, a in zip(xs, before, after):
-        ax.text(x - 0.2, b + 0.6, f"{b:+.1f}%", ha="center", fontsize=9, color=VERMILLION)
-        ax.text(x + 0.2, max(a, 0) + 0.6, f"{a:+.1f}%", ha="center", fontsize=9, color=BLUE)
-    ax.axhspan(-5, 5, color=GREEN, alpha=0.12, lw=0)
-    ax.text(-0.5, -4.3, "plausible range (±5% a month)", color=GREEN, fontsize=9)
-    ax.axhline(0, color=T["muted"], lw=0.8)
-    ax.text(-0.2, before[0] + 3.3, "first run", color=VERMILLION, ha="center", fontsize=9.5,
-            fontweight="bold")
-    ax.text(0.2, -2.6, "after the fixes", color=BLUE, ha="left", fontsize=9.5,
-            fontweight="bold")
-    ax.set_xticks(list(xs), [v.replace("_", " ") for v in variants])
-    ax.set_ylabel("mean long-short return, % a month")
-    ax.set_ylim(top=max(before) + 7)
-    _title(fig, "A +27%/month backtest was too good to be true; it traced back to three data bugs")
     return fig
 
 
@@ -268,7 +233,6 @@ def timestamps(theme: str):
 
 FIGURES = {
     "time-machine": time_machine,
-    "caught-bug": caught_bug,
     "development-returns": development_returns,
     "leak-probe": leak_probe,
     "test-size": test_size,
