@@ -1,0 +1,387 @@
+{
+  "status": "partial",
+  "generation_attempts": 9,
+  "items": [
+    {
+      "id": "a1a74a36-62d8-4b1f-b438-2ea8890bcb39",
+      "grounded": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "b0de5a91942a48ca31769f76c9b60c887e9c5626fc65dec00da4ae7e39760d6c",
+        "ollama_timing": {
+          "total_duration": 80995339100,
+          "load_duration": 26511144800,
+          "prompt_eval_count": 691,
+          "prompt_eval_duration": 47659193000,
+          "eval_count": 23,
+          "eval_duration": 6514350000
+        },
+        "citation_locations_or_quotes_valid": null
+      },
+      "no_context": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "d4b9da7a51fb25a4774d5a25051b4c2a07719825202c35559791147f5df8fd4e",
+        "ollama_timing": {
+          "total_duration": 17486541000,
+          "load_duration": 13055300,
+          "prompt_eval_count": 156,
+          "prompt_eval_duration": 10904335000,
+          "eval_count": 23,
+          "eval_duration": 6422816000
+        },
+        "citation_locations_or_quotes_valid": null
+      },
+      "symbolic_v2": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "reason": "ambiguous_context_units"
+      }
+    },
+    {
+      "id": "2f25de01-c367-4011-8749-a1132424b6d0",
+      "grounded": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "b4dd2590447d292e08d61d879cf126bc525180b2139c034d4a31ef629a238547",
+        "ollama_timing": {
+          "total_duration": 40776837700,
+          "load_duration": 11740800,
+          "prompt_eval_count": 544,
+          "prompt_eval_duration": 34422629000,
+          "eval_count": 23,
+          "eval_duration": 6331421000
+        },
+        "citation_locations_or_quotes_valid": null
+      },
+      "no_context": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "af7c71f007a9f9ff54022737a688ce9592006be9014801fe0c8b7c9d8d139c15",
+        "ollama_timing": {
+          "total_duration": 14870469900,
+          "load_duration": 13287000,
+          "prompt_eval_count": 147,
+          "prompt_eval_duration": 8587875000,
+          "eval_count": 23,
+          "eval_duration": 6233242000
+        },
+        "citation_locations_or_quotes_valid": null
+      },
+      "symbolic_v2": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "reason": "ambiguous_context_units"
+      }
+    },
+    {
+      "id": "2f4e9dbb-92fc-4ade-873d-83a1cb1c0a21",
+      "grounded": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "964c3047dca70c161c76e2273eafdc139cbdcf474c074fdd321d412b6ed3b797",
+        "ollama_timing": {
+          "total_duration": 54528841000,
+          "load_duration": 14127200,
+          "prompt_eval_count": 733,
+          "prompt_eval_duration": 48244839000,
+          "eval_count": 23,
+          "eval_duration": 6256526000
+        },
+        "citation_locations_or_quotes_valid": null
+      },
+      "no_context": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "cd9ed170b56c9d17d79cf8594e739208e1352aec6443fbf4afaa1505b034bb7d",
+        "ollama_timing": {
+          "total_duration": 15244367800,
+          "load_duration": 11171600,
+          "prompt_eval_count": 156,
+          "prompt_eval_duration": 8790877000,
+          "eval_count": 23,
+          "eval_duration": 6432614000
+        },
+        "citation_locations_or_quotes_valid": null
+      },
+      "symbolic_v2": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "reason": "requires_one_or_two_explicit_years"
+      }
+    },
+    {
+      "id": "407d43ea-c405-4b88-95ae-d15b1f25fb25",
+      "grounded": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "c4a99aaf0b197e94eee2ef3bc8e83d30faf60821724d1a7e5a3d4e8632d7b9a7",
+        "ollama_timing": {
+          "total_duration": 37427317900,
+          "load_duration": 11230000,
+          "prompt_eval_count": 485,
+          "prompt_eval_duration": 30721483000,
+          "eval_count": 24,
+          "eval_duration": 6683573000
+        },
+        "citation_locations_or_quotes_valid": null
+      },
+      "no_context": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "b119972a9ab34f88e2cbb72b8d303d21b5865827ff91d91e0498a7caddf62f36",
+        "ollama_timing": {
+          "total_duration": 14421064400,
+          "load_duration": 10749200,
+          "prompt_eval_count": 145,
+          "prompt_eval_duration": 8193787000,
+          "eval_count": 23,
+          "eval_duration": 6187027000
+        },
+        "citation_locations_or_quotes_valid": null
+      },
+      "symbolic_v2": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "reason": "requires_one_or_two_explicit_years"
+      }
+    },
+    {
+      "id": "98bd5d62-dd90-48ae-8e7e-678ec7c9a04a",
+      "grounded": {
+        "outcome": "failed",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "733f0416ae774cdaa938fcefd2fb76395b8fa0dab5a3bda5295bd6f4dd120771",
+        "reason": "ReadTimeout"
+      },
+      "no_context": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "4c688028ce5a68728987be6468646e7693f34464738cf71b3e9b892df3c5c4e5",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "symbolic_v2": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "reason": "requires_one_or_two_explicit_years"
+      }
+    },
+    {
+      "id": "eca3afa3-cd52-44ed-9e62-2003038a0926",
+      "grounded": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "44a01bff458429688f42b4e5905223002203b872fb89b42d47b79a553ee0c0e3",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "no_context": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "32ded6eb36db7292ad18cad5329994eddc30830571c4738b8823851ef6407f33",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "symbolic_v2": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "reason": "ambiguous_row_mapping"
+      }
+    },
+    {
+      "id": "ff9b07aa-2cdc-425a-86b6-2f231421ce11",
+      "grounded": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "815ebf8e91abd59e32d2b20922b19c48f87832341dbff700273aa5a621b39694",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "no_context": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "d77fcecaffb9e848d4fbade2a377752254b4179590cb7c786b861709256f5819",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "symbolic_v2": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "reason": "ambiguous_row_mapping"
+      }
+    },
+    {
+      "id": "73693527-ed4b-4d07-941e-0e654095a43d",
+      "grounded": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "db5a1a3935234b639e1628b4c525687ba736babc03250fcafb299a037ff4e67b",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "no_context": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "57f7de7f063886f1c8e9c9a747cc2ce38c3f0316ce300da1dbb496568b717c91",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "symbolic_v2": {
+        "outcome": "wrong",
+        "native_EM": 0.0,
+        "native_F1": 0.0,
+        "reason": "unique_row_year_lookup"
+      }
+    },
+    {
+      "id": "62872bab-8c6f-4444-9f14-f57fe31cb250",
+      "grounded": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "1696a9328472d757efb93a76bfdfecd1aaae693b4a1cb63ee36439fb0d6f4a8c",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "no_context": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "186355b427f27479275f373dd70470765c745e3beafee3a369fd2876338746da",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "symbolic_v2": {
+        "outcome": "abstain",
+        "native_EM": 0,
+        "native_F1": 0,
+        "reason": "requires_one_or_two_explicit_years"
+      }
+    },
+    {
+      "id": "50a84776-bffd-424b-a0d8-6385b76c049a",
+      "grounded": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "50cc54bbc605d15c7da989d5494a0f76e54553a670c15ca45fd6d5bbc89441e0",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "no_context": {
+        "outcome": "not_attempted",
+        "native_EM": 0,
+        "native_F1": 0,
+        "request_sha256": "6c1c6dd010a615b3d736fac3e991af15c8243cad96386d78509ab92063d5e27a",
+        "reason": "wall_or_Python_memory_ceiling"
+      },
+      "symbolic_v2": {
+        "outcome": "correct",
+        "native_EM": 1.0,
+        "native_F1": 1.0,
+        "reason": "unique_row_year_lookup"
+      }
+    }
+  ],
+  "config_sha256": "218e0b3dffb149084d3ba6c0cb11d43743a11ece3eb50560d6b65efe455ecfd1",
+  "summaries": {
+    "grounded": {
+      "counts": {
+        "abstain": 4,
+        "failed": 1,
+        "not_attempted": 5
+      },
+      "native_EM": 0.0,
+      "native_F1": 0.0,
+      "native_scale_accuracy": 0.0,
+      "coverage": 0.0,
+      "EM_Wilson95": [
+        0.0,
+        0.2775327998628892
+      ],
+      "coverage_Wilson95": [
+        0.0,
+        0.2775327998628892
+      ]
+    },
+    "no_context": {
+      "counts": {
+        "abstain": 4,
+        "not_attempted": 6
+      },
+      "native_EM": 0.0,
+      "native_F1": 0.0,
+      "native_scale_accuracy": 0.0,
+      "coverage": 0.0,
+      "EM_Wilson95": [
+        0.0,
+        0.2775327998628892
+      ],
+      "coverage_Wilson95": [
+        0.0,
+        0.2775327998628892
+      ]
+    },
+    "symbolic_v2": {
+      "counts": {
+        "abstain": 8,
+        "wrong": 1,
+        "correct": 1
+      },
+      "native_EM": 0.1,
+      "native_F1": 0.1,
+      "native_scale_accuracy": 0.1,
+      "coverage": 0.2,
+      "EM_Wilson95": [
+        0.017876213095072896,
+        0.4041500267952385
+      ],
+      "coverage_Wilson95": [
+        0.05668215145437519,
+        0.5098375284633583
+      ]
+    }
+  },
+  "resources": {
+    "Python_CPU_seconds": 0.609375,
+    "wall_seconds": 366.45300000021234,
+    "Python_peak_resident_bytes": 131547136,
+    "note": "Ollama durations are not CPU measurements; model memory is separate."
+  },
+  "lineage": {
+    "git_commit": "9c14fecd118b1fd1a38f7d8dc3915468ce24372a",
+    "git_dirty": false,
+    "inputs": {
+      "reader_diagnostic_config_v2.json": "218e0b3dffb149084d3ba6c0cb11d43743a11ece3eb50560d6b65efe455ecfd1",
+      "run_reader_diagnostic.py": "70c5da62713cd266bf057af99b67662da20499d9870dd1bbb7347ffbe89344d9",
+      "reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d"
+    },
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  },
+  "frozen_source_and_config_unchanged": true
+}
