@@ -26,9 +26,16 @@ def header_fields(raw: str) -> dict:
     text = html.unescape(raw)
     match = re.search(r"ACCEPTANCE-DATETIME[^0-9]{0,100}(\d{14})", text, re.IGNORECASE)
     value = None if match is None else match.group(1)
+    candidate, issue = None, None
+    if value is not None:
+        try:
+            candidate = parse_header_acceptance_et(value).isoformat()
+        except ValueError as exc:
+            issue = str(exc)
     return {
         "header_raw": value,
-        "UTC_if_header_ET": None if value is None else parse_header_acceptance_et(value).isoformat(),
+        "UTC_if_header_ET": candidate,
+        "header_clock_issue": issue,
         "header_CIKs": sorted(set(re.findall(
             r"CENTRAL\s+INDEX\s+KEY[^0-9]{0,80}(\d{10})", text, re.IGNORECASE))),
     }

@@ -9,7 +9,7 @@ from datetime import UTC, datetime, timedelta
 from itertools import pairwise
 from typing import Literal
 
-from asof.timeutil import ET
+from asof.timeutil import ET, et_wall_instants
 
 
 @dataclass(frozen=True)
@@ -50,11 +50,7 @@ def acceptance_candidates(stored: datetime) -> ClockCandidates:
         if candidate.astimezone(ET).utcoffset() == offset:
             branches.append(ClockBranch("late_correction", candidate))
     wall = stored.replace(tzinfo=None)
-    local_candidates = set()
-    for fold in (0, 1):
-        candidate = wall.replace(tzinfo=ET, fold=fold).astimezone(UTC)
-        if candidate.astimezone(ET).replace(tzinfo=None) == wall:
-            local_candidates.add(candidate)
+    local_candidates = et_wall_instants(wall)
     branches.extend(ClockBranch("ET_wall_correction", t) for t in sorted(local_candidates))
     issues = (() if len(local_candidates) == 1 else
               ("ambiguous_ET_wall_clock",) if local_candidates else ("nonexistent_ET_wall_clock",))

@@ -21,6 +21,12 @@ from asof.config import RAW_DIR, user_agent
 SEC_MAX_RPS = 8.0  # below the commonly cited 10 req/s ceiling
 
 
+def response_cache_path(url: str, cache_dir: Path) -> Path:
+    """Locate a URL's existing cache without creating a client or making a request."""
+    digest = hashlib.sha256(url.encode()).hexdigest()
+    return cache_dir / digest[:2] / f"{digest}.gz"
+
+
 class EdgarClient:
     def __init__(self, cache_dir: Path | None = None, max_rps: float = SEC_MAX_RPS) -> None:
         self.cache_dir = cache_dir or RAW_DIR / "sec"
@@ -35,8 +41,7 @@ class EdgarClient:
         )
 
     def _cache_path(self, url: str) -> Path:
-        digest = hashlib.sha256(url.encode()).hexdigest()
-        return self.cache_dir / digest[:2] / f"{digest}.gz"
+        return response_cache_path(url, self.cache_dir)
 
     def _throttle(self) -> None:
         with self._lock:

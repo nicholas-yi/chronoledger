@@ -28,6 +28,16 @@ def test_rejects_naive_or_non_utc_strings() -> None:
         parse_acceptance_utc("2026-11-09T21:30:40")
 
 
+@pytest.mark.parametrize(("value", "reason"), [
+    ("20241103013000", "ambiguous"),
+    ("20240310023000", "nonexistent"),
+    ("2024010101010", "14 ASCII digits"),
+])
+def test_header_clock_never_silently_chooses_a_fold_or_normalizes_a_gap(value, reason) -> None:
+    with pytest.raises(ValueError, match=reason):
+        parse_header_acceptance_et(value)
+
+
 def test_premarket_filing_trades_same_day_close() -> None:
     accepted = parse_header_acceptance_et("20260731060102")
     days = [date(2026, 7, 30), date(2026, 7, 31), date(2026, 8, 3)]

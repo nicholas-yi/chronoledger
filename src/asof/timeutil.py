@@ -8,7 +8,7 @@ header/index evidence and source provenance before treating it as knowledge time
 from __future__ import annotations
 
 from bisect import bisect_left
-from datetime import date, datetime, time, timedelta, timezone
+from datetime import UTC, date, datetime, time, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 ET = ZoneInfo("America/New_York")
@@ -22,10 +22,30 @@ def parse_acceptance_utc(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
 
 
+def et_wall_instants(wall: datetime) -> tuple[datetime, ...]:
+    """Valid UTC instants for a naive NY civil clock: zero in a gap, two in a fold."""
+    if wall.tzinfo is not None:
+        raise ValueError("Eastern wall clock must be naive")
+    instants = set()
+    for fold in (0, 1):
+        candidate = wall.replace(tzinfo=ET, fold=fold).astimezone(UTC)
+        if candidate.astimezone(ET).replace(tzinfo=None) == wall:
+            instants.add(candidate)
+    return tuple(sorted(instants))
+
+
 def parse_header_acceptance_et(value: str) -> datetime:
-    """Parse filing-header ``ACCEPTANCE-DATETIME`` (US/Eastern, 'YYYYMMDDhhmmss') to UTC."""
-    local = datetime.strptime(value, "%Y%m%d%H%M%S").replace(tzinfo=ET)
-    return local.astimezone(timezone.utc)
+    """Interpret a header as Eastern only if its civil clock is uniquely valid.
+
+    This conversion does not independently certify the source field's clock.
+    """
+    if len(value) != 14 or not value.isascii() or not value.isdigit():
+        raise ValueError("header acceptance requires exactly 14 ASCII digits")
+    candidates = et_wall_instants(datetime.strptime(value, "%Y%m%d%H%M%S"))
+    if len(candidates) != 1:
+        issue = "ambiguous" if candidates else "nonexistent"
+        raise ValueError(f"{issue} Eastern header clock")
+    return candidates[0]
 
 
 def close_time_utc(day: date) -> datetime:

@@ -1,0 +1,185 @@
+{
+  "kind": "SMALL CURRENT-MODEL DEVELOPMENT QA DIAGNOSTIC; not formal H1 or historical usability",
+  "ids": [
+    "a1a74a36-62d8-4b1f-b438-2ea8890bcb39",
+    "2f25de01-c367-4011-8749-a1132424b6d0",
+    "2f4e9dbb-92fc-4ade-873d-83a1cb1c0a21",
+    "407d43ea-c405-4b88-95ae-d15b1f25fb25",
+    "98bd5d62-dd90-48ae-8e7e-678ec7c9a04a",
+    "eca3afa3-cd52-44ed-9e62-2003038a0926",
+    "ff9b07aa-2cdc-425a-86b6-2f231421ce11",
+    "73693527-ed4b-4d07-941e-0e654095a43d",
+    "62872bab-8c6f-4444-9f14-f57fe31cb250",
+    "50a84776-bffd-424b-a0d8-6385b76c049a"
+  ],
+  "excluded_ids": [
+    "028bf685-261d-420f-a080-1a9b62147d53",
+    "0b72b5e6-51d3-45fa-bd67-6f44b78e25fb",
+    "0d0c77cf-d32c-4b0e-8da0-dcaa3f681f59",
+    "0fc63de0-335d-438e-a65a-b65faae8f011",
+    "11708d2a-0e19-4feb-b687-fe2785da2b95",
+    "1427bbad-0def-4340-a537-4713dad96ea7",
+    "1c738686-3b66-4fd0-b8ca-e90ece7bdb40",
+    "20092aeb-d39f-4b50-b927-0602b8a95c08",
+    "2183fd41-aa7b-4eff-81b0-427d0bbe52e9",
+    "219f3e23-c2b0-4607-9573-6af0eea1fb33",
+    "26d44a4e-9164-47a6-a2f5-523d6e9303d2",
+    "276f39d7-5428-46cf-b808-7dd9eefab430",
+    "2cefe0db-9e87-47d9-b441-844a5d6b6d5c",
+    "3109048c-86f4-4be4-85b4-39e43d24a502",
+    "33437a5b-9c80-4961-a8c6-9a31c6458cf8",
+    "33c65458-8b70-4e9a-8127-67465d67790b",
+    "342d9ac7-1621-4585-87f8-83b1040555ba",
+    "40a7294a-7851-42a8-a85e-caeaca0097e9",
+    "430ae0ff-c719-4b6c-a1e3-64dbfce036cc",
+    "438d631c-1dd3-4620-b851-d9ea5cec4ad5",
+    "4bb9ca4a-a5d3-4cf4-9d42-bca4707bf585",
+    "4ece6b8e-230b-475b-8354-b7d281332895",
+    "511beaff-af2b-46f9-9eea-268e338270b2",
+    "5dc7a9ae-acd0-4b54-9721-ff522aaef3f5",
+    "617cd0f0-5fac-4c34-b9b6-425a0d353491",
+    "747db6b5-48bb-44ed-a8c3-c60fcf264d2e",
+    "75716aca-67de-45ad-a624-3e95c050478d",
+    "75cadcb4-da5e-4e3e-b2ad-36a31be3d013",
+    "77b14f34-b206-4b50-babb-aa9ee379410a",
+    "7c540b6e-6f7f-421a-9aa8-b173f882dbac",
+    "81fafa03-6f80-4fdf-b025-4a37d0bd184e",
+    "82c155de-a907-4b3f-b89f-1984bd97ddc5",
+    "872a7a6b-ed57-479b-a532-96eb6ccc9b7c",
+    "8859367b-71c1-4382-9808-9332afecb13d",
+    "88d66deb-980a-41c8-b41a-0e9610526f0f",
+    "95f11a7d-d59b-4123-9e64-561a4c91a839",
+    "97125a03-6fc4-4782-a1d7-77fea738df4f",
+    "9fa0bb46-4243-4629-81c2-3ba6e549fee0",
+    "a4a37315-e9d5-44ea-9a8e-79ce4d6dbf24",
+    "a4be9eab-ad03-4d67-9136-62d7cbe40e1e",
+    "a4e02fba-5fe2-440b-ae68-2cb050e887ab",
+    "a696f558-43cb-46b7-9834-def99a3dde08",
+    "a79b1b03-fe81-471b-bc71-4951e8c43813",
+    "abda534c-fde6-4155-b854-3070ca1975b5",
+    "ad42fe3e-38cd-446f-a313-b9a50f5e6937",
+    "b01cfc26-4c45-4331-868a-432b93e272e9",
+    "bed1fce2-69cb-4d1e-a34a-01950a1770bd",
+    "bf7abd62-d9cd-48d2-8826-1457684019a3",
+    "c3454b58-520a-4b25-a484-70e360c9c046",
+    "c52dc053-375e-4b4d-b4ce-757bb39fa256",
+    "cc0bdcfe-1ad1-4a36-8169-50270dad8b75",
+    "d4f18464-2a67-4768-8540-1a9bf577e14d",
+    "d5072c93-36bb-432c-adc8-6334fd6fe7ac",
+    "d547e798-a829-4b95-af68-e50705558993",
+    "e10133f7-0579-4a1d-b41c-c12210fc7559",
+    "e4f21617-1a84-40e4-bdf0-671df88cb862",
+    "efbe38bb-e6a7-4a21-ade3-6b962a11b690",
+    "f6cb9974-2af7-43b3-9e1c-8cd5439dff67",
+    "fb46f62a-fd52-49d3-9394-844db5a3254e",
+    "fd303846-a740-4d73-b19a-961fa0d7b71b"
+  ],
+  "seed": 2026111406,
+  "count": 10,
+  "selection": "Random(seed).sample(sorted(all devUIDs minus prior60),10); no type/answer filter",
+  "model": {
+    "name": "qwen3.5:4b",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "ollama_version": "0.40.16"
+  },
+  "endpoint": "http://127.0.0.1:11435",
+  "options": {
+    "temperature": 0,
+    "seed": 2026111406,
+    "num_predict": 256,
+    "num_ctx": 16384,
+    "num_thread": 1,
+    "num_gpu": 0,
+    "num_batch": 128
+  },
+  "arms": [
+    "grounded",
+    "no_context"
+  ],
+  "order": "Per item, shuffle both arms with Random(seed+1); both predictions precede gold scoring.",
+  "assets": {
+    "tatqa\\dev.json": {
+      "source_path": "dataset_raw/tatqa_dataset_dev.json",
+      "bytes": 1637431,
+      "sha256": "8da095a819af6db3c14877c6df2d4d29960e41d1a63dd1fa853507bd2a616af5",
+      "git_blob_sha1": "48075c812af3fe6698b1d5cb50d9dbf358d52784"
+    },
+    "tatqa\\tatqa_eval.py": {
+      "source_path": "tatqa_eval.py",
+      "bytes": 2236,
+      "sha256": "a4110626c477e7ed88f42b5edeb8449eaa9a4370740a627631b4a462bcf43762",
+      "git_blob_sha1": "5d40665e0a52630ba078aefa0a31144bc7cba8bc"
+    },
+    "tatqa\\tatqa_metric.py": {
+      "source_path": "tatqa_metric.py",
+      "bytes": 14129,
+      "sha256": "2aeeac479f89f8c76300af1cc0e8d098eb86af84bc386b38b6ab4af484a6dea8",
+      "git_blob_sha1": "80f45360fd5303110b9e31ad1b54ad6dfd3f9d18"
+    },
+    "tatqa\\tatqa_utils.py": {
+      "source_path": "tatqa_utils.py",
+      "bytes": 3807,
+      "sha256": "a84bb2f960737cf0a53733637a674cc4b20ef030a2be6a4b21dc2c4356f415ec",
+      "git_blob_sha1": "2c7c7246a73330af3bd290bf746ca9014ef73ebb"
+    },
+    "tatqa\\LICENSE": {
+      "source_path": "LICENSE",
+      "bytes": 1068,
+      "sha256": "46e27ffbc49c3fd44a9595c2213f8a5f4319a81b53238e49ce1eec39e7e25662",
+      "git_blob_sha1": "7855a66ee0e672eda63b018d8b0d37f848b4015a"
+    },
+    "tatqa\\README.md": {
+      "source_path": "README.md",
+      "bytes": 4689,
+      "sha256": "85c398173d771a2531abea5b81f3696914296642da2af78c2c34545715c14d5f",
+      "git_blob_sha1": "13718343e75798a4708851c54af99e1daf7b4397"
+    },
+    "quarantine\\finqa_dev.json": {
+      "source_path": "dataset/dev.json",
+      "bytes": 10954658,
+      "sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+      "git_blob_sha1": "970f239f591c782b17df420c0d343b780737f3da"
+    },
+    "finqa\\evaluate.py": {
+      "source_path": "code/evaluate/evaluate.py",
+      "bytes": 14305,
+      "sha256": "845cd131cab843eceff256cf6d392978cc470a7da4a80107beb56027fdca5c13",
+      "git_blob_sha1": "4829a4ca58a5725fb3f7a46b3b23b7f7e848a512"
+    },
+    "finqa\\general_utils.py": {
+      "source_path": "code/utils/general_utils.py",
+      "bytes": 607,
+      "sha256": "98bac4efec9f4b56e11fc50564ebdf1a067cdce565232a10430f3e5343c5f4cc",
+      "git_blob_sha1": "bcd54fab833ae6dbcecd0dc562014fff59a96e15"
+    },
+    "finqa\\LICENSE": {
+      "source_path": "LICENSE",
+      "bytes": 1067,
+      "sha256": "92c0e67bd762c15c07ba60de09558338315a8ebf99aac4f51f487179809ac087",
+      "git_blob_sha1": "fb3b513238ba5ec7e0799cb1190ff30c759a5bdf"
+    },
+    "finqa\\README.md": {
+      "source_path": "README.md",
+      "bytes": 6518,
+      "sha256": "eb86779cfed6f0a253913761d8e4fabe032a29d9fcf2944e56c23bf007064605",
+      "git_blob_sha1": "8fc89f8402714c39385a80c3d7d5e947ae27fcab"
+    }
+  },
+  "source_sha256": {
+    "scripts\\run_reader_diagnostic.py": "0b47df44c25aed4cc506ebe85aedf1a1bca8b9c2d1e452601c9316bc468f8398",
+    "src\\asof\\reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+    "src\\asof\\benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d"
+  },
+  "limits": {
+    "generation_attempts": 20,
+    "wall_seconds": 900,
+    "per_call_seconds": 90,
+    "serialized_request_bytes": 12000,
+    "Python_RSS_bytes": 1073741824,
+    "note": "Ollama runs separately, CPU1/noGPU; Python RSS excludes its model memory. Settings/checks are cooperative, not an OS quota."
+  },
+  "metrics": "Unmodified native TAT-QA EM/F1/scale and coverage on all10 per arm, plus unchanged symbolic v2 on same10; failures/oversize/unattempted count as misses. Question-level descriptive Wilson95 for binary EM/coverage only.",
+  "citation_boundary": "Only location/normalized-quote validity; not answer relevance, complete arithmetic proof or verified claim support.",
+  "control_boundary": "No-context arm measures evidence-withholding behavior, not a clean memorization test. Abstention does not prove no training contamination.",
+  "rights_and_time": "Same immutable pre-2022 TAT-QA dev asset already qualified; data CC BY4.0. Current model may have seen public benchmark answers; no training-cutoff or historical-use claim. No new corpus/model download or training."
+}
