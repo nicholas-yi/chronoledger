@@ -382,7 +382,7 @@ default repo/data/run writer; Research supplies read-only design cards, Lead
 reconciles design choices, and the owner retains reserved permissions. No new
 queue service, chat, agent or planning file is created.
 
-**Queue snapshot v0.3 (Batch A offline release); stable IDs CL-P1 through CL-P6.** Lead decision
+**Queue snapshot v0.3.1 (independent synthetic cross-check); stable IDs CL-P1 through CL-P6.** Lead decision
 **Lead-D1** accepts this organization only. These `Lead-D*` identifiers are
 coordination decisions, **not** pre-registration deviations D1-D9 or new tags.
 Research's **CL-P1 through CL-P6 decision-ready design cards v1**, completed
@@ -676,6 +676,50 @@ replicates. Existing reports, raw-data cutoffs, D3a planner and all failures rem
 identifiable. **Next:** Lead reviews this evidence and the queued Batch B scope;
 no human/vendor contact, source access, empirical integration or reserved
 authorization follows automatically.
+
+##### Independent oracle cross-check R1 (synthetic only)
+
+The later authorized cross-check read **CL-ORACLES-20261113-R1 — Independent
+correctness pack**, completed Research response
+`aff80bff-cc5c-464e-8a10-f2493581179e`, in all five pages in the
+[existing Research chat](agent-host-session://ahp-session/951260e2-fb65-4741-bc73-7ba69cbfc778?chat=8b3fbed7-849c-4ebb-8c14-aa755f6b3045).
+This is independent proposed review material, not owner approval, real gold,
+source entitlement or permission to change frozen definitions.
+
+Initial tests of22applicable synthetic cases gave **5failures /17passes**.
+The fixes below concern only offline helpers; **no Batch B stopped step,
+manifest generation on project data, empirical study, calibration, source request,
+annotation or referee was rerun**.
+
+| Oracle / result | Correction or explicitly retained boundary |
+|---|---|
+| P3-D01..D10 | All ten formal-H1 conjunction cases are encoded in [test_independent_oracles.py](../tests/test_independent_oracles.py). Genuine D07 bug: a known failed assumption was masked by missing TF-IDF. Known failure now dominates unknown evidence; missing alone still yields `unavailable` (oracle `undetermined`). Directed event t negates raw increasing-change t. API `supported` means only the supplied conjunction predicate, not global scientific acceptance. D09 monthly3.1/event3.3 passes with all other gates; D02 3.1/3.1 fails. Supplementary Holm neither rescues nor replaces it. |
+| P3-M03 | Missing purpose is now `unknown`, not inferred scientific from a known hypothesis label and not engineering. Registered N still counts every distinct logged config independently of this annotation. The real74-attempt manifest is **not regenerated** here: its earlier inferred-purpose partition remains historical evidence pinned to its generator, not certification by this correction. |
+| P3-M09 | Before overwriting an existing manifest, the CLI checks its persisted registered counts and attempt count. A reduced/incomplete ledger export raises and leaves the previous manifest bytes intact. The hypothetical raw2/distinct2 versus registered3 case preserves3, rejects reconciliation, and does not compute statistics. The pure in-memory classifier without a supplied receipt cannot infer omitted history; it must not be used to reset an authoritative registered count. |
+| P3-M01/M04/M05/M06/M08 | Existing/new tests retain duplicate and changed-vintage attempts/lineages and registered counts, preserve failures/missing outputs, reject endpoint pooling and keep short PBO blocked. `repeat_vintage` is an attempt annotation, **not proven equivalence**, permission to choose latest, or an independence estimate. Availability's `available` plus `inputs_only_not_computed` maps to the oracle's conditional `eligible_not_computed`; it is not a DSR/PBO result or independent proof of a persisted file. |
+| P3-M02/M05/M07 interface limits | The helper prioritizes unavailable/incomplete-family reasons; the pack sometimes labels PBO not_estimable with an additional family blocker. Both disallow inference. A single supplied matrix cannot certify an external required-calendar receipt or undo a caller's prior silent intersection. Such receipt reconciliation remains an integration requirement; no zero filling/calendar intersection was introduced in this cross-check. Batch B DSR remains stopped. |
+| P5-R01/R02/R03/R04/R05/R06/R07 | Adversarial tests reject missing rights/authorization, bad formal-H1 identity, missing two-ended links or calibration. R02 adds an explicit optional `requested_outcomes` check: B0 measurement cannot authorize requested returns. R04 now blocks X1 presented under H1/H1n instead of its distinct study. A supplied `run_ready=true` does not bypass required gates. No study executes. |
+| P5-R08 boundary | The API has no coverage-ratio-to-qualification conversion. `qualified_sources=True` must mean independently supported source qualification, not merely0.81 coverage. The checker validates declared gates, not the truth of source receipts; rights/identity/payoffs remain unresolved. No test fabricates those receipts or declares F2 cleared. |
+| P4-E01..E05 | Synthetic missing/zero NI, missing impairment, in-window early positive and incomplete follow-up cases pass. Added zero-NI4->0/100assets yields decline1 and dROA-0.04 in a wholly mocked H4 panel. A censored200day envelope keeps null, not an observed negative. No real label/data changed. |
+| P4-C01..C14/E06 | The invented semantic pairs are **not implemented claim-labeling performance tests**: no numeric/entity/modality semantic classifier or real adjudicated gold is supplied here. Administrative versus substantive endpoints remain separate; historical broad10-K/A and prior10-Q/A discrepancy remain as documented. Do not manufacture a substantive endpoint or precision/recall score from this pack. D7/human protocol still blocked. |
+| P6-T01/T02/T03/T05/T06 | Hand-derived dollar costs and break-even cases pass with the **declared** half-L1/gross-traded convention and supplied incremental cashflow basis. The short toy has30execution/carry cost plus50distribution debit,80cash drag. Already-distribution-inclusive gross P&L deducts30, not another50. Unknown borrow/fill stays unavailable. No actual trade, annual-rate inference or frozen cost change. |
+| P6-T04/T07 interface limits | Long-only borrow=`not_applicable` is not represented by the current bool/unknown borrow evidence field; do not forge availability to clear it. T07 preserves the two input-basis results1.60versus0.80; a **joint** observed-Q/frozen-T mismatch flag needs that additional receipt/interface. It is not automatically implemented by one-basis arithmetic. No silent halving, addition of both spread lines or universal claim about the existing frozen turnover basis. |
+| P2-B01..B04 | The independent scheduled-overlap/other-firm/SIC expectations agree with the recorded future contracts, but those future overlap/peer/SIC algorithms are not implemented or evaluated by this turn. The separate D3a planner and all old runner defaults remain untouched. No minimum support threshold or new price input inferred. |
+
+Final focused command, numerical threads1:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q tests\test_independent_oracles.py tests\test_trial_manifest.py tests\test_studies.py tests\test_costs.py tests\test_labels.py tests\test_h4_development.py
+```
+
+**56passed**; configured changed-file Ruff and selected `E4,E7,E9,F` passed.
+This is not a fresh full-suite179pass or referee result. The host initially
+reported88%CPU load; no heavy job, simulation, model or full-suite rerun was
+launched. All synthetic receipt/ledger writes use temporary directories.
+The original real ledger, manifests, study outputs, rosters and referee remain
+unchanged. F7/F8 source/numerical blockers remain unresolved; the correction
+does not reopen DSR or the holdout. Only the single authorized further evidence
+handoff to Lead follows; no other chats, schedules or acknowledgment loop.
 
 ##### Batch B bounded development plan (recorded before draws/reruns)
 

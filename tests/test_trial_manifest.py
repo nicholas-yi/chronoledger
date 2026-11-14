@@ -15,7 +15,7 @@ def _entry(config, metrics=None):
 
 
 def test_manifest_keeps_counts_repeats_unknown_and_failed_attempts() -> None:
-    first = _entry({"variant": "v1"}, {"m_mean_net": 0.01})
+    first = _entry({"variant": "v1", "purpose": "scientific"}, {"m_mean_net": 0.01})
     entries = [
         first, deepcopy(first),
         _entry({"purpose": "optimization_equivalence"}, {"equivalence_passed": True}),
@@ -28,7 +28,7 @@ def test_manifest_keeps_counts_repeats_unknown_and_failed_attempts() -> None:
     assert entries == before
     assert manifest["registered_N_per_hypothesis"] == {"H0": 5}
     assert [a["purpose"] for a in manifest["attempts"]] == [
-        "scientific", "repeat_vintage", "engineering", "unknown", "timing", "scientific"]
+        "scientific", "repeat_vintage", "engineering", "unknown", "timing", "unknown"]
     assert manifest["attempts"][1]["previous_attempt_row"] == 1
     assert manifest["attempts"][3]["output_status"] == "failed"
     assert manifest["attempts"][-1]["output_status"] == "missing"

@@ -37,6 +37,7 @@ class StudyReadiness:
 def study_readiness(
     study_id: str, *, prerequisite_status: Mapping[str, Literal["ready", "blocked", "completed"] | None],
     gates: Mapping[str, bool | None], hypothesis: str | None,
+    requested_outcomes: bool | None = None,
 ) -> StudyReadiness:
     """Validate supplied readiness assertions, never infer authority from a design card."""
     if study_id not in STUDIES:
@@ -47,4 +48,8 @@ def study_readiness(
     blockers += [f"gate:{g}" for g in spec.gates if gates.get(g) is not True]
     if study_id == "CL-P5-H1" and hypothesis != "H1":
         blockers.append("formal_H1_identity_required")
+    if requested_outcomes is not None and requested_outcomes != spec.outcomes:
+        blockers.append("scope_mismatch")
+    if study_id == "CL-P5-X1" and hypothesis in {"H1", "H1n"}:
+        blockers.append("distinct_study_required")
     return StudyReadiness(study_id, "blocked" if blockers else "ready", tuple(blockers), spec.outcomes)

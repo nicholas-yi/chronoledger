@@ -12,7 +12,7 @@ def _costs(**overrides):
     return component_costs(**args)
 
 
-def test_turnover_bases_match_frozen_normalization_without_double_charge() -> None:
+def test_declared_half_l1_and_gross_traded_normalizations_without_double_charge() -> None:
     one_way = _costs()
     gross = _costs(turnover=0.8, turnover_basis="gross_traded")
     assert one_way == gross

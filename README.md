@@ -20,7 +20,12 @@ recorded summary exactly, and the metadata-only claims preflight found305CIK and
 124acceptance disagreements. Claims selection stopped before drawing; DSR was not
 computed. See [F7/F8](docs/FINDINGS.md#f7-h0-pair-metadata-disagrees-with-the-bulk-filing-identityacceptance-metadata)
 and the [bounded Batch B evidence](docs/DATA_AUDIT.md#batch-b-completion-and-stopped-gates).
-**179 tests pass**, but that does not resolve source or numerical-reconciliation failures.
+**Batch B's pinned full suite passed179tests**, but that does not resolve source
+or numerical-reconciliation failures.
+That full-suite result is pinned to Batch B's tested source. The later
+[independent synthetic oracle cross-check](docs/DATA_AUDIT.md#independent-oracle-cross-check-r1-synthetic-only)
+passed56focused tests after offline-helper fixes; no study/referee or stopped
+step was repeated, and no new full-suite result is claimed.
 
 The Python package is named `asof`, after the `as_of` queries everything is built on.
 

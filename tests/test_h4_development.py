@@ -39,7 +39,7 @@ def test_h4_development_winsorization_ignores_future_outcomes(monkeypatch) -> No
 
 @pytest.mark.parametrize(
     ("current_ni", "next_ni", "expected"),
-    [(None, 2.0, None), (2.0, None, None), (2.0, 1.0, 1.0), (2.0, 2.0, 0.0)],
+    [(None, 2.0, None), (2.0, None, None), (2.0, 1.0, 1.0), (2.0, 2.0, 0.0), (4.0, 0.0, 1.0)],
 )
 def test_h4_decline_requires_both_observed_income_values(
     monkeypatch, current_ni, next_ni, expected,
@@ -61,8 +61,11 @@ def test_h4_decline_requires_both_observed_income_values(
         script.ENT: pd.DataFrame({"cik": [1], "sic": ["3500"]}),
     }
     monkeypatch.setattr(script.pd, "read_parquet", lambda path: frames[path].copy())
-    decline = script.build_panel()["decline"].iloc[0]
+    panel = script.build_panel()
+    decline = panel["decline"].iloc[0]
     if expected is None:
         assert pd.isna(decline)
     else:
         assert decline == expected
+    if current_ni == 4.0 and next_ni == 0.0:
+        assert panel["d_roa"].iloc[0] == pytest.approx(-0.04)

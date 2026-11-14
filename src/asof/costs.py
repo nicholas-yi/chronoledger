@@ -40,7 +40,11 @@ def component_costs(
     conversion. Holding inputs are already period-accrued (positive cost, negative credit);
     no annual-rate/day-count convention is inferred. Caller flags are evidence assertions,
     not historical borrow/fill verification. Break-even is all-in one-way execution bps after
-    holding costs, not an additional charge.
+    holding costs, not an additional charge. ``one_way`` explicitly declares half-L1 turnover;
+    this does not certify the basis of an externally supplied frozen turnover. This is a
+    component ledger, not net P&L: distributions already included in a gross total-return P&L
+    must not be deducted from that P&L a second time. Reconcile the gross/holding cashflow basis
+    before using the break-even output; this API does not infer that basis.
     """
     if (not math.isfinite(capital) or capital <= 0 or not math.isfinite(turnover)
             or turnover < 0 or not math.isfinite(half_spread_bps) or half_spread_bps < 0):

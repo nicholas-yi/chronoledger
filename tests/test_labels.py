@@ -58,3 +58,14 @@ def test_unknown_states_require_null_and_reason(status) -> None:
         validate_label(replace(label, value=False))
     with pytest.raises(ValueError, match="explicit reason"):
         validate_label(replace(label, reason=None))
+
+
+def test_p4_e04_incomplete_negative_is_represented_as_censored_not_zero() -> None:
+    start = datetime(2016, 1, 1, tzinfo=UTC)
+    evidence = LabelEvidence(
+        "formal_365d", "censored", None, ("synthetic_partial_envelope",),
+        reason="followup_only_200days", signal_time=start,
+        observation_end=start + timedelta(days=200))
+    assert validate_label(evidence).value is None
+    with pytest.raises(ValueError):
+        validate_label(replace(evidence, status="negative", value=False))

@@ -39,8 +39,6 @@ def build_manifest(entries: Sequence[dict[str, Any]]) -> dict[str, Any]:
             purpose, reason = "engineering", "explicit_engineering_purpose"
         elif declared in ("scientific", "repeat_vintage"):
             purpose, reason = declared, "explicit_purpose"
-        elif declared is None and hypothesis in {"H0", "H1n", "H4", "H5a", "H5b", "H5c", "H6"}:
-            purpose, reason = "scientific", "recognized_legacy_hypothesis"
         previous = seen.get(key)
         if purpose == "scientific" and previous is not None:
             purpose, reason = "repeat_vintage", "same_hypothesis_period_configuration"
@@ -98,28 +96,39 @@ def co_primary_decision(
     values = [monthly_t, event_change_t, *delisting_effects.values()]
     if requires_tfidf:
         values.append(tfidf_t)
-    if referee_passed is None or any(v is None or not math.isfinite(v) for v in values):
-        return ProtocolDecision("unavailable", ("missing_or_nonfinite_required_evidence",), None)
-    assert monthly_t is not None and event_change_t is not None
-    oriented_event = -event_change_t
-    p = [math.erfc(t / math.sqrt(2)) / 2 for t in (monthly_t, oriented_event)]
-    order = sorted(range(2), key=p.__getitem__)
-    adjusted = [0.0, 0.0]
-    adjusted[order[0]] = min(1.0, 2 * p[order[0]])
-    adjusted[order[1]] = max(adjusted[order[0]], p[order[1]])
+    unknown = referee_passed is None or any(v is None or not math.isfinite(v) for v in values)
+    m = monthly_t if monthly_t is not None and math.isfinite(monthly_t) else None
+    e = -event_change_t if event_change_t is not None and math.isfinite(event_change_t) else None
+    supplementary = None
+    if m is not None and e is not None:
+        p = [math.erfc(t / math.sqrt(2)) / 2 for t in (m, e)]
+        order = sorted(range(2), key=p.__getitem__)
+        adjusted = [0.0, 0.0]
+        adjusted[order[0]] = min(1.0, 2 * p[order[0]])
+        adjusted[order[1]] = max(adjusted[order[0]], p[order[1]])
+        supplementary = (adjusted[0], adjusted[1])
     reasons = []
-    if monthly_t < (2.0 if hypothesis == "H0" else 3.0):
+    if m is not None and m < (2.0 if hypothesis == "H0" else 3.0):
         reasons.append("v1_monthly_threshold_or_direction")
-    if any(v is None or v <= 0 for v in delisting_effects.values()):
+    if any(v is not None and math.isfinite(v) and v <= 0 for v in delisting_effects.values()):
         reasons.append("delisting_direction")
-    if not referee_passed:
+    if referee_passed is False:
         reasons.append("referee_gate")
-    if monthly_t <= 0 or oriented_event <= 0 or max(monthly_t, oriented_event) < 3.2:
+    if ((m is not None and m <= 0) or (e is not None and e <= 0)
+            or (m is not None and e is not None and max(m, e) < 3.2)):
         reasons.append("v2_co_primary_threshold_or_direction")
-    if requires_tfidf and (tfidf_t is None or tfidf_t < 2.0):
+    if requires_tfidf and tfidf_t is not None and math.isfinite(tfidf_t) and tfidf_t < 2.0:
         reasons.append("D3_TFIDF_agreement")
-    return ProtocolDecision("not_supported" if reasons else "supported", tuple(reasons),
-                            (adjusted[0], adjusted[1]))
+    status: Literal["not_supported", "unavailable", "supported"]
+    if reasons:
+        status = "not_supported"
+    elif unknown:
+        status = "unavailable"
+    else:
+        status = "supported"
+    if unknown:
+        reasons.append("missing_or_nonfinite_required_evidence")
+    return ProtocolDecision(status, tuple(reasons), supplementary)
 
 
 def inference_availability(
@@ -154,12 +163,23 @@ def main() -> None:
         raise FileNotFoundError(ledger.LEDGER_PATH)
     entries = ledger.read_ledger()
     result = build_manifest(entries)
+    path = PROJECT_ROOT / "results" / "trial_manifest.json"
+    if path.exists():
+        previous = json.loads(path.read_text(encoding="utf-8"))
+        registered = previous.get("registered_N_per_hypothesis")
+        if not isinstance(registered, dict) or any(
+            isinstance(n, bool) or not isinstance(n, int) or n < 0 for n in registered.values()
+        ):
+            raise ValueError("previous registered counts are malformed; preserve manifest")
+        if (len(previous.get("attempts", [])) > len(entries)
+                or any(result["registered_N_per_hypothesis"].get(h, 0) < n
+                       for h, n in registered.items())):
+            raise ValueError("incomplete registered history; preserve previous manifest and N")
     result["source_ledger"] = "results/trial_ledger.jsonl"
     result["generation_lineage"] = ledger.lineage()
     result["project_inference"] = inference_availability(
         None, endpoint_kind="monthly_net_returns", persisted=False, family_complete=False,
         registered_count=result["registered_N_per_hypothesis"].get("H0", 0))
-    path = PROJECT_ROOT / "results" / "trial_manifest.json"
     path.write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
     print(f"Manifest: {len(entries)} preserved attempts; {path.name}")
 
