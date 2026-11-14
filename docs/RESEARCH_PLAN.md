@@ -14,24 +14,23 @@ better-documented answers, not more chances to find a lucky backtest.
 
 ```mermaid
 flowchart TD
-    Q["Question or known limitation"] --> R["Research: mechanism,<br/>competing explanations, sources"]
-    R --> C["Study card written<br/>before any outcome is seen"]
-    C --> S["Lead: scope, dependencies,<br/>expected information value"]
-    S --> D{"Data, labels and statistical<br/>power good enough?"}
-    D -->|no| G["Record what is missing<br/>and the smallest next check"]
-    G --> R
-    D -->|yes| F["Freeze protocol, metrics,<br/>data versions and budget"]
-    F --> X["Execution: one bounded run"]
-    X --> L["Record every attempt,<br/>log and output"]
-    L --> V["Independent review<br/>and automated referee"]
-    V --> O{"Compare with the<br/>frozen decision rule"}
-    O -->|supported| A["Supported under the<br/>stated conditions"]
-    O -->|null or imprecise| N["Unsupported or inconclusive"]
-    O -->|discrepancy| I["Invalid: investigate,<br/>do not retune"]
-    I --> G
-    A --> K[("Shared evidence log")]
-    N --> K
-    K --> R
+    question["Question or known limitation"] --> research["Research agent<br/>mechanism, competing explanations, sources"]
+    research --> card["Study card written<br/>before any outcome is seen"]
+    card --> scope["Lead agent<br/>scope, dependencies, information value"]
+    scope --> ready{"Data, labels and<br/>statistical power adequate?"}
+    ready -->|no| gap["Record what is missing<br/>and the smallest next check"]
+    gap --> research
+    ready -->|yes| freeze["Freeze protocol, metrics,<br/>data versions and budget"]
+    freeze --> run["Execution agent<br/>one bounded run"]
+    run --> record["Record every attempt,<br/>log and output"]
+    record --> review["Independent review<br/>and automated referee"]
+    review --> verdict{"Compare with the<br/>frozen decision rule"}
+    verdict -->|supported| supported["Supported under the<br/>stated conditions"]
+    verdict -->|null or imprecise| unsupported["Unsupported or inconclusive"]
+    verdict -->|discrepancy| invalid["Invalid<br/>investigate, do not retune"]
+    invalid --> gap
+    supported --> evidence[("Shared evidence log")]
+    unsupported --> evidence
 ```
 
 Three rules keep the workflow honest:
