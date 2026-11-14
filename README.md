@@ -318,7 +318,10 @@ is weak evidence, and more data matters more than a better estimator.
   known to be wrong by one Eastern-time offset for some filings.
   The [offline assignment planner](docs/DATA_AUDIT.md#approved-offline-p0-assignment-planner)
   screens cached candidate clocks and joint selection/window decisions; it does
-  not repair inputs or establish the actual look-ahead impact.
+  not repair inputs or establish the actual look-ahead impact. Its
+  [completed metadata screen](results/p0_assignment_plan.json) flags 17,389
+  potentially sensitive accessions under a broad hypothetical error model,
+  including internally agreeing records; these are not verified errors.
 - **Industry codes are today's.** Industry neutralization uses current SIC codes, not those in force
   at each filing date.
 - **Costs are a spread estimate.** Turnover costs use a daily high/low/close proxy; price impact,

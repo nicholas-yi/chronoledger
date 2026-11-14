@@ -69,6 +69,73 @@ is consumed. Pre-execution validation passed **51 focused tests in 2.37s** and
 configured changed-file Ruff. Execution and final validation receipts are
 recorded separately, not implied by these tests.
 
+#### Offline P0 planner execution receipt
+
+The screen completed from clean source
+`45d0c441d9c13a505cb18916ce036d4745cc04fd`, with **zero requests, input
+repairs, score/price/outcome reads or trial appends**. Results:
+[p0_assignment_plan.json](../results/p0_assignment_plan.json); detailed
+candidate/accession context stays in ignored `data/p0_assignment_queue.parquet`.
+
+| Count | Observed metadata screen |
+|---|---:|
+| Full cached H0 rows / stored development rows |21,502 / 16,226 |
+| Sensitive accessions, union of all screened reasons |17,389 |
+| Sensitive records whose stored source clocks agree |17,230 |
+| Sensitive accessions in stored development |13,152 |
+| First nominal-close-sensitive accessions |16,762 |
+| Formation-eligibility-sensitive accessions / record-month instances |1,029 / 1,041 |
+| Potentially changing latest-signal firm-month instances |792 |
+| Joint latest-selection context accessions |2,233 |
+| Prior120-day uncertain ordered metadata pairs |145 |
+| Future365-day uncertain ordered metadata pairs |1,399 |
+| Potential future365 windows beyond observed cutoff |10,349 |
+
+Counts overlap; do not sum reason counts as unique affected filings. Source
+agreement does not exempt a record. The broad independent-accession error model
+is an **over-approximation of possible decisions**, not 17,389 verified errors or
+an estimated probability of look-ahead. In particular, 792 is not a changed
+portfolio/P&L count. The complete source/identity/price/filter/label pipelines
+were not evaluated.
+
+This is not a small enough universal verification queue to certify with the
+remaining 104-request envelope: a blanket small header sample cannot establish
+all clocks. A later audit must qualify accession-level cached authority and
+the error-model scope, plus an explicitly bounded retrieval design. No request
+permission or generic correction follows from this result.
+
+The runner also counted 404 CIK disagreements without remapping either source.
+Prior/future window counts compare **H0 filing metadata pairs**, not H6 formal
+records or observed outcomes; incomplete envelopes are not negative labels.
+The preserved tie rule has zero exact latest-timestamp ties in baseline metadata
+here, but synthetic tests cover them.
+
+Resources: **13.265625 CPU seconds / 14.625 wall seconds / 209.77734375 MiB peak
+RSS**, below the reserved 780-second/1GiB runner limits. Pre-screen shared load 8%;
+cooperative budget checks do not create an OS sandbox. Lineage pins the two
+metadata inputs and the queue hash. French calendar date fields are reused
+under the existing cache contract; their raw-file hashes are not included in
+this new report, so it is not a fully isolated snapshot freeze or certified
+exchange calendar.
+
+Validation now performed with BLAS/NUMEXPR flags 1:
+
+```powershell
+python -m pytest -q tests\test_p0.py tests\test_p0_assignment_plan.py tests\test_timeutil.py tests\test_timing.py tests\test_p0_acceptance_audit.py
+python -m pytest -q
+python -m ruff check src\asof\p0.py scripts\plan_p0_assignments.py tests\test_p0.py tests\test_p0_assignment_plan.py
+```
+
+**51 focused tests passed in 2.37s; 253 full-suite passed in 39.64s**, with two
+inherited synthetic rank-deficiency warnings; Ruff passed. These checks prove
+the candidate/assignment arithmetic and error paths under declared assumptions,
+not real clock authority. Original signal/bulk/share hashes match recorded
+lineage; ledger remains 74 rows, P0 HTTP receipt 46 requests. No referee or empirical
+runner rerun. P0 and Batch C Part 2 remain blocked; the other three proposed
+offline batches were not selected or started.
+The persisted report and queue reconcile on accession uniqueness, counts and
+queue hash; all **116 local links/anchors** in the updated documents passed.
+
 Generated from EDGAR full-index files (2011–2026), SEC's current CIK-ticker map, and the XBRL
 frames API (`dei:EntityPublicFloat`). Having a current ticker is an upper bound on whether a free
 source has the firm's price history. Firms acquired, merged, taken private, or failed since then
