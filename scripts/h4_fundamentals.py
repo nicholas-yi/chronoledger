@@ -143,7 +143,8 @@ def build_panel() -> pd.DataFrame:
     out["roa"] = out["ni"] / out["assets"]
     out["roa_next"] = (nxt["ni"] / nxt["assets"]).where(lag.between(300, 430))
     out["d_roa"] = out["roa_next"] - out["roa"]
-    out["decline"] = (nxt["ni"] < out["ni"]).astype(float).where(lag.between(300, 430) & nxt["ni"].notna())
+    out["decline"] = (nxt["ni"] < out["ni"]).astype(float).where(
+        lag.between(300, 430) & out["ni"].notna() & nxt["ni"].notna())
     out["impair_next"] = (nxt["gw_impair"].fillna(0) > 0).astype(float).where(lag.between(300, 430))
     prev_rev = out.groupby("cik")["revenue"].shift(1)
     out["sales_growth"] = out["revenue"] / prev_rev - 1

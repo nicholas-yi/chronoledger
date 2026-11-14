@@ -138,13 +138,53 @@ rebuild it with `python scripts/h0_data.py price_snapshot`. Missing or stale sna
 
 ## Proposed next gates: approval required, not executed
 
-1. **Delisted-price pilot.** Evaluate a personal-key source such as
-   [Tiingo EOD](https://www.tiingo.com/documentation/end-of-day), subject to its current plan,
-   quotas, licensing, and actual coverage. A free tier or historical prices alone do not guarantee
-   historical identity mapping or terminal delisting payoffs. Start from all eligible EDGAR
-   issuers, qualify ticker reuse/share classes/corporate actions, then rerun the F2 coverage
-   contrast and predetermined development-only checks. No market-data API key was used and no
-   paid data or compute was purchased here.
+**Local continuation:** the [bounded gate packet](docs/DATA_AUDIT.md#bounded-gate-advancement-2026-11-13)
+contains a proposed development-only source contract, exact method blockers and
+reproducibility/holdout decisions. Two narrow implementation corrections have
+synthetic-only validation (13 focused tests); they are uncommitted, and the earlier
+CI/referee/empirical results above are evidence for their recorded revisions, not
+reruns of these changes. No vendor pilot, new study, holdout opening, commit or
+publication was authorized or performed by that bounded turn. Hourly automation
+is unavailable; completion-triggered Lead handoff is not an always-on monitor.
+The [six-package dependency queue](docs/DATA_AUDIT.md#six-package-dependency-queue)
+now keeps stable CL-P1 through CL-P6 IDs, versioned designs and blocked operations
+explicit. The completed **Research design cards v1** have full design review, not
+source revalidation or wholesale scientific approval. Proposed resource/human
+ceilings do not release rights or run permissions. Execution's
+[P2 source/fixture map](docs/DATA_AUDIT.md#p2-source-to-contract-and-fixture-map)
+retains unresolved choices. **Lead-D3a's explicitly approved separate synthetic
+planner is now implemented and verified**:
+[`asof.timing.plan_return_window`](src/asof/timing.py) uses supplied aware session
+closes/readiness/deadlines, post-entry fixed-session intervals and explicit missing/
+censored support. It is not wired into historical runners and claims no fill/borrow
+feasibility. Queue/P2 v0.2, exact test results and the frozen-runner boundary are in
+the [planner contract](docs/DATA_AUDIT.md#lead-d3a-opt-in-synthetic-planner-v02).
+No empirical study, vendor access, new budget, holdout opening or publication is
+released; neutralization/overlap and Lead-D2/D4-D9/rest of D3 remain open.
+
+**Batch A v0.3:** prospective overlap/control/industry, decision, observation and
+economic contracts are now recorded in the
+[bounded offline release](docs/DATA_AUDIT.md#batch-a-prospective-decisions-and-bounded-release).
+Supplementary manifest/decision gates, future evidence-label validation,
+component-cost arithmetic and a data-free study registry passed73focused tests.
+The fixed synthetic inference calibration is separately authorized and specified
+before execution; its actual completion/resource/result record is not an empirical
+finding. Frozen studies and their labels/costs remain unchanged. D10 discloses the
+historical10-Q/A quiet-exclusion wording discrepancy after results, without a rerun.
+Vendor contact/keys/spending, human annotation, publication, push/tags and holdout
+access remain reserved; this release permits validated **local commits only**.
+
+1. **Rights and historical-source feasibility first; no approved vendor pilot.**
+   The earlier free-Tiingo suggestion is a historical premise, not a viable durable
+   pilot authorization. [Posted Tiingo terms](https://www.tiingo.com/tos/) updated
+   2026-11-05 prohibit Starter/trial durable storage of both data and derived products;
+   Power predictive-model permission is internal-use-only, not established public-project
+   permission. Sharadar also has disclosure and retention restrictions. See the
+   [dated rights reconciliation](docs/DATA_AUDIT.md#current-source-rights-reconciliation-2026-11-13).
+   No account-specific/supplemental rights, license, key use, purchase, or publication
+   is approved. User approval cannot waive vendor rights. Only after rights are resolved
+   could an explicitly approved development-only source pilot qualify dated identities,
+   actions and terminal payoffs; F2 coverage >= 0.8 alone is insufficient.
 2. **Holdout readiness.** Resolve F2 where applicable, the current-SIC proxy, early-close session
    timing/calendar-gap handling, the event-time neutralization contract, outstanding preregistered inference outputs,
    and F4's historical H4 contamination. Review the ledger, freeze/tag code/config/data/windows,
@@ -157,10 +197,19 @@ rebuild it with `python scripts/h0_data.py price_snapshot`. Missing or stale sna
    This is not an automatic opening date. H4/H6(a) require separate label-readiness and
    isolation decisions. Audit July 2024 event-label overlap with the permitted development tail.
 
+Research priorities remain gated: **rights + historical identity/terminal payoffs**
+before **calendar/dissemination/event-anchor/gaps + observable labels**, then
+**power/dependence/trial families + co-primary inference**, then **blinded human
+labels and cheap structural baselines**. Complex modeling comes only after
+preregistered evidence gates. These are priorities, not activated studies.
+
 ## Data sources and licenses
 
 - SEC EDGAR filings and XBRL APIs: public records.
-- Prices: free sources for personal research only. **Raw prices are never redistributed; only derived statistics are published.**
+- Prices: raw prices are not redistributed. **Derived does not automatically mean
+  retainable or publishable**; each provider's applicable rights must cover the proposed
+  storage, analysis, model use, validation and disclosure. The current terms review is
+  not a retroactive rights clearance for historical artifacts or a vendor fitness test.
 - Factors: Kenneth French Data Library, which is linked and cited but not re-hosted.
 
 ## Provenance of ideas and code

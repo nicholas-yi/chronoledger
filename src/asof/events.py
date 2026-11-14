@@ -54,7 +54,10 @@ def car(
 
 class CarEngine:
     """Fast CARs: each firm's returns are aligned to the factor calendar once, then every event is
-    a slice plus a small least-squares fit. Numerically identical to ``car``."""
+    a slice plus a small least-squares fit, using ``car``'s joint nonmissing-row rule.
+
+    Window offsets still count complete observations, not scheduled exchange sessions.
+    """
 
     def __init__(self, factors: pd.DataFrame) -> None:
         self.factors = factors
@@ -62,6 +65,7 @@ class CarEngine:
         self.pos = {d: i for i, d in enumerate(self.days)}
         self.F = factors[FACTORS].to_numpy()
         self.rf = factors["RF"].to_numpy()
+        self._complete_factors = factors.notna().all(axis=1).to_numpy()
         self._cache: dict[str, np.ndarray] = {}
 
     def _aligned(self, key: str, returns: pd.Series) -> np.ndarray:
@@ -74,7 +78,7 @@ class CarEngine:
         import bisect
 
         r = self._aligned(key, returns)
-        idx = np.flatnonzero(~np.isnan(r))  # calendar positions of this firm's valid days
+        idx = np.flatnonzero(~np.isnan(r) & self._complete_factors)
         dpos = bisect.bisect_left(self.days, event_day)  # first calendar day >= event_day
         j = int(np.searchsorted(idx, dpos))  # first valid firm day on/after the event
         if j >= idx.size:

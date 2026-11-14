@@ -168,3 +168,63 @@
 - **Validation:** the regression test covers zero/negative denominators,
   non-finite returns, missing-price gaps, retained valid returns, and visible
   exclusion counts. Historical ledger entries are not edited.
+
+## 2026-11-13 bounded implementation review (uncommitted, no new trial)
+
+This review occurred **after** the recorded H0/H4/H6 development estimates.
+Only source inspection and synthetic fixtures were used; no empirical configuration,
+new source, scoring rule, cutoff or hypothesis was evaluated. No tag was created.
+
+- `CarEngine.car()` selected complete firm returns but not complete factor rows,
+  unlike `car()`'s joint `dropna()`. Synthetic missing market-factor rows produced
+  an SVD exception, and missing risk-free rows produced NaN where the reference
+  returned a finite CAR. The fast path now uses the reference's same complete-row
+  rule. This does **not** change either engine to scheduled-session windows or
+  resolve the event-anchor ambiguity.
+- H4's decline label compared next income with a missing current income and
+  emitted zero. It now requires both income values to be observed, preserving
+  `NI(t+1) < NI(t)` and missing versus observed no-decline. Existing regressions
+  also require current ROA, but no empirical impact or unchanged result is claimed.
+  The separate missing-impairment-tag-to-zero assumption is **not** changed.
+
+The original ledger, checked-in results, referee report, source pins and tags remain
+historical evidence, not validation of these local changes. Any later empirical
+rerun requires an approved queue/resource decision, the usual trial lineage, and
+explicit review of affected source contracts. Design alternatives in the
+[bounded gate packet](DATA_AUDIT.md#bounded-gate-advancement-2026-11-13)
+remain proposals; this note does not authorize them or a new numbered/tagged design.
+
+## 2026-11-13 Lead-D3a: separate synthetic planner (not a registered-runner change)
+
+After the historical development results, the owner explicitly selected
+`timing_scope='separate-synthetic-planner'` under CL-P2. The opt-in
+[`asof.timing.plan_return_window`](../src/asof/timing.py) is implemented and tested
+only on caller-supplied synthetic schedules and availability metadata.
+Strictly later ready/deadline eligibility, hypothetical entry-close-to-next-close
+intervals, fixed scheduled estimation/outcome slots and explicit support/censoring
+are specified in the [v0.2 contract](DATA_AUDIT.md#lead-d3a-opt-in-synthetic-planner-v02).
+
+This is not a new numbered scientific deviation, empirical configuration or tag.
+No historical runner, old clock/CAR default, source license, endpoint, SIC rule,
+neutralization/overlap policy, hypothesis, score or date was changed by this release.
+No result or ledger entry is rewritten, and no held-out input was inspected.
+The earlier two local corrections remain identifiable rather than being attributed
+to this planner. Any real-data application or runner migration requires its own
+accepted design and explicit evaluation/resource approval; the rest of D3 and
+Lead-D2/D4-D9 stay open.
+
+## D10: disclose the historical 10-Q/A quiet-exclusion discrepancy
+
+- **Logged:** 2026-11-13, **after** the recorded H6 development results and their
+  reproduced estimate. Identified by source inspection, not by a new evaluation.
+- **Discrepancy:** v2/D5 describe no prior 10-K/A or Item4.02 within120days.
+  `quiet_down_revisions()` has always included **both** 10-K/A and10-Q/A in
+  that prior-amendment exclusion. This implemented rule differs from the narrower
+  written specification; historical entries and results are retained unchanged.
+- **Action:** disclosure only, no historical code/label change or H6 rerun.
+  Lead-D6's **future**, separately registered quiet construct excludes both forms;
+  that does not automatically add10-Q/A to the formal365day endpoint or turn
+  administrative amendments into substantive restatements.
+- **Boundary:** no tag or holdout opening is authorized. This numbered protocol
+  discrepancy disclosure is not a new coordination decision; the operative
+  future decision is Lead-D6. No source/rights or scientific acceptance follows.

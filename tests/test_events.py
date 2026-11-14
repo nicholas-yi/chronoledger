@@ -76,3 +76,17 @@ def test_car_engine_matches_reference_and_is_fast() -> None:
     for _ in range(500):
         eng.car("X", r, f.index[500], horizon=60)
     assert time.time() - t < 2.0
+
+
+@pytest.mark.parametrize("column", ["Mkt_RF", "RF"])
+def test_car_engine_matches_reference_when_factor_rows_are_missing(column) -> None:
+    from asof.events import CarEngine
+
+    f = _factors(700)
+    rng = np.random.default_rng(23)
+    returns = f["RF"] + 0.9 * f["Mkt_RF"] + rng.normal(0, 0.003, len(f))
+    f.loc[f.index[[220, 400, 410]], column] = np.nan
+    expected = car(returns, f, f.index[400], horizon=20)
+    actual = CarEngine(f).car("SYNTHETIC", returns, f.index[400], horizon=20)
+    assert np.isfinite(expected)
+    assert actual == pytest.approx(expected, abs=1e-12)
