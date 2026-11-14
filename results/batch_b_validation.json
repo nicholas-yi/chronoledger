@@ -24,9 +24,52 @@
     "gold_oracle_cases": 0
   },
   "referee": {
-    "status": "pending_bounded_execution",
+    "status": "executed",
+    "seconds": 15.32799999974668,
     "timeout_seconds": 900,
-    "HTTP_policy": "disabled before module main"
+    "HTTP_policy": "disabled before module main",
+    "prior_gate": "PASS",
+    "current_gate": "PASS",
+    "prior_levels": {
+      "lookahead.store": 5,
+      "lookahead.formation": 5,
+      "lookahead.reconcile": 4,
+      "lookahead.representation": 5,
+      "lookahead.representation.all_vintages": 1,
+      "extraction.hallucination": 5,
+      "extraction.quality": 4,
+      "multiple_testing": 5,
+      "survivorship": 4,
+      "survivorship.distress_events [blocks H5b, H5c, H6b]": 1,
+      "price_level_leak": 5,
+      "data_integrity": 4
+    },
+    "current_levels": {
+      "lookahead.store": 5,
+      "lookahead.formation": 5,
+      "lookahead.reconcile": 4,
+      "lookahead.representation": 5,
+      "lookahead.representation.all_vintages": 1,
+      "extraction.hallucination": 5,
+      "extraction.quality": 4,
+      "multiple_testing": 5,
+      "survivorship": 4,
+      "survivorship.distress_events [blocks H5b, H5c, H6b]": 1,
+      "price_level_leak": 5,
+      "data_integrity": 4
+    },
+    "changed_levels": {},
+    "source_commit": "c689aa46714b4bb455bb11653a7cca4b1de13c17",
+    "scope_warning": "Defined technical checks do not automatically test F7/F8; release remains BLOCKED."
   },
-  "remote_actions": "no push, tags, publication or owner-reserved access"
+  "remote_actions": "no push, tags, publication or owner-reserved access",
+  "final_integrity": {
+    "ledger_entries": 74,
+    "original_prefix_lines_unchanged": 56,
+    "project_holdout_entries": 0,
+    "referee_input_doc_and_result_fingerprints_match": true,
+    "source_unchanged_since_tested_fb0a333": true,
+    "release_status": "BLOCKED_F7_F8",
+    "CI": "not rerun; no push"
+  }
 }

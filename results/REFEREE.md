@@ -111,25 +111,25 @@ data_integrity                     [####.] 4/5
 
 ## Run provenance
 
-Generated UTC: `2026-11-13T21:23:00.870802+00:00`.
+Generated UTC: `2026-11-14T02:06:32.524769+00:00`.
 
 The holdout-seal mutation uses a temporary synthetic ledger, not the project holdout.
 
 ```json
 {
-  "git_commit": "6c7d385a9efc96dee483de77121e1cac8f0e92fb",
+  "git_commit": "c689aa46714b4bb455bb11653a7cca4b1de13c17",
   "git_dirty": false,
   "inputs": {
     "pilot.duckdb": "8192692acd2d987ac4611d81cc40e2e4c0a9f9d722ceaf8e1ea796d9e90fc31c",
     "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
     "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017",
     "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
-    "returns_h0_development.json": "f582e83ddbc4bcfb59140d22ee73c0934ea5f80a8e2e6cf2ecde2d81fd022524",
+    "returns_h0_development.json": "a259b847cb6a4783d2f563fb999f37f2300e95fe4ffc55a847257b5b720b07f2",
     "bench_qwen3.5-4b_n300_s0.json": "f0b1c7371fdaa8552bf4f2b6a633c0c686fdafd62182485512803eca2aecdd3d",
     "swap_qwen3.5-4b_n160_s0.json": "df99ef309ed2c70e4c4382ce7095751fbf7af4659ecca8e466bfdb0361d47428",
     "leakprobe_chronobert.json": "135bb0713aef6070525bbafb4654135042da1de0854910730c7999c59e6d1d3e",
-    "DATA_AUDIT.md": "6ff158b2cf38e50ce831ec2e1e7f8c9e97474c521d02d0760a22b835b8a001b4",
-    "DEVIATIONS.md": "d7eb013059faa6cace4b2732ade885643ffc38ad3d33e3b900d45249e76b4985",
+    "DATA_AUDIT.md": "277f3f9e47a129a3f5c21db96903e5478a49623d062e223e668b82d9f93b4894",
+    "DEVIATIONS.md": "e3da04500fb25d9be055a9fdc5b2ee666cea7e8a4547eeae8338c8a81d7383f3",
     "AAPL_to20240731_v2.json.gz": "1445c9d8e507440deb1bcf8dbc2bfc00255da74ee183e8b535c4ac5a273623d3"
   },
   "environment": {
