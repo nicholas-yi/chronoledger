@@ -175,8 +175,10 @@ pairs of company disclosures.
 
 The project's extraction benchmark uses synthetic labels. Before testing new return signals, the
 cheapest real check is whether the measurement tools read financial documents correctly. Several
-free, human-annotated benchmarks can test that. None has been run yet, and each one's licence and
-release version must be pinned first.
+free, human-annotated benchmarks can test that. A first attempt checked public
+source and release metadata, but stopped before opening any question files:
+the reports' publication and revision histories could not be settled from that
+metadata alone. No benchmark has been scored.
 
 | Benchmark | What it labels | How it is scored | Watch out for |
 |---|---|---|---|
@@ -194,6 +196,21 @@ including the ones the method declines to answer. Two precautions apply:
 - Check that the source reports don't overlap the project's sealed holdout years before opening
   any files.
 - Running a benchmark's own reference calculations only tests the scorer, not the model.
+
+**What happened in the first attempt:** repository, development-file and scorer
+revisions were recorded, along with the licence sources. TAT-QA's development
+history points to a 2021 release; FinQA describes 1999-2019 reports, but its
+pinned development file was updated in June 2022. That later update does not
+prove overlap with reserved financial material. It leaves a source-version
+question that cannot safely be answered by opening the file to check.
+
+The comparison included both reserved return periods and the fundamental study's
+filing and follow-up periods, not just stock-price dates. No dataset or scorer
+files were downloaded, no questions selected, and no answers scored. The
+[status receipt](../results/benchmark_diagnostic_status.json) distinguishes known
+repository identities from the data-byte hashes that have not been collected.
+The next step is to resolve this provenance question, not to treat the missing
+scores as zero or as evidence that a baseline performs poorly.
 
 Forty items can expose bugs; they cannot establish that the claim-level signal works or that it
 would have been usable historically.

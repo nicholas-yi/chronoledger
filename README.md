@@ -327,7 +327,9 @@ is weak evidence, and more data matters more than a better estimator.
 - **Synthetic extraction labels.** The LLM benchmark's ground truth comes from injected fictitious
   companies, not human annotation. Free human-annotated benchmarks for reading financial documents
   are listed in the [research plan](docs/RESEARCH_PLAN.md#free-benchmarks-for-testing-measurement-on-real-data);
-  none has been run yet.
+  none has been scored yet. The first small diagnostic stopped after reviewing
+  public source metadata because publication/revision overlap with reserved
+  financial material remained uncertain; no question files were opened.
 
 ## What would change the answer
 

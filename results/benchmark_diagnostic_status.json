@@ -1,0 +1,184 @@
+{
+  "status": "stopped_before_download_overlap_unresolved",
+  "checked_date": "2026-11-14",
+  "scope": "Public provenance metadata only; no dataset or official scorer file opened.",
+  "stop_condition": "Overlap possible or unclear must stop acquisition and scoring. No uncertainty was waived.",
+  "baseline_commit": "b012de554718712beabf0dd40a52d07eab5b9d90",
+  "local_definition_sha256": {
+    "PREREGISTRATION.md": "9d652bcdd9c33ef18b76448d3a428ab92c4989e1c614bf2ac730b2aa42161403",
+    "PREREGISTRATION_V2.md": "24c3eafd31a506dfe35a2f7227276116aa5521f21a4df439c927c38adb5b697a",
+    "DEVIATIONS.md": "564e05141109ec30e0170da91ca7c76f17a1eea41241e5e0eca8163e792c2316"
+  },
+  "reserved_window_comparison": [
+    {
+      "definition": "PREREGISTRATION.md section 2, original H0-H3",
+      "start": "2022-01-01",
+      "end": "2026-10-31",
+      "time_basis": "signal knowledge time",
+      "status": "historical return split superseded by D1; retained in the comparison"
+    },
+    {
+      "definition": "DEVIATIONS.md D1, H0-H3 current returns",
+      "start": "2024-07-01",
+      "end": "2026-10-31",
+      "time_basis": "signal knowledge time",
+      "status": "reserved"
+    },
+    {
+      "definition": "PREREGISTRATION_V2.md section 3, H4",
+      "start": "2022-01-01",
+      "end": "2025-06-30",
+      "time_basis": "10-K knowledge time; next-fiscal-year first-reported outcomes also protected",
+      "status": "reserved"
+    },
+    {
+      "definition": "PREREGISTRATION_V2.md section 4, H5 and H6(b)",
+      "start": "2024-07-01",
+      "end": "2026-10-31",
+      "time_basis": "D1 return windows and their outcome tails",
+      "status": "reserved"
+    },
+    {
+      "definition": "PREREGISTRATION_V2.md section 4, H6(a)",
+      "start": "2022-01-01",
+      "end": "2025-06-30",
+      "time_basis": "H4 filing windows and subsequent formal-record follow-up",
+      "status": "reserved"
+    }
+  ],
+  "benchmarks": {
+    "TAT-QA": {
+      "repository_commit": "870accc41953dcde885aabeb963d94aabdc0fbc3",
+      "repository_commit_date": "2024-12-09T11:06:29Z",
+      "requested_items": 30,
+      "dev_file": {
+        "url": "https://raw.githubusercontent.com/NExTplusplus/TAT-QA/870accc41953dcde885aabeb963d94aabdc0fbc3/dataset_raw/tatqa_dataset_dev.json",
+        "git_blob_sha1": "48075c812af3fe6698b1d5cb50d9dbf358d52784",
+        "declared_bytes": 1637431,
+        "sha256": null,
+        "downloaded": false
+      },
+      "official_scorer_files": [
+        {
+          "url": "https://raw.githubusercontent.com/NExTplusplus/TAT-QA/870accc41953dcde885aabeb963d94aabdc0fbc3/tatqa_eval.py",
+          "git_blob_sha1": "5d40665e0a52630ba078aefa0a31144bc7cba8bc",
+          "declared_bytes": 2236,
+          "sha256": null,
+          "downloaded": false
+        },
+        {
+          "url": "https://raw.githubusercontent.com/NExTplusplus/TAT-QA/870accc41953dcde885aabeb963d94aabdc0fbc3/tatqa_metric.py",
+          "git_blob_sha1": "80f45360fd5303110b9e31ad1b54ad6dfd3f9d18",
+          "declared_bytes": 14129,
+          "sha256": null,
+          "downloaded": false
+        }
+      ],
+      "licences": {
+        "dataset": "CC BY 4.0, stated in the pinned README",
+        "dataset_declaration_url": "https://raw.githubusercontent.com/NExTplusplus/TAT-QA/870accc41953dcde885aabeb963d94aabdc0fbc3/README.md",
+        "dataset_legal_text_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+        "code": "MIT",
+        "code_licence_url": "https://raw.githubusercontent.com/NExTplusplus/TAT-QA/870accc41953dcde885aabeb963d94aabdc0fbc3/LICENSE",
+        "code_licence_git_blob_sha1": "7855a66ee0e672eda63b018d8b0d37f848b4015a",
+        "qualification": "The 2021 paper describes an initial noncommercial release; the pinned README declares CC BY 4.0. Underlying document rights are not inferred from the code licence."
+      },
+      "public_metadata_evidence": [
+        {
+          "url": "https://arxiv.org/html/2105.07624v2",
+          "section": "2.1",
+          "statement": "About 500 financial reports released in the past two years were collected from annualreports.com; no comprehensive dev issuer/publication/correction-date inventory is provided in the inspected metadata."
+        },
+        {
+          "url": "https://api.github.com/repos/NExTplusplus/TAT-QA/commits?sha=870accc41953dcde885aabeb963d94aabdc0fbc3&path=dataset_raw%2Ftatqa_dataset_dev.json&per_page=3",
+          "commit": "ec12a30c26365ff05face6ffc431aaff9cb67c91",
+          "date": "2021-05-16T04:42:34Z",
+          "statement": "Public path history lists a release in 2021; this points to an earlier development corpus, not a verified per-report source inventory."
+        }
+      ],
+      "overlap_assessment": "Earlier source material is indicated, but a comprehensive issuer and exact report-publication/correction inventory was not established. No affirmative overlap finding is made.",
+      "native_metrics": {"items": 0, "EM": null, "F1": null, "scale_accuracy": null}
+    },
+    "FinQA": {
+      "repository_commit": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "repository_commit_date": "2022-06-06T02:12:33Z",
+      "requested_items_optional": 10,
+      "dev_file": {
+        "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+        "git_blob_sha1": "970f239f591c782b17df420c0d343b780737f3da",
+        "declared_bytes": 10954658,
+        "sha256": null,
+        "downloaded": false
+      },
+      "official_scorer_files": [
+        {
+          "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/code/evaluate/evaluate.py",
+          "git_blob_sha1": "4829a4ca58a5725fb3f7a46b3b23b7f7e848a512",
+          "declared_bytes": 14305,
+          "sha256": null,
+          "downloaded": false
+        }
+      ],
+      "corrected_preprocessing": {
+        "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/code/utils/general_utils.py",
+        "git_blob_sha1": "bcd54fab833ae6dbcecd0dc562014fff59a96e15",
+        "statement": "Pinned README records the 2022-05-04 table_row_to_text correction; no preprocessing was run or older leaky version used."
+      },
+      "licences": {
+        "repository": "MIT",
+        "licence_url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/LICENSE",
+        "licence_git_blob_sha1": "fb3b513238ba5ec7e0799cb1190ff30c759a5bdf",
+        "qualification": "Repository licence is not independent clearance of the underlying FinTabNet/report materials."
+      },
+      "public_metadata_evidence": [
+        {
+          "url": "https://arxiv.org/html/2109.00122v3",
+          "section": "4.1",
+          "statement": "S&P 500 earnings reports from 1999 to 2019, collected in FinTabNet. These nominal report years precede the reserved periods but are not a file-level publication/revision inventory."
+        },
+        {
+          "url": "https://api.github.com/repos/czyssrs/FinQA/commits?sha=0f16e2867befa6840783e58be38c9efb9229d742&path=dataset%2Fdev.json&per_page=3",
+          "commit": "0f16e2867befa6840783e58be38c9efb9229d742",
+          "date": "2022-06-06T02:12:33Z",
+          "statement": "The pinned development file was updated during the earliest reserved fundamental window. The update alone does not prove protected financial material was introduced; its source-version effect is not established by the inspected metadata."
+        }
+      ],
+      "overlap_assessment": "Unresolved publication/revision provenance; a fiscal-year range alone cannot waive the stop rule. Issuer sampling is broad S&P 500 rather than a project-specific exclusion list.",
+      "native_metrics": {"items": 0, "execution_accuracy": null},
+      "gold_program_check_performed": false
+    }
+  },
+  "download_and_run_state": {
+    "dataset_files_downloaded": 0,
+    "scorer_files_downloaded": 0,
+    "selected_items": 0,
+    "scored_items": 0,
+    "correct": 0,
+    "wrong": 0,
+    "abstain": 0,
+    "per_item_outcomes": [],
+    "selection_rule_or_baseline_freeze_performed": false,
+    "models_or_training_used": false,
+    "ledger_rows_appended": 0
+  },
+  "hash_note": "Listed file identities are Git blob SHA-1 metadata, not downloaded-byte SHA-256 hashes. SHA-256 is null because acquisition stopped.",
+  "validation": {
+    "status_receipt_JSON_and_metadata_shapes": "passed",
+    "local_document_links_and_anchors_checked": 46,
+    "local_definition_sha256_reconciliation": "passed",
+    "git_whitespace_check": "passed",
+    "tests_rerun": false,
+    "ruff_rerun": false,
+    "reason": "Documentation and metadata stop receipt only; no code, baseline, scorer or dataset processing implemented.",
+    "ledger_rows_unchanged": 74,
+    "previous_results_and_frozen_definitions": "unchanged"
+  },
+  "resources": {
+    "stage": "metadata-only preflight",
+    "scoring_CPU_seconds": 0,
+    "scoring_peak_resident_bytes": null,
+    "total_metadata_wall_CPU_RSS_measured": false,
+    "note": "No baseline or scoring job started; metadata review was not instrumented as a compute experiment."
+  },
+  "interpretation": "No real benchmark result exists. Thirty to forty items could expose defects, not establish skill, formal H1 or historical usability. The pre-download uncertainty is preserved for review rather than resolved by inspecting potentially reserved data."
+}
