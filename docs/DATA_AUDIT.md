@@ -157,16 +157,16 @@ long-only and fail; fill evidence and financing costs still apply.
 
 `reconcile_turnover` compares observed absolute traded notional Q with
 T=Q/(2*capital), without renormalizing the supplied frozen turnover. The T07
-fixture (capital10,000, Q2,000, half-spread4bp, frozenT.2) preserves frozen
-spread cost1.60 versus observed0.80 and reports **basis_mismatch**, not1.60+.80
-or a silently halved frozenT. Numerical equality tolerance is arithmetic,
+fixture (capital 10,000, Q 2,000, half-spread 4bp, frozen T .2) preserves frozen
+spread cost 1.60 versus observed 0.80 and reports **basis_mismatch**, not 1.60+.80
+or a silently halved frozen T. Numerical equality tolerance is arithmetic,
 not an economic acceptance threshold.
 
 `reconcile_net_return` requires a declared distribution basis. The component
 ledger still reports all cash costs; net P&L deducts distributions only if they
-are not already in gross total return. Toy spread4 +fees1 +borrow15 +financing10
-+distributions50 gives full drag80; total-return gross-50 deducts only30more,
-not another50. Unknown basis or unavailable components returns explicit
+are not already in gross total return. Toy spread 4 + fees 1 + borrow 15 + financing 10
++ distributions 50 gives full drag 80; total-return gross -50 deducts only 30 more,
+not another 50. Unknown basis or unavailable components returns explicit
 unavailable/null fields. The older component break-even field retains its
 caller-basis contract; use the new basis-aware receipt for netting.
 
@@ -201,7 +201,7 @@ a semantic labeler or source-verification service.
   and incomplete gold have separate counts and never become negative labels.
 - Abstention is distinct from an emitted empty prediction: it reduces coverage,
   retains missed gold claims as false negatives and is not an exact match.
-- Precision/recall with zero denominator is null, not100%. Report prediction
+- Precision/recall with zero denominator is null, not 100%. Report prediction
   coverage and both unconditional/selected exact-match accuracy together.
 - Duplicate cases fail. Explicit half-open chronological boundaries and
   issuer-disjoint partitions are checked; no dates or split inferred.
@@ -209,12 +209,12 @@ a semantic labeler or source-verification service.
   checked quotes or annotation independence. Split hygiene alone does not prove
   a model's pretraining or historical availability is clean.
 
-The real60-pair roster/gold audit remains P0/human-protocol blocked. No real
+The real 60-pair roster/gold audit remains P0/human-protocol blocked. No real
 labels were generated or current/future outcomes read by these helpers.
 
 #### Validation and reproducible synthetic receipt
 
-Before the demonstration, **60 focused tests passed in3.20s** across costs,
+Before the demonstration, **60 focused tests passed in 3.20s** across costs,
 studies, measurement, prior independent oracles, D4 and labels. Configured new-file
 and selected changed-file Ruff passed. Final full-suite/run receipts will be
 recorded after execution; this is not evidence those steps already ran.
@@ -225,6 +225,31 @@ demonstrates blocked request expansion, missing metrics, usage overrun,
 preserved partial errors, a simulated null and cost/measurement reconciliation.
 It is not real-label accuracy, a training experiment, permission to access
 financial data or a real sandbox test. No ledger row is appended.
+
+The demonstration is now complete from clean source
+`db2a19f4b820677b8a61b0f4e7d2e273d917837c`:
+[offline_contract_fixtures.json](../results/offline_contract_fixtures.json).
+All five contract scenarios matched their expected states. The component
+ledger reports toy cash costs 80 while total-return P&L deducts only 30 additional
+costs; the mismatched turnover receipt retains 1.60/0.80. Two invented measurement
+cases give precision 1, recall/coverage .5, showing why selective correctness alone
+is inadequate. These are **fixture arithmetic, not measured real performance**.
+
+Final validation: **262 full-suite tests passed in 29.94s**, with two inherited
+synthetic rank-deficiency warnings; configured new-file and selected changed-file
+Ruff passed. The initial 87% shared CPU load delayed long validation; final
+demonstration/full suite began at 24% with single-thread flags. No study, model,
+training or source-acquisition job was started.
+
+Original signal/bulk/share hashes and prior tracked results remain unchanged.
+Ledger 74 rows, P0 HTTP receipt 46 requests, no input repair or holdout exposure.
+These helpers do not clear P0, source/economic/annotation/inference gates. The
+separate [free-benchmark research](RESEARCH_PLAN.md#free-real-measurement-evaluations)
+identifies possible real component tests, but release/rights/overlap, native
+adapter, frozen baseline and acquisition/run permission remain prerequisites.
+All **128 local links/anchors** in the updated documents passed checks. The
+fixture's source lineage is clean and previously tracked study outputs are
+unchanged. No new scientific finding is inferred from these engineering fixes.
 
 The float-bucket coverage table is the historical audit that motivated D1, not a
 bucket table regenerated during this continuation. Fresh reconstruction,

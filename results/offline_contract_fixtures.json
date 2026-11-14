@@ -1,0 +1,145 @@
+{
+  "label": "SYNTHETIC CONTRACT FIXTURES ONLY; not real measurement, inference or isolation proof",
+  "status": "complete_synthetic_fixture_check",
+  "lineage": {
+    "git_commit": "db2a19f4b820677b8a61b0f4e7d2e273d917837c",
+    "git_dirty": false,
+    "inputs": {},
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  },
+  "real_jobs_launched": 0,
+  "trial_rows_appended": 0,
+  "fleet": {
+    "null_kept": {
+      "label": "SYNTHETIC RECEIPT CHECK; no run permission or actual worker execution",
+      "run_id": "synthetic-contract",
+      "status": "metrics_matched",
+      "reasons": [],
+      "observed_metrics": [
+        [
+          "toy_metric",
+          0.0
+        ]
+      ],
+      "simulated_scientific_status": "null"
+    },
+    "missing_output": {
+      "label": "SYNTHETIC RECEIPT CHECK; no run permission or actual worker execution",
+      "run_id": "synthetic-contract",
+      "status": "metrics_mismatch",
+      "reasons": [
+        "missing_or_different_scoped_metric"
+      ],
+      "observed_metrics": [],
+      "simulated_scientific_status": "null"
+    },
+    "budget_exceeded": {
+      "label": "SYNTHETIC RECEIPT CHECK; no run permission or actual worker execution",
+      "run_id": "synthetic-contract",
+      "status": "budget_exceeded",
+      "reasons": [
+        "observed_usage_exceeds_frozen_limit"
+      ],
+      "observed_metrics": [
+        [
+          "toy_metric",
+          0.0
+        ]
+      ],
+      "simulated_scientific_status": "null"
+    },
+    "partial_failure": {
+      "label": "SYNTHETIC RECEIPT CHECK; no run permission or actual worker execution",
+      "run_id": "synthetic-contract",
+      "status": "execution_failed",
+      "reasons": [
+        "synthetic_worker_failure"
+      ],
+      "observed_metrics": [
+        [
+          "partial",
+          0.3
+        ]
+      ],
+      "simulated_scientific_status": "null"
+    },
+    "request_changed": {
+      "label": "SYNTHETIC RECEIPT CHECK; no run permission or actual worker execution",
+      "run_id": "changed",
+      "status": "blocked",
+      "reasons": [
+        "validation_request_mismatch"
+      ],
+      "observed_metrics": [
+        [
+          "toy_metric",
+          0.0
+        ]
+      ],
+      "simulated_scientific_status": "null"
+    }
+  },
+  "costs": {
+    "components": {
+      "status": "available",
+      "currency": "USD",
+      "one_way_turnover": 0.5,
+      "gross_traded_fraction": 1,
+      "component_return_costs": {
+        "spread": 0.0004,
+        "fees": 0.0001,
+        "impact": 0.0,
+        "borrow": 0.0015,
+        "financing": 0.001,
+        "distributions": 0.005
+      },
+      "total_return_cost": 0.008,
+      "total_currency_cost": 80.0,
+      "break_even_one_way_bps": null,
+      "reasons": [],
+      "borrow_status": "supported"
+    },
+    "net_return": {
+      "status": "available",
+      "incremental_return_cost": 0.003,
+      "net_return": -0.008,
+      "break_even_one_way_bps": -75.0,
+      "reasons": []
+    },
+    "turnover_receipt": {
+      "status": "basis_mismatch",
+      "frozen_one_way_turnover": 0.2,
+      "observed_half_l1_turnover": 0.1,
+      "frozen_spread_currency": 1.6,
+      "observed_spread_currency": 0.8,
+      "currency": "USD"
+    }
+  },
+  "measurement": {
+    "cases": 2,
+    "scored_cases": 2,
+    "gold_unknown_cases": 0,
+    "gold_unverified_cases": 0,
+    "gold_incomplete_cases": 0,
+    "scored_predictions": 1,
+    "scored_abstentions": 1,
+    "true_positive": 1,
+    "false_positive": 0,
+    "false_negative": 1,
+    "precision": 1.0,
+    "recall": 0.5,
+    "prediction_coverage": 0.5,
+    "exact_match_accuracy": 0.5,
+    "selective_exact_match_accuracy": 1.0
+  }
+}

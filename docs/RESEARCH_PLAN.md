@@ -196,17 +196,26 @@ necessarily unseen by a model's pretraining.
 | ConvFinQA: [paper](https://arxiv.org/html/2210.03849v1), [author release](https://github.com/czyssrs/ConvFinQA/tree/cf3eed2d5984960bf06bb8145bcea5e80b0222a6) |3,892conversations/14,115turns derived from FinQA; simulated skeletons realized as annotated questions. MIT repository, but original test evaluation is withheld/CodaLab. |Turn and all-conversation program/execution accuracy; development diagnostic only until local test gold qualified. Not an independent replication of FinQA or automatically account-free test access. |
 
 **Smallest proposed diagnostic:** after explicit release/rights and download/run
-approval, start with30TAT-QAdevelopment questions and, if its release scope is
-qualified,10FinQAdevelopment questions selected by frozen metadata rules.
+approval, start with 30 TAT-QA development questions and, if its release scope is
+qualified, 10 FinQA development questions selected by frozen metadata rules.
+Review source-report overlap with this project's sealed **fundamental as well
+as return** periods before reading any files. A whole-dataset download followed
+by selecting 30 items can still expose forbidden material; require a qualified,
+isolated measurement snapshot and an exposure inventory first.
 Use a deterministic CPU baseline first, separate prediction inputs from gold,
 and report every item, coverage/abstention and native metrics. No training,
 model acquisition or hosted inference is needed for an initial parser/scorer
 diagnostic. Executing the gold program checks the scorer; it does **not**
 demonstrate prediction skill.
 
+A separately approved non-overlapping retrospective component benchmark need
+not wait for a trading timestamp correction: it can test current financial
+reading or arithmetic, with exposure caveats. It cannot validate historical
+deployability or replace the P0-blocked project-specific claim-change roster.
+
 The new [exact-ID measurement scorer](../src/asof/measurement.py) provides
 completeness/evidence/abstention and split contracts, but it is **not** the
-native TAT-QA/FinQA answer/program scorer. A benchmark-specific adapter and
+native TAT-QA/FinQA answer/program or FinDVer balanced/macro scorer. A benchmark-specific adapter and
 separately frozen baseline are still needed. Forty items can expose defects,
 not establish leadership, formal H1, economic predictability or deployment.
 
@@ -216,17 +225,17 @@ Only public papers were used; no private implementations, employer material
 or unrestricted code/data/model license was inferred.
 
 - **[Stashbird](https://arxiv.org/html/2609.34242v2)**, *Episode-Grounded Lifecycle
-  Reconciliation for Conversational Agent Memory*, revised2026-10-17:
+  Reconciliation for Conversational Agent Memory*, revised 2026-10-17:
   retain supporting episodes, multiple support, supersession history and
   invalidation of unsupported searchable state. Transfer that discipline to
   financial claims and historical as-of replay. Its semantic decisions/provenance
   assumptions are not extraction-accuracy proof; reported deletion leaves some
   summaries/checkpoints unchanged, so it is not complete erasure. No original
   freely licensed implementation was qualified.
-- **[CorpGen](https://arxiv.org/html/2602.14229v1)**, submitted2026-02-15:
+- **[CorpGen](https://arxiv.org/html/2602.14229v1)**, submitted 2026-02-15:
   task-scoped context, preserved failures/decisions, verified demonstrations
   and evaluation of final artifacts rather than success narratives. Its
-  15.2versus4.3figures are task-completion **percentages**, not completed-task
+  15.2 versus 4.3 figures are task-completion **percentages**, not completed-task
   counts; controlled single-day sessions do not validate an unattended
   multi-agent quant fleet. No original open implementation was qualified.
 
