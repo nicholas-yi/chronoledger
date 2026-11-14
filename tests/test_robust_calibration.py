@@ -34,3 +34,10 @@ def test_mc_bounds_do_not_turn_missing_draws_into_nonrejections(monkeypatch) -> 
     assert missing["worst_case_95_upper"] == 1
     finite = script.binomial_summary(0, 1000, 0, 1000)
     assert finite["worst_case_95_upper"] == pytest.approx(1 - 0.025 ** (1 / 1000))
+
+
+def test_missing_student_df_cannot_be_labeled_with_normal_reference_metadata(monkeypatch) -> None:
+    script = _script(monkeypatch)
+    assert all(v is None for v in script.reference_criticals("EWC", None, {}).values())
+    assert script.reference_criticals("NW_fixed_b", None, {0.05: 3.043})["0.01"] is None
+    assert script.reference_criticals("IM", 6, {})["0.05"] == pytest.approx(2.4469118511449692)

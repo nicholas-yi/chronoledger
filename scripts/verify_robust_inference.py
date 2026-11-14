@@ -83,6 +83,17 @@ def binomial_summary(rejections: int, valid: int, unavailable: int, requested: i
     }
 
 
+def reference_criticals(method: str, df: float | None, published: dict[float, float]) -> dict:
+    from scipy import stats
+
+    if method == "NW_fixed_b":
+        return {str(a): published.get(a) for a in LEVELS}
+    if method == "WCR" or (method in ("classical_OLS", "EWC", "IM") and df is None):
+        return {str(a): None for a in LEVELS}
+    return {str(a): float(stats.t.isf(a / 2, df) if df is not None
+                          else stats.norm.isf(a / 2)) for a in LEVELS}
+
+
 def main() -> None:
     if any(os.environ.get(k) != "1"
            for k in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS")):
@@ -216,23 +227,16 @@ def main() -> None:
                         methods = ("registered_two_way", "IM", "WCR") if reserve > 1 else (
                             ("classical_OLS",) if case["kind"] == "harness"
                             else ("registered_NW6", "EWC", "NW_fixed_b"))
-                        tests = {m: RobustTest(m, "not_estimable", None, None, case["T"],
+                        n_obs = 40 * case["T"] if reserve > 1 else case["T"]
+                        tests = {m: RobustTest(m, "not_estimable", None, None, n_obs,
                                               reasons=(f"LinAlgError:{exc}",)) for m in methods}
                 warning_counts.update(f"{w.category.__name__}:{w.message}" for w in caught)
                 budget.bootstrap_draws += sum(t.details.get("bootstrap_draws", 0)
                                                for t in tests.values())
                 for name, test in tests.items():
                     if name not in counters:
-                        criticals = {}
-                        for a in LEVELS:
-                            if test.method == "NW_fixed_b":
-                                criticals[str(a)] = dict(test.critical_values).get(a)
-                            elif test.method == "WCR":
-                                criticals[str(a)] = None
-                            else:
-                                criticals[str(a)] = float(
-                                    stats.t.isf(a / 2, test.df) if test.df is not None
-                                    else stats.norm.isf(a / 2))
+                        criticals = reference_criticals(
+                            test.method, test.df, dict(test.critical_values))
                         counters[name] = {
                             "invalid": Counter(), "minimum_p": test.minimum_p_value,
                             "reference_df": test.df, "reference_critical_values": criticals,

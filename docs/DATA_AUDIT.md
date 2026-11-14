@@ -1013,7 +1013,8 @@ Hard limits:<=250,000 charges,<=2,700CPU seconds,<=2GiB OS peak resident memory,
 single pytest/runner process with BLAS thread flags1; check before/after every
 small fit/block and stop at the first observed ceiling. Check machine load before
 launch; AfterEvidence's authorized network-bound work is not a CPU release for
-unrelated jobs. No source/data/model/price/holdout job.
+unrelated jobs. Only prespecified synthetic fits; no empirical/source-price,
+model-training or holdout job.
 
 Safe run only after this seed/allocation/source revision is locally committed:
 
@@ -1029,13 +1030,82 @@ complete/incomplete status, actual charge breakdown, resource observations,
 harness result, per-case unavailable/invalid/warnings, intervals and fixed
 adoption labels. Errors/ceilings preserve partial evidence and raise; no ledger
 row, DSR/PBO, accepted hypothesis or live-data evidence is produced. No rerun
-toward preferred size/power. **Pre-execution status: not run yet.**
+toward preferred size/power. **Freeze receipt: this contract said not run yet
+when committed before E3; the current execution status is below.**
 
 Pre-freeze validation: **63 focused tests passed in 15.43s** across robust
 inference, resource guards, original inference, D4 predicates and independent
 oracle fixtures. Configured new-file and selected changed-file Ruff passed.
 Wheel inspection confirmed the attributed KV numeric asset is included.
 This checks code/formula contracts, not statistical size or live assumptions.
+
+##### Batch E completion: bounded run complete, adoption mostly failed
+
+The single approved E3 run used clean commit
+`1499865544a1a46004dfa391002409efb0869370` and the frozen seed/allocation above:
+
+- **34,540 data attempts + 215,460 bootstrap draws = 250,000 charges**, no unused
+  allowance, no redraw or retry toward preferred rates.
+- **156.78125 CPU seconds / 158.922 wall seconds; 687.78125 MiB peak RSS**.
+  Both CPU and memory ceilings respected; pre-launch shared CPU load 2%.
+- **Classical harness passed:** at 5% the three geometries rejected 58/1334,
+  61/1333, 52/1333; at 1%: 12/1334, 9/1333, 14/1333. All met the frozen exact-binomial
+  familywise 99% checks against t(T-7), with no invalid classical statistics.
+- [Output](../results/robust_inference_calibration.json) contains clean generation
+  lineage, per-DGP/procedure/level counts and CP intervals, invalid/unavailable
+  reasons, critical values, resource charges and fixed adoption labels.
+
+**Adoption:** registered NW6, EWC and NW-fixed-b all fail the 5% bound at
+T17/18/28. Worst upper 95% bounds are respectively:
+
+| T | Registered NW6 | EWC | NW-fixed-b |
+|---|---:|---:|---:|
+|17|39.06%|13.40%|19.08%|
+|18|38.00%|12.51%|19.55%|
+|28|24.91%|9.65%|13.09%|
+
+Panel G7 IM's worst bound 6.72% meets <=7.5%; WCR 8.73% and registered two-way 17.59%
+do not. The WCR point 5.2% no-shock rate is below the tolerance; its **upper bound**
+fails, so this is conservative qualification failure, not proof of excessive
+population size. IM's label is limited to these two invented DGPs and5%, not
+real year independence, rare tails, common targets or scientific approval.
+
+The registered panel had 7 nonfinite statistics per null DGP; all 14 remain
+unavailable. All monthly, IM and WCR estimates were finite. Unsupported
+NW-fixed-b 1%/0.27% reference levels remain unavailable, not zero rejections.
+Raw power curves are not size-adjusted: a higher rejection rate from an oversized
+test is not stronger scientific power. Panel 10 replicates/effect yields wide CIs.
+[F10](FINDINGS.md#f10-synthetic-finite-sample-size-distortion-of-the-registered-tests)
+gives provenance-linked observed/expected examples and non-claims.
+
+**Validation actually rerun:** final full `python -m pytest -q` → **234 passed,
+two inherited synthetic rank-deficiency warnings, 36.71s**, one process with
+BLAS/NUMEXPR flags 1. Configured new-file Ruff and E4/E7/E9/F on directly changed
+existing Python files passed. Wheel inspection verified the KV asset. Added
+matrix-sandwich and exact two-cluster reference assertions validate formulas,
+not size or real-data assumptions. Pylance's reference request timed out; no
+editor/static-analysis pass is claimed.
+The initial post-run suite passed233tests before one reporting-guard test was
+added. Final review corrected only failed-fit metadata: panel observation count
+is280 rather than7groups, and missing Student df is not labeled with a normal
+critical value. No Student failure or LinAlgError occurred in the executed
+experiment; its reference metadata is unchanged. Methods, statistics, seed,
+allocation and adoption rule remain as frozen; no E3 rerun after these reporting
+fixes. Generated results retain their honest clean1499865 lineage.
+
+Integrity checks: all33cases completed their assigned counts; per-level valid
+plus unavailable denominators reconcile to attempts; all unsupported NW levels
+remain null-rate rather than false zeros.130local document links/anchors checked.
+Ledger74, original signal/bulk/share hashes and prior tracked empirical/manifest/
+referee outputs are unchanged. P0 receipt stays46requests.
+
+**Unchanged/held:** ledger 74 rows, registered N/design/statistics/signs, empirical
+outputs and priors; no P0 request/repair, no development procedure/DSR/near-tie/
+manifest/claims run, no holdout access, keys, paid data, vendor/human contact,
+publication/push/tags. No scientific acceptance or release hold was lifted.
+The c* allocation remains superseded and unexecuted. Any next qualification or
+different sample geometry needs a prospective owner/Lead decision, not tuning
+this completed run.
 
 ### Source-pilot contract: proposed, not activated
 

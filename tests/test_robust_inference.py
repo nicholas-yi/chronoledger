@@ -38,6 +38,14 @@ def test_monthly_factor_score_and_published_fixed_b_values(n, nu, critical) -> N
     y = 0.2 + x[:, 1:] @ np.arange(6) + rng.normal(size=n)
     cosine = ewc_test(y, x)
     assert cosine.df == nu
+    fit = sm.OLS(y, x).fit()
+    phi = np.sqrt(2) * np.cos(
+        np.pi * np.arange(1, nu + 1)[:, None] * (np.arange(n) + 0.5) / n)
+    projections = phi @ (x * fit.resid[:, None]) / np.sqrt(n)
+    omega = projections.T @ projections / nu
+    q_inv = np.linalg.inv(x.T @ x / n)
+    covariance = q_inv @ omega @ q_inv / n
+    assert cosine.standard_error == pytest.approx(np.sqrt(covariance[0, 0]), rel=1e-12)
     scaled = ewc_test(7 * y, x)
     assert scaled.t_stat == pytest.approx(cosine.t_stat)
     nw = nw_fixed_b_test(y, x)
@@ -144,9 +152,11 @@ def test_im_month_crosscheck_cannot_veto_or_rescue_the_wcr_decision() -> None:
     assert gate.status == "supported"
     rejected = RobustTest("WCR", "available", 0.01, 0.1, 100,
                           p_value=0.9, details={"cluster_axis": "month"})
+    strong_im = RobustTest("IM", "available", 1.0, 10.0, 100, p_value=1e-8, df=16,
+                           details={"group_axis": "month"})
     assert future_robust_gate(
         "event", 3.2, 1, rejected, registered_passed=True, assumptions_met=True,
-        reliable_at_geometry=True, crosscheck=im).status == "not_supported"
+        reliable_at_geometry=True, crosscheck=strong_im).status == "not_supported"
 
 
 def test_low_nu_rare_level_hold_is_not_mathematical_zero_power_or_a_registered_rescue() -> None:
@@ -171,3 +181,12 @@ def test_research_o4_o5_o6_bandwidth_is_not_the_registered_maxlag(
 ) -> None:
     influence = (np.array([0.0, 0.0, 2.0, 2.0]) - 1) / 4
     assert bartlett_variance(influence, bandwidth) == pytest.approx(expected_variance)
+
+
+@pytest.mark.parametrize(("weights", "expected_p"), [("rademacher", 1 / 2), ("webb", 1 / 3)])
+def test_research_o10_o11_exact_two_cluster_studentization_and_ties(weights, expected_p) -> None:
+    result = wild_cluster_restricted(
+        np.array([1.0, 3.0]), np.ones((2, 1)), np.array([0, 1]), 0,
+        seed=1, weights=weights, cluster_axis="month")
+    assert result.t_stat == pytest.approx(2)
+    assert result.p_value == pytest.approx(expected_p)

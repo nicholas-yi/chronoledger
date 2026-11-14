@@ -37,13 +37,17 @@ The final P0 validation passed **18 focused tests and 213 full-suite tests**
 (including post-`8642597` code), with two existing synthetic warnings; selected
 Ruff passed. Passing tests do not clear the source-clock gate.
 
-**Batch E prospective update:** user-approved established robust significance
+**Batch E update — verification complete, adoption mostly failed:** established robust significance
 tests replace the unexecuted c* proposal. [D12](docs/DEVIATIONS.md#d12-require-established-robust-significance-checks-for-future-acceptance)
 and the [frozen seed/allocation](docs/DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract)
 preserve all registered statistics/N/signs and add stricter future requirements.
 EWC uses floor nu; NW uses ceil S with maxlags S-1 and KV table interpolation;
 IM-by-month is non-deciding. **No robust procedure is applied to development data;
-P0 and Batch C Part 2 remain blocked.** E3 size/power verification has not run yet.
+P0 and Batch C Part 2 remain blocked.** The [single synthetic verification](results/robust_inference_calibration.json)
+completed 250,000 charges in 156.78 CPU seconds with its exact-t harness passing.
+All monthly procedures fail the frozen 5% qualification rule at T=17/18/28;
+only panel IM passes that limited criterion. WCR does not qualify. These are
+not project inference, scientific approval or rare-tail validation; see [F10](docs/FINDINGS.md#f10-synthetic-finite-sample-size-distortion-of-the-registered-tests).
 
 The Python package is named `asof`, after the `as_of` queries everything is built on.
 
@@ -71,7 +75,7 @@ The Python package is named `asof`, after the `as_of` queries everything is buil
   That is not survivorship coverage. [F2](docs/FINDINGS.md#f2-distress-event-tests-are-invalid-under-a-current-ticker-universe)
   remains unresolved; [F3](docs/FINDINGS.md#f3-three-data-bugs-caught-by-an-implausible-backtest)
   records the original implausible-backtest failures.
-- Latest P0 local regression tests: **213 passed**, with two existing synthetic
+- Latest Batch E local regression tests: **234 passed**, with two existing synthetic
   rank-deficiency warnings. Selected changed-file Ruff `E4,E7,E9,F` checks pass.
   Full-repository default Ruff was not rerun here; its last recorded baseline
   had 62 inherited findings versus 63 at the handoff.

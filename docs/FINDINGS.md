@@ -425,6 +425,55 @@ rate or universal failure of asymptotic methods.
 therefore adds established robust tests prospectively, instead of the retired
 ad-hoc c* plan. Their own finite-sample behavior is to be checked under the
 [frozen Batch E contract](DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract).
-Before that run, no new size/power rates or reliability verdicts are claimed.
-Neither citing a paper nor passing implementation tests proves its assumptions
-for the project. P0 and all empirical release holds remain unresolved.
+At that pre-execution freeze, no new size/power rates were claimed. The
+[single Batch E run](../results/robust_inference_calibration.json) is now complete
+from clean source `1499865544a1a46004dfa391002409efb0869370`, seed `2026111401`.
+It consumed 34,540 data attempts plus 215,460 bootstrap draws, exactly 250,000
+charges; 156.78125 CPU seconds, 158.922 wall seconds, 687.78125 MiB OS peak RSS.
+The classical OLS/exact-t harness passed. No retry, new cutoff or method tuning.
+
+**Completion is not statistical adoption.** Under the frozen rule (upper 95%
+CP endpoint of 5% null rejection <=7.5% across every fixed DGP), every monthly
+procedure is **unreliable at T=17/18/28**. Only panel IM passes that particular
+synthetic 5% criterion; it is not proof of real H4 validity.
+
+| Geometry | Registered-test worst 95% upper | Robust worst 95% upper | Verdict |
+|---|---:|---:|---|
+| Monthly T17 |39.06%|EWC 13.40%; NW-fixed-b 19.08%|All fail |
+| Monthly T18 |38.00%|EWC 12.51%; NW-fixed-b 19.55%|All fail |
+| Monthly T28 |24.91%|EWC 9.65%; NW-fixed-b 13.09%|All fail |
+| Panel G7 |17.59%|IM 6.72%; WCR 8.73%|IM qualifies at 5% only |
+
+Examples with observed counts versus nominal expectations:
+
+- IID monthly T17: registered NW6 rejects 610/2,000=30.5% at nominal 5%;
+  EWC 161/2,000=8.05%; NW-fixed-b 280/2,000=14.0%.
+- AR(.3), T17: EWC 238/2,000=11.9%, upper 95% endpoint 13.40%, well beyond the
+  7.5% adoption tolerance. T28 EWC 167/2,000=8.35%, upper 9.65%; longer here is
+  still insufficient.
+- No-year-shock panel: IM 9/250=3.6%, upper 6.72%; WCR 13/250=5.2%, upper 8.73%.
+  WCR's failure of the conservative rule is **not proof** that its population
+  rejection exceeds 7.5%; the finite precision is insufficient to qualify it.
+- The registered two-way panel statistic is nonfinite in 7/250 attempts in
+  **each** null DGP (14 total). Finite-only 5% rates are 22/243 and 25/243.
+  Those missing statistics were retained, not redrawn or called non-rejections;
+  the adoption bound conservatively treats them as possible rejections.
+
+All monthly estimates and IM/WCR panel estimates were finite in this experiment.
+At 1% EWC monthly null rates range 1.25-2.7%; at 0.27% they range 0.1-0.95%,
+with the reported wide Monte Carlo intervals. KV Table I lacks the necessary
+99.5th/rarer percentiles, so NW-fixed-b 1%/0.27% rates are **unavailable**, not zero.
+
+Power is **raw rejection power, not size-adjusted or qualified project power**.
+For example, at T28/EWC the positive 0.25 SD effect rejects 90/500=18.0%
+(95% CI 14.73-21.65%) at 5%; the 1.0 SD effect rejects 450/500=90.0%
+(87.03-92.49%). At 0.27%, that 1.0 SD effect rejects 112/500=22.4%
+(18.82-26.31%). Because EWC fails the null-size rule, these rates are not
+power guarantees for a reliable test. Panel power has only 10 attempts/effect;
+its apparent high rates are too imprecise for economic conclusions.
+
+Neither citing a paper nor passing implementation tests proves project assumptions.
+No robust procedure, DSR/PBO or calibration outcome was applied to development data.
+Monthly acceptance remains undetermined under unreliable geometry/low-nu rare-level
+holds; panel IM's label cannot clear P0, F2/F4, source, measurement or owner gates.
+The holdout remains sealed.
