@@ -206,12 +206,13 @@ labels. Unsupported or ambiguous questions produce an abstention.
 
 | Result on the 30 items | Value |
 |---|---:|
-| Reference answer matched |5 |
-| Wrong answer |4 |
-| Abstained |21 |
-| Official exact match |16.7% |
-| Official F1 |16.7% |
-| Official scale accuracy |26.7% |
+| Reference answer matched | 5 |
+| Wrong answer | 4 |
+| Abstained | 21 |
+| Official exact match | 16.7% |
+| Exact-match 95% Wilson interval | 7.3-33.6% |
+| Official F1 | 16.7% |
+| Official scale accuracy | 26.7% |
 
 The unmodified TAT-QA scorer includes the abstentions in these scores.
 The baseline answered only nine questions; quoting five correct out of those
@@ -223,20 +224,74 @@ stay local; [configuration](../results/benchmark_diagnostic_config.json) and
 [results](../results/benchmark_diagnostic_status.json) record versions,
 checksums and every item's outcome without copying the questions or answers.
 
-FinQA was **not scored in that first diagnostic**: its official evaluator lacked
-`tqdm`. No scorer was substituted. The development file was retained after its
-report-ID check, not deleted, and no gold programs were run as predictions.
+### FinQA follow-up with the original rules
 
-A follow-up now has its dependencies available through the pinned `benchmarks`
-extra (`tqdm`, `sympy` and its `mpmath` dependency). Before scoring, ten
-unfiltered development IDs are frozen with a new seed, the original table
-baseline and deterministic input/program adapters. Raw text/table inputs are
-kept separate from reference answers and retrieved annotations; percentages
-are encoded as ratios in FinQA's calculation language. The metric uses the
-official program executor and exact reference comparison. No result from this
-follow-up is implied until it has run.
+FinQA was not scored in the first diagnostic because its official evaluator
+lacked `tqdm`. The follow-up installed only the pinned benchmark dependencies:
+`tqdm 4.70.1`, `sympy 1.14.0` and `mpmath 1.3.0`, reproduced by the `benchmarks`
+extra. No scorer was substituted.
 
-This is a useful first check of a very limited baseline, not evidence of broad
+Before changing the average rule, we froze ten unfiltered development IDs with
+a new seed, the unchanged original baseline, and deterministic adapters for raw
+text/table inputs and FinQA calculation programs. Reference answers and retrieved
+annotations were not prediction inputs; percentages were represented as ratios.
+
+The original rules declined **all ten items**. With abstentions counted as
+misses, execution accuracy was **0/10**, with a descriptive 95% Wilson interval
+of **0-27.8%**, and coverage was zero. No dataset prediction program or gold
+program was executed, because the baseline emitted no answers. Two invented
+arithmetic programs passed a separate native-executor check; that is a scorer
+check, not question-answering performance. The file remains local after its
+report-ID check. [Follow-up results](../results/benchmark_followup_status.json)
+record each outcome and the frozen configuration.
+
+### Average-only correction and a fresh paired comparison
+
+Only after the FinQA result was committed did we inspect the three earlier
+average errors. They exposed three different issues:
+
+- An explicit year range was averaged using its endpoints, omitting an
+  intermediate year.
+- A signed expense had an ambiguous positive-magnitude convention, and its
+  table's unit banner appeared later than the global unit scan.
+- A metric with "weighted-average" in its name was requested separately by year;
+  that was not an instruction to average the values.
+
+The change is confined to the average rule. It includes every observed year in
+an explicit range, considers a table-local unit banner, and declines ambiguous
+expense signs or ordered/weighted-metric lookups rather than guessing. Other
+row, year, ratio, unit and output-type rules were left alone. In particular,
+the limitations behind FinQA's abstentions were not broadened away.
+
+We froze a new seed and **30 fresh TAT-QA development items**, excluding every
+item in the original sample, then ran the original and corrected versions once
+on the same items. The original 30 were not re-scored or overwritten.
+
+| Result on the fresh 30 | Original rules | Average-only correction |
+|---|---:|---:|
+| Reference matches / wrong / abstained | 3 / 0 / 27 | 3 / 0 / 27 |
+| Official exact match | 10.0% | 10.0% |
+| Exact-match 95% Wilson interval | 3.5-25.6% | 3.5-25.6% |
+| Official F1 | 10.0% | 10.0% |
+| Official scale accuracy | 10.0% | 10.0% |
+| Coverage | 10.0% | 10.0% |
+
+No prediction changed: zero items improved and zero regressed. **None of these
+fresh items reached the average calculation**, so the sample does not
+demonstrate a real-data benefit from the correction. Synthetic tests check the
+mechanics; we did not choose another sample until a gain appeared.
+
+These intervals describe question-level binomial accuracy; they do not adjust
+for shared reports or contexts. F1 is not given a binomial interval, and
+overlapping intervals are not a paired significance test. Here scale and
+coverage also have 3/30 support, so their Wilson intervals are the same.
+
+For context, [the TAT-QA paper, Table 3 and section 4.3](https://arxiv.org/html/2105.07624v2#S4.T3)
+reports human experts at **84.1% exact match** and 90.8% F1 on 301 test questions
+from 50 contexts. That different test sample and its conditions are not a matched
+comparison with these tiny development samples.
+
+These are checks of a very limited baseline, not evidence of broad
 financial-reading skill. Thirty to forty items can expose bugs; they cannot
 establish formal H1, benchmark leadership or historical usability. A benchmark's
 own reference calculations would test the scorer, not prediction skill. This

@@ -328,10 +328,15 @@ is weak evidence, and more data matters more than a better estimator.
   companies, not human annotation. Free human-annotated benchmarks for reading financial documents
   are listed in the [research plan](docs/RESEARCH_PLAN.md#free-benchmarks-for-testing-measurement-on-real-data).
   A separate non-model baseline now matched 5 of 30 TAT-QA development answers,
-  gave 4 wrong answers and abstained on 21; official EM/F1 were both 16.7%.
-  FinQA was not scored because a dependency of its official evaluator is missing.
-  This small diagnostic tests limited reading rules, not formal H1 or historical
-  usability; it did not inspect the sealed test period.
+  gave 4 wrong answers and abstained on 21; official EM/F1 were both 16.7%
+  (95% Wilson exact-match interval 7-34%). On a fresh paired sample, the original
+  and average-corrected rules both matched 3/30 and abstained on 27 (10% EM/F1;
+  interval 3.5-25.6%); none reached the changed rule, so no benefit was demonstrated.
+  The original rules abstained on all ten FinQA items (0% accuracy; interval 0-27.8%).
+  For context, the [TAT-QA paper](https://arxiv.org/html/2105.07624v2#S4.T3) reports
+  human experts around 84% exact match on a different test sample.
+  Thirty to forty items can expose bugs, not establish skill, formal H1 or
+  historical usability. These diagnostics did not inspect the sealed test period.
 
 ## What would change the answer
 
