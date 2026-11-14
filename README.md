@@ -48,6 +48,9 @@ completed 250,000 charges in 156.78 CPU seconds with its exact-t harness passing
 All monthly procedures fail the frozen 5% qualification rule at T=17/18/28;
 only panel IM passes that limited criterion. WCR does not qualify. These are
 not project inference, scientific approval or rare-tail validation; see [F10](docs/FINDINGS.md#f10-synthetic-finite-sample-size-distortion-of-the-registered-tests).
+The later duplicate R3 cross-check added four deterministic boundary/numeric
+cases: **21 focused tests passed**, with no method or outcome change. It did
+not rerun the full suite or E3 and did not authorize P0.
 
 The Python package is named `asof`, after the `as_of` queries everything is built on.
 

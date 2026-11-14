@@ -1107,6 +1107,29 @@ The c* allocation remains superseded and unexecuted. Any next qualification or
 different sample geometry needs a prospective owner/Lead decision, not tuning
 this completed run.
 
+##### Late R3 oracle cross-check: same report, no new evaluation
+
+The subsequent completion payload repeats
+`CL-P0-POWER-ORACLES-20261113-R1`, already read in full before Batch E.
+Under the previously authorized single cross-check turn, four additional
+deterministic cases now cover default nu=0 (unsupported, no promotion to1),
+the alternating-series Bartlett variance, and equal-weight IM estimates
+[0,1,2] / [0,1,2,3,4,5,6]. **21 focused robust-inference tests passed in4.32s;
+Ruff passed.** No discrepancy or implementation change was needed.
+
+R3's explicit-nu1/nu2 illustrations are not the public fixed-rule API:
+they do not authorize overriding floor nu. Default T4 degeneracy, regression
+score/bread, bandwidth/maxlag, interpolated KV references, q/tail conditions,
+nondeciding IM-by-month and exact small-cluster WCR cases remain covered.
+Webb's reported >=2/6^G is a lower bound; inclusive constant-weight/scaling
+ties can force a larger floor, as the code and exact two-cluster oracle report.
+
+No R1 timestamp fixtures/proposals were implemented, no SEC request or real-data
+access, no E3/referee/full-suite rerun or trial append. The last full-suite
+234-test result and frozen synthetic artifact retain their original scope.
+Only tests and this receipt change; methods, tables, decisions, adoption outcomes,
+ledger and all P0/holdout/resource/publication holds remain unchanged.
+
 ### Source-pilot contract: proposed, not activated
 
 The minimal next source decision is a **development-only coverage and identity

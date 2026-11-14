@@ -190,3 +190,34 @@ def test_research_o10_o11_exact_two_cluster_studentization_and_ties(weights, exp
         seed=1, weights=weights, cluster_axis="month")
     assert result.t_stat == pytest.approx(2)
     assert result.p_value == pytest.approx(expected_p)
+
+
+def test_late_oracle_nu_zero_is_unsupported_not_silently_promoted() -> None:
+    result = ewc_test(np.array([2.0, 0.0]), np.ones((2, 1)))
+    assert result.status == "not_estimable"
+    assert result.reasons == ("invalid_cosine_count",)
+    assert result.t_stat is None and result.p_value is None
+
+
+def test_late_oracle_alternating_series_bartlett_variance() -> None:
+    influence = (np.array([0.0, 2.0, 0.0, 2.0]) - 1) / 4
+    variance = bartlett_variance(influence, 2)
+    assert 4 * variance == pytest.approx(0.25)
+    assert 1 / np.sqrt(variance) == pytest.approx(4)
+
+
+@pytest.mark.parametrize(
+    ("q", "expected_t", "expected_variance"),
+    [(3, np.sqrt(3), 1 / 3), (7, np.sqrt(13.5), 2 / 3)],
+)
+def test_late_oracle_im_equal_weight_group_estimates(q, expected_t, expected_variance) -> None:
+    groups = np.repeat(np.arange(q), 3)
+    signal = np.tile([-1.0, 0.0, 1.0], q)
+    y = signal * np.repeat(np.arange(q), 3) + np.tile([1.0, -2.0, 1.0], q)
+    result = im_group_test(y, signal, np.empty((len(y), 0)), groups,
+                           expected_groups=list(range(q)), group_axis="synthetic")
+    assert result.status == "available" and result.standard_error is not None
+    assert result.t_stat == pytest.approx(expected_t)
+    assert result.standard_error**2 == pytest.approx(expected_variance)
+    if q == 3:
+        assert result.p_value == pytest.approx(0.2254033308)
