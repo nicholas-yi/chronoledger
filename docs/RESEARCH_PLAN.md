@@ -381,45 +381,52 @@ A [proposal for thirty fresh real questions](../results/reader_next_real_proposa
 excluded all seventy earlier question IDs. It was later run under the amended
 limits below; the original proposal remains as its planning record.
 
-### Thirty real questions: stopped before a usable comparison
+### Fresh real reader sample: partial results
 
-The [committed contract](../results/reader_real1_config.json) selected thirty
-fresh question IDs with seed 2026111412, preserved the positive control's
-answer-first prompt/schema/parse, and explicitly increased context length to
-16,384. A single call timeout would fail that case and continue without retry;
-three consecutive timeouts, sustained high host load or the total wall limit
-would stop the run.
+The [earlier thirty-question run](../results/reader_real1_status.json) was
+stopped by an over-sensitive safeguard, with no reading result. Its records
+remain unchanged; the new run is a fresh sample, not a resume.
 
-The [run stopped](../results/reader_real1_status.json) when host CPU exceeded
-90% for three consecutive one-second samples. It had started at 17.2% load.
-One no-report request abstained and a second was cancelled. The first
-report-supplied input was 13,229 serialized bytes, exceeding the fixed 12,000-byte
-guard; it failed without generation or truncation. No report-supplied generation
-ran, and no paired prediction was completed.
+The [new contract](../results/reader_real2_config.json) drew thirty questions
+with seed 2026111415, excluding all hundred earlier IDs. It kept the exact
+positive-control prompt/schema/parse, model and native scorer, but replaced
+spike-sensitive CPU stopping with a sustained rolling-average rule and checked
+input/output token fit instead of a tight byte cap.
 
-| Condition, thirty selected questions each | Generation attempts | Abstained | Failed | Not attempted |
-|---|---:|---:|---:|---:|
-| Report supplied | 0 | 0 | 1 | 29 |
-| No report | 2 | 1 | 1 | 28 |
+| Native result, all thirty selected questions | Report supplied | No report |
+|---|---:|---:|
+| Exact match / F1 | 20.0% / 20.0% | 0% / 0% |
+| Exact-match Wilson 95% interval | 9.5-37.3% | 0-11.4% |
+| Scale accuracy | 30.0% | 0% |
+| Coverage | 33.3% | 0% |
+| Correct / wrong / abstained / failed / not attempted | 6 / 4 / 0 / 1 / 19 | 0 / 0 / 10 / 0 / 20 |
 
-Native EM, F1, scale accuracy and coverage are zero on each all-thirty
-denominator, counting failures and unattempted cases as misses. The binary
-Wilson calculation is 0-11.4%, **not a reading-ability interval**. The all-selected
-paired table has zero right-only-with, zero right-only-without, zero both-right
-and thirty neither-right; its descriptive McNemar p = 1 is uninformative.
-The valid-completed-pair contrast is unavailable, not evidence of equivalence.
-The selected types were 15 span, 2 multi-span, 13 arithmetic and no count items;
-the per-type denominators and outcomes are retained in the result.
+**The run is incomplete.** Ten pairs finished: the reader answered six of these
+questions exactly with their report; every no-report response abstained. One
+further report-supplied request was cancelled when sampled owned working set
+crossed 6 GiB. The table's all-thirty denominator counts failures and unattempted
+cases as misses; it is not the completed-sample model accuracy.
 
-The [administrative review](../results/reader_real1_review.json) records the
-40.3-second run, zero call timeouts, resource measurements, input-size diagnosis
-and shutdown of the isolated server. The backend confirmed four decoding and
-batch threads; its logs do not identify the cause of the shared-host surge.
-Nothing was retried, resampled, tuned or resumed. All question outcomes,
-including the unattempted cases, remain visible without question/answer text.
-This run provides no estimate of reading ability. No-report correctness, when
-observed, may reflect memorization or guessing. Even a completed public-benchmark
-test would not establish historical usability, formal H1 or financial returns.
+The all-selected paired counts are six right only with the report, zero only
+without, zero both-right and twenty-four neither-right. On the ten valid pairs,
+the neither-right count is four. Exact McNemar p = 0.03125 is **descriptive only**;
+resource-related missingness, repeated report contexts and the public benchmark
+limit interpretation. No-report correctness may reflect memorization or guessing,
+and these abstentions do not establish a clean training cutoff.
+
+The [per-item result and full CPU trace](../results/reader_real2_status.json) retain
+all outcomes and answer-type counts: 10 span, 4 multi-span, 15 arithmetic and
+1 count. Completed pairs included 3 span, 2 multi-span and 5 arithmetic cases.
+The [review](../results/reader_real2_review.json) records the 5.7-minute run,
+zero timeouts or detected truncations, and successful token-bound checks.
+Instantaneous CPU spikes reached 100%, but the highest sixty-second mean was
+87.35%, so the revised CPU rule did not stop the run. The memory safeguard did;
+the isolated server was stopped afterwards. No retry, tuning or resampling.
+
+This demonstrates limited reading ability on the completed public-benchmark
+subset, not a finished thirty-question evaluation, historical usability,
+formal H1, or financial returns. Question-level intervals do not correct for
+shared contexts or resource-driven missingness; no binomial interval is used for F1.
 
 ### Three measurement ideas worth testing
 

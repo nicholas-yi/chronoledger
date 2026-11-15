@@ -1,0 +1,79 @@
+{
+  "scope": "Post-run validation only; no further requests, rerun, tuning or scoring-rule change.",
+  "run_receipt_sha256": "9c7e838d80b1725c7bdf1a0e10a95a00c9a7324de29731b85a575caa9e6891a0",
+  "config_sha256": "efe477b5948bfbbf212bb927cae7c589557ffe4b8ebc09e036bccb62b3567bf7",
+  "source_commit": "c6c3abd14d18becad1f3a0ddd8c7129a78f8f7c0",
+  "actual_stop": "owned isolated process tree working set exceeds6GiB",
+  "execution": {
+    "generation_attempts": 21,
+    "completed_valid_pairs": 10,
+    "memory_cancelled_report_request": 1,
+    "unattempted_condition_cases": 39
+  },
+  "input_checks": {
+    "fit_rejections": 0,
+    "truncated_or_invalid_prompt_cases": 0,
+    "call_timeouts": 0,
+    "max_completed_prompt_eval_count": 1151,
+    "max_input_estimate_sent": 2032
+  },
+  "CPU_trace_validation": {
+    "private_per_second_trace_equals_full_receipt": true,
+    "samples": 325,
+    "summary": {
+      "samples": 325,
+      "sampled_seconds": 341.06199999991804,
+      "host_CPU_time_weighted_mean_percent": 78.01994957844362,
+      "host_CPU_max_percent": 100.0,
+      "rolling_60second_mean_max_percent": 87.3481132912497,
+      "max_consecutive_seconds_rolling_mean_above95": 0.0
+    },
+    "meaning": "Instantaneous100%spikesdidnottrigger;time-weighted60smeanneverabove95%,no120sCPUstop."
+  },
+  "resource_samples": {
+    "run": {
+      "wall_seconds": 341.4220000002533,
+      "Python_CPU_seconds": 9.640625,
+      "owned_tree_working_set_peak_sample_bytes": 6449147904,
+      "transient_exited_children": 0,
+      "note": "Nominal1s timestamped samples/time-weightedwindows; cooperative, not OSquota. HostCPU,PythonCPU,andmodelCPU are distinct."
+    },
+    "owned_model_process_CPU_seconds_since_start": 1167.21875,
+    "owned_server_process_CPU_seconds_since_start": 2.671875,
+    "largest_owned_process_peak_RSS_bytes": 6325743616,
+    "memory_limit_bytes": 6442450944,
+    "observed_owned_tree_overage_bytes": 6696960,
+    "note": "One-second cooperative working-set samples can brieflycrossbound; stop fired on crossing. Individualprocesslifetime CPU/peak is distinct from hostload/PythonCPU/concurrenttree sample."
+  },
+  "interpretation": "Six exactanswerswithreportsamong10completedpairs showlimitedpublic-sampleability;full30comparisonincomplete. All-selectedmetricscountfailed/unattempted asmisses,not full-cohort modelaccuracy. DescriptiveMcNemarp.03125isnotconfirmatory; stopping/missingness/sharedcontexts/publictrainingcontaminationlimit inference. No-reportabstentioncannotprove absenceofmemorization; correctnesswithoutreportmayreflectmemoryorguessing.",
+  "cleanup": {
+    "isolated11435_listener_absent": true,
+    "owned_server179916_and_runner66616_gone": true,
+    "shared11434_Docker_AEcheckout_untouched": true
+  },
+  "integrity": {
+    "frozen_source_config_unchanged": true,
+    "native_assets_unchanged": true,
+    "all30selectedUIDs_retained": true,
+    "no_question_or_answer_text_committed": true,
+    "old_REAL1_unchanged": true,
+    "trial_ledger_rows": 74
+  },
+  "real_UIDs_exposed_to_date": 130,
+  "next_action": "Noautomaticcontinuation,failed-case retries,guardrelaxation orresampling. FurtherworkrequiresanotherLeaddecision; preservepartialresults.",
+  "validation": {
+    "full_pytest_passed": 309,
+    "full_pytest_seconds": 72.04,
+    "inherited_warnings": 2,
+    "full_suite_run_count": 1,
+    "Ruff_all3_changed_Python_files": "passed",
+    "Pylance_syntax_new_runner_and_guard_module": "passed",
+    "new_relative_links_checked": 3,
+    "exact_fresh_draw_orders_native_pins_reports_reconciled": true,
+    "private_full_CPU_trace_equals_receipt": true,
+    "whole_own_server_log_input_truncation_warnings": 0,
+    "REAL1_source_config_result_review_unchanged": true,
+    "ledger_rows_unchanged": 74,
+    "no_data_files_tracked": true
+  }
+}
