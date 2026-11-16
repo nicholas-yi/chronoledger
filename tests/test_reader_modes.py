@@ -2,7 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 from asof.reader_contract import Report, Row
-from asof.reader_modes import ADAPTER, request_body, resolve_mode
+from asof.reader_modes import ADAPTER, ModeChoice, mode_specific_body, request_body, resolve_mode
 
 
 def operand(value="15", period="P"):
@@ -42,3 +42,14 @@ def test_mode_lists_adapt_to_native_values_and_checked_calculation():
     with pytest.raises(ValueError, match="dimension/scale"):
         resolve_mode(bad, report)
     assert "expected" not in request_body(report, "toy", {})["messages"][1]["content"]
+
+
+def test_fallback_mode_choice_and_answer_schema_lock_mode_without_redundant_values():
+    choice = ModeChoice.model_validate({"mode": "arithmetic"})
+    with pytest.raises(ValidationError):
+        ModeChoice.model_validate({"mode": "arithmetic", "values": ["18"]})
+    report = Report(question="invented", monetary_banner="", rows=[])
+    body = mode_specific_body(report, choice.mode, "toy", {})
+    assert body["format"]["properties"]["mode"]["const"] == "arithmetic"
+    assert "values" not in body["format"]["properties"]
+    assert body["format"]["additionalProperties"] is False

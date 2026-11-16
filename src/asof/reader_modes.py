@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from typing import Annotated, Literal
 
 from pydantic import Field, TypeAdapter
@@ -71,6 +72,46 @@ class Abstain(StrictModel):
 
 ModeAnswer = Annotated[Lookup | MultiValue | Arithmetic | Abstain, Field(discriminator="mode")]
 ADAPTER = TypeAdapter(ModeAnswer)
+Mode = Literal["lookup", "multi_value", "arithmetic", "abstain"]
+
+
+class ModeChoice(StrictModel):
+    mode: Mode
+
+
+MODE_SYSTEM = (
+    "Choose the task mode from this fictional report. Return only {\"mode\":\"...\"}. "
+    "arithmetic: question asks to calculate a difference, percent change, average or ratio "
+    "from two cells. multi_value: question asks to LIST several existing cells, not calculate. "
+    "lookup: question asks for ONE existing value or name. "
+    "abstain: requested row/period/fact is absent, units incompatible, or denominator zero. "
+    "Check the question and table before choosing. Do not output an answer or operands."
+)
+
+
+def mode_choice_body(report: Report, model: str, options: dict, *, probe: bool = False) -> dict:
+    body = request_body(report, model, options, probe=probe)
+    body["format"] = ModeChoice.model_json_schema()
+    body["messages"][0]["content"] = PROBE_SYSTEM if probe else MODE_SYSTEM
+    return body
+
+
+def mode_specific_body(report: Report, mode: Mode, model: str, options: dict, *,
+                       probe: bool = False) -> dict:
+    model_type = {"lookup": Lookup, "multi_value": MultiValue,
+                  "arithmetic": Arithmetic, "abstain": Abstain}[mode]
+    schema = model_type.model_json_schema()
+    body = request_body(report, model, options, probe=probe)
+    body["format"] = schema
+    body["messages"][0]["content"] = PROBE_SYSTEM if probe else (
+        SYSTEM + f" The mode has already been selected as {mode}; do not change it. "
+        "Each operand.value is ONLY the cell's plain string (for example a numeric string), "
+        "not serialized JSON, a formula, object, sentence or punctuation. "
+        "Row labels, periods and units are separate fields. "
+        "Use row unit, not the monetary banner, for count/years/ratio. "
+        "The exact output schema is: " + json.dumps(schema)
+    )
+    return body
 
 
 def to_contract(answer: ModeAnswer) -> ContractAnswer:

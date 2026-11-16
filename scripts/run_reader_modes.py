@@ -20,7 +20,18 @@ from run_reader_real2_completion import SleepAwareCPU
 from asof import ledger
 from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.reader_contract import Control, Report, passed
-from asof.reader_modes import ADAPTER, PROBE_SYSTEM, SYSTEM, request_body, resolve_mode, to_contract
+from asof.reader_modes import (
+    ADAPTER,
+    MODE_SYSTEM,
+    PROBE_SYSTEM,
+    SYSTEM,
+    ModeChoice,
+    mode_choice_body,
+    mode_specific_body,
+    request_body,
+    resolve_mode,
+    to_contract,
+)
 from asof.reader_real2_guards import SustainedCPU, input_fit, truncation_reason
 
 PRACTICE = PROJECT_ROOT / "tests" / "fixtures" / "reader_modes_practice.json"
@@ -31,6 +42,7 @@ LOG = PROJECT_ROOT / "results" / "reader_modes_practice_log.json"
 OPTIONS = {"temperature": 0, "seed": 2026111604, "num_predict": 768, "num_ctx": 8192,
            "num_thread": 4, "num_gpu": 0, "num_batch": 128}
 WALL = 1800
+STRATEGY = "two_stage"
 SOURCES = [Path(__file__), PROJECT_ROOT / "src" / "asof" / "reader_modes.py",
            PROJECT_ROOT / "src" / "asof" / "reader_contract.py",
            PROJECT_ROOT / "src" / "asof" / "reader_real2_guards.py",
@@ -68,7 +80,9 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
                 jobs.append({"id": row["id"], "probe": True, "constrained": False})
             jobs.append({"id": row["id"], "probe": row["kind"] == "grammar_probe",
                          "constrained": True})
-        if sum(r["attempts"] for r in previous) + len(jobs) > 40:
+        if sum(r["attempts"] for r in previous) + sum(
+            2 if j["constrained"] else 1 for j in jobs
+        ) > 40:
             raise ValueError("forty practice-call ceiling")
         fixture = PRACTICE
     else:
@@ -98,16 +112,27 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
                 raise ValueError("expected answer fails native self-check")
         jobs = [{"id": row["id"], "probe": False, "constrained": True} for row in items]
         fixture = SCORED
+    templates = {mode: mode_specific_body(
+        Report(question="", monetary_banner="", rows=[]), mode, MODEL, OPTIONS,
+    ) for mode in ("lookup", "multi_value", "arithmetic", "abstain")}
     value = {
         "kind": "PRACTICE NEVER SCORED" if practice else "FRESH INVENTED SCORED CONTROL",
         "iteration": iteration if practice else None, "change": change, "items": items, "jobs": jobs,
         "model": MODEL, "digest": DIGEST, "Ollama_version": "0.40.16", "options": OPTIONS,
         "system_prompt": SYSTEM, "probe_system": PROBE_SYSTEM, "format": ADAPTER.json_schema(),
+        "strategy": STRATEGY, "mode_choice_prompt": MODE_SYSTEM,
+        "mode_choice_schema": ModeChoice.model_json_schema(),
+        "mode_specific_schemas": {mode: body["format"] for mode, body in templates.items()},
+        "mode_specific_prompts": {mode: body["messages"][0]["content"]
+                                  for mode, body in templates.items()},
+        "max_calls": sum(2 if j["constrained"] else 1 for j in jobs),
         "source_sha256": {str(p.relative_to(PROJECT_ROOT)): ledger.file_sha256(p) for p in SOURCES},
         "fixture_sha256": ledger.file_sha256(fixture),
         "limits": "4threads/10GiB ownedRSS/240s call/30min phase; REAL2 sustainedCPU; sleep stop;"
                   "single timeout miss,3consecutive stop; no retry. <=40practicecalls/3iterations.",
-        "protocol": "Mode-first discriminated oneOf/const; each mode forbids others' fields. "
+        "protocol": "Two-call fallback after union practice proved operationally unreliable. "
+                    "First mode-only enum; then that mode's const/forbid-extra schema. "
+                    "An explicit abstention ends after the mode-only call; no redundant call. "
                     "Multi-value list contains sourced value records; adapter emits string list "
                     "to the pinned native scorer. Calculator/source checks unchanged.",
         "practice_rule": "No accuracy calculation. Check schema/mode-first conformance and "
@@ -122,7 +147,7 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
         "scored_items_existed_at_practice_freeze": SCORED.exists() if practice else None,
     }
     config_path.write_text(json.dumps(value, indent=2), encoding="utf-8")
-    print(json.dumps({"phase": value["kind"], "calls": len(jobs),
+    print(json.dumps({"phase": value["kind"], "max_calls": value["max_calls"],
                       "config_sha256": ledger.file_sha256(config_path)}))
 
 
@@ -147,6 +172,10 @@ def log_truncated(offset: int) -> bool:
                           raw.decode("utf-8", errors="replace"), re.IGNORECASE))
 
 
+class CallFailure(RuntimeError):
+    pass
+
+
 async def run(practice: bool, iteration: int, server_pid: int) -> None:
     config_path, status_path, private = paths(practice, iteration)
     if status_path.exists():
@@ -156,12 +185,12 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
         ledger.file_sha256(PROJECT_ROOT / p) != h for p, h in config["source_sha256"].items()
     ):
         raise ValueError("commit phase source/config before generation")
-    if practice and sum(r["attempts"] for r in prior_practice()) + len(config["jobs"]) > 40:
+    if practice and sum(r["attempts"] for r in prior_practice()) + config["max_calls"] > 40:
         raise ValueError("practice-call ceiling")
     started, cpu_started = time.monotonic(), time.process_time()
     cpu, memory, policy = SleepAwareCPU(), OwnedMemory(server_pid), SustainedCPU()
     rows = [{**job, "attempted": False, "outcome": "not_attempted",
-             **({} if practice else {"correct": False}), "computed_by_code": False}
+             **({} if practice else {"correct": False}), "computed_by_code": False, "calls": []}
             for job in config["jobs"]]
     items = {r["id"]: r for r in config["items"]}
     receipt = {"kind": config["kind"], "iteration": config["iteration"], "items": rows,
@@ -174,6 +203,58 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
 
     scorer = None if practice else native_scorer()
     watch, complete, stop, timeouts = None, False, "unexpected_interruption", 0
+
+    async def ask(client, body: dict, row: dict, stage: str, watch) -> str:
+        nonlocal timeouts
+        if not input_fit(json.dumps(body).encode(), body["options"])[2]:
+            raise CallFailure("input_fit")
+        if sum(len(r["calls"]) for r in rows) >= config["max_calls"]:
+            raise ResourceStop("frozen_call_ceiling")
+        cpu.check_suspend()
+        remaining = WALL - (time.monotonic() - started)
+        if remaining <= 0:
+            raise ResourceStop("phase30minute_wall")
+        call = {"stage": stage, "outcome": "started"}
+        row["calls"].append(call)
+        row.update(attempted=True, outcome="attempt_started")
+        offset, call_started = SERVER_LOG.stat().st_size, time.monotonic()
+        persist()
+        try:
+            try:
+                response = await guarded_request(client, body, watch, min(240, remaining))
+            except (TimeoutError, httpx.TimeoutException) as exc:
+                timeouts += 1
+                call.update(outcome="failed", reason="call_timeout")
+                if timeouts >= 3:
+                    raise ResourceStop("three_consecutive_timeouts") from exc
+                raise CallFailure("call_timeout") from exc
+            except httpx.HTTPError as exc:
+                timeouts = 0
+                raise CallFailure(type(exc).__name__) from exc
+            cpu.check_suspend()
+            timeouts = 0
+            response.raise_for_status()
+            raw = response.json()
+            raw_path = private / f"{row['id']}_{row['constrained']}_{stage}.json"
+            raw_path.write_text(json.dumps(raw, indent=2), encoding="utf-8")
+            call["raw_SHA256"] = ledger.file_sha256(raw_path)
+            call["metrics"] = {k: raw.get(k) for k in (
+                "eval_count", "prompt_eval_count", "total_duration", "load_duration")}
+            invalid = truncation_reason(raw, body["options"], log_truncated(offset))
+            if invalid or raw.get("done") is not True or raw.get("done_reason") != "stop":
+                raise CallFailure(invalid or "incomplete_generation")
+            call["outcome"] = "valid_generation"
+            return raw["message"]["content"]
+        except CallFailure as exc:
+            call.update(outcome="failed", reason=str(exc))
+            raise
+        except (httpx.HTTPError, ValueError, KeyError) as exc:
+            call.update(outcome="failed", reason=str(exc))
+            raise CallFailure(str(exc)) from exc
+        finally:
+            call["wall_seconds"] = time.monotonic() - call_started
+            persist()
+
     persist()
     with (private / "CPU_trace.jsonl").open("x", encoding="utf-8") as trace:
         recorder = CPURecorder(started, cpu, policy, trace)
@@ -193,54 +274,34 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
                     raise ResourceStop("server_or_model_pin")
                 for row in rows:
                     report = Report.model_validate(items[row["id"]]["report"])
-                    body = request_body(report, MODEL, config["options"], probe=row["probe"],
-                                        constrained=row["constrained"])
-                    if body.get("format") != (config["format"] if row["constrained"] else None):
-                        raise ValueError("frozen schema differs")
-                    if body["messages"][0]["content"] != (
-                        config["probe_system"] if row["probe"] else config["system_prompt"]
-                    ):
-                        raise ValueError("frozen prompt differs")
-                    if not input_fit(json.dumps(body).encode(), config["options"])[2]:
-                        row.update(outcome="failed", reason="input_fit")
-                        persist()
-                        continue
-                    cpu.check_suspend()
-                    remaining = WALL - (time.monotonic() - started)
-                    if remaining <= 0:
-                        raise ResourceStop("phase30minute_wall")
-                    row.update(attempted=True, outcome="attempt_started")
-                    offset, call_started = SERVER_LOG.stat().st_size, time.monotonic()
-                    persist()
                     try:
-                        response = await guarded_request(client, body, watch, min(240, remaining))
-                    except (TimeoutError, httpx.TimeoutException):
-                        timeouts += 1
-                        row.update(outcome="failed", reason="call_timeout")
-                        if timeouts >= 3:
-                            raise ResourceStop("three_consecutive_timeouts") from None
-                        continue
-                    except httpx.HTTPError as exc:
-                        timeouts = 0
-                        row.update(outcome="failed", reason=type(exc).__name__)
-                        continue
-                    finally:
-                        row["wall_seconds"] = time.monotonic() - call_started
-                        persist()
-                    cpu.check_suspend()
-                    timeouts = 0
-                    try:
-                        response.raise_for_status()
-                        raw = response.json()
-                        raw_path = private / f"{row['id']}_{row['constrained']}.json"
-                        raw_path.write_text(json.dumps(raw, indent=2), encoding="utf-8")
-                        row["raw_SHA256"] = ledger.file_sha256(raw_path)
-                        row["metrics"] = {k: raw.get(k) for k in (
-                            "eval_count", "prompt_eval_count", "total_duration", "load_duration")}
-                        invalid = truncation_reason(raw, config["options"], log_truncated(offset))
-                        if invalid or raw.get("done") is not True or raw.get("done_reason") != "stop":
-                            raise ValueError(invalid or "incomplete_generation")
-                        content = raw["message"]["content"]
+                        if row["constrained"]:
+                            body = mode_choice_body(report, MODEL, config["options"],
+                                                    probe=row["probe"])
+                            if body["format"] != config["mode_choice_schema"] or (
+                                body["messages"][0]["content"] != (
+                                    config["probe_system"] if row["probe"]
+                                    else config["mode_choice_prompt"])
+                            ):
+                                raise ValueError("frozen mode-choice contract differs")
+                            content = await ask(client, body, row, "mode", watch)
+                            choice = ModeChoice.model_validate_json(content)
+                            row["calls"][-1]["schema_valid"] = True
+                            row["selected_mode"] = choice.mode
+                            if choice.mode != "abstain":
+                                body = mode_specific_body(report, choice.mode, MODEL,
+                                                          config["options"], probe=row["probe"])
+                                if body["format"] != config["mode_specific_schemas"][choice.mode] or (
+                                    body["messages"][0]["content"] != (
+                                        config["probe_system"] if row["probe"] else
+                                        config["mode_specific_prompts"][choice.mode])
+                                ):
+                                    raise ValueError("frozen mode-specific contract differs")
+                                content = await ask(client, body, row, "answer", watch)
+                        else:
+                            body = request_body(report, MODEL, config["options"],
+                                                probe=True, constrained=False)
+                            content = await ask(client, body, row, "open_probe", watch)
                         obj = json.loads(content)
                         if not isinstance(obj, dict):
                             raise TypeError("model output must be a JSON object")
@@ -273,7 +334,7 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
                                     row.update(correct=correct, outcome=(
                                         "correct_abstention" if correct and not case.expected
                                         else "correct" if correct else "wrong"))
-                    except (httpx.HTTPError, ValidationError, ValueError, KeyError, TypeError) as exc:
+                    except (CallFailure, ValidationError, ValueError, KeyError, TypeError) as exc:
                         row.update(outcome="failed", reason=str(exc), failure_type=type(exc).__name__)
                     persist()
                 complete, stop = True, None
@@ -287,11 +348,15 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
                 if row["outcome"] in ("not_attempted", "attempt_started"):
                     row.update(outcome="failed" if row["attempted"] else "not_attempted",
                                reason=f"run_stopped:{stop}")
+                for call in row["calls"]:
+                    if call["outcome"] == "started":
+                        call.update(outcome="failed", reason=f"run_stopped:{stop}")
             unchanged = ledger.file_sha256(config_path) == receipt["config_sha256"] and all(
                 ledger.file_sha256(PROJECT_ROOT / p) == h
                 for p, h in config["source_sha256"].items())
             receipt.update(status="complete" if complete and unchanged else "partial",
-                stop_reason=stop, attempts=sum(r["attempted"] for r in rows),
+                stop_reason=stop, attempts=sum(len(r["calls"]) for r in rows),
+                items_attempted=sum(r["attempted"] for r in rows),
                 source_and_config_unchanged=unchanged, outcomes=dict(Counter(r["outcome"] for r in rows)),
                 CPU_summary=policy.summary(),
                 resources={"wall_seconds": time.monotonic() - started,
@@ -339,7 +404,7 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
                         if items[r["id"]]["category"] == "arithmetic"),
                     "arithmetic_correct": sum(r["correct"] for r in rows
                         if items[r["id"]]["category"] == "arithmetic"),
-                    "pass": complete and unchanged and passed(a, u, receipt["attempts"])}
+                    "pass": complete and unchanged and passed(a, u, receipt["items_attempted"])}
                 persist()
             print(json.dumps({k: receipt.get(k) for k in (
                 "status", "attempts", "outcomes", "operational_gate", "summary", "resources")}))
