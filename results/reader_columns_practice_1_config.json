@@ -1,0 +1,291 @@
+{
+  "kind": "PRACTICE NEVER ACCURACY",
+  "iteration": 1,
+  "change": "Actual source column_label replaces model-facing period; namedroles unchanged. Dedicated text_span with paragraph_id and exact source substring check, no row/column dependency. New10invented practiceitems cover regions,segments,products,years,text-only and missing facts;neveraccuracy.",
+  "items": [
+    {
+      "id": "CLP01",
+      "report": {
+        "question": "Fictional OrielTeak: list depot names for North and South separately.",
+        "monetary_banner": "No money.",
+        "rows": [
+          {
+            "label": "Depot",
+            "unit": "text",
+            "values": {
+              "North": "Pearl Landing",
+              "South": "Cobalt Rise"
+            }
+          }
+        ],
+        "paragraphs": []
+      }
+    },
+    {
+      "id": "CLP02",
+      "report": {
+        "question": "Fictional VermilionTansy: list all three segment project names separately.",
+        "monetary_banner": "No money.",
+        "rows": [
+          {
+            "label": "Project",
+            "unit": "text",
+            "values": {
+              "Retail": "Gold Meadow",
+              "Services": "Violet Quay",
+              "Wholesale": "Scarlet Glen"
+            }
+          }
+        ],
+        "paragraphs": []
+      }
+    },
+    {
+      "id": "CLP03",
+      "report": {
+        "question": "Fictional CedarHelm: give the listed price for Product Cedar in table units.",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Price",
+            "unit": "thousand",
+            "values": {
+              "Product Birch": "81",
+              "Product Cedar": "107"
+            }
+          }
+        ],
+        "paragraphs": []
+      }
+    },
+    {
+      "id": "CLP04",
+      "report": {
+        "question": "Fictional IndigoGrouse: calculate 2022 cost minus 2021 cost in table units.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Cost",
+            "unit": "million",
+            "values": {
+              "2021": "152",
+              "2022": "117"
+            }
+          }
+        ],
+        "paragraphs": []
+      }
+    },
+    {
+      "id": "CLP05",
+      "report": {
+        "question": "Fictional MapleOcher: average the two product costs equally in table units.",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Cost",
+            "unit": "thousand",
+            "values": {
+              "Product Oak": "78",
+              "Product Pine": "106"
+            }
+          }
+        ],
+        "paragraphs": []
+      }
+    },
+    {
+      "id": "CLP06",
+      "report": {
+        "question": "Fictional CitrineLark: calculate 2022 revenue divided by 2021 revenue; decline undefined division.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "2021": "0",
+              "2022": "68"
+            }
+          }
+        ],
+        "paragraphs": []
+      }
+    },
+    {
+      "id": "CLP07",
+      "report": {
+        "question": "What project name does fictional AmaranthAnchor use? Return only its name.",
+        "monetary_banner": "",
+        "rows": [],
+        "paragraphs": [
+          "AmaranthAnchor uses the project name Saffron Bridge."
+        ]
+      }
+    },
+    {
+      "id": "CLP08",
+      "report": {
+        "question": "What material does fictional TopazTern use for its display covers? Return only the material.",
+        "monetary_banner": "",
+        "rows": [],
+        "paragraphs": [
+          "TopazTern makes its display covers from braided willow."
+        ]
+      }
+    },
+    {
+      "id": "CLP09",
+      "report": {
+        "question": "Fictional JuniperOriel: give revenue for the West region without substituting another region.",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "thousand",
+            "values": {
+              "North": "146",
+              "South": "192"
+            }
+          }
+        ],
+        "paragraphs": []
+      }
+    },
+    {
+      "id": "CLP10",
+      "report": {
+        "question": "In which city is fictional UmberAlder headquartered?",
+        "monetary_banner": "",
+        "rows": [],
+        "paragraphs": [
+          "UmberAlder uses reusable sleeves for its demonstration tools."
+        ]
+      }
+    }
+  ],
+  "profile": "columns",
+  "non_year_column_ids": [
+    "CLP01",
+    "CLP02",
+    "CLP03",
+    "CLP05",
+    "CLP09"
+  ],
+  "column_contract": "Source field column_label is an actual dictionary column header,not a temporal classification. Internal compatibility adapter only renames it for the existing checked calculator. text_span has paragraph_id+verbatim substring,no row/column dependency. No inference-time expected labels.",
+  "options": {
+    "temperature": 0,
+    "seed": 2026111605,
+    "num_predict": 768,
+    "num_ctx": 8192,
+    "num_thread": 4,
+    "num_gpu": 0,
+    "num_batch": 128
+  },
+  "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+  "server": "0.40.16",
+  "request_SHA256": {
+    "CLP01": {
+      "mode": "6b61384e02b183eef459f845869d4d06508e1d612c5a5b638eb8cbeabe211d5b",
+      "lookup": "16fbcc8fc7cd8f06c8f221148100933254de9b5343ef0b8e951eb3a80c776f02",
+      "multi_value": "ee60b4215c56f172b52e5edf7bb0d9485c49a7811e99ba7606d9f46a3b8e9170",
+      "arithmetic": "a9f70f5045a601adb7b3306f3bf5326fe8d2c389488f1bb95aa5c7e91b1129dc",
+      "abstain": "1f4bcd3edaf9c5f0be4b6148ec9ad33578682d328ae938653ef159368867ef79",
+      "text_span": "1edbdd76304d979a655749bef55fb8ee6f78a01d3e92c712e4b20722764075eb"
+    },
+    "CLP02": {
+      "mode": "e15bb216ee8516f1f7d221b31a183d10df366bf08b977b5d196168e09e69d490",
+      "lookup": "1c63352764da53c63a1a6cd0ee1dde727d198f9fd0f83f6217b7ab5e0fdc9ad1",
+      "multi_value": "25f7a1601c885ddf9fc68553fa11aafba79109e3f3bb664c4e346d05f43f8ffa",
+      "arithmetic": "5e78a32cd83af783c6162a8e0356fe6b9990f1edfca7b3ce6a3bbcbd451bede2",
+      "abstain": "9e981b5135bc7e92e22f6f798caafe9dae40a4c4940c39680ad882690931360f",
+      "text_span": "ba2f6e291e87484137aca40e0da21f5fceab593f68bdeb0a1dfc402c3acda73b"
+    },
+    "CLP03": {
+      "mode": "a39ca24e6c39b3f01f85d8977f819799b80690b5f83e219849ae14e11ac97db5",
+      "lookup": "b37f86a6e77a6a58ab1135765a629b49f4a54ce7980b6ed197e66be6fe07f1ea",
+      "multi_value": "9b6ce7436d0f8910ebcaf3b2cd1a7ca56c5ca4c40c955a8111271ef69bfa525b",
+      "arithmetic": "dc86532f75ba03f4334c69e3db1c1b5202b5d7bcac19e3e924812f35eef9d2b0",
+      "abstain": "6b8c2579407810e09b54aa07e81e99c0aff00956472fa21949eff530bef0fe63",
+      "text_span": "642c1f1ed86b4fbca265fb7aa24460cdcba7d0ea59f748f6f44c1939c1ae8aa1"
+    },
+    "CLP04": {
+      "mode": "33a1c5a6a6a14845c9822e0219140926a386ed6702d2af46d68f44ee980a2379",
+      "lookup": "3b358f8daf31030011160a59bb315b1996a0c1b7b965acb9da5e2963eac658f7",
+      "multi_value": "54841a1c31afe55ba18210d8143e866bf07dd1db6b4b281da93f8f3a05e1d93b",
+      "arithmetic": "aa153fb22d9f71aa942c6c8cea94e760bbdbca302c7888561600d0180e8b0e7b",
+      "abstain": "81a2a67095d5a5f8df9a026aa6cf0c4fcb615ac7c50d5449f42651006857942e",
+      "text_span": "3f7b27ae763fbcbfc29fd42873653b2ef526f3171dc4b23d758c68f0547564e2"
+    },
+    "CLP05": {
+      "mode": "e4ebcad070cf59944bebe78e2f7dd8b69f91577589dc006b809a8e8b1563f77b",
+      "lookup": "534f272d029ca43456d9a6edf7f76d6af5e323235c2c9287e4fae3e5ae50db96",
+      "multi_value": "7484fd54f8c75ab7f46347492085d06ec5b2b8c12647cb9966d462ac99c9f617",
+      "arithmetic": "97d908d751e3ca2fcd1f5498cd77120e3be0884c5a7883ee9a2caff457ecbe10",
+      "abstain": "4fcc45e1c2ed6fed9a56dff3639e73c31bf9b88c32039cb18f5f639833fcc92f",
+      "text_span": "56724a0513a0628b316301d7e98e67afca35406941ced3c7bd83f43f6e0b372b"
+    },
+    "CLP06": {
+      "mode": "e7b1a0981f42d70479380a25eb8bf0958b7a3c578bef2497a6a261f90ae3796e",
+      "lookup": "bea1973e43da45860534d379ce51058324261d5fbc8a666839634c71d6f383e2",
+      "multi_value": "ffd67a5d2ba347c577b1c68d38d033692091e99c5eae9300bed545fcbbb4378b",
+      "arithmetic": "47ef2459d6f679235c3e36f5c132195d5d25cb4c7bd3ad37fa28de8c6f5a979d",
+      "abstain": "c5a157d7e443741234e4fd33c6ae7ae57c5d5f91aa79b6c7acbefad08398221e",
+      "text_span": "79f6ed96e1d9044b5a4a550d3d541cafdef74d8d77d0053e1f59ee2f30424d0d"
+    },
+    "CLP07": {
+      "mode": "2b80985f2bd81040c9572be712d98a0ab7b9461c56b9ca8241be02dc7a200c26",
+      "lookup": "6bfc0964eab6ea65fec992c6c84d33bbf3871625c691c3c7db10f8943cb72c4a",
+      "multi_value": "cbfbf306e57656156df2a493bc0064c78d14664fd1a984e73909700f46124f26",
+      "arithmetic": "a11598b186ce3957f05583b87bb4b02835f71fc9fe3e27bf8fd58c89f3d34ea5",
+      "abstain": "8e8060203d7136817f2100fb33a50554f0b97af78000231d869b948228f1a2d5",
+      "text_span": "dc30efbf9a9fc6295696bc9c8e6f8329cc42d7de37e6f487fd6aed83cc4c1913"
+    },
+    "CLP08": {
+      "mode": "87a5efc9e6244cf8d4d58bbe07f1ff4e5a975ff6db1e87f217ee67517d670cf6",
+      "lookup": "55355297dd148db2a1cb53862bbbd6267bc160f05bf68276985d9bab449f5ffa",
+      "multi_value": "deef88d284fbad2d9dca173463d345bbafde4c27365314bf29e6dc2bc55ac87b",
+      "arithmetic": "771c32a33e9aab56377b413578da67618122450d4bd552259595bf856c34809b",
+      "abstain": "6d83c0a4f79e0138200867f9c2593ace06bd07e7fa532a8c04c94441c4b7ddfb",
+      "text_span": "c042645aa961c1f1c06c513ca21b028a0c58170670679a824e79dd1d7a2fb764"
+    },
+    "CLP09": {
+      "mode": "1d53f5c1c3a6ab31eceb47f11705018a64d637959dfa730ec978b6efb4159b59",
+      "lookup": "ea103f9e2fd6caf03fd14c03ee1a47ea7ce63c662d0887c8bb8d574e52316e94",
+      "multi_value": "12ad0fde9f2924b6b5a39a2d25bf75b8b08a13d245545cdb5490d63fb4984c90",
+      "arithmetic": "bf4aa57069d433092ebf510bd1b8c50e82066d13b01440755bca387f1ca6c091",
+      "abstain": "4a26e5fbc638b34db203009241466df7f977f6a7630f47d4c6c115e2ffcba7ad",
+      "text_span": "ba40018afea8d703c188a9698f9f27ec0920dd2f4efe813afe4836937a62c1cd"
+    },
+    "CLP10": {
+      "mode": "fa4df2fadde603bb727aa2a7c4a79a082f8091b0800ff9000222eacd2f3ba314",
+      "lookup": "7914d2d66f4f53fffd70386b5f336d675c4ef2937ae86ee5dbc02aa5f3e74dae",
+      "multi_value": "c0029283a4aa5f579396c46c4b10fbc2274a6565feacbff92d754dfd5373821d",
+      "arithmetic": "67937bfe8a297851f463a670e1754763d9d483e30221bf33dee7f46634aa54ff",
+      "abstain": "229115661c1a0e3174b4325fa09a3ac2df2d0a1c12616822454ef40e0b2f7474",
+      "text_span": "5339739a87e4a38e88a955807f0a3c59d7ca538e6489e00cb7c4fa102e502ee0"
+    }
+  },
+  "source_SHA256": {
+    "scripts\\run_presence_control.py": "2a9b6eea04fbc59d95791147296db2cc11b8b5dc298fe339209209097164f7bc",
+    "src\\asof\\reader_presence.py": "60b1855e29e1f1a680d795eb8f59fed493ff98e79ce900546c244212ed18f303",
+    "src\\asof\\reader_modes.py": "94f99813b3e4b667aa85abd38f4e491c5396ce87b80d5a2e25e473893c642ffa",
+    "src\\asof\\reader_contract.py": "e011a20f97c7f2ff40e35e0c9a11acc032d5ec2f5356c41c495a33b6ca3cdb65",
+    "src\\asof\\reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+    "scripts\\reader_real1_memory.py": "b126a1edeb163c2cbcccf4c48a169a92af107076f11e8998797897c796db80a4",
+    "scripts\\run_reader_real2.py": "2c9775259d380113af9a02871f02f8870ea82453507447851080a3a9d0a118c6",
+    "scripts\\run_reader_real2_completion.py": "6534c300205e28f7e8a87f37a86d48b2025a1836d628cf3a397b80f687f0895d",
+    "scripts\\run_reader_positive_control.py": "8ac3488548c3227e25f3bc483ddbf8f42c32bbf6eeba7ded462d3704e1ecd669",
+    "scripts\\run_reader_contract.py": "b74c7285ad6248a10bbd49928ce70e59328ab815cc778408a8b674595105ec30",
+    "src\\asof\\reader_roles.py": "79fd01e98fc29d6eed36712a70dfdd152774793d7ee46639e17b9d12bbad1562",
+    "src\\asof\\reader_columns.py": "65f7a73ffe8143a98d7faed5ecc706d826320bb4cea9ebd42c94665f1415d12b"
+  },
+  "schema_policy": "Two-stage,mode first; source fields includeNOT_PRESENT. Source-only vocabularies and unit-derived dimension domain; code validates cells and derives arithmetic/scale. No answer label in model input.",
+  "decline_policy": "Model abstain and explicit SYSTEM declines on NOT_PRESENT,missing operands,zero denominator,incompatible dimension/unit all count as abstentions; report model/system separately. Others remain failures.",
+  "pass": "All24attempted;>=20/21fullyright nativeEM+scale+dimension+operation AND3/3model-or-system abstentions. Answerable abstention is a miss. No retries/rerun.",
+  "limits": "Entire invented-control part30min from first practice start;4threads,10GiB,240s percall,sustainedREAL2CPU,sleepstop,continue single timeout/stop3consecutive.",
+  "scope": "Invented only,no real benchmark data,no ledger row,pull,training or paid call.",
+  "SEC_receipt_SHA256": "126970d20493600b0c47a4109c4b732e0f102f68135469f9304ae77e02e3fa38",
+  "named_role_contract": "difference=end-start;fractionalchange=(end-start)/abs(start),displaypercent=100*fraction;ratio=numerator/denominator;average=mean(values). Allroles retain row/period/unit/value;code-derived scale,source checks unchanged. Mixed real/NOT_PRESENT lists rejected as SYSTEM decline. List capacity is bounded by source-cell count (not target labels),max6.",
+  "practice_SHA256": []
+}

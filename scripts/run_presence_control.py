@@ -28,7 +28,8 @@ from asof.reader_presence import ADAPTER, answer_body, mode_body, resolve_answer
 from asof.reader_real2_guards import SustainedCPU, input_fit, truncation_reason
 
 ROOT = PROJECT_ROOT
-Profile = Literal["presence", "roles"]
+Profile = Literal["presence", "roles", "columns"]
+InterfaceMode = Mode | Literal["text_span"]
 OPTIONS = {"temperature": 0, "seed": 2026111605, "num_predict": 768, "num_ctx": 8192,
            "num_thread": 4, "num_gpu": 0, "num_batch": 128}
 SOURCES = [Path(__file__), ROOT / "src" / "asof" / "reader_presence.py",
@@ -59,7 +60,47 @@ def fingerprint(value: dict) -> str:
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
 
-def build_answer(profile: Profile, report: Report, mode: Mode, model: str, options: dict) -> dict:
+def read_report(profile: Profile, value: dict) -> Report:
+    if profile == "columns":
+        from asof.reader_columns import ColumnReport
+        return ColumnReport.model_validate(value)
+    return Report.model_validate(value)
+
+
+def scored_case(value: dict) -> Control:
+    # The scorer uses expectation metadata, not report evidence.
+    report = {key: value["report"][key] for key in ("question", "monetary_banner", "rows")}
+    return Control.model_validate({**value, "report": report})
+
+
+def build_mode(profile: Profile, report: Report, model: str, options: dict) -> dict:
+    if profile == "columns":
+        from asof.reader_columns import ColumnReport
+        from asof.reader_columns import mode_body as column_mode
+        if not isinstance(report, ColumnReport):
+            raise TypeError("column profile needs paragraph-aware report")
+        return column_mode(report, model, options)
+    return mode_body(report, model, options)
+
+
+def choose_mode(profile: Profile, content: str) -> InterfaceMode:
+    if profile == "columns":
+        from asof.reader_columns import ModeChoice as ColumnChoice
+        return ColumnChoice.model_validate_json(content).mode
+    return ModeChoice.model_validate_json(content).mode
+
+
+def build_answer(
+    profile: Profile, report: Report, mode: InterfaceMode, model: str, options: dict,
+) -> dict:
+    if profile == "columns":
+        from asof.reader_columns import ColumnReport
+        from asof.reader_columns import answer_body as column_body
+        if not isinstance(report, ColumnReport):
+            raise TypeError("column profile needs paragraph-aware report")
+        return column_body(report, mode, model, options)
+    if mode == "text_span":
+        raise ValueError("text_span requires column profile")
     if profile == "roles":
         from asof.reader_roles import answer_body as role_body
         return role_body(report, mode, model, options)
@@ -91,7 +132,7 @@ def freeze(practice: bool, iteration: int, change: str, profile: Profile = "pres
         }:
             raise ValueError("scored composition")
         for r in items:
-            Control.model_validate(r)
+            scored_case(r)
         exposed = []
         for candidate in fixture.parent.glob("reader_*.json"):
             if candidate != fixture:
@@ -102,15 +143,34 @@ def freeze(practice: bool, iteration: int, change: str, profile: Profile = "pres
         raise ValueError("duplicate IDs")
     requests = {}
     for r in items:
-        report = Report.model_validate(r["report"])
+        report = read_report(profile, r["report"])
+        modes: tuple[InterfaceMode, ...] = ("lookup", "multi_value", "arithmetic", "abstain")
+        if profile == "columns":
+            modes = (*modes, "text_span")
         requests[r["id"]] = {
-            "mode": fingerprint(mode_body(report, MODEL, OPTIONS)),
+            "mode": fingerprint(build_mode(profile, report, MODEL, OPTIONS)),
             **{m: fingerprint(build_answer(profile, report, m, MODEL, OPTIONS))
-               for m in ("lookup", "multi_value", "arithmetic", "abstain")}}
-    sources = SOURCES + ([ROOT / "src" / "asof" / "reader_roles.py"] if profile == "roles" else [])
+               for m in modes}}
+    sources = SOURCES + ([ROOT / "src" / "asof" / "reader_roles.py"]
+                        if profile in ("roles", "columns") else [])
+    if profile == "columns":
+        sources.append(ROOT / "src" / "asof" / "reader_columns.py")
+    non_year = []
+    if profile == "columns":
+        non_year = [r["id"] for r in items if r["report"]["rows"] and all(
+            re.fullmatch(r"(?:19|20)\d{2}", label) is None
+            for row in r["report"]["rows"] for label in row["values"])]
+        if not practice and len(non_year) < 6:
+            raise ValueError("at least6scored non-year-column reports required")
     value = {"kind": "PRACTICE NEVER ACCURACY" if practice else "FRESH INVENTED CONTROL",
         "iteration": iteration if practice else None, "change": change, "items": items,
         "profile": profile,
+        "non_year_column_ids": non_year,
+        "column_contract": ("Source field column_label is an actual dictionary column header,"
+            "not a temporal classification. Internal compatibility adapter only renames it for "
+            "the existing checked calculator. text_span has paragraph_id+verbatim substring,"
+            "no row/column dependency. No inference-time expected labels."
+            if profile == "columns" else None),
         "options": OPTIONS, "digest": DIGEST, "server": "0.40.16",
         "request_SHA256": requests,
         "source_SHA256": {str(p.relative_to(ROOT)): ledger.file_sha256(p) for p in sources},
@@ -130,7 +190,7 @@ def freeze(practice: bool, iteration: int, change: str, profile: Profile = "pres
             "displaypercent=100*fraction;ratio=numerator/denominator;average=mean(values). "
             "Allroles retain row/period/unit/value;code-derived scale,source checks unchanged. "
             "Mixed real/NOT_PRESENT lists rejected as SYSTEM decline. List capacity is bounded "
-            "by source-cell count (not target labels),max6." if profile == "roles" else None),
+            "by source-cell count (not target labels),max6." if profile in ("roles", "columns") else None),
         "practice_SHA256": [ledger.file_sha256(paths(True, r["iteration"], profile)[1])
                            for r in previous]}
     config_path.write_text(json.dumps(value, indent=2), encoding="utf-8")
@@ -149,7 +209,7 @@ async def run(practice: bool, iteration: int, pid: int, profile: Profile = "pres
     private.mkdir(parents=True, exist_ok=True)
     private_root = DATA_DIR / f"reader_{profile}"
     server_log = private_root / "isolated-server.log"
-    deadline_path = private_root / "part1_deadline.json" if profile == "roles" else (
+    deadline_path = private_root / "part1_deadline.json" if profile in ("roles", "columns") else (
         private_root / "part2a_deadline.json")
     if not deadline_path.exists():
         deadline_path.write_text(json.dumps({"monotonic_deadline": time.monotonic() + 1800}),
@@ -251,22 +311,28 @@ async def run(practice: bool, iteration: int, pid: int, profile: Profile = "pres
                 ):
                     raise ResourceStop("model_or_server_pin")
                 for item, row in zip(cfg["items"], rows, strict=True):
-                    report = Report.model_validate(item["report"])
+                    report = read_report(profile, item["report"])
                     try:
-                        content = await ask(client, mode_body(report, MODEL, cfg["options"]),
+                        content = await ask(client, build_mode(profile, report, MODEL, cfg["options"]),
                                             row, "mode", watch)
-                        choice = ModeChoice.model_validate_json(content)
-                        if choice.mode != "abstain":
+                        selected_mode = choose_mode(profile, content)
+                        if selected_mode != "abstain":
                             content = await ask(client, build_answer(
-                                profile, report, choice.mode, MODEL, cfg["options"]),
-                                row, choice.mode, watch)
-                        if profile == "roles":
+                                profile, report, selected_mode, MODEL, cfg["options"]),
+                                row, selected_mode, watch)
+                        if profile == "columns":
+                            from asof.reader_columns import ColumnReport
+                            from asof.reader_columns import resolve_content as column_resolve
+                            if not isinstance(report, ColumnReport):
+                                raise TypeError("column profile needs paragraph-aware report")
+                            parsed_mode, result = column_resolve(content, report)
+                        elif profile == "roles":
                             from asof.reader_roles import resolve_content
                             parsed_mode, result = resolve_content(content, report)
                         else:
                             parsed = ADAPTER.validate_json(content)
                             parsed_mode, result = parsed.mode, resolve_answer(parsed, report)
-                        if parsed_mode != choice.mode:
+                        if parsed_mode != selected_mode:
                             raise ValueError("answer mode differs from selected mode")
                         row.update(outcome="practice_path" if practice else "answered",
                             mode=parsed_mode, values=result.values, scale=result.scale,
@@ -274,7 +340,7 @@ async def run(practice: bool, iteration: int, pid: int, profile: Profile = "pres
                             abstention_source=result.abstention_source,
                             decline_reason=result.decline_reason, computed_by_code=result.computed_by_code)
                         if not practice:
-                            case = Control.model_validate(item)
+                            case = scored_case(item)
                             if case.expected:
                                 row.update(native_score(case, result.values, result.scale, scorer))
                                 correct = (result.abstention_source is None and row["native_EM"] == 1
@@ -339,7 +405,7 @@ if __name__ == "__main__":
     parser.add_argument("--iteration", type=int, default=1)
     parser.add_argument("--change", default="NOT_PRESENT plus predeclared model/system abstentions.")
     parser.add_argument("--server-pid", type=int)
-    parser.add_argument("--profile", choices=("presence", "roles"), default="presence")
+    parser.add_argument("--profile", choices=("presence", "roles", "columns"), default="presence")
     args = parser.parse_args()
     if args.phase in ("practice-freeze", "freeze"):
         freeze(args.phase == "practice-freeze", args.iteration, args.change, args.profile)
