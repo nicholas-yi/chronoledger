@@ -270,8 +270,8 @@ def reader_accuracy(theme: str):
     ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:.0f}%"))
     ax.set_xlabel("exactly right (dot) with 95% range (bar)")
     ax.grid(axis="y", visible=False)
-    _title(fig, "A small local model answers from the report, not from memory, "
-                "but often gets calculations wrong")
+    _title(fig, "A small local model answered only when given the report, "
+                "and missed most calculations")
     return fig
 
 

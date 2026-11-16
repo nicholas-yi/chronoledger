@@ -309,7 +309,7 @@ z
    </g>
   </g>
   <g id="text_19">
-   <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #e6edf3" x="7.56" y="12.498287" transform="rotate(-0 7.56 12.498287)">A small local model answers from the report, not from memory, but often gets calculations wrong</text>
+   <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #e6edf3" x="7.56" y="12.498287" transform="rotate(-0 7.56 12.498287)">A small local model answered only when given the report, and missed most calculations</text>
   </g>
  </g>
  <defs>
