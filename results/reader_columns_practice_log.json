@@ -1,0 +1,11 @@
+{
+  "kind": "UNSCORED PRACTICE, NEVER ACCURACY",
+  "items": 10,
+  "iterations": [
+    {"iteration":1,"change":"Generic column_label and independent paragraph-span path; regions,segments,products,years,text-only and missing facts.","calls":18,"operational_paths":10,"model_declines":2,"system_declines":2,"system_reasons":{"NOT_PRESENT":1,"zero_denominator":1},"verified_span_paths":2,"note":"A populated segment list selected missing metadata; no correctness scores calculated."},
+    {"iteration":2,"change":"Mode-specific field-copying template with source dictionary-key descriptions; same10items,unchanged calculator/span verifier.","calls":18,"operational_paths":10,"model_declines":2,"system_declines":1,"system_reasons":{"zero_denominator":1},"verified_span_paths":2}
+  ],
+  "total_calls": 36,
+  "accuracy_expected_answers_or_native_scoring": false,
+  "practice_reused_as_scored": false
+}

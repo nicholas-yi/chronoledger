@@ -193,7 +193,7 @@ def answer_body(report: ColumnReport, mode: Mode, model: str, options: dict) -> 
                 dimensions.add("percentage_points")
             for name in ("Change", "Ratio", "Average"):
                 schema["$defs"][name]["properties"]["answer_dimension"]["enum"] = sorted(dimensions)
-        else:
+        elif dimensions:
             schema["properties"]["answer_dimension"]["enum"] = sorted(dimensions)
         capacity = max(2, min(6, sum(len(r.values) for r in report.rows)))
         if mode == "multi_value":

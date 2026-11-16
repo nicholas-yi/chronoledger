@@ -52,3 +52,11 @@ def test_text_spans_require_no_table_metadata_and_are_verified_exactly():
     assert resolve_content(json.dumps(raw), r)[1].abstention_source == "system"
     sent = json.loads(mode_body(r, "toy", {})["messages"][1]["content"])
     assert sent["paragraphs"] == r.paragraphs and "expected" not in sent
+
+
+def test_tableless_report_still_has_valid_schema_for_an_incorrect_table_mode():
+    r = ColumnReport(question="invented", monetary_banner="", rows=[], paragraphs=["A demo sentence."])
+    for mode in ("lookup", "multi_value"):
+        schema = answer_body(r, mode, "toy", {})["format"]
+        assert schema["properties"]["answer_dimension"]["enum"]
+        assert schema["$defs"]["ColumnOperand"]["properties"]["value"]["enum"] == ["NOT_PRESENT"]
