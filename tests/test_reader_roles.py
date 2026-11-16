@@ -40,6 +40,12 @@ def test_named_ratio_does_not_swap_zero_denominator_with_valid_zero_numerator():
     answer["numerator"], answer["denominator"] = answer["denominator"], answer["numerator"]
     valid = resolve_roles(ADAPTER.validate_python(answer), r)
     assert valid.abstention_source is None and Decimal(valid.values[0]) == 0
+    change = ADAPTER.validate_python({
+        "mode": "arithmetic", "operation": "percent_change",
+        "start_value": operand("Zero", "0"), "end_value": operand("After", "-20"),
+        "answer_dimension": "percent",
+    })
+    assert resolve_roles(change, r).decline_reason == "zero_denominator"
 
 
 def test_average_values_and_mixed_missing_multivalue_are_not_cleaned_up():

@@ -250,9 +250,9 @@ joined into one string, four used a different operator or denominator convention
 key, two had the right number in the wrong unit, and three were other slips. The review was
 AI-assisted and after the fact, not blind human annotation.
 
-Three answer formats aimed at those errors were then tested on newly written, made-up questions,
-never on real benchmark items. Each test fixed its questions, answers and pass rule in advance: at
-least 20 of 21 answerable questions fully right and all 3 unanswerable ones declined. From the
+Four answer formats aimed at those errors were then tested on newly written, made-up questions,
+never on real benchmark items. Each test fixed its questions and expected answers in advance:
+21 answerable questions and 3 unanswerable ones. From the
 second test on, a small practice set that is never scored came first, so format and resource
 problems surface before anything is frozen.
 
@@ -261,12 +261,13 @@ problems surface before anything is frozen.
 | One combined format for every answer type | 0 of 21: outputs broke the format's own rules | 1 of 3 | [review](../results/reader_contract_review.json) |
 | Choose the answer type first; code does the arithmetic | 18 of 21 | 0 of 3: picked the nearest row or year | [review](../results/reader_modes_review.json) |
 | Same, plus a "not in the table" choice | 19 of 21 | 2 of 3 | [review](../results/reader_presence_review.json) |
+| Name the start/end values or numerator/denominator; code calculates | 19 of 21 | 3 of 3 | [review](../results/reader_roles_review.json) |
 
-None has passed yet. The remaining errors are reversed subtraction or division order, and one
-answerable question declined because the model padded a list with "not in the table". Choosing
-the answer type first, with code doing the arithmetic, removed most format errors, and the code
-also caught answers given in the wrong kind of unit. The format has not been tried on real
-reports, so the 11-of-30 result above remains the only real-data figure.
+On the latest invented set, all eight calculations were right and all three unanswerable questions
+were declined. Two answerable text lists were also declined: the requested names were present,
+but their required row or column metadata was marked missing. Fresh authored sets are not a
+matched accuracy comparison. The format has not been tried on real reports, so the 11-of-30
+result above remains the only real-data figure.
 
 ### What the earlier tests taught
 
