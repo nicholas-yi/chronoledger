@@ -16,7 +16,23 @@
       "constrained_mode_first": 12,
       "unconstrained_disallowed_mode_observed": 2,
       "config_sha256": "543af60aa006eeae7f4ab04d53d7f4d7b871553de0504428834883aecf6c5353"
+    },
+    {
+      "iteration": 2,
+      "attempts": 23,
+      "change": "Union constrained syntax but source/dimension paths were unreliable. Use allowed two-stage mode enum then const-mode schema, explicit schema/plain-cell guidance; abstain ends after first call. Same12practice items, <=26additionalcalls and <=40total.",
+      "outcomes": {
+        "failed": 3,
+        "practice_path_valid": 7,
+        "unconstrained_probe_observed": 2,
+        "constrained_probe_valid": 2
+      },
+      "operational_gate": false,
+      "constrained_schema_valid": 12,
+      "constrained_mode_first": 12,
+      "unconstrained_disallowed_mode_observed": 2,
+      "config_sha256": "a0cdde78bcb98b044990dae26f794719b642a5143d5b11ade5f4c1bb96be4d3b"
     }
   ],
-  "total_calls": 14
+  "total_calls": 37
 }
