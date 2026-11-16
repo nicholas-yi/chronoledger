@@ -1,0 +1,823 @@
+{
+  "kind": "INVENTED ONLY: contract positive control, not real-data accuracy",
+  "items": [
+    {
+      "id": "IC01",
+      "category": "multi_value",
+      "report": {
+        "question": "Fictional VelvetCairn Labs: list the two facility names, each separately.",
+        "monetary_banner": "Monetary amounts in million USD; other rows use their own unit.",
+        "rows": [
+          {
+            "label": "Facility",
+            "unit": "text",
+            "values": {
+              "North": "Orchid Quay",
+              "South": "Cobalt Dock"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "Orchid Quay",
+        "Cobalt Dock"
+      ],
+      "expected_dimension": "text",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC02",
+      "category": "multi_value",
+      "report": {
+        "question": "Fictional MorrowSpindle Works: list headcounts for Cycle P and Cycle Q separately.",
+        "monetary_banner": "Monetary amounts in thousand USD; headcount is people.",
+        "rows": [
+          {
+            "label": "Headcount",
+            "unit": "count",
+            "values": {
+              "Cycle P": "23",
+              "Cycle Q": "41"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "23",
+        "41"
+      ],
+      "expected_dimension": "count",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC03",
+      "category": "multi_value",
+      "report": {
+        "question": "Fictional PollenHarbor Studio: list both program names separately.",
+        "monetary_banner": "No monetary amounts.",
+        "rows": [
+          {
+            "label": "Program",
+            "unit": "text",
+            "values": {
+              "Alpha": "Silver Meadow",
+              "Beta": "Crimson Compass"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "Silver Meadow",
+        "Crimson Compass"
+      ],
+      "expected_dimension": "text",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC04",
+      "category": "multi_value",
+      "report": {
+        "question": "Fictional CinderLoom Systems: list revenue for Cycle P, Cycle Q and Cycle R separately, in table units.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "Cycle P": "26",
+              "Cycle Q": "39",
+              "Cycle R": "52"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "26",
+        "39",
+        "52"
+      ],
+      "expected_dimension": "money",
+      "expected_scale": "million",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC05",
+      "category": "multi_value",
+      "report": {
+        "question": "Fictional PebbleNimbus: list both case materials separately.",
+        "monetary_banner": "No monetary amounts.",
+        "rows": [
+          {
+            "label": "Material",
+            "unit": "text",
+            "values": {
+              "Case P": "woven flax",
+              "Case Q": "pressed bamboo"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "woven flax",
+        "pressed bamboo"
+      ],
+      "expected_dimension": "text",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC06",
+      "category": "multi_value",
+      "report": {
+        "question": "Fictional DappleOrbit: list both project durations separately in years.",
+        "monetary_banner": "Monetary amounts in billion USD; duration is years.",
+        "rows": [
+          {
+            "label": "Duration",
+            "unit": "years",
+            "values": {
+              "Project P": "7",
+              "Project Q": "13"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "7",
+        "13"
+      ],
+      "expected_dimension": "years",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC07",
+      "category": "arithmetic",
+      "report": {
+        "question": "Fictional OcherTrellis: compute Cycle Q revenue minus Cycle P revenue in table units.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "Cycle P": "34",
+              "Cycle Q": "57"
+            }
+          },
+          {
+            "label": "Cost",
+            "unit": "million",
+            "values": {
+              "Cycle P": "11",
+              "Cycle Q": "16"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "23"
+      ],
+      "expected_dimension": "money",
+      "expected_scale": "million",
+      "expected_operation": "difference"
+    },
+    {
+      "id": "IC08",
+      "category": "arithmetic",
+      "report": {
+        "question": "Fictional ThistleBeacon: compute Cycle Q shipments minus Cycle P shipments, retaining the sign.",
+        "monetary_banner": "Monetary amounts in million USD; shipments are counts.",
+        "rows": [
+          {
+            "label": "Shipments",
+            "unit": "count",
+            "values": {
+              "Cycle P": "91",
+              "Cycle Q": "68"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "-23"
+      ],
+      "expected_dimension": "count",
+      "expected_scale": "",
+      "expected_operation": "difference"
+    },
+    {
+      "id": "IC09",
+      "category": "arithmetic",
+      "report": {
+        "question": "Fictional WickerAster: compute revenue percent change from Cycle P to Cycle Q: 100 times (Q minus P) divided by P.",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "thousand",
+            "values": {
+              "Cycle P": "64",
+              "Cycle Q": "80"
+            }
+          },
+          {
+            "label": "Cost",
+            "unit": "thousand",
+            "values": {
+              "Cycle P": "17",
+              "Cycle Q": "21"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "25"
+      ],
+      "expected_dimension": "percent",
+      "expected_scale": "percent",
+      "expected_operation": "percent_change"
+    },
+    {
+      "id": "IC10",
+      "category": "arithmetic",
+      "report": {
+        "question": "Fictional LichenVoyage: compute headcount percent change from Cycle P to Cycle Q: 100 times (Q minus P) divided by P.",
+        "monetary_banner": "Monetary amounts in million USD; headcount is people.",
+        "rows": [
+          {
+            "label": "Headcount",
+            "unit": "count",
+            "values": {
+              "Cycle P": "125",
+              "Cycle Q": "100"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "-20"
+      ],
+      "expected_dimension": "percent",
+      "expected_scale": "percent",
+      "expected_operation": "percent_change"
+    },
+    {
+      "id": "IC11",
+      "category": "arithmetic",
+      "report": {
+        "question": "Fictional JuniperPrism Demo: compute the equally weighted average of Cycle P and Cycle Q cost, in table units.",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Cost",
+            "unit": "thousand",
+            "values": {
+              "Cycle P": "37",
+              "Cycle Q": "53"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "45"
+      ],
+      "expected_dimension": "money",
+      "expected_scale": "thousand",
+      "expected_operation": "average"
+    },
+    {
+      "id": "IC12",
+      "category": "arithmetic",
+      "report": {
+        "question": "Fictional CoralSpire Toy: compute the equally weighted average of Cycle P and Cycle Q shipments.",
+        "monetary_banner": "Monetary amounts in million USD; shipments are counts.",
+        "rows": [
+          {
+            "label": "Shipments",
+            "unit": "count",
+            "values": {
+              "Cycle P": "31",
+              "Cycle Q": "46"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "38.5"
+      ],
+      "expected_dimension": "count",
+      "expected_scale": "",
+      "expected_operation": "average"
+    },
+    {
+      "id": "IC13",
+      "category": "arithmetic",
+      "report": {
+        "question": "Fictional SaffronArc: compute Cycle Q revenue divided by Cycle Q cost as a dimensionless ratio, not a percent.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "Cycle Q": "55"
+            }
+          },
+          {
+            "label": "Cost",
+            "unit": "million",
+            "values": {
+              "Cycle Q": "22"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "2.5"
+      ],
+      "expected_dimension": "ratio",
+      "expected_scale": "",
+      "expected_operation": "ratio"
+    },
+    {
+      "id": "IC14",
+      "category": "arithmetic",
+      "report": {
+        "question": "Fictional CedarRipple: compute accepted demo units divided by inspected demo units for Cycle Q, as a ratio, not percent.",
+        "monetary_banner": "Monetary amounts in thousand USD; demo units are counts.",
+        "rows": [
+          {
+            "label": "Accepted units",
+            "unit": "count",
+            "values": {
+              "Cycle Q": "42"
+            }
+          },
+          {
+            "label": "Inspected units",
+            "unit": "count",
+            "values": {
+              "Cycle Q": "56"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "0.75"
+      ],
+      "expected_dimension": "ratio",
+      "expected_scale": "",
+      "expected_operation": "ratio"
+    },
+    {
+      "id": "IC15",
+      "category": "lookup",
+      "report": {
+        "question": "Fictional IrisFoundry Demo: what is Cycle Q revenue in table units?",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "Cycle P": "29",
+              "Cycle Q": "47"
+            }
+          },
+          {
+            "label": "Cost",
+            "unit": "million",
+            "values": {
+              "Cycle P": "12",
+              "Cycle Q": "19"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "47"
+      ],
+      "expected_dimension": "money",
+      "expected_scale": "million",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC16",
+      "category": "lookup",
+      "report": {
+        "question": "Fictional TawnyBasin: what is Cycle P cost in table units?",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Cost",
+            "unit": "thousand",
+            "values": {
+              "Cycle P": "63",
+              "Cycle Q": "78"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "63"
+      ],
+      "expected_dimension": "money",
+      "expected_scale": "thousand",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC17",
+      "category": "lookup",
+      "report": {
+        "question": "Fictional MarigoldCove: what material is listed for the outer shell?",
+        "monetary_banner": "No monetary amounts.",
+        "rows": [
+          {
+            "label": "Material",
+            "unit": "text",
+            "values": {
+              "Outer shell": "reclaimed cedar",
+              "Inner lining": "woven hemp"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "reclaimed cedar"
+      ],
+      "expected_dimension": "text",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC18",
+      "category": "lookup",
+      "report": {
+        "question": "Fictional SlateDahlia Demo: what project name is listed for Cycle Q?",
+        "monetary_banner": "No monetary amounts.",
+        "rows": [
+          {
+            "label": "Project name",
+            "unit": "text",
+            "values": {
+              "Cycle P": "Azure Needle",
+              "Cycle Q": "Golden Paddle"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "Golden Paddle"
+      ],
+      "expected_dimension": "text",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC19",
+      "category": "unit_trap",
+      "report": {
+        "question": "Fictional HazelBraid: how many people are in Cycle Q headcount?",
+        "monetary_banner": "Monetary amounts in million USD; headcount is an unscaled count, not money.",
+        "rows": [
+          {
+            "label": "Headcount",
+            "unit": "count",
+            "values": {
+              "Cycle Q": "73"
+            }
+          },
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "Cycle Q": "18"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "73"
+      ],
+      "expected_dimension": "count",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC20",
+      "category": "unit_trap",
+      "report": {
+        "question": "Fictional AmberCliff Demo: what is the duration of Project P in years?",
+        "monetary_banner": "Monetary amounts in billion USD; duration is years, not money.",
+        "rows": [
+          {
+            "label": "Duration",
+            "unit": "years",
+            "values": {
+              "Project P": "9"
+            }
+          },
+          {
+            "label": "Budget",
+            "unit": "billion",
+            "values": {
+              "Project P": "4"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "9"
+      ],
+      "expected_dimension": "years",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC21",
+      "category": "unit_trap",
+      "report": {
+        "question": "Fictional FernObelisk: what is the listed Cycle Q coverage ratio, not a percent?",
+        "monetary_banner": "Monetary amounts in thousand USD; ratios are dimensionless.",
+        "rows": [
+          {
+            "label": "Coverage ratio",
+            "unit": "ratio",
+            "values": {
+              "Cycle Q": "2.25"
+            }
+          },
+          {
+            "label": "Cash",
+            "unit": "thousand",
+            "values": {
+              "Cycle Q": "84"
+            }
+          }
+        ]
+      },
+      "expected": [
+        "2.25"
+      ],
+      "expected_dimension": "ratio",
+      "expected_scale": "",
+      "expected_operation": "lookup"
+    },
+    {
+      "id": "IC22",
+      "category": "unanswerable",
+      "report": {
+        "question": "Fictional QuartzPetal Demo: what is Cycle R revenue?",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "Cycle P": "43",
+              "Cycle Q": "61"
+            }
+          }
+        ]
+      },
+      "expected": [],
+      "expected_dimension": "none",
+      "expected_scale": "",
+      "expected_operation": "abstain"
+    },
+    {
+      "id": "IC23",
+      "category": "unanswerable",
+      "report": {
+        "question": "Fictional DriftwoodHalo: what is Cycle Q net income?",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "thousand",
+            "values": {
+              "Cycle Q": "87"
+            }
+          }
+        ]
+      },
+      "expected": [],
+      "expected_dimension": "none",
+      "expected_scale": "",
+      "expected_operation": "abstain"
+    },
+    {
+      "id": "IC24",
+      "category": "unanswerable",
+      "report": {
+        "question": "Fictional MapleTide Demo: compute Cycle Q revenue divided by Cycle P revenue; abstain if the denominator is zero.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "Cycle P": "0",
+              "Cycle Q": "36"
+            }
+          }
+        ]
+      },
+      "expected": [],
+      "expected_dimension": "none",
+      "expected_scale": "",
+      "expected_operation": "abstain"
+    }
+  ],
+  "order": [
+    "IC22",
+    "IC01",
+    "IC09",
+    "IC10",
+    "IC02",
+    "IC17",
+    "IC23",
+    "IC19",
+    "IC24",
+    "IC18",
+    "IC12",
+    "IC14",
+    "IC07",
+    "IC20",
+    "IC21",
+    "IC08",
+    "IC04",
+    "IC15",
+    "IC11",
+    "IC03",
+    "IC16",
+    "IC05",
+    "IC13",
+    "IC06"
+  ],
+  "order_seed": 2026111603,
+  "arms": [
+    "typed_contract"
+  ],
+  "comparison_arm": null,
+  "model": "qwen3.5:4b",
+  "API_digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+  "Ollama_version": "0.40.16",
+  "endpoint": "http://127.0.0.1:11435",
+  "options": {
+    "temperature": 0,
+    "seed": 2026111602,
+    "num_predict": 768,
+    "num_ctx": 8192,
+    "num_thread": 4,
+    "num_gpu": 0,
+    "num_batch": 128
+  },
+  "think": false,
+  "system_prompt": "Solve only from this fictional report. Return JSON with values as a LIST of separate strings, never a joined sentence, including for one value. Copy each lookup value and its source operand exactly; use one operand per value. Each operand has row_label, period, unit, value, copied from the same table cell and its row metadata. Do not select a header or a different period. For calculations select exactly TWO numeric operands and the operation, and leave values=[]: code computes the answer, not you. difference means first minus second; percent_change means 100*(first-second)/second (first=new, second=old); average means (first+second)/2; ratio means first/second. Operands must have the same unit. Do not invent a result cell or include a computed result as an operand. Choose answer_dimension separately from source unit and the monetary banner: money/count/years/percent/percentage_points/ratio/text. Set answer_scale to thousand/million/billion only for money in those units; percent for percent or percentage_points; otherwise ''. A ratio of like units is dimensionless, not money; percent change is percent, not the operands' unit. For difference of percent-valued cells use percentage_points, not relative change. For missing facts, incompatible units or a zero denominator, use operation='abstain', values=[], operands=[], answer_dimension='none', answer_scale=''. Never guess, use outside knowledge, emit reasoning or compute the arithmetic yourself.",
+  "schema": {
+    "$defs": {
+      "Operand": {
+        "additionalProperties": false,
+        "properties": {
+          "row_label": {
+            "title": "Row Label",
+            "type": "string"
+          },
+          "period": {
+            "title": "Period",
+            "type": "string"
+          },
+          "unit": {
+            "enum": [
+              "USD",
+              "thousand",
+              "million",
+              "billion",
+              "count",
+              "years",
+              "percent",
+              "ratio",
+              "text"
+            ],
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "row_label",
+          "period",
+          "unit",
+          "value"
+        ],
+        "title": "Operand",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "values": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 6,
+        "title": "Values",
+        "type": "array"
+      },
+      "operation": {
+        "enum": [
+          "lookup",
+          "difference",
+          "percent_change",
+          "average",
+          "ratio",
+          "abstain"
+        ],
+        "title": "Operation",
+        "type": "string"
+      },
+      "operands": {
+        "items": {
+          "$ref": "#/$defs/Operand"
+        },
+        "maxItems": 6,
+        "title": "Operands",
+        "type": "array"
+      },
+      "answer_dimension": {
+        "enum": [
+          "money",
+          "count",
+          "years",
+          "percent",
+          "percentage_points",
+          "ratio",
+          "text",
+          "none"
+        ],
+        "title": "Answer Dimension",
+        "type": "string"
+      },
+      "answer_scale": {
+        "enum": [
+          "",
+          "thousand",
+          "million",
+          "billion",
+          "percent"
+        ],
+        "title": "Answer Scale",
+        "type": "string"
+      }
+    },
+    "required": [
+      "values",
+      "operation",
+      "operands",
+      "answer_dimension",
+      "answer_scale"
+    ],
+    "title": "ContractAnswer",
+    "type": "object"
+  },
+  "normalization": "Unmodified pinned TAT-QA EM/F1: element-wise best span alignment, order-independent lists with exact-match cardinality, native numeric/text normalization. Separate exact scale, dimension and operation gates. Code Decimal precision40, round-half-up to2decimal places, no rescaling.",
+  "pass_rule": "All24attempted and completed; >=20/21answerable nativeEM1+scale+dimension+operation correct with source-checked operands AND3/3explicitabstentions. Failures/invalid/timeout/unattempted are misses. Separately count arithmetic outputs computed by code and correct among the8arithmetic controls.",
+  "limits": {
+    "calls": 24,
+    "wall_seconds": 1800,
+    "per_call_seconds": 240,
+    "owned_tree_RSS_bytes": 10737418240,
+    "launch_mean3_below": 70,
+    "launch_wait_seconds": 600,
+    "CPU_mean_window_seconds": 60,
+    "CPU_abort_mean_above": 95,
+    "CPU_high_consecutive_seconds": 120,
+    "sleep_seconds_stop_above": 2
+  },
+  "stop_policy": "No retry. Single240s timeout is a miss;3consecutive stop. SustainedCPU/memory/wall/sleep stop and record every remaining case. Input byte/3 conservative fit and post-call prompt/output truncation checks.",
+  "scope": "Invented authored controls only; no real questions/answers, no dataset read, old-result rescore, model pull, training, financial/sealed data or trial-ledger row.",
+  "native_code_sha256": {
+    "tatqa_metric.py": "2aeeac479f89f8c76300af1cc0e8d098eb86af84bc386b38b6ab4af484a6dea8",
+    "tatqa_utils.py": "a84bb2f960737cf0a53733637a674cc4b20ef030a2be6a4b21dc2c4356f415ec"
+  },
+  "source_sha256": {
+    "scripts\\run_reader_contract.py": "b74c7285ad6248a10bbd49928ce70e59328ab815cc778408a8b674595105ec30",
+    "tests\\fixtures\\reader_contract_controls.json": "8af114418fbf76cf12ce9b38f60664d9ad9afbf3edeb0dd41b6055b66c9c5404",
+    "src\\asof\\reader_contract.py": "e011a20f97c7f2ff40e35e0c9a11acc032d5ec2f5356c41c495a33b6ca3cdb65",
+    "scripts\\reader_real1_memory.py": "b126a1edeb163c2cbcccf4c48a169a92af107076f11e8998797897c796db80a4",
+    "scripts\\run_reader_positive_control.py": "8ac3488548c3227e25f3bc483ddbf8f42c32bbf6eeba7ded462d3704e1ecd669",
+    "scripts\\run_reader_real2.py": "2c9775259d380113af9a02871f02f8870ea82453507447851080a3a9d0a118c6",
+    "scripts\\run_reader_real2_completion.py": "6534c300205e28f7e8a87f37a86d48b2025a1836d628cf3a397b80f687f0895d",
+    "src\\asof\\reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d"
+  }
+}
