@@ -60,6 +60,31 @@ cannot be certified; this is not dismissed as harmless rounding. The frozen sour
 unchanged. A future limiter needs high-resolution monotonic measurement, a post-wait
 recheck and early-wake tests before any separately approved continuation or source amendment.
 
+**Approved amendment A1 (2026-11-16), before further requests.** The original discrepancy
+is a precision miss against our own protocol, not a SEC fair-access breach: the recorded
+average was about 1.9 requests/s, below SEC's published 10/s ceiling. Calendar-second
+counts never exceeded two; sliding windows and quantized timestamps are different.
+This context does not retrospectively certify the original half-second spacing.
+
+[The additive A1 runner](../scripts/run_full_timestamps_a1.py) leaves every original
+source file and outcome unchanged. Its QPC `perf_counter` limiter rechecks after every
+wait and refuses dispatch gaps below 0.667 seconds. Each attempt records application
+transport-dispatch QPC time and UTC; these are not wire timestamps. One shared serial
+connection pool is borrowed by one-use scoped adapters, so retries do not clear or
+bypass the original adapter's stopped/duplicate guards.
+
+A1 permits one same-URL retry after at least 600 QPC seconds for HTTP 503 or 429,
+at most five such waits total; a second 503/429 or a sixth required wait stops it.
+Other original stop/unknown rules remain. The exact remainder puts 108 designated
+clock-disagreement accessions first, 256 CIK disagreements next, then shuffles the
+other remaining accessions with seed 2026111603. Previously processed resources,
+including five at-cap unknowns, remain protected; only the expressly reeligible old
+503 URL may get a new A1 primary attempt. The original 1,289 outcomes are never edited.
+The ceiling stays 34,402, starting at 1,421. At most 32,972 primary attempts plus five
+retries fit within it. A1 resets only the 12-hour wall clock; the combined old/new
+4 GiB budget, 500-resource checkpoints, sleep stop, no automatic continuation,
+population, parser and unqualified Eastern-clock assumption remain.
+
 ### Future local-reader memory safeguards (not run)
 
 The strict-format experiments are stopped; the default local request helper is the existing
