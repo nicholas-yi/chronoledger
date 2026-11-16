@@ -175,10 +175,8 @@ pairs of company disclosures.
 
 The project's extraction benchmark uses synthetic labels. Before testing new return signals, the
 cheapest real check is whether the measurement tools read financial documents correctly. Several
-free, human-annotated benchmarks can test that. A small deterministic baseline
-has now been tested on 30 TAT-QA development questions. It matched five reference
-answers, gave four wrong answers and declined the other 21. No language model
-or training was used.
+free, human-annotated benchmarks can test that. TAT-QA and FinQA have been used so far; the
+results follow the table.
 
 | Benchmark | What it labels | How it is scored | Watch out for |
 |---|---|---|---|
@@ -189,248 +187,77 @@ or training was used.
 | [FinCausal 2020](https://github.com/yseop/YseopLab/tree/develop/FNP_2020_FinCausal) ([paper](https://arxiv.org/abs/2012.02505)) | Cause-and-effect spans in 2019 financial news | Weighted precision, recall and F1 | Linguistic cause and effect is not economic causation |
 | [ConvFinQA](https://github.com/czyssrs/ConvFinQA) ([paper](https://arxiv.org/abs/2210.03849)) | 3,892 multi-turn conversations built on FinQA | Turn-level and conversation-level accuracy | Derived from FinQA, so not an independent check; its test answers are held back |
 
-### The first real-data diagnostic
+### What has been run
 
-Before opening files, we checked their source history against the sealed test
-period, including the fundamental study rather than just stock prices. The
-TAT-QA development file has been unchanged since May 2021. FinQA was initially
-paused because its file changed in 2022; a check of report IDs alone found all
-883 IDs named report years 2001-2019, with none unparseable. Its other fields were not
-read before that check.
+Each test drew its questions at random. The questions, prompt and scoring were committed before any
+answer was produced, and every attempt was kept, including ones that stopped early. Benchmark files
+stay local. The linked records hold file versions, checksums and each question's outcome by ID,
+without question or answer text. Before any file was opened, its public history was checked against
+the project's sealed test period. TAT-QA's development file has not changed since May 2021, and
+every FinQA report ID names a year from 2001 to 2019.
 
-We then froze a seed and randomly selected 30 TAT-QA development questions,
-without filtering by question type or answer. The baseline looks for a unique
-table-row label and an explicit year, then applies a few fixed arithmetic and
-unit rules. It receives no reference answers, calculation steps or answer-type
-labels. Unsupported or ambiguous questions produce an abstention.
+| Test | Reader | Questions | Outcome | Record |
+|---|---|---|---|---|
+| Rule baseline | Hand-written lookup and arithmetic rules | 30 TAT-QA | 5 right, 4 wrong, 21 declined | [results](../results/benchmark_diagnostic_status.json) |
+| Rule baseline | Same rules | 10 FinQA | All 10 declined | [results](../results/benchmark_followup_status.json) |
+| Averaging fix | Rules before and after fixing three averaging errors | 30 new TAT-QA | Both versions 3 right; no question used the fixed rule | [results](../results/benchmark_followup_status.json) |
+| First model run | Qwen 3.5 4B on a local CPU | 10 new TAT-QA | All 8 finished requests declined; stopped on a timeout | [results](../results/reader_diagnostic_status.json) |
+| Can it answer at all? | Same model, asked for the answer before the option to decline | 12 invented questions | 9 of 10 answerable right, both unanswerable declined (old prompt: 1 of 10) | [results](../results/reader_pc1_status.json) |
+| Second model run | Same | 30 new TAT-QA | Stopped by an over-sensitive CPU safeguard before any answer | [results](../results/reader_real1_status.json) |
+| Final model run | Same | 30 new TAT-QA | 11 right with the report, none without | [results](../results/reader_real2_combined.json) |
 
-| Result on the 30 items | Value |
-|---|---:|
-| Reference answer matched | 5 |
-| Wrong answer | 4 |
-| Abstained | 21 |
-| Official exact match | 16.7% |
-| Exact-match 95% Wilson interval | 7.3-33.6% |
-| Official F1 | 16.7% |
-| Official scale accuracy | 26.7% |
+### The final model run
 
-The unmodified TAT-QA scorer includes the abstentions in these scores.
-The baseline answered only nine questions; quoting five correct out of those
-nine alone would hide its low coverage. Scores cover the selected 30 IDs;
-running the upstream command on the entire development file would use a
-different denominator. The run took about 1.58 CPU seconds
-and used about 119 MiB of memory. Data, official scorer code and predictions
-stay local; [configuration](../results/benchmark_diagnostic_config.json) and
-[results](../results/benchmark_diagnostic_status.json) record versions,
-checksums and every item's outcome without copying the questions or answers.
-
-### FinQA follow-up with the original rules
-
-FinQA was not scored in the first diagnostic because its official evaluator
-lacked `tqdm`. The follow-up installed only the pinned benchmark dependencies:
-`tqdm 4.70.1`, `sympy 1.14.0` and `mpmath 1.3.0`, reproduced by the `benchmarks`
-extra. No scorer was substituted.
-
-Before changing the average rule, we froze ten unfiltered development IDs with
-a new seed, the unchanged original baseline, and deterministic adapters for raw
-text/table inputs and FinQA calculation programs. Reference answers and retrieved
-annotations were not prediction inputs; percentages were represented as ratios.
-
-The original rules declined **all ten items**. With abstentions counted as
-misses, execution accuracy was **0/10**, with a descriptive 95% Wilson interval
-of **0-27.8%**, and coverage was zero. No dataset prediction program or gold
-program was executed, because the baseline emitted no answers. Two invented
-arithmetic programs passed a separate native-executor check; that is a scorer
-check, not question-answering performance. The file remains local after its
-report-ID check. [Follow-up results](../results/benchmark_followup_status.json)
-record each outcome and the frozen configuration.
-
-### Average-only correction and a fresh paired comparison
-
-Only after the FinQA result was committed did we inspect the three earlier
-average errors. They exposed three different issues:
-
-- An explicit year range was averaged using its endpoints, omitting an
-  intermediate year.
-- A signed expense had an ambiguous positive-magnitude convention, and its
-  table's unit banner appeared later than the global unit scan.
-- A metric with "weighted-average" in its name was requested separately by year;
-  that was not an instruction to average the values.
-
-The change is confined to the average rule. It includes every observed year in
-an explicit range, considers a table-local unit banner, and declines ambiguous
-expense signs or ordered/weighted-metric lookups rather than guessing. Other
-row, year, ratio, unit and output-type rules were left alone. In particular,
-the limitations behind FinQA's abstentions were not broadened away.
-
-We froze a new seed and **30 fresh TAT-QA development items**, excluding every
-item in the original sample, then ran the original and corrected versions once
-on the same items. The original 30 were not re-scored or overwritten.
-
-| Result on the fresh 30 | Original rules | Average-only correction |
-|---|---:|---:|
-| Reference matches / wrong / abstained | 3 / 0 / 27 | 3 / 0 / 27 |
-| Official exact match | 10.0% | 10.0% |
-| Exact-match 95% Wilson interval | 3.5-25.6% | 3.5-25.6% |
-| Official F1 | 10.0% | 10.0% |
-| Official scale accuracy | 10.0% | 10.0% |
-| Coverage | 10.0% | 10.0% |
-
-No prediction changed: zero items improved and zero regressed. **None of these
-fresh items reached the average calculation**, so the sample does not
-demonstrate a real-data benefit from the correction. Synthetic tests check the
-mechanics; we did not choose another sample until a gain appeared.
-
-These intervals describe question-level binomial accuracy; they do not adjust
-for shared reports or contexts. F1 is not given a binomial interval, and
-overlapping intervals are not a paired significance test. Here scale and
-coverage also have 3/30 support, so their Wilson intervals are the same.
-
-For context, [the TAT-QA paper, Table 3 and section 4.3](https://arxiv.org/html/2105.07624v2#S4.T3)
-reports human experts at **84.1% exact match** and 90.8% F1 on 301 test questions
-from 50 contexts. That different test sample and its conditions are not a matched
-comparison with these tiny development samples.
-
-These are checks of a very limited baseline, not evidence of broad
-financial-reading skill. Thirty to forty items can expose bugs; they cannot
-establish formal H1, benchmark leadership or historical usability. A benchmark's
-own reference calculations would test the scorer, not prediction skill. This
-diagnostic did not inspect prices, returns or the sealed test period.
-
-### Existing local reader: incomplete first check
-
-The already-installed Qwen 3.5 4B was tested on ten fresh development questions,
-excluding the earlier sixty question IDs. Each question had a report-supplied
-condition and a no-report control; unchanged symbolic rules used the same ten.
-The [prospective contract](../results/reader_diagnostic_config_v2.json) pins the
-model digest, server version, options, selection and native scorer. Its technical
-revision before inference kept the first contract's items and model unchanged.
-
-| Condition, ten selected questions each | Correct | Wrong | Abstained | Failed | Not attempted |
-|---|---:|---:|---:|---:|---:|
-| Local reader with report | 0 | 0 | 4 | 1 | 5 |
-| Local reader without report | 0 | 0 | 4 | 0 | 6 |
-| Unchanged symbolic rules | 1 | 1 | 8 | 0 | 0 |
-
-Eight model requests completed, all with abstentions. The ninth request, with a
-report, exceeded its 90-second limit; the run stopped without retrying and left
-eleven condition/question cases unattempted. Thus model exact match, F1, scale
-accuracy and coverage are zero on the fixed ten-question denominator, counting
-failures and unattempted cases as misses. **That is an incomplete pipeline result,
-not an estimate that the model has zero reading skill.** The rules scored 10%
-EM/F1/scale and 20% coverage; its descriptive EM Wilson interval is 1.8-40.4%.
-The model's all-selected binary interval is 0-27.8%, not a competence interval.
-
-The [original result](../results/reader_diagnostic_status.json) is preserved.
-The [post-run review](../results/reader_diagnostic_review.json) explains an
-incorrect generic resource label on skipped cases: they followed the transport
-timeout, not a memory or total-wall-time ceiling. The current runner propagates
-that cause correctly; no predictions or native scores were rerun.
-
-The single-CPU-thread run took 6.1 minutes. Completed requests averaged 53.4
-seconds with the report and 15.5 seconds without it; the largest isolated model
-process peaked near 4.7 GiB. Its separate server was stopped afterwards. These
-are operational observations, not matched-quality model comparisons.
-
-The ten questions came from nine contexts, two also used by earlier questions.
-The current model may have seen this public benchmark during training.
-No-report abstention cannot prove otherwise. Location/quote checks are not
-proof of answer support, and no non-abstained model answer exercised them here.
-That failure motivated the invented positive control below; human-reviewed
-support checks are still needed. Neither model
-acquisition, training, formal H1, historical usability nor a return test follows.
-The run used no prices, returns or sealed test data.
-
-Software checks need no model service:
-
-```powershell
-python -m pytest -q tests\test_reader_diagnostic.py tests\test_cached_timestamps.py tests\test_timeutil.py
-```
-
-The saved inference used source revision `9c14fec`; reproducing model requests
-requires that revision, the pinned existing model/server and a separate run
-decision. Changing the timeout or rerunning the exposed questions was not done.
-
-### Invented positive control: can the reader answer at all?
-
-An [offline check of the eight saved responses](../results/reader_pc1_diagnosis.json)
-found explicit, valid abstentions: normal endings, only 23-24 generated tokens,
-no visible thinking or empty output, and no token-limit hit. They were not
-parse failures converted into abstentions.
-
-The [next control was specified before running](../results/reader_pc1_config.json):
-twelve invented reports, with four cell lookups, four arithmetic questions,
-two text lookups and two missing-answer controls. The answer-first instruction
-and output-field ordering passed the fixed rule: **9/10 answerable items correct,
-including units, and 2/2 correct abstentions**. One answer had the right count
-but incorrectly labelled it percent. It remains wrong; nothing was tuned or rerun.
-
-The old instruction/schema, tested with the same four-thread runtime, scored
-1/10 plus both abstentions. Five outputs were singleton lists rejected by the
-declared scalar-only scoring rule, so the score difference also reflects format,
-not just factual accuracy. Prompt wording and field ordering changed together; the test
-cannot identify which caused the difference.
-
-All 24 requests completed in 2.75 minutes. Actual launch CPU averaged 68.3%;
-brief peaks reached 98.5%, but the fixed three-consecutive-second stop did not
-fire. The largest isolated model process peaked near 4.2 GiB and was stopped
-afterward. The [per-item result](../results/reader_pc1_status.json) preserves
-every outcome. **This establishes trivial harness function, not reading skill.**
-
-A [proposal for thirty fresh real questions](../results/reader_next_real_proposal.json)
-excluded all seventy earlier question IDs. It was later run under the amended
-limits below; the original proposal remains as its planning record.
-
-### Completed public reader sample
-
-The [earlier thirty-question run](../results/reader_real1_status.json) was
-stopped by an over-sensitive safeguard, with no reading result. Its records
-remain unchanged.
-
-The [next contract](../results/reader_real2_config.json) drew thirty questions
-with seed 2026111415, excluding all hundred earlier IDs. It kept the exact
-positive-control prompt/schema/parse, model and native scorer. It first stopped
-after ten pairs at its 6 GiB memory cap. A
-[declared, content-independent operational amendment](../results/reader_real2_completion_config.json)
-raised only that cap to 10 GiB and completed the same frozen sample. All twenty
-finished case records and raw predictions were retained unchanged; only the
-thirty-nine unattempted cases and one memory-cancelled case ran.
-
-| Final native result, all thirty questions | Report supplied | No report |
+| All 30 questions | Report supplied | No report |
 |---|---:|---:|
 | Exact match / F1 | 36.7% / 42.6% | 0% / 0% |
-| Exact-match Wilson 95% interval | 21.9-54.5% | 0-11.4% |
-| Scale accuracy | 73.3% | 0% |
-| Coverage | 100% | 0% |
-| Correct / wrong / abstained | 11 / 19 / 0 | 0 / 0 / 30 |
+| Exact-match 95% range | 21.9-54.5% | 0-11.4% |
+| Units right | 73.3% | 0% |
+| Answered | 100% | 0% |
+| Right / wrong / declined | 11 / 19 / 0 | 0 / 0 / 30 |
 
-All thirty pairs are now complete. Eleven questions were right only with the
-report, zero only without, zero in both conditions and nineteen in neither.
-Exact McNemar p = 0.0009766 is **descriptive only**, not a confirmatory finding.
-Question-level intervals do not correct for shared report contexts, and no
-binomial interval is used for F1.
+With the report, the model got 7 of 10 single-value lookups exactly right, 4 of 15 calculations,
+none of the 4 questions needing several values, and the single counting question wrong.
 
-The [combined report](../results/reader_real2_combined.json) labels the producing
-run for each condition/question case and preserves the unchanged
-[as-stopped report](../results/reader_real2_status.json). The original
-twenty-one requests plus forty completion requests include one explicitly
-permitted repeat of the cancelled request, not sixty-one distinct cases.
-The [completion record](../results/reader_real2_completion_status.json) contains
-its full CPU trace; the original failed attempt was not erased.
+- **The answers come from the report.** All 11 correct answers needed it. Without the report the
+  model declined every question (exact McNemar p = 0.001, descriptive only).
+- **The run was completed, not restarted.** It first stopped after 10 question pairs, when the
+  model's memory use passed a 6 GiB limit. The limit was raised to 10 GiB with nothing else
+  changed, and only the unfinished questions were run. The
+  [as-stopped result](../results/reader_real2_status.json) and the
+  [completion](../results/reader_real2_completion_status.json) are both kept.
+- **It is cheap to run.** The completion took 8.7 minutes on 4 CPU threads, using about 8 GiB of
+  memory.
 
-Report-supplied exact matches were 7/10 span, 0/4 multi-span, 4/15 arithmetic
-and 0/1 count questions. These tiny groups expose weaknesses, not precise skill
-estimates. Completion took 8.7 minutes and sampled owned working set peaked at
-8.2 GiB, below the amended cap. It had no timeouts, detected truncations,
-sleep interruptions or further retries. The isolated server was stopped;
-the [review](../results/reader_real2_completion_review.json) records provenance,
-both launches' resources and validation.
+For scale, the TAT-QA paper reports human experts at
+[84.1% exact match](https://arxiv.org/html/2105.07624v2#S4.T3) on its own test set; that is not a
+matched comparison.
 
-This measures reading on a small public benchmark sample only. No-report
-abstention does not rule out training exposure; no-report correctness, if
-observed elsewhere, may reflect memorization or guessing. The result does not
-establish historical usability, formal H1 or financial returns. The completion
-was declared after initial outcomes were known, with no content or sample change.
+**What this does not show.** Thirty questions leave a wide range (22-54%), and questions about the
+same report are not independent. The model may have seen this public benchmark during training, and
+declining without the report does not rule that out. Answering questions about one report is not the
+same as measuring how claims change between filings. None of this shows the signal would have been
+usable at the time, and it says nothing about returns.
+
+### What the earlier tests taught
+
+- **The first model run's refusals were deliberate.** Every saved response was a valid, explicit
+  refusal, not cut-off or unparsed output ([diagnosis](../results/reader_pc1_diagnosis.json)).
+  Asking for the answer before the option to decline fixed it on invented questions. The prompt
+  wording and the field order changed together, so the test can't say which mattered.
+- **One fix can hide behind another.** The rule baseline's three wrong averages came from three
+  different mistakes: a skipped middle year, a unit label further down the table, and
+  "weighted-average" read as an instruction. No new question triggered the fixed rule, so it shows
+  no real-data benefit.
+- **Safeguards need headroom.** One run stopped on brief CPU spikes from other programs, another
+  on a memory limit set just below what the model needs. Both stops are recorded rather than
+  quietly retried.
+
+The software checks need no model or benchmark files:
+
+```powershell
+python -m pytest -q tests\test_benchmark_baseline.py tests\test_reader_positive_control.py tests\test_reader_real2.py tests\test_reader_completion.py
+```
 
 ### Three measurement ideas worth testing
 

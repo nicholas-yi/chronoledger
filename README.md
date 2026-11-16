@@ -213,7 +213,7 @@ Source: <a href="results/returns_h0_development.json">returns_h0_development.jso
 
 **No variant supports the hypothesis.** The two neutral variants even point the wrong way, but
 \*at this sample length the textbook t-test shown here flags pure noise as significant about 30% of
-the time instead of 5% (Figure 5), so values near ±2.3 are within the range of chance. Missing-return
+the time instead of 5% (Figure 6), so values near ±2.3 are within the range of chance. Missing-return
 sensitivities (0%, -30%, -100%) give identical answers because every held stock had a next-month
 return.
 
@@ -244,6 +244,38 @@ construction. A second test swaps famous real partners for fictitious ones to se
 | Names a partner absent from the text | 0.5% | 0.0% | < 2% |
 | Leaks the famous real partner after a swap | 0 / 159 | 0 / 40 | < 2% |
 
+### Reading real financial reports
+
+The benchmark above uses invented companies. On real reports, the test is
+[TAT-QA](https://github.com/NExTplusplus/TAT-QA): questions about tables and text from real annual
+reports, with answers written by finance-trained annotators. The local Qwen 3.5 4B model answered
+30 randomly drawn development questions twice, once with the report and once without it.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/reader-accuracy-dark.svg">
+  <img alt="Exact-match accuracy with 95% ranges: 11 of 30 questions right with the report and 0 of 30 without it; by question type, 7 of 10 single-span lookups, 4 of 15 calculations and 0 of 4 multi-part answers right; human experts score about 84% on the benchmark's test set." src="docs/figures/reader-accuracy-light.svg" width="100%">
+</picture>
+
+<sub><b>Figure 3.</b> Share of questions answered exactly right (dots) with 95% ranges (bars). One
+counting question is not shown. The dashed line is the human-expert score reported by the
+<a href="https://arxiv.org/html/2105.07624v2#S4.T3">TAT-QA paper</a> on its own test set, shown for
+scale rather than as a matched comparison. Source:
+<a href="results/reader_real2_combined.json">reader_real2_combined.json</a>.</sub>
+
+- **It reads the report rather than recalling answers.** Without the report it declined all 30
+  questions. With the report it answered every one, 11 exactly right (37%, 95% range 22-54%).
+- **Lookups are its strength; arithmetic is not.** It got 7 of 10 single-value lookups right, but
+  only 4 of 15 calculations and none of the 4 questions needing several values. Units were
+  right 73% of the time.
+- **The test was fixed before any answer.** The 30 questions, the prompt and the scoring were
+  committed first. A first version declined everything until it was asked for the answer before
+  the option to decline; 12 invented questions confirmed that change worked. The final run was
+  completed after a memory limit stopped it partway, changing nothing but that limit. Every
+  attempt is kept in [results](results).
+- **This is a small public sample.** It shows the model can read some filings, not that it would
+  have measured disclosure changes reliably at the time. The model may also have seen this public
+  benchmark during training.
+
 ## Stress tests of the method
 
 Before trusting any result, the inputs and the statistics themselves are put under test. These checks
@@ -256,7 +288,7 @@ say how far the results above can be trusted; they are not results in their own 
   <img alt="Three panels showing the rank of a masked word by model vintage. For COVID, the 2018 and 2019 models rank it first in a pandemic sentence but below 1,000th in a control sentence. Coronavirus and Brexit are not known before they were coined." src="docs/figures/leak-probe-light.svg" width="100%">
 </picture>
 
-<sub><b>Figure 3.</b> A word is hidden in a sentence that evokes it ("lockdowns in 2020 slowed the spread
+<sub><b>Figure 4.</b> A word is hidden in a sentence that evokes it ("lockdowns in 2020 slowed the spread
 of ___-19") and in a control sentence with the same pattern but unrelated meaning ("part number
 ___-19"). Rank 1 means the model's top guess; the scale is logarithmic. Shaded vintages were trained
 before the word was coined. Source: <a href="results/leakprobe_chronobert.json">leakprobe_chronobert.json</a>.</sub>
@@ -274,7 +306,7 @@ is why any claim-level result must also hold with a bag-of-words representation 
   <img alt="Left: of 21,502 filings, 165 have different acceptance times in the SEC bulk archive and the per-company API, all by exactly 4 or 5 hours. Right: in an audit of 22 filings, the API record matched the filing's own SEC header 21 times and the bulk archive 7 times." src="docs/figures/timestamps-light.svg" width="100%">
 </picture>
 
-<sub><b>Figure 4.</b> Acceptance times for the same filings from two official SEC JSON sources, and an audit
+<sub><b>Figure 5.</b> Acceptance times for the same filings from two official SEC JSON sources, and an audit
 against each filing's own SGML header. Source: <a href="results/p0_acceptance_authority_audit.json">p0_acceptance_authority_audit.json</a>.</sub>
 
 Everything in the engine hinges on knowing *when* a filing became public. Cross-checking two official
@@ -293,7 +325,7 @@ but an early one would create look-ahead, so the filing header is treated as the
   <img alt="Bar chart of false-positive rates on simulated data with no true effect: textbook Newey-West rejects 20-32% of the time instead of 5%; fixed-b and equal-weighted cosine corrections reduce this to 8-14%. In a 7-cluster panel, the textbook two-way cluster test rejects about 10%, the wild bootstrap and Ibragimov-Müller tests about 3-4%." src="docs/figures/test-size-light.svg" width="100%">
 </picture>
 
-<sub><b>Figure 5.</b> Share of simulated datasets with <i>no</i> true effect in which each test reports
+<sub><b>Figure 6.</b> Share of simulated datasets with <i>no</i> true effect in which each test reports
 significance at the 5% level. Bars average four data-generating processes (normal, AR(1), fat-tailed
 t₃, factor exposure); dots show each process. 2,000 datasets per cell, fixed seed.
 Source: <a href="results/robust_inference_calibration.json">robust_inference_calibration.json</a>.</sub>
@@ -325,18 +357,10 @@ is weak evidence, and more data matters more than a better estimator.
 - **Costs are a spread estimate.** Turnover costs use a daily high/low/close proxy; price impact,
   borrow fees and short availability are not modeled.
 - **Synthetic extraction labels.** The LLM benchmark's ground truth comes from injected fictitious
-  companies, not human annotation. Free human-annotated benchmarks for reading financial documents
-  are listed in the [research plan](docs/RESEARCH_PLAN.md#free-benchmarks-for-testing-measurement-on-real-data).
-  A first check used a simple rule-based reader with no language model. It answered 5 of 30
-  TAT-QA questions exactly (17%; 95% interval 7-34%) and declined most of the rest, then
-  declined all 10 FinQA questions. Human experts score about
-  [84% on TAT-QA](https://arxiv.org/html/2105.07624v2#S4.T3). Samples this small can expose
-  bugs, but they can't measure reading skill.
-  A later local-model check stopped after abstentions and a timeout. An invented positive
-  control then met its fixed pass rule; that checks the harness, not financial-reading
-  skill. A completed thirty-question public sample had 11 exact answers with reports and
-  thirty abstentions without them. The research plan records the memory-stop completion
-  amendment and limits; this is not historical usability or a return result.
+  companies. Reading real reports has been checked only on 30 public benchmark questions
+  ([above](#reading-real-financial-reports)); measuring claim-level change still needs
+  human-labelled pairs of real filings. Other free benchmarks are listed in the
+  [research plan](docs/RESEARCH_PLAN.md#free-benchmarks-for-testing-measurement-on-real-data).
 
 ## What would change the answer
 
@@ -382,6 +406,7 @@ point-in-time queries everything is built on.
 | [`invariance.py`](src/asof/invariance.py), [`leakprobe.py`](src/asof/leakprobe.py) | Time-travel invariance harness and language-model leak probe |
 | [`ledger.py`](src/asof/ledger.py), [`referee.py`](src/asof/referee.py) | Append-only trial ledger and the automated referee |
 | [`costs.py`](src/asof/costs.py), [`studies.py`](src/asof/studies.py), [`measurement.py`](src/asof/measurement.py) | Trading-cost breakdowns, pre-run study checklists and evidence-linked measurement scoring |
+| [`benchmark_baseline.py`](src/asof/benchmark_baseline.py), [`reader_real_report.py`](src/asof/reader_real_report.py) | Real-report reading tests: rule baseline, local-model reader and benchmark scoring |
 | [`scripts/`](scripts) · [`results/`](results) · [`tests/`](tests) | Data builds and study runners · every published number · unit, invariance and mutation tests |
 
 ## Documentation

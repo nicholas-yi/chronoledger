@@ -262,7 +262,7 @@ training or source-acquisition job was started.
 Original signal/bulk/share hashes and prior tracked results remain unchanged.
 Ledger 74 rows, P0 HTTP receipt 46 requests, no input repair or holdout exposure.
 These helpers do not clear P0, source/economic/annotation/inference gates. The
-separate [free-benchmark research](RESEARCH_PLAN.md#free-real-measurement-evaluations)
+separate [free-benchmark research](RESEARCH_PLAN.md#free-benchmarks-for-testing-measurement-on-real-data)
 identifies possible real component tests, but release/rights/overlap, native
 adapter, frozen baseline and acquisition/run permission remain prerequisites.
 All **128 local links/anchors** in the updated documents passed checks. The

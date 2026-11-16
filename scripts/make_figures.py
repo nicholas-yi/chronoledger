@@ -231,12 +231,57 @@ def timestamps(theme: str):
     return fig
 
 
+def _wilson(k: int, n: int, z: float = 1.959964) -> tuple[float, float]:
+    p = k / n
+    centre = (p + z * z / (2 * n)) / (1 + z * z / n)
+    half = z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5) / (1 + z * z / n)
+    return max(0.0, centre - half), min(1.0, centre + half)
+
+
+def reader_accuracy(theme: str):
+    """Local model on 30 TAT-QA questions, each asked with and without its report."""
+    items = _load("reader_real2_combined.json")["items"]
+
+    def tally(rows, arm):
+        return sum(r[arm]["outcome"] == "correct" for r in rows), len(rows)
+
+    by_type = {t: [r for r in items if r["answer_type"] == t]
+               for t in ("span", "arithmetic", "multi-span")}
+    rows = [("all questions, report given", *tally(items, "report_supplied"), BLUE, True),
+            ("all questions, no report", *tally(items, "no_report"), VERMILLION, True)]
+    rows += [(f"{t}, report given", *tally(r, "report_supplied"), BLUE, False)
+             for t, r in by_type.items()]
+    fig, ax = plt.subplots(figsize=(10.5, 3.9), layout="constrained")
+    for y, (label, k, n, color, bold) in enumerate(rows[::-1]):
+        lo, hi = _wilson(k, n)
+        ax.plot([100 * lo, 100 * hi], [y, y], color=color, lw=2.5, alpha=0.45,
+                solid_capstyle="round")
+        ax.scatter([100 * k / n], [y], s=60, color=color, zorder=3)
+        ax.text(100 * hi + 1.5, y, f"{k} / {n}", va="center", fontsize=10,
+                fontweight="bold" if bold else "normal")
+    labels = [r[0] for r in rows[::-1]]
+    ax.set_yticks(range(len(rows)), labels)
+    ax.axhline(2.5, color=T["grid"], lw=1)
+    ax.axvline(84.1, color=T["muted"], ls="--", lw=1)
+    ax.text(83, len(rows) - 0.45, "human experts, paper's test set: 84%", ha="right",
+            va="center", fontsize=9, color=T["muted"])
+    ax.set_xlim(0, 100)
+    ax.set_ylim(-0.6, len(rows) - 0.2)
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    ax.set_xlabel("exactly right (dot) with 95% range (bar)")
+    ax.grid(axis="y", visible=False)
+    _title(fig, "A small local model answers from the report, not from memory, "
+                "but often gets calculations wrong")
+    return fig
+
+
 FIGURES = {
     "time-machine": time_machine,
     "development-returns": development_returns,
     "leak-probe": leak_probe,
     "test-size": test_size,
     "timestamps": timestamps,
+    "reader-accuracy": reader_accuracy,
 }
 
 
