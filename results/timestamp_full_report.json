@@ -1,0 +1,128 @@
+{
+  "status": "stopped_final",
+  "config_SHA256": "68b4de2fbbfdf7386889246096264a570da48e1d4c4fd087c3e68cd39d93ed8d",
+  "freeze_commit": "f6495d411bd3eda73286bce19893f6f8fa87a43f",
+  "documentation": {
+    "URLs": [],
+    "max_requests": 10,
+    "read_cap_bytes": 4194304,
+    "wall_seconds": 1800,
+    "status": "SKIPPED: approved plans name categories but no specific qualifying official SEC Filer Manual/PDS/clock-definition URLs. No guessed URLs.",
+    "clock": "Eastern wall-clock assumption remains explicitly unqualified."
+  },
+  "qualified_UTC_accessions": 0,
+  "unresolved_accessions": 16921,
+  "accessions_accounted_for": 16921,
+  "resource_outcomes": 1289,
+  "resource_outcomes_missing": 33065,
+  "resources_not_attempted": 33065,
+  "new_HTTP_attempts": 1281,
+  "HTTP_status_counts": {
+    "200": 1280,
+    "503": 1
+  },
+  "attempts_without_finished_receipt": 0,
+  "cache_hits_processed": 8,
+  "resource_unknown_reasons": {
+    "body_reached_read_cap_unqualified": 5,
+    "resource_failed:HTTP_503": 1
+  },
+  "pool_summary": {
+    "CIK_disagreement": {
+      "accessions": 256,
+      "agreement_classes": {
+        "unknown_header": 256
+      },
+      "conditional_comparable": 0,
+      "qualified_UTC": 0,
+      "outside_screen": 0
+    },
+    "candidate_calendar_boundary_or_clock_issue": {
+      "accessions": 676,
+      "agreement_classes": {
+        "both_match_assumption": 21,
+        "unknown_header": 655
+      },
+      "conditional_comparable": 21,
+      "qualified_UTC": 0,
+      "outside_screen": 0
+    },
+    "clock_agreement_sensitive": {
+      "accessions": 15881,
+      "agreement_classes": {
+        "both_match_assumption": 620,
+        "unknown_header": 15260,
+        "index_unread_or_conflicting:both_match_assumption": 1
+      },
+      "conditional_comparable": 620,
+      "qualified_UTC": 0,
+      "outside_screen": 0
+    },
+    "clock_disagreement_summer": {
+      "accessions": 71,
+      "agreement_classes": {
+        "unknown_header": 71
+      },
+      "conditional_comparable": 0,
+      "qualified_UTC": 0,
+      "outside_screen": 0
+    },
+    "clock_disagreement_winter": {
+      "accessions": 37,
+      "agreement_classes": {
+        "unknown_header": 37
+      },
+      "conditional_comparable": 0,
+      "qualified_UTC": 0,
+      "outside_screen": 0
+    }
+  },
+  "assignments": {
+    "qualified_assignment_changes": null,
+    "qualified_accession_denominator": 0,
+    "reason": "No historically qualified field clock; actual verified changes cannot be established.",
+    "conditional_diagnostics_only": {
+      "stored_pair_versus_conditional": {
+        "conditional_accessions": 641,
+        "UTC_month_changed": 0,
+        "first_close_unassigned": 0,
+        "first_close_comparable": 641,
+        "first_registered_close_changed": 0,
+        "eligibility_record_month_instances_changed": 0,
+        "eligibility_accessions_changed": 0,
+        "latest_filing_firm_months_in_scope": 39940,
+        "latest_filing_firm_months_unresolved": 38400,
+        "latest_filing_firm_months_comparable": 1540,
+        "latest_filing_firm_months_changed": 0
+      },
+      "stored_bulk_versus_conditional": {
+        "conditional_accessions": 641,
+        "UTC_month_changed": 0,
+        "first_close_unassigned": 0,
+        "first_close_comparable": 641,
+        "first_registered_close_changed": 0,
+        "eligibility_record_month_instances_changed": 0,
+        "eligibility_accessions_changed": 0,
+        "latest_filing_firm_months_in_scope": 39940,
+        "latest_filing_firm_months_unresolved": 38400,
+        "latest_filing_firm_months_comparable": 1540,
+        "latest_filing_firm_months_changed": 0
+      }
+    },
+    "limits": "Eastern-clock assumption and cached nominal16:00ET calendar only. Unaudited competitors are held unchanged in each baseline; incomplete audited competitor contexts are unresolved. Stable source order breaks equal-time ties. No security remaps, signal values, prices, returns or portfolio results."
+  },
+  "private_hash_manifest": {
+    "data\\timestamp_full\\frozen_accessions.jsonl": "b974eaec61195ac873d7ae8fec9c5cb7214942a17e3ac628d1a4d380f3cde9c6",
+    "data\\timestamp_full\\frozen_URL_inventory.jsonl": "fefb8df3d44f84c1012bff94f899da7211b6fc3e1d1b2b34fc8bd80baf30f0a8",
+    "data\\timestamp_full\\frozen_metadata_universe.jsonl": "523cb20c5aba810ee2106f8561205c95fb348545b4c367d8e2d8c19263a3d9a6",
+    "data\\timestamp_full\\frozen_registered_calendar.json": "8db2de5367bc682605caa2a6b0aedac771a2997edd83e3092d8cc81760e408ca",
+    "data\\timestamp_full\\resource_outcomes.jsonl": "b05722fc8d609699d90f7addae7c80031b7881dac57f3207b304e99332da59c8",
+    "data\\timestamp_full\\requests.jsonl": "87b258ab478c2f3ea9a49281a4fc5bd65827fd9db2e855817567382a3e4df3fd",
+    "data\\timestamp_full\\checkpoint.json": "d6497c45c0548269277e94637550e7111a88ed777dfb57b86b6f98ed3561dfb7",
+    "data\\timestamp_full\\per_accession.jsonl": "2b9027ebac12f295351c89d0fd13fe996f01fce37f0aec9b856d97d9205befc9",
+    "data\\timestamp_full\\raw_body_hashes.jsonl": "77bb483c03e55f8818aa874491f9d9e8051e8d79d54589626e0c5054a5507785"
+  },
+  "clock_limit": "Conditional Eastern assumption only, no historical field-clock authority. No actual verified assignment-change count established.",
+  "prior_cached_controls": "Two out-of-population conditional clock counterexamples remain in the pinned prior header_pilot_reconciled.json; no new fetch or certification of these controls.",
+  "unchanged": "No production metadata/identity repair, correction release, financial rerun, price/return/sealed observation, signal value or trial ledger row."
+}

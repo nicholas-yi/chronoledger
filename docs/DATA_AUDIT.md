@@ -44,6 +44,22 @@ calendar is not a venue/early-close certification. No price, return or signal
 value is used, no ledger row is added, and no data repair, CIK remap, correction
 release or backtest rerun follows.
 
+**Stopped result, not a full check:** [the review](../results/timestamp_full_review.json)
+and [original report](../results/timestamp_full_report.json) record an HTTP 503 stop at
+15:45 ET on 2026-11-16, after 1,281 new attempts (1,280 HTTP 200 and one HTTP 503).
+There are 1,289 resource outcomes including eight pinned cache hits; five at-cap bodies
+remain unknown. Only 641 header/index pairs are conditionally complete, all matching
+both stored clocks under the Eastern assumption. All 16,921 rows remain historically
+unqualified; no verified assignment-change count is established. The run did not resume.
+
+The post-run receipt audit also found 97 recorded UTC inter-start gaps below 0.5 seconds,
+minimum 0.490596, with up to three recorded starts in a half-open one-second window.
+Both the Windows monotonic and wall clocks used here have 15.625 ms resolution.
+High-resolution send instants were not logged, so strict two-starts-per-second compliance
+cannot be certified; this is not dismissed as harmless rounding. The frozen source is
+unchanged. A future limiter needs high-resolution monotonic measurement, a post-wait
+recheck and early-wake tests before any separately approved continuation or source amendment.
+
 ### Future local-reader memory safeguards (not run)
 
 The strict-format experiments are stopped; the default local request helper is the existing

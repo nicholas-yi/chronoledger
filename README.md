@@ -344,6 +344,10 @@ groups, including filings where the two sources agree
 - **Limits.** The check reads header times as Eastern time, which SEC's documentation doesn't
   state. Eight filings per group can't certify all 21,502.
 
+A [larger check](results/timestamp_full_review.json) stopped on an SEC server error (HTTP 503)
+after 1,281 new requests: 641 of 16,921 filings had both header and index read, matching both stored
+times under the Eastern-clock assumption; actual assignment changes remain undetermined.
+
 ### Are the significance tests honest at this sample size?
 
 <picture>

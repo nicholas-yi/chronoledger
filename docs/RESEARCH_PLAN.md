@@ -76,7 +76,7 @@ launch workers or enforce host isolation. The planned container remains unprovis
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | The [48-filing check](../results/header_pilot_review.json) is done; the [full-check proposal](../results/timestamp_full_plan.json) specifies the exact remaining assignment-risk population, URLs and budget | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
+| Filing timestamps | The [larger check](../results/timestamp_full_review.json) stopped on HTTP 503 after 641 of 16,921 header/index pairs; review the partial evidence and rate discrepancy before any separately approved continuation | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Use the [draft annotation guide](H1_DESIGN.md#annotation-guide-h1-claim-guide-draft-01) for two independent human annotations of 60 filing pairs and adjudication | Measured precision and recall on real text, with coverage, agreement and company-separated audit results |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
@@ -85,15 +85,18 @@ launch workers or enforce host isolation. The planned container remains unprovis
 | Model training | Train a small claim matcher only if the labelled audit shows errors it could fix | Splits separated by time and by company, compared against the frozen baselines |
 | Trading costs | Record which cost components are observed and which are assumed; compute break-even costs | A realistic net comparison, plus a long-only version that needs no borrowing |
 
-The [full timestamp-check proposal](../results/timestamp_full_plan.json) covers 16,921 distinct
+The [approved timestamp inventory](../results/timestamp_full_plan.json) covers 16,921 distinct
 assignment-risk accessions, including all 108 designated clock disagreements. It inventories
-34,354 distinct header/index URLs across both original CIK paths where needed: 102 have usable
-bounded caches, leaving 34,252 proposed metadata requests. With up to ten clock-definition
-documentation requests, that needs a new explicit 34,262-request approval and project ceiling
-34,402, not the ten requests left today. At two starts per second the metadata floor is 4.76 hours;
-12 hours and 4 GiB are proposed limits, not completion promises. A documented historical clock,
-resolved filing roles and a qualified calendar are still needed before times are called verified;
-no data repair or backtest rerun follows without a separate decision.
+34,354 distinct header/index URLs across both original CIK paths where needed, with 102 pinned
+cache hits. The user approved at most 34,262 new requests and a project ceiling of 34,402.
+The [frozen run](../results/timestamp_full_config.json) stopped on HTTP 503 after 1,281 new
+requests, bringing total usage to 1,421; it was not resumed. The documentation stage was skipped
+because the plan named no exact qualifying URL, so Eastern remains an assumption. Its
+[review](../results/timestamp_full_review.json) also records sub-half-second receipt spacings:
+strict rate compliance cannot be certified. The 12-hour and 4 GiB limits were not reached.
+A continuation needs a new decision and the rate issue needs prospective correction, not a
+silent change to the completed run. Historical clock authority, resolved filing roles and a
+qualified calendar remain necessary; no data repair or backtest rerun follows automatically.
 
 A fine-tuned modern model is not automatically free of look-ahead for old filings, even if its
 fine-tuning data is old, because its pretraining may include later text. Measurement models are
