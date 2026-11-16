@@ -262,11 +262,13 @@ counting question is not shown. The dashed line is the human-expert score report
 scale rather than as a matched comparison. Source:
 <a href="results/reader_real2_combined.json">reader_real2_combined.json</a>.</sub>
 
-- **It reads the report rather than recalling answers.** Without the report it declined all 30
-  questions. With the report it answered every one, 11 exactly right (37%, 95% range 22-54%).
-- **Lookups are its strength; arithmetic is not.** It got 7 of 10 single-value lookups right, but
+- **It answered only when supplied the report.** Without it the model declined all 30
+  questions. With it the model answered every one, 11 exactly right (37%, 95% range 22-54%).
+  Abstention alone does not establish whether the public questions were in its training data.
+- **Lookup scores were higher in this sample.** It got 7 of 10 single-value lookups right, but
   only 4 of 15 calculations and none of the 4 questions needing several values. Units were
-  right 73% of the time.
+  right 73% of the time. The [offline error review](results/reader_error_audit.json) separates
+  representation, units, calculations and reference ambiguity without changing any score.
 - **The test was fixed before any answer.** The 30 questions, the prompt and the scoring were
   committed first. A first version declined everything until it was asked for the answer before
   the option to decline; 12 invented questions confirmed that change worked. The final run was

@@ -1,0 +1,163 @@
+{
+  "status": "PROPOSED_STAGED_PLAN_ONLY_NOT_EXECUTED",
+  "date": "2026-11-16",
+  "objective": "Qualify accession-level acceptance-clock and filing-party authority before any timestamp repair or financial rerun.",
+  "new_HTTP_attempts": 0,
+  "roster_drawn": false,
+  "repairs_or_remaps": 0,
+  "current_evidence": {
+    "metadata_rows": 21502,
+    "sensitive_accessions": 17389,
+    "cached_header_rows": 22,
+    "sensitive_with_cached_header": 17,
+    "observed_own_index_wall_matches": 21,
+    "clock_certification": "Still blocked: wall-clock agreement and conditional Eastern conversion are not field-clock authority.",
+    "HTTP_attempts_already_used": 46,
+    "historical_HTTP_ceiling": 150,
+    "remaining_historical_envelope": 104,
+    "qualification_limit": "A small stratified pilot cannot certify the full cohort. Apparently agreeing or insensitive records are not automatically correct."
+  },
+  "stages": [
+    {
+      "id": "offline_contract",
+      "new_requests": 0,
+      "work": [
+        "Freeze input hashes and deduplicated accession/role inventory; retain all source clocks and CIKs without choosing a winner.",
+        "Confirm the allowed metadata fields and periods against every return and fundamental seal. If scope is unclear, stop before a new source response is opened.",
+        "Define knowledge time as the existing registered acceptance-clock contract. Do not substitute report date, filing date, server Date, last-modified, processing time or feed receipt.",
+        "Specify role-aware parsing for transmitting agent, filer, subject company and co-registrants; a list of header CIKs or accession prefix is not an issuer/security mapping.",
+        "Rehearse normal, missing, conflicting, multi-party, DST-fold/gap, oversized and blocked-source cases using synthetic fixtures and existing caches."
+      ],
+      "required_before_network": "An accepted observation envelope, implemented/tested strict request adapter and a prospective metadata-only roster. This file is not acquisition permission."
+    },
+    {
+      "id": "field_definition_qualification",
+      "max_HTTP_attempts": 8,
+      "sources": [
+        "Official SEC EDGAR API field documentation",
+        "Applicable versioned EDGAR Filer Manual/header-field documentation",
+        "Official filing-index acceptance-clock definition"
+      ],
+      "record": "Exact URL, document/version/applicability dates, retrieval UTC, content hash and the field-specific clock definition. Keep syntax claims separate from accuracy guarantees.",
+      "stop_if": [
+        "Only general EDGAR operating hours or ISO Z syntax is documented, not the relevant field clock.",
+        "Current documentation cannot support the historical source versions being audited.",
+        "A response is blocked, gated, a JavaScript shell, unavailable or otherwise unqualified."
+      ],
+      "decision": "No implicit promotion of either internal source. If field-clock authority remains unresolved, stop with an evidence gap before the live accession pilot; a later conditional-evidence objective requires an explicit new decision."
+    },
+    {
+      "id": "bounded_accession_pilot",
+      "accessions": 48,
+      "max_HTTP_attempts": 96,
+      "resources_per_accession": [
+        "own filing-header metadata",
+        "own filing-index metadata"
+      ],
+      "selection": {
+        "seed": 2026111601,
+        "rule": "After observation-envelope acceptance, sample8withoutreplacement from each exclusive pool using sorted accession IDs and a fixed RNG; no source-adjudication result or financial outcome affects selection.",
+        "exclusive_pool_priority": [
+          "CIK_disagreement",
+          "candidate_calendar_boundary_or_clock_issue",
+          "clock_disagreement_winter",
+          "clock_disagreement_summer",
+          "clock_agreement_sensitive",
+          "clock_agreement_insensitive"
+        ],
+        "boundary_definition": "Candidate instants cross a UTC calendar month/year or the existing planner flags a civil-clock issue; this is a sampling feature, not actual market impact.",
+        "season_definition": "Use the displayed pair timestamp's named New York offset only as a winter/summer sampling label, not as clock authority.",
+        "observed_metadata_only_pool_counts": {
+          "CIK_disagreement": 404,
+          "candidate_calendar_boundary_or_clock_issue": 676,
+          "clock_disagreement_winter": 37,
+          "clock_disagreement_summer": 71,
+          "clock_agreement_sensitive": 16335,
+          "clock_agreement_insensitive": 3979
+        },
+        "shortfall_policy": "Stop before HTTP if any accepted pool has fewer than8; do not backfill, remap or select a convenient replacement.",
+        "selection_performed": false
+      },
+      "scope": "Acceptance timestamps and filing-party roles only. No document bodies, exhibits, statements, signal scores, prices, returns or event outcomes.",
+      "classification": [
+        "qualified_unique_instant",
+        "unqualified_clock_definition",
+        "ambiguous_or_nonexistent_civil_clock",
+        "conflicting_sources",
+        "missing_or_unread_metadata",
+        "filing_role_unresolved"
+      ],
+      "handling": "Preserve raw clocks and role fields; only add a candidate/qualified UTC instant when the documented clock is applicable and the civil-time mapping is unique. Multi-party uncertainty is not resolved by first-CIK or name similarity. Missing is unknown, never agreement or zero.",
+      "pass_to_next_stage": "All48selectedcases accounted for; no budget/seal/access breach; independent review accepts the source definitions and explicit unresolved classes. Any unresolved class blocks certification of records in it. Zero sampled errors never certifies unobserved filings."
+    },
+    {
+      "id": "cohort_scale_decision",
+      "new_requests_authorized": false,
+      "work": [
+        "Review the pilot before proposing any scale-up. Preserve every failed/unresolved case.",
+        "Compute an exact unique accession/role URL cache-miss roster for the intended used cohort, not a rounded claim that seventeen thousand requests will close everything.",
+        "The current inventory lacks headers for21480metadata rows and for17372sensitiveaccessions. These are row-level gaps, not automatically unique request counts; co-registrant paths, index requirements and unresolved definitions matter.",
+        "Approve a new explicit request/time budget before exceeding the historical150-attempt ceiling. Do not transfer unused pilot requests into extra cases automatically.",
+        "Require per-accession provenance and uncertainty for every used record. No universal four/five-hour shift or automatic pair/bulk substitution.",
+        "Recompute clock-driven assignments under the registered cached calendar before any separate financial rerun. Calendar/early-close validity, dated SIC/shares/security mapping and terminal payoffs remain distinct unresolved concerns."
+      ],
+      "limits": "Stratified sampling is diagnostic, not population error-rate estimation without weights and not scientific approval of H0/H1/H6."
+    }
+  ],
+  "proposed_request_contract": {
+    "max_new_HTTP_attempts": 104,
+    "allocation": {
+      "field_docs": 8,
+      "filing_headers_and_indexes": 96
+    },
+    "max_total_historical_attempts": 150,
+    "max_requests_per_second": 2,
+    "parallelism": 1,
+    "per_request_timeout_seconds": 30,
+    "pilot_wall_minutes": 30,
+    "metadata_read_bound_bytes": 65536,
+    "retry_count": 0,
+    "automatic_redirects": false,
+    "stop_on": [
+      "403",
+      "429",
+      "5xx",
+      "transport failure",
+      "redirect",
+      "budget ceiling",
+      "wall ceiling",
+      "scope ambiguity"
+    ],
+    "access_boundary": "Only ordinary public HTTPS and a locally configured SEC-compliant contact User-Agent. No accounts, keys, paid feed, contact with people, alternate headers/identities, proxy bypass or retries after a block.",
+    "cache": "Use checksum-pinned ignored cache; cache hits consume no request. Count every network attempt before sending. Keep raw metadata/headers and retrieval/ETag/last-modified separately from acceptance time. Oversized responses are explicitly unread/unknown, not silently truncated or treated as clock agreement.",
+    "implementation_readiness": "The existing EdgarClient has retries and redirect following; it is NOT qualified unchanged for this strict pilot. A scoped request adapter and negative budget/block/redirect tests are prerequisites, not implemented or run here.",
+    "enforcement_limit": "These are proposed cooperative checks, not an installed sandbox or network-permission grant."
+  },
+  "expected_future_outputs": [
+    "An append-only per-request attempt receipt including failed requests and cache provenance",
+    "A per-selected-accession clock/role adjudication table with explicit unknowns and evidence hashes",
+    "Coverage/reconciliation counts, source-version qualifications, resource usage and stop reasons",
+    "A separate proposed cohort-scale budget, or an explicit blocked verdict; no production overwrite"
+  ],
+  "non_claims": "No HTTP was performed, no roster selected, no source newly cleared, no correction or CIK remap written, no holdout opened and no financial result or inference gate lifted.",
+  "provenance": {
+    "base_revision": "af9b47623ca15856ee523fd9ce5e62412ba55818",
+    "cached_authority_summary_sha256": "88f6c658e4b877b868c40bb7fdb1dba185071ba195c4f7e7e5c1cf89c6abb06a",
+    "comparison_metadata_sha256": "8e7d66d2c6cb168663596899af90aa241b0dd9646318c98cfef208b01f02b117",
+    "assignment_queue_sha256": "85d6a4ea3bb29537abd493a5fbde943e7969fac442320acaa8e8978c7df274bb",
+    "SEC_request_receipt_sha256": "4cb66b252accb2dfae2dce8fe16ece28e0282ece1ba5e9f6a9beba837dda7312"
+  },
+  "validation": {
+    "six_exclusive_pools_sum": 21502,
+    "all_six_pools_support_eight": true,
+    "proposed_pilot_accessions": 48,
+    "max_new_attempts": 104,
+    "current_attempts_unchanged": 46,
+    "no_network_or_roster_execution": true,
+    "request_receipt_hash_unchanged": true,
+    "source_clock_status_still_blocked": true,
+    "new_local_links_checked": 4,
+    "software_tests_rerun": false,
+    "reason": "Proposal/data/docs only; no request adapter implemented or acquisition executed."
+  }
+}

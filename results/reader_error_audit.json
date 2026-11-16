@@ -1,0 +1,463 @@
+{
+  "status": "POSTHOC_OFFLINE_REVIEW_NOT_A_NEW_EVALUATION",
+  "scope": "All nineteen wrong report-supplied cases in the completed frozen thirty-question sample.",
+  "reviewer": "AI-assisted execution review, not independent human annotation or blinded adjudication.",
+  "method": "Read saved raw predictions, reference answers/derivations, full tables and relevant/cited paragraphs locally. Public records contain only UID/category/metadata, never benchmark question, answer or quoted report text. No prediction, scoring rule, label or published metric changed.",
+  "model_calls": 0,
+  "HTTP_requests": 0,
+  "native_scores_rerun": 0,
+  "causal_limit": "Primary labels describe observed failure modes, not inaccessible internal model reasoning. Citations show claimed support, not necessarily the operands the model actually used. Matching a reference derivation does not resolve ambiguous wording.",
+  "primary_categories": {
+    "multi_answer_serialization": "Requested reference components appear in one joined string rather than separate spans.",
+    "numeric_result_mismatch": "A numeric output differs from the reference calculation; actual internal operands/operation are not assumed.",
+    "unit_only_mismatch": "The answer value component matches the reference but its scale/dimension does not.",
+    "operator_or_denominator_convention": "The response and reference use different quantity, rate-change or denominator conventions.",
+    "cited_operand_mapping_mismatch": "A claimed supporting input is a derived or otherwise inappropriate table column.",
+    "period_comparison_mismatch": "The returned period does not match the requested comparison.",
+    "reference_span_boundary": "The response is a shorter supported span than the stored reference; independent adjudication is needed."
+  },
+  "items": [
+    {
+      "id": "33b512c9-9c56-495a-955f-2913a01cf6f6",
+      "private_evidence_ordinal": 1,
+      "primary": "multi_answer_serialization",
+      "confidence": "confirmed_representation_observation",
+      "flags": [
+        "citation_target_mismatch",
+        "reference_components_present_joined"
+      ],
+      "note": "The reference components are present in the prediction string. Claimed support points to a blank header band rather than the year headers.",
+      "reviewer_derived_reference_cells": [
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "answer_type": "multi-span",
+      "prediction_run": "REAL2",
+      "raw_response_sha256": "52959572248e329b4d1668179c344bd430d4a605d7606662d0d71e11a5965547",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "8c47c1a7-0fea-4501-a9f3-8c2b3b5989b1",
+      "private_evidence_ordinal": 2,
+      "primary": "numeric_result_mismatch",
+      "confidence": "confirmed_reference_arithmetic_inconsistency",
+      "flags": [
+        "reference_arithmetic_recomputed",
+        "reference_scale_mismatch"
+      ],
+      "note": "The cited cell pair supplies the requested inputs, but its mean does not match the prediction. The scale also differs; actual internal calculation is unknown.",
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2",
+      "raw_response_sha256": "67728370d90e79b7f78e8289bcd24688a674e1ee1a407ec1d37fd074e12e2b54",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "0efd7f4a-b4ce-45b5-96ce-b1139251ad58",
+      "private_evidence_ordinal": 3,
+      "primary": "multi_answer_serialization",
+      "confidence": "confirmed_representation_observation",
+      "flags": [
+        "reference_components_present_joined",
+        "source_reference_missing"
+      ],
+      "note": "Both reference values and their units are present, but emitted as a single sentence-like string rather than two spans.",
+      "answer_type": "multi-span",
+      "prediction_run": "REAL2",
+      "raw_response_sha256": "6ebf67c47d655ea00c8fd3de7bf7bc4a8deedad82d584868ee0105d641e0a0c6",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "b29f1fb0-a644-4f3d-9968-8977e5e37d4c",
+      "private_evidence_ordinal": 4,
+      "primary": "numeric_result_mismatch",
+      "confidence": "confirmed_reference_arithmetic_inconsistency",
+      "flags": [
+        "reference_arithmetic_recomputed",
+        "sign_or_direction_mismatch"
+      ],
+      "note": "The cited inputs support the reference percentage calculation, not the emitted result. A simple reversed-period formula does not explain the prediction.",
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2",
+      "raw_response_sha256": "c48a13622bba69c474b9c877c61419e1758742df96bd90eb17bdeb7ddeb5189b",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "9551fa01-dfe4-4bbb-bd0f-cb4ec1c83d3b",
+      "private_evidence_ordinal": 5,
+      "primary": "unit_only_mismatch",
+      "confidence": "confirmed_dimension_mismatch",
+      "flags": [
+        "answer_value_component_matches",
+        "reference_scale_mismatch"
+      ],
+      "note": "The dimensionless count value matches the reference, but the prediction attaches a monetary scale.",
+      "answer_type": "count",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "3c513fa9250ee16311c8494fe9745af7d2bdf961bd16018a76cc7da2172279bc",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "973464b5-a5fe-4381-9bc5-e225f5ba9a2c",
+      "private_evidence_ordinal": 6,
+      "primary": "operator_or_denominator_convention",
+      "confidence": "qualified_reference_convention",
+      "flags": [
+        "citation_target_mismatch",
+        "reference_arithmetic_recomputed",
+        "reference_convention_needs_adjudication"
+      ],
+      "note": "The reference uses a rate-point difference while the output resembles a signed relative change. The magnitude wording and operator convention need review; the cited periods also differ from the requested pair.",
+      "reviewer_derived_reference_cells": [
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "29ffc518a1de91212136cbb37f4c72db5dcd278d656e48b4f1a4ff0fbba4898e",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "babee4bb-4861-4918-9a8e-dbadec47fe94",
+      "private_evidence_ordinal": 7,
+      "primary": "numeric_result_mismatch",
+      "confidence": "confirmed_reference_arithmetic_inconsistency",
+      "flags": [
+        "reference_arithmetic_recomputed"
+      ],
+      "note": "The prediction differs from recomputed percentage change beyond the reference rounding precision; the cited input cells match the requested pair.",
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "e9efd77a439fb8fe40c42433d6e1d86ad2710c5f2e7049f0c0486b6cffeb53b6",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "07d44d17-d3d3-488e-9ea9-7f7f0ab1d1ef",
+      "private_evidence_ordinal": 8,
+      "primary": "unit_only_mismatch",
+      "confidence": "confirmed_dimension_mismatch",
+      "flags": [
+        "answer_value_component_matches",
+        "reference_scale_mismatch",
+        "source_reference_missing"
+      ],
+      "note": "The single value component matches the reference but is labelled as a percentage instead of a dimensionless count.",
+      "answer_type": "span",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "40bc52542d297931995eeecda223d6d28c6b588cdcae9f8eba3ac0e2de0ef900",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "c9cc2ebc-b50b-4b6f-93cf-76496f3374a4",
+      "private_evidence_ordinal": 9,
+      "primary": "reference_span_boundary",
+      "confidence": "requires_independent_adjudication",
+      "flags": [
+        "reference_convention_needs_adjudication"
+      ],
+      "note": "The shorter response is supported by its source quote but omits the stored reference prefix. Retain the native error; do not silently relabel it.",
+      "answer_type": "span",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "01905bf63407bf94b635e236ea2a06d7dd6e529d880de7d9a70d68cdbc795129",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.77
+    },
+    {
+      "id": "e5417b8b-e0f4-4259-9012-dec45d2ffacd",
+      "private_evidence_ordinal": 10,
+      "primary": "multi_answer_serialization",
+      "confidence": "confirmed_representation_observation",
+      "flags": [
+        "reference_components_present_joined"
+      ],
+      "note": "The requested pair is present with the reference scale, but joined into one string instead of separate spans.",
+      "answer_type": "multi-span",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "b44d0fd1c900b8b7ec46fbb0f6be1c567cec938cc764087695512d62a760e98a",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "43e6bb90-dd1b-4f54-bdb7-60556312ad4e",
+      "private_evidence_ordinal": 11,
+      "primary": "numeric_result_mismatch",
+      "confidence": "confirmed_output_and_citation_mismatch",
+      "flags": [
+        "citation_target_mismatch",
+        "reference_arithmetic_recomputed"
+      ],
+      "note": "The output differs from the fixed reference calculation. One cited period is outside the requested pair, so the actual operands remain uncertain.",
+      "reviewer_derived_reference_cells": [
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "271df8faf791a97974d2d741194389299b7240650961dd9cce16223f921d484c",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "57f38b17-ccdb-4d57-b075-9d1ff7dfb5e7",
+      "private_evidence_ordinal": 12,
+      "primary": "operator_or_denominator_convention",
+      "confidence": "qualified_reference_convention",
+      "flags": [
+        "citation_target_mismatch",
+        "reference_arithmetic_recomputed",
+        "reference_convention_needs_adjudication"
+      ],
+      "note": "The prediction aligns with an alternate denominator, while the question does not clearly name a base. Cited cells target a component row rather than the requested aggregate.",
+      "reviewer_derived_reference_cells": [
+        [
+          14,
+          3
+        ],
+        [
+          14,
+          4
+        ]
+      ],
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "58cea1d2bdcc6c3d33a5acab8ddfbfef4dd97d566b3b4acfcdee40f93c1f1550",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "cdd25c08-9a9d-42c6-a5d0-6ff9d7a1e3f7",
+      "private_evidence_ordinal": 13,
+      "primary": "period_comparison_mismatch",
+      "confidence": "confirmed_output_mismatch",
+      "flags": [
+        "reference_scale_mismatch",
+        "source_reference_missing"
+      ],
+      "note": "The selected year conflicts with the source comparison and a dimensionful unit is attached to the year. No supporting citation was supplied.",
+      "answer_type": "span",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "1c892a8ac4ba1252675a19e902f4f659cf9693d4afab5122eafdd8f215f12654",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "efbff294-365a-47c4-b530-7de812c65bf3",
+      "private_evidence_ordinal": 14,
+      "primary": "multi_answer_serialization",
+      "confidence": "confirmed_representation_observation",
+      "flags": [
+        "reference_components_present_joined",
+        "source_reference_missing"
+      ],
+      "note": "All requested reference names are present but serialized as one span. Saved native F1 is full while exact match is zero; that distinction is preserved.",
+      "answer_type": "multi-span",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "7da826d0eeb0514a70608ac40af4aeba7c92e14f6ff8fe5d25cd1c9d644e2577",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 1.0
+    },
+    {
+      "id": "d76df306-5452-4d72-ba6a-968482943bee",
+      "private_evidence_ordinal": 15,
+      "primary": "cited_operand_mapping_mismatch",
+      "confidence": "confirmed_citation_mapping_observation",
+      "flags": [
+        "citation_target_mismatch",
+        "reference_arithmetic_recomputed",
+        "reference_scale_mismatch"
+      ],
+      "note": "A cited input is an already-computed variance column rather than the second requested period. The output value and unit also disagree with the reference; actual internal operands are unknown.",
+      "reviewer_derived_reference_cells": [
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "ba3cf6839b0ab45f79c37d929350dea582b85150a13ed0cdf4e3824d279bbac1",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "adf3bdc1-f364-4bfd-ad79-7a0fa7b39a78",
+      "private_evidence_ordinal": 16,
+      "primary": "operator_or_denominator_convention",
+      "confidence": "qualified_quantity_convention",
+      "flags": [
+        "reference_arithmetic_recomputed",
+        "reference_convention_needs_adjudication",
+        "reference_scale_mismatch"
+      ],
+      "note": "The prediction copies a displayed relative variance, while the reference uses an amount difference. The quantity convention warrants independent review rather than an automatic factual-error claim.",
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "e988cf77676f1c91dd95752d5fd01d48c3a150bd1917c48a70b4191c08306822",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "0f0a7e9d-b53c-4c59-bd72-2e17582d4349",
+      "private_evidence_ordinal": 17,
+      "primary": "operator_or_denominator_convention",
+      "confidence": "confirmed_quantity_and_citation_mismatch",
+      "flags": [
+        "citation_target_mismatch",
+        "reference_arithmetic_recomputed",
+        "reference_convention_needs_adjudication",
+        "reference_scale_mismatch"
+      ],
+      "note": "The response is a relative rate while the reference is an amount difference. One cited coordinate is a label, not a numeric operand; the emitted value is not explained by the reference calculation.",
+      "reviewer_derived_reference_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "b5db5668f131bd5b4f7f4ac3992204e21a08abf64ed2e1e9fc5b4e04742cd5d1",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "8f5fc436-679e-40ae-8e2c-d142d7c5b0ce",
+      "private_evidence_ordinal": 18,
+      "primary": "numeric_result_mismatch",
+      "confidence": "confirmed_reference_arithmetic_inconsistency",
+      "flags": [
+        "decimal_magnitude_mismatch",
+        "reference_arithmetic_recomputed"
+      ],
+      "note": "The output magnitude is inconsistent with the mean of the correctly cited percentage cells. Internal decimal handling is not observed.",
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "69741bc6c38ca5af6301890bf1a348b950e13758dac2dfbf839baa99894c587f",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    },
+    {
+      "id": "b39edf5b-35db-4010-a4d0-90abe617dc89",
+      "private_evidence_ordinal": 19,
+      "primary": "numeric_result_mismatch",
+      "confidence": "confirmed_output_and_citation_mismatch",
+      "flags": [
+        "citation_target_mismatch",
+        "reference_arithmetic_recomputed"
+      ],
+      "note": "The output differs from the reference mean and cites an adjacent metric row. Whether the error arose in reading or arithmetic cannot be determined from citations alone.",
+      "reviewer_derived_reference_cells": [
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "answer_type": "arithmetic",
+      "prediction_run": "REAL2-C",
+      "raw_response_sha256": "90a08e929d77ab8f4a90ed49e083328087e3868898ff234c78ef2206d8a17ff6",
+      "saved_native_EM": 0.0,
+      "saved_native_F1": 0.0
+    }
+  ],
+  "recommendations_not_implemented": [
+    "First fix the generic multi-answer contract on invented development fixtures: allow separate ordered spans instead of forcing a scalar. Do not repair or regrade these four exposed cases.",
+    "Add typed operands naming row, period and unit, then deterministic arithmetic validation; a calculator without correct operand mapping is insufficient.",
+    "Validate answer dimension separately from table units, especially counts, years, amount changes, relative changes and rate-point changes.",
+    "Treat location/quote checks as syntax/support-location checks, not semantic grounding; review cited target alignment.",
+    "Independently adjudicate span/operator ambiguities before using these observations as new training labels. Preserve original gold and metrics.",
+    "Any later model validation uses a newly frozen fresh sample excluding all130 already exposed question IDs; no model training or rerun is authorized here."
+  ],
+  "non_claims": "No corrected accuracy, recovered-correct count, new prediction score, training label set, formal H1 or financial result.",
+  "counts": {
+    "primary_observations": {
+      "multi_answer_serialization": 4,
+      "numeric_result_mismatch": 6,
+      "unit_only_mismatch": 2,
+      "operator_or_denominator_convention": 4,
+      "reference_span_boundary": 1,
+      "period_comparison_mismatch": 1,
+      "cited_operand_mapping_mismatch": 1
+    },
+    "overlapping_flags": {
+      "citation_target_mismatch": 7,
+      "reference_components_present_joined": 4,
+      "reference_arithmetic_recomputed": 11,
+      "reference_scale_mismatch": 7,
+      "source_reference_missing": 4,
+      "sign_or_direction_mismatch": 1,
+      "answer_value_component_matches": 2,
+      "reference_convention_needs_adjudication": 5,
+      "decimal_magnitude_mismatch": 1
+    },
+    "answer_types": {
+      "multi-span": 4,
+      "arithmetic": 11,
+      "count": 1,
+      "span": 3
+    },
+    "reference_arithmetic_recomputed": 11,
+    "native_exact_answers_unchanged": 11,
+    "native_wrong_unchanged": 19,
+    "native_scale_mismatches_all30": 8
+  },
+  "provenance": {
+    "base_revision": "af9b47623ca15856ee523fd9ce5e62412ba55818",
+    "combined_report_sha256": "26509d2c8f853d2012ec7d7cfc4a332bd6fbe6fd1e269a9beb47fcc362a2cbdf",
+    "native_contract_sha256": "efe477b5948bfbbf212bb927cae7c589557ffe4b8ebc09e036bccb62b3567bf7",
+    "private_review_pack_sha256": "0f14cd4216618a7557887b3b8ff593a2b6ff0a4bb35c1da41b1b9e2f422e2306",
+    "private_arithmetic_witness_sha256": "69f50b95e67ae262e291d1af5ce9d19b125ae662a552d1d31680f52f6b2082c1",
+    "raw_text_location": "Ignored data/reader_error_audit only; not a public artifact."
+  },
+  "interpretation": "Counts overlap across flags. These observations do not revise11/30EM, demonstrate a fix, identify every internal cause, or establish that ambiguous references are wrong. Seven wrong cases have reference-scale mismatches; the eighth full-sample scale miss is outside this19-case error set.",
+  "validation": {
+    "all_nineteen_wrong_UIDs_accounted_for": true,
+    "primary_categories_sum": 19,
+    "eleven_reference_calculations_checked_to_reference_precision": true,
+    "seven_semantically_misaligned_citations_were_structurally_valid": true,
+    "raw_questions_quotes_and_answer_payload_fields_absent_from_public_artifacts": true,
+    "frozen_combined_report_hash_unchanged": true,
+    "software_tests_rerun": false,
+    "reason": "Documentation/data-only audit; no production code, predictions or scoring changed. Explicit JSON/scope/count/hash/privacy/link checks performed; prior test results are not presented as rerun."
+  }
+}

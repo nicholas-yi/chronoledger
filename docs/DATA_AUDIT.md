@@ -32,6 +32,22 @@ large cached index; the completed recheck keeps the 64 KiB read bound and marks
 that index explicitly unread/unknown. Zero new SEC requests, timestamp repairs,
 CIK remaps, score/price/outcome reads or ledger appends. **P0 remains blocked.**
 
+### Proposed staged timestamp-authority pilot
+
+The [offline plan](../results/timestamp_authority_plan.json) proposes field-clock
+qualification first, then 48 metadata-only accessions across six exclusive pools,
+including agreeing and insensitive records. All pools have at least eight candidates;
+no roster was drawn. At most eight documentation requests plus 96 header/index
+requests would fit the remaining 104 of the historical 150-attempt envelope.
+**No new request was made or permitted by writing this plan.**
+
+Field-specific historical clock definitions and the allowed metadata observation
+envelope must be settled first. The pilot would stop on blocks, redirects or
+transport failures, with no retries, remapping or blanket time shift. The existing
+client's retry/redirect behavior needs a tested scoped adapter before use.
+A small stratified pilot cannot certify the full cohort; scale-up requires a
+separate exact cache-miss inventory and budget. P0 remains blocked.
+
 ### Approved offline P0 assignment planner
 
 **2026-11-14: owner selected `p0_first`.** This permits a bounded cached-metadata

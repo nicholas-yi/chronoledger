@@ -2,8 +2,8 @@
 
 This document describes how new experiments are proposed, tested and reported in Filing Time
 Machine, what it would take to close the gaps listed in the [README](../README.md#caveats), three
-new study ideas, and candidate data sources. Everything here is a plan: none of these studies has
-been run, and no new data source has been adopted.
+new study ideas, and candidate data sources. The new studies and source proposals remain plans;
+completed measurement checks and audits are labelled below. No new data source has been adopted.
 
 ## How an idea becomes a result
 
@@ -37,8 +37,10 @@ Three rules keep the workflow honest:
 
 - **Outcomes come last.** A study card fixes the question, data, measurement, baseline, test and
   budget before anyone looks at results. If any of these is undecided, the study does not run.
-- **Nothing is deleted.** Every attempt, including failed and null runs, is appended to the
-  [trial ledger](../results/trial_ledger.jsonl) and counts toward the multiple-testing penalty.
+- **Nothing is deleted.** Return-hypothesis trials, including failed and null runs, are appended
+  to the [trial ledger](../results/trial_ledger.jsonl) and count toward their multiple-testing
+  family. Component measurements and audits keep separate receipts; they do not silently change
+  the return-trial denominator.
 - **Three separate verdicts.** Whether a job *ran*, what it *showed scientifically* (supported,
   unsupported, inconclusive or invalid) and whether it is *ready to publish* are tracked separately.
   A completed run can still be invalid evidence.
@@ -74,7 +76,7 @@ launch workers or enforce host isolation. The planned container remains unprovis
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | An offline screen already shows which filings' trading day, portfolio month or event window would change if their time were off by one Eastern-time offset ([results](../results/p0_assignment_plan.json)); next, check those filings against their own SEC headers | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
+| Filing timestamps | Use the [staged authority plan](../results/timestamp_authority_plan.json): qualify field clocks and filing roles, then a bounded metadata pilot including agreeing sources, before cohort-wide header checks | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Two people independently label claim changes in 60 real filing pairs, with disagreements adjudicated | Measured precision and recall of claim extraction on real text, not synthetic benchmarks |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
@@ -219,8 +221,9 @@ every FinQA report ID names a year from 2001 to 2019.
 With the report, the model got 7 of 10 single-value lookups exactly right, 4 of 15 calculations,
 none of the 4 questions needing several values, and the single counting question wrong.
 
-- **The answers come from the report.** All 11 correct answers needed it. Without the report the
+- **Answers occurred in the report-supplied condition.** Without the report the
   model declined every question (exact McNemar p = 0.001, descriptive only).
+  This contrast does not identify whether its knowledge also came from pretraining.
 - **The run was completed, not restarted.** It first stopped after 10 question pairs, when the
   model's memory use passed a 6 GiB limit. The limit was raised to 10 GiB with nothing else
   changed, and only the unfinished questions were run. The
@@ -238,6 +241,23 @@ same report are not independent. The model may have seen this public benchmark d
 declining without the report does not rule that out. Answering questions about one report is not the
 same as measuring how claims change between filings. None of this shows the signal would have been
 usable at the time, and it says nothing about returns.
+
+### Offline review of the nineteen misses
+
+The [post-run audit](../results/reader_error_audit.json) reviewed all nineteen saved
+errors without a model call or rescoring. Four multi-answer responses contain the
+reference components but serialize them as one string; two other misses have the
+reference value component with the wrong unit. Six primary observations are numeric
+result mismatches. Other categories cover operator/denominator conventions,
+period comparison, cited operands and reference-span boundaries.
+
+Flags overlap: seven wrong cases have reference-scale mismatches, seven cite the
+wrong row/period/header cells despite valid coordinates, and four provide no
+citation. Five need independent span/operator adjudication. This is AI-assisted,
+post-hoc review, not blinded human gold. The published 11/30 result is unchanged.
+The next generic development checks should address multi-answer shape, typed
+row/period/unit operands and deterministic calculation; no fix or new model run
+was made by this audit.
 
 ### What the earlier tests taught
 
