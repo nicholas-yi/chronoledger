@@ -280,6 +280,12 @@ scale rather than as a matched comparison. Source:
 
 ## Stress tests of the method
 
+A later [invented-only control](results/reader_contract_review.json) tested a more structured
+answer format and code-computed arithmetic. It failed: 0/21 answerable cases passed the full
+contract, and only 1/3 unanswerable cases was correctly declined. Most outputs combined
+incompatible fields. No predictions were repaired or rerun; the real-report result above is
+unchanged. This prototype needs a simpler interface before another real-data test.
+
 Before trusting any result, the inputs and the statistics themselves are put under test. These checks
 say how far the results above can be trusted; they are not results in their own right.
 

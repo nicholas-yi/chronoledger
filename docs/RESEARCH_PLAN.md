@@ -259,6 +259,16 @@ The next generic development checks should address multi-answer shape, typed
 row/period/unit operands and deterministic calculation; no fix or new model run
 was made by this audit.
 
+The subsequent [frozen invented test](../results/reader_contract_config.json) tried
+those ideas on 24 newly written fictional questions, not the exposed benchmark.
+It [failed](../results/reader_contract_review.json): 0/21 answerable cases passed
+the complete answer/scale/dimension/operation contract, and only 1/3 unanswerable
+cases was correctly declined. Twenty-two outputs violated cross-field rules;
+no arithmetic output reached accepted code execution. Values were often present,
+but incompatible fields cannot be silently repaired into successes. All calls
+finished normally. There was no tuning or rerun, and this says nothing new about
+real-data accuracy. A simpler response interface needs a new, declared test.
+
 ### What the earlier tests taught
 
 - **The first model run's refusals were deliberate.** Every saved response was a valid, explicit

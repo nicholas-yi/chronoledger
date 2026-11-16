@@ -1,0 +1,40 @@
+{
+  "verdict": "STOPPED: incomplete documentation response; clock authority remains unresolved",
+  "freeze_commit": "ee94ee7a2c60f16573aa1d14692ddc14605db5f5",
+  "config_sha256": "22f59aa735e003ac681f8beb69f02e4899e8c4f6ea2632046a9b695888c78c9a",
+  "request_receipt_sha256": "7b13463651c30f01dd076ee153bfc2d30e5248d09f6f0b09f2673557cea74a78",
+  "observed": {
+    "new_HTTP_attempts": 1,
+    "historical_attempt": 47,
+    "historical_ceiling": 150,
+    "remaining_ceiling": 103,
+    "URL": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "request_UTC": "2026-11-16T12:41:52.405395+00:00",
+    "status": 200,
+    "observed_bytes": 65536,
+    "SHA256_observed_prefix": "79c6a3c49e5ffb5d753f71dc81011695e6c048a3e5057be714aac904c2c0e3a0",
+    "body_complete": false,
+    "stop_reason": "body_reached_read_cap_unqualified",
+    "request_elapsed_seconds": 0.4059999999590218,
+    "stage_wall_seconds": 1.0619999999180436
+  },
+  "field_definitions": [],
+  "field_definition_status": "No complete source was obtained within the frozen cap. No definition is quoted or qualified from the incomplete prefix; no inference about the historical clock or time zone is warranted.",
+  "access_interpretation": "HTTP200, not403/429 or a redirect. The read safeguard stopped the request. Do not describe this as an SEC block, a JavaScript-shell diagnosis or proof that documentation lacks a definition.",
+  "adapter_tests_before_request": {
+    "targeted_passed": 20,
+    "coverage": "301/302/307,403/404/429/500/503; connection/read-timeout/total-deadline failures; declared and streaming read caps; historical/local budget; URL and serial scope; content encoding; declared agent, precharge, hashes, rate limit, no retry/redirect and permanent stop.",
+    "Ruff": "passed",
+    "full_suite": "Reported separately after both task parts, not implied by the targeted preflight."
+  },
+  "actions_not_taken": {
+    "retry_or_alternate_URL": false,
+    "proxy_or_identity_bypass": false,
+    "filing_requests": 0,
+    "roster_drawn": false,
+    "timestamp_repairs_or_CIK_remaps": 0,
+    "stage2_authorized": false
+  },
+  "next_gate": "Review this size-limited outcome before approving a narrower official field-definition source or a revised documentation read contract. Unused documentation headroom and the 103-request ceiling are not authorization for new requests or the accession pilot.",
+  "clock_certification": "BLOCKED"
+}

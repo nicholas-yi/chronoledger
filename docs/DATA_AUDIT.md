@@ -39,7 +39,7 @@ qualification first, then 48 metadata-only accessions across six exclusive pools
 including agreeing and insensitive records. All pools have at least eight candidates;
 no roster was drawn. At most eight documentation requests plus 96 header/index
 requests would fit the remaining 104 of the historical 150-attempt envelope.
-**No new request was made or permitted by writing this plan.**
+**The plan itself made no requests and did not authorize them.**
 
 Field-specific historical clock definitions and the allowed metadata observation
 envelope must be settled first. The pilot would stop on blocks, redirects or
@@ -47,6 +47,17 @@ transport failures, with no retries, remapping or blanket time shift. The existi
 client's retry/redirect behavior needs a tested scoped adapter before use.
 A small stratified pilot cannot certify the full cohort; scale-up requires a
 separate exact cache-miss inventory and budget. P0 remains blocked.
+
+On November 16, a separately approved [documentation-only freeze](../results/sec_stage1_config.json)
+and [tested strict adapter](../src/asof/sec_documentation.py) preceded one live request.
+The [receipt](../results/sec_stage1_requests.jsonl) records HTTP 200, but the
+page reached the 64 KiB read cap before completion. Its hash identifies only the
+observed prefix, not a complete authoritative document. No clock definition was
+qualified or quoted, and no retry, alternative URL, filing request or roster followed
+([findings](../results/sec_stage1_review.json)). The cumulative counter is now
+**47/150**, leaving 103 within that ceiling, not permission to spend them.
+This was a size-guard stop, not evidence that the SEC blocked access or that a clock
+definition does not exist. Clock certification and the filing pilot remain blocked.
 
 ### Approved offline P0 assignment planner
 

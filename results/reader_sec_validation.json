@@ -1,0 +1,38 @@
+{
+  "scope": "Final validation after the sequential invented-reader control and documentation-only request.",
+  "base_revision": "f0d8088",
+  "freezes": {
+    "reader_commit": "e5ae73fa9a020bf392b181c3108d84aca6318632",
+    "reader_config_sha256": "4766af3a213d4fd585eb5461e4820942cf3afc2fd5726ad0b69c3a9cf0d0a4ae",
+    "reader_result_commit": "f0453404f0f5c5d5d4a83a80c0b0cc7c58f2d18d",
+    "SEC_commit": "ee94ee7a2c60f16573aa1d14692ddc14605db5f5",
+    "SEC_config_sha256": "22f59aa735e003ac681f8beb69f02e4899e8c4f6ea2632046a9b695888c78c9a"
+  },
+  "validation_actually_run": {
+    "pre_reader_targeted_command": "python -m pytest -q tests/test_reader_contract.py",
+    "pre_reader_targeted_passed": 8,
+    "pre_HTTP_targeted_command": "python -m pytest -q tests/test_sec_documentation.py",
+    "pre_HTTP_targeted_passed": 20,
+    "full_suite_command": "python -m pytest -q",
+    "full_suite_runs": 1,
+    "full_suite_passed": 341,
+    "full_suite_wall_seconds_reported_by_pytest": 71.93,
+    "full_suite_warnings": "Two SingularMatrixWarnings in the existing sparse-control neutralization test; no failures.",
+    "Ruff_command": "ruff check src/asof/reader_contract.py src/asof/sec_documentation.py scripts/run_reader_contract.py scripts/qualify_sec_documentation.py tests/test_reader_contract.py tests/test_sec_documentation.py",
+    "Ruff": "passed",
+    "Pylance": "Syntax checks passed for the two new modules and two runners. No claim of an editor type-check.",
+    "integrity": "Frozen source/config hashes, all24raw response hashes and order/denominators, SEC started/finished event reconciliation and prefix hash, exact47/150counter, seven new local links, whitespace and historical-evidence preservation passed."
+  },
+  "preserved": {
+    "old_real_reader_result": "11/30 exact match, unchanged",
+    "old_real_reader_configs_statuses_and_combined_report": true,
+    "return_trial_ledger_rows": 74,
+    "data_files_tracked": 0,
+    "AE_files_Docker_shared11434_touched": false,
+    "owned11435_listener_and_PID56896_absent_after_shutdown": true,
+    "model_pulls_training_keys_paid_calls": false,
+    "filing_or_sealed_data_requests": 0,
+    "push_or_tags": false
+  },
+  "limits": "Tests verify software and cooperative guards, not reading skill or timestamp authority. Part A failed its frozen invented-only criterion; Part B stopped at its frozen read cap. Neither result authorizes a rerun, relaxed guard, replacement source, accession pilot or publication."
+}
