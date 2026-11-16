@@ -65,7 +65,41 @@ completed the same page in request #48: 69,025 bytes, HTTP 200. Its
 format, clock/time zone and historical applicability are **not defined on this page**.
 The page's bulk-update schedule is not an acceptance-clock definition.
 The counter is now **48/150**, with no other URL or filing request made.
-Additional documentation sources require a new decision; the clock and filing gates remain blocked.
+At that point additional sources and the filing pilot still required a new decision.
+
+### Conditional 48-filing pilot, not clock certification
+
+The subsequent owner-approved [roster](../results/header_pilot_config.json) sampled eight
+accessions from each of six exclusive metadata pools with seed 2026111601. The
+[reconciled report](../results/header_pilot_reconciled.json) compares cached API-derived
+and bulk representations with header times **assuming an Eastern header wall-clock**.
+Stage 1 did not document that clock; this is conditional evidence, not a source correction.
+
+| Pool, eight accessions each | Both match assumption | API/pair only | Neither | Unread clocks |
+|---|---:|---:|---:|---:|
+| CIK disagreement | 8 | 0 | 0 | 0 |
+| Calendar boundary or clock issue | 8 | 0 | 0 | 0 |
+| Winter source disagreement | 0 | 8 | 0 | 0 |
+| Summer source disagreement | 0 | 8 | 0 | 0 |
+| Agreeing, assignment-sensitive | 8 | 0 | 0 | 0 |
+| Agreeing, assignment-insensitive | 6 | 0 | 2 | 0 |
+
+All 48 own index/header wall clocks agree. Relative to the conditional header UTC,
+bulk is five hours later in the winter-disagreement pool and four hours later in
+summer; both stored sources are four hours later for the two neither-matching
+insensitive records. Internal agreement or insensitivity therefore does not certify
+a clock. Eight headers contain multiple CIKs; observed roles were retained without
+choosing a new issuer/security mapping.
+
+The pilot used **92 new requests and four pinned cache hits**, reaching **140/150**.
+All 96 resources were read within the bound. The initial parser conservatively
+marked duplicate SGML/rendered clocks unknown; that [original result](../results/header_pilot_status.json)
+and all receipts remain unchanged. A synthetic regression failed before a parser-only
+fix; only pinned bytes were reparsed offline, with zero further requests.
+No timestamp repair, CIK remap, correction release, portfolio assignment or financial
+rerun occurred. Equal-sized stratified pools cannot certify the full cohort or supply
+an unweighted population error rate. **P0 stays blocked pending review**; the ten
+requests left under the ceiling are not permission to acquire more data.
 
 ### Approved offline P0 assignment planner
 

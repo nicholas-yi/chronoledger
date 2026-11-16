@@ -1,0 +1,47 @@
+{
+  "verdict": "CONDITIONAL DIAGNOSTIC COMPLETE; P0 REMAINS BLOCKED",
+  "roster_freeze_commit": "92bc9f3302df9cadf89550a6d73c2450565e4e20",
+  "config_SHA256": "c441b94a6b89466558b5b0573a1f328f8a8dbf76780b46e2a7e3d289556d66cc",
+  "reconciled_SHA256": "56d9437daee80a4dbc057bbd6bb0479f37f073e24471f9f0e5be23231807571c",
+  "initial_status_SHA256": "cf36b69e6ae454f5e7482add4b1652461ee2d3f20a5ee7fa3b5f86b2869d1dd9",
+  "request_receipt_SHA256": "42b268ce227d22698f429588c4def0e93cb28c35588f28826628113bd37600cf",
+  "selection": "Seed2026111601,oneRandom across6priority-exclusive pools,sample8sortedIDs per pool. No filtering,backfill or resampling.",
+  "pool_population_counts": [404,676,37,71,16335,3979],
+  "pool_table": [
+    {"pool":"CIK_disagreement","n":8,"both_match":8,"pair_only":0,"bulk_only":0,"neither":0,"unknown":0},
+    {"pool":"candidate_calendar_boundary_or_clock_issue","n":8,"both_match":8,"pair_only":0,"bulk_only":0,"neither":0,"unknown":0},
+    {"pool":"clock_disagreement_winter","n":8,"both_match":0,"pair_only":8,"bulk_only":0,"neither":0,"unknown":0,"bulk_minus_assumed_header_hours":5},
+    {"pool":"clock_disagreement_summer","n":8,"both_match":0,"pair_only":8,"bulk_only":0,"neither":0,"unknown":0,"bulk_minus_assumed_header_hours":4},
+    {"pool":"clock_agreement_sensitive","n":8,"both_match":8,"pair_only":0,"bulk_only":0,"neither":0,"unknown":0},
+    {"pool":"clock_agreement_insensitive","n":8,"both_match":6,"pair_only":0,"bulk_only":0,"neither":2,"unknown":0,"both_stored_minus_assumed_header_hours_for_neither":4}
+  ],
+  "assumption": "Interpret header ACCEPTANCE-DATETIME as Eastern wall time. Stage1 did not define the field clock; no clock authority is established.",
+  "observations": {
+    "header_index_wall_agree": 48,
+    "pair_matches_conditional_header": 46,
+    "bulk_matches_conditional_header": 30,
+    "both_match": 30,
+    "pair_only": 16,
+    "neither": 2,
+    "missing_or_unread_clock_resources_after_parser_fix": 0,
+    "headers_with_multiple_CIKs": 8,
+    "unresolved_historical_clock_definition": "All48 remain conditional.",
+    "issuer_security_mapping_certified": false
+  },
+  "request_accounting": {
+    "baseline": 48,
+    "new_HTTP_attempts": 92,
+    "frozen_cache_hits": 4,
+    "resources": 96,
+    "final_counter": 140,
+    "historical_ceiling": 150,
+    "left_under_ceiling_not_permission": 10,
+    "all_new_responses": "HTTP200,complete,below64KiB",
+    "wall_seconds": 47.40599999995902,
+    "Python_CPU_seconds": 2.296875
+  },
+  "parser_amendment": "Initial conservative parser treated identical repeated SGML/rendered clock tokens as nonunique; all48 initially unknown. Original status/receipts preserved in95a9c6e. Synthetic regression failed before fix,then39targeted tests passed. Parser-only fix4649c05deduplicates identical values but still rejects conflicting clocks;96pinned resources reparsed offline in c6426d9 with zero new requests. Decision after observing formatting, before corrected source-offset outcomes; no original input timestamp or CIK changed.",
+  "rehearsal_limitation": "Pre-network synthetic rehearsal did not cover duplicate renderings that were present in existing caches. This was an engineering coverage gap, not missing clock evidence; the conservative initial result is retained rather than hidden.",
+  "limits": "Not independent field-clock certification, issuer adjudication, cohort verification, a population error-rate estimate, market-impact result or permission to release corrections. Equal-sized stratified pools are not population weights.",
+  "unchanged": "No timestamp repair,CIK remap,assignment/backtest rerun,financial/sealed outcome access,ledger row,push or tag."
+}

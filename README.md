@@ -280,17 +280,14 @@ scale rather than as a matched comparison. Source:
 
 ## Stress tests of the method
 
-A later [invented-only control](results/reader_contract_review.json) tested a more structured
-answer format and code-computed arithmetic. It failed: 0/21 answerable cases passed the full
-contract, and only 1/3 unanswerable cases was correctly declined. Most outputs combined
-incompatible fields. No predictions were repaired or rerun; the real-report result above is
-unchanged. This prototype needs a simpler interface before another real-data test.
-
-A [mode-first follow-up](results/reader_modes_review.json), after separately labelled
-practice, produced valid formats but still failed: 18/21 fresh invented answerable
-cases fully right and 0/3 correct abstentions. Seven of eight arithmetic cases reached
-accepted code computation, six correctly. These source-constrained controls are not
-a new real-report accuracy figure. No real-data rerun follows.
+Later invented-only interface controls remain below their predeclared gates
+([first](results/reader_contract_review.json), [mode-first](results/reader_modes_review.json)).
+The [latest control](results/reader_presence_review.json) allowed explicit missing-source
+selections and reported model- versus code-chosen declines. It still failed: **19/21**
+answerable cases fully right and **2/3** correct abstentions. Reversed operands and an
+unnecessary decline remain. These source-constrained, authored questions are not a new
+real-report accuracy figure or a matched improvement estimate. The real-data comparison
+was **not run**; the result and figure above are unchanged.
 
 Before trusting any result, the inputs and the statistics themselves are put under test. These checks
 say how far the results above can be trusted; they are not results in their own right.

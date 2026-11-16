@@ -298,6 +298,16 @@ schemas, but this is not reliable answerability. The fresh authored questions an
 stronger constraints also prevent a matched accuracy comparison to earlier tests.
 There was no tuning or rerun, no real benchmark use, and no new real-data permission.
 
+The [missing-source follow-up](../results/reader_presence_review.json) added an explicit
+`NOT_PRESENT` choice and prospectively counted code-side declines as abstentions,
+reported separately from model choices. After eight new unscored practice items,
+the fresh 24-item control failed: **19/21** answerable fully right and **2/3**
+correct abstentions, below the frozen 20/21 plus 3/3 rule. All eight intended
+arithmetic cases were computed by code; seven were correct. A reversed difference,
+a reversed undefined division and an unnecessary missing-source decline remained.
+No cleanup, retuning or rerun followed. The conditional real-report format comparison
+did not open, so its practice, 30-ID selection, generation and scoring were not run.
+
 ### What the earlier tests taught
 
 - **The first model run's refusals were deliberate.** Every saved response was a valid, explicit
