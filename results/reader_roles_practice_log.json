@@ -1,0 +1,19 @@
+{
+  "kind": "UNSCORED PRACTICE, NEVER ACCURACY",
+  "iterations": [{
+    "iteration": 1,
+    "change": "Named start/end, numerator/denominator and average values; mixed sentinel lists system-decline; list capacity bounded by source-cell count, not target labels.",
+    "items": 10,
+    "calls": 19,
+    "operational_paths": 10,
+    "model_declines": 1,
+    "system_declines": 2,
+    "system_reasons": {"zero_denominator":1,"NOT_PRESENT":1},
+    "calculator_paths": {"difference":1,"percent_change":2,"ratio":1,"average":1},
+    "format_failures": 0,
+    "format_and_resource_gate": true,
+    "note": "Operational paths are format/source/resource checks, not accuracy or expected-answer grading."
+  }],
+  "total_calls": 19,
+  "practice_reused_as_scored": false
+}
