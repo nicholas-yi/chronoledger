@@ -1,0 +1,868 @@
+{
+  "kind": "PRACTICE NEVER SCORED",
+  "iteration": 3,
+  "change": "Final3of40practicecalls: replay only answer stages for PRA01/PRA03/PRA06 using model-selected modes from iteration2. Source-only enum vocabularies prevent empty periods/non-cell strings; remove redundant scale field and derive it from source unit/operation. Dimension remains model selected and checked. No scored items yet.",
+  "items": [
+    {
+      "id": "PRA01",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional BluebellAnvil: give the Cycle M project name.",
+        "monetary_banner": "No money.",
+        "rows": [
+          {
+            "label": "Project",
+            "unit": "text",
+            "values": {
+              "Cycle M": "Violet Rudder"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA02",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional CopperWillow Demo: give Cycle M headcount in people.",
+        "monetary_banner": "Monetary amounts in million USD; headcount is unscaled people.",
+        "rows": [
+          {
+            "label": "Headcount",
+            "unit": "count",
+            "values": {
+              "Cycle M": "89"
+            }
+          },
+          {
+            "label": "Cash",
+            "unit": "million",
+            "values": {
+              "Cycle M": "24"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA03",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional LarkspurMosaic: list both depot names separately.",
+        "monetary_banner": "No money.",
+        "rows": [
+          {
+            "label": "Depot",
+            "unit": "text",
+            "values": {
+              "East": "Jade Pier",
+              "West": "Plum Terrace"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA04",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional AshenSail: list Cycle M and Cycle N revenue separately, in table units.",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "thousand",
+            "values": {
+              "Cycle M": "72",
+              "Cycle N": "96"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA05",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional BirchHelix: calculate Cycle N cost minus Cycle M cost, in table units.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Cost",
+            "unit": "million",
+            "values": {
+              "Cycle M": "44",
+              "Cycle N": "59"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA06",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional MangoTrestle: calculate percent change in shipments from Cycle M to Cycle N, using 100*(N-M)/M.",
+        "monetary_banner": "Shipments are unscaled counts.",
+        "rows": [
+          {
+            "label": "Shipments",
+            "unit": "count",
+            "values": {
+              "Cycle M": "150",
+              "Cycle N": "180"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA07",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional VioletHearth: calculate the equally weighted average of Cycle M and Cycle N revenue in table units.",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "thousand",
+            "values": {
+              "Cycle M": "66",
+              "Cycle N": "86"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA08",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional LindenGrove Demo: calculate Cycle N assets divided by Cycle N debt as a ratio, not a percent.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Assets",
+            "unit": "million",
+            "values": {
+              "Cycle N": "108"
+            }
+          },
+          {
+            "label": "Debt",
+            "unit": "million",
+            "values": {
+              "Cycle N": "27"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA09",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional SorrelDune: give Cycle Z revenue.",
+        "monetary_banner": "Monetary amounts in thousand USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "thousand",
+            "values": {
+              "Cycle M": "115"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA10",
+      "kind": "natural",
+      "report": {
+        "question": "Fictional RosewoodGlimmer: calculate Cycle N revenue divided by Cycle M revenue; abstain for zero denominator.",
+        "monetary_banner": "Monetary amounts in million USD.",
+        "rows": [
+          {
+            "label": "Revenue",
+            "unit": "million",
+            "values": {
+              "Cycle M": "0",
+              "Cycle N": "58"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA11",
+      "kind": "grammar_probe",
+      "report": {
+        "question": "Unscored format probe with a fictional source cell.",
+        "monetary_banner": "No money.",
+        "rows": [
+          {
+            "label": "Token",
+            "unit": "text",
+            "values": {
+              "Probe": "Olive Lantern"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRA12",
+      "kind": "grammar_probe",
+      "report": {
+        "question": "Second unscored format probe with fictional numeric cells.",
+        "monetary_banner": "Counts only.",
+        "rows": [
+          {
+            "label": "Tokens",
+            "unit": "count",
+            "values": {
+              "Probe A": "113",
+              "Probe B": "137"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "id": "PRA01",
+      "probe": false,
+      "constrained": true,
+      "direct_mode": "lookup"
+    },
+    {
+      "id": "PRA03",
+      "probe": false,
+      "constrained": true,
+      "direct_mode": "multi_value"
+    },
+    {
+      "id": "PRA06",
+      "probe": false,
+      "constrained": true,
+      "direct_mode": "arithmetic"
+    }
+  ],
+  "model": "qwen3.5:4b",
+  "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+  "Ollama_version": "0.40.16",
+  "options": {
+    "temperature": 0,
+    "seed": 2026111604,
+    "num_predict": 768,
+    "num_ctx": 8192,
+    "num_thread": 4,
+    "num_gpu": 0,
+    "num_batch": 128
+  },
+  "system_prompt": "Read only this fictional report. Pick mode FIRST. For one source value use lookup with one operand; for several requested values use multi_value with a list of sourced values, one object per separate cell. Copy row_label, period, value and unit exactly from each selected cell and its row metadata. For arithmetic, provide exactly two source operands plus operation; do NOT supply a result. Code computes: difference=first-second; percent_change=100*(first-second)/second (first=new, second=old); average=(first+second)/2; ratio=first/second. Use the requested row and periods, not a header or another row. Choose answer_dimension independently of the monetary banner: count, years and ratio are not money. Do not output an answer_scale field: code derives scale from the source unit and selected operation. Like-unit division gives ratio; percent change gives percent; difference of percent-valued cells gives percentage_points. For a missing fact, incompatible operand units or zero denominator, use ONLY {'mode':'abstain'}. Never invent facts or operands. Return only the mode-specific JSON, no explanation or extra fields.",
+  "probe_system": "This is an unscored grammar challenge. Output exactly {\"mode\":\"unsupported_mode\",\"debug\":true}. Do not replace unsupported_mode with a supported mode. No explanation.",
+  "format": {
+    "$defs": {
+      "Abstain": {
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "const": "abstain",
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "title": "Abstain",
+        "type": "object"
+      },
+      "Arithmetic": {
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "const": "arithmetic",
+            "title": "Mode",
+            "type": "string"
+          },
+          "operation": {
+            "enum": [
+              "difference",
+              "percent_change",
+              "average",
+              "ratio"
+            ],
+            "title": "Operation",
+            "type": "string"
+          },
+          "operands": {
+            "items": {
+              "$ref": "#/$defs/Operand"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "title": "Operands",
+            "type": "array"
+          },
+          "answer_dimension": {
+            "enum": [
+              "money",
+              "count",
+              "years",
+              "percent",
+              "percentage_points",
+              "ratio",
+              "text"
+            ],
+            "title": "Answer Dimension",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode",
+          "operation",
+          "operands",
+          "answer_dimension"
+        ],
+        "title": "Arithmetic",
+        "type": "object"
+      },
+      "Lookup": {
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "const": "lookup",
+            "title": "Mode",
+            "type": "string"
+          },
+          "operand": {
+            "$ref": "#/$defs/Operand"
+          },
+          "answer_dimension": {
+            "enum": [
+              "money",
+              "count",
+              "years",
+              "percent",
+              "percentage_points",
+              "ratio",
+              "text"
+            ],
+            "title": "Answer Dimension",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode",
+          "operand",
+          "answer_dimension"
+        ],
+        "title": "Lookup",
+        "type": "object"
+      },
+      "MultiValue": {
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "const": "multi_value",
+            "title": "Mode",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "$ref": "#/$defs/Operand"
+            },
+            "maxItems": 6,
+            "minItems": 2,
+            "title": "Values",
+            "type": "array"
+          },
+          "answer_dimension": {
+            "enum": [
+              "money",
+              "count",
+              "years",
+              "percent",
+              "percentage_points",
+              "ratio",
+              "text"
+            ],
+            "title": "Answer Dimension",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode",
+          "values",
+          "answer_dimension"
+        ],
+        "title": "MultiValue",
+        "type": "object"
+      },
+      "Operand": {
+        "additionalProperties": false,
+        "properties": {
+          "row_label": {
+            "title": "Row Label",
+            "type": "string"
+          },
+          "period": {
+            "title": "Period",
+            "type": "string"
+          },
+          "unit": {
+            "enum": [
+              "USD",
+              "thousand",
+              "million",
+              "billion",
+              "count",
+              "years",
+              "percent",
+              "ratio",
+              "text"
+            ],
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "row_label",
+          "period",
+          "unit",
+          "value"
+        ],
+        "title": "Operand",
+        "type": "object"
+      }
+    },
+    "discriminator": {
+      "mapping": {
+        "abstain": "#/$defs/Abstain",
+        "arithmetic": "#/$defs/Arithmetic",
+        "lookup": "#/$defs/Lookup",
+        "multi_value": "#/$defs/MultiValue"
+      },
+      "propertyName": "mode"
+    },
+    "oneOf": [
+      {
+        "$ref": "#/$defs/Lookup"
+      },
+      {
+        "$ref": "#/$defs/MultiValue"
+      },
+      {
+        "$ref": "#/$defs/Arithmetic"
+      },
+      {
+        "$ref": "#/$defs/Abstain"
+      }
+    ]
+  },
+  "strategy": "two_stage",
+  "mode_choice_prompt": "Choose the task mode from this fictional report. Return only {\"mode\":\"...\"}. arithmetic: question asks to calculate a difference, percent change, average or ratio from two cells. multi_value: question asks to LIST several existing cells, not calculate. lookup: question asks for ONE existing value or name. abstain: requested row/period/fact is absent, units incompatible, or denominator zero. Check the question and table before choosing. Do not output an answer or operands.",
+  "mode_choice_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "mode": {
+        "enum": [
+          "lookup",
+          "multi_value",
+          "arithmetic",
+          "abstain"
+        ],
+        "title": "Mode",
+        "type": "string"
+      }
+    },
+    "required": [
+      "mode"
+    ],
+    "title": "ModeChoice",
+    "type": "object"
+  },
+  "mode_specific_schemas": {
+    "lookup": {
+      "$defs": {
+        "Operand": {
+          "additionalProperties": false,
+          "properties": {
+            "row_label": {
+              "title": "Row Label",
+              "type": "string"
+            },
+            "period": {
+              "title": "Period",
+              "type": "string"
+            },
+            "unit": {
+              "enum": [
+                "USD",
+                "thousand",
+                "million",
+                "billion",
+                "count",
+                "years",
+                "percent",
+                "ratio",
+                "text"
+              ],
+              "title": "Unit",
+              "type": "string"
+            },
+            "value": {
+              "maxLength": 100,
+              "minLength": 1,
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "row_label",
+            "period",
+            "unit",
+            "value"
+          ],
+          "title": "Operand",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "const": "lookup",
+          "title": "Mode",
+          "type": "string"
+        },
+        "operand": {
+          "$ref": "#/$defs/Operand"
+        },
+        "answer_dimension": {
+          "enum": [
+            "money",
+            "count",
+            "years",
+            "percent",
+            "percentage_points",
+            "ratio",
+            "text"
+          ],
+          "title": "Answer Dimension",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode",
+        "operand",
+        "answer_dimension"
+      ],
+      "title": "Lookup",
+      "type": "object"
+    },
+    "multi_value": {
+      "$defs": {
+        "Operand": {
+          "additionalProperties": false,
+          "properties": {
+            "row_label": {
+              "title": "Row Label",
+              "type": "string"
+            },
+            "period": {
+              "title": "Period",
+              "type": "string"
+            },
+            "unit": {
+              "enum": [
+                "USD",
+                "thousand",
+                "million",
+                "billion",
+                "count",
+                "years",
+                "percent",
+                "ratio",
+                "text"
+              ],
+              "title": "Unit",
+              "type": "string"
+            },
+            "value": {
+              "maxLength": 100,
+              "minLength": 1,
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "row_label",
+            "period",
+            "unit",
+            "value"
+          ],
+          "title": "Operand",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "const": "multi_value",
+          "title": "Mode",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/$defs/Operand"
+          },
+          "maxItems": 6,
+          "minItems": 2,
+          "title": "Values",
+          "type": "array"
+        },
+        "answer_dimension": {
+          "enum": [
+            "money",
+            "count",
+            "years",
+            "percent",
+            "percentage_points",
+            "ratio",
+            "text"
+          ],
+          "title": "Answer Dimension",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode",
+        "values",
+        "answer_dimension"
+      ],
+      "title": "MultiValue",
+      "type": "object"
+    },
+    "arithmetic": {
+      "$defs": {
+        "Operand": {
+          "additionalProperties": false,
+          "properties": {
+            "row_label": {
+              "title": "Row Label",
+              "type": "string"
+            },
+            "period": {
+              "title": "Period",
+              "type": "string"
+            },
+            "unit": {
+              "enum": [
+                "USD",
+                "thousand",
+                "million",
+                "billion",
+                "count",
+                "years",
+                "percent",
+                "ratio",
+                "text"
+              ],
+              "title": "Unit",
+              "type": "string"
+            },
+            "value": {
+              "maxLength": 100,
+              "minLength": 1,
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "row_label",
+            "period",
+            "unit",
+            "value"
+          ],
+          "title": "Operand",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "const": "arithmetic",
+          "title": "Mode",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "difference",
+            "percent_change",
+            "average",
+            "ratio"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "$ref": "#/$defs/Operand"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Operands",
+          "type": "array"
+        },
+        "answer_dimension": {
+          "enum": [
+            "money",
+            "count",
+            "years",
+            "percent",
+            "percentage_points",
+            "ratio",
+            "text"
+          ],
+          "title": "Answer Dimension",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode",
+        "operation",
+        "operands",
+        "answer_dimension"
+      ],
+      "title": "Arithmetic",
+      "type": "object"
+    },
+    "abstain": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "const": "abstain",
+          "title": "Mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "Abstain",
+      "type": "object"
+    }
+  },
+  "mode_specific_prompts": {
+    "lookup": "Read only this fictional report. Pick mode FIRST. For one source value use lookup with one operand; for several requested values use multi_value with a list of sourced values, one object per separate cell. Copy row_label, period, value and unit exactly from each selected cell and its row metadata. For arithmetic, provide exactly two source operands plus operation; do NOT supply a result. Code computes: difference=first-second; percent_change=100*(first-second)/second (first=new, second=old); average=(first+second)/2; ratio=first/second. Use the requested row and periods, not a header or another row. Choose answer_dimension independently of the monetary banner: count, years and ratio are not money. Do not output an answer_scale field: code derives scale from the source unit and selected operation. Like-unit division gives ratio; percent change gives percent; difference of percent-valued cells gives percentage_points. For a missing fact, incompatible operand units or zero denominator, use ONLY {'mode':'abstain'}. Never invent facts or operands. Return only the mode-specific JSON, no explanation or extra fields. The mode has already been selected as lookup; do not change it. Each operand.value is ONLY the cell's plain string (for example a numeric string), not serialized JSON, a formula, object, sentence or punctuation. Row labels, periods and units are separate fields. Input rows[].values is a dictionary: its KEYS are period labels; its VALUES are cell answers. Copy period from the key and value from the value, never the reverse. Only source field vocabularies are allowed by this schema; matching a whole cell is still checked by code. Do not output answer_scale: code derives it. Use row unit, not the monetary banner, for count/years/ratio. The exact output schema is: {\"$defs\": {\"Operand\": {\"additionalProperties\": false, \"properties\": {\"row_label\": {\"title\": \"Row Label\", \"type\": \"string\"}, \"period\": {\"title\": \"Period\", \"type\": \"string\"}, \"unit\": {\"enum\": [\"USD\", \"thousand\", \"million\", \"billion\", \"count\", \"years\", \"percent\", \"ratio\", \"text\"], \"title\": \"Unit\", \"type\": \"string\"}, \"value\": {\"maxLength\": 100, \"minLength\": 1, \"title\": \"Value\", \"type\": \"string\"}}, \"required\": [\"row_label\", \"period\", \"unit\", \"value\"], \"title\": \"Operand\", \"type\": \"object\"}}, \"additionalProperties\": false, \"properties\": {\"mode\": {\"const\": \"lookup\", \"title\": \"Mode\", \"type\": \"string\"}, \"operand\": {\"$ref\": \"#/$defs/Operand\"}, \"answer_dimension\": {\"enum\": [\"money\", \"count\", \"years\", \"percent\", \"percentage_points\", \"ratio\", \"text\"], \"title\": \"Answer Dimension\", \"type\": \"string\"}}, \"required\": [\"mode\", \"operand\", \"answer_dimension\"], \"title\": \"Lookup\", \"type\": \"object\"}",
+    "multi_value": "Read only this fictional report. Pick mode FIRST. For one source value use lookup with one operand; for several requested values use multi_value with a list of sourced values, one object per separate cell. Copy row_label, period, value and unit exactly from each selected cell and its row metadata. For arithmetic, provide exactly two source operands plus operation; do NOT supply a result. Code computes: difference=first-second; percent_change=100*(first-second)/second (first=new, second=old); average=(first+second)/2; ratio=first/second. Use the requested row and periods, not a header or another row. Choose answer_dimension independently of the monetary banner: count, years and ratio are not money. Do not output an answer_scale field: code derives scale from the source unit and selected operation. Like-unit division gives ratio; percent change gives percent; difference of percent-valued cells gives percentage_points. For a missing fact, incompatible operand units or zero denominator, use ONLY {'mode':'abstain'}. Never invent facts or operands. Return only the mode-specific JSON, no explanation or extra fields. The mode has already been selected as multi_value; do not change it. Each operand.value is ONLY the cell's plain string (for example a numeric string), not serialized JSON, a formula, object, sentence or punctuation. Row labels, periods and units are separate fields. Input rows[].values is a dictionary: its KEYS are period labels; its VALUES are cell answers. Copy period from the key and value from the value, never the reverse. Only source field vocabularies are allowed by this schema; matching a whole cell is still checked by code. Do not output answer_scale: code derives it. Use row unit, not the monetary banner, for count/years/ratio. The exact output schema is: {\"$defs\": {\"Operand\": {\"additionalProperties\": false, \"properties\": {\"row_label\": {\"title\": \"Row Label\", \"type\": \"string\"}, \"period\": {\"title\": \"Period\", \"type\": \"string\"}, \"unit\": {\"enum\": [\"USD\", \"thousand\", \"million\", \"billion\", \"count\", \"years\", \"percent\", \"ratio\", \"text\"], \"title\": \"Unit\", \"type\": \"string\"}, \"value\": {\"maxLength\": 100, \"minLength\": 1, \"title\": \"Value\", \"type\": \"string\"}}, \"required\": [\"row_label\", \"period\", \"unit\", \"value\"], \"title\": \"Operand\", \"type\": \"object\"}}, \"additionalProperties\": false, \"properties\": {\"mode\": {\"const\": \"multi_value\", \"title\": \"Mode\", \"type\": \"string\"}, \"values\": {\"items\": {\"$ref\": \"#/$defs/Operand\"}, \"maxItems\": 6, \"minItems\": 2, \"title\": \"Values\", \"type\": \"array\"}, \"answer_dimension\": {\"enum\": [\"money\", \"count\", \"years\", \"percent\", \"percentage_points\", \"ratio\", \"text\"], \"title\": \"Answer Dimension\", \"type\": \"string\"}}, \"required\": [\"mode\", \"values\", \"answer_dimension\"], \"title\": \"MultiValue\", \"type\": \"object\"}",
+    "arithmetic": "Read only this fictional report. Pick mode FIRST. For one source value use lookup with one operand; for several requested values use multi_value with a list of sourced values, one object per separate cell. Copy row_label, period, value and unit exactly from each selected cell and its row metadata. For arithmetic, provide exactly two source operands plus operation; do NOT supply a result. Code computes: difference=first-second; percent_change=100*(first-second)/second (first=new, second=old); average=(first+second)/2; ratio=first/second. Use the requested row and periods, not a header or another row. Choose answer_dimension independently of the monetary banner: count, years and ratio are not money. Do not output an answer_scale field: code derives scale from the source unit and selected operation. Like-unit division gives ratio; percent change gives percent; difference of percent-valued cells gives percentage_points. For a missing fact, incompatible operand units or zero denominator, use ONLY {'mode':'abstain'}. Never invent facts or operands. Return only the mode-specific JSON, no explanation or extra fields. The mode has already been selected as arithmetic; do not change it. Each operand.value is ONLY the cell's plain string (for example a numeric string), not serialized JSON, a formula, object, sentence or punctuation. Row labels, periods and units are separate fields. Input rows[].values is a dictionary: its KEYS are period labels; its VALUES are cell answers. Copy period from the key and value from the value, never the reverse. Only source field vocabularies are allowed by this schema; matching a whole cell is still checked by code. Do not output answer_scale: code derives it. Use row unit, not the monetary banner, for count/years/ratio. The exact output schema is: {\"$defs\": {\"Operand\": {\"additionalProperties\": false, \"properties\": {\"row_label\": {\"title\": \"Row Label\", \"type\": \"string\"}, \"period\": {\"title\": \"Period\", \"type\": \"string\"}, \"unit\": {\"enum\": [\"USD\", \"thousand\", \"million\", \"billion\", \"count\", \"years\", \"percent\", \"ratio\", \"text\"], \"title\": \"Unit\", \"type\": \"string\"}, \"value\": {\"maxLength\": 100, \"minLength\": 1, \"title\": \"Value\", \"type\": \"string\"}}, \"required\": [\"row_label\", \"period\", \"unit\", \"value\"], \"title\": \"Operand\", \"type\": \"object\"}}, \"additionalProperties\": false, \"properties\": {\"mode\": {\"const\": \"arithmetic\", \"title\": \"Mode\", \"type\": \"string\"}, \"operation\": {\"enum\": [\"difference\", \"percent_change\", \"average\", \"ratio\"], \"title\": \"Operation\", \"type\": \"string\"}, \"operands\": {\"items\": {\"$ref\": \"#/$defs/Operand\"}, \"maxItems\": 2, \"minItems\": 2, \"title\": \"Operands\", \"type\": \"array\"}, \"answer_dimension\": {\"enum\": [\"money\", \"count\", \"years\", \"percent\", \"percentage_points\", \"ratio\", \"text\"], \"title\": \"Answer Dimension\", \"type\": \"string\"}}, \"required\": [\"mode\", \"operation\", \"operands\", \"answer_dimension\"], \"title\": \"Arithmetic\", \"type\": \"object\"}",
+    "abstain": "Read only this fictional report. Pick mode FIRST. For one source value use lookup with one operand; for several requested values use multi_value with a list of sourced values, one object per separate cell. Copy row_label, period, value and unit exactly from each selected cell and its row metadata. For arithmetic, provide exactly two source operands plus operation; do NOT supply a result. Code computes: difference=first-second; percent_change=100*(first-second)/second (first=new, second=old); average=(first+second)/2; ratio=first/second. Use the requested row and periods, not a header or another row. Choose answer_dimension independently of the monetary banner: count, years and ratio are not money. Do not output an answer_scale field: code derives scale from the source unit and selected operation. Like-unit division gives ratio; percent change gives percent; difference of percent-valued cells gives percentage_points. For a missing fact, incompatible operand units or zero denominator, use ONLY {'mode':'abstain'}. Never invent facts or operands. Return only the mode-specific JSON, no explanation or extra fields. The mode has already been selected as abstain; do not change it. Each operand.value is ONLY the cell's plain string (for example a numeric string), not serialized JSON, a formula, object, sentence or punctuation. Row labels, periods and units are separate fields. Input rows[].values is a dictionary: its KEYS are period labels; its VALUES are cell answers. Copy period from the key and value from the value, never the reverse. Only source field vocabularies are allowed by this schema; matching a whole cell is still checked by code. Do not output answer_scale: code derives it. Use row unit, not the monetary banner, for count/years/ratio. The exact output schema is: {\"additionalProperties\": false, \"properties\": {\"mode\": {\"const\": \"abstain\", \"title\": \"Mode\", \"type\": \"string\"}}, \"required\": [\"mode\"], \"title\": \"Abstain\", \"type\": \"object\"}"
+  },
+  "max_calls": 3,
+  "per_item_mode_request_SHA256": {
+    "PRA01": {
+      "lookup": "694164300b196fcfbac2ed61b44e690b2aaf81b0b0387858812a0147cf51d844",
+      "multi_value": "94bccdc84ba69828991e1e2d488298a497e3666206aac3f5909c9d5313414fd7",
+      "arithmetic": "829192a3983449b1499387118d75c0d0488d87de55a9bd23f47014645e52ff74",
+      "abstain": "be1baf61cfb8b6f32488efd6ee1202ed9581538e68402f8b89efcede492ae265"
+    },
+    "PRA02": {
+      "lookup": "c145ae41cfd4eaab01aed7c86288466dc4491fab69fcb1e5d245365b1899508c",
+      "multi_value": "f336d3904b923095692fb6992ad980ffd4ba1c9d070a7990f07f03f752a0cbdc",
+      "arithmetic": "ce0e4bdad69c01020694a3f41d5e62068754871d86752a2475d503f72e3424ec",
+      "abstain": "eeeef282cbb8bb688c6b48223d8d9866444a5e38c965cbb79f3574da163542d0"
+    },
+    "PRA03": {
+      "lookup": "d98a8bba6579a186c47aa331267db357fd9f61fdfe7be651a871144bc491d5f4",
+      "multi_value": "bfcec7e9525e81cafdd24a620d794bd3a269d68df82e1d89f334a3738a28a2b0",
+      "arithmetic": "9385d6b71687a9b670016548a89c7299e913bd1665d4be8cb2c596784a0ad46e",
+      "abstain": "40a07562bbc32e5329c6dbfd1688a58c4c84b22e82ed82a60caadc662852543c"
+    },
+    "PRA04": {
+      "lookup": "9b1f4b547abfeae047c12cf24ffc7212ec26ec9ffd1e8cffb973eb897a2c8676",
+      "multi_value": "76e0e65100de265b3abd065a8483009b55f92816f4dbf3a4449fbf44589800fb",
+      "arithmetic": "f3d9a35bb451a003eb2d219a22bfa110a4f0d584a37f52be36f32cf473665da9",
+      "abstain": "b20e1fcac6c2ab5544d3191ae41f6eea060ef30e5def23a35b8fa0fb3a2f4ecf"
+    },
+    "PRA05": {
+      "lookup": "45cd02e185bbf4d9280b06ba434f66ce6c7aad296ad0cc88cafc8aeb8d57412d",
+      "multi_value": "9205f71f71d7b0a64a63507359e09a7597b17a178dccccea645e224a44223b80",
+      "arithmetic": "a331626602f970172861aa39d8c7447133afc4cd8ee637547fa78de2d4f6373a",
+      "abstain": "a24f55310658deb492aa189babb7ef5b40c82ecdf7cf8db580edc67828f10cb3"
+    },
+    "PRA06": {
+      "lookup": "eff64d4e0e68aaa0045d5139d0d832e8fef5a5e825cffe33c41a60fe92c5eccd",
+      "multi_value": "c74232d6e214c404cf0028db2687218a44bce1cb505d3c16599f94fc5cc1b4b7",
+      "arithmetic": "dfda59a40b45a6e51cfbe9ead81e58937e591331a04d94e9a3574679c8f444b0",
+      "abstain": "7977e6ce73ebb0190c5c09b3c0e059aad51d984ee919e10fba1e26ae432d96e6"
+    },
+    "PRA07": {
+      "lookup": "383577f140fbebef83d019b9847b7d2f258cbab5be980124a99d7d1f1167f273",
+      "multi_value": "030476f5894adbbf86aa0ad7c3c026474d16654dc70260495591bd08e110d01f",
+      "arithmetic": "b66b26f8ec25adc261947a265a3e95d31e7712659f4e78f3a6d0bf278b44a47d",
+      "abstain": "2039d86f679ab2e9076ed48afcedea9021efd16b983d8d647b5af6d3a0ed0152"
+    },
+    "PRA08": {
+      "lookup": "21fabd9ec67969eb4995eab2dffa7335f0d0203610abbd814f23d262958663f8",
+      "multi_value": "3d7f34fe5c1cf0a61816ac86a5a527a30458e51f04b2cbc27d0ec146bc89f52e",
+      "arithmetic": "6bc2af9a7f9d40df38b89e6e84b6d810981046e7a9ff87d097473064619c50db",
+      "abstain": "d4f8a36dee17e3cfdb8ef0002eb10b4af5e58b9686fc20bfd8064c3df19a5f99"
+    },
+    "PRA09": {
+      "lookup": "d68bf11abaa60043abcde8284444c34f91dc0ec55abb581fa0a103e616e5a226",
+      "multi_value": "81391a0913e425e6d9c69aa1e82bf15ba0a935671c92b15b4659eeec3ddedf09",
+      "arithmetic": "ff40c1f0e79913f6ec67560eb698e745114eb048c9fbdb896ca710689c66408a",
+      "abstain": "505cafd2874a858081f9d44f02cc93fdda559fe8dde414b6c1bcc944526c32c3"
+    },
+    "PRA10": {
+      "lookup": "ed7164349074d3233a8d0db0def30fe2ff1eec31d356d3fd746212f3cc4c0471",
+      "multi_value": "e904b9c3799e8c423a23190974da9cdf34768bc89402a7820d807f4c5fda2448",
+      "arithmetic": "1c920d1eaf1d057676f74e4089a34aba391bc70077fd189db0e97b36bc7594cc",
+      "abstain": "41022770edd56ee858e9ec203fe59bfa8ec9367ab2cb70b49b5ebed70950a6a1"
+    },
+    "PRA11": {
+      "lookup": "afca3ce3f333eef107483ef4e900fcbe8ee16192d8ddee1ef840b25d895a3bac",
+      "multi_value": "daae289d308b00053214f3022a643ffea145ff725947a6365b3ec9b6671d99fe",
+      "arithmetic": "547c560356e85b11d0672ea442c8eeb9c6ebb8db3308c3b4d950dae3f06c58c0",
+      "abstain": "636cab57963ef8afd4130ff273e67284d8e224d61251693e13b4deaa1b20fe90"
+    },
+    "PRA12": {
+      "lookup": "40c29763210f310fd3a144fb378b5a20eb99c4663575dbf1cf576af5d868390f",
+      "multi_value": "7ecd44900a2dd9485a7881bc9fddab5ab114b9c6e374820198f50b98f00ff0cf",
+      "arithmetic": "d7df4b64948fd64661489d3203df18efb90a52ea8a50427c542a48b7050a141a",
+      "abstain": "ab4dd76d897441a6d3dbe8264d30d020bd630f700bf87c2468a414bca022011f"
+    }
+  },
+  "source_sha256": {
+    "scripts\\run_reader_modes.py": "46e88a31ce0310a8b3a007b34fc68726157b8bd1ed03e40c1a7a5a306b5c9c72",
+    "src\\asof\\reader_modes.py": "94f99813b3e4b667aa85abd38f4e491c5396ce87b80d5a2e25e473893c642ffa",
+    "src\\asof\\reader_contract.py": "e011a20f97c7f2ff40e35e0c9a11acc032d5ec2f5356c41c495a33b6ca3cdb65",
+    "src\\asof\\reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+    "scripts\\reader_real1_memory.py": "b126a1edeb163c2cbcccf4c48a169a92af107076f11e8998797897c796db80a4",
+    "scripts\\run_reader_positive_control.py": "8ac3488548c3227e25f3bc483ddbf8f42c32bbf6eeba7ded462d3704e1ecd669",
+    "scripts\\run_reader_real2.py": "2c9775259d380113af9a02871f02f8870ea82453507447851080a3a9d0a118c6",
+    "scripts\\run_reader_real2_completion.py": "6534c300205e28f7e8a87f37a86d48b2025a1836d628cf3a397b80f687f0895d",
+    "scripts\\run_reader_contract.py": "b74c7285ad6248a10bbd49928ce70e59328ab815cc778408a8b674595105ec30"
+  },
+  "fixture_sha256": "e5f12be21aebe968c3dd86380d8f4dabb3c78858d3576644d2d121d28e0f6373",
+  "limits": "4threads/10GiB ownedRSS/240s call/30min phase; REAL2 sustainedCPU; sleep stop;single timeout miss,3consecutive stop; no retry. <=40practicecalls/3iterations.",
+  "protocol": "Two-call fallback after union practice proved operationally unreliable. First mode-only enum; then that mode's const/forbid-extra schema. An explicit abstention ends after the mode-only call; no redundant call. Final source-only enums bound operand field vocabularies; code still checks whole-cell identity. Scale is derived by code, not independently guessed. Multi-value list contains sourced value records; adapter emits string list to the pinned native scorer. Calculator/source checks unchanged.",
+  "practice_rule": "No accuracy calculation. Check schema/mode-first conformance and operational paths; paired adversarial prompts with/without format test whether schema intervention prevents disallowed mode/fields.",
+  "scored_rule": "All24attempted;>=20/21 fully right nativeEM+scale+dimension+operation and3/3explicitabstentions; failures are misses. Separately count successful code-computed arithmetic outputs. Native span alignment/order/numeric normalization unchanged; Decimal40/round-half-up2decimals.",
+  "prior_practice_status_sha256": [
+    "bd3d776216ff918c50a9972927982d675a0e3e54d40b9ec29aac25bdcc398005",
+    "4535bd5d46c2deeeeb1aaa0e09566d1799385e6a43263cb3e78fb13428ebca55"
+  ],
+  "scored_items_existed_at_practice_freeze": false,
+  "iteration3_scope": "Three remaining calls recheck only answer-stage failures on existing practice items, using the modes the model already selected in iteration2 (not answer labels). Mode-choice implementation unchanged. No new practice items or accuracy calculation."
+}

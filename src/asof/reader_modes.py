@@ -11,9 +11,9 @@ from asof.reader_contract import (
     ContractAnswer,
     Operand,
     Report,
-    Scale,
     StrictModel,
     resolve,
+    unit_dimension,
 )
 
 AnsweredDimension = Literal[
@@ -30,8 +30,8 @@ SYSTEM = (
     "(first=new, second=old); average=(first+second)/2; ratio=first/second. "
     "Use the requested row and periods, not a header or another row. "
     "Choose answer_dimension independently of the monetary banner: count, years and ratio "
-    "are not money. answer_scale is thousand/million/billion only for money in those units; "
-    "percent for percent/percentage_points, otherwise ''. Like-unit division gives ratio; "
+    "are not money. Do not output an answer_scale field: code derives scale from the "
+    "source unit and selected operation. Like-unit division gives ratio; "
     "percent change gives percent; difference of percent-valued cells gives percentage_points. "
     "For a missing fact, incompatible operand units or zero denominator, use ONLY "
     "{'mode':'abstain'}. Never invent facts or operands. Return only the mode-specific JSON, "
@@ -48,14 +48,12 @@ class Lookup(StrictModel):
     mode: Literal["lookup"]
     operand: Operand
     answer_dimension: AnsweredDimension
-    answer_scale: Scale
 
 
 class MultiValue(StrictModel):
     mode: Literal["multi_value"]
     values: list[Operand] = Field(min_length=2, max_length=6)
     answer_dimension: AnsweredDimension
-    answer_scale: Scale
 
 
 class Arithmetic(StrictModel):
@@ -63,7 +61,6 @@ class Arithmetic(StrictModel):
     operation: Literal["difference", "percent_change", "average", "ratio"]
     operands: list[Operand] = Field(min_length=2, max_length=2)
     answer_dimension: AnsweredDimension
-    answer_scale: Scale
 
 
 class Abstain(StrictModel):
@@ -101,6 +98,12 @@ def mode_specific_body(report: Report, mode: Mode, model: str, options: dict, *,
     model_type = {"lookup": Lookup, "multi_value": MultiValue,
                   "arithmetic": Arithmetic, "abstain": Abstain}[mode]
     schema = model_type.model_json_schema()
+    if report.rows and "Operand" in schema.get("$defs", {}):
+        properties = schema["$defs"]["Operand"]["properties"]
+        properties["row_label"]["enum"] = sorted({row.label for row in report.rows})
+        properties["period"]["enum"] = sorted({p for row in report.rows for p in row.values})
+        properties["value"]["enum"] = sorted({v for row in report.rows for v in row.values.values()})
+        properties["unit"]["enum"] = sorted({row.unit for row in report.rows})
     body = request_body(report, model, options, probe=probe)
     body["format"] = schema
     body["messages"][0]["content"] = PROBE_SYSTEM if probe else (
@@ -108,6 +111,10 @@ def mode_specific_body(report: Report, mode: Mode, model: str, options: dict, *,
         "Each operand.value is ONLY the cell's plain string (for example a numeric string), "
         "not serialized JSON, a formula, object, sentence or punctuation. "
         "Row labels, periods and units are separate fields. "
+        "Input rows[].values is a dictionary: its KEYS are period labels; its VALUES are "
+        "cell answers. Copy period from the key and value from the value, never the reverse. "
+        "Only source field vocabularies are allowed by this schema; matching a whole cell "
+        "is still checked by code. Do not output answer_scale: code derives it. "
         "Use row unit, not the monetary banner, for count/years/ratio. "
         "The exact output schema is: " + json.dumps(schema)
     )
@@ -123,12 +130,14 @@ def to_contract(answer: ModeAnswer) -> ContractAnswer:
     elif isinstance(answer, MultiValue):
         operands = answer.values
     else:
+        scale = ("percent" if answer.operation == "percent_change" else
+                 "" if answer.operation == "ratio" else unit_dimension(answer.operands[0].unit)[1])
         return ContractAnswer(values=[], operation=answer.operation, operands=answer.operands,
                               answer_dimension=answer.answer_dimension,
-                              answer_scale=answer.answer_scale)
+                              answer_scale=scale)
     return ContractAnswer(values=[o.value for o in operands], operation="lookup",
                           operands=operands, answer_dimension=answer.answer_dimension,
-                          answer_scale=answer.answer_scale)
+                          answer_scale=unit_dimension(operands[0].unit)[1])
 
 
 def resolve_mode(answer: ModeAnswer, report: Report) -> tuple[list[str], bool]:

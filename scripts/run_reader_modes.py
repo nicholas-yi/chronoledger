@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
 import time
 from collections import Counter
@@ -62,6 +63,10 @@ def prior_practice() -> list[dict]:
         (PROJECT_ROOT / "results").glob("reader_modes_practice_*_status.json"))]
 
 
+def request_hash(body: dict) -> str:
+    return hashlib.sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
+
+
 def freeze(practice: bool, iteration: int, change: str) -> None:
     config_path, status_path, _ = paths(practice, iteration)
     if config_path.exists() or status_path.exists():
@@ -80,8 +85,13 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
                 jobs.append({"id": row["id"], "probe": True, "constrained": False})
             jobs.append({"id": row["id"], "probe": row["kind"] == "grammar_probe",
                          "constrained": True})
+        if iteration == 3:
+            previous_rows = {r["id"]: r for r in previous[-1]["items"] if not r["probe"]}
+            selected = ("PRA01", "PRA03", "PRA06")
+            jobs = [{"id": uid, "probe": False, "constrained": True,
+                     "direct_mode": previous_rows[uid]["selected_mode"]} for uid in selected]
         if sum(r["attempts"] for r in previous) + sum(
-            2 if j["constrained"] else 1 for j in jobs
+            1 if j.get("direct_mode") or not j["constrained"] else 2 for j in jobs
         ) > 40:
             raise ValueError("forty practice-call ceiling")
         fixture = PRACTICE
@@ -125,7 +135,11 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
         "mode_specific_schemas": {mode: body["format"] for mode, body in templates.items()},
         "mode_specific_prompts": {mode: body["messages"][0]["content"]
                                   for mode, body in templates.items()},
-        "max_calls": sum(2 if j["constrained"] else 1 for j in jobs),
+        "max_calls": sum(1 if j.get("direct_mode") or not j["constrained"] else 2 for j in jobs),
+        "per_item_mode_request_SHA256": {
+            row["id"]: {mode: request_hash(mode_specific_body(
+                Report.model_validate(row["report"]), mode, MODEL, OPTIONS,
+            )) for mode in ("lookup", "multi_value", "arithmetic", "abstain")} for row in items},
         "source_sha256": {str(p.relative_to(PROJECT_ROOT)): ledger.file_sha256(p) for p in SOURCES},
         "fixture_sha256": ledger.file_sha256(fixture),
         "limits": "4threads/10GiB ownedRSS/240s call/30min phase; REAL2 sustainedCPU; sleep stop;"
@@ -133,6 +147,8 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
         "protocol": "Two-call fallback after union practice proved operationally unreliable. "
                     "First mode-only enum; then that mode's const/forbid-extra schema. "
                     "An explicit abstention ends after the mode-only call; no redundant call. "
+                    "Final source-only enums bound operand field vocabularies; code still checks "
+                    "whole-cell identity. Scale is derived by code, not independently guessed. "
                     "Multi-value list contains sourced value records; adapter emits string list "
                     "to the pinned native scorer. Calculator/source checks unchanged.",
         "practice_rule": "No accuracy calculation. Check schema/mode-first conformance and "
@@ -145,6 +161,10 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
         "prior_practice_status_sha256": [
             ledger.file_sha256(paths(True, r["iteration"])[1]) for r in previous],
         "scored_items_existed_at_practice_freeze": SCORED.exists() if practice else None,
+        "iteration3_scope": "Three remaining calls recheck only answer-stage failures on existing "
+                            "practice items, using the modes the model already selected in "
+                            "iteration2 (not answer labels). Mode-choice implementation unchanged. "
+                            "No new practice items or accuracy calculation." if iteration == 3 else None,
     }
     config_path.write_text(json.dumps(value, indent=2), encoding="utf-8")
     print(json.dumps({"phase": value["kind"], "max_calls": value["max_calls"],
@@ -276,25 +296,26 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
                     report = Report.model_validate(items[row["id"]]["report"])
                     try:
                         if row["constrained"]:
-                            body = mode_choice_body(report, MODEL, config["options"],
-                                                    probe=row["probe"])
-                            if body["format"] != config["mode_choice_schema"] or (
-                                body["messages"][0]["content"] != (
-                                    config["probe_system"] if row["probe"]
-                                    else config["mode_choice_prompt"])
-                            ):
-                                raise ValueError("frozen mode-choice contract differs")
-                            content = await ask(client, body, row, "mode", watch)
-                            choice = ModeChoice.model_validate_json(content)
-                            row["calls"][-1]["schema_valid"] = True
+                            if row.get("direct_mode"):
+                                choice = ModeChoice.model_validate({"mode": row["direct_mode"]})
+                            else:
+                                body = mode_choice_body(report, MODEL, config["options"],
+                                                        probe=row["probe"])
+                                if body["format"] != config["mode_choice_schema"] or (
+                                    body["messages"][0]["content"] != (
+                                        config["probe_system"] if row["probe"]
+                                        else config["mode_choice_prompt"])
+                                ):
+                                    raise ValueError("frozen mode-choice contract differs")
+                                content = await ask(client, body, row, "mode", watch)
+                                choice = ModeChoice.model_validate_json(content)
+                                row["calls"][-1]["schema_valid"] = True
                             row["selected_mode"] = choice.mode
                             if choice.mode != "abstain":
                                 body = mode_specific_body(report, choice.mode, MODEL,
                                                           config["options"], probe=row["probe"])
-                                if body["format"] != config["mode_specific_schemas"][choice.mode] or (
-                                    body["messages"][0]["content"] != (
-                                        config["probe_system"] if row["probe"] else
-                                        config["mode_specific_prompts"][choice.mode])
+                                if not row["probe"] and request_hash(body) != (
+                                    config["per_item_mode_request_SHA256"][row["id"]][choice.mode]
                                 ):
                                     raise ValueError("frozen mode-specific contract differs")
                                 content = await ask(client, body, row, "answer", watch)
@@ -373,6 +394,16 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
                     and all(r["outcome"] == "practice_path_valid" for r in natural)
                     and {"lookup", "multi_value", "arithmetic", "abstain"} <= {
                         r.get("mode") for r in natural})
+                if iteration == 3:
+                    prior = prior_practice()[-1]
+                    gate = (complete and unchanged
+                            and len(rows) == 3 and all(r["outcome"] == "practice_path_valid"
+                                                     for r in rows)
+                            and any(r.get("operation") == "percent_change"
+                                    and r["computed_by_code"] for r in rows)
+                            and all(r.get("schema_valid") for r in prior["items"] if r["constrained"])
+                            and {"difference", "average", "ratio"} <= set(
+                                prior["code_path_operations"]))
                 receipt.update(operational_gate=bool(gate), code_path_operations=dict(operations),
                                warning="PRACTICE: no accuracy, expected answers or native scores.")
                 persist()
