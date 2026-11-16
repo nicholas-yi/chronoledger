@@ -10,6 +10,7 @@ import re
 import time
 from collections import Counter
 from pathlib import Path
+from typing import Literal
 
 import httpx
 from pydantic import ValidationError
@@ -22,14 +23,12 @@ from run_reader_real2_completion import SleepAwareCPU
 from asof import ledger
 from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.reader_contract import Control, Report, passed
-from asof.reader_modes import ModeChoice
+from asof.reader_modes import Mode, ModeChoice
 from asof.reader_presence import ADAPTER, answer_body, mode_body, resolve_answer
 from asof.reader_real2_guards import SustainedCPU, input_fit, truncation_reason
 
 ROOT = PROJECT_ROOT
-PRIVATE = DATA_DIR / "reader_presence"
-SERVER_LOG = PRIVATE / "isolated-server.log"
-DEADLINE = PRIVATE / "part2a_deadline.json"
+Profile = Literal["presence", "roles"]
 OPTIONS = {"temperature": 0, "seed": 2026111605, "num_predict": 768, "num_ctx": 8192,
            "num_thread": 4, "num_gpu": 0, "num_batch": 128}
 SOURCES = [Path(__file__), ROOT / "src" / "asof" / "reader_presence.py",
@@ -40,39 +39,47 @@ SOURCES = [Path(__file__), ROOT / "src" / "asof" / "reader_presence.py",
                "run_reader_contract.py")]]
 
 
-def paths(practice: bool, iteration: int):
+def paths(practice: bool, iteration: int, profile: Profile = "presence"):
     label = f"practice_{iteration}" if practice else "scored"
-    return (ROOT / "results" / f"reader_presence_{label}_config.json",
-            ROOT / "results" / f"reader_presence_{label}_status.json", PRIVATE / label)
+    private = DATA_DIR / f"reader_{profile}"
+    return (ROOT / "results" / f"reader_{profile}_{label}_config.json",
+            ROOT / "results" / f"reader_{profile}_{label}_status.json", private / label)
 
 
-def history():
+def history(profile: Profile = "presence"):
     return [json.loads(p.read_text()) for p in sorted(
-        (ROOT / "results").glob("reader_presence_practice_*_status.json"))]
+        (ROOT / "results").glob(f"reader_{profile}_practice_*_status.json"))]
 
 
-def prior_practice_calls(iteration: int) -> int:
-    return sum(r["calls"] for r in history() if r["iteration"] < iteration)
+def prior_practice_calls(iteration: int, profile: Profile = "presence") -> int:
+    return sum(r["calls"] for r in history(profile) if r["iteration"] < iteration)
 
 
 def fingerprint(value: dict) -> str:
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
 
-def freeze(practice: bool, iteration: int, change: str) -> None:
-    config_path, status_path, _ = paths(practice, iteration)
+def build_answer(profile: Profile, report: Report, mode: Mode, model: str, options: dict) -> dict:
+    if profile == "roles":
+        from asof.reader_roles import answer_body as role_body
+        return role_body(report, mode, model, options)
+    return answer_body(report, mode, model, options)
+
+
+def freeze(practice: bool, iteration: int, change: str, profile: Profile = "presence") -> None:
+    config_path, status_path, _ = paths(practice, iteration, profile)
     if config_path.exists() or status_path.exists():
         raise RuntimeError("phase already frozen/attempted")
     fixture = ROOT / "tests" / "fixtures" / (
-        "reader_presence_practice.json" if practice else "reader_presence_scored.json")
+        f"reader_{profile}_practice.json" if practice else f"reader_{profile}_scored.json")
     items = json.loads(fixture.read_text())
-    previous = history()
+    previous = history(profile)
     if practice:
         if not 1 <= iteration <= 3 or len(previous) != iteration - 1 or len(items) > 12:
             raise ValueError("practice limit/sequence")
         if sum(r["calls"] for r in previous) + 2 * len(items) > 40:
             raise ValueError("practice40call cap")
-        if (fixture.parent / "reader_presence_scored.json").exists() or any(
+        if (fixture.parent / f"reader_{profile}_scored.json").exists() or any(
             "expected" in r for r in items
         ):
             raise ValueError("practice first and never accuracy labels")
@@ -86,9 +93,9 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
         for r in items:
             Control.model_validate(r)
         exposed = []
-        for name in ("reader_contract_controls.json", "reader_modes_practice.json",
-                     "reader_modes_scored.json", "reader_presence_practice.json"):
-            exposed.extend(json.loads((fixture.parent / name).read_text()))
+        for candidate in fixture.parent.glob("reader_*.json"):
+            if candidate != fixture:
+                exposed.extend(json.loads(candidate.read_text()))
         if {r["report"]["question"] for r in items} & {r["report"]["question"] for r in exposed}:
             raise ValueError("fresh scored questions required")
     if len({r["id"] for r in items}) != len(items):
@@ -98,13 +105,15 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
         report = Report.model_validate(r["report"])
         requests[r["id"]] = {
             "mode": fingerprint(mode_body(report, MODEL, OPTIONS)),
-            **{m: fingerprint(answer_body(report, m, MODEL, OPTIONS))
+            **{m: fingerprint(build_answer(profile, report, m, MODEL, OPTIONS))
                for m in ("lookup", "multi_value", "arithmetic", "abstain")}}
+    sources = SOURCES + ([ROOT / "src" / "asof" / "reader_roles.py"] if profile == "roles" else [])
     value = {"kind": "PRACTICE NEVER ACCURACY" if practice else "FRESH INVENTED CONTROL",
         "iteration": iteration if practice else None, "change": change, "items": items,
+        "profile": profile,
         "options": OPTIONS, "digest": DIGEST, "server": "0.40.16",
         "request_SHA256": requests,
-        "source_SHA256": {str(p.relative_to(ROOT)): ledger.file_sha256(p) for p in SOURCES},
+        "source_SHA256": {str(p.relative_to(ROOT)): ledger.file_sha256(p) for p in sources},
         "schema_policy": "Two-stage,mode first; source fields includeNOT_PRESENT. Source-only "
                          "vocabularies and unit-derived dimension domain; code validates cells "
                          "and derives arithmetic/scale. No answer label in model input.",
@@ -113,16 +122,23 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
                           "abstentions; report model/system separately. Others remain failures.",
         "pass": "All24attempted;>=20/21fullyright nativeEM+scale+dimension+operation AND3/3"
                 "model-or-system abstentions. Answerable abstention is a miss. No retries/rerun.",
-        "limits": "Entire2a30min from first practice start;4threads,10GiB,240s percall,"
+        "limits": "Entire invented-control part30min from first practice start;4threads,10GiB,240s percall,"
                   "sustainedREAL2CPU,sleepstop,continue single timeout/stop3consecutive.",
         "scope": "Invented only,no real benchmark data,no ledger row,pull,training or paid call.",
-        "practice_SHA256": [ledger.file_sha256(paths(True, r["iteration"])[1]) for r in previous]}
+        "SEC_receipt_SHA256": ledger.file_sha256(DATA_DIR / "p0_SEC_request_receipt.json"),
+        "named_role_contract": ("difference=end-start;fractionalchange=(end-start)/abs(start),"
+            "displaypercent=100*fraction;ratio=numerator/denominator;average=mean(values). "
+            "Allroles retain row/period/unit/value;code-derived scale,source checks unchanged. "
+            "Mixed real/NOT_PRESENT lists rejected as SYSTEM decline. List capacity is bounded "
+            "by source-cell count (not target labels),max6." if profile == "roles" else None),
+        "practice_SHA256": [ledger.file_sha256(paths(True, r["iteration"], profile)[1])
+                           for r in previous]}
     config_path.write_text(json.dumps(value, indent=2), encoding="utf-8")
     print(json.dumps({"config_SHA256": ledger.file_sha256(config_path), "items": len(items)}))
 
 
-async def run(practice: bool, iteration: int, pid: int) -> None:
-    cp, sp, private = paths(practice, iteration)
+async def run(practice: bool, iteration: int, pid: int, profile: Profile = "presence") -> None:
+    cp, sp, private = paths(practice, iteration, profile)
     if sp.exists():
         raise RuntimeError("already attempted")
     cfg = json.loads(cp.read_text())
@@ -131,10 +147,15 @@ async def run(practice: bool, iteration: int, pid: int) -> None:
     ):
         raise ValueError("commit source/config before calls")
     private.mkdir(parents=True, exist_ok=True)
-    if not DEADLINE.exists():
-        DEADLINE.write_text(json.dumps({"monotonic_deadline": time.monotonic() + 1800}),
+    private_root = DATA_DIR / f"reader_{profile}"
+    server_log = private_root / "isolated-server.log"
+    deadline_path = private_root / "part1_deadline.json" if profile == "roles" else (
+        private_root / "part2a_deadline.json")
+    if not deadline_path.exists():
+        deadline_path.write_text(json.dumps({"monotonic_deadline": time.monotonic() + 1800}),
                             encoding="utf-8")
-    deadline = json.loads(DEADLINE.read_text())["monotonic_deadline"]
+    deadline = json.loads(deadline_path.read_text())["monotonic_deadline"]
+    wall_reason = "entire_invented_control30minwall"
     start, cpu_start = time.monotonic(), time.process_time()
     cpu, memory, policy = SleepAwareCPU(), OwnedMemory(pid), SustainedCPU()
     rows = [{"id": r["id"], "calls": [], "outcome": "not_attempted",
@@ -153,7 +174,7 @@ async def run(practice: bool, iteration: int, pid: int) -> None:
             if memory.sample() > 10 << 30:
                 raise ResourceStop("owned_RSS10GiB")
             if time.monotonic() >= deadline:
-                raise ResourceStop("entire_part2a30minwall")
+                raise ResourceStop(wall_reason)
 
     consecutive = 0
 
@@ -166,15 +187,15 @@ async def run(practice: bool, iteration: int, pid: int) -> None:
         cpu.check_suspend()
         remaining = deadline - time.monotonic()
         if remaining <= 0:
-            raise ResourceStop("entire_part2a30minwall")
-        if practice and prior_practice_calls(iteration) + sum(
+            raise ResourceStop(wall_reason)
+        if practice and prior_practice_calls(iteration, profile) + sum(
             len(r["calls"]) for r in rows) >= 40:
             raise ResourceStop("practice40callcap")
         call = {"stage": stage, "outcome": "started"}
         row["calls"].append(call)
         row["outcome"] = "attempt_started"
         persist()
-        offset, started = SERVER_LOG.stat().st_size, time.monotonic()
+        offset, started = server_log.stat().st_size, time.monotonic()
         try:
             response = await guarded_request(client, body, watch, min(240, remaining))
             consecutive = 0
@@ -186,7 +207,7 @@ async def run(practice: bool, iteration: int, pid: int) -> None:
             call["raw_SHA256"] = ledger.file_sha256(path)
             call["metrics"] = {k: raw.get(k) for k in ("prompt_eval_count", "eval_count",
                                                       "total_duration", "load_duration")}
-            with SERVER_LOG.open("rb") as stream:
+            with server_log.open("rb") as stream:
                 stream.seek(offset)
                 log = stream.read(262145)
             if len(log) > 262144:
@@ -236,12 +257,19 @@ async def run(practice: bool, iteration: int, pid: int) -> None:
                                             row, "mode", watch)
                         choice = ModeChoice.model_validate_json(content)
                         if choice.mode != "abstain":
-                            content = await ask(client, answer_body(
-                                report, choice.mode, MODEL, cfg["options"]), row, choice.mode, watch)
-                        parsed = ADAPTER.validate_json(content)
-                        result = resolve_answer(parsed, report)
+                            content = await ask(client, build_answer(
+                                profile, report, choice.mode, MODEL, cfg["options"]),
+                                row, choice.mode, watch)
+                        if profile == "roles":
+                            from asof.reader_roles import resolve_content
+                            parsed_mode, result = resolve_content(content, report)
+                        else:
+                            parsed = ADAPTER.validate_json(content)
+                            parsed_mode, result = parsed.mode, resolve_answer(parsed, report)
+                        if parsed_mode != choice.mode:
+                            raise ValueError("answer mode differs from selected mode")
                         row.update(outcome="practice_path" if practice else "answered",
-                            mode=parsed.mode, values=result.values, scale=result.scale,
+                            mode=parsed_mode, values=result.values, scale=result.scale,
                             dimension=result.dimension, operation=result.operation,
                             abstention_source=result.abstention_source,
                             decline_reason=result.decline_reason, computed_by_code=result.computed_by_code)
@@ -311,10 +339,11 @@ if __name__ == "__main__":
     parser.add_argument("--iteration", type=int, default=1)
     parser.add_argument("--change", default="NOT_PRESENT plus predeclared model/system abstentions.")
     parser.add_argument("--server-pid", type=int)
+    parser.add_argument("--profile", choices=("presence", "roles"), default="presence")
     args = parser.parse_args()
     if args.phase in ("practice-freeze", "freeze"):
-        freeze(args.phase == "practice-freeze", args.iteration, args.change)
+        freeze(args.phase == "practice-freeze", args.iteration, args.change, args.profile)
     else:
         if args.server_pid is None:
             parser.error("--server-pid required")
-        asyncio.run(run(args.phase == "practice", args.iteration, args.server_pid))
+        asyncio.run(run(args.phase == "practice", args.iteration, args.server_pid, args.profile))

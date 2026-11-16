@@ -57,5 +57,6 @@ def test_call_budget_does_not_read_current_partial_receipt_as_completed_history(
                                                 scripts / "run_presence_control.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    monkeypatch.setattr(module, "history", lambda: [{"iteration": 1, "calls": 16}, {"iteration": 2}])
+    monkeypatch.setattr(module, "history", lambda profile="presence": [
+        {"iteration": 1, "calls": 16}, {"iteration": 2}])
     assert module.prior_practice_calls(2) == 16
