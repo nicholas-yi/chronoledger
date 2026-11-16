@@ -1,0 +1,2136 @@
+{
+  "kind": "PRACTICE NEVER ACCURACY",
+  "iteration": 2,
+  "items": [
+    {
+      "id": "CLP01",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "d97ccc5fdaa74d272f5b6e1d1e79f533f61efffc6c7a90317822216049c6382c",
+          "metrics": {
+            "prompt_eval_count": 162,
+            "eval_count": 7,
+            "total_duration": 2907058900,
+            "load_duration": 11332200
+          },
+          "wall_seconds": 2.9529999997466803
+        },
+        {
+          "stage": "multi_value",
+          "outcome": "complete",
+          "raw_SHA256": "801f1a8c2056198e9a3bb443da75a639e626ea18b48a8b18a95c6af4f74d1875",
+          "metrics": {
+            "prompt_eval_count": 646,
+            "eval_count": 58,
+            "total_duration": 18794678300,
+            "load_duration": 10759800
+          },
+          "wall_seconds": 18.875
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "multi_value",
+      "values": [
+        "Pearl Landing",
+        "Cobalt Rise"
+      ],
+      "scale": "",
+      "dimension": "text",
+      "operation": "lookup",
+      "abstention_source": null,
+      "decline_reason": null,
+      "computed_by_code": false
+    },
+    {
+      "id": "CLP02",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "27d11cf9c852742efd6895d7d47009667de055dd48b9a699725e73a9c8d8b15d",
+          "metrics": {
+            "prompt_eval_count": 166,
+            "eval_count": 7,
+            "total_duration": 2829613400,
+            "load_duration": 11474600
+          },
+          "wall_seconds": 2.8909999998286366
+        },
+        {
+          "stage": "multi_value",
+          "outcome": "complete",
+          "raw_SHA256": "5ae4c968726cc3e8e3e02767ceebe79c19ef6a985f4b4348f4c58bd7feb39630",
+          "metrics": {
+            "prompt_eval_count": 656,
+            "eval_count": 75,
+            "total_duration": 20266003900,
+            "load_duration": 14327900
+          },
+          "wall_seconds": 20.311999999918044
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "multi_value",
+      "values": [
+        "Gold Meadow",
+        "Violet Quay",
+        "Scarlet Glen"
+      ],
+      "scale": "",
+      "dimension": "text",
+      "operation": "lookup",
+      "abstention_source": null,
+      "decline_reason": null,
+      "computed_by_code": false
+    },
+    {
+      "id": "CLP03",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "be57f160b95021e50672dfc42a2a52e83a28a4348fd7e247977245449c6199d0",
+          "metrics": {
+            "prompt_eval_count": 167,
+            "eval_count": 6,
+            "total_duration": 2942311200,
+            "load_duration": 13181800
+          },
+          "wall_seconds": 3.0
+        },
+        {
+          "stage": "lookup",
+          "outcome": "complete",
+          "raw_SHA256": "0624d29768a51d684b0dd16c793c0f2dbd1d33dd262cb7a9ca57ab5089f9d1bf",
+          "metrics": {
+            "prompt_eval_count": 616,
+            "eval_count": 35,
+            "total_duration": 15972634700,
+            "load_duration": 13738000
+          },
+          "wall_seconds": 16.030999999959022
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "lookup",
+      "values": [
+        "107"
+      ],
+      "scale": "thousand",
+      "dimension": "money",
+      "operation": "lookup",
+      "abstention_source": null,
+      "decline_reason": null,
+      "computed_by_code": false
+    },
+    {
+      "id": "CLP04",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "1999605e8aee545dbc408149e023551d82748a2b6e9aabb3d0b5b37ab1ce3261",
+          "metrics": {
+            "prompt_eval_count": 180,
+            "eval_count": 7,
+            "total_duration": 3538572300,
+            "load_duration": 12577200
+          },
+          "wall_seconds": 3.610000000335276
+        },
+        {
+          "stage": "arithmetic",
+          "outcome": "complete",
+          "raw_SHA256": "6f805c32cf0ed358dd1d87465b5a3152fc7823324a14e19c09305ba4985c208e",
+          "metrics": {
+            "prompt_eval_count": 1201,
+            "eval_count": 68,
+            "total_duration": 31864156300,
+            "load_duration": 18868700
+          },
+          "wall_seconds": 31.92199999978766
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "arithmetic",
+      "values": [
+        "-35.00"
+      ],
+      "scale": "million",
+      "dimension": "money",
+      "operation": "difference",
+      "abstention_source": null,
+      "decline_reason": null,
+      "computed_by_code": true
+    },
+    {
+      "id": "CLP05",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "59c9115dea96b071942a3a9d5b467acd7b40533c0e1a3268415f9b689c935327",
+          "metrics": {
+            "prompt_eval_count": 166,
+            "eval_count": 7,
+            "total_duration": 2844112500,
+            "load_duration": 11826500
+          },
+          "wall_seconds": 2.889999999664724
+        },
+        {
+          "stage": "arithmetic",
+          "outcome": "complete",
+          "raw_SHA256": "b73a6b7f83fab51fc89271b50527e4cac6ad7251275287b1f9b491b595a9e817",
+          "metrics": {
+            "prompt_eval_count": 1183,
+            "eval_count": 62,
+            "total_duration": 28896522700,
+            "load_duration": 10668400
+          },
+          "wall_seconds": 28.95300000021234
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "arithmetic",
+      "values": [
+        "92.00"
+      ],
+      "scale": "thousand",
+      "dimension": "money",
+      "operation": "average",
+      "abstention_source": null,
+      "decline_reason": null,
+      "computed_by_code": true
+    },
+    {
+      "id": "CLP06",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "4abd1f3c37af501838f057dcb9c46e5da08b01e42d9d270942d69e83dcd5c626",
+          "metrics": {
+            "prompt_eval_count": 178,
+            "eval_count": 7,
+            "total_duration": 3077075700,
+            "load_duration": 10713600
+          },
+          "wall_seconds": 3.1409999998286366
+        },
+        {
+          "stage": "arithmetic",
+          "outcome": "complete",
+          "raw_SHA256": "b56122372685552af67989f06552646fe38e6ce12569bfa739778b16ac9f3d6b",
+          "metrics": {
+            "prompt_eval_count": 1196,
+            "eval_count": 65,
+            "total_duration": 29300767800,
+            "load_duration": 12231100
+          },
+          "wall_seconds": 29.375
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "arithmetic",
+      "values": [],
+      "scale": "",
+      "dimension": "none",
+      "operation": "abstain",
+      "abstention_source": "system",
+      "decline_reason": "zero_denominator",
+      "computed_by_code": false
+    },
+    {
+      "id": "CLP07",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "beb5d04b4a69ffb372c9efcc754a1a7fd672d5bc6180730303fc31c6091f5cd5",
+          "metrics": {
+            "prompt_eval_count": 147,
+            "eval_count": 8,
+            "total_duration": 2687656700,
+            "load_duration": 12145500
+          },
+          "wall_seconds": 2.75
+        },
+        {
+          "stage": "text_span",
+          "outcome": "complete",
+          "raw_SHA256": "6dcfa9a453e56d94aa1f46845550ed42a4490031d251eb0b84bde9218ef71723",
+          "metrics": {
+            "prompt_eval_count": 360,
+            "eval_count": 28,
+            "total_duration": 10045308300,
+            "load_duration": 11813000
+          },
+          "wall_seconds": 10.125
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "text_span",
+      "values": [
+        "Saffron Bridge"
+      ],
+      "scale": "",
+      "dimension": "text",
+      "operation": "lookup",
+      "abstention_source": null,
+      "decline_reason": null,
+      "computed_by_code": false
+    },
+    {
+      "id": "CLP08",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "89ea9e079e378ca40e9195f855970f76d3a729acf1f1340665d9ffffb67794bb",
+          "metrics": {
+            "prompt_eval_count": 151,
+            "eval_count": 8,
+            "total_duration": 2952198300,
+            "load_duration": 13107200
+          },
+          "wall_seconds": 3.0
+        },
+        {
+          "stage": "text_span",
+          "outcome": "complete",
+          "raw_SHA256": "fc96d999c66c71aee5d499090d7c2abc42ec264738a4319e1341194b6e05877a",
+          "metrics": {
+            "prompt_eval_count": 364,
+            "eval_count": 36,
+            "total_duration": 6415810200,
+            "load_duration": 12058400
+          },
+          "wall_seconds": 6.484000000171363
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "text_span",
+      "values": [
+        "braided willow"
+      ],
+      "scale": "",
+      "dimension": "text",
+      "operation": "lookup",
+      "abstention_source": null,
+      "decline_reason": null,
+      "computed_by_code": false
+    },
+    {
+      "id": "CLP09",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "05ea9e5e1300bb63bbed8896f9a3a1e75f66edc10f7e21db63a61fbdf67bd041",
+          "metrics": {
+            "prompt_eval_count": 168,
+            "eval_count": 8,
+            "total_duration": 3458301000,
+            "load_duration": 15240600
+          },
+          "wall_seconds": 3.530999999959022
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "abstain",
+      "values": [],
+      "scale": "",
+      "dimension": "none",
+      "operation": "abstain",
+      "abstention_source": "model",
+      "decline_reason": "explicit_model_abstention",
+      "computed_by_code": false
+    },
+    {
+      "id": "CLP10",
+      "calls": [
+        {
+          "stage": "mode",
+          "outcome": "complete",
+          "raw_SHA256": "342ce16b0878428505223fc13145329567a352d7d928c616e758e333e1959687",
+          "metrics": {
+            "prompt_eval_count": 142,
+            "eval_count": 9,
+            "total_duration": 2674871900,
+            "load_duration": 11802400
+          },
+          "wall_seconds": 2.734999999869615
+        }
+      ],
+      "outcome": "practice_path",
+      "mode": "abstain",
+      "values": [],
+      "scale": "",
+      "dimension": "none",
+      "operation": "abstain",
+      "abstention_source": "model",
+      "decline_reason": "explicit_model_abstention",
+      "computed_by_code": false
+    }
+  ],
+  "config_SHA256": "ce305a8521345cab699f30cb06d5fec2f4a17100ada4ab0ddc81e7b1329f9fc5",
+  "lineage": {
+    "git_commit": "43af7f88ccfee2fe55909cf834d22237a9927e29",
+    "git_dirty": false,
+    "inputs": {},
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  },
+  "CPU_trace": [
+    {
+      "start_seconds": 0.29700000025331974,
+      "end_seconds": 1.3130000000819564,
+      "timestamp_UTC": "2026-11-16T16:58:30.364732+00:00",
+      "host_CPU_percent": 54.55882352941177,
+      "phase": "launch_wait",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 1.3130000000819564,
+      "end_seconds": 2.3130000000819564,
+      "timestamp_UTC": "2026-11-16T16:58:31.368399+00:00",
+      "host_CPU_percent": 19.140625,
+      "phase": "launch_wait",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 2.3130000000819564,
+      "end_seconds": 3.3280000002123415,
+      "timestamp_UTC": "2026-11-16T16:58:32.383019+00:00",
+      "host_CPU_percent": 23.269230769230763,
+      "phase": "launch_wait",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 3.3280000002123415,
+      "end_seconds": 4.844000000040978,
+      "timestamp_UTC": "2026-11-16T16:58:33.885498+00:00",
+      "host_CPU_percent": 36.9140625,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 4.844000000040978,
+      "end_seconds": 5.875,
+      "timestamp_UTC": "2026-11-16T16:58:34.916550+00:00",
+      "host_CPU_percent": 45.45454545454546,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 5.875,
+      "end_seconds": 6.905999999959022,
+      "timestamp_UTC": "2026-11-16T16:58:35.950403+00:00",
+      "host_CPU_percent": 48.29545454545454,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 6.905999999959022,
+      "end_seconds": 7.92200000025332,
+      "timestamp_UTC": "2026-11-16T16:58:36.976837+00:00",
+      "host_CPU_percent": 45.833333333333336,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 7.92200000025332,
+      "end_seconds": 8.953000000212342,
+      "timestamp_UTC": "2026-11-16T16:58:38.009816+00:00",
+      "host_CPU_percent": 42.89772727272727,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 8.953000000212342,
+      "end_seconds": 9.984000000171363,
+      "timestamp_UTC": "2026-11-16T16:58:39.037060+00:00",
+      "host_CPU_percent": 40.05681818181818,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 9.984000000171363,
+      "end_seconds": 11.016000000294298,
+      "timestamp_UTC": "2026-11-16T16:58:40.071728+00:00",
+      "host_CPU_percent": 42.42424242424242,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 11.016000000294298,
+      "end_seconds": 12.04700000025332,
+      "timestamp_UTC": "2026-11-16T16:58:41.090551+00:00",
+      "host_CPU_percent": 72.5,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 12.04700000025332,
+      "end_seconds": 13.078000000212342,
+      "timestamp_UTC": "2026-11-16T16:58:42.124632+00:00",
+      "host_CPU_percent": 49.621212121212125,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 13.078000000212342,
+      "end_seconds": 14.109000000171363,
+      "timestamp_UTC": "2026-11-16T16:58:43.160291+00:00",
+      "host_CPU_percent": 73.78731343283582,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 14.109000000171363,
+      "end_seconds": 15.141000000294298,
+      "timestamp_UTC": "2026-11-16T16:58:44.192251+00:00",
+      "host_CPU_percent": 61.17424242424243,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 15.141000000294298,
+      "end_seconds": 16.17200000025332,
+      "timestamp_UTC": "2026-11-16T16:58:45.226598+00:00",
+      "host_CPU_percent": 44.22348484848485,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 16.17200000025332,
+      "end_seconds": 17.219000000040978,
+      "timestamp_UTC": "2026-11-16T16:58:46.263378+00:00",
+      "host_CPU_percent": 48.01136363636363,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 17.219000000040978,
+      "end_seconds": 18.234000000171363,
+      "timestamp_UTC": "2026-11-16T16:58:47.286910+00:00",
+      "host_CPU_percent": 42.32954545454546,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 18.234000000171363,
+      "end_seconds": 19.266000000294298,
+      "timestamp_UTC": "2026-11-16T16:58:48.315812+00:00",
+      "host_CPU_percent": 36.458333333333336,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 19.266000000294298,
+      "end_seconds": 20.29700000025332,
+      "timestamp_UTC": "2026-11-16T16:58:49.349515+00:00",
+      "host_CPU_percent": 41.19318181818182,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 20.29700000025332,
+      "end_seconds": 21.344000000040978,
+      "timestamp_UTC": "2026-11-16T16:58:50.396141+00:00",
+      "host_CPU_percent": 44.309701492537314,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 21.344000000040978,
+      "end_seconds": 22.375,
+      "timestamp_UTC": "2026-11-16T16:58:51.429794+00:00",
+      "host_CPU_percent": 34.84848484848485,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 22.375,
+      "end_seconds": 23.405999999959022,
+      "timestamp_UTC": "2026-11-16T16:58:52.457740+00:00",
+      "host_CPU_percent": 79.35606060606061,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 23.405999999959022,
+      "end_seconds": 24.438000000081956,
+      "timestamp_UTC": "2026-11-16T16:58:53.492670+00:00",
+      "host_CPU_percent": 44.03409090909091,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 24.438000000081956,
+      "end_seconds": 25.469000000040978,
+      "timestamp_UTC": "2026-11-16T16:58:54.522257+00:00",
+      "host_CPU_percent": 47.064393939393945,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 25.469000000040978,
+      "end_seconds": 26.516000000294298,
+      "timestamp_UTC": "2026-11-16T16:58:55.558943+00:00",
+      "host_CPU_percent": 47.44318181818182,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 26.516000000294298,
+      "end_seconds": 27.530999999959022,
+      "timestamp_UTC": "2026-11-16T16:58:56.588361+00:00",
+      "host_CPU_percent": 35.70075757575758,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 27.530999999959022,
+      "end_seconds": 28.563000000081956,
+      "timestamp_UTC": "2026-11-16T16:58:57.616272+00:00",
+      "host_CPU_percent": 44.31818181818182,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 28.563000000081956,
+      "end_seconds": 29.609000000171363,
+      "timestamp_UTC": "2026-11-16T16:58:58.653569+00:00",
+      "host_CPU_percent": 75.0,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 29.609000000171363,
+      "end_seconds": 30.641000000294298,
+      "timestamp_UTC": "2026-11-16T16:58:59.690084+00:00",
+      "host_CPU_percent": 48.9181561618062,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 30.641000000294298,
+      "end_seconds": 31.67200000025332,
+      "timestamp_UTC": "2026-11-16T16:59:00.721250+00:00",
+      "host_CPU_percent": 42.39848914069877,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 31.67200000025332,
+      "end_seconds": 32.70300000021234,
+      "timestamp_UTC": "2026-11-16T16:59:01.749675+00:00",
+      "host_CPU_percent": 36.61567877629063,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 32.70300000021234,
+      "end_seconds": 33.73400000017136,
+      "timestamp_UTC": "2026-11-16T16:59:02.778903+00:00",
+      "host_CPU_percent": 38.73106060606061,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 33.73400000017136,
+      "end_seconds": 34.7660000002943,
+      "timestamp_UTC": "2026-11-16T16:59:03.816686+00:00",
+      "host_CPU_percent": 37.68656716417911,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 34.7660000002943,
+      "end_seconds": 35.79700000025332,
+      "timestamp_UTC": "2026-11-16T16:59:04.853338+00:00",
+      "host_CPU_percent": 39.86742424242424,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 35.79700000025332,
+      "end_seconds": 36.82800000021234,
+      "timestamp_UTC": "2026-11-16T16:59:05.872569+00:00",
+      "host_CPU_percent": 33.94230769230769,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 36.82800000021234,
+      "end_seconds": 37.84400000004098,
+      "timestamp_UTC": "2026-11-16T16:59:06.899052+00:00",
+      "host_CPU_percent": 35.70075757575758,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 37.84400000004098,
+      "end_seconds": 38.875,
+      "timestamp_UTC": "2026-11-16T16:59:07.930683+00:00",
+      "host_CPU_percent": 37.21590909090909,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 38.875,
+      "end_seconds": 39.90599999995902,
+      "timestamp_UTC": "2026-11-16T16:59:08.954385+00:00",
+      "host_CPU_percent": 43.36538461538461,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 39.90599999995902,
+      "end_seconds": 40.938000000081956,
+      "timestamp_UTC": "2026-11-16T16:59:09.989053+00:00",
+      "host_CPU_percent": 41.23134328358209,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 40.938000000081956,
+      "end_seconds": 41.96900000004098,
+      "timestamp_UTC": "2026-11-16T16:59:11.020361+00:00",
+      "host_CPU_percent": 37.121212121212125,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 41.96900000004098,
+      "end_seconds": 43.0,
+      "timestamp_UTC": "2026-11-16T16:59:12.057151+00:00",
+      "host_CPU_percent": 43.27651515151515,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 43.0,
+      "end_seconds": 44.04700000025332,
+      "timestamp_UTC": "2026-11-16T16:59:13.095847+00:00",
+      "host_CPU_percent": 43.20754716981132,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 44.04700000025332,
+      "end_seconds": 45.07800000021234,
+      "timestamp_UTC": "2026-11-16T16:59:14.132813+00:00",
+      "host_CPU_percent": 61.142322097378276,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 45.07800000021234,
+      "end_seconds": 46.125,
+      "timestamp_UTC": "2026-11-16T16:59:15.177597+00:00",
+      "host_CPU_percent": 70.24253731343283,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 46.125,
+      "end_seconds": 47.15599999995902,
+      "timestamp_UTC": "2026-11-16T16:59:16.206594+00:00",
+      "host_CPU_percent": 47.15909090909091,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 47.15599999995902,
+      "end_seconds": 48.188000000081956,
+      "timestamp_UTC": "2026-11-16T16:59:17.244823+00:00",
+      "host_CPU_percent": 55.11363636363637,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 48.188000000081956,
+      "end_seconds": 49.23400000017136,
+      "timestamp_UTC": "2026-11-16T16:59:18.281353+00:00",
+      "host_CPU_percent": 60.60606060606061,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 49.23400000017136,
+      "end_seconds": 50.25,
+      "timestamp_UTC": "2026-11-16T16:59:19.303131+00:00",
+      "host_CPU_percent": 46.685606060606055,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 50.25,
+      "end_seconds": 51.28099999995902,
+      "timestamp_UTC": "2026-11-16T16:59:20.336303+00:00",
+      "host_CPU_percent": 55.77651515151515,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 51.28099999995902,
+      "end_seconds": 52.29700000025332,
+      "timestamp_UTC": "2026-11-16T16:59:21.348353+00:00",
+      "host_CPU_percent": 52.88461538461539,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 52.29700000025332,
+      "end_seconds": 53.32800000021234,
+      "timestamp_UTC": "2026-11-16T16:59:22.381095+00:00",
+      "host_CPU_percent": 54.35606060606061,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 53.32800000021234,
+      "end_seconds": 54.35900000017136,
+      "timestamp_UTC": "2026-11-16T16:59:23.411429+00:00",
+      "host_CPU_percent": 47.44318181818182,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 54.35900000017136,
+      "end_seconds": 55.3910000002943,
+      "timestamp_UTC": "2026-11-16T16:59:24.441620+00:00",
+      "host_CPU_percent": 50.85227272727273,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 55.3910000002943,
+      "end_seconds": 56.42200000025332,
+      "timestamp_UTC": "2026-11-16T16:59:25.474509+00:00",
+      "host_CPU_percent": 63.25757575757576,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 56.42200000025332,
+      "end_seconds": 57.45300000021234,
+      "timestamp_UTC": "2026-11-16T16:59:26.506390+00:00",
+      "host_CPU_percent": 41.38257575757576,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 57.45300000021234,
+      "end_seconds": 58.48400000017136,
+      "timestamp_UTC": "2026-11-16T16:59:27.535031+00:00",
+      "host_CPU_percent": 66.00378787878788,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 58.48400000017136,
+      "end_seconds": 59.5,
+      "timestamp_UTC": "2026-11-16T16:59:28.554368+00:00",
+      "host_CPU_percent": 40.67307692307692,
+      "phase": "generation",
+      "rolling_60second_mean_percent": null,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 59.5,
+      "end_seconds": 60.53099999995902,
+      "timestamp_UTC": "2026-11-16T16:59:29.583029+00:00",
+      "host_CPU_percent": 53.59848484848485,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.285768939853924,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 60.53099999995902,
+      "end_seconds": 61.563000000081956,
+      "timestamp_UTC": "2026-11-16T16:59:30.613101+00:00",
+      "host_CPU_percent": 66.09848484848484,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.6318269417715,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 61.563000000081956,
+      "end_seconds": 62.59400000004098,
+      "timestamp_UTC": "2026-11-16T16:59:31.648209+00:00",
+      "host_CPU_percent": 41.003787878787875,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.98817332020733,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 62.59400000004098,
+      "end_seconds": 63.625,
+      "timestamp_UTC": "2026-11-16T16:59:32.677973+00:00",
+      "host_CPU_percent": 50.189393939393945,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.38320954031056,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 63.625,
+      "end_seconds": 64.65599999995902,
+      "timestamp_UTC": "2026-11-16T16:59:33.711178+00:00",
+      "host_CPU_percent": 40.71969696969697,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.44860302594559,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 64.65599999995902,
+      "end_seconds": 65.68800000008196,
+      "timestamp_UTC": "2026-11-16T16:59:34.740188+00:00",
+      "host_CPU_percent": 49.0530303030303,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.537257145282815,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 65.68800000008196,
+      "end_seconds": 66.73400000017136,
+      "timestamp_UTC": "2026-11-16T16:59:35.782913+00:00",
+      "host_CPU_percent": 50.56818181818181,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.5857325240702,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 66.73400000017136,
+      "end_seconds": 67.7660000002943,
+      "timestamp_UTC": "2026-11-16T16:59:36.822417+00:00",
+      "host_CPU_percent": 46.54850746268657,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.59097543829718,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 67.7660000002943,
+      "end_seconds": 68.79700000025332,
+      "timestamp_UTC": "2026-11-16T16:59:37.852310+00:00",
+      "host_CPU_percent": 54.26136363636363,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.778608014049006,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 68.79700000025332,
+      "end_seconds": 69.82800000021234,
+      "timestamp_UTC": "2026-11-16T16:59:38.880975+00:00",
+      "host_CPU_percent": 66.47727272727273,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.22521312766925,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 69.82800000021234,
+      "end_seconds": 70.85900000017136,
+      "timestamp_UTC": "2026-11-16T16:59:39.911212+00:00",
+      "host_CPU_percent": 53.97727272727273,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.42988800139712,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 70.85900000017136,
+      "end_seconds": 71.90599999995902,
+      "timestamp_UTC": "2026-11-16T16:59:40.957215+00:00",
+      "host_CPU_percent": 56.06343283582089,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.22176813682522,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 71.90599999995902,
+      "end_seconds": 72.93800000008196,
+      "timestamp_UTC": "2026-11-16T16:59:41.990914+00:00",
+      "host_CPU_percent": 49.24242424242424,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.161487833681925,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 72.93800000008196,
+      "end_seconds": 73.96900000004098,
+      "timestamp_UTC": "2026-11-16T16:59:43.020095+00:00",
+      "host_CPU_percent": 54.0719696969697,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.879100080280395,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 73.96900000004098,
+      "end_seconds": 75.0,
+      "timestamp_UTC": "2026-11-16T16:59:44.052777+00:00",
+      "host_CPU_percent": 40.814393939393945,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.49981951811553,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 75.0,
+      "end_seconds": 76.03099999995902,
+      "timestamp_UTC": "2026-11-16T16:59:45.081854+00:00",
+      "host_CPU_percent": 80.97514340344169,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.091501237206934,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 76.03099999995902,
+      "end_seconds": 77.06300000008196,
+      "timestamp_UTC": "2026-11-16T16:59:46.115816+00:00",
+      "host_CPU_percent": 57.692307692307686,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.2669149901591,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 77.06300000008196,
+      "end_seconds": 78.09400000004098,
+      "timestamp_UTC": "2026-11-16T16:59:47.145424+00:00",
+      "host_CPU_percent": 45.73863636363637,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.31072180834247,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 78.09400000004098,
+      "end_seconds": 79.10900000017136,
+      "timestamp_UTC": "2026-11-16T16:59:48.167781+00:00",
+      "host_CPU_percent": 51.442307692307686,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.55050121298544,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 79.10900000017136,
+      "end_seconds": 80.1410000002943,
+      "timestamp_UTC": "2026-11-16T16:59:49.196773+00:00",
+      "host_CPU_percent": 45.17045454545454,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.6312998241144,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 80.1410000002943,
+      "end_seconds": 81.18800000008196,
+      "timestamp_UTC": "2026-11-16T16:59:50.232594+00:00",
+      "host_CPU_percent": 53.59848484848485,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.80149204479402,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 81.18800000008196,
+      "end_seconds": 82.20300000021234,
+      "timestamp_UTC": "2026-11-16T16:59:51.260869+00:00",
+      "host_CPU_percent": 46.496212121212125,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.97393360124822,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 82.20300000021234,
+      "end_seconds": 83.23400000017136,
+      "timestamp_UTC": "2026-11-16T16:59:52.286639+00:00",
+      "host_CPU_percent": 61.83712121212122,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.800488209688524,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 83.23400000017136,
+      "end_seconds": 84.2660000002943,
+      "timestamp_UTC": "2026-11-16T16:59:53.320410+00:00",
+      "host_CPU_percent": 71.30681818181819,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.16832280582901,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 84.2660000002943,
+      "end_seconds": 85.29700000025332,
+      "timestamp_UTC": "2026-11-16T16:59:54.350511+00:00",
+      "host_CPU_percent": 46.96969696969697,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.175382464909255,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 85.29700000025332,
+      "end_seconds": 86.32800000021234,
+      "timestamp_UTC": "2026-11-16T16:59:55.375832+00:00",
+      "host_CPU_percent": 52.69230769230769,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.26666580309391,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 86.32800000021234,
+      "end_seconds": 87.35900000017136,
+      "timestamp_UTC": "2026-11-16T16:59:56.406331+00:00",
+      "host_CPU_percent": 46.59090909090909,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.41700197731286,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 87.35900000017136,
+      "end_seconds": 88.375,
+      "timestamp_UTC": "2026-11-16T16:59:57.431927+00:00",
+      "host_CPU_percent": 48.29545454545454,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.509053744947764,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 88.375,
+      "end_seconds": 89.40599999995902,
+      "timestamp_UTC": "2026-11-16T16:59:58.454069+00:00",
+      "host_CPU_percent": 52.88461538461539,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.22517408300011,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 89.40599999995902,
+      "end_seconds": 90.43800000008196,
+      "timestamp_UTC": "2026-11-16T16:59:59.485683+00:00",
+      "host_CPU_percent": 54.45075757575757,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.23209125558655,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 90.43800000008196,
+      "end_seconds": 91.46900000004098,
+      "timestamp_UTC": "2026-11-16T17:00:00.517210+00:00",
+      "host_CPU_percent": 52.08333333333333,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.376450954845566,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 91.46900000004098,
+      "end_seconds": 92.48400000017136,
+      "timestamp_UTC": "2026-11-16T17:00:01.542262+00:00",
+      "host_CPU_percent": 44.791666666666664,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.49519624158881,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 92.48400000017136,
+      "end_seconds": 93.5160000002943,
+      "timestamp_UTC": "2026-11-16T17:00:02.567504+00:00",
+      "host_CPU_percent": 59.09090909090908,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.85310677925001,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 93.5160000002943,
+      "end_seconds": 94.54700000025332,
+      "timestamp_UTC": "2026-11-16T17:00:03.603860+00:00",
+      "host_CPU_percent": 75.18939393939394,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.49373535980848,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 94.54700000025332,
+      "end_seconds": 95.59400000004098,
+      "timestamp_UTC": "2026-11-16T17:00:04.645720+00:00",
+      "host_CPU_percent": 54.630495790458376,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.75931108660652,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 95.59400000004098,
+      "end_seconds": 96.625,
+      "timestamp_UTC": "2026-11-16T17:00:05.680964+00:00",
+      "host_CPU_percent": 59.773371104815865,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.18312821521161,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 96.625,
+      "end_seconds": 97.67200000025332,
+      "timestamp_UTC": "2026-11-16T17:00:06.716202+00:00",
+      "host_CPU_percent": 44.60227272727273,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.344409076755014,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 97.67200000025332,
+      "end_seconds": 98.68800000008196,
+      "timestamp_UTC": "2026-11-16T17:00:07.744123+00:00",
+      "host_CPU_percent": 53.314393939393945,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.62135352114812,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 98.68800000008196,
+      "end_seconds": 99.73400000017136,
+      "timestamp_UTC": "2026-11-16T17:00:08.792980+00:00",
+      "host_CPU_percent": 47.76119402985075,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.717152997323076,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 99.73400000017136,
+      "end_seconds": 100.78099999995902,
+      "timestamp_UTC": "2026-11-16T17:00:09.834357+00:00",
+      "host_CPU_percent": 49.440298507462686,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.85428168080713,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 100.78099999995902,
+      "end_seconds": 101.81300000008196,
+      "timestamp_UTC": "2026-11-16T17:00:10.870341+00:00",
+      "host_CPU_percent": 58.33333333333333,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 53.20837532248245,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 101.81300000008196,
+      "end_seconds": 102.85900000017136,
+      "timestamp_UTC": "2026-11-16T17:00:11.913941+00:00",
+      "host_CPU_percent": 72.01492537313433,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 53.72538539526342,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 102.85900000017136,
+      "end_seconds": 103.8910000002943,
+      "timestamp_UTC": "2026-11-16T17:00:12.942484+00:00",
+      "host_CPU_percent": 53.88257575757576,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 53.90883381223803,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 103.8910000002943,
+      "end_seconds": 104.92200000025332,
+      "timestamp_UTC": "2026-11-16T17:00:13.976122+00:00",
+      "host_CPU_percent": 32.1969696969697,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 53.4580865883102,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 104.92200000025332,
+      "end_seconds": 105.95300000021234,
+      "timestamp_UTC": "2026-11-16T17:00:15.005850+00:00",
+      "host_CPU_percent": 36.682464454976305,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.90507322927083,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 105.95300000021234,
+      "end_seconds": 106.98400000017136,
+      "timestamp_UTC": "2026-11-16T17:00:16.037753+00:00",
+      "host_CPU_percent": 50.709555345316936,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.89990949688682,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 106.98400000017136,
+      "end_seconds": 108.0160000002943,
+      "timestamp_UTC": "2026-11-16T17:00:17.070498+00:00",
+      "host_CPU_percent": 33.71212121212122,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.55460646651179,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 108.0160000002943,
+      "end_seconds": 109.04700000025332,
+      "timestamp_UTC": "2026-11-16T17:00:18.092457+00:00",
+      "host_CPU_percent": 39.61538461538462,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 52.20966163356185,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 109.04700000025332,
+      "end_seconds": 110.06300000008196,
+      "timestamp_UTC": "2026-11-16T17:00:19.115644+00:00",
+      "host_CPU_percent": 32.1969696969697,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.92093530786467,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 110.06300000008196,
+      "end_seconds": 111.07800000021234,
+      "timestamp_UTC": "2026-11-16T17:00:20.133443+00:00",
+      "host_CPU_percent": 38.17307692307692,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.651477144449586,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 111.07800000021234,
+      "end_seconds": 112.10900000017136,
+      "timestamp_UTC": "2026-11-16T17:00:21.158375+00:00",
+      "host_CPU_percent": 63.17307692307692,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.81848294767932,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 112.10900000017136,
+      "end_seconds": 113.1410000002943,
+      "timestamp_UTC": "2026-11-16T17:00:22.187559+00:00",
+      "host_CPU_percent": 33.14393939393939,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.45824499114992,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 113.1410000002943,
+      "end_seconds": 114.15599999995902,
+      "timestamp_UTC": "2026-11-16T17:00:23.210973+00:00",
+      "host_CPU_percent": 52.65151515151515,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.524807491130254,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 114.15599999995902,
+      "end_seconds": 115.18800000008196,
+      "timestamp_UTC": "2026-11-16T17:00:24.244337+00:00",
+      "host_CPU_percent": 63.4469696969697,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.752970369956,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 115.18800000008196,
+      "end_seconds": 116.21900000004098,
+      "timestamp_UTC": "2026-11-16T17:00:25.272766+00:00",
+      "host_CPU_percent": 46.96969696969697,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.51506159475851,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 116.21900000004098,
+      "end_seconds": 117.25,
+      "timestamp_UTC": "2026-11-16T17:00:26.306764+00:00",
+      "host_CPU_percent": 35.984848484848484,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 51.348300231048405,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 117.25,
+      "end_seconds": 118.2660000002943,
+      "timestamp_UTC": "2026-11-16T17:00:27.323542+00:00",
+      "host_CPU_percent": 31.346153846153847,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.84473272902306,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 118.2660000002943,
+      "end_seconds": 119.29700000025332,
+      "timestamp_UTC": "2026-11-16T17:00:28.350443+00:00",
+      "host_CPU_percent": 38.25757575757576,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.71119145091032,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 119.29700000025332,
+      "end_seconds": 120.32800000021234,
+      "timestamp_UTC": "2026-11-16T17:00:29.373346+00:00",
+      "host_CPU_percent": 31.538461538461537,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.375857680474546,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 120.32800000021234,
+      "end_seconds": 121.34400000004098,
+      "timestamp_UTC": "2026-11-16T17:00:30.396339+00:00",
+      "host_CPU_percent": 41.47727272727273,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.00123015523957,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 121.34400000004098,
+      "end_seconds": 122.35900000017136,
+      "timestamp_UTC": "2026-11-16T17:00:31.415063+00:00",
+      "host_CPU_percent": 36.63461538461539,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.83572267658046,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 122.35900000017136,
+      "end_seconds": 123.3910000002943,
+      "timestamp_UTC": "2026-11-16T17:00:32.444953+00:00",
+      "host_CPU_percent": 34.65909090909091,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.604578421478166,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 123.3910000002943,
+      "end_seconds": 124.42200000025332,
+      "timestamp_UTC": "2026-11-16T17:00:33.480293+00:00",
+      "host_CPU_percent": 37.40530303030303,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.510694267486464,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 124.42200000025332,
+      "end_seconds": 125.45300000021234,
+      "timestamp_UTC": "2026-11-16T17:00:34.506329+00:00",
+      "host_CPU_percent": 61.64772727272727,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.75961314369962,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 125.45300000021234,
+      "end_seconds": 126.48400000017136,
+      "timestamp_UTC": "2026-11-16T17:00:35.537633+00:00",
+      "host_CPU_percent": 39.29924242424242,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.571909545219164,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 126.48400000017136,
+      "end_seconds": 127.5160000002943,
+      "timestamp_UTC": "2026-11-16T17:00:36.567784+00:00",
+      "host_CPU_percent": 51.515151515151516,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.64058717978385,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 127.5160000002943,
+      "end_seconds": 128.54700000025332,
+      "timestamp_UTC": "2026-11-16T17:00:37.598562+00:00",
+      "host_CPU_percent": 73.57954545454545,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 50.004674838070066,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 128.54700000025332,
+      "end_seconds": 129.57800000021234,
+      "timestamp_UTC": "2026-11-16T17:00:38.633026+00:00",
+      "host_CPU_percent": 38.82575757575758,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.580429257280876,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 129.57800000021234,
+      "end_seconds": 130.60900000017136,
+      "timestamp_UTC": "2026-11-16T17:00:39.664435+00:00",
+      "host_CPU_percent": 36.07954545454546,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.220803310323404,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 130.60900000017136,
+      "end_seconds": 131.6410000002943,
+      "timestamp_UTC": "2026-11-16T17:00:40.696290+00:00",
+      "host_CPU_percent": 67.32954545454545,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.42327278117417,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 131.6410000002943,
+      "end_seconds": 132.67200000025332,
+      "timestamp_UTC": "2026-11-16T17:00:41.726513+00:00",
+      "host_CPU_percent": 45.45454545454546,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.32805827608899,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 132.67200000025332,
+      "end_seconds": 133.71900000004098,
+      "timestamp_UTC": "2026-11-16T17:00:42.771933+00:00",
+      "host_CPU_percent": 48.0410447761194,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.24422962107619,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 133.71900000004098,
+      "end_seconds": 134.7660000002943,
+      "timestamp_UTC": "2026-11-16T17:00:43.811540+00:00",
+      "host_CPU_percent": 36.458333333333336,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 49.11297646449213,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 134.7660000002943,
+      "end_seconds": 135.79700000025332,
+      "timestamp_UTC": "2026-11-16T17:00:44.848651+00:00",
+      "host_CPU_percent": 41.47727272727273,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.5908983094464,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 135.79700000025332,
+      "end_seconds": 136.81300000008196,
+      "timestamp_UTC": "2026-11-16T17:00:45.868647+00:00",
+      "host_CPU_percent": 43.65530303030303,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.262401971383994,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 136.81300000008196,
+      "end_seconds": 137.84400000004098,
+      "timestamp_UTC": "2026-11-16T17:00:46.897329+00:00",
+      "host_CPU_percent": 31.818181818181824,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.97339519691798,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 137.84400000004098,
+      "end_seconds": 138.84400000004098,
+      "timestamp_UTC": "2026-11-16T17:00:47.893117+00:00",
+      "host_CPU_percent": 54.26587301587303,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 48.044219916180204,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 138.84400000004098,
+      "end_seconds": 139.85900000017136,
+      "timestamp_UTC": "2026-11-16T17:00:48.913811+00:00",
+      "host_CPU_percent": 34.09090909090909,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.82909025413783,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 139.85900000017136,
+      "end_seconds": 140.8910000002943,
+      "timestamp_UTC": "2026-11-16T17:00:49.943680+00:00",
+      "host_CPU_percent": 58.14393939393939,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.94688381477047,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 140.8910000002943,
+      "end_seconds": 141.92200000025332,
+      "timestamp_UTC": "2026-11-16T17:00:50.975634+00:00",
+      "host_CPU_percent": 37.02651515151515,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.74900660520612,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 141.92200000025332,
+      "end_seconds": 142.95300000021234,
+      "timestamp_UTC": "2026-11-16T17:00:51.998552+00:00",
+      "host_CPU_percent": 49.13461538461539,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.60258180431076,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 142.95300000021234,
+      "end_seconds": 143.96900000004098,
+      "timestamp_UTC": "2026-11-16T17:00:53.023016+00:00",
+      "host_CPU_percent": 57.00757575757576,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.404797713436054,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 143.96900000004098,
+      "end_seconds": 145.0,
+      "timestamp_UTC": "2026-11-16T17:00:54.055262+00:00",
+      "host_CPU_percent": 30.39772727272727,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.999567284051686,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 145.0,
+      "end_seconds": 146.03099999995902,
+      "timestamp_UTC": "2026-11-16T17:00:55.085227+00:00",
+      "host_CPU_percent": 38.73106060606061,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.7879934447303,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 146.03099999995902,
+      "end_seconds": 147.06300000008196,
+      "timestamp_UTC": "2026-11-16T17:00:56.119430+00:00",
+      "host_CPU_percent": 32.67045454545454,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.51835970341726,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 147.06300000008196,
+      "end_seconds": 148.09400000004098,
+      "timestamp_UTC": "2026-11-16T17:00:57.147519+00:00",
+      "host_CPU_percent": 34.28030303030303,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.28594177413645,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 148.09400000004098,
+      "end_seconds": 149.125,
+      "timestamp_UTC": "2026-11-16T17:00:58.170875+00:00",
+      "host_CPU_percent": 40.48076923076923,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.09429492099494,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 149.125,
+      "end_seconds": 150.1410000002943,
+      "timestamp_UTC": "2026-11-16T17:00:59.196910+00:00",
+      "host_CPU_percent": 33.80681818181818,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 45.75205897975042,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 150.1410000002943,
+      "end_seconds": 151.17200000025332,
+      "timestamp_UTC": "2026-11-16T17:01:00.217860+00:00",
+      "host_CPU_percent": 39.807692307692314,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 45.52940379814324,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 151.17200000025332,
+      "end_seconds": 152.18800000008196,
+      "timestamp_UTC": "2026-11-16T17:01:01.240368+00:00",
+      "host_CPU_percent": 51.70454545454546,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 45.61036812895739,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 152.18800000008196,
+      "end_seconds": 153.21900000004098,
+      "timestamp_UTC": "2026-11-16T17:01:02.274634+00:00",
+      "host_CPU_percent": 57.95454545454546,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 45.66138454312089,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 153.21900000004098,
+      "end_seconds": 154.25,
+      "timestamp_UTC": "2026-11-16T17:01:03.306489+00:00",
+      "host_CPU_percent": 39.6780303030303,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 45.13086844472825,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 154.25,
+      "end_seconds": 155.28099999995902,
+      "timestamp_UTC": "2026-11-16T17:01:04.334099+00:00",
+      "host_CPU_percent": 39.67649857278782,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.772142379957465,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 155.28099999995902,
+      "end_seconds": 156.31300000008196,
+      "timestamp_UTC": "2026-11-16T17:01:05.360717+00:00",
+      "host_CPU_percent": 38.75598086124402,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.437471933955216,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 156.31300000008196,
+      "end_seconds": 157.32800000021234,
+      "timestamp_UTC": "2026-11-16T17:01:06.384443+00:00",
+      "host_CPU_percent": 35.51136363636363,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.20479434360509,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 157.32800000021234,
+      "end_seconds": 158.35900000017136,
+      "timestamp_UTC": "2026-11-16T17:01:07.413654+00:00",
+      "host_CPU_percent": 54.54545454545454,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.27589756330717,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 158.35900000017136,
+      "end_seconds": 159.375,
+      "timestamp_UTC": "2026-11-16T17:01:08.430135+00:00",
+      "host_CPU_percent": 46.82692307692308,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.22962719567787,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 159.375,
+      "end_seconds": 160.40599999995902,
+      "timestamp_UTC": "2026-11-16T17:01:09.460788+00:00",
+      "host_CPU_percent": 73.10606060606061,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.646330516185124,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 160.40599999995902,
+      "end_seconds": 161.43800000008196,
+      "timestamp_UTC": "2026-11-16T17:01:10.495279+00:00",
+      "host_CPU_percent": 34.65909090909091,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.29471501410134,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 161.43800000008196,
+      "end_seconds": 162.46900000004098,
+      "timestamp_UTC": "2026-11-16T17:01:11.528304+00:00",
+      "host_CPU_percent": 41.666666666666664,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 43.858740718931344,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 162.46900000004098,
+      "end_seconds": 163.5160000002943,
+      "timestamp_UTC": "2026-11-16T17:01:12.573286+00:00",
+      "host_CPU_percent": 61.940298507462686,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 43.881487708410354,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 163.5160000002943,
+      "end_seconds": 164.54700000025332,
+      "timestamp_UTC": "2026-11-16T17:01:13.605758+00:00",
+      "host_CPU_percent": 38.73106060606061,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 43.85823013264833,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 164.54700000025332,
+      "end_seconds": 165.57800000021234,
+      "timestamp_UTC": "2026-11-16T17:01:14.633344+00:00",
+      "host_CPU_percent": 43.65530303030303,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.00608108440047,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 165.57800000021234,
+      "end_seconds": 166.60900000017136,
+      "timestamp_UTC": "2026-11-16T17:01:15.665372+00:00",
+      "host_CPU_percent": 38.16287878787878,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 43.878156676961694,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 166.60900000017136,
+      "end_seconds": 167.6410000002943,
+      "timestamp_UTC": "2026-11-16T17:01:16.689575+00:00",
+      "host_CPU_percent": 38.36538461538461,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 43.85195884417489,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 167.6410000002943,
+      "end_seconds": 168.68800000008196,
+      "timestamp_UTC": "2026-11-16T17:01:17.743460+00:00",
+      "host_CPU_percent": 48.71323529411765,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.04761173475697,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 168.68800000008196,
+      "end_seconds": 169.70300000021234,
+      "timestamp_UTC": "2026-11-16T17:01:18.763215+00:00",
+      "host_CPU_percent": 39.90384615384615,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.133599545552855,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 169.70300000021234,
+      "end_seconds": 170.73400000017136,
+      "timestamp_UTC": "2026-11-16T17:01:19.784018+00:00",
+      "host_CPU_percent": 46.92307692307692,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.31981035555718,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 170.73400000017136,
+      "end_seconds": 171.7660000002943,
+      "timestamp_UTC": "2026-11-16T17:01:20.822466+00:00",
+      "host_CPU_percent": 50.559701492537314,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.246193631476466,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 171.7660000002943,
+      "end_seconds": 172.78099999995902,
+      "timestamp_UTC": "2026-11-16T17:01:21.838668+00:00",
+      "host_CPU_percent": 39.807692307692314,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.18725554875019,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 172.78099999995902,
+      "end_seconds": 173.81300000008196,
+      "timestamp_UTC": "2026-11-16T17:01:22.865019+00:00",
+      "host_CPU_percent": 69.78074356530028,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.59892373215685,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 173.81300000008196,
+      "end_seconds": 174.84400000004098,
+      "timestamp_UTC": "2026-11-16T17:01:23.889983+00:00",
+      "host_CPU_percent": 48.519579751671436,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.40413543006973,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 174.84400000004098,
+      "end_seconds": 175.85900000017136,
+      "timestamp_UTC": "2026-11-16T17:01:24.913569+00:00",
+      "host_CPU_percent": 41.5719696969697,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.21835418004675,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 175.85900000017136,
+      "end_seconds": 176.8910000002943,
+      "timestamp_UTC": "2026-11-16T17:01:25.945645+00:00",
+      "host_CPU_percent": 42.234848484848484,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.25994508917434,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 176.8910000002943,
+      "end_seconds": 177.92200000025332,
+      "timestamp_UTC": "2026-11-16T17:01:26.975979+00:00",
+      "host_CPU_percent": 41.38257575757576,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.40464941611332,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 177.92200000025332,
+      "end_seconds": 178.96900000004098,
+      "timestamp_UTC": "2026-11-16T17:01:28.016571+00:00",
+      "host_CPU_percent": 50.28409090909092,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 44.6541375910949,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 178.96900000004098,
+      "end_seconds": 180.0,
+      "timestamp_UTC": "2026-11-16T17:01:29.049281+00:00",
+      "host_CPU_percent": 59.28030303030303,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 45.09410374295583,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 180.0,
+      "end_seconds": 181.04700000025332,
+      "timestamp_UTC": "2026-11-16T17:01:30.095320+00:00",
+      "host_CPU_percent": 88.43283582089552,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 45.96781048700513,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 181.04700000025332,
+      "end_seconds": 182.07800000021234,
+      "timestamp_UTC": "2026-11-16T17:01:31.132089+00:00",
+      "host_CPU_percent": 60.07462686567165,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.34661686377625,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 182.07800000021234,
+      "end_seconds": 183.09400000004098,
+      "timestamp_UTC": "2026-11-16T17:01:32.150656+00:00",
+      "host_CPU_percent": 46.25,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.53363755139017,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 183.09400000004098,
+      "end_seconds": 184.125,
+      "timestamp_UTC": "2026-11-16T17:01:33.172601+00:00",
+      "host_CPU_percent": 43.36538461538461,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.64964536996801,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 184.125,
+      "end_seconds": 185.15599999995902,
+      "timestamp_UTC": "2026-11-16T17:01:34.202600+00:00",
+      "host_CPU_percent": 44.60227272727273,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.476747642809286,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 185.15599999995902,
+      "end_seconds": 186.17200000025332,
+      "timestamp_UTC": "2026-11-16T17:01:35.227621+00:00",
+      "host_CPU_percent": 42.04545454545454,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.41262516798092,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 186.17200000025332,
+      "end_seconds": 187.20300000021234,
+      "timestamp_UTC": "2026-11-16T17:01:36.260959+00:00",
+      "host_CPU_percent": 42.99242424242424,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.32969903160642,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 187.20300000021234,
+      "end_seconds": 188.23400000017136,
+      "timestamp_UTC": "2026-11-16T17:01:37.290943+00:00",
+      "host_CPU_percent": 46.30681818181818,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 45.976165256402645,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 188.23400000017136,
+      "end_seconds": 189.2660000002943,
+      "timestamp_UTC": "2026-11-16T17:01:38.317887+00:00",
+      "host_CPU_percent": 52.115384615384606,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.02344791469633,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 189.2660000002943,
+      "end_seconds": 190.29700000025332,
+      "timestamp_UTC": "2026-11-16T17:01:39.354869+00:00",
+      "host_CPU_percent": 51.399253731343286,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.27241126554895,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 190.29700000025332,
+      "end_seconds": 191.34400000004098,
+      "timestamp_UTC": "2026-11-16T17:01:40.400132+00:00",
+      "host_CPU_percent": 80.87686567164178,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.671312003246655,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 191.34400000004098,
+      "end_seconds": 192.375,
+      "timestamp_UTC": "2026-11-16T17:01:41.430978+00:00",
+      "host_CPU_percent": 52.746212121212125,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.68832589203821,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 192.375,
+      "end_seconds": 193.3910000002943,
+      "timestamp_UTC": "2026-11-16T17:01:42.448185+00:00",
+      "host_CPU_percent": 60.0,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 46.90363403887396,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 193.3910000002943,
+      "end_seconds": 194.43800000008196,
+      "timestamp_UTC": "2026-11-16T17:01:43.493454+00:00",
+      "host_CPU_percent": 68.47014925373134,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.39892140406663,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 194.43800000008196,
+      "end_seconds": 195.46900000004098,
+      "timestamp_UTC": "2026-11-16T17:01:44.527183+00:00",
+      "host_CPU_percent": 42.32954545454546,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.441003159134304,
+      "consecutive_high_mean_seconds": 0.0
+    },
+    {
+      "start_seconds": 195.46900000004098,
+      "end_seconds": 196.5,
+      "timestamp_UTC": "2026-11-16T17:01:45.556916+00:00",
+      "host_CPU_percent": 33.04924242424242,
+      "phase": "generation",
+      "rolling_60second_mean_percent": 47.27066225005835,
+      "consecutive_high_mean_seconds": 0.0
+    }
+  ],
+  "sleep_interruptions": [],
+  "launch_CPU_mean": 32.32289309954751,
+  "status": "complete",
+  "stop_reason": null,
+  "calls": 18,
+  "source_and_config_unchanged": true,
+  "outcomes": {
+    "practice_path": 10
+  },
+  "abstentions": {
+    "system": 1,
+    "model": 2
+  },
+  "CPU_summary": {
+    "samples": 190,
+    "sampled_seconds": 196.20299999974668,
+    "host_CPU_time_weighted_mean_percent": 48.1138456635577,
+    "host_CPU_max_percent": 88.43283582089552,
+    "rolling_60second_mean_max_percent": 53.90883381223803,
+    "max_consecutive_seconds_rolling_mean_above95": 0.0
+  },
+  "resources": {
+    "wall_seconds": 197.125,
+    "Python_CPU_seconds": 4.59375,
+    "owned_RSS_peak_sample_bytes": 5068394496
+  },
+  "format_and_resource_gate": true,
+  "warning": "Practice only; no accuracy or native scoring."
+}
