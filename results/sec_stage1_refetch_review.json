@@ -1,0 +1,35 @@
+{
+  "verdict": "Complete page obtained; acceptance clock not defined on this page",
+  "freeze_commit": "80fe115f216934882ec38757cefc3a404fdbbf29",
+  "config_sha256": "35b9176741e27d086fbc2e1fe0e4f4913de0a9d1820ec49dfa5bb0f4ea35f2e8",
+  "URL": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+  "retrieved_UTC": "2026-11-16T12:55:33.529793+00:00",
+  "HTTP_status": 200,
+  "complete_bytes": 69025,
+  "complete_body_SHA256": "b8f200a5964e1c09abf39cc03c26018afd6f31e9be988cb0349e369d049fb0e7",
+  "page_displayed_date": "2024-06-06",
+  "page_last_reviewed_or_updated": "2025-04-08",
+  "acceptance_field_definitions_verbatim": [],
+  "acceptanceDateTime": {
+    "named_field_occurrences_in_visible_main_text": 0,
+    "field_definition": "not defined on this page",
+    "format": "not defined on this page",
+    "time_zone_or_clock": "not defined on this page",
+    "historical_applicability": "not stated for acceptance-time fields on this page"
+  },
+  "other_acceptance_header_or_index_clock_definition": "not defined on this page",
+  "distinctions": "The page discusses JSON delivery, dissemination/update delays and nightly bulk republication. Its Eastern-time bulk republication schedule is not an acceptance-field clock definition. Page publication/review dates and XBRL history are not historical acceptance-clock guarantees.",
+  "review_method": "Read the complete cached page's visible main text, not just a keyword count. No external link or additional URL followed.",
+  "request_accounting": {
+    "new_requests": 1,
+    "historical_request": 48,
+    "historical_total": 48,
+    "ceiling": 150,
+    "remaining_ceiling_not_permission": 102,
+    "request47records_unchanged": true,
+    "filing_requests": 0,
+    "roster_drawn": false
+  },
+  "clock_certification": "BLOCKED",
+  "next_gate": "Additional official documentation sources require a new decision. No repairs, blanket offset, issuer remap or accession pilot authorized."
+}
