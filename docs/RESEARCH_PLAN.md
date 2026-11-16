@@ -381,52 +381,56 @@ A [proposal for thirty fresh real questions](../results/reader_next_real_proposa
 excluded all seventy earlier question IDs. It was later run under the amended
 limits below; the original proposal remains as its planning record.
 
-### Fresh real reader sample: partial results
+### Completed public reader sample
 
 The [earlier thirty-question run](../results/reader_real1_status.json) was
 stopped by an over-sensitive safeguard, with no reading result. Its records
-remain unchanged; the new run is a fresh sample, not a resume.
+remain unchanged.
 
-The [new contract](../results/reader_real2_config.json) drew thirty questions
+The [next contract](../results/reader_real2_config.json) drew thirty questions
 with seed 2026111415, excluding all hundred earlier IDs. It kept the exact
-positive-control prompt/schema/parse, model and native scorer, but replaced
-spike-sensitive CPU stopping with a sustained rolling-average rule and checked
-input/output token fit instead of a tight byte cap.
+positive-control prompt/schema/parse, model and native scorer. It first stopped
+after ten pairs at its 6 GiB memory cap. A
+[declared, content-independent operational amendment](../results/reader_real2_completion_config.json)
+raised only that cap to 10 GiB and completed the same frozen sample. All twenty
+finished case records and raw predictions were retained unchanged; only the
+thirty-nine unattempted cases and one memory-cancelled case ran.
 
-| Native result, all thirty selected questions | Report supplied | No report |
+| Final native result, all thirty questions | Report supplied | No report |
 |---|---:|---:|
-| Exact match / F1 | 20.0% / 20.0% | 0% / 0% |
-| Exact-match Wilson 95% interval | 9.5-37.3% | 0-11.4% |
-| Scale accuracy | 30.0% | 0% |
-| Coverage | 33.3% | 0% |
-| Correct / wrong / abstained / failed / not attempted | 6 / 4 / 0 / 1 / 19 | 0 / 0 / 10 / 0 / 20 |
+| Exact match / F1 | 36.7% / 42.6% | 0% / 0% |
+| Exact-match Wilson 95% interval | 21.9-54.5% | 0-11.4% |
+| Scale accuracy | 73.3% | 0% |
+| Coverage | 100% | 0% |
+| Correct / wrong / abstained | 11 / 19 / 0 | 0 / 0 / 30 |
 
-**The run is incomplete.** Ten pairs finished: the reader answered six of these
-questions exactly with their report; every no-report response abstained. One
-further report-supplied request was cancelled when sampled owned working set
-crossed 6 GiB. The table's all-thirty denominator counts failures and unattempted
-cases as misses; it is not the completed-sample model accuracy.
+All thirty pairs are now complete. Eleven questions were right only with the
+report, zero only without, zero in both conditions and nineteen in neither.
+Exact McNemar p = 0.0009766 is **descriptive only**, not a confirmatory finding.
+Question-level intervals do not correct for shared report contexts, and no
+binomial interval is used for F1.
 
-The all-selected paired counts are six right only with the report, zero only
-without, zero both-right and twenty-four neither-right. On the ten valid pairs,
-the neither-right count is four. Exact McNemar p = 0.03125 is **descriptive only**;
-resource-related missingness, repeated report contexts and the public benchmark
-limit interpretation. No-report correctness may reflect memorization or guessing,
-and these abstentions do not establish a clean training cutoff.
+The [combined report](../results/reader_real2_combined.json) labels the producing
+run for each condition/question case and preserves the unchanged
+[as-stopped report](../results/reader_real2_status.json). The original
+twenty-one requests plus forty completion requests include one explicitly
+permitted repeat of the cancelled request, not sixty-one distinct cases.
+The [completion record](../results/reader_real2_completion_status.json) contains
+its full CPU trace; the original failed attempt was not erased.
 
-The [per-item result and full CPU trace](../results/reader_real2_status.json) retain
-all outcomes and answer-type counts: 10 span, 4 multi-span, 15 arithmetic and
-1 count. Completed pairs included 3 span, 2 multi-span and 5 arithmetic cases.
-The [review](../results/reader_real2_review.json) records the 5.7-minute run,
-zero timeouts or detected truncations, and successful token-bound checks.
-Instantaneous CPU spikes reached 100%, but the highest sixty-second mean was
-87.35%, so the revised CPU rule did not stop the run. The memory safeguard did;
-the isolated server was stopped afterwards. No retry, tuning or resampling.
+Report-supplied exact matches were 7/10 span, 0/4 multi-span, 4/15 arithmetic
+and 0/1 count questions. These tiny groups expose weaknesses, not precise skill
+estimates. Completion took 8.7 minutes and sampled owned working set peaked at
+8.2 GiB, below the amended cap. It had no timeouts, detected truncations,
+sleep interruptions or further retries. The isolated server was stopped;
+the [review](../results/reader_real2_completion_review.json) records provenance,
+both launches' resources and validation.
 
-This demonstrates limited reading ability on the completed public-benchmark
-subset, not a finished thirty-question evaluation, historical usability,
-formal H1, or financial returns. Question-level intervals do not correct for
-shared contexts or resource-driven missingness; no binomial interval is used for F1.
+This measures reading on a small public benchmark sample only. No-report
+abstention does not rule out training exposure; no-report correctness, if
+observed elsewhere, may reflect memorization or guessing. The result does not
+establish historical usability, formal H1 or financial returns. The completion
+was declared after initial outcomes were known, with no content or sample change.
 
 ### Three measurement ideas worth testing
 
