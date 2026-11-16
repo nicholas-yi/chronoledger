@@ -103,6 +103,33 @@ firm-month; API-side counts are zero. Actual verified assignment changes remain
 undetermined. Counter 3,137/34,402, ledger 74 and all raw data remains ignored;
 no repair, correction release, financial rerun or automatic continuation occurred.
 
+**Approved A2 bounded sample, before requests.** A separate user decision selects
+the next 3,000 **new** random-rest accession IDs after A1's first 270, in the
+unchanged seed-2026111603 order. The A1 timeout is outside that window and remains
+pending; the older 503 is attempted only if its existing position falls inside.
+Already processed resources are not re-fetched. The user clarified that statistics
+cover all internally agreeing random-rest strata, including the boundary pool,
+not only the named agreement-sensitive pool.
+
+[A2](../scripts/run_full_timestamps_a2.py) predeclares an exact one-sided 95%
+Clopper-Pearson upper bound by pool and overall for a complete conditional header
+that disagrees with both stored sources. Its primary n excludes unread/incomplete
+pairs, never treating them as error-free. A separate conservative bound treats
+every unread **selected** eligible case, including unvisited cases after a stop,
+as an error. Both use the fixed union of the 270 A1 and 3,000 A2 accessions.
+This definition is prospective for A2 but follows inspection of A1; it is not
+a registration predating A1. Readability/stopping limitations, the Eastern
+assumption and restriction to the remaining random-rest order remain explicit.
+
+A2 keeps QPC gaps at least 0.667 seconds and the original metadata/clock/parser
+contract. It permits one same-URL retry after 60 seconds for timeout or evidenced
+connection reset, or 600 seconds for HTTP 503/429. There are at most 20 status
+waits and at most two hours of cumulative waiting across both kinds. A second
+request error stops; original 404/read-cap unknown handling is unchanged.
+The wall cap is four hours; ceiling 34,402, starting usage 3,137, combined 4 GiB,
+500-resource checkpoints, sleep stop and no automatic continuation remain.
+No repair, price/return use, model run or ledger row is authorized.
+
 ### Future local-reader memory safeguards (not run)
 
 The strict-format experiments are stopped; the default local request helper is the existing
