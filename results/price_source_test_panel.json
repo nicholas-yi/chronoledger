@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT: proposed metadata/action qualification panel; not registered, acquired or evaluated.",
+  "research_as_of": "2026-11-16",
+  "provenance": {
+    "source": "CL-R-H1-PRICE completion, 2026-11-16, forwarded verbatim for integration.",
+    "Lead_verification": "14:05 ET: selected vendor facts and inference arithmetic verified separately; authority links for these 12 cases were NOT reverified by the Lead.",
+    "Execution_scope": "Structured integration only; no independent research, authority fetches or case evaluations.",
+    "evidence_labels": {
+      "D": "Primary documentation read directly by Research.",
+      "I": "Official primary text available to Research through the search index only.",
+      "U": "Unknown or unverified."
+    },
+    "link_limit": "Mutable public locators, not archived contractual or event-document pins."
+  },
+  "selection": {
+    "case_count": 12,
+    "basis": "Fixed proposed panel selected for metadata and corporate-action complexity, not performance.",
+    "all_actions_before_July2024": true,
+    "price_cutoff_inclusive": "2024-07-31",
+    "includes_CVR_case": false,
+    "CVR_limit": "This panel cannot certify contingent value right handling; a separate metadata case would need new authorization."
+  },
+  "observations": {
+    "prices_retrieved": false,
+    "final_traded_prices_retrieved_for_any_case": false,
+    "case_by_source_coverage": "U for every source and case until a separately authorized sample is inspected.",
+    "legal_terms_are_not_prices_or_returns": true,
+    "accounts_keys_purchases_or_vendor_contacts": false,
+    "holdout_accessed": false,
+    "SEC_requests": 0
+  },
+  "required_future_sample_fields": [
+    "provider_security_id",
+    "issuer_id_or_CIK",
+    "share_class",
+    "ticker_valid_from",
+    "ticker_valid_to",
+    "venue_valid_from",
+    "venue_valid_to",
+    "observation_date",
+    "available_or_revision_vintage",
+    "raw_price",
+    "raw_price_date",
+    "raw_price_type",
+    "adjustment_basis",
+    "action_id",
+    "action_type",
+    "effective_date",
+    "record_date",
+    "ex_date",
+    "payment_date",
+    "cash_amount",
+    "currency",
+    "stock_ratio",
+    "successor_security_id",
+    "fractional_share_status",
+    "election_status",
+    "CVR_status",
+    "warrant_status",
+    "final_trade_date",
+    "terminal_status",
+    "terminal_amount",
+    "source_provenance",
+    "missing_reason"
+  ],
+  "interpretation": [
+    "Expected legal terms below are provisional documentary expectations, never observed project prices, returns or executable fills.",
+    "Supply the final valid traded quote/date, legal entitlement, effective/payment date, return convention and dated identities separately.",
+    "A last price does not establish terminal wealth. Unavailable terminal wealth prevents complete-return qualification, even if a price-only component is usable.",
+    "No wrong-issuer splicing, zero fills, generic bankruptcy loss, last-bar liquidation or double counting adjusted returns and distributions may substitute for sourced treatment.",
+    "Repair C02's drifting locator and pin completed terms/ratios/allocations for C05, C07, C08 and C11 before using them as numerical oracles.",
+    "Twelve cases are a spot check, not a statistical completeness guarantee. No panel expansion or acquisition is authorized."
+  ],
+  "cases": [
+    {
+      "case_id": "C01",
+      "company": "Twitter",
+      "tickers": ["TWTR"],
+      "action_type": "cash_take_private",
+      "year": 2022,
+      "event_date": "2022-10-27",
+      "authorities": [
+        {
+          "label": "Issuer 8-K, 2022-10-28",
+          "url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522272772/d411753d8k.htm",
+          "evidence": "I"
+        }
+      ],
+      "expected_legal_terms": {
+        "cash_per_eligible_ordinary_share": "54.20",
+        "currency": "USD",
+        "eligibility": "Subject to the documented exceptions."
+      },
+      "expected_treatment": "End the Twitter security and record eligible cash consideration; no zero-return fill or surviving-ticker substitution.",
+      "unresolved_fields": [
+        "Actual final valid traded quote and date",
+        "Cash payment timing",
+        "Application of stated eligibility exceptions"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C02",
+      "company": "Dell, old 2013 security versus later Dell Technologies",
+      "tickers": ["DELL"],
+      "action_type": "cash_acquisition_with_special_distribution_and_later_ticker_reuse",
+      "year": 2013,
+      "authorities": [
+        {
+          "label": "Dell announcement locator; now redirects to retail",
+          "url": "https://www.dell.com/learn/gt/en/gtcorp1/secure/acq-dell-silverlake",
+          "evidence": "I",
+          "limitation": "Indexed text only; locator drift prevents direct verification."
+        }
+      ],
+      "expected_legal_terms": {
+        "reported_cash_per_share": "13.75",
+        "reported_special_distribution_per_share": "0.13",
+        "currency": "USD",
+        "status": "Provisional indexed terms, not a certified cash oracle; separate record/payment eligibility."
+      },
+      "expected_treatment": "Keep old Dell separate from later Dell Technologies despite DELL reuse. Reconcile acquisition cash and the special distribution under their distinct eligibility dates; do not double count a regular dividend.",
+      "unresolved_fields": [
+        "Independent accession or archived issuer confirmation before a pilot",
+        "Completed legal terms and effective date",
+        "Distribution record/payment eligibility",
+        "Actual final valid traded quote and date",
+        "Dated identities for old and later DELL"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C03",
+      "company": "Activision Blizzard",
+      "tickers": ["ATVI", "MSFT"],
+      "action_type": "cash_acquisition",
+      "year": 2023,
+      "authorities": [
+        {
+          "label": "Issuer 8-K, 2023-10-13",
+          "url": "https://www.sec.gov/Archives/edgar/data/718877/000110465923108985/tm2328253d1_8k.htm",
+          "evidence": "I"
+        }
+      ],
+      "expected_legal_terms": {
+        "cash_per_eligible_common_share": "95",
+        "currency": "USD",
+        "eligibility": "Preserve documented exceptions and appraisal treatment."
+      },
+      "expected_treatment": "End ATVI with the eligible cash entitlement; do not rename the acquired share MSFT.",
+      "unresolved_fields": [
+        "Exact cash receipt timing",
+        "Actual final valid traded quote and date",
+        "Exceptions and appraisal application"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C04",
+      "company": "Xilinx / AMD",
+      "tickers": ["XLNX", "AMD"],
+      "action_type": "stock_acquisition",
+      "year": 2022,
+      "event_date": "2022-02-14",
+      "authorities": [
+        {
+          "label": "AMD acquisition completion release",
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-22-000031/xilinxacquisitionclosepres.htm",
+          "evidence": "I"
+        }
+      ],
+      "expected_legal_terms": {
+        "AMD_shares_per_XLNX_share": "1.7234",
+        "fractional_share_treatment": "Cash in lieu; exact convention unresolved."
+      },
+      "expected_treatment": "Preserve separate security IDs and the stock-conversion edge. XLNX ending is not worthless; supply acquirer valuation timing and fractional-share treatment rather than guessing.",
+      "unresolved_fields": [
+        "Actual final valid XLNX traded quote and date",
+        "AMD valuation timing and raw/adjusted basis",
+        "Fractional-share cash convention",
+        "Dated security conversion mapping"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C05",
+      "company": "Slack / Salesforce",
+      "tickers": ["WORK", "CRM"],
+      "action_type": "mixed_cash_and_stock_acquisition",
+      "year": 2021,
+      "event_date": "2021-07-21",
+      "authorities": [
+        {
+          "label": "Announced acquisition terms, 2020",
+          "url": "https://investor.salesforce.com/news/news-details/2020/Salesforce-Signs-Definitive-Agreement-to-Acquire-Slack/default.aspx",
+          "evidence": "I"
+        },
+        {
+          "label": "Acquisition completion, 2021-07-21",
+          "url": "https://www.salesforce.com/news/press-releases/2021/07/21/salesforce-slack-deal-close/",
+          "evidence": "D"
+        }
+      ],
+      "expected_legal_terms": {
+        "announced_cash_per_WORK_share": "26.79",
+        "currency": "USD",
+        "announced_CRM_shares_per_WORK_share": "0.0776",
+        "status": "Reconcile announced and completed final terms in the sample."
+      },
+      "expected_treatment": "Add the cash and stock legs once; these are mixed consideration, not election alternatives. WORK and CRM IDs remain distinct.",
+      "unresolved_fields": [
+        "Reconciled completed consideration",
+        "Actual final valid WORK traded quote and date",
+        "CRM valuation timing",
+        "Cash receipt and fractional-share treatment"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C06",
+      "company": "BB&T / SunTrust / Truist",
+      "tickers": ["BBT", "STI", "TFC"],
+      "action_type": "merger_and_continuing_issuer_rename",
+      "year": 2019,
+      "event_date": "2019-12-06",
+      "authorities": [
+        {
+          "label": "Regulatory approval and terms, 2019-11-19",
+          "url": "https://media.truist.com/2019-11-19-BB-T-and-SunTrust-receive-regulatory-approvals-for-merger-of-equals-to-form-Truist",
+          "evidence": "I"
+        },
+        {
+          "label": "Completion release, 2019-12-09; effective December 6",
+          "url": "https://ir.truist.com/2019-12-09-BB-T-and-SunTrust-complete-merger-of-equals-to-become-Truist",
+          "evidence": "D"
+        }
+      ],
+      "expected_legal_terms": {
+        "continuing_security": "BBT shares continue as Truist.",
+        "TFC_shares_per_STI_share": "1.295"
+      },
+      "expected_treatment": "Track the continuing issuer separately from the acquired security. Neither concatenate STI dollar prices to TFC nor create an unexplained BBT return jump.",
+      "unresolved_fields": [
+        "Dated BBT/TFC identity and venue intervals",
+        "STI final valid traded quote and date",
+        "Conversion valuation and fractional-share terms",
+        "Reconciliation of raw and adjusted series"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C07",
+      "company": "Sprint versus SentinelOne",
+      "tickers": ["S", "TMUS"],
+      "action_type": "stock_acquisition_and_unrelated_issuer_ticker_reuse",
+      "year": 2020,
+      "ticker_reuse_year": 2021,
+      "event_date": "2020-04-01",
+      "authorities": [
+        {
+          "label": "T-Mobile / Sprint completion, 2020-04-01",
+          "url": "https://www.t-mobile.com/news/un-carrier/t-mobile-sprint-one-company",
+          "evidence": "D"
+        },
+        {
+          "label": "SentinelOne IPO closing locator",
+          "url": "https://www.sentinelone.com/press/sentinelone-announces-underwriters-full-exercise-of-greenshoe-option-and-closing-of-initial-public-offering/",
+          "evidence": "I",
+          "limitation": "Direct access returned 429 during Research's review."
+        }
+      ],
+      "expected_treatment": "Separate Sprint and SentinelOne legal issuers and security histories despite identical S tickers. Pin Sprint's exchange ratio directly; do not infer it from price continuity. New S is not Sprint resumed.",
+      "unresolved_fields": [
+        "Directly pinned Sprint stock-conversion ratio and completed terms",
+        "Actual final Sprint traded quote and date",
+        "Direct SentinelOne IPO confirmation and dated security identity",
+        "Nonoverlapping S ticker-validity intervals"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C08",
+      "company": "Hertz",
+      "tickers": ["HTZGQ", "HTZZ", "HTZZW"],
+      "action_type": "bankruptcy_reorganization_with_equity_and_warrant_entitlements",
+      "year": 2021,
+      "event_date": "2021-06-30",
+      "authorities": [
+        {
+          "label": "Hertz emergence release, 2021-06-30",
+          "url": "https://newsroom.hertz.com/press-releases/press-release-details/hertz-exits-chapter-11-as-a-much-stronger-company-successful-restructuring-provides-the-co/",
+          "evidence": "D"
+        }
+      ],
+      "expected_treatment": "Preserve OTC history and separate reorganization, new-equity and warrant legs. The issuer confirms existing shareholders received value and new tickers from July 1. Neither impose generic bankruptcy loss of 100% nor stitch dollar prices one-for-one.",
+      "unresolved_fields": [
+        "Exact per-old-share allocations",
+        "Warrant terms and valuation treatment",
+        "Final valid old-security traded quote and date",
+        "Later national relisting and security mapping",
+        "All cash and other entitlement legs"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C09",
+      "company": "Sears Holdings",
+      "tickers": ["SHLD", "SHLDQ"],
+      "action_type": "bankruptcy_caused_exchange_suspension_and_OTC_continuation",
+      "year": 2018,
+      "anticipated_suspension_date": "2018-10-24",
+      "authorities": [
+        {
+          "label": "Issuer 8-K, 2018-10-15",
+          "url": "https://www.sec.gov/Archives/edgar/data/1310067/000119312518299298/d622556d8k.htm",
+          "evidence": "I"
+        }
+      ],
+      "expected_treatment": "An expected Nasdaq suspension and OTC SHLDQ continuation are not automatic terminal zero at exchange exit. Do not attach assets acquired by another entity as if old equity survived.",
+      "unresolved_fields": [
+        "Actual suspension and venue-transition dates",
+        "Continuous dated SHLD/SHLDQ security identity",
+        "Final valid traded quote and date",
+        "Eventual final entitlement or recovery record"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C10",
+      "company": "Bed Bath & Beyond, old equity",
+      "tickers": ["BBBY", "BBBYQ"],
+      "action_type": "bankruptcy_equity_cancellation_without_consideration",
+      "year": 2023,
+      "authorities": [
+        {
+          "label": "Issuer 8-K accession 0001193125-23-247428; indexed underlying text",
+          "url": "https://www.sec.gov/Archives/edgar/data/886158/0001193125-23-247428-index.html",
+          "evidence": "I"
+        }
+      ],
+      "expected_legal_terms": {
+        "terminal_entitlement_at_legal_cancellation": "0",
+        "status": "Documented confirmed-plan cancellation without consideration; not an observed traded price."
+      },
+      "expected_treatment": "Apply zero entitlement at legal cancellation, not automatically at initial Nasdaq suspension. Retain the preceding OTC path and do not splice subsequently reused branding or tickers to old equity.",
+      "unresolved_fields": [
+        "Pinned legal effective date",
+        "Intermediate cash-flow and action completeness",
+        "OTC continuity and actual final valid traded quote/date",
+        "Dated separation from later brand/ticker reuse"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C11",
+      "company": "eBay / PayPal",
+      "tickers": ["EBAY", "PYPL"],
+      "action_type": "spin_off",
+      "year": 2015,
+      "authorities": [
+        {
+          "label": "Board approval and distribution terms",
+          "url": "https://www.ebayinc.com/stories/news/ebay-inc-board-approves-completion-of-ebay-and-paypal-separation/",
+          "evidence": "I",
+          "limitation": "Pre-completion release."
+        },
+        {
+          "label": "Final regulatory approval",
+          "url": "https://www.ebayinc.com/stories/news/ebay-inc-obtains-european-central-bank-approval/",
+          "evidence": "I",
+          "limitation": "Pre-completion release, not the completed distribution record."
+        }
+      ],
+      "expected_legal_terms": {
+        "published_PYPL_shares_per_EBAY_share": "1",
+        "scheduled_record_date": "2015-07-08",
+        "scheduled_distribution_date": "2015-07-17",
+        "scheduled_regular_way_date": "2015-07-20"
+      },
+      "expected_treatment": "Preserve EBAY and add PYPL entitlement once. Distinguish when-issued, due-bill and ex-distribution markets. Pin completed distribution and effective-market records before treating scheduled terms as a numerical oracle.",
+      "unresolved_fields": [
+        "Completed distribution confirmation",
+        "Effective-market, due-bill and ex-distribution records",
+        "Distribution valuation timing and adjustment basis",
+        "Dated parent and distributed-security identities"
+      ],
+      "source_coverage": "U"
+    },
+    {
+      "case_id": "C12",
+      "company": "GE / GE HealthCare",
+      "tickers": ["GE", "GEHC"],
+      "action_type": "spin_off",
+      "year": 2023,
+      "event_date": "2023-01-04",
+      "authorities": [
+        {
+          "label": "GE separation completion, 2023-01-04",
+          "url": "https://www.ge.com/news/press-releases/ge-completes-separation-of-ge-healthcare",
+          "evidence": "D"
+        }
+      ],
+      "expected_legal_terms": {
+        "GEHC_shares_distributed": "1",
+        "GE_shares_required": "3",
+        "parent_continues": true
+      },
+      "expected_treatment": "Combine continuing-parent and distributed-security wealth or use a correctly documented adjustment, never both. Retain a separate GEHC ID, fractional cash where applicable and consistent distribution valuation timing.",
+      "unresolved_fields": [
+        "Fractional-share cash treatment",
+        "Distribution valuation timing",
+        "Raw versus adjusted price/distribution reconciliation",
+        "Dated GE and GEHC security identities"
+      ],
+      "source_coverage": "U"
+    }
+  ]
+}

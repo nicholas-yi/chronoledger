@@ -78,9 +78,9 @@ launch workers or enforce host isolation. The planned container remains unprovis
 |---|---|---|
 | Filing timestamps | The [48-filing check](../results/header_pilot_review.json) is done; the [full-check proposal](../results/timestamp_full_plan.json) specifies the exact remaining assignment-risk population, URLs and budget | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
-| Real measurement labels | Two people independently label claim changes in 60 real filing pairs, with disagreements adjudicated | Measured precision and recall of claim extraction on real text, not synthetic benchmarks |
+| Real measurement labels | Use the [draft annotation guide](H1_DESIGN.md#annotation-guide-h1-claim-guide-draft-01) for two independent human annotations of 60 filing pairs and adjudication | Measured precision and recall on real text, with coverage, agreement and company-separated audit results |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
-| Claim-level signal (H1) | Register the exact comparison, data, effect size and test | One evaluation, reported whatever the outcome |
+| Claim-level signal (H1) | Start with the [draft measurement-first design](H1_DESIGN.md); resolve inference and power before registering a return test | One valid comparison, reported whatever the outcome, separating registered claim alpha from incremental value beyond word change |
 | More independent periods | Plan a separate older-period study with survivorship-free data | More real, independent months; nominal date ranges alone do not count |
 | Model training | Train a small claim matcher only if the labelled audit shows errors it could fix | Splits separated by time and by company, compared against the frozen baselines |
 | Trading costs | Record which cost components are observed and which are assumed; compute break-even costs | A realistic net comparison, plus a long-only version that needs no borrowing |
@@ -98,6 +98,18 @@ no data repair or backtest rerun follows without a separate decision.
 A fine-tuned modern model is not automatically free of look-ahead for old filings, even if its
 fine-tuning data is old, because its pretraining may include later text. Measurement models are
 trained to read filings correctly, never to predict historical returns.
+
+## Claim-level test (H1): draft design
+
+The [draft H1 design](H1_DESIGN.md) starts with human labels, not returns.
+Two people must independently label real filing pairs; they have not been recruited.
+AI suggestions cannot replace their blind first pass or human adjudication.
+First measure whether claims, matches and changes are faithful to the source, against simple baselines.
+The existing 17-18-month sample cannot support a confirmatory return test with any method calibrated so far.
+Even optimistic calculations need effects around 0.7-1.0 monthly residual standard deviations for 80% power.
+Those are scale illustrations, not a calibrated minimum detectable effect for this project.
+Only after measurement, historical data and inference are adequate could a separately specified comparison test added value beyond word-level change.
+Nothing in this draft registers a study, creates labels or opens the holdout.
 
 ## Three new study ideas
 
@@ -151,8 +163,9 @@ any return is examined.
 ## Data sources
 
 Survivorship-free historical prices are the single biggest constraint. The project currently uses
-free public sources only. Prices below are as listed on the providers' public pages on
-2026-11-14; every option's licence must be checked before publishing results derived from it.
+free public sources only. The draft comparison below records Research's public-document review
+as of 2026-11-16, not acquired data or a source qualification. Prices and terms can change;
+the applicable product, purchasing channel and rights need confirmation before acquisition.
 
 ### Free and public
 
@@ -163,15 +176,95 @@ free public sources only. Prices below are as listed on the providers' public pa
 | [Federal Reserve feeds](https://www.federalreserve.gov/feeds/feeds.htm) | Scheduled policy-event times | Rolling feeds do not preserve history or corrections |
 | [ALFRED](https://alfred.stlouisfed.org/) | Macro data as it was known on each date | Needs an API key; its API terms restrict caching and use for model training |
 
-### Paid or request-based
+### Historical-equity source comparison (draft)
 
-| Source | What it offers | Main limitation |
-|---|---|---|
-| [Norgate Data](https://norgatedata.com/stockmarketpackages.php) US Platinum | Advertises delisted securities, history back to 1990 and historical index membership; about $347 for 6 months or $630 a year | Personal use only, and data must be deleted when the subscription ends; delisting payoffs need checking |
-| [EODHD](https://eodhd.com/pricing) | Low-cost API, about $20 a month for historical end-of-day prices | Delisted coverage before 2018 is end-of-day prices only |
-| [Sharadar](https://data.nasdaq.com/publishers/SHARADAR) via Nasdaq Data Link | Prices and fundamentals with permanent security identifiers | Personal-use terms restrict publishing evaluations of the data |
-| [CRSP](https://indexes.morningstar.com/research-data-products/crsp-us-stock-databases) | The academic standard: active and inactive securities, permanent identifiers, corporate actions | Institutional subscription; individual access is by request |
-| [Compustat Point-in-Time](https://www.marketplace.spglobal.com/en/datasets/compustat-financials-%288%29) | Accounting values as originally reported, not later revised | Separate product from ordinary Compustat; by quote |
+**DRAFT; no candidate is qualified against this panel, and no data was acquired for this review.**
+Keeping a delisted price history is not the same as supplying the shareholder's terminal wealth.
+A final exchange quote, legal entitlement, payment and executable fill are different observations.
+
+Evidence labels describe Research's review: **D** means primary documentation read directly;
+**I** means official primary text seen only through a search index; **U** means unknown or
+unverified. They do not mean Execution independently checked the pages. Public links are mutable
+locators, not archived contractual pins. Every source's actual coverage of the
+[12-case panel](../results/price_source_test_panel.json), dated CIK/security links, correction
+vintages and unmentioned rights remains **U**.
+
+| Source | Documented capabilities and key gaps | Cost and access | Rights and retention |
+|---|---|---|---|
+| Yahoo-type free sources | [Price history](https://help.yahoo.com/kb/finance/historical-prices-adjusted-close-sln2311.html) and [adjustments](https://uk.help.yahoo.com/kb/finance/adjusted-close-sln28256.html), **I**: quotes, dividends and splits. Complete inactive, terminal-payoff, dated identity, OTC and spin-off coverage **U**; adjustment language is not a CRSP entitlement. | Official help places CSV download behind Gold, **I**. Public-free bulk entitlement **U**; no unofficial downloader used. | Browsing is not a research redistribution licence. Retention and reviewer rights **U**. |
+| Stooq-type free sources | [Historical-bar description](https://stooq.com/db/h/), **I**. Dated identity, inactive universe, corporate-action lineage and every panel action's terminal treatment **U**. | Historical downloads advertised; no qualified recovery mapping. | Free availability is not an explicit open-data licence. Automated acquisition, redistribution and retention rights **U**. |
+| Tiingo, free and paid | [EOD documentation](https://www.tiingo.com/documentation/end-of-day), **I**: raw/adjusted prices, split/dividend/listing-change cleaning. Specific inactive/OTC/reused-ticker and cash/stock terminal-payoff coverage **U**. | [Product/pricing](https://www.tiingo.com/products/end-of-day-stock-price-data), **I**, dynamic page: exact self-serve price/entitlements not reliably pinned. Exceptions described for some startup/enterprise/institutional accounts from $250/month do not automatically apply to free/Power plans. Account/key needed. | [Terms](https://www.tiingo.com/tos/), **D**, updated 2026-11-05: free/Starter/trials cannot persist data **or derived outputs**; paid data/backups must be deleted at expiry, with limited nonreconstructive-output exceptions. Independent-dataset validation and AI/model use are restricted. See the verification distinction below. |
+| Alpha Vantage | [LISTING_STATUS](https://www.alphavantage.co/documentation/), **I**: active/delisted US stocks/ETFs as of dates after 2010-01-01. Listing status does not establish price/payoff completeness. Stable history, merger/stock/OTC/reuse/CVR coverage **U**. | [Premium page](https://www.alphavantage.co/premium/), **I**: free 25 requests/day and a key; full-history daily series premium versus limited compact data. Match adjusted history to the plan. | Terms were fetched as an unreadable PDF in Research's review; specific retention/redistribution rights **U**. |
+| Nasdaq/NYSE public status lists | [NYSE delistings](https://www.nyse.com/regulation/delistings), **I**: pending Form 25 issues generally shown only until effectiveness, about ten days. [Nasdaq directory notice](https://www.nasdaqtrader.com/TraderNews.aspx?id=ETA2026-64), **I**: operational directory, not proven historical snapshots. Neither supplies complete returns/OTC payoffs. | Notices are free to read. Today's lists cannot reconstruct a point-in-time universe. | Historical feeds and redistribution terms are separate; complete-history rights **U**. |
+| SEC-derived overlay | [Case authorities](../results/price_source_test_panel.json), **D/I as marked per link**, can establish legal events, cancellation and consideration. CIK/accession identifies a registrant/filing, not automatically a share class through time. No consolidated trade tape, complete ticker-reuse master or systematic OTC recovery feed. | Requires case-by-case 8-K items 2.01/1.03/3.01/3.03/5.03, Forms 25/15 and merger/proxy/registration documents. No SEC requests were made for this panel. | Public issuer documents are not an off-the-shelf survivorship-free price database. Building and auditing an overlay remains substantial work. |
+| Norgate Platinum/Diamond | [Data FAQ](https://norgatedata.com/data-package-faq.php), **D**: broad inactive/OTC history, stable `assetid`, dead-ticker suffixes, dated index membership and optional split/dividend/spin adjustments. Explicitly **no historical ticker/name dates, historical industry, merger terms/successor details, economic terminal return or post-delisting events**. | [Packages](https://norgatedata.com/stockmarketpackages.php), **D**: US Platinum $346.50/six months or $630/year; lower tiers omit dead stocks. Three-week trial has only the latest **two years**, no custom older sample: it cannot test this panel. | [EULA](https://norgatedata.com/subscribe/eula.php), **D**, version 20261107, and [licensing FAQ](https://norgatedata.com/faq.php), **D**: personal use; underlying/normalized/point-in-time data, metadata and backups deleted after lapse; nonreconstructive created results may remain. Private processing is not independent provider reuse or reviewer access. |
+| EODHD | [Delisted documentation](https://eodhd.com/financial-apis/delisted-stock-companies-data-2), **D**: inactive symbols, EOD queries and US symbol-change history. Pre-2018 delistings have EOD only; 2018+ adds fundamentals/dividends/splits; 2021+ adds intraday. Nullable ISIN is not a proven permanent-security/dated-CIK bridge. Stock/mixed terminal legs, OTC continuity, CVRs and exact reuse/spin coverage **U**. | [Pricing](https://eodhd.com/pricing), **D**: one-year free sandbox; EOD $19.99/month, fundamentals $59.99, all-data $99.99. Index add-on has limited index/date coverage, not an all-US historical universe. | [Commercial FAQ](https://eodhd.com/help/commercial), **D**: self-serve personal plans; multi-person/display/distribution can need commercial licensing. Governing retention, nonreconstructive publication and reviewer rights **U**. |
+| Sharadar direct / Nasdaq Data Link SEP | [Stocks](https://sharadar.com/docs/stocks), [actions](https://sharadar.com/docs/actions) and [FAQ](https://sharadar.com/docs/faqs), **D**: active/inactive history around 1998+, `permaticker` by security/share class, ticker-reuse suffixes, dated ticker/venue/SIC actions, delist dates/reasons and cash **plus** stock acquisition consideration. Election alternatives differ from additive mixed consideration. **CVRs excluded**; OTC completeness **U**. Roughly 99% survivorship/acquisition coverage is a vendor estimate, not our measurement. As-reported fundamentals are discussed below. | [Subscribe](https://sharadar.com/subscribe), **D**: Prices from $9/month; official indexed full-history table, **I**, $39/month or $299/year (five-year tier $9/$99). Reconfirm exact entitlement/channel; five years is inadequate for 2011-2022. [Nasdaq SEP documentation](https://data.nasdaq.com/databases/SEP/documentation), **I**, dynamic page: legacy schema/terms are not assumed equal to direct-site terms. | [Terms](https://sharadar.com/terms), **D**: personal, non-professional use; no raw/reconstructive sharing. Section 6 needs no attribution for research outputs, backtests or summary statistics, but **section 8 requires prior written approval to publish evaluations of data value, usability or fitness**. Section 10 permits some nonreconstructive outputs but requires underlying data/caches/extracts deletion within 30 days after termination. Pricing is not publication/reviewer clearance. |
+| Polygon/Massive | [Inactive-ticker policy](https://massive.com/knowledge-base/article/what-does-massive-do-with-delisted-tickers), **D**: inactive records and trading-period bars/trades/quotes/actions, including OTC. [Ticker events](https://massive.com/docs/rest/stocks/corporate-actions/ticker-events), **I**, supplies symbol changes, not complete terminal reasons/recoveries or post-final-trade records. Dated reused-ticker details and cash/stock/spin terminal completeness **U**. | [Pricing](https://massive.com/pricing), **I**, dynamic page: Starter $29, Developer $79, Advanced $199/month; history/access differ, with 20+ years advertised for Advanced. Account/key needed. | Individual access is not redistribution permission. Retention, reviewer and public-output rights **U**. |
+| Databento | [Security master](https://databento.com/docs/datasets/security-master.md), **D**: point-in-time listing/security IDs, dated attributes and listed/inactive continuity from 2005+. [Actions](https://databento.com/docs/datasets/corporate-actions.md), **D**, begin **2018-05-01**, so cannot cover the Dell/eBay cases or 2011-2017 actions. Cash recovery/election/CVR/bankruptcy allocation completeness **U**; distinguish validity time from vendor observation time. | [Launch announcement](https://databento.com/blog/corporate-actions), **I**: $299/month starting at launch, **not a current quote**. [Current product](https://databento.com/corporate-actions), **I**: 1,000-symbol standard and annual-term language. Reference data is separate from trades. | Current price, retention, exchange and redistribution rights need a contract. No account or free credits used. |
+| Intrinio | [Historical prices](https://intrinio.com/financial-market-data/stock-prices-eod), **D**: 50+ years, raw/adjusted OHLCV, split ratios and adjustment factors. Inactive coverage, dated IDs and cash/stock/OTC/reuse/spin terminal treatment **U**. "All US equities" is not measured failed-company coverage. | Same direct page, **D**: starts at $150/month Individual, trial offered. Exact package entitlement **U**; no trial requested. | Retention/deletion, reviewer and publication rights **U**. |
+| FirstRate | [Stock documentation](https://firstratedata.com/stock-data), **D**: 2000+, 8,000+ active/7,000+ delisted, raw and split/dividend-adjusted bars, OTC venues. Permanent IDs, dated old tickers, merger/CVR/spin payoffs and complete OTC paths **U**. Wording about removed tickers versus an inactive bundle needs resolution. Trades-only bars do not establish fills/costs. | [Bundle](https://firstratedata.com/b/22/), **I**: updates $59.95/month, or $79 with fundamentals; initial purchase price **U**. | [Licence](https://firstratedata.com/about/license), **D**: perpetual storage and derived/public research with attribution; no raw redistribution. Limited-excerpt/provider clauses do not imply unrestricted independent reviewer sharing. |
+| CRSP via legitimate entitlement | [Current product](https://indexes.morningstar.com/research-data-products/crsp-us-stock-databases), **D**: active/inactive daily/monthly securities, actions and permanent PERMNO/PERMCO. [Guide locator](https://www.crsp.org/wp-content/uploads/2023/08/CRSP10-User-Guide.pdf), **I**: delisting-return/compounding fields. Strongest documented complete-return architecture; exact cases/missing recoveries still untested. Use actual CIZ/SIZ definitions; never append DLRET if already included. | [WRDS account types](https://wrds-www.wharton.upenn.edu/pages/about/wrds-account-types/), **I**: subscribing-institution entitlement, not an open free personal account. Product quote and individual route **U**. | Access, retention, reviewer and identifier redistribution are contractual; another employer/institution's entitlement is not transferable. |
+| Compustat | [Official product](https://www.marketplace.spglobal.com/en/datasets/compustat-financials-%288%29), **I**, dynamic page: active/inactive financials and market data, Corporate Tracker identifiers/actions and separate point-in-time snapshots. Respect share class and dated CRSP links. Revised fundamentals are not original availability; standalone DLRET/CVR/final-wealth completeness **U**. | Institutional/contracted; exact personal price/access **U**. Specific point-in-time product entitlement is required. | Redistribution/retention **U**. The Compustat name alone does not establish the needed known-at contract or a cheap price fallback. |
+
+The Lead rechecked Norgate's FAQ, Sharadar's FAQ and terms, and Tiingo section 1.4(h) on
+2026-11-16. Tiingo 1.4(h) restricts publishing analysis except Derived Products permitted by
+section 1.6; **the section 1.6 interpretation above remains attributed to Research**, not a
+separate Lead reread. Individual prices, the other vendor pages and the authority links
+for the 12 cases were not reverified by the Lead; their Research D/I/U labels remain unchanged.
+
+The Lead also confirmed that Sharadar's FAQ documents **As-Reported ARQ/ARY/ART** fundamentals,
+indexed to the filing date and excluding restatements. This is a documented but **untested**
+possible fit for the project's fundamentals needs, not a qualification of availability,
+identity, coverage or rights.
+
+#### Proposed source choice
+
+**Sharadar full-history prices/actions is the primary small-budget qualification candidate**,
+conditional on exact entitlement and rights, especially section 8's restriction on publishing
+data evaluations. Its documented cash/stock consideration, permanent IDs and dated SIC address
+actual gaps; the CVR exclusion remains. Indicative $39/month or $299/year is an indexed plan
+figure, not a verified checkout quote or permission to purchase.
+
+**EODHD is the cheap price-only fallback**, with separately evidenced dated identities, actions
+and payoffs. Its pre-2018 action limitation makes that overlay substantial work. If a
+one-provider complete-return source is required, the alternative is **CRSP through a legitimate
+entitlement**, not another free API. Norgate can supply useful prices/universe infrastructure
+but is **not a terminal-return solution**, and its rolling two-year trial cannot test this
+historical panel. Tiingo's free/trial storage terms are unsuitable for persistent checks.
+FirstRate has attractive archival/public-output rights but no proven identity/payoff cure.
+No complete free replacement is certified; no contact, purchase or evaluation is authorized.
+
+#### Proposed sample acceptance contract
+
+1. **Rights first.** Identify product/channel/version, personal/public research scope,
+   independent review, publication of qualification conclusions, code versus data,
+   identifiers, nonreconstructive outputs, backups/deletion and continued reproducibility.
+   An advertised trial is not permission to acquire data.
+2. Freeze the [12 cases](../results/price_source_test_panel.json), issuer/security/share-class
+   mapping, dates, legal actions and unresolved fields. Repair Dell's drifting authority
+   locator and confirm completion/ratio/allocation records for Slack, Sprint, Hertz and
+   eBay before treating them as numerical oracles. No performance-based replacements.
+   The panel has **no CVR case**, so it cannot certify CVR handling.
+3. Any separately approved bounded sample must use endpoints capped at **2024-07-31**,
+   with no latest/default calls. Full 2011-2022 availability needs separate verification.
+   Each case needs dated IDs, venue/ticker intervals, raw quote/date/type, revision vintage,
+   adjustment basis, all action dates and cash/stock/fractional/election/warrant/CVR terms,
+   final trade and terminal entitlement, provenance and explicit missing reasons. The
+   [panel JSON](../results/price_source_test_panel.json) lists the required fields.
+4. Require no wrong-issuer splices, all contractual legs reconciled and no double counting
+   of adjusted returns with distributions. An unavailable terminal-wealth case prevents
+   complete-return qualification, even if a narrower price-only component is usable.
+   Imputed zero, last-bar liquidation and blanket bankruptcy loss are not sourced payoffs.
+5. Reconcile cash, stock, mixed, spin-off, zero-cancellation and nonzero-reorganization cases
+   separately. Twelve stories are a spot check, not a completeness guarantee. Any expansion
+   needs new approval; the earlier proposed 24-metadata-case/six-stratum, at most
+   40-security/150-request/50-MiB limits are planning bounds, not permission or vendor quotas.
+   They do not replenish the current SEC allowance (140 of 150 used) or approve the
+   separately proposed full timestamp-check budget.
+6. On rights, identity, terminal-payoff or clock failure, stop and retain only permitted
+   metadata/diagnostics. No strategy evaluation, holdout opening, money or vendor/human
+   contact follows from this draft.
 
 ### Dataset platforms
 

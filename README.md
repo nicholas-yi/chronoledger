@@ -277,8 +277,9 @@ scale rather than as a matched comparison. Source:
 - **This is a small public sample.** It shows the model can read some filings, not that it would
   have measured disclosure changes reliably at the time. The model may also have seen this public
   benchmark during training.
-- The stricter format did not carry over to real reports in an early, partial comparison, so the
-  simpler answer-first format remains the reader
+- A stricter answer format, where the model names each number's role and code does the arithmetic,
+  did not carry over to real reports in an early, partial comparison, so the simpler answer-first
+  format remains the reader
   ([diagnosis](results/reader_real3_diagnosis.json)).
 
 ## Stress tests of the method
@@ -401,6 +402,8 @@ is weak evidence, and more data matters more than a better estimator.
 
 The [research plan](docs/RESEARCH_PLAN.md) describes how each of these will be tested, the
 agent workflow used to run experiments, three new study ideas and candidate data sources.
+
+The [draft claim-level design](docs/H1_DESIGN.md) starts with human labels, while the [draft source comparison](docs/RESEARCH_PLAN.md#historical-equity-source-comparison-draft) explains what could fill the historical-data gaps.
 
 ## Run it
 
