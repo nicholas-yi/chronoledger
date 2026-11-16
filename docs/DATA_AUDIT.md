@@ -54,10 +54,18 @@ The [receipt](../results/sec_stage1_requests.jsonl) records HTTP 200, but the
 page reached the 64 KiB read cap before completion. Its hash identifies only the
 observed prefix, not a complete authoritative document. No clock definition was
 qualified or quoted, and no retry, alternative URL, filing request or roster followed
-([findings](../results/sec_stage1_review.json)). The cumulative counter is now
-**47/150**, leaving 103 within that ceiling, not permission to spend them.
+([findings](../results/sec_stage1_review.json)). At that stop the cumulative counter was
+**47/150**; the ceiling was not permission to spend the remainder.
 This was a size-guard stop, not evidence that the SEC blocked access or that a clock
 definition does not exist. Clock certification and the filing pilot remain blocked.
+
+The separately approved [4 MiB refetch](../results/sec_stage1_refetch_config.json)
+completed the same page in request #48: 69,025 bytes, HTTP 200. Its
+[field review](../results/sec_stage1_refetch_review.json) found that acceptance-time
+format, clock/time zone and historical applicability are **not defined on this page**.
+The page's bulk-update schedule is not an acceptance-clock definition.
+The counter is now **48/150**, with no other URL or filing request made.
+Additional documentation sources require a new decision; the clock and filing gates remain blocked.
 
 ### Approved offline P0 assignment planner
 

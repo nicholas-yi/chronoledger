@@ -269,6 +269,35 @@ but incompatible fields cannot be silently repaired into successes. All calls
 finished normally. There was no tuning or rerun, and this says nothing new about
 real-data accuracy. A simpler response interface needs a new, declared test.
 
+Before any scored control is frozen, run a small, separately labelled practice
+check for format and resource problems. Practice may be iterated but is never
+reported as accuracy. Write fresh scored items only after practice, then freeze
+the questions, expectations, interface and pass rule before the one scored run.
+
+The [next interface control](../results/reader_modes_review.json) followed that sequence:
+12 practice items, 40 calls across three iterations, then 24 freshly written scored
+items. Practice was not accuracy. The union grammar constrained syntax but was
+operationally unreliable, so the final interface chose a mode in one call and used
+only that mode's fields in the next. Operand fields were bounded to the source
+vocabulary; code computed arithmetic and scale while checking the model's answer
+dimension. A post-generation practice-reporting error was recovered offline, with
+the interrupted receipt retained and no repeated call.
+
+| Fresh invented scored controls | Fully right |
+|---|---:|
+| Several values | 6/6 |
+| Arithmetic | 6/8 |
+| One lookup | 3/4 |
+| Unit traps | 3/3 |
+| Correctly declined missing/undefined answers | 0/3 |
+
+**FAIL:** 18/21 answerable and 0/3 abstentions missed the frozen 20/21 plus 3/3 rule.
+Seven arithmetic outputs were computed by code; wrong period direction, wrong
+dimensions and failure to decline still matter. All responses followed the mode
+schemas, but this is not reliable answerability. The fresh authored questions and
+stronger constraints also prevent a matched accuracy comparison to earlier tests.
+There was no tuning or rerun, no real benchmark use, and no new real-data permission.
+
 ### What the earlier tests taught
 
 - **The first model run's refusals were deliberate.** Every saved response was a valid, explicit

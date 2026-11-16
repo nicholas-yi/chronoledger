@@ -286,6 +286,12 @@ contract, and only 1/3 unanswerable cases was correctly declined. Most outputs c
 incompatible fields. No predictions were repaired or rerun; the real-report result above is
 unchanged. This prototype needs a simpler interface before another real-data test.
 
+A [mode-first follow-up](results/reader_modes_review.json), after separately labelled
+practice, produced valid formats but still failed: 18/21 fresh invented answerable
+cases fully right and 0/3 correct abstentions. Seven of eight arithmetic cases reached
+accepted code computation, six correctly. These source-constrained controls are not
+a new real-report accuracy figure. No real-data rerun follows.
+
 Before trusting any result, the inputs and the statistics themselves are put under test. These checks
 say how far the results above can be trusted; they are not results in their own right.
 
