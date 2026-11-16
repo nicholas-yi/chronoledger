@@ -1,0 +1,22 @@
+{
+  "kind": "PRACTICE ONLY, NEVER ACCURACY",
+  "iterations": [
+    {
+      "iteration": 1,
+      "attempts": 14,
+      "change": "Initial mode-first oneOf; no redundant output values.",
+      "outcomes": {
+        "practice_path_valid": 3,
+        "failed": 7,
+        "unconstrained_probe_observed": 2,
+        "constrained_probe_valid": 2
+      },
+      "operational_gate": false,
+      "constrained_schema_valid": 12,
+      "constrained_mode_first": 12,
+      "unconstrained_disallowed_mode_observed": 2,
+      "config_sha256": "543af60aa006eeae7f4ab04d53d7f4d7b871553de0504428834883aecf6c5353"
+    }
+  ],
+  "total_calls": 14
+}
