@@ -1,4 +1,4 @@
-"""Practice source serialization, freeze30fresh IDs, generate blind, then score separately."""
+"""Archived experimental format comparison, not the default answer-first reader."""
 
 from __future__ import annotations
 
@@ -26,6 +26,7 @@ from run_reader_real2_completion import SleepAwareCPU
 from asof import ledger
 from asof.benchmark_baseline import TableInput
 from asof.config import DATA_DIR, PROJECT_ROOT
+from asof.local_model_runtime import RuntimePolicy, verify_runtime_receipt
 from asof.reader_columns import ModeChoice, resolve_content
 from asof.reader_diagnostic import ReaderAnswer, references_locally_valid
 from asof.reader_real2_guards import SustainedCPU, input_fit, truncation_reason
@@ -50,6 +51,7 @@ SOURCES = [Path(__file__), ROOT / "src" / "asof" / "reader_tatqa_mapping.py",
            ROOT / "src" / "asof" / "reader_real3_data.py",
            ROOT / "src" / "asof" / "reader_real_report.py",
            ROOT / "src" / "asof" / "benchmark_reporting.py", *PROTECTED,
+           ROOT / "src" / "asof" / "local_model_runtime.py",
            *[ROOT / "scripts" / p for p in (
                "reader_real1_memory.py", "run_reader_real2.py", "run_reader_real2_completion.py",
                "run_reader_positive_control.py", "run_reader_real1.py")]]
@@ -151,6 +153,8 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
         "arms": {"column_format": "A=current unchanged column-label/named-role/text-span logic",
                  "answer_first": "B=exactREAL2answer-first system/schema/ReaderAnswerparse"},
         "model": MODEL, "digest": DIGEST, "server": "0.40.16", "options": options,
+        "server_runtime": RuntimePolicy().manifest(),
+        "reader_status": "column_format_stopped_experimental;answer_first_is_default",
         "runtime_change": "Botharms use num_predict768 rather than historicalREAL2's512, "
                           "num_ctx16384;otherwiseREAL2options. A<=2calls,B1: not matched compute.",
         "baseline_system": base["system_prompt"], "baseline_schema": base["schema"],
@@ -197,12 +201,17 @@ def verify(cfg: dict) -> None:
         raise ValueError("baseline_pin_changed")
 
 
-async def generate(practice: bool, iteration: int, pid: int) -> None:
+async def generate(practice: bool, iteration: int, pid: int,
+                   runtime_receipt: Path | None = None) -> None:
     cp, sp, private = paths(practice, iteration)
     if sp.exists():
         raise RuntimeError("already_attempted_no_retry")
     cfg = json.loads(cp.read_text())
     verify(cfg)
+    if "server_runtime" not in cfg:
+        raise RuntimeError("archived_runtime_contract_requires_separate_new_run_decision")
+    verify_runtime_receipt(runtime_receipt or DATA_DIR/"local_reader_server"/"runtime.json",
+                           pid, cfg["server_runtime"])
     if ledger.lineage()["git_dirty"]:
         raise ValueError("commit_frozen_source_and_config_first")
     if practice:
@@ -230,7 +239,11 @@ async def generate(practice: bool, iteration: int, pid: int) -> None:
         deadline = json.loads(deadline_path.read_text())["deadline"]
     else:
         deadline = start + 7200
-    cpu, memory, policy = SleepAwareCPU(), OwnedMemory(pid), SustainedCPU()
+    memory_context = {"phase":"practice" if practice else "real_generation",
+                      "options_SHA256":fingerprint(cfg["options"])}
+    cpu = SleepAwareCPU()
+    memory = OwnedMemory(pid,telemetry_path=private/"process_memory.jsonl",context=memory_context)
+    policy = SustainedCPU()
     output.update(CPU_trace=policy.trace, sleep_interruptions=cpu.interruptions)
 
     def persist():
@@ -266,6 +279,7 @@ async def generate(practice: bool, iteration: int, pid: int) -> None:
         if remaining <= 0:
             raise ResourceStop("whole_run_wall")
         call = {"stage": stage, "outcome": "started"}
+        memory_context.update(uid=uid,arm=arm,stage=stage,call_id=n+1)
         value["calls"].append(call)
         value.update(attempted=True, outcome="attempt_started")
         offset, t = SERVER_LOG.stat().st_size, time.monotonic()
@@ -457,6 +471,7 @@ if __name__ == "__main__":
     parser.add_argument("--iteration", type=int, default=1)
     parser.add_argument("--change", default="Initial source-only TAT-shaped operational mapping.")
     parser.add_argument("--server-pid", type=int)
+    parser.add_argument("--runtime-receipt", type=Path)
     args = parser.parse_args()
     if args.phase in ("practice-freeze", "freeze"):
         freeze(args.phase == "practice-freeze", args.iteration, args.change)
@@ -465,4 +480,5 @@ if __name__ == "__main__":
     else:
         if args.server_pid is None:
             parser.error("--server-pid required")
-        asyncio.run(generate(args.phase == "practice", args.iteration, args.server_pid))
+        asyncio.run(generate(args.phase == "practice", args.iteration, args.server_pid,
+                             args.runtime_receipt))

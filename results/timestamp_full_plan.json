@@ -1,0 +1,109 @@
+{
+  "kind": "PROPOSED FULL ASSIGNMENT-TIMESTAMP CHECK, NO REQUEST AUTHORIZATION",
+  "new_requests": 0,
+  "repairs": 0,
+  "backtest_reruns": 0,
+  "population": {
+    "universe": "21502cached H0 metadata accessions,2022throughJune2024;not all EDGAR/history.",
+    "universe_accessions": 21502,
+    "rule": "Union of differing candidate first-registered-close choices,UTCcalendar-month choices,monthly formation-eligibility changes,and entire uncertain latest-signal competitor contexts;plus the108exclusive winter/summer clock-disagreement pool.",
+    "assignment_risk_accessions": 16921,
+    "explicit_disagreement_accessions": 108,
+    "overlap": 108,
+    "additional_disagreement_accessions": 0,
+    "required_unique_accessions": 16921,
+    "first_registered_close_sensitive": 16762,
+    "UTC_month_sensitive": 687,
+    "formation_eligibility_sensitive": 1029,
+    "latest_signal_context_accessions": 2233,
+    "reason": "Joint monthly competitors are included,not just possible winners. UTCmonth choices are conservatively retained even if the next close is same.",
+    "not_in_scope": "Records sensitive only to prior120/future365label windows,not the requested trading-day/month decisions,are not automatically included.",
+    "all_raw_internal_clock_disagreements": 165,
+    "raw_disagreements_outside_required": 11,
+    "exclusion_warning": "The mandated108are the priority-exclusive37winter+71summer pools,not all165raw disagreements. Outside records are NOT certified; expanding scope requires an explicit amended population and budget.",
+    "known_pilot_neither_controls_outside_required": [
+      "0000950170-24-056953",
+      "0001140361-22-031989"
+    ],
+    "control_handling": "Retain these already-cached conditional counterexamples as controls,not population members or newly fetched cases;insensitivity is not clock authority."
+  },
+  "URLs_and_cache": {
+    "identity_policy": "Header and index for EACH distinct original pair/bulkCIK archive path per accession;no firstCIK/accession-prefix remap. Content identity/role conflicts remain unresolved,not cache-deduplicated away.",
+    "CIK_disagreement_accessions": 256,
+    "unique_metadata_URLs": 34354,
+    "usable_cached_URLs_excluded_from_network": 102,
+    "new_or_unusable_URLs_max_one_GET_each": 34252,
+    "cache_status_counts": {
+      "missing": 34252,
+      "usable_bounded_metadata_not_clock_authority": 102
+    },
+    "unusable_reasons": {},
+    "cache_definition": "Checksum-pinned,bounded<64KiB,parseable header/index metadata. This is collection reuse,NOT clock or issuer certification.",
+    "private_inventory": "data/timestamp_full_plan/proposed_URL_inventory.jsonl",
+    "inventory_SHA256": "fefb8df3d44f84c1012bff94f899da7211b6fc3e1d1b2b34fc8bd80baf30f0a8"
+  },
+  "proposed_approval": {
+    "requires_NEW_explicit_user_budget": true,
+    "used": 140,
+    "current_ceiling": 150,
+    "current_remaining_not_permission": 10,
+    "field_clock_documentation_max_requests": 10,
+    "metadata_max_requests": 34252,
+    "max_NEW_requests_proposed": 34262,
+    "proposed_total_project_ceiling": 34402,
+    "budget_contract": "Count all attempts before sending;cache hits0. Exact docs allowlist,population+URLinventory+sourcepins frozen before network;unused document budget does not transfer to extra filings. This proposal changes no ceiling or counter."
+  },
+  "time": {
+    "parallelism": 1,
+    "maximum_starts_per_second": 2,
+    "SEC_published_fair_access_ceiling_per_second": 10,
+    "metadata_rate_limit_lower_bound_seconds": 17125.5,
+    "metadata_rate_limit_lower_bound_hours": 4.757083333333333,
+    "pilot_rate_extrapolated_hours_not_guaranteed": 4.902627753623188,
+    "serial30s_timeout_all_requests_hours_not_expected": 285.43333333333334,
+    "proposed_metadata_wall_cap_hours": 12,
+    "proposed_docs_wall_cap_minutes": 30,
+    "wall_note": "2starts/s is an upper rate,not assured throughput;serial latency and fail-stop rules can prevent completion.12h is proposed approval,not permission. Stop/checkpoint at wall,no automatic retry or scope expansion.",
+    "rate_source": "Owner dispatch supplies published SEC ceiling10/s;existingproject protocol also cites it. Not refreshed over network in this offline plan;the proposedclient remains at2/s."
+  },
+  "storage": {
+    "per_resource_read_bound_bytes": 65536,
+    "new_body_bytes_upper_bound": 2244739072,
+    "receipt_allowance_bytes": 140296192,
+    "filesystem_allowance_bytes": 140296192,
+    "per_accession_report_allowance_bytes": 69308416,
+    "logical_bytes_before_safety_margin": 2594639872,
+    "proposed_disk_budget_GiB": 4,
+    "policy": "Private ignored raw metadata+hashes+append-only receipts;never financial bodies/quotes/identities in Git. Compression benefit not assumed. Cap/space failure stops or leaves explicit unknown,no silent deletion/truncation."
+  },
+  "prerequisites_and_stops": {
+    "clock_authority": "Stage1 page did not define historical acceptance clocks. First qualify applicable header/index/API/bulk field definitions. If unsupported,stop with conditional Eastern candidates only;do not call them verifiedUTC.",
+    "calendar": "Current risk flags use cached French dates/nominal16:00ET,not independently certified venue/early-close calendar. Qualify relevant calendar before claiming actual exchange-session assignment changes;otherwise label registered-calendar only.",
+    "identity": "Role-aware filer/subject/transmitter/co-registrant evidence;multipleCIKs are not issuer/security mapping. Preserve original identities and uncertainty.",
+    "sealed_data": "Only already-used acceptance/role/indexmetadata dates;no statement/XBRL,fundamental outcome,prices/returns or sealed observations. Stop scope uncertainty.",
+    "http": "Existing declared User-Agent,ordinary publicHTTPS,<=2/s,serial,30stotal,no retries/redirects. Stop whole acquisition on403/429/5xx/transport/redirect/budget/scope/integrity/wall failure. No alternate identity/proxy/CIK bypass.",
+    "unknowns": "Oversized/missing/malformed/ambiguous civil clock/role/conflict stays unknown,never agreement. Knownunusable cache is not proof another GET will help;freshfetchatmostonce onlyifapproved,stillbounded. Unresolved rows block certification.",
+    "screen_violation": "If a qualified instant falls outside the frozen one-offset candidate envelope,stop certification and re-plan the population;do not assume excluded records remain assignment-insensitive or expand requests automatically."
+  },
+  "done_output": {
+    "per_accession": "Every required accession accounted for with original clocks/identities,resource/version/retrievalhashes,documented applicable clock basis,unique qualifiedUTC instant or explicit unresolved reason,and role/calendar status.",
+    "assignment_reconciliation": "Using qualified times and the frozen rules,compare originalvsverified first close,UTC/month buckets,monthly eligibility and latest-signalchoice;report exact accession counts,record-month instances and firm-month changes.No scores,prices,portfolio weights or P&L required.",
+    "acceptance": "Verified means clock definition applicable,identityrole resolved,civil conversion unique,sourceconflicts addressed and calendar qualified. A list of conditional Eastern conversions alone is NOT done. Report verified/unresolved/unread/conflicting coverage with full reconciliation,not a blanket offset.",
+    "separate_decisions": "No production timestamp/CIK repair,correction release,publicationor backtest rerun without another decision,even after the audit is complete.",
+    "limit": "This certifies only explicitly verified plan members,not the excluded cohortor allfilings;one-offset sensitivity screen is not a probability or global error bound."
+  },
+  "provenance": {
+    "input_SHA256": {
+      "data\\p0_assignment_queue.parquet": "85d6a4ea3bb29537abd493a5fbde943e7969fac442320acaa8e8978c7df274bb",
+      "data\\p0_pair_metadata_comparison.parquet": "8e7d66d2c6cb168663596899af90aa241b0dd9646318c98cfef208b01f02b117",
+      "results\\header_pilot_reconciled.json": "56d9437daee80a4dbc057bbd6bb0479f37f073e24471f9f0e5be23231807571c",
+      "results\\timestamp_authority_plan.json": "5b0a0af8d4a190b0f3be4f19d29cd117c3618a14f68d0b5475c1acc48b46db3d"
+    },
+    "source_SHA256": "1e4743c4303f65e163eaea2ad8b38d1e8f384a8faaa01f526dc117290998c2e9",
+    "SEC_counter_unchanged": {
+      "actual_HTTP_attempts": 140,
+      "ceiling": 150
+    },
+    "plan_wall_seconds": 4.57799999974668
+  }
+}

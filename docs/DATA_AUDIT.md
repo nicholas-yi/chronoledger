@@ -6,6 +6,32 @@ and [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-
 Older rebuild receipts and the frozen preregistration describe historical claims,
 not current source-clock certification. The registered first-close rule is unchanged.
 
+### Future local-reader memory safeguards (not run)
+
+The strict-format experiments are stopped; the default local request helper is the existing
+answer-first prompt. Experimental modules and frozen records remain available for review.
+The [pinned runtime support receipt](../results/local_model_runtime_support.json) records the
+bundled native `llama-server --help` definition: `--cache-ram N`, environment
+`LLAMA_ARG_CACHE_RAM`, defaults to 8192 MiB and accepts `0` to disable the prompt cache.
+The inspected native build is `6c01da627`, shipped with the pinned Ollama 0.40.16 package;
+executable, implementation-DLL and help hashes are recorded. Only help/version metadata was
+queried, without a model, server or network request.
+
+[RuntimePolicy](../src/asof/local_model_runtime.py) now defaults that environment setting to
+zero, keeps the owned server on 11435, and freezes the setting in future runner contracts.
+The [future launcher](../scripts/start_local_reader_server.py) verifies the package fingerprints,
+requires an explicit `serve` invocation and writes a PID/policy receipt. The archived comparison
+and control runners require that receipt; this does not authorize restarting an old experiment.
+It is a native environment option, not a guessed Ollama JSON request field.
+
+Future per-second owned-tree samples also append per-PID parent, creation time, process basename,
+working-set/peak/private/commit bytes, CPU time, UTC/monotonic time and safe arm/UID/stage context
+to ignored logs; observed starts/exits distinguish PID reuse. Prompt and answer payloads are
+rejected from logging context. The existing aggregate memory stop remains.
+Mock tests cover configured environment, launch arguments and process records; no live model
+was run, so inherited child-setting effectiveness and any RSS improvement remain unvalidated.
+This is not proof of the old memory cause or an OS-enforced quota, and shared 11434 is untouched.
+
 **2026-11-14 research plan:** the [research plan](RESEARCH_PLAN.md) records the proposed
 experiment workflow and diagram, prerequisites for closing the data/label/power gaps, three
 prospective study ideas and candidate data sources. Acquisition stays on free public sources for

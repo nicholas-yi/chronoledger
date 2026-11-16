@@ -1,0 +1,33 @@
+{
+  "kind": "LOCAL SHIPPED DOCUMENTATION, NOT A LIVE MODEL VALIDATION",
+  "Ollama_version": "0.40.16",
+  "version_basis": "Existing REAL3 owned-server/API receipt;current package executable and native backend fingerprinted offline.",
+  "Ollama_executable_SHA256": "4ccefcbfecc50fb6526471adabbc20869dd614e29e351120b15083cb174b0b8a",
+  "native_backend": {
+    "relative_executable": "lib\\ollama\\llama-server.exe",
+    "executable_SHA256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+    "relative_implementation": "lib\\ollama\\libllama-server-impl.dll",
+    "implementation_SHA256": "d553e971fc48f08d919eb016b73116c73af0aff82074e2b622ba3ee9d5fe95f2",
+    "build": "0.9.0-dev(build1,commit6c01da627),Clang18.1.8,WindowsAMD64"
+  },
+  "documentation": {
+    "method": "Only bundled llama-server.exe --help and --version;no --model,serve,inference,download or network request.",
+    "help_SHA256": "e314114263246b9ef7d97af20bf486ec222f9824cdf78b160d0d6369afae45c3",
+    "version_output_SHA256": "890230baedaeeae2c4093d9233ec5bef5e2c0e6739ff978737d7039a33e3620c",
+    "help_line_range": [446,449],
+    "short_definition": "--cache-ram N: set the maximum cache size in MiB;default8192;-1no limit;0disable. Environment:LLAMA_ARG_CACHE_RAM.",
+    "upstream_link_printed_by_help": "https://github.com/ggml-org/llama.cpp/pull/16391",
+    "upstream_page_fetched": false
+  },
+  "future_policy": {
+    "default_reader": "answer_first",
+    "strict_formats": "stopped_experimental_not_default",
+    "prompt_cache_MiB": 0,
+    "owned_server_environment": {"LLAMA_ARG_CACHE_RAM":"0","OLLAMA_HOST":"127.0.0.1:11435","OLLAMA_NUM_PARALLEL":"1","OLLAMA_MAX_LOADED_MODELS":"1"},
+    "not_an_Ollama_request_option": true,
+    "per_PID_logging": "Everyexisting1secondowned-tree sample also recordsPID,parent,creationtime,basename,RSS/peak/private/commit/CPU,UTC/monotonic and safeUID/arm/stage/options context;starts/exits tracked,no prompt or answer payload.",
+    "limits": "Keep aggregate10GiB/CPU/sleep/timeout protections. Retained prompt-cache control doesnot disable active context/KV buffers or model weights,prove historical RSS cause or bound every memory component.",
+    "verification": "Documented native setting and mocked parent-launch environment tests only. No live server/model run in this task,so child effective-setting/memory-effect validation remains for a separately approved run.",
+    "fallback": "Supported native environment setting exists;automatic per-N-call restarts are not implemented or guessed."
+  }
+}

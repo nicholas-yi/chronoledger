@@ -1,4 +1,4 @@
-"""Practice first, then one fresh invented control with explicit system abstentions."""
+"""Archived experimental strict-format controls, not the default answer-first reader."""
 
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ from run_reader_real2_completion import SleepAwareCPU
 
 from asof import ledger
 from asof.config import DATA_DIR, PROJECT_ROOT
+from asof.local_model_runtime import RuntimePolicy, verify_runtime_receipt
 from asof.reader_contract import Control, Report, passed
 from asof.reader_modes import Mode, ModeChoice
 from asof.reader_presence import ADAPTER, answer_body, mode_body, resolve_answer
@@ -33,6 +34,7 @@ InterfaceMode = Mode | Literal["text_span"]
 OPTIONS = {"temperature": 0, "seed": 2026111605, "num_predict": 768, "num_ctx": 8192,
            "num_thread": 4, "num_gpu": 0, "num_batch": 128}
 SOURCES = [Path(__file__), ROOT / "src" / "asof" / "reader_presence.py",
+           ROOT / "src" / "asof" / "local_model_runtime.py",
            ROOT / "src" / "asof" / "reader_modes.py", ROOT / "src" / "asof" / "reader_contract.py",
            ROOT / "src" / "asof" / "reader_real2_guards.py",
            *[ROOT / "scripts" / p for p in ("reader_real1_memory.py", "run_reader_real2.py",
@@ -172,6 +174,8 @@ def freeze(practice: bool, iteration: int, change: str, profile: Profile = "pres
             "no row/column dependency. No inference-time expected labels."
             if profile == "columns" else None),
         "options": OPTIONS, "digest": DIGEST, "server": "0.40.16",
+        "server_runtime": RuntimePolicy().manifest(),
+        "reader_status": "strict_format_stopped_experimental;answer_first_is_default",
         "request_SHA256": requests,
         "source_SHA256": {str(p.relative_to(ROOT)): ledger.file_sha256(p) for p in sources},
         "schema_policy": "Two-stage,mode first; source fields includeNOT_PRESENT. Source-only "
@@ -197,11 +201,16 @@ def freeze(practice: bool, iteration: int, change: str, profile: Profile = "pres
     print(json.dumps({"config_SHA256": ledger.file_sha256(config_path), "items": len(items)}))
 
 
-async def run(practice: bool, iteration: int, pid: int, profile: Profile = "presence") -> None:
+async def run(practice: bool, iteration: int, pid: int, profile: Profile = "presence",
+              runtime_receipt: Path | None = None) -> None:
     cp, sp, private = paths(practice, iteration, profile)
     if sp.exists():
         raise RuntimeError("already attempted")
     cfg = json.loads(cp.read_text())
+    if "server_runtime" not in cfg:
+        raise RuntimeError("archived_runtime_contract_requires_separate_new_run_decision")
+    verify_runtime_receipt(runtime_receipt or DATA_DIR/"local_reader_server"/"runtime.json",
+                           pid,cfg["server_runtime"])
     if ledger.lineage()["git_dirty"] or any(
         ledger.file_sha256(ROOT / p) != h for p, h in cfg["source_SHA256"].items()
     ):
@@ -217,7 +226,11 @@ async def run(practice: bool, iteration: int, pid: int, profile: Profile = "pres
     deadline = json.loads(deadline_path.read_text())["monotonic_deadline"]
     wall_reason = "entire_invented_control30minwall"
     start, cpu_start = time.monotonic(), time.process_time()
-    cpu, memory, policy = SleepAwareCPU(), OwnedMemory(pid), SustainedCPU()
+    memory_context = {"phase":"practice" if practice else "invented_control",
+                      "options_SHA256":fingerprint(cfg["options"])}
+    cpu = SleepAwareCPU()
+    memory = OwnedMemory(pid,telemetry_path=private/"process_memory.jsonl",context=memory_context)
+    policy = SustainedCPU()
     rows = [{"id": r["id"], "calls": [], "outcome": "not_attempted",
              **({} if practice else {"correct": False})} for r in cfg["items"]]
     output = {"kind": cfg["kind"], "iteration": cfg["iteration"], "items": rows,
@@ -252,6 +265,8 @@ async def run(practice: bool, iteration: int, pid: int, profile: Profile = "pres
             len(r["calls"]) for r in rows) >= 40:
             raise ResourceStop("practice40callcap")
         call = {"stage": stage, "outcome": "started"}
+        memory_context.update(uid=row["id"],stage=stage,
+                              call_id=sum(len(r["calls"]) for r in rows)+1)
         row["calls"].append(call)
         row["outcome"] = "attempt_started"
         persist()
@@ -405,6 +420,7 @@ if __name__ == "__main__":
     parser.add_argument("--iteration", type=int, default=1)
     parser.add_argument("--change", default="NOT_PRESENT plus predeclared model/system abstentions.")
     parser.add_argument("--server-pid", type=int)
+    parser.add_argument("--runtime-receipt", type=Path)
     parser.add_argument("--profile", choices=("presence", "roles", "columns"), default="presence")
     args = parser.parse_args()
     if args.phase in ("practice-freeze", "freeze"):
@@ -412,4 +428,5 @@ if __name__ == "__main__":
     else:
         if args.server_pid is None:
             parser.error("--server-pid required")
-        asyncio.run(run(args.phase == "practice", args.iteration, args.server_pid, args.profile))
+        asyncio.run(run(args.phase == "practice", args.iteration, args.server_pid, args.profile,
+                        args.runtime_receipt))

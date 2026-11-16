@@ -277,13 +277,9 @@ scale rather than as a matched comparison. Source:
 - **This is a small public sample.** It shows the model can read some filings, not that it would
   have measured disclosure changes reliably at the time. The model may also have seen this public
   benchmark during training.
-- **A stricter answer format is being tested.** The model names each number's role (start or end
-  value, numerator or denominator) and code does the arithmetic. It now accepts non-date column
-  labels and checks quoted words against supplied paragraphs. On the latest made-up set, all eight
-  calculations were right, but it still missed requested values, source labels and exact reference
-  phrasing: 18 of 21 answerable questions fully right and 2 of 3 unanswerable ones declined.
-  It hasn't been tried on real reports
-  ([details](docs/RESEARCH_PLAN.md#toward-a-stricter-answer-format)).
+- The stricter format did not carry over to real reports in an early, partial comparison, so the
+  simpler answer-first format remains the reader
+  ([diagnosis](results/reader_real3_diagnosis.json)).
 
 ## Stress tests of the method
 

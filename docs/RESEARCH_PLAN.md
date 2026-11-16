@@ -76,7 +76,7 @@ launch workers or enforce host isolation. The planned container remains unprovis
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | A [48-filing check](../results/header_pilot_review.json) of each filing's own SEC header is done (see the README); next, check every filing whose trading day or month could change with a one-offset error | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
+| Filing timestamps | The [48-filing check](../results/header_pilot_review.json) is done; the [full-check proposal](../results/timestamp_full_plan.json) specifies the exact remaining assignment-risk population, URLs and budget | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Two people independently label claim changes in 60 real filing pairs, with disagreements adjudicated | Measured precision and recall of claim extraction on real text, not synthetic benchmarks |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
@@ -84,6 +84,16 @@ launch workers or enforce host isolation. The planned container remains unprovis
 | More independent periods | Plan a separate older-period study with survivorship-free data | More real, independent months; nominal date ranges alone do not count |
 | Model training | Train a small claim matcher only if the labelled audit shows errors it could fix | Splits separated by time and by company, compared against the frozen baselines |
 | Trading costs | Record which cost components are observed and which are assumed; compute break-even costs | A realistic net comparison, plus a long-only version that needs no borrowing |
+
+The [full timestamp-check proposal](../results/timestamp_full_plan.json) covers 16,921 distinct
+assignment-risk accessions, including all 108 designated clock disagreements. It inventories
+34,354 distinct header/index URLs across both original CIK paths where needed: 102 have usable
+bounded caches, leaving 34,252 proposed metadata requests. With up to ten clock-definition
+documentation requests, that needs a new explicit 34,262-request approval and project ceiling
+34,402, not the ten requests left today. At two starts per second the metadata floor is 4.76 hours;
+12 hours and 4 GiB are proposed limits, not completion promises. A documented historical clock,
+resolved filing roles and a qualified calendar are still needed before times are called verified;
+no data repair or backtest rerun follows without a separate decision.
 
 A fine-tuned modern model is not automatically free of look-ahead for old filings, even if its
 fine-tuning data is old, because its pretraining may include later text. Measurement models are
@@ -272,6 +282,13 @@ comparison. A later real-format comparison stopped early at a memory limit, and 
 [ten-pair offline review](../results/reader_real3_diagnosis.json) found both answer-conversion
 mismatches and source-selection or unnecessary-decline problems, without changing the earlier
 11-of-30 result.
+
+**What the format experiments taught.** Code arithmetic with named inputs was right on all
+eight calculations in each of two separate made-up sets. On the ten completed real pairs, the
+strict format got one exactly right against six for the simple prompt; five of its nine misses
+were source-cell or span selection, not conversion. We are stopping this format line and keeping
+its code and records as experimental references, not the default reader; answer-first remains
+the reader. These small, partial observations do not establish historical usability or returns.
 
 ### What the earlier tests taught
 
