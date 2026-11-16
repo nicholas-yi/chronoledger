@@ -1,0 +1,49 @@
+{
+  "verdict": "FAIL: preserve the single run; do not tune, repair predictions or rerun",
+  "freeze_commit": "e5ae73fa9a020bf392b181c3108d84aca6318632",
+  "config_sha256": "4766af3a213d4fd585eb5461e4820942cf3afc2fd5726ad0b69c3a9cf0d0a4ae",
+  "scope": "Twenty-four newly authored fictional controls only; no real benchmark items opened, generated or rescored.",
+  "observed": {
+    "generation_attempts": 24,
+    "normal_provider_stops": 24,
+    "answerable_correct": 0,
+    "answerable_total": 21,
+    "correct_explicit_abstentions": 1,
+    "unanswerable_total": 3,
+    "invalid_contract_outputs": 22,
+    "valid_but_wrong_abstention": 1,
+    "successful_arithmetic_outputs_computed_by_code": 0,
+    "arithmetic_total": 8,
+    "timeouts": 0,
+    "truncations": 0,
+    "sleep_interruptions": 0,
+    "resource_stop": false
+  },
+  "offline_diagnosis": {
+    "invalid_abstentions_with_nonempty_values": 12,
+    "arithmetic_operations_with_nonempty_values_forbidden_by_frozen_contract": 10,
+    "lookup_operation_outputs": 0,
+    "operation_counts": {
+      "abstain": 14,
+      "difference": 3,
+      "percent_change": 2,
+      "ratio": 3,
+      "average": 2
+    },
+    "interpretation": "The outputs often populate value strings, then choose incompatible operation/operand fields. This is a contract-compliance failure, not evidence that the underlying values could not be located or that deterministic arithmetic is wrong. The JSON schema constrains field types but the cross-field invariants are enforced by Python, not guaranteed by the provider grammar. Do not ignore or repair those invariants after seeing the run.",
+    "causal_limit": "One bundled prompt/schema/typed-execution control cannot isolate the cause. Correct-looking components are not accepted answers or a recovered accuracy. No counterfactual rescoring was performed."
+  },
+  "resources": {
+    "wall_seconds": 329.969000000041,
+    "Python_CPU_seconds": 9.1875,
+    "owned_RSS_peak_sample_bytes": 4060495872,
+    "host_CPU_time_weighted_mean_percent": 59.94729909200617,
+    "host_CPU_max_percent": 100.0,
+    "rolling_60second_mean_max_percent": 75.65553744971027,
+    "note": "Host CPU is not model-process CPU. Cooperative sampled guards, not an operating-system sandbox."
+  },
+  "operational_note": "The first five-second readiness GET timed out during server startup; no run receipt or generation existed then. A later readiness GET confirmed the frozen server version before the one generation run. Own server PID 56896 and listener 11435 were absent after shutdown.",
+  "next_gate": "A simpler operation-first or mode-specific schema is a future proposal only. No contract tuning, further model call or real-data rerun is authorized by this failed control.",
+  "Part_B": "Proceed sequentially with the separately approved strict-client tests and documentation-only Stage 1. Part A failure does not authorize additional inference.",
+  "non_claims": "No real-data accuracy improvement, historical usability, H1, returns, training or absence-of-training-exposure claim."
+}
