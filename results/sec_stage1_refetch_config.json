@@ -1,0 +1,25 @@
+{
+  "kind": "DECLARED SINGLE-URL DOCUMENTATION READ-CAP AMENDMENT",
+  "URL": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+  "method": "GET",
+  "historical_attempt": 48,
+  "only_operational_change": {
+    "documentation_read_cap_bytes_from": 65536,
+    "documentation_read_cap_bytes_to": 4194304
+  },
+  "unchanged": "Same declared ASOF_USER_AGENT, 30s total deadline, <=2starts/s, serial, no retries, redirects, encoding/proxy/identity bypass; precharged counter.",
+  "scope": "Only this official documentation page. No other URL, filing request or roster.",
+  "budget_sha256": "eddc85a3c8d3393299ab2b01cb824dafbebe4ececcbc25f50140783e54206c07",
+  "protected_sha256": {
+    "results\\sec_stage1_config.json": "22f59aa735e003ac681f8beb69f02e4899e8c4f6ea2632046a9b695888c78c9a",
+    "results\\sec_stage1_status.json": "342304fddfcbbc39d5f51169c8cb00725a671f33eafa77294d159dad77eac75c",
+    "results\\sec_stage1_requests.jsonl": "7b13463651c30f01dd076ee153bfc2d30e5248d09f6f0b09f2673557cea74a78",
+    "results\\sec_stage1_review.json": "1b36768750960eedd026de3cac40e8f48601c1517603539c16e0ef5a95403192"
+  },
+  "source_sha256": {
+    "scripts\\qualify_sec_documentation_refetch.py": "87467f0af4aa2e6fc0982f0931d3079680509f89f2863d9c1c6d1aadef81dd9c",
+    "src\\asof\\sec_documentation.py": "945e6f73f7b1ba95b4f01402eb236734a222468182259d8f3a0656b60c0a7957",
+    "tests\\test_sec_documentation.py": "84770fdd5c1987290b482336ff8e930429a2fb8e0c1662f158e62de1e6fa125f"
+  },
+  "review": "Short verbatim acceptance-field definitions only. Distinguish format, clock/time zone and historical applicability. If absent say not defined on this page."
+}

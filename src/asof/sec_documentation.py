@@ -32,12 +32,16 @@ class StrictSecDocumentation:
     def __init__(
         self, allowed_urls: tuple[str, ...], budget_path: Path, receipt_path: Path,
         cache_dir: Path, *, transport: httpx.AsyncBaseTransport | None = None,
+        read_cap_bytes: int = MAX_BYTES,
     ) -> None:
+        if type(read_cap_bytes) is not int or read_cap_bytes not in (MAX_BYTES, 4 << 20):
+            raise ValueError("documentation read cap must be the frozen64KiB or approved4MiB")
         if not allowed_urls or len(allowed_urls) > MAX_ATTEMPTS:
             raise ValueError("one to eight frozen documentation URLs required")
         if receipt_path.exists():
             raise DocumentationStop("receipt_already_exists_no_automatic_resume")
         self.allowed_urls = frozenset(allowed_urls)
+        self.read_cap_bytes = read_cap_bytes
         self.budget_path, self.receipt_path, self.cache_dir = budget_path, receipt_path, cache_dir
         self.attempts = 0
         self.stopped = False
@@ -123,11 +127,13 @@ class StrictSecDocumentation:
                     if response.headers.get("content-encoding", "identity").lower() != "identity":
                         raise DocumentationStop("unsupported_content_encoding")
                     length = response.headers.get("content-length")
-                    if length is not None and (not length.isdecimal() or int(length) >= MAX_BYTES):
+                    if length is not None and (
+                        not length.isdecimal() or int(length) >= self.read_cap_bytes
+                    ):
                         raise DocumentationStop("declared_body_at_read_cap_or_invalid_length")
                     async for chunk in response.aiter_raw(chunk_size=4096):
                         body.extend(chunk)
-                        if len(body) >= MAX_BYTES:
+                        if len(body) >= self.read_cap_bytes:
                             raise DocumentationStop("body_reached_read_cap_unqualified")
                     record["body_complete"] = True
             return bytes(body)

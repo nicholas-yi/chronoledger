@@ -170,3 +170,25 @@ def test_serial_start_rate_and_duplicate_request_stop(tmp_path, monkeypatch):
 
     asyncio.run(run())
     assert len(starts) == 2 and starts[1] - starts[0] >= 0.49
+
+
+def test_approved_documentation_cap_only_changes_read_bound(tmp_path, monkeypatch):
+    seen = []
+
+    def handle(request):
+        seen.append(str(request.url))
+        return httpx.Response(200, stream=Bytes([b"x" * 70000]))
+
+    client, budget, receipt = setup(tmp_path, monkeypatch, handle)
+    asyncio.run(client.client.aclose())
+    client = docs.StrictSecDocumentation(
+        (URL,), budget, receipt, tmp_path / "cache",
+        transport=httpx.MockTransport(handle), read_cap_bytes=4 << 20,
+    )
+
+    async def run():
+        async with client:
+            return await client.fetch(URL)
+
+    assert len(asyncio.run(run())) == 70000 and seen == [URL]
+    assert json.loads(receipt.read_text().splitlines()[-1])["body_complete"]
