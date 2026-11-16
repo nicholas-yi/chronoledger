@@ -1,0 +1,225 @@
+{
+  "kind": "POSTHOC OFFLINE DIAGNOSIS, NOT NEW OR REPLACEMENT SCORES",
+  "scope": "All10completed REAL3 pairs:7wrong+2abstained+1correct column-format outcomes,with matched answer-first outputs as contrast.",
+  "reviewer": "AI-assisted,after-the-fact review;not blinded independent human adjudication.",
+  "new_model_generations": 0,
+  "new_SEC_or_other_HTTP_requests": 0,
+  "original_scores_changed": false,
+  "classification_contract": {
+    "primary": "One primary WHERE category per miss;correct_control is separate. Secondary categories/flags overlap and do not sum to misses.",
+    "a": "Wrong coarse mode or answer type,including unnecessary model abstention.",
+    "b": "Wrong source operands or model-selected span boundaries/extraneous spans.",
+    "c": "Raw selected facts substantively supported,but native answer-grouping/scale contract produces an exact-match mismatch. Sensitivity is not proof of a universal arithmetic/parser bug.",
+    "d": "Explicit code-side decline blocks a source-supported reading.",
+    "e": "Reference/granularity/unit/scope convention sensitivity requiring qualification;may overlap another primary cause.",
+    "boundary": "Contains the reference somewhere is not enough for c:when raw model spans already contain substantial extraneous material,primary b remains and no trimming counterfactual is scored."
+  },
+  "counts": {
+    "completed_pairs": 10,
+    "column_correct": 1,
+    "column_misses": 9,
+    "primary_misses": {"a":1,"b":5,"c":2,"d":1,"e":0},
+    "primary_b_breakdown": {"wrong_cell_or_metric_operands":2,"overbroad_or_overlapping_spans":3},
+    "secondary_e_convention_or_scope_flags": 3,
+    "answer_first_exact_matches_on_same10": 6,
+    "counterfactual_conversion_sensitive_UIDs": 2,
+    "other_misses_not_explained_by_those_two_counterfactuals": 7
+  },
+  "items": [
+    {
+      "id": "58d97328-c6a8-4f7e-9740-80c0384306fb",
+      "column_outcome": "wrong",
+      "primary": "c",
+      "secondary": ["e"],
+      "subtype": "native_answer_grouping_contract",
+      "note": "The model selects all requested source components as separate,ordered fragments of one paragraph. The frozen bridge emits a string list;native normalization sorts list entries before joining,while the reference is one contiguous answer. No extra substantive source content is needed to reconstruct the covering span.",
+      "qualification": "Plain space joining alone does not recover EM. A source-aware contiguous cover restoring only punctuation/conjunction gaps does. This is grouping-contract sensitivity,not proof that arbitrary multi-span lists should be merged.",
+      "saved_A": {"EM":0,"F1":1,"scale_correct":1},
+      "saved_B": {"EM":1,"F1":1,"scale_correct":1},
+      "counterfactual_mapping": true
+    },
+    {
+      "id": "765f1e20-9c75-4611-99ef-68a193d7e101",
+      "column_outcome": "wrong",
+      "primary": "b",
+      "secondary": [],
+      "subtype": "extra_metric_rows_in_average",
+      "note": "The requested average operation is chosen,but operands include a different metric row as well as the requested row. Code exactly averages the four selected cells;the reference uses only the requested metric's two cells. Decimal/scale conversion does not explain the error.",
+      "saved_A": {"EM":0,"F1":0,"scale_correct":1},
+      "saved_B": {"EM":1,"F1":1,"scale_correct":1}
+    },
+    {
+      "id": "3ac56faa-f0d1-49e6-b461-5088b0e9062e",
+      "column_outcome": "wrong",
+      "primary": "b",
+      "secondary": [],
+      "subtype": "overbroad_span_and_extraneous_context",
+      "note": "Correct paragraph mode,but selected output includes a heading,an entire factual sentence and an unrelated explanatory sentence rather than the requested short ownership span. The bridge preserves that model-selected excess;joining or numeric canonicalization cannot fix selection.",
+      "saved_A": {"EM":0,"F1":0.11,"scale_correct":1},
+      "saved_B": {"EM":0,"F1":0.67,"scale_correct":0},
+      "contrast_note": "Answer-first selects the relevant quantity but misses the frozen reference qualifier/scale convention;its original score remains unchanged."
+    },
+    {
+      "id": "d1dbf58b-a4be-40f9-b0b1-7c5185d4403e",
+      "column_outcome": "abstain",
+      "primary": "a",
+      "secondary": [],
+      "subtype": "unnecessary_model_abstain_mode",
+      "note": "The model chooses abstain at the mode-only stage despite an explicit definition in the supplied paragraph. No answer-stage conversion or code-side decline occurs.",
+      "saved_A": {"EM":0,"F1":0,"scale_correct":0},
+      "saved_B": {"EM":1,"F1":1,"scale_correct":1}
+    },
+    {
+      "id": "862a5386-ce39-493c-acf9-ded6177ba4b5",
+      "column_outcome": "wrong",
+      "primary": "b",
+      "secondary": ["e"],
+      "subtype": "amount_embedded_in_overlong_clause",
+      "note": "The selected source clause contains the reference amount but also substantial introductory/year wording. The frozen bridge preserves the clause. Extracting only the amount would change model-selected answer boundaries,not merely correct Decimal formatting.",
+      "qualification": "The unqualified question also admits a total-versus-included-component interpretation from the table and narrative;independent reference-scope adjudication is warranted. No label change or counterfactual trimming score.",
+      "saved_A": {"EM":0,"F1":0,"scale_correct":1},
+      "saved_B": {"EM":1,"F1":1,"scale_correct":0}
+    },
+    {
+      "id": "94d96afd-4f9f-4edd-9e9e-6585ab8c1c40",
+      "column_outcome": "abstain",
+      "primary": "d",
+      "secondary": [],
+      "subtype": "sentinel_padding_blocks_supported_definition",
+      "note": "The first span quotes the relevant definition,but a second entry has a NOT_PRESENT paragraph selector. The prospectively frozen any-sentinel rule declines the whole output. No padding removal/regrade is performed.",
+      "qualification": "The retained definition also includes a source prefix beyond the reference boundary,so removing the sentinel alone is not claimed to guarantee native EM.",
+      "saved_A": {"EM":0,"F1":0,"scale_correct":0},
+      "saved_B": {"EM":1,"F1":1,"scale_correct":1}
+    },
+    {
+      "id": "4a58213e-066a-4a7e-becc-e9dc85bda06e",
+      "column_outcome": "wrong",
+      "primary": "c",
+      "secondary": ["e"],
+      "subtype": "displayed_span_vs_context_scale_contract",
+      "note": "The correct source cell/value is selected. Canonicalization removes only display punctuation;the source banner supplies a context multiplier. The benchmark reference is instead an unscaled displayed span with an empty native scale. Both arms return the right displayed value with the contextual scale and both miss native EM.",
+      "qualification": "The counterfactual honors the benchmark's displayed-span convention;it does not establish that the source banner is wrong or that all lookups should ignore scale.",
+      "saved_A": {"EM":0,"F1":0,"scale_correct":0},
+      "saved_B": {"EM":0,"F1":0,"scale_correct":0},
+      "counterfactual_mapping": true
+    },
+    {
+      "id": "1d868d0c-ddf5-4c62-8c73-28b453e91abc",
+      "column_outcome": "wrong",
+      "primary": "b",
+      "secondary": [],
+      "subtype": "overbroad_and_overlapping_spans",
+      "note": "The model selects the whole explanatory sentence plus an overlapping restatement of the subject,rather than the concise reason clause. The adapter does not invent the overlap;raw selection is already redundant/too broad.",
+      "saved_A": {"EM":0,"F1":0.81,"scale_correct":1},
+      "saved_B": {"EM":1,"F1":1,"scale_correct":1}
+    },
+    {
+      "id": "91f1515f-4771-403c-ba45-309079ea2723",
+      "column_outcome": "correct",
+      "primary": "correct_control",
+      "secondary": [],
+      "subtype": "correct_named_difference_and_native_scale",
+      "note": "Named start/end cells,canonical decimals,subtraction and native scale agree with the reference derivation. This control gives no evidence of an arithmetic or sign-conversion bug.",
+      "saved_A": {"EM":1,"F1":1,"scale_correct":1},
+      "saved_B": {"EM":0,"F1":0,"scale_correct":0},
+      "contrast_note": "Answer-first gives a relative quantity instead of the referenced absolute change;no B counterfactual or score change."
+    },
+    {
+      "id": "98b13aba-4ca2-4369-87eb-a960c71b8a2c",
+      "column_outcome": "wrong",
+      "primary": "b",
+      "secondary": [],
+      "subtype": "wrong_entity_row_in_average",
+      "note": "One of the selected average operands comes from the wrong row category. The calculator exactly computes the model's selected cells;the reference uses two cells from the requested row category.",
+      "saved_A": {"EM":0,"F1":0,"scale_correct":1},
+      "saved_B": {"EM":0,"F1":0,"scale_correct":1}
+    }
+  ],
+  "counterfactual_mapping_diagnostic_only": {
+    "scope": "Only the2primary-c UIDs;3official native-scorer calls including one unsuccessful simple-join variant. No original full-run rescoring,labels or predictions changed.",
+    "cases": [
+      {
+        "id": "58d97328-c6a8-4f7e-9740-80c0384306fb",
+        "saved": {"EM":0,"F1":1,"scale_correct":true},
+        "variants": [
+          {"method":"join_model_fragments_with_spaces_in_source_order","EM":0,"F1":1,"scale_correct":true},
+          {"method":"same_cited_paragraph_cover_with_only_punctuation_and_conjunction_gaps","EM":1,"F1":1,"scale_correct":true}
+        ],
+        "guard": "Every fragment uniquely locatable,ordered and nonoverlapping in one cited paragraph;interstitial gaps verified to contain only whitespace,commas or conjunctions. No reference text used to choose the cover."
+      },
+      {
+        "id": "4a58213e-066a-4a7e-becc-e9dc85bda06e",
+        "saved": {"EM":0,"F1":0,"scale_correct":false},
+        "method": "Keep the exact selected displayed number;use empty native scale for the displayed-span annotation convention.",
+        "counterfactual": {"EM":1,"F1":1,"scale_correct":true}
+      }
+    ],
+    "additional_exact_matches_in_isolated_counterfactuals": 2,
+    "replacement_accuracy_or_README_score": false,
+    "limit": "These demonstrate two native-contract sensitivities,not a validated general mapping repair. The other7misses remain unexplained by these two changes;no counterfactual was scored for a,b,d or e-only cases."
+  },
+  "memory": {
+    "cause_of_total_RSS_peak": "cannot determine",
+    "recorded_total_peak_bytes": 10862796800,
+    "model_runner_start_commands_observed": 1,
+    "model_load_requests_observed": 1,
+    "native_tensor_load_sequences_observed": 1,
+    "loaded_runner_counter": 1,
+    "runner_context_tokens": 16384,
+    "runner_parallel_slots": 1,
+    "runner_CPU_threads": 4,
+    "reload_or_unload_events_observed": 0,
+    "option_driven_reload_between_arms": "No recorded evidence. Frozen request options are identical for both arms;one launch/load across practice and the real run.",
+    "exact_concurrent_runner_process_count": "cannot determine from persisted per-PID evidence;surviving lifecycle log supports one recorded model runner,not multiple.",
+    "ready_message_caveat": "Two identical ready messages at the same startup time are not two launch commands.",
+    "completed_real_call_load_duration_seconds": {
+      "column_format": {"n":19,"min":0.0106436,"median":0.013652,"max":0.0727057},
+      "answer_first": {"n":10,"min":0.0099844,"median":0.01221555,"max":0.0225905}
+    },
+    "runner_cache_observation": {
+      "logged_states":47,
+      "first_prompts":0,
+      "first_logged_MiB":0,
+      "last_and_max_prompts":31,
+      "last_and_max_logged_MiB":6697.439,
+      "configured_cache_limit_MiB":8192,
+      "interpretation":"Retained prompt-cache growth is directly logged and is a plausible contributor,not a proven per-process or OS-resident-memory attribution."
+    },
+    "evidence_lines_in_owned_server_log": {
+      "start_command":16,"load_request":18,"tensor_load":187,
+      "loaded_runners_count":295,"initial_cache":303,"late_cache":4243
+    },
+    "missing_evidence": "No persisted runner PID lifecycle or per-PID RSS/private-byte series. CPU trace contains host-load intervals only;OwnedMemory persisted just the owned-tree peak. No separate owned-runner log with a process-memory series was found. Shared11434/global Ollama/AE logs not inspected.",
+    "future_logging_proposal_only": "On a separately approved run,persist per-second owned PID,parentPID,creation time,process basename,current/peakRSS,private/commit bytes,cumulativeCPU,UTC/monotonic time,arm/UID/stage/callID and optionhash;record starts/exits and align runner/cache counters. No prompt,answer or private source text. Preserve existing total-RSS stop. Not implemented."
+  },
+  "recommendation": {
+    "label":"mixed",
+    "basis":"2of9misses are native grouping/scale-contract sensitive under narrow counterfactuals;5are source-cell/span selection,1unnecessary model abstention and1code-side sentinel decline. Mapping alone does not explain7of9misses. Three convention/scope flags overlap those primary causes.",
+    "action":"Do not treat this as either a simple Decimal/sign fix or conclusive failure of all strict formats. Review native grouping/scale conventions separately from evidence selection/decline design;any implementation and fresh scored sample requires a new decision. No fixes,tuning or rerun here.",
+    "generalization_limit":"Only10early completed pairs from an RSS-stopped public sample;no observed multi-span/count group. Not a population estimate,paired improvement,historical usability,H1 or returns. Possible training exposure."
+  },
+  "provenance": {
+    "frozen_config_SHA256":"a55d5bd50044eae26e40689568d324d2d44ca0cadb436c430de1e0cef55c5ae6",
+    "generation_status_SHA256":"568eeb6cf2b03a5bc2f7aaadb6443dc708bea133a8c8ee5b60779c728b331333",
+    "native_report_SHA256":"21a91441704860856ba4f5956c06686a245f98ae488c4ac58abd9bda151e16aa",
+    "sealed_predictions_SHA256":"a145f28b452527ad6caba43131c44e373ff6355e70dde28d7dc2de5cd6811228",
+    "owned_server_log_SHA256":"61a0ea38c5395e8fa2153c335aa6ee6d29ff2c33607a7309463e98f286ae61f6",
+    "native_metric_SHA256":"2aeeac479f89f8c76300af1cc0e8d098eb86af84bc386b38b6ab4af484a6dea8",
+    "private_evidence":"Ignored data/reader_real3_diagnosis holds10case reviews,limited counterfactual witnesses and arithmetic/mapping traces. Never committed.",
+    "verified":"All10raw-to-frozen-native mappings reproduced exactly without scoring;two wrong arithmetic outputs equal the selected operands' calculations;correct control matches reference arithmetic."
+  },
+  "exposure":"All30REAL3UIDs are exposed and must not be used in a future fresh scored test;160realUIDs total excluded thereafter. No automatic completion/resume.",
+  "preserved":"No model or SEC request,no production code/calculator/mapping/prediction/label/original-score changes;SECcounter140,ledger74,datauntracked,README/Figure3unchanged,no push/tags.",
+  "validation": {
+    "JSON_shape_UIDs_counts_saved_metrics":"passed;10unique completed-pairUIDs,9exclusive primary misses+1correctcontrol,3overlapping convention flags",
+    "counterfactual_scope":"Only2primary-c UIDs;3native calls,2isolated additional EMmatches,no aggregate replacement score",
+    "pipeline_trace":"All10rawoutputs reproduce sealed native prediction/scale strings;2wrong averages agree exactly with selected operands,correctcontrol subtraction consistent",
+    "privacy":"No real question/reference-answer/quote payload fields or full question/long reference strings in public JSON;private evidence ignored",
+    "Ruff":"Read-only check passed on existing frozen mapping/column/report/generation/offline-scoring paths;Ruff does not lint JSON itself",
+    "code_changes":false,
+    "full_pytest_rerun":false,
+    "reason_no_full_suite":"Documentation/data-only diagnosis;JSON/count/hash/privacy checks performed instead,per dispatch",
+    "original_artifacts":"Frozenconfig,generationstatus,nativereport,sealedpredictions,ownedserverlog hashes unchanged;source/scripts/tests/README/figures/originalresults unchanged",
+    "counters":"SEC140/150,ledger74,datauntracked"
+  }
+}

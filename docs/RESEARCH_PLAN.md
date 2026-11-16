@@ -268,8 +268,10 @@ On the latest invented set, all eight calculations were right. Remaining errors 
 one of two requested table values, marking a present row label missing, quoting a shorter phrase
 than the expected answer, and substituting an existing region for an absent one. A quoted span
 can be in the source yet still be incomplete. Fresh authored sets are not a matched accuracy
-comparison. The format has not been tried on real reports, so the 11-of-30 result above remains
-the only real-data figure.
+comparison. A later real-format comparison stopped early at a memory limit, and its
+[ten-pair offline review](../results/reader_real3_diagnosis.json) found both answer-conversion
+mismatches and source-selection or unnecessary-decline problems, without changing the earlier
+11-of-30 result.
 
 ### What the earlier tests taught
 
