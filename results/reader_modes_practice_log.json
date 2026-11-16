@@ -32,7 +32,21 @@
       "constrained_mode_first": 12,
       "unconstrained_disallowed_mode_observed": 2,
       "config_sha256": "a0cdde78bcb98b044990dae26f794719b642a5143d5b11ade5f4c1bb96be4d3b"
+    },
+    {
+      "iteration": 3,
+      "attempts": 3,
+      "change": "Final3of40practicecalls: replay only answer stages for PRA01/PRA03/PRA06 using model-selected modes from iteration2. Source-only enum vocabularies prevent empty periods/non-cell strings; remove redundant scale field and derive it from source unit/operation. Dimension remains model selected and checked. No scored items yet.",
+      "outcomes": {
+        "practice_path_valid": 3
+      },
+      "operational_gate": true,
+      "constrained_schema_valid": 3,
+      "constrained_mode_first": 3,
+      "unconstrained_disallowed_mode_observed": 0,
+      "config_sha256": "598d750c86ed9d687116e039cb2e1d367ac1b6e9e88f507551b9bea4fbaa0d93"
     }
   ],
-  "total_calls": 37
+  "total_calls": 40,
+  "recovery": "Iteration3 summary recovered offline; original interrupted receipt retained."
 }

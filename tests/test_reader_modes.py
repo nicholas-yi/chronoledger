@@ -68,3 +68,19 @@ def test_source_vocabularies_and_percent_scale_are_code_derived_not_redundant_fi
         "operands": [operand("33", "Q"), operand()], "answer_dimension": "percent",
     })
     assert resolve_mode(answer, report) == (["120.00"], True)
+
+
+def test_practice_finalizer_uses_predecessor_not_current_partial_receipt(monkeypatch):
+    import importlib.util
+    from pathlib import Path
+    scripts = Path(__file__).resolve().parents[1] / "scripts"
+    monkeypatch.syspath_prepend(str(scripts))
+    spec = importlib.util.spec_from_file_location("mode_runner_finalizer",
+                                                scripts / "run_reader_modes.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    prior = {"iteration": 2, "code_path_operations": {"difference": 1}}
+    current = {"iteration": 3, "items": []}
+    assert module.practice_predecessor([prior, current], 3) is prior
+    with pytest.raises(ValueError):
+        module.practice_predecessor([current], 3)

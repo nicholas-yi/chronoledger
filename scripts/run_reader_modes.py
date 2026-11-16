@@ -67,6 +67,13 @@ def request_hash(body: dict) -> str:
     return hashlib.sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
 
 
+def practice_predecessor(history: list[dict], iteration: int) -> dict:
+    matches = [r for r in history if r["iteration"] == iteration - 1]
+    if len(matches) != 1:
+        raise ValueError("one predecessor practice receipt required")
+    return matches[0]
+
+
 def freeze(practice: bool, iteration: int, change: str) -> None:
     config_path, status_path, _ = paths(practice, iteration)
     if config_path.exists() or status_path.exists():
@@ -100,8 +107,12 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
             raise ValueError("grammar/path practice gate must pass before fresh scored freeze")
         latest_config, _, _ = paths(True, previous[-1]["iteration"])
         latest = json.loads(latest_config.read_text())
-        if any(ledger.file_sha256(PROJECT_ROOT / p) != h
-               for p, h in latest["source_sha256"].items()):
+        changed = {p: ledger.file_sha256(PROJECT_ROOT / p)
+                   for p, h in latest["source_sha256"].items()
+                   if ledger.file_sha256(PROJECT_ROOT / p) != h}
+        recovery_path = PROJECT_ROOT / "results" / "reader_modes_practice_3_recovery.json"
+        recovery = json.loads(recovery_path.read_text()) if recovery_path.exists() else {}
+        if changed and changed != recovery.get("reporting_only_source_after"):
             raise ValueError("implementation changed since practice; practice it before scoring")
         items = [Control.model_validate(row).model_dump() for row in json.loads(SCORED.read_text())]
         if Counter(row["category"] for row in items) != {
@@ -160,6 +171,8 @@ def freeze(practice: bool, iteration: int, change: str) -> None:
                        "normalization unchanged; Decimal40/round-half-up2decimals.",
         "prior_practice_status_sha256": [
             ledger.file_sha256(paths(True, r["iteration"])[1]) for r in previous],
+        "reporting_only_recovery_sha256": ledger.file_sha256(recovery_path)
+            if not practice and recovery_path.exists() else None,
         "scored_items_existed_at_practice_freeze": SCORED.exists() if practice else None,
         "iteration3_scope": "Three remaining calls recheck only answer-stage failures on existing "
                             "practice items, using the modes the model already selected in "
@@ -395,7 +408,7 @@ async def run(practice: bool, iteration: int, server_pid: int) -> None:
                     and {"lookup", "multi_value", "arithmetic", "abstain"} <= {
                         r.get("mode") for r in natural})
                 if iteration == 3:
-                    prior = prior_practice()[-1]
+                    prior = practice_predecessor(prior_practice(), iteration)
                     gate = (complete and unchanged
                             and len(rows) == 3 and all(r["outcome"] == "practice_path_valid"
                                                      for r in rows)
