@@ -76,7 +76,7 @@ launch workers or enforce host isolation. The planned container remains unprovis
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | Use the [staged authority plan](../results/timestamp_authority_plan.json): qualify field clocks and filing roles, then a bounded metadata pilot including agreeing sources, before cohort-wide header checks | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
+| Filing timestamps | A [48-filing check](../results/header_pilot_review.json) of each filing's own SEC header is done (see the README); next, check every filing whose trading day or month could change with a one-offset error | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Two people independently label claim changes in 60 real filing pairs, with disagreements adjudicated | Measured precision and recall of claim extraction on real text, not synthetic benchmarks |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
@@ -242,71 +242,31 @@ declining without the report does not rule that out. Answering questions about o
 same as measuring how claims change between filings. None of this shows the signal would have been
 usable at the time, and it says nothing about returns.
 
-### Offline review of the nineteen misses
+### Toward a stricter answer format
 
-The [post-run audit](../results/reader_error_audit.json) reviewed all nineteen saved
-errors without a model call or rescoring. Four multi-answer responses contain the
-reference components but serialize them as one string; two other misses have the
-reference value component with the wrong unit. Six primary observations are numeric
-result mismatches. Other categories cover operator/denominator conventions,
-period comparison, cited operands and reference-span boundaries.
+All 19 misses from the final run were reviewed offline, without changing any score
+([review](../results/reader_error_audit.json)). Six were wrong numbers, four were several values
+joined into one string, four used a different operator or denominator convention from the answer
+key, two had the right number in the wrong unit, and three were other slips. The review was
+AI-assisted and after the fact, not blind human annotation.
 
-Flags overlap: seven wrong cases have reference-scale mismatches, seven cite the
-wrong row/period/header cells despite valid coordinates, and four provide no
-citation. Five need independent span/operator adjudication. This is AI-assisted,
-post-hoc review, not blinded human gold. The published 11/30 result is unchanged.
-The next generic development checks should address multi-answer shape, typed
-row/period/unit operands and deterministic calculation; no fix or new model run
-was made by this audit.
+Three answer formats aimed at those errors were then tested on newly written, made-up questions,
+never on real benchmark items. Each test fixed its questions, answers and pass rule in advance: at
+least 20 of 21 answerable questions fully right and all 3 unanswerable ones declined. From the
+second test on, a small practice set that is never scored came first, so format and resource
+problems surface before anything is frozen.
 
-The subsequent [frozen invented test](../results/reader_contract_config.json) tried
-those ideas on 24 newly written fictional questions, not the exposed benchmark.
-It [failed](../results/reader_contract_review.json): 0/21 answerable cases passed
-the complete answer/scale/dimension/operation contract, and only 1/3 unanswerable
-cases was correctly declined. Twenty-two outputs violated cross-field rules;
-no arithmetic output reached accepted code execution. Values were often present,
-but incompatible fields cannot be silently repaired into successes. All calls
-finished normally. There was no tuning or rerun, and this says nothing new about
-real-data accuracy. A simpler response interface needs a new, declared test.
+| Answer format | Answerable fully right | Unanswerable declined | Record |
+|---|---:|---:|---|
+| One combined format for every answer type | 0 of 21: outputs broke the format's own rules | 1 of 3 | [review](../results/reader_contract_review.json) |
+| Choose the answer type first; code does the arithmetic | 18 of 21 | 0 of 3: picked the nearest row or year | [review](../results/reader_modes_review.json) |
+| Same, plus a "not in the table" choice | 19 of 21 | 2 of 3 | [review](../results/reader_presence_review.json) |
 
-Before any scored control is frozen, run a small, separately labelled practice
-check for format and resource problems. Practice may be iterated but is never
-reported as accuracy. Write fresh scored items only after practice, then freeze
-the questions, expectations, interface and pass rule before the one scored run.
-
-The [next interface control](../results/reader_modes_review.json) followed that sequence:
-12 practice items, 40 calls across three iterations, then 24 freshly written scored
-items. Practice was not accuracy. The union grammar constrained syntax but was
-operationally unreliable, so the final interface chose a mode in one call and used
-only that mode's fields in the next. Operand fields were bounded to the source
-vocabulary; code computed arithmetic and scale while checking the model's answer
-dimension. A post-generation practice-reporting error was recovered offline, with
-the interrupted receipt retained and no repeated call.
-
-| Fresh invented scored controls | Fully right |
-|---|---:|
-| Several values | 6/6 |
-| Arithmetic | 6/8 |
-| One lookup | 3/4 |
-| Unit traps | 3/3 |
-| Correctly declined missing/undefined answers | 0/3 |
-
-**FAIL:** 18/21 answerable and 0/3 abstentions missed the frozen 20/21 plus 3/3 rule.
-Seven arithmetic outputs were computed by code; wrong period direction, wrong
-dimensions and failure to decline still matter. All responses followed the mode
-schemas, but this is not reliable answerability. The fresh authored questions and
-stronger constraints also prevent a matched accuracy comparison to earlier tests.
-There was no tuning or rerun, no real benchmark use, and no new real-data permission.
-
-The [missing-source follow-up](../results/reader_presence_review.json) added an explicit
-`NOT_PRESENT` choice and prospectively counted code-side declines as abstentions,
-reported separately from model choices. After eight new unscored practice items,
-the fresh 24-item control failed: **19/21** answerable fully right and **2/3**
-correct abstentions, below the frozen 20/21 plus 3/3 rule. All eight intended
-arithmetic cases were computed by code; seven were correct. A reversed difference,
-a reversed undefined division and an unnecessary missing-source decline remained.
-No cleanup, retuning or rerun followed. The conditional real-report format comparison
-did not open, so its practice, 30-ID selection, generation and scoring were not run.
+None has passed yet. The remaining errors are reversed subtraction or division order, and one
+answerable question declined because the model padded a list with "not in the table". Choosing
+the answer type first, with code doing the arithmetic, removed most format errors, and the code
+also caught answers given in the wrong kind of unit. The format has not been tried on real
+reports, so the 11-of-30 result above remains the only real-data figure.
 
 ### What the earlier tests taught
 

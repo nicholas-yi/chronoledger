@@ -277,17 +277,12 @@ scale rather than as a matched comparison. Source:
 - **This is a small public sample.** It shows the model can read some filings, not that it would
   have measured disclosure changes reliably at the time. The model may also have seen this public
   benchmark during training.
+- **A stricter answer format is being tested.** Having the model choose the answer type first,
+  with code doing the arithmetic, now gets 19 of 21 made-up questions right. It hasn't yet met its
+  pre-set bar (reversed subtraction order remains), so it hasn't been tried on real reports
+  ([details](docs/RESEARCH_PLAN.md#toward-a-stricter-answer-format)).
 
 ## Stress tests of the method
-
-Later invented-only interface controls remain below their predeclared gates
-([first](results/reader_contract_review.json), [mode-first](results/reader_modes_review.json)).
-The [latest control](results/reader_presence_review.json) allowed explicit missing-source
-selections and reported model- versus code-chosen declines. It still failed: **19/21**
-answerable cases fully right and **2/3** correct abstentions. Reversed operands and an
-unnecessary decline remain. These source-constrained, authored questions are not a new
-real-report accuracy figure or a matched improvement estimate. The real-data comparison
-was **not run**; the result and figure above are unchanged.
 
 Before trusting any result, the inputs and the statistics themselves are put under test. These checks
 say how far the results above can be trusted; they are not results in their own right.
@@ -328,6 +323,26 @@ audited cases. The same defect in SEC's submission files has been documented ind
 [Canli Capital](https://canlicapital.com/notes/edgar-acceptance-times),
 [Gow](https://iangow.github.io/sec_submissions/timestamps/)). A late timestamp only delays a signal,
 but an early one would create look-ahead, so the filing header is treated as the authority.
+
+A follow-up checked 48 more filings against their own headers: 8 drawn at random from each of six
+groups, including filings where the two sources agree
+([details](results/header_pilot_review.json)).
+
+| Group (filings in group) | Header matches the API | Header matches the bulk archive |
+|---|---:|---:|
+| Sources disagree, winter (37) | 8 of 8 | 0 of 8: 5 hours late |
+| Sources disagree, summer (71) | 8 of 8 | 0 of 8: 4 hours late |
+| Sources agree, timing could matter (16,335) | 8 of 8 | 8 of 8 |
+| Sources agree, timing can't matter (3,979) | 6 of 8 | 6 of 8 |
+| Sources disagree on the company ID (404) | 8 of 8 | 8 of 8 |
+| Near a date or clock boundary (676) | 8 of 8 | 8 of 8 |
+
+- **Every error found was late, never early.** Late timestamps delay a signal; they cannot leak
+  the future.
+- **Agreement isn't proof.** In two filings both sources were 4 hours late. Those happened to be
+  filings whose trading day doesn't depend on the hour.
+- **Limits.** The check reads header times as Eastern time, which SEC's documentation doesn't
+  state. Eight filings per group can't certify all 21,502.
 
 ### Are the significance tests honest at this sample size?
 
