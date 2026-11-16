@@ -101,6 +101,17 @@ SYSTEM = (
     "Keep answer_dimension separate from a monetary banner; code derives scale. "
     "Return only the selected mode-specific JSON, no extra fields or explanation."
 )
+TABLE_GUIDANCE = (
+    "Copy table cells, not guessed metadata. A source row "
+    '{"label":"<row>","unit":"<unit>","values":{"<column>":"<cell>"}} '
+    "maps to an operand "
+    '{"row_label":"<row>","column_label":"<column>","unit":"<unit>","value":"<cell>"}. '
+    "The column label is a literal dictionary KEY, not a date requirement. Regions, "
+    "segments, products and years all work. If the requested cell exists, its row label, "
+    "column key and unit are explicitly supplied: copy them, do not mark them NOT_PRESENT. "
+    "Use NOT_PRESENT only for an actually absent requested fact. "
+    "Set answer_dimension from the source unit, not a monetary banner on unrelated rows. "
+)
 
 
 def _legacy(value: ColumnOperand | None) -> PresenceOperand | None:
@@ -168,6 +179,13 @@ def answer_body(report: ColumnReport, mode: Mode, model: str, options: dict) -> 
         }
         for field, values in vocab.items():
             props[field]["enum"] = sorted(values | {NOT_PRESENT})
+        for field, description in {
+            "row_label": "Copy source row.label exactly.",
+            "column_label": "Copy the matching source row.values dictionary KEY exactly.",
+            "value": "Copy that row.values[column_label] cell string exactly.",
+            "unit": "Copy that source row.unit exactly.",
+        }.items():
+            props[field]["description"] = description
         dimensions = {unit_dimension(r.unit)[0] for r in report.rows}
         if mode == "arithmetic":
             dimensions |= {"percent", "ratio"}
@@ -187,5 +205,19 @@ def answer_body(report: ColumnReport, mode: Mode, model: str, options: dict) -> 
             *range(len(report.paragraphs)), NOT_PRESENT]
     body = mode_body(report, model, options)
     body["format"] = schema
-    body["messages"][0]["content"] = SYSTEM + f" Selected mode={mode}. Exact schema: " + json.dumps(schema)
+    if mode in ("lookup", "multi_value"):
+        instruction = TABLE_GUIDANCE + (
+            "Return one operand for the requested cell." if mode == "lookup" else
+            "Return one operand per requested cell in values, each separately. "
+            "No padding entries and no mixing NOT_PRESENT with real cells; code declines such lists.")
+    elif mode == "text_span":
+        instruction = (
+            "Copy only the requested words VERBATIM from supplied paragraphs. Return spans "
+            "with zero-based paragraph_id; no row or column fields. Code checks exact substring "
+            "membership. Use NOT_PRESENT only when the requested fact is absent. "
+            "Return separate spans, not an explanatory sentence.")
+    else:
+        instruction = SYSTEM
+    body["messages"][0]["content"] = (
+        instruction + f" Selected mode={mode}. Return only JSON. Exact schema: " + json.dumps(schema))
     return body
