@@ -277,9 +277,10 @@ scale rather than as a matched comparison. Source:
 - **This is a small public sample.** It shows the model can read some filings, not that it would
   have measured disclosure changes reliably at the time. The model may also have seen this public
   benchmark during training.
-- **A stricter answer format is being tested.** Having the model choose the answer type first,
-  with code doing the arithmetic, now gets 19 of 21 made-up questions right. It hasn't yet met its
-  pre-set bar (reversed subtraction order remains), so it hasn't been tried on real reports
+- **A stricter answer format is being tested.** The model names each number's role (start or end
+  value, numerator or denominator) and code does the arithmetic. On made-up questions it now gets
+  every calculation right and declines every unanswerable question. It still wrongly declines some
+  answers when a table's columns aren't dates, so it hasn't been tried on real reports
   ([details](docs/RESEARCH_PLAN.md#toward-a-stricter-answer-format)).
 
 ## Stress tests of the method
