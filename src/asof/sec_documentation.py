@@ -35,6 +35,7 @@ class MetadataUnknown(DocumentationStop):
 class StrictSecDocumentation:
     max_attempts = MAX_ATTEMPTS
     authorized_total_ceiling = HISTORICAL_CEILING
+    historical_ceiling = HISTORICAL_CEILING
 
     def __init__(
         self, allowed_urls: tuple[str, ...], budget_path: Path, receipt_path: Path,
@@ -72,7 +73,7 @@ class StrictSecDocumentation:
     def budget(self) -> dict:
         value = json.loads(self.budget_path.read_text())
         used, ceiling = value.get("actual_HTTP_attempts"), value.get("ceiling")
-        if type(used) is not int or used < 0 or ceiling != HISTORICAL_CEILING or used > ceiling:
+        if type(used) is not int or used < 0 or ceiling != self.historical_ceiling or used > ceiling:
             raise DocumentationStop("invalid_historical_budget")
         return value
 
@@ -137,7 +138,9 @@ class StrictSecDocumentation:
                 async with self.client.stream("GET", url, follow_redirects=False) as response:
                     record.update(status=response.status_code,
                                   content_type=response.headers.get("content-type"),
-                                  content_length=response.headers.get("content-length"))
+                                  content_length=response.headers.get("content-length"),
+                                  ETag=response.headers.get("etag"),
+                                  last_modified=response.headers.get("last-modified"))
                     if not 200 <= response.status_code < 300:
                         raise DocumentationStop(f"HTTP_{response.status_code}")
                     if response.headers.get("content-encoding", "identity").lower() != "identity":
@@ -148,11 +151,15 @@ class StrictSecDocumentation:
                     if length is not None and int(length) >= self.read_cap_bytes:
                         raise DocumentationStop("declared_body_at_read_cap")
                     async for chunk in response.aiter_raw(chunk_size=4096):
-                        body.extend(chunk)
+                        body.extend(chunk[:self.read_cap_bytes - len(body)])
                         if len(body) >= self.read_cap_bytes:
                             raise DocumentationStop("body_reached_read_cap_unqualified")
                     record["body_complete"] = True
             return bytes(body)
+        except asyncio.CancelledError:
+            record["stop_reason"] = "cancelled_before_completion"
+            self.stopped = True
+            raise
         except (DocumentationStop, httpx.HTTPError, TimeoutError) as exc:
             record["stop_reason"] = str(exc) if isinstance(exc, DocumentationStop) else type(exc).__name__
             if self.unknown_resource(record["stop_reason"]):

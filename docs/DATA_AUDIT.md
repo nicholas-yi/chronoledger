@@ -6,6 +6,44 @@ and [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-
 Older rebuild receipts and the frozen preregistration describe historical claims,
 not current source-clock certification. The registered first-close rule is unchanged.
 
+### Approved full timestamp metadata check
+
+The user approved the [exact full-check proposal](../results/timestamp_full_plan.json)
+on 2026-11-16. The project SEC ceiling changes from 150 to 34,402, with usage
+unchanged at 140 before this run. At most 34,252 new metadata requests and ten
+documentation requests are approved; unused documentation requests cannot buy
+extra filings. This is not a return trial or permission to repair source data.
+
+[The runner](../scripts/run_full_timestamps.py) has separate `freeze`, `run` and
+offline `report` phases. `freeze` pins the exact 16,921-accession and 34,354-URL
+private lists (including 102 cache hits), metadata universe, registered-calendar
+dates, code, existing caches and declared User-Agent hash in a committed config.
+The exact private lists remain in ignored data; their committed hashes define the
+allowlist. Commit that config and all source/test changes before `run`; `run`
+requires the config bytes to match Git and refuses any prior attempt marker.
+No automatic resume exists, including after a first-request stop.
+
+The full adapter inherits the pilot's strict transport. It is serial, at most
+two starts per second, with a 30-second total request timeout, no redirects and
+no retries. It reads at most 64 KiB per metadata resource; at-cap and missing
+resources stay unread/unknown and do not stop the next allowed URL. Other
+non-success responses, transport failures, scope/budget/integrity errors,
+12 hours elapsed, the 4 GiB disk allowance or a detected sleep/suspend stop it.
+Windows uptime versus unbiased awake uptime detects suspend differences above
+two seconds; the in-flight task is cancelled and recorded, never silently resumed.
+Raw bodies and append-only receipts stay private. Every 500 resources and at a
+final stop, the runner flushes receipts/outcomes and writes a hash checkpoint.
+
+The proposal names documentation categories, not exact qualifying Filer
+Manual/PDS/field-clock URLs. The documentation stage is therefore skipped rather
+than guessing URLs. Header conversions remain conditional on Eastern wall time,
+not verified UTC. Offline reporting accounts for every selected accession,
+including unknown/unattempted rows, and separately labels conditional first-close,
+month, eligibility and latest-filing comparisons. The existing nominal 16:00 ET
+calendar is not a venue/early-close certification. No price, return or signal
+value is used, no ledger row is added, and no data repair, CIK remap, correction
+release or backtest rerun follows.
+
 ### Future local-reader memory safeguards (not run)
 
 The strict-format experiments are stopped; the default local request helper is the existing
