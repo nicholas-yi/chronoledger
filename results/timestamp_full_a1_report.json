@@ -1,0 +1,205 @@
+{
+  "status": "stopped_final",
+  "stop_reason": "TimeoutError",
+  "amendment_commit": "c05e113ee839674d2a2959ecca7304c0d2863361",
+  "config_SHA256": "a60f995932abec9beec876bde8624bab9f6048688a5b117a66df91c6b89788c1",
+  "parent_freeze": "f6495d411bd3eda73286bce19893f6f8fa87a43f",
+  "designated108_first": {
+    "clock_disagreement_winter": {
+      "accessions": 37,
+      "agreement_classes": {
+        "pair_only_matches_assumption": 37
+      },
+      "unique_conditional_UTC": 37,
+      "historically_qualified_UTC": 0
+    },
+    "clock_disagreement_summer": {
+      "accessions": 71,
+      "agreement_classes": {
+        "pair_only_matches_assumption": 71
+      },
+      "unique_conditional_UTC": 71,
+      "historically_qualified_UTC": 0
+    }
+  },
+  "pool_summary": {
+    "clock_disagreement_winter": {
+      "accessions": 37,
+      "agreement_classes": {
+        "pair_only_matches_assumption": 37
+      },
+      "unique_conditional_UTC": 37,
+      "historically_qualified_UTC": 0
+    },
+    "clock_disagreement_summer": {
+      "accessions": 71,
+      "agreement_classes": {
+        "pair_only_matches_assumption": 71
+      },
+      "unique_conditional_UTC": 71,
+      "historically_qualified_UTC": 0
+    },
+    "CIK_disagreement": {
+      "accessions": 256,
+      "agreement_classes": {
+        "both_match_assumption": 204,
+        "unknown_header": 7,
+        "pair_only_matches_assumption": 44,
+        "index_unread_or_conflicting:both_match_assumption": 1
+      },
+      "unique_conditional_UTC": 248,
+      "historically_qualified_UTC": 0
+    },
+    "candidate_calendar_boundary_or_clock_issue": {
+      "accessions": 676,
+      "agreement_classes": {
+        "both_match_assumption": 30,
+        "unknown_header": 646
+      },
+      "unique_conditional_UTC": 30,
+      "historically_qualified_UTC": 0
+    },
+    "clock_agreement_sensitive": {
+      "accessions": 15881,
+      "agreement_classes": {
+        "both_match_assumption": 878,
+        "unknown_header": 15001,
+        "index_unread_or_conflicting:both_match_assumption": 2
+      },
+      "unique_conditional_UTC": 878,
+      "historically_qualified_UTC": 0
+    }
+  },
+  "qualified_UTC": {
+    "historically_qualified": 0,
+    "unresolved": 16921,
+    "unique_conditional_assuming_Eastern": 1264
+  },
+  "assignments": {
+    "qualified_assignment_changes": null,
+    "qualified_accession_denominator": 0,
+    "reason": "No historically qualified field clock; actual verified changes cannot be established.",
+    "conditional_diagnostics_only": {
+      "stored_pair_versus_conditional": {
+        "conditional_accessions": 1264,
+        "UTC_month_changed": 0,
+        "first_close_unassigned": 0,
+        "first_close_comparable": 1264,
+        "first_registered_close_changed": 0,
+        "eligibility_record_month_instances_changed": 0,
+        "eligibility_accessions_changed": 0,
+        "latest_filing_firm_months_in_scope": 39940,
+        "latest_filing_firm_months_unresolved": 37445,
+        "latest_filing_firm_months_comparable": 2495,
+        "latest_filing_firm_months_changed": 0
+      },
+      "stored_bulk_versus_conditional": {
+        "conditional_accessions": 1264,
+        "UTC_month_changed": 0,
+        "first_close_unassigned": 0,
+        "first_close_comparable": 1264,
+        "first_registered_close_changed": 30,
+        "eligibility_record_month_instances_changed": 1,
+        "eligibility_accessions_changed": 1,
+        "latest_filing_firm_months_in_scope": 39940,
+        "latest_filing_firm_months_unresolved": 37445,
+        "latest_filing_firm_months_comparable": 2495,
+        "latest_filing_firm_months_changed": 1
+      }
+    },
+    "limits": "Eastern-clock assumption and cached nominal16:00ET calendar only. Unaudited competitors are held unchanged in each baseline; incomplete audited competitor contexts are unresolved. Stable source order breaks equal-time ties. No security remaps, signal values, prices, returns or portfolio results."
+  },
+  "A1_attempts": 1716,
+  "A1_HTTP_status_counts": {
+    "200": 1713,
+    "503": 2,
+    "None": 1
+  },
+  "A1_retries_charged": 2,
+  "A1_waits_started": 2,
+  "every_wait_and_retry": [
+    {
+      "event": "wait_started",
+      "wait_number": 1,
+      "HTTP_status": 503,
+      "wait_seconds": 600,
+      "failed_attempt": 3093,
+      "UTC": "2026-11-16T21:32:26.999167+00:00",
+      "perf_counter": 2566755.0324226,
+      "URL_SHA256": "1cd23fb630fec61d418ef2a9fd38943fb696d60bd4144b9fce22ce91f85db897"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 1,
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0177919999696,
+      "UTC": "2026-11-16T21:42:27.029193+00:00",
+      "perf_counter": 2567355.0502247,
+      "URL_SHA256": "1cd23fb630fec61d418ef2a9fd38943fb696d60bd4144b9fce22ce91f85db897"
+    },
+    {
+      "event": "retry_started",
+      "wait_number": 1,
+      "retry_attempt": 3094,
+      "UTC": "2026-11-16T21:42:27.142323+00:00",
+      "perf_counter": 2567355.1631666,
+      "URL_SHA256": "1cd23fb630fec61d418ef2a9fd38943fb696d60bd4144b9fce22ce91f85db897"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 2,
+      "HTTP_status": 503,
+      "wait_seconds": 600,
+      "failed_attempt": 3102,
+      "UTC": "2026-11-16T21:43:01.526387+00:00",
+      "perf_counter": 2567389.5473198,
+      "URL_SHA256": "7b7b978aef9cd52d4cd9d387653891f66d73ebf8427e64aef296bbb630f675db"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 2,
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0027998001315,
+      "UTC": "2026-11-16T21:53:01.538058+00:00",
+      "perf_counter": 2567989.5501302,
+      "URL_SHA256": "7b7b978aef9cd52d4cd9d387653891f66d73ebf8427e64aef296bbb630f675db"
+    },
+    {
+      "event": "retry_started",
+      "wait_number": 2,
+      "retry_attempt": 3103,
+      "UTC": "2026-11-16T21:53:01.572786+00:00",
+      "perf_counter": 2567989.5845738,
+      "URL_SHA256": "7b7b978aef9cd52d4cd9d387653891f66d73ebf8427e64aef296bbb630f675db"
+    }
+  ],
+  "counter": {
+    "actual_HTTP_attempts": 3137,
+    "ceiling": 34402
+  },
+  "A1_resource_outcomes": 1780,
+  "A1_order_resources_not_processed": 31286,
+  "effective_unique_resource_outcomes": 3069,
+  "resources_not_attempted": 31285,
+  "QPC_rate": {
+    "sends": 1716,
+    "minimum_gap_seconds": 0.667809400241822,
+    "median_gap_seconds": 0.6772982999682426,
+    "maximum_gap_seconds": 628.9701689998619,
+    "declared_minimum_seconds": 0.667,
+    "all_observed_gaps_meet_minimum": true,
+    "definition": "New A1 application transport dispatches only, not wire timestamps or retrospective validation of the old run."
+  },
+  "private_hash_manifest": {
+    "data\\timestamp_full_a1\\frozen_remaining_order.jsonl": "60926eab1280d9731f71b4482e50e8faf3527c728e58666fa2fd451ac3ed67d7",
+    "data\\timestamp_full_a1\\resource_outcomes.jsonl": "61498480ecff2c1cf2c5cd538ba091cd2cc94c0c6626dd0a294f2cae9e1c0d9b",
+    "data\\timestamp_full_a1\\requests.jsonl": "640fbb4b34a3b713bf522064b5d12c5e8b3c00c305077ef36737a3531d5c3f6c",
+    "data\\timestamp_full_a1\\waits_and_retries.jsonl": "d254a4320362ddf846955be4bc284184ba6b67c29c7e8ed421d51e3260e757db",
+    "data\\timestamp_full_a1\\checkpoint.json": "2ccbb7d41b1a6bc95f041e14af6fc876d9fdb2297da149308dcd8713453cb942",
+    "data\\timestamp_full_a1\\combined_per_accession.jsonl": "32e019199868df3b3cd9e4d918b4b42e4780e91040634bff9c1da9b1de80555b",
+    "data\\timestamp_full_a1\\raw_hashes.jsonl": "c632e5eaabcc2e8453b3bcc7de4389867aa7362ece2a3fe2ab6e6f435a40792d",
+    "data\\timestamp_full_a1\\receipt_hashes.jsonl": "c2ba908f33bec5422e6f1a2ed2de408345045443c00ac21dbde60ac89a4e023f"
+  },
+  "original_rate_context": "Precision miss against our own <=2/s protocol, not evidence of a SEC10/s fair-access breach. Original receipts averaged ~1.9/s and never exceeded2starts in a calendar second; sliding windows and coarse clock quantization differ. No503causal claim.",
+  "limits": "Unqualified Eastern assumption and original cached nominal calendar; no verified actual assignment-change count. Original outcomes preserved, except authorized503 overlay in the combined view; originals remain intact. No prices, returns, feature values, repairs, correction release or ledger row."
+}

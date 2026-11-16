@@ -1,0 +1,186 @@
+{
+  "kind": "CL-TS-FULL-A1 stopped continuation review; not full population certification",
+  "status": "STOPPED_FINAL_TimeoutError; no further continuation",
+  "amendment_commit": "c05e113ee839674d2a2959ecca7304c0d2863361",
+  "parent_freeze_commit": "f6495d411bd3eda73286bce19893f6f8fa87a43f",
+  "config_SHA256": "a60f995932abec9beec876bde8624bab9f6048688a5b117a66df91c6b89788c1",
+  "designated108_first": {
+    "winter": {
+      "population": 37,
+      "conditional_comparisons_complete": 37,
+      "API_matches_assuming_Eastern": 37,
+      "bulk_five_hours_later_assuming_Eastern": 37,
+      "conditional_first_close_changes_versus_bulk": 10
+    },
+    "summer": {
+      "population": 71,
+      "conditional_comparisons_complete": 71,
+      "API_matches_assuming_Eastern": 71,
+      "bulk_four_hours_later_assuming_Eastern": 71,
+      "conditional_first_close_changes_versus_bulk": 17
+    },
+    "historically_qualified_UTC": 0,
+    "limit": "All108support the pilot pattern under the stated Eastern assumption; agreement does not establish historical field-clock authority or certify issuer/security identities."
+  },
+  "other_pools_combined_with_original_run": {
+    "CIK_disagreement": {
+      "population": 256,
+      "unique_conditional_UTC": 248,
+      "both_stored_times_match_assumption": 204,
+      "only_API_matches_assumption": 44,
+      "header_unknown": 7,
+      "index_unread_or_conflicting": 1,
+      "conditional_first_close_changes_versus_bulk": 3,
+      "role_limit": "Original CIK paths and observed header roles preserved, not remapped or adjudicated into a security master."
+    },
+    "calendar_boundary": {
+      "population": 676,
+      "both_match_assumption": 30,
+      "header_unknown_or_not_attempted": 646
+    },
+    "clock_agreement_sensitive": {
+      "population": 15881,
+      "both_match_assumption": 878,
+      "header_unknown_or_not_attempted": 15001,
+      "index_unread_or_conflicting": 2
+    }
+  },
+  "conditional_assignments_not_verified_changes": {
+    "conditional_accession_denominator": 1264,
+    "original_run_complete_pairs": 641,
+    "additional_complete_pairs_from_A1": 623,
+    "historically_qualified_UTC": 0,
+    "unresolved_accessions": 16921,
+    "actual_verified_assignment_changes": null,
+    "versus_stored_API_pair_time": {
+      "first_registered_close_changes": 0,
+      "UTC_month_changes": 0,
+      "formation_eligibility_record_month_changes": 0,
+      "latest_filing_firm_month_changes": 0
+    },
+    "versus_stored_bulk_time": {
+      "first_registered_close_changes": 30,
+      "UTC_month_changes": 0,
+      "formation_eligibility_record_month_changes": 1,
+      "formation_eligibility_accessions_changed": 1,
+      "latest_filing_firm_month_changes": 1
+    },
+    "formation_record_months_comparable": 22752,
+    "formation_months": 18,
+    "latest_filing_firm_months_comparable": 2495,
+    "latest_filing_firm_months_unresolved": 37445,
+    "latest_filing_firm_months_in_scope": 39940,
+    "interpretation": "These are conditional metadata assignments on the original nominal16:00ET calendar, not venue/early-close certification or financial results. Monthly formation eligibility can change at its close cutoff even without a UTC-month change. Unaudited competitors stay at their baseline values; incomplete audited contexts remain unresolved. No production correction follows."
+  },
+  "every_wait_and_retry": [
+    {
+      "wait_number": 1,
+      "failed_attempt": 3093,
+      "first_status": 503,
+      "wait_started_UTC": "2026-11-16T21:32:26.999167+00:00",
+      "wait_finished_UTC": "2026-11-16T21:42:27.029193+00:00",
+      "wait_elapsed_QPC_seconds": 600.0177919999696,
+      "retry_attempt": 3094,
+      "retry_status": 200,
+      "URL_SHA256": "1cd23fb630fec61d418ef2a9fd38943fb696d60bd4144b9fce22ce91f85db897"
+    },
+    {
+      "wait_number": 2,
+      "failed_attempt": 3102,
+      "first_status": 503,
+      "wait_started_UTC": "2026-11-16T21:43:01.526387+00:00",
+      "wait_finished_UTC": "2026-11-16T21:53:01.538058+00:00",
+      "wait_elapsed_QPC_seconds": 600.0027998001315,
+      "retry_attempt": 3103,
+      "retry_status": 200,
+      "URL_SHA256": "7b7b978aef9cd52d4cd9d387653891f66d73ebf8427e64aef296bbb630f675db"
+    }
+  ],
+  "stop_and_rate": {
+    "start_UTC": "2026-11-16T21:12:43.420272+00:00",
+    "final_checkpoint_UTC": "2026-11-16T21:53:56.459286+00:00",
+    "wall_seconds": 2472.9840000001714,
+    "final_attempt": 3137,
+    "final_error": "TimeoutError",
+    "final_timeout_retry": false,
+    "configured_total_request_timeout_seconds": 30,
+    "maximum_recorded_request_elapsed_seconds_including_overhead": 30.030999999959022,
+    "QPC_send_records": 1716,
+    "QPC_intervals": 1715,
+    "minimum_QPC_gap_seconds": 0.667809400241822,
+    "median_QPC_gap_seconds": 0.6772982999682426,
+    "maximum_QPC_gap_seconds_including_waits": 628.9701689998619,
+    "all_observed_gaps_meet0_667": true,
+    "definition": "Application transport dispatches, not physical wire timestamps. UTC accompanies each QPC record. No retrospective validation of the original coarse-clock run.",
+    "original_context": "The original own-protocol precision miss was not a SEC10/s fair-access breach. Original calendar-second counts never exceeded2; sliding windows/coarse clock resolution are a different measure. No503/timeout causal claim is made.",
+    "sleep_interruptions": 0,
+    "automatic_resume": false
+  },
+  "request_and_resource_reconciliation": {
+    "counter_before_A1": 1421,
+    "counter_after_A1": 3137,
+    "ceiling_unchanged": 34402,
+    "A1_attempts": 1716,
+    "A1_unique_primary_URLs": 1714,
+    "A1_retries": 2,
+    "A1_HTTP200": 1713,
+    "A1_HTTP503": 2,
+    "A1_transport_timeout_without_HTTP_status": 1,
+    "A1_resource_outcomes": 1780,
+    "A1_cache_hits": 66,
+    "A1_at_cap_unknowns": 26,
+    "A1_unknowns_including_timeout": 27,
+    "maximum_body_bytes": 65536,
+    "all_prior_outcomes_preserved": 1289,
+    "prior_URLs_refetched_in_this_execution": 0,
+    "previous_original503_still_pending": true,
+    "combined_unique_resource_outcomes": 3069,
+    "combined_complete_parsed_resources": 3036,
+    "combined_cache_hits": 74,
+    "combined_at_cap_unknowns": 31,
+    "original_never_attempted_URL_resources_remaining": 31285,
+    "A1_order_resources_not_processed": 31286,
+    "remaining_primary_URLs": 31258,
+    "remaining_cache_URLs": 28,
+    "one_resource_difference": "A1 pending work includes the expressly reeligible original503 URL, which was historically attempted but not reached in this A1 prefix. It is not silently discarded or counted as a new completed resource.",
+    "selection_limit": "All108clock and256CIK accessions precede the attempted prefix of the seeded random-rest order. Complete-case coverage can still depend on read caps and stop behavior; this is not a statistical completeness or cohort error-rate claim."
+  },
+  "evidence_and_resources": {
+    "original_report": "results/timestamp_full_report.json",
+    "A1_report": "results/timestamp_full_a1_report.json",
+    "A1_status": "results/timestamp_full_a1_status.json",
+    "A1_private_receipt_SHA256": "640fbb4b34a3b713bf522064b5d12c5e8b3c00c305077ef36737a3531d5c3f6c",
+    "A1_private_event_SHA256": "d254a4320362ddf846955be4bc284184ba6b67c29c7e8ed421d51e3260e757db",
+    "combined_disk_bytes_before_this_review": 171465342,
+    "disk_budget_bytes": 4294967296,
+    "last_regular_checkpoint_A1_resources": 1500,
+    "final_checkpoint_A1_resources": 1780,
+    "policy": "Exact lists, raw metadata, per-attempt receipts, waits/retries and combined16921-row table stay ignored; committed reports pin their hashes. Every original and A1 source/input/cache/manifest hash matched."
+  },
+  "validation": {
+    "full_suite_runs_after_A1_code_changes": 1,
+    "full_suite_passed": 431,
+    "pytest_seconds": 42.61,
+    "warnings": "Two existing sparse-control SingularMatrixWarnings.",
+    "focused_tests": 34,
+    "Ruff": "Three new Python files passed before amendment freeze.",
+    "syntax": "AST and actual import/execution tests passed; no new editor type-check claim.",
+    "offline_checks": "Contiguous attempts1422..3137, all1716starts/finishes/sends, two charged retries, both>=600s waits, all1715QPC gaps, exact frozen-order prefix, protected original URLs, all16921rows, cap limits, body/receipt manifests and counters reconciled.",
+    "local_link_targets_checked": 186,
+    "Markdown_anchors_checked": 32,
+    "external_URL_syntax_checks_only": 96,
+    "external_HTTP_during_checks": 0,
+    "full_suite_rerun_for_docs_results": false
+  },
+  "unchanged": {
+    "ledger_rows": 74,
+    "original_source_or_parsing_changed": false,
+    "A1_source_changed_after_freeze": false,
+    "no_numeric_price_return_or_feature_value_use": true,
+    "no_model_training_or_inference": true,
+    "no_sealed_observations": true,
+    "no_timestamp_or_CIK_repair": true,
+    "no_correction_release_or_backtest_rerun": true,
+    "no_push_or_tags": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "status": "stopped_final",
+  "amendment_commit": "c05e113ee839674d2a2959ecca7304c0d2863361",
+  "start_UTC": "2026-11-16T21:12:43.420272+00:00",
+  "wall_cap_seconds": 43200,
+  "resources_recorded": 1780,
+  "sleep_interruptions": [],
+  "counter_start": 1421,
+  "config_SHA256": "a60f995932abec9beec876bde8624bab9f6048688a5b117a66df91c6b89788c1",
+  "counter": {
+    "actual_HTTP_attempts": 3137,
+    "ceiling": 34402
+  },
+  "wall_seconds": 2472.9840000001714,
+  "disk_bytes_observed": 142507876,
+  "checkpoint_UTC": "2026-11-16T21:53:56.459286+00:00",
+  "latest_retry_event": {
+    "event": "retry_started",
+    "wait_number": 2,
+    "retry_attempt": 3103,
+    "UTC": "2026-11-16T21:53:01.572786+00:00",
+    "perf_counter": 2567989.5845738
+  },
+  "stop_reason": "TimeoutError"
+}

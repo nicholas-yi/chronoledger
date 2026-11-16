@@ -85,6 +85,24 @@ retries fit within it. A1 resets only the 12-hour wall clock; the combined old/n
 4 GiB budget, 500-resource checkpoints, sleep stop, no automatic continuation,
 population, parser and unqualified Eastern-clock assumption remain.
 
+**A1 stopped on a transport timeout, not a completed full audit.**
+[The review](../results/timestamp_full_a1_review.json) records 1,716 attempts
+(1,713 HTTP 200, two HTTP 503 and one timeout) from 16:12 to 16:53 ET.
+Both 503s received their single allowed retry after 600.017792 and 600.002800
+QPC seconds and returned HTTP 200; the later timeout was not retried.
+All 1,715 QPC dispatch gaps met the 0.667-second minimum (minimum 0.667809400,
+median 0.677298300 seconds). No original record/source was edited or re-fetched.
+The old 503 URL was not reached in the random remainder and remains pending.
+
+The 37 winter and 71 summer comparisons all match API time under the Eastern
+assumption; bulk is respectively five and four hours later. The combined table
+has 1,264 unique conditional instants, but zero historically qualified UTC times.
+Conditional bulk-side changes are 30 first closes (10 winter, 17 summer, three
+CIK-disagreement cases), one formation-eligibility record-month and one latest-filing
+firm-month; API-side counts are zero. Actual verified assignment changes remain
+undetermined. Counter 3,137/34,402, ledger 74 and all raw data remains ignored;
+no repair, correction release, financial rerun or automatic continuation occurred.
+
 ### Future local-reader memory safeguards (not run)
 
 The strict-format experiments are stopped; the default local request helper is the existing
