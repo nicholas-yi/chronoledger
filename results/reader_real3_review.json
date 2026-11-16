@@ -1,0 +1,107 @@
+{
+  "verdict": "STOPPED EARLY: partial observations, not a completed format comparison",
+  "freeze_commit": "aec62cd5c56b9aea43eaf9ede498d8d5fc9dbbe0",
+  "config_SHA256": "a55d5bd50044eae26e40689568d324d2d44ca0cadb436c430de1e0cef55c5ae6",
+  "user_decision": "run despite invented-control miss (18/21 + 2/3)",
+  "generation_receipt_SHA256": "568eeb6cf2b03a5bc2f7aaadb6443dc708bea133a8c8ee5b60779c728b331333",
+  "native_report_SHA256": "21a91441704860856ba4f5956c06686a245f98ae488c4ac58abd9bda151e16aa",
+  "sampling": "30fresh immutable public devUIDs,Random2026111701sample over sortedUIDs minus all130previous real IDs;arm orderRandom2026111702. Recomputed exactly against actual prior manifests. No filtering/resampling.",
+  "practice": {
+    "invented_TAT_shaped_items": 6,
+    "iterations": 1,
+    "calls": 18,
+    "both_arms_valid_predictions": 6,
+    "expected_answers_native_scores_or_accuracy": false,
+    "logic_modes_calculator_changed": false,
+    "scope": "Only source table/paragraph/accounting-number/banner serialization. Complete raw source retained; coordinate/unit grouping locators are source-only. Unmarked numerics explicitly assumed unscaled USD for prototype units; scaled-count limitations disclosed."
+  },
+  "stop": {
+    "reason": "owned_RSS10GiB",
+    "owned_RSS_peak_sample_bytes": 10862796800,
+    "limit_bytes": 10737418240,
+    "wall_seconds": 1207.5789999999106,
+    "Python_CPU_seconds": 25.53125,
+    "generation_calls": 30,
+    "complete_raw_calls": 29,
+    "memory_cancelled_calls": 1,
+    "timeouts": 0,
+    "completed_responses_with_truncation": 0,
+    "cancelled_response_truncation_status": "unavailable; no answer scored",
+    "sleep_interruptions": 0,
+    "CPU_guard_trips": 0,
+    "rerun_resume_or_retry": false,
+    "note": "The sampled owned process tree reached about10.12GiB. No causal memory-growth explanation is established. The frozen stop was followed; no cap increase or completion amendment."
+  },
+  "all30_as_assigned_failure_as_miss_metrics": {
+    "denominator_warning": "These include19/20unattempted conditions as misses. They are operational all-assigned totals, not estimates of accuracy on the unobserved questions. Wilson ranges do not correct nonrandom early stopping or repeated-report dependence.",
+    "A_column_format": {
+      "n":30,"EM":0.03333333333333333,"F1":0.09733333333333333,
+      "scale_accuracy":0.23333333333333334,"coverage":0.26666666666666666,
+      "EM_Wilson95":[0.005908590381612455,0.16670390991409173],
+      "scale_Wilson95":[0.11792388144489496,0.40928326158122164],
+      "coverage_Wilson95":[0.14182663319596317,0.4444796169518888],
+      "correct":1,"wrong":7,"abstain":2,"failed":1,"not_attempted":19,
+      "model_declines":1,"system_declines":1,"code_computed_arithmetic":3,
+      "condition_attempts":11,"generation_calls":20
+    },
+    "B_exact_REAL2_answer_first": {
+      "n":30,"EM":0.2,"F1":0.22233333333333333,
+      "scale_accuracy":0.2,"coverage":0.3333333333333333,
+      "EM_Wilson95":[0.0950510717728987,0.3730569641314825],
+      "scale_Wilson95":[0.0950510717728987,0.3730569641314825],
+      "coverage_Wilson95":[0.19230498083676134,0.5121994835545616],
+      "correct":6,"wrong":4,"not_attempted":20,
+      "condition_attempts":10,"generation_calls":10
+    }
+  },
+  "paired": {
+    "all30":{"A_only":1,"B_only":6,"both":0,"neither":23,"exact_McNemar_p_descriptive":0.125},
+    "completed_valid_pairs":{"n":10,"A_only":1,"B_only":6,"both":0,"neither":3,"exact_McNemar_p_descriptive":0.125},
+    "warning":"The10complete pairs are an early observed subset,not an independent representative study; no format-superiority or efficiency claim."
+  },
+  "answer_type_all_assigned": {
+    "span":{"n":15,"A_EM_count":0,"B_EM_count":5,"A_F1":0.128,"B_F1":0.378,"A_coverage":0.3333333333333333,"B_coverage":0.4666666666666667},
+    "multi-span":{"n":2,"A_EM_count":0,"B_EM_count":0,"A_valid":0,"B_valid":0,"note":"Neither item attempted; no observed reading-performance result."},
+    "arithmetic":{"n":12,"A_EM_count":1,"B_EM_count":1,"A_valid":3,"B_valid":3},
+    "count":{"n":1,"A_EM_count":0,"B_EM_count":0,"A_valid":0,"B_valid":0,"note":"Not attempted; no observed counting-performance result."},
+    "detail_location":"reader_real3_report.json includes every UID, nativeEM/F1/scale,outcome,decline and full per-type metrics/intervals.",
+    "attempt_field_note":"Per-type legacy generation_attempts means condition attempts; actual call arrays/top-level generation_calls distinguishA's up-to2calls fromB's1."
+  },
+  "runtime_and_blindness": {
+    "same_model_server_options_both_arms": true,
+    "num_ctx":16384,"num_predict":768,"threads":4,
+    "runtime_difference_from_historical_REAL2":"Botharms predict768rather than historical512,explicitly declared before real generation. ExactBsystem/schema/ReaderAnswerparse unchanged.",
+    "compute_difference":"A<=2calls percondition,B1;not matched computation. Raw source unchanged in both;A also gets fixed source-derived typed serialization.",
+    "source_logic_format_calculator_and_mapping_unchanged_after_freeze":true,
+    "gold_phase":"Inference loader whitelists UID/question and table/paragraph source; no annotation fields retained/consulted. Generation closed and sealed predictions saved,ownserver stopped,then separate native scoring.",
+    "scoring_only_repair":"Original1sTCP-negative probe timed out on Windows after OS listener/PID absence and BEFORE gold access. Tested separate offline entry committed91dd113requiresdirectOS listener/specificPID absence,checks frozen source/pins/sealed predictions,uses SAME frozen native metric/report logic. No generation,prediction change,metric retuning or duplicate native scoring.",
+    "scoring_shutdown_evidence":"Exact OS-checked UTC/listener/PID evidence retained in native report,not inferred from a timed-out TCP negative."
+  },
+  "resources": {
+    "practice_wall_seconds":301.530999999959,"practice_Python_CPU_seconds":6.0,
+    "practice_owned_RSS_peak_sample_bytes":6286368768,
+    "scored_host_CPU_mean_percent":58.47243853039676,
+    "scored_host_CPU_max_percent":100.0,
+    "scored_rolling60s_host_CPU_max_percent":82.11302461479345,
+    "note":"Sampled cooperative limits,not OS quotas. HostCPU is not modelCPU;PythonCPU excludes modelCPU. Own94876/11435stopped;never11434,Docker orAEfiles."
+  },
+  "interpretation":"Small public sample with possible TAT-QA training exposure. A missed its invented bar18/21+2/3;user explicitly chose measurement anyway. Partial results do not establish format superiority,historical usability,formalH1 or returns. No source-unit authority or retrospective correction is claimed.",
+  "audience_docs":"Run stopped early:README/research-plan tables and Figure3/generator left unchanged,including original11/30 rows. Technical partial records only.",
+  "next_action":"Stop and report;new decision required for any further generation,cap change,resampling or completion. Do not silently resume.",
+  "exposure_and_remaining_cases":"All30selectedUIDs remain exposed,including unattempted cases;future fresh tests exclude160total prior real IDs.20finished condition records must not be overwritten.39condition cases never attempted plus1memory-cancelled case are not permission for automatic completion.",
+  "preserved":"No SEC requests,counter140,ledger74,datauntracked,no training/pulls/keys/paidcalls/prices/returns/sealed data,push or tags.",
+  "validation_actually_run": {
+    "full_suite_command": ".venv\\Scripts\\python.exe -m pytest -q",
+    "full_suite_runs_at_end": 1,
+    "full_suite_passed": 390,
+    "full_suite_wall_seconds_reported_by_pytest": 57.86,
+    "warnings": "Two SingularMatrixWarnings from existing sparse-control neutralization test;no failures.",
+    "targeted": "15mapping/blind-projection/denominator/gold-phase/unchanged-reader tests before practice;7scoring-shutdown/closed-gold-phase tests before the first native scoring.",
+    "Ruff": "All7new Python files clean.",
+    "syntax": "New mapping/runner/offline scoring-entry syntax checked;no full editor type-check claim.",
+    "integrity": "Exact30seed/order selection and all130actual prior exclusions recomputed. Frozen config/source/logic/native pins,47complete raw hashes(18practice+29real),1cancelled response unavailable,sealed predictions and generation receipt hashes verified. All30UIDoutcomes/assigned metrics/completed pairs reconciled;no answer payload fields in public arm records. SEC140ANDreceiptchecksum,ledger74,datauntracked,prior real/invented/pilot records unchanged;all audience docs/Figure3/generator unchanged;owned94876/11435absent.",
+    "sealed_predictions_SHA256": "a145f28b452527ad6caba43131c44e373ff6355e70dde28d7dc2de5cd6811228",
+    "shutdown_OS_checked_UTC": "2026-11-16T18:17:16.6915189Z",
+    "publication": "Local commits only;no push or tags."
+  }
+}
