@@ -142,3 +142,13 @@ def test_exclusive_pool_priority_uses_only_metadata():
                      "source_times_agree": False}) == POOLS[3]
     assert pool_for({**row, "clock_issues": ["synthetic"]}) == POOLS[1]
     assert pool_for({**row, "clock_issues": ["synthetic"], "CIKs_agree": False}) == POOLS[0]
+
+
+def test_identical_rendered_clock_duplicates_are_not_conflicting_clocks():
+    raw = (f"<ACCESSION-NUMBER>{ACC}\n<ACCEPTANCE-DATETIME>20230105103000\n"
+           f"ACCESSION NUMBER: {ACC}\n<ACCEPTANCE-DATETIME>20230105103000\n"
+           "FILER:\n CENTRAL INDEX KEY: 0000000123").encode()
+    parsed = parse_header(raw, ACC)
+    assert parsed.get("UTC_assuming_Eastern") == "2023-01-05T15:30:00+00:00"
+    conflict = raw.replace(b"20230105103000", b"20230105103001", 1)
+    assert parse_header(conflict, ACC).get("unknown")

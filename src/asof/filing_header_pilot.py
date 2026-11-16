@@ -59,13 +59,16 @@ def resource_urls(cik: int, accession: str) -> dict[str, str]:
 
 def parse_header(raw: bytes, accession: str) -> dict:
     text = html.unescape(raw.decode("latin-1"))
-    identities = set(re.findall(rf"ACCESSION\s+NUMBER[^0-9]{{0,100}}({ACCESSION})", text, re.IGNORECASE))
+    identities = set(re.findall(
+        rf"ACCESSION(?:\s+NUMBER|-NUMBER)[^0-9]{{0,100}}({ACCESSION})", text, re.IGNORECASE))
     if identities and identities != {accession}:
         raise ValueError("scope_failure_header_accession_mismatch")
-    values = re.findall(r"ACCEPTANCE-DATETIME[^0-9]{0,100}([0-9]+)", text, re.IGNORECASE)
+    occurrences = re.findall(r"ACCEPTANCE-DATETIME[^0-9]{0,100}([0-9]+)", text, re.IGNORECASE)
+    # The same logical header may appear as both SGML and a rendered copy.
+    values = set(occurrences)
     if not identities or len(values) != 1:
         return {"unknown": "missing_or_nonunique_header_accession_or_acceptance"}
-    wall = values[0]
+    wall = next(iter(values))
     try:
         candidate = parse_header_acceptance_et(wall)
     except ValueError as exc:
@@ -82,6 +85,7 @@ def parse_header(raw: bytes, accession: str) -> dict:
         if match:
             roles.setdefault(role, []).append(match[1])
     return {"header_wall": wall, "UTC_assuming_Eastern": candidate.isoformat(),
+            "identical_acceptance_occurrences": len(occurrences),
             "header_CIKs_by_role": {r: sorted(set(ciks)) for r, ciks in roles.items()},
             "role_limit": "Observed header roles only, not issuer/security identity adjudication."}
 
