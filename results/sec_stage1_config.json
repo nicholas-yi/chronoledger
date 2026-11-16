@@ -1,0 +1,36 @@
+{
+  "kind": "APPROVED STAGE1 DOCUMENTATION ONLY; no accession pilot",
+  "URLs_in_order": [
+    "https://www.sec.gov/search-filings/edgar-application-programming-interfaces"
+  ],
+  "selection": "One primary official API field-documentation page already cited by the project. Eight is an upper bound, not a request quota. Do not fetch known large manuals under this64KiBread cap or invent replacement URLs.",
+  "plan_sha256": "5b0a0af8d4a190b0f3be4f19d29cd117c3618a14f68d0b5475c1acc48b46db3d",
+  "budget_before": {
+    "actual_HTTP_attempts": 46,
+    "ceiling": 150
+  },
+  "budget_before_sha256": "4cb66b252accb2dfae2dce8fe16ece28e0282ece1ba5e9f6a9beba837dda7312",
+  "source_sha256": {
+    "scripts\\qualify_sec_documentation.py": "7c149b9ca6b2a8ffeef74a72ebd8556ecc859a7a5508d7102db952c4280544e1",
+    "src\\asof\\sec_documentation.py": "c7a087e8d020386772840a267f5875275fe65276479c917445752c71408b31ce",
+    "tests\\test_sec_documentation.py": "935b32b04e254000a5dbba6594e3684398b4b680a754e0d16501fa75a4ca618a"
+  },
+  "scope": "Official documentation definitions only, not issuers or financial observations. No real benchmark, filing body/header/index, 48-item roster, source correction, price, return, sealed data, model or trial-ledger append.",
+  "HTTP_contract": {
+    "max_approved_attempts": 8,
+    "frozen_requests": 1,
+    "historical_ceiling": 150,
+    "timeout_seconds_total_per_request": 30,
+    "max_retained_body_bytes": 65536,
+    "minimum_start_interval_seconds": 0.5,
+    "parallelism": 1,
+    "retries": 0,
+    "redirects": false,
+    "UA": "Existing ASOF_USER_AGENT through asof.config.user_agent()",
+    "read_cap_boundary": "Conservative: body reaching64KiB is unqualified; do not read an extra byte or call it complete."
+  },
+  "receipt_semantics": "Append-only started/finished events. Charge the ignored historical counter before sending. Status and SHA256 refer to observed bytes; an unread error response has zero observed bytes, not a full-body hash. Crash/unfinished attempts require review, never automatic resume.",
+  "stop": "Any redirect, non2xx,403,429,5xx,transport/deadline,read cap,unsupported encoding,scope/budget failure. No alternate identity/header/proxy or replacement URL. If the complete document is unclear, blocked or a JS shell, report the gap. No accession pilot follows without a new decision.",
+  "review": "Record short exact field definitions only, with retrieval/version applicability separate from any clock guarantee. General business hours or Z syntax does not certify historical JSON/header/index clock accuracy. No automatic qualification.",
+  "adapter_negative_tests": "Must pass and be committed before live request; final full-suite result is reported separately after both parts."
+}
