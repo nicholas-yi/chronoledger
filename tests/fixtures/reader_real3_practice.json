@@ -1,0 +1,8 @@
+[
+  {"id":"R3P01","question":"For fictional FernOriel, list North and South revenue separately in the table units.","table":[["(in thousands)","North","South"],["Revenue","1,240","980"],["Cost","750","620"]],"paragraphs":["FernOriel's demonstration project is named Bronze Ladder."]},
+  {"id":"R3P02","question":"For fictional AlderBeryl, calculate 2022 balance minus 2021 balance, keeping the sign and table units.","table":[["(in millions)","2021","2022"],["Balance","(80)","(45)"],["Revenue","210","240"]],"paragraphs":["AlderBeryl uses recycled cartons for its fictional demonstration equipment."]},
+  {"id":"R3P03","question":"What project name does fictional MyrtleTern use? Return only its name.","table":[],"paragraphs":["MyrtleTern uses the project name Scarlet Causeway."]},
+  {"id":"R3P04","question":"For fictional ApricotHelix, what material is listed for Product Birch?","table":[["Product material","Product Birch","Product Elm"],["Material","pressed hemp","woven nettle"]],"paragraphs":["ApricotHelix has no other materials in this demonstration source."]},
+  {"id":"R3P05","question":"For fictional TeakCinnabar, calculate margin percent change from 2021 to 2022 using the absolute start margin.","table":[["Margin","2021","2022"],["Margin (%)","20%","30%"]],"paragraphs":["These fictional margin figures are rates, not monetary values."]},
+  {"id":"R3P06","question":"For fictional LarchPipit, calculate the equally weighted average of 2021 and 2022 cost in table units.","table":[["Amount","2021","2022"],["Cost","64","92"]],"paragraphs":["All monetary amounts in this fictional source are in thousands."]}
+]
