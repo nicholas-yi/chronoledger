@@ -28,7 +28,14 @@ class DocumentationStop(RuntimeError):
     pass
 
 
+class MetadataUnknown(DocumentationStop):
+    """A bounded/missing resource, explicitly unqualified rather than a client-wide stop."""
+
+
 class StrictSecDocumentation:
+    max_attempts = MAX_ATTEMPTS
+    authorized_total_ceiling = HISTORICAL_CEILING
+
     def __init__(
         self, allowed_urls: tuple[str, ...], budget_path: Path, receipt_path: Path,
         cache_dir: Path, *, transport: httpx.AsyncBaseTransport | None = None,
@@ -36,8 +43,8 @@ class StrictSecDocumentation:
     ) -> None:
         if type(read_cap_bytes) is not int or read_cap_bytes not in (MAX_BYTES, 4 << 20):
             raise ValueError("documentation read cap must be the frozen64KiB or approved4MiB")
-        if not allowed_urls or len(allowed_urls) > MAX_ATTEMPTS:
-            raise ValueError("one to eight frozen documentation URLs required")
+        if not allowed_urls or len(allowed_urls) > self.max_attempts:
+            raise ValueError("URL count exceeds scoped request allowance")
         if receipt_path.exists():
             raise DocumentationStop("receipt_already_exists_no_automatic_resume")
         self.allowed_urls = frozenset(allowed_urls)
@@ -49,6 +56,7 @@ class StrictSecDocumentation:
         self.thread = threading.get_ident()
         self.last_started: float | None = None
         self.requested: set[str] = set()
+        self.last_record: dict | None = None
         self.client = httpx.AsyncClient(
             headers={"User-Agent": user_agent(), "Accept-Encoding": "identity"},
             follow_redirects=False, timeout=TIMEOUT_SECONDS, trust_env=False,
@@ -74,6 +82,12 @@ class StrictSecDocumentation:
             stream.write(json.dumps(row, allow_nan=False) + "\n")
             stream.flush()
 
+    def path_allowed(self, path: str) -> bool:
+        return not path.lower().startswith("/archives/")
+
+    def unknown_resource(self, reason: str) -> bool:
+        return False
+
     async def fetch(self, url: str) -> bytes:
         if self.stopped:
             raise DocumentationStop("adapter_already_stopped")
@@ -84,7 +98,7 @@ class StrictSecDocumentation:
         elif (
             url not in self.allowed_urls or url in self.requested or info.scheme != "https"
             or info.netloc != "www.sec.gov" or info.query or info.fragment
-            or info.path.lower().startswith("/archives/")
+            or not self.path_allowed(info.path)
         ):
             reason = "URL_scope_failure_or_duplicate_no_retry"
         if reason:
@@ -100,12 +114,14 @@ class StrictSecDocumentation:
         started = time.monotonic()
         try:
             budget = self.budget()
-            if budget["actual_HTTP_attempts"] >= HISTORICAL_CEILING or self.attempts >= MAX_ATTEMPTS:
+            if budget["actual_HTTP_attempts"] >= self.authorized_total_ceiling or (
+                self.attempts >= self.max_attempts
+            ):
                 raise DocumentationStop("request_budget_exhausted")
             if self.last_started is not None:
                 await rate_sleep(max(0, MIN_INTERVAL_SECONDS - (time.monotonic() - self.last_started)))
             budget = self.budget()
-            if budget["actual_HTTP_attempts"] >= HISTORICAL_CEILING:
+            if budget["actual_HTTP_attempts"] >= self.authorized_total_ceiling:
                 raise DocumentationStop("request_budget_exhausted")
             budget["actual_HTTP_attempts"] += 1
             partial = self.budget_path.with_suffix(".stage1.tmp")
@@ -127,10 +143,10 @@ class StrictSecDocumentation:
                     if response.headers.get("content-encoding", "identity").lower() != "identity":
                         raise DocumentationStop("unsupported_content_encoding")
                     length = response.headers.get("content-length")
-                    if length is not None and (
-                        not length.isdecimal() or int(length) >= self.read_cap_bytes
-                    ):
-                        raise DocumentationStop("declared_body_at_read_cap_or_invalid_length")
+                    if length is not None and not length.isdecimal():
+                        raise DocumentationStop("declared_body_invalid_length")
+                    if length is not None and int(length) >= self.read_cap_bytes:
+                        raise DocumentationStop("declared_body_at_read_cap")
                     async for chunk in response.aiter_raw(chunk_size=4096):
                         body.extend(chunk)
                         if len(body) >= self.read_cap_bytes:
@@ -138,8 +154,10 @@ class StrictSecDocumentation:
                     record["body_complete"] = True
             return bytes(body)
         except (DocumentationStop, httpx.HTTPError, TimeoutError) as exc:
-            self.stopped = True
             record["stop_reason"] = str(exc) if isinstance(exc, DocumentationStop) else type(exc).__name__
+            if self.unknown_resource(record["stop_reason"]):
+                raise MetadataUnknown(record["stop_reason"]) from exc
+            self.stopped = True
             raise DocumentationStop(record["stop_reason"]) from exc
         finally:
             self.active = False
@@ -153,3 +171,4 @@ class StrictSecDocumentation:
                     stream.write(body)
                 record["cache_file"] = path.name
             self.append(record)
+            self.last_record = record
