@@ -250,7 +250,7 @@ joined into one string, four used a different operator or denominator convention
 key, two had the right number in the wrong unit, and three were other slips. The review was
 AI-assisted and after the fact, not blind human annotation.
 
-Four answer formats aimed at those errors were then tested on newly written, made-up questions,
+Five answer formats aimed at those errors were then tested on newly written, made-up questions,
 never on real benchmark items. Each test fixed its questions and expected answers in advance:
 21 answerable questions and 3 unanswerable ones. From the
 second test on, a small practice set that is never scored came first, so format and resource
@@ -262,12 +262,14 @@ problems surface before anything is frozen.
 | Choose the answer type first; code does the arithmetic | 18 of 21 | 0 of 3: picked the nearest row or year | [review](../results/reader_modes_review.json) |
 | Same, plus a "not in the table" choice | 19 of 21 | 2 of 3 | [review](../results/reader_presence_review.json) |
 | Name the start/end values or numerator/denominator; code calculates | 19 of 21 | 3 of 3 | [review](../results/reader_roles_review.json) |
+| Accept non-year column labels and check quoted paragraph spans | 18 of 21 | 2 of 3 | [review](../results/reader_columns_review.json) |
 
-On the latest invented set, all eight calculations were right and all three unanswerable questions
-were declined. Two answerable text lists were also declined: the requested names were present,
-but their required row or column metadata was marked missing. Fresh authored sets are not a
-matched accuracy comparison. The format has not been tried on real reports, so the 11-of-30
-result above remains the only real-data figure.
+On the latest invented set, all eight calculations were right. Remaining errors included giving
+one of two requested table values, marking a present row label missing, quoting a shorter phrase
+than the expected answer, and substituting an existing region for an absent one. A quoted span
+can be in the source yet still be incomplete. Fresh authored sets are not a matched accuracy
+comparison. The format has not been tried on real reports, so the 11-of-30 result above remains
+the only real-data figure.
 
 ### What the earlier tests taught
 
