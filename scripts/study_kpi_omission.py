@@ -25,6 +25,7 @@ from asof.kpi_omission import (
     METRICS,
     SEED,
     analyze_case,
+    assert_development_disclosures,
     filing_url,
     pin_filing,
     read_cached,
@@ -59,6 +60,10 @@ def write_json(path: Path, data: dict | list) -> None:
 def prepare() -> dict:
     if MANIFEST.exists() or PLAN.exists():
         raise FileExistsError("plan already exists; preserve the frozen selection")
+    assert_development_disclosures([
+        {"knowledge_time": "2021-07-01T00:00:00+00:00", "report_date": "2021-07-01"},
+        {"knowledge_time": "2024-06-30T23:59:59+00:00", "report_date": "2024-06-30"},
+    ])
     import pandas as pd
 
     metadata = DATA_DIR / "bulk_filings.parquet"
@@ -102,10 +107,12 @@ def prepare() -> dict:
             & (frame.knowledge_time >= current - pd.Timedelta(days=120))
             & frame["items"].fillna("").astype(str).str.contains("2.02", regex=False)
         ].sort_values(["knowledge_time", "accession"]).tail(2)
+        context_refs = [row_dict(r) for r in context.itertuples()]
+        assert_development_disclosures(refs + context_refs)
         cases.append({
             "case_id": f"KPI-{i:03d}", "cik": cik,
             "annual": [pin_filing(r, CACHE) for r in refs],
-            "context": [pin_filing(row_dict(r), CACHE) for r in context.itertuples()],
+            "context": [pin_filing(r, CACHE) for r in context_refs],
         })
     if not cases:
         raise ValueError("no eligible cached annual triples; do not broaden or fabricate a roster")
@@ -234,6 +241,9 @@ def run() -> dict:
     plan = json.loads(PLAN.read_bytes())
     if ledger.file_sha256(MANIFEST) != plan["manifest_SHA256"]:
         raise ValueError("frozen manifest changed")
+    cases = json.loads(MANIFEST.read_bytes())["cases"]
+    assert_development_disclosures([
+        ref for case in cases for ref in case["annual"] + case["context"]])
     git = subprocess.run(["git", "status", "--porcelain"], cwd=PROJECT_ROOT,
                          check=True, capture_output=True, text=True)
     if git.stdout.strip():
@@ -246,7 +256,6 @@ def run() -> dict:
     source_hashes = {p: ledger.file_sha256(PROJECT_ROOT.joinpath(*p.split("/"))) for p in FROZEN}
     protected = {str(p.relative_to(PROJECT_ROOT)): ledger.file_sha256(p) for p in PROTECTED}
     lineage = ledger.lineage()
-    cases = json.loads(MANIFEST.read_bytes())["cases"]
     write_json(PRIVATE / "attempt.json", {
         "started_utc": datetime.now(UTC).isoformat(), "lineage": lineage,
         "source_SHA256": source_hashes, "protected_SHA256": protected})
@@ -312,7 +321,8 @@ def run() -> dict:
             ledger.file_sha256(PROJECT_ROOT.joinpath(*p.split("/"))) == v
             for p, v in protected.items()),
         scientific_acceptance=False, human_gold=False,
-        model_calls=0, new_downloads=0, return_evaluations=0, holdout_opened=False,
+        model_calls=0, new_downloads=0, return_evaluations=0,
+        source_scope="conservative_development_guard_not_scientific_clearance",
     )
     if not result["source_unchanged"] or not result["protected_unchanged"]:
         result["status"] = "stopped"

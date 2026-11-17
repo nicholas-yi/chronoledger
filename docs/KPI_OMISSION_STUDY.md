@@ -2,8 +2,27 @@
 
 **Separate exploratory study, not H0/H1, human gold or an economic test.**
 The owner approved cached-source analysis and implementation only, with no new downloads,
-project model inference, training or human effort. No prices, returns, fundamentals outcomes
-or sealed data are inputs. Existing registrations, holds and failed results remain unchanged.
+project model inference, training or human effort. No price, return or computed fundamental
+outcome dataset was an input. Reserved-source overlaps are disclosed below; this does not
+certify exclusion of all outcome-bearing material. Existing holds and failed results stand.
+
+**STOPPED AND QUARANTINED.** The first screen stopped on an HTML-comment parser error.
+A subsequent metadata-only review found that the pinned 2021-2024 disclosure roster
+overlaps the separately reserved H4/H6(a) calendar even though it predates the return
+holdout. No cached-case evidence may be used or published pending Lead/owner review.
+The stopped receipt and detailed date/exposure audit remain in ignored
+`data\kpi_omission_v1`; they were not committed as scientific results.
+The original receipt's static `holdout_opened=false` is not a scope-compliance attestation.
+Raw annual HTML can contain reserved fundamental comparatives, and the loaded filing
+`Items` metadata can carry H6 event codes. No numerical outcomes or endpoint joins were
+computed, but no claim of excluding all outcome-bearing source material is justified.
+Preparation also fingerprinted compressed cached objects; the private audit distinguishes
+that byte access from the much smaller set of decompressed/parsed document bodies.
+
+Parser fixes are tested on invented fixtures only. A conservative, study-local date gate
+now refuses validation/holdout-era disclosures before cache access. It does not silently
+replace the original roster or authorize any continuation; the original plan remains
+historical and blocked. No actual case was reprocessed after the stop.
 
 ## Economic question and competing explanations
 
@@ -77,6 +96,11 @@ Human gold, validated precision/recall, semantic omission prevalence, cash-flow 
 uncertainty direction and incremental alpha cannot be supplied by this screen.
 
 ## Local workflow and safety
+
+These commands document the frozen interface, not permission to continue the quarantined
+roster. Preparation now rejects its reserved-date envelope before reading filing metadata;
+execution checks every pinned annual and context date before any body access. Do not delete
+receipts or adjust dates to force a run. A new approved scope/freeze is required.
 
 ```powershell
 $env:OPENBLAS_NUM_THREADS='1'

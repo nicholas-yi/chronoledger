@@ -22,6 +22,13 @@ implementation-QA screen; the full software suite passed 510 tests.
 It does not import A2 counts, resume collection or establish the historical sampling
 and field-clock assumptions. Measurement-error estimators and reader changes remain proposals.
 
+A separate [cached KPI-omission workflow](KPI_OMISSION_STUDY.md) was implemented, but its first
+screen stopped and its 2021-2024 disclosure roster is **quarantined pending cross-hypothesis
+reserved-window review**. Being before the July 2024 return holdout does not clear H4/H6(a)
+reservations or their outcome-source windows. No KPI finding, human-gold accuracy or economic
+result is released. Parser repairs and conservative access guards were checked on invented
+fixtures only; no source screen was resumed.
+
 ## How an idea becomes a result
 
 The project is developed with a small team of AI agents that each play one role: a research agent

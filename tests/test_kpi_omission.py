@@ -6,6 +6,7 @@ from asof.kpi_omission import (
     METRICS,
     CachedText,
     analyze_case,
+    assert_development_disclosures,
     metric_mentions,
     pin_filing,
     read_cached,
@@ -114,3 +115,40 @@ def test_body_cap_is_unknown_and_cache_miss_never_constructs_http_client(
     capped = read_cached(ref, tmp_path)
     assert capped.text is None
     assert capped.reason == "body_cap_not_read_complete"
+
+
+@pytest.mark.parametrize("period,expected", [
+    ("March 31, 2022", "available"),
+    ("March 30, 2022", "inline_period_conflict"),
+    ("fiscal year end", "inline_period_uninterpretable"),
+])
+def test_html_comments_and_formatted_inline_dates_are_handled_explicitly(
+    tmp_path, period: str, expected: str,
+) -> None:
+    from asof.edgar import response_cache_path
+    from asof.kpi_omission import filing_url
+
+    row = {"cik": 1, "accession": "0000000001-22-000001", "primary_doc": "a.htm",
+           "form": "10-K", "knowledge_time": "2022-05-01T10:00:00+00:00",
+           "report_date": "2022-03-31"}
+    path = response_cache_path(filing_url(row), tmp_path)
+    path.parent.mkdir()
+    body = (
+        '<html><!-- ordinary source comment -->'
+        '<ix:nonNumeric name="dei:EntityCentralIndexKey">1</ix:nonNumeric>'
+        f'<ix:nonNumeric name="dei:DocumentPeriodEndDate">{period}</ix:nonNumeric>'
+        '<p>Backlog was 20 units.</p></html>').encode()
+    path.write_bytes(gzip.compress(body))
+    result = read_cached(pin_filing(row, tmp_path), tmp_path)
+    assert (result.status if result.status == "available" else result.reason) == expected
+
+
+@pytest.mark.parametrize("when", ["2021-08-01", "2023-02-01", "2024-08-01"])
+def test_disclosure_gate_checks_validation_and_fundamental_reserves_not_just_prices(when) -> None:
+    from asof.periods import HoldoutAccessError
+
+    ref = {"knowledge_time": f"{when}T10:00:00+00:00", "report_date": "2020-12-31"}
+    with pytest.raises(HoldoutAccessError, match="H4/H6"):
+        assert_development_disclosures([ref])
+    assert_development_disclosures([{
+        "knowledge_time": "2018-02-01T10:00:00+00:00", "report_date": "2017-12-31"}])

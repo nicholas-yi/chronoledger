@@ -27,3 +27,22 @@ def test_prior_case_attempt_blocks_before_data_or_worker_access(tmp_path, monkey
     recovered, issues = module.recover_cases([{"case_id": "a"}, {"case_id": "b"}])
     assert [r["case_id"] for r in recovered] == ["a"]
     assert issues == ["b:truncated_checkpoint"]
+
+
+def test_quarantined_envelope_is_rejected_before_metadata_access(tmp_path, monkeypatch) -> None:
+    import pandas as pd
+
+    from asof.periods import HoldoutAccessError
+
+    scripts = Path(__file__).resolve().parents[1] / "scripts"
+    monkeypatch.syspath_prepend(str(scripts))
+    spec = importlib.util.spec_from_file_location("kpi_guard_test", scripts / "study_kpi_omission.py")
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    monkeypatch.setattr(module, "MANIFEST", tmp_path / "manifest.json")
+    monkeypatch.setattr(module, "PLAN", tmp_path / "plan.json")
+    monkeypatch.setattr(pd, "read_parquet", lambda *a, **k: pytest.fail("metadata must not be read"))
+    with pytest.raises(HoldoutAccessError, match="H4/H6"):
+        module.prepare()

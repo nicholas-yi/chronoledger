@@ -9,12 +9,14 @@ import math
 import re
 from collections import Counter
 from dataclasses import dataclass
+from datetime import date, datetime
 from pathlib import Path
 
 from lxml import etree, html
 
 from asof.edgar import response_cache_path
 from asof.ledger import file_sha256
+from asof.periods import HoldoutAccessError
 from asof.sections import cosine_similarity, html_to_text, jaccard_similarity, tokens
 
 SEED = 2026111702
@@ -63,6 +65,29 @@ def pin_filing(row: dict, cache: Path) -> dict:
     }
 
 
+def assert_development_disclosures(refs: list[dict]) -> None:
+    """Conservative study-only gate; never infer clearance from the price cutoff."""
+    for ref in refs:
+        known = datetime.fromisoformat(ref["knowledge_time"]).date()
+        if not date(2012, 1, 1) <= known <= date(2018, 12, 31):
+            raise HoldoutAccessError(
+                f"disclosure date {known} is outside this study's conservative development "
+                "envelope; validation/H4/H6/return reservations require owner review")
+        report = date.fromisoformat(ref["report_date"][:10])
+        if report > known:
+            raise ValueError("report period follows stored filing availability")
+
+
+def normalized_inline_period(value: str) -> str | None:
+    value = re.sub(r"\s+", " ", value).strip()
+    for pattern in ("%Y-%m-%d", "%B %d, %Y", "%B %d %Y", "%b %d, %Y", "%b %d %Y"):
+        try:
+            return datetime.strptime(value, pattern).date().isoformat()
+        except ValueError:
+            continue
+    return None
+
+
 def read_cached(ref: dict, cache: Path) -> CachedText:
     path = response_cache_path(ref["url"], cache)
     provenance = {
@@ -97,6 +122,8 @@ def read_cached(ref: dict, cache: Path) -> CachedText:
     periods: set[str] = set()
     forms: set[str] = set()
     for element in root.iter():
+        if not isinstance(element.tag, str):
+            continue
         name = element.get("name", "").rsplit(":", 1)[-1].lower()
         if name in {"entitycentralindexkey", "documentperiodenddate", "documenttype"}:
             value = "".join(element.itertext()).strip()
@@ -110,7 +137,10 @@ def read_cached(ref: dict, cache: Path) -> CachedText:
                       inline_forms=sorted(forms))
     if identities and identities != {int(ref["cik"])}:
         return CachedText("unavailable", None, len(body), provenance, "inline_CIK_conflict")
-    if periods and ref["report_date"][:10] not in periods:
+    normalized = {normalized_inline_period(value) for value in periods}
+    if None in normalized:
+        return CachedText("unavailable", None, len(body), provenance, "inline_period_uninterpretable")
+    if normalized and normalized != {ref["report_date"][:10]}:
         return CachedText("unavailable", None, len(body), provenance, "inline_period_conflict")
     if forms and ref["form"] not in forms:
         return CachedText("unavailable", None, len(body), provenance, "inline_form_conflict")
