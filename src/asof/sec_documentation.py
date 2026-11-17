@@ -36,14 +36,15 @@ class StrictSecDocumentation:
     max_attempts = MAX_ATTEMPTS
     authorized_total_ceiling = HISTORICAL_CEILING
     historical_ceiling = HISTORICAL_CEILING
+    supported_read_caps = (MAX_BYTES, 4 << 20)
 
     def __init__(
         self, allowed_urls: tuple[str, ...], budget_path: Path, receipt_path: Path,
         cache_dir: Path, *, transport: httpx.AsyncBaseTransport | None = None,
         read_cap_bytes: int = MAX_BYTES,
     ) -> None:
-        if type(read_cap_bytes) is not int or read_cap_bytes not in (MAX_BYTES, 4 << 20):
-            raise ValueError("documentation read cap must be the frozen64KiB or approved4MiB")
+        if type(read_cap_bytes) is not int or read_cap_bytes not in self.supported_read_caps:
+            raise ValueError("documentation read cap must be supported by the frozen adapter")
         if not allowed_urls or len(allowed_urls) > self.max_attempts:
             raise ValueError("URL count exceeds scoped request allowance")
         if receipt_path.exists():

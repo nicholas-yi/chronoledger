@@ -1,0 +1,54 @@
+{
+  "check": "clock",
+  "status": "stopped_final",
+  "documents": [
+    {
+      "URL": "https://www.sec.gov/files/edgar/filermanual/efmvol2-c1.pdf",
+      "bytes": 110591,
+      "SHA256": "d7f287e06dd39e4f1e9ab6a12ffc0a4887c66253ccfa6d120275193bec4721bc",
+      "content_type": "application/pdf",
+      "official_links": [],
+      "cache_file": "request_3251.bin",
+      "review": "Requires field-specific/manual version review,not automatic UTC authority."
+    },
+    {
+      "URL": "https://www.sec.gov/files/edgar/filermanual/efmvol2-aa.pdf",
+      "bytes": 79875,
+      "SHA256": "99592d716d2cf7b864724b1b536d9d28f51fe96cb9bc8af18a4ba26e58612df7",
+      "content_type": "application/pdf",
+      "official_links": [],
+      "cache_file": "request_3252.bin",
+      "review": "Requires field-specific/manual version review,not automatic UTC authority."
+    }
+  ],
+  "new_requests": 3,
+  "historical_clock_qualified": false,
+  "last_receipt": {
+    "event": "finished",
+    "url": "https://www.sec.gov/files/edgar/filermanual/archive/efmvol2-v60.pdf",
+    "status": 200,
+    "bytes": 0,
+    "SHA256_observed_bytes": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "body_complete": false,
+    "attempted": true,
+    "stop_reason": "declared_body_at_read_cap",
+    "historical_attempt": 3253,
+    "request_UTC": "2026-11-17T13:12:49.831228+00:00",
+    "charged_before_send": true,
+    "content_type": "application/pdf",
+    "content_length": "23159215",
+    "ETag": null,
+    "last_modified": "Wed, 28 Sep 2022 13:14:03 GMT",
+    "elapsed_seconds": 0.6559999999590218,
+    "finished_UTC": "2026-11-17T13:12:50.468611+00:00",
+    "cache_file": "request_3253.bin"
+  },
+  "stop_reason": "declared_body_at_read_cap",
+  "counter": {
+    "actual_HTTP_attempts": 3253,
+    "ceiling": 34402
+  },
+  "config_SHA256": "c0994541f4b467e451a3029b9ed67fd2b34268bac84a3a2a67da1b59f05f7dd7",
+  "source_revision": "b9b016328e155ea3b5289dfad321949cd3c9d504",
+  "private_directory": "data\\project_closure\\closure_clock_manuals_config"
+}

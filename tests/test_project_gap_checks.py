@@ -86,3 +86,12 @@ def test_relative_followup_report_is_resolved_before_fingerprinting(tmp_path, mo
                            from_report=Path("prior.json"), url=[target])
     m.freeze(args)
     assert json.loads(args.config.read_text())["URLs"] == [target]
+
+
+def test_large_cap_cannot_escape_the_one_approved_manual(tmp_path, monkeypatch):
+    m = module(monkeypatch)
+    with pytest.raises(ValueError, match="restricted"):
+        m.OneDocument(("https://www.sec.gov/files/another.pdf",),
+                      tmp_path / "budget", tmp_path / "receipt", tmp_path / "cache",
+                      read_cap_bytes=32 << 20)
+    assert m.StrictSecDocumentation.supported_read_caps == (65536, 4 << 20)

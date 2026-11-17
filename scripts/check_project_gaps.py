@@ -32,6 +32,7 @@ ROOT_URLS = [
     "https://www.sec.gov/submit-filings/filer-support-resources",
 ]
 CACHED = DATA_DIR / "sec_stage1_refetch" / "request_48.bin"
+HISTORICAL_MANUAL = "https://www.sec.gov/files/edgar/filermanual/archive/efmvol2-v60.pdf"
 MODEL = "qwen3.5:4b"
 DIGEST = "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04"
 OPTIONS = {"num_ctx": 16384, "num_predict": 64, "num_thread": 4, "num_batch": 128,
@@ -68,15 +69,26 @@ def freeze(args) -> None:
                  "limits": "Invented inputs only; no training/QA score or long-report efficacy "
                            "claim. Keep one minute of the approved10min for owned-tree cleanup."}
     else:
+        if getattr(args, "large_manual", False) and not args.from_report:
+            raise ValueError("large-manual amendment requires its stopped retrieval receipt")
         budget = json.loads(common.BUDGET.read_bytes())
         used = budget["actual_HTTP_attempts"] - 3246
         if not 0 <= used < 10 or budget["ceiling"] != 34402:
             raise ValueError("closure documentation budget changed or exhausted")
         if args.from_report:
             previous = json.loads(args.from_report.read_bytes())
-            if previous["status"] != "retrieved_requires_review":
+            large = getattr(args, "large_manual", False)
+            if large:
+                if (previous["status"] != "stopped_final"
+                        or previous.get("stop_reason") != "declared_body_at_read_cap"
+                        or previous["last_receipt"]["url"] != HISTORICAL_MANUAL
+                        or args.url != [HISTORICAL_MANUAL]):
+                    raise ValueError("explicit cap amendment applies only to the same historical manual")
+                known = {HISTORICAL_MANUAL}
+            elif previous["status"] != "retrieved_requires_review":
                 raise ValueError("documentation audit stopped; no implicit continuation")
-            known = {u for r in previous["documents"] for u in r["official_links"]}
+            else:
+                known = {u for r in previous["documents"] for u in r["official_links"]}
             urls = args.url or []
             if not urls or any(u not in known for u in urls):
                 raise ValueError("follow-up URLs must be observed links in complete official pages")
@@ -97,6 +109,12 @@ def freeze(args) -> None:
                              "any error/cap stops. Official docs only,no Archives/filings.",
                  "clock_certification": "No automatic qualification; review field-specific text "
                                         "and historical applicability separately."}
+        value["read_cap_bytes"] = (32 if getattr(args, "large_manual", False) else 4) << 20
+        if getattr(args, "large_manual", False):
+            value["protocol"] = value["protocol"].replace("4MiBbody", "32MiBbody")
+            value["explicit_cap_approval"] = (
+                "User historical_manual=true after seeing declared23159215bytes; one amended "
+                "GET under existing ten-request quota, no redirect or retry.")
     value["source_SHA256"] = common.pin([
         Path(__file__), PROJECT_ROOT / "src" / "asof" / "local_model_runtime.py",
         PROJECT_ROOT / "src" / "asof" / "sec_documentation.py"])
@@ -109,6 +127,12 @@ class OneDocument(StrictSecDocumentation):
     max_attempts = 1
     historical_ceiling = 34402
     authorized_total_ceiling = 34402
+    supported_read_caps = (65536, 4 << 20, 32 << 20)
+
+    def __init__(self, urls, *args, **kwargs):
+        if kwargs.get("read_cap_bytes") == 32 << 20 and urls != (HISTORICAL_MANUAL,):
+            raise ValueError("32MiB cap is restricted to the explicitly approved manual")
+        super().__init__(urls, *args, **kwargs)
 
 
 async def clock_check(config: dict, directory: Path) -> dict:
@@ -129,7 +153,7 @@ async def clock_check(config: dict, directory: Path) -> dict:
                 measured = BorrowedMeasuredTransport(inner, limiter, guard, url, expected)
                 async with OneDocument((url,), common.BUDGET,
                     directory / f"request_{expected}.jsonl", directory,
-                    transport=measured, read_cap_bytes=4 << 20) as client:
+                    transport=measured, read_cap_bytes=config.get("read_cap_bytes", 4 << 20)) as client:
                     measured.emit = client.append
                     try:
                         raw = await client.fetch(url)
@@ -309,6 +333,7 @@ if __name__ == "__main__":
     parser.add_argument("--url", action="append")
     parser.add_argument("--pid", type=int)
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument("--large-manual", action="store_true")
     args = parser.parse_args()
     if args.phase == "freeze":
         freeze(args)
