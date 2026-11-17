@@ -1,0 +1,43 @@
+{
+  "scope": "ONLY newly added readiness checks; not full referee CLI, new simulation or return-data execution",
+  "status": "BLOCKED",
+  "source_SHA256": "9dd9344427fb4276f065c2c175491eca24503bed3ad26d771df5c86b0a472276",
+  "input_SHA256": {
+    "results\\timestamp_full_a2_report.json": "38c4fb4df713d706b6ec34d54e4ef125b7f5146ab66a230d4db352f46be343f4",
+    "results\\robust_inference_calibration.json": "dbbc7266808600c0aa8319fcdb47fbba8515b7211d695ead5951709dedd171c4"
+  },
+  "outcomes": [
+    {
+      "threat": "time_authority",
+      "level": 1,
+      "checks": [
+        {
+          "name": "qualified per-accession clocks, not conditional agreement",
+          "passed": false,
+          "evidence": "Latest integrated audit: historically qualified UTC=0, unresolved=16921; conditional Eastern agreement is not qualification"
+        },
+        {
+          "name": "recorded metadata evidence hashes remain intact",
+          "passed": true,
+          "evidence": "9 private metadata artifact hashes match; not clock authority"
+        }
+      ]
+    },
+    {
+      "threat": "inference.calibration",
+      "level": 1,
+      "checks": [
+        {
+          "name": "registered NW6 meets its recorded calibration adoption rule",
+          "passed": false,
+          "evidence": "Recorded registered NW6 null-size evidence at T=17/18/28: {\"17\": {\"status\": \"unreliable_at_this_geometry\", \"worst_95_upper_5percent\": 0.39057733744216394}, \"18\": {\"status\": \"unreliable_at_this_geometry\", \"worst_95_upper_5percent\": 0.37996260652320607}, \"28\": {\"status\": \"unreliable_at_this_geometry\", \"worst_95_upper_5percent\": 0.24908182100081513}}; no method substitution, project-return test or new simulation performed"
+        },
+        {
+          "name": "synthetic calibration harness completed",
+          "passed": true,
+          "evidence": "Recorded synthetic harness completion; not scientific acceptance or a rerun"
+        }
+      ]
+    }
+  ]
+}

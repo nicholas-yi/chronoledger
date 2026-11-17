@@ -80,7 +80,7 @@ def freeze(args) -> None:
             urls = args.url or []
             if not urls or any(u not in known for u in urls):
                 raise ValueError("follow-up URLs must be observed links in complete official pages")
-            provenance = common.pin([args.from_report])
+            provenance = common.pin([args.from_report.resolve()])
         else:
             urls = ROOT_URLS
             known = official_links(CACHED.read_bytes(),

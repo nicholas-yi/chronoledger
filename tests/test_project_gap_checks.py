@@ -64,3 +64,25 @@ def test_cleanup_targets_verified_creation_time_and_children_first(monkeypatch):
     ]))
     assert "Stop-Process -Id 100" in commands[0] and " -ne 901" in commands[0]
     assert "Stop-Process -Id 300" in commands[1] and " -ne 900" in commands[1]
+
+
+def test_relative_followup_report_is_resolved_before_fingerprinting(tmp_path, monkeypatch):
+    m = module(monkeypatch)
+    monkeypatch.chdir(tmp_path)
+    budget = tmp_path / "budget.json"
+    budget.write_text(json.dumps({"actual_HTTP_attempts": 3248, "ceiling": 34402}))
+    monkeypatch.setattr(m.common, "BUDGET", budget)
+    monkeypatch.setattr(m, "user_agent", lambda: "Fictional Test test@example.invalid")
+    target = "https://www.sec.gov/files/edgar/manual.pdf"
+    (tmp_path / "prior.json").write_text(json.dumps({
+        "status": "retrieved_requires_review", "documents": [{"official_links": [target]}]}))
+
+    def pins(paths):
+        assert all(p.is_absolute() for p in paths)
+        return {p.name: "a" * 64 for p in paths}
+
+    monkeypatch.setattr(m.common, "pin", pins)
+    args = SimpleNamespace(config=tmp_path / "config.json", check="clock",
+                           from_report=Path("prior.json"), url=[target])
+    m.freeze(args)
+    assert json.loads(args.config.read_text())["URLs"] == [target]
