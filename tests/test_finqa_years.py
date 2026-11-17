@@ -47,7 +47,10 @@ def test_unsafe_year_or_format_deletes_before_any_scoring(tmp_path, monkeypatch,
     path.write_bytes(raw)
     expected = hashlib.sha1(f"blob {len(raw)}\0".encode() + raw).hexdigest()
     monkeypatch.setattr(script, "EXPECTED_BLOB", expected)
-    summary, safe = script.check_quarantine(path)
+    from asof.document_scope import DocumentDates
+
+    summary, safe = script.check_quarantine(path, documents=(DocumentDates(
+        "2017-02-01", "2017-02-01", "2016-12-31"),))
     assert safe is kept and path.exists() is kept
     assert set(summary) == {"item_count", "year_histogram", "nonmatching"}
 
@@ -57,5 +60,8 @@ def test_blob_mismatch_never_parses_and_deletes(tmp_path, monkeypatch):
     path = tmp_path / "quarantine.json"
     path.write_bytes(b'{"question":"forbidden"}')
     monkeypatch.setattr(script.json, "loads", lambda _: pytest.fail("unverified bytes parsed"))
-    summary, safe = script.check_quarantine(path)
+    from asof.document_scope import DocumentDates
+
+    summary, safe = script.check_quarantine(path, documents=(DocumentDates(
+        "2017-02-01", "2017-02-01", "2016-12-31"),))
     assert not safe and not path.exists() and summary["nonmatching"] == 1

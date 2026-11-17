@@ -5,6 +5,10 @@ from pathlib import Path
 import httpx
 import pytest
 
+from asof.document_scope import DocumentDates
+
+SYNTHETIC_DATES = (DocumentDates("2017-02-01", "2017-02-01", "2016-12-31"),)
+
 
 def _script(monkeypatch):
     scripts = Path(__file__).resolve().parents[1] / "scripts"
@@ -23,11 +27,13 @@ def test_byte_integrity_before_any_parse_and_bad_download_cleanup(monkeypatch, t
         lambda _: httpx.Response(200, content=raw, headers={"content-type": "text/plain"})))
     with client:
         target = tmp_path / "file.json"
-        result = script.fetch(client, "https://example.test/file", target, expected)
+        result = script.fetch(
+            client, "https://example.test/file", target, expected, documents=SYNTHETIC_DATES)
         assert result["sha256"] == hashlib.sha256(raw).hexdigest()
         assert target.read_bytes() == raw
         with pytest.raises(ValueError, match="blob"):
-            script.fetch(client, "https://example.test/file", tmp_path / "bad.json", "0" * 40)
+            script.fetch(client, "https://example.test/file", tmp_path / "bad.json", "0" * 40,
+                         documents=SYNTHETIC_DATES)
         assert not (tmp_path / "bad.json").exists()
         assert not (tmp_path / "bad.json.part").exists()
 
@@ -41,6 +47,7 @@ def test_declared_and_actual_limits_are_enforced_without_install_or_login(monkey
                 lambda _, h=headers: httpx.Response(200, content=b"12345", headers=h))) as client,
             pytest.raises(ValueError),
         ):
-            script.fetch(client, "https://example.test/file", tmp_path / "bad", "0" * 40)
+            script.fetch(client, "https://example.test/file", tmp_path / "bad", "0" * 40,
+                         documents=SYNTHETIC_DATES)
     assert not (tmp_path / "bad").exists()
     assert not (tmp_path / "bad.part").exists()

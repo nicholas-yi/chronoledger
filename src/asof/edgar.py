@@ -17,6 +17,7 @@ from typing import Any
 import httpx
 
 from asof.config import RAW_DIR, user_agent
+from asof.document_scope import DocumentDates, require_eligible_documents
 
 SEC_MAX_RPS = 8.0  # below the commonly cited 10 req/s ceiling
 
@@ -104,7 +105,11 @@ class EdgarClient:
             f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json", refresh=refresh
         )
 
-    def filing_document(self, cik: int, accession: str, document: str) -> bytes:
+    def filing_document(
+        self, cik: int, accession: str, document: str, *,
+        dates: DocumentDates | None = None,
+    ) -> bytes:
+        require_eligible_documents(None if dates is None else (dates,))
         folder = accession.replace("-", "")
         return self.get_bytes(f"https://www.sec.gov/Archives/edgar/data/{cik}/{folder}/{document}")
 

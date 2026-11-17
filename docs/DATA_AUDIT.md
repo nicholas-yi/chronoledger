@@ -19,6 +19,9 @@ remain in ignored `data\kpi_omission_v1`, with no trial-ledger append.
 This adds to D6: future H4/H6(a) holdout work cannot be called untouched.
 A mandatory shared pre-body eligibility check must cover all reserved windows,
 follow-up sources, period ends and used context, failing closed on unknown dates.
+The [implemented D13 guard](DOCUMENT_SCOPE.md) uses a conservative development-only
+envelope at the common SEC, derived-feature, KPI and financial-benchmark read boundaries.
+Legacy inputs with unknown dates now stop before reading/fingerprinting source bodies.
 Any replacement KPI roster must be separately frozen from eligible 2012-2018
 cached sources; fewer than 30 eligible issuer triples means stop, not download.
 

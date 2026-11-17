@@ -79,6 +79,9 @@ def practice_inputs() -> dict[str, TableInput]:
 
 
 def native_pins() -> dict:
+    from asof.document_scope import require_eligible_documents
+
+    require_eligible_documents(None)
     expected = json.loads(BASE.read_text())["native_assets"]
     result = {}
     for relative in (r"tatqa\dev.json", r"tatqa\tatqa_metric.py",

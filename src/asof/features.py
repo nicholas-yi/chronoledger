@@ -12,7 +12,7 @@ import gzip
 import json
 import sys
 from collections import Counter
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 from concurrent.futures import (
     FIRST_COMPLETED,
     Future,
@@ -25,6 +25,7 @@ from pathlib import Path
 import numpy as np
 
 from asof.config import DATA_DIR
+from asof.document_scope import DocumentDates, require_eligible_documents
 
 FEATURE_DIR = DATA_DIR / "features"
 
@@ -62,16 +63,26 @@ def _parse_job(accession: str, raw: bytes, form: str) -> tuple[str, str | None]:
     return accession, None
 
 
-def load(accession: str) -> dict | None:
+def load(accession: str, *, dates: DocumentDates | None = None) -> dict | None:
+    require_eligible_documents(None if dates is None else (dates,))
     path = feature_path(accession)
     return json.loads(gzip.decompress(path.read_bytes())) if path.exists() else None
 
 
 def build(jobs: Iterable[tuple[int, str, str, str]], download_threads: int = 6,
-          parse_workers: int = 14, max_inflight: int = 64) -> dict[str, str]:
+          parse_workers: int = 14, max_inflight: int = 64, *,
+          dates_by_accession: Mapping[str, DocumentDates] | None = None) -> dict[str, str]:
     """jobs: (cik, accession, primary_doc, form). Returns {accession: error} for failures."""
     from asof.edgar import EdgarClient
 
+    jobs = list(jobs)
+    if not jobs:
+        return {}
+    require_eligible_documents(
+        [dates_by_accession[j[1]] for j in jobs if j[1] in dates_by_accession]
+        if dates_by_accession is not None else None)
+    if dates_by_accession is None or any(j[1] not in dates_by_accession for j in jobs):
+        raise ValueError("D13 requires dates for every feature source, including cached jobs")
     todo = [j for j in jobs if not feature_path(j[1]).exists()]
     client = EdgarClient()
     errors: dict[str, str] = {}
@@ -80,7 +91,8 @@ def build(jobs: Iterable[tuple[int, str, str, str]], download_threads: int = 6,
     def fetch(job):
         cik, acc, doc, form = job
         try:
-            return acc, client.filing_document(cik, acc, doc), form, None
+            return acc, client.filing_document(
+                cik, acc, doc, dates=dates_by_accession[acc]), form, None
         except Exception as exc:  # noqa: BLE001 - recorded per accession, never dropped
             return acc, None, form, f"download error: {exc!r}"
 

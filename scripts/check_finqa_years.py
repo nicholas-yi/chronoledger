@@ -9,6 +9,7 @@ from collections import Counter
 from pathlib import Path
 
 from asof.config import DATA_DIR
+from asof.document_scope import DocumentDates, require_eligible_documents
 
 EXPECTED_BLOB = "970f239f591c782b17df420c0d343b780737f3da"
 QUARANTINE = DATA_DIR / "bench_1" / "quarantine" / "finqa_dev.json"
@@ -36,7 +37,10 @@ def identity_summary(records: object) -> dict:
             "nonmatching": nonmatching}
 
 
-def check_quarantine(path: Path) -> tuple[dict, bool]:
+def check_quarantine(
+    path: Path, *, documents: tuple[DocumentDates, ...] | None = None,
+) -> tuple[dict, bool]:
+    require_eligible_documents(documents)
     if path.stat().st_size > MAX_BYTES:
         path.unlink()
         return {"item_count": 0, "year_histogram": {}, "nonmatching": 1}, False

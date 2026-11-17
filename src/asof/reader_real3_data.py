@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from asof.benchmark_baseline import TableInput
+from asof.document_scope import DocumentDates, require_eligible_documents
 from asof.reader_real_report import ANSWER_TYPES, VALID_OUTCOMES, arm_summary, exact_mcnemar
 
 ARMS = ("column_format", "answer_first")
@@ -17,8 +18,11 @@ def _blind_object(value: dict) -> dict:
     return value
 
 
-def blind_inputs(path: Path) -> dict[str, TableInput]:
+def blind_inputs(
+    path: Path, *, documents: tuple[DocumentDates, ...] | None = None,
+) -> dict[str, TableInput]:
     """Drop question annotations at decode; inference gets only UID, question and source."""
+    require_eligible_documents(documents)
     contexts = json.loads(path.read_bytes(), object_hook=_blind_object)
     result = {}
     for context in contexts:

@@ -11,6 +11,7 @@ import httpx
 from check_finqa_years import QUARANTINE, check_quarantine
 
 from asof.config import DATA_DIR
+from asof.document_scope import DocumentDates, require_eligible_documents
 
 MAX_BYTES = 50_000_000
 ROOT = DATA_DIR / "bench_1"
@@ -44,7 +45,11 @@ def file_identity(path: Path) -> dict:
             "git_blob_sha1": hashlib.sha1(f"blob {len(raw)}\0".encode() + raw).hexdigest()}
 
 
-def fetch(client: httpx.Client, url: str, path: Path, expected: str) -> dict:
+def fetch(
+    client: httpx.Client, url: str, path: Path, expected: str, *,
+    documents: tuple[DocumentDates, ...] | None = None,
+) -> dict:
+    require_eligible_documents(documents)
     if path.exists():
         existing = file_identity(path)
         if existing["git_blob_sha1"] != expected:

@@ -122,6 +122,9 @@ def freeze() -> None:
 
 
 def run() -> None:
+    from asof.document_scope import require_eligible_documents
+
+    require_eligible_documents(None)
     budget = Budget()
     config = json.loads(CONFIG.read_text())
     assert_frozen(config, Path(__file__))

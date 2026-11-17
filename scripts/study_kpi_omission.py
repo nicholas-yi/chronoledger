@@ -61,8 +61,10 @@ def prepare() -> dict:
     if MANIFEST.exists() or PLAN.exists():
         raise FileExistsError("plan already exists; preserve the frozen selection")
     assert_development_disclosures([
-        {"knowledge_time": "2021-07-01T00:00:00+00:00", "report_date": "2021-07-01"},
-        {"knowledge_time": "2024-06-30T23:59:59+00:00", "report_date": "2024-06-30"},
+        {"accepted_at": "2021-07-01T00:00:00+00:00",
+         "knowledge_time": "2021-07-01T00:00:00+00:00", "report_date": "2021-07-01"},
+        {"accepted_at": "2024-06-30T23:59:59+00:00",
+         "knowledge_time": "2024-06-30T23:59:59+00:00", "report_date": "2024-06-30"},
     ])
     import pandas as pd
 

@@ -63,9 +63,9 @@ def test_cached_reader_uses_hash_pin_and_rejects_identity_conflict(tmp_path) -> 
     from asof.edgar import response_cache_path
     from asof.kpi_omission import filing_url
 
-    row = {"cik": 1, "accession": "0000000001-23-000001", "primary_doc": "a.htm",
-           "form": "10-K", "knowledge_time": "2023-02-01T10:00:00+00:00",
-           "report_date": "2022-12-31"}
+    row = {"cik": 1, "accession": "0000000001-17-000001", "primary_doc": "a.htm",
+           "form": "10-K", "knowledge_time": "2017-02-01T10:00:00+00:00",
+           "accepted_at": "2017-02-01T10:00:00+00:00", "report_date": "2016-12-31"}
     path = response_cache_path(filing_url(row), tmp_path)
     path.parent.mkdir()
     body = (b'<html><ix:nonNumeric name="dei:EntityCentralIndexKey">2</ix:nonNumeric>'
@@ -102,9 +102,9 @@ def test_body_cap_is_unknown_and_cache_miss_never_constructs_http_client(
         pytest.fail("offline reader must not create an HTTP client")
 
     monkeypatch.setattr(httpx, "Client", forbidden)
-    row = {"cik": 1, "accession": "0000000001-23-000001", "primary_doc": "a.htm",
-           "form": "10-K", "knowledge_time": "2023-02-01T10:00:00+00:00",
-           "report_date": "2022-12-31"}
+    row = {"cik": 1, "accession": "0000000001-17-000001", "primary_doc": "a.htm",
+           "form": "10-K", "knowledge_time": "2017-02-01T10:00:00+00:00",
+           "accepted_at": "2017-02-01T10:00:00+00:00", "report_date": "2016-12-31"}
     absent = pin_filing(row, tmp_path)
     assert read_cached(absent, tmp_path).reason == "not_cached_at_freeze"
     path = response_cache_path(module.filing_url(row), tmp_path)
@@ -118,8 +118,8 @@ def test_body_cap_is_unknown_and_cache_miss_never_constructs_http_client(
 
 
 @pytest.mark.parametrize("period,expected", [
-    ("March 31, 2022", "available"),
-    ("March 30, 2022", "inline_period_conflict"),
+    ("March 31, 2017", "available"),
+    ("March 30, 2017", "inline_period_conflict"),
     ("fiscal year end", "inline_period_uninterpretable"),
 ])
 def test_html_comments_and_formatted_inline_dates_are_handled_explicitly(
@@ -128,9 +128,9 @@ def test_html_comments_and_formatted_inline_dates_are_handled_explicitly(
     from asof.edgar import response_cache_path
     from asof.kpi_omission import filing_url
 
-    row = {"cik": 1, "accession": "0000000001-22-000001", "primary_doc": "a.htm",
-           "form": "10-K", "knowledge_time": "2022-05-01T10:00:00+00:00",
-           "report_date": "2022-03-31"}
+    row = {"cik": 1, "accession": "0000000001-17-000001", "primary_doc": "a.htm",
+           "form": "10-K", "knowledge_time": "2017-05-01T10:00:00+00:00",
+           "accepted_at": "2017-05-01T10:00:00+00:00", "report_date": "2017-03-31"}
     path = response_cache_path(filing_url(row), tmp_path)
     path.parent.mkdir()
     body = (
@@ -148,7 +148,9 @@ def test_disclosure_gate_checks_validation_and_fundamental_reserves_not_just_pri
     from asof.periods import HoldoutAccessError
 
     ref = {"knowledge_time": f"{when}T10:00:00+00:00", "report_date": "2020-12-31"}
+    ref["accepted_at"] = ref["knowledge_time"]
     with pytest.raises(HoldoutAccessError, match="H4/H6"):
         assert_development_disclosures([ref])
     assert_development_disclosures([{
-        "knowledge_time": "2018-02-01T10:00:00+00:00", "report_date": "2017-12-31"}])
+        "knowledge_time": "2018-02-01T10:00:00+00:00",
+        "accepted_at": "2018-02-01T10:00:00+00:00", "report_date": "2017-12-31"}])

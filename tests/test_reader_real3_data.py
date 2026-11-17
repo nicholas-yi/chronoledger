@@ -2,6 +2,7 @@ import json
 
 import pytest
 
+from asof.document_scope import DocumentDates
 from asof.reader_real3_data import ARMS, blind_inputs, report
 
 
@@ -11,7 +12,8 @@ def test_blind_projection_does_not_retain_gold_or_support_annotations(tmp_path):
         "paragraphs": [{"text":"A fictional source."}],
         "questions": [{"uid":"synthetic","question":"What units?","answer":"GOLD_ONLY",
                        "answer_type":"count","scale":"million","derivation":"GOLD_ONLY"}]}]))
-    values = blind_inputs(p)
+    values = blind_inputs(p, documents=(DocumentDates(
+        "2017-02-01", "2017-02-01", "2016-12-31"),))
     assert values["synthetic"].question == "What units?"
     assert "GOLD_ONLY" not in repr(values)
 

@@ -19,6 +19,7 @@ from check_finqa_years import QUARANTINE, SUMMARY, check_quarantine
 from asof import ledger
 from asof.benchmark_baseline import TableInput, predict_table
 from asof.config import PROJECT_ROOT
+from asof.document_scope import DocumentDates, require_eligible_documents
 
 SEED = 2026111403
 CONFIG = PROJECT_ROOT / "results" / "benchmark_diagnostic_config.json"
@@ -27,7 +28,8 @@ BASELINE = PROJECT_ROOT / "src" / "asof" / "benchmark_baseline.py"
 MAX_CPU_SECONDS, MAX_RSS = 780, 1 << 30
 
 
-def verified_assets() -> dict:
+def verified_assets(*, documents: tuple[DocumentDates, ...] | None = None) -> dict:
+    require_eligible_documents(documents)
     entries = {}
     for group in ASSETS.values():
         for source, relative, expected in group:
