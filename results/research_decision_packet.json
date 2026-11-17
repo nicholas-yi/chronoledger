@@ -1,0 +1,77 @@
+{
+  "status": "DRAFTS_NOT_SENT; NO_PURCHASE_RECRUITMENT_OR_STUDY_AUTHORIZATION",
+  "purpose": "Concrete inputs needed to move beyond the verified offline engineering work. Fill answers in a private copy; do not commit personal contacts, account details, contracts, raw samples or human labels.",
+  "boundaries": {
+    "holdout": "Remains sealed.",
+    "registered_hypotheses_thresholds_and_stopped_jobs": "Unchanged; no automatic continuation.",
+    "new_SEC_or_model_calls": 0,
+    "accounts_keys_purchase_or_contact": "None performed; needs explicit authorization.",
+    "empty_packets": "Deliberately fail readiness checks. Ready for review is not ready to run."
+  },
+  "clock_authority_question_draft": {
+    "recipient": "[Official SEC support/contact selected and approved by the user]",
+    "subject": "Historical acceptance timestamp field definitions for 2022-2024",
+    "message": "For independent personal research, could you identify authoritative published definitions and effective versions for the 14-digit SGML ACCEPTANCE-DATETIME, the filing-index Accepted display, submissions-API acceptanceDateTime and corresponding bulk representation for 2022-2024? In particular: timezone/DST semantics, whether any historical Z-labelled values represent unconverted local wall time, applicable corrections/errata, and whether reported acceptance is the relevant dissemination/availability event. We found Eastern operating-hour/filing-date rules, but those do not answer the field-specific question. Please distinguish intended format/clock from accuracy guarantees and provide a citable versioned source; may any response be cited in public research?",
+    "context_to_attach_if_approved": [
+      "Official May2025 PDS technical-specification version and December2021 EFM VolumeIIv60 citations from project_closure_review.json.",
+      "Only a separately approved public metadata example if needed; no private panel, payload, identities, credentials or benchmark text."
+    ],
+    "not_done": "No support request sent and no field-clock certification inferred."
+  },
+  "data_rights_question_draft": {
+    "candidate": "Sharadar full-history prices/actions as a qualification candidate, conditional on exact channel and rights; legitimate CRSP entitlement is the complete-return alternative.",
+    "recipient": "[Vendor licensing/contact selected and approved by the user]",
+    "subject": "Personal research qualification, evaluation-publication and independent-review permissions",
+    "message": "Before acquiring data, please confirm the exact product/channel/full-history entitlement and whether this independent personal research qualifies under the personal/non-professional terms. Can we publish code, nonreconstructive statistics and a data-qualification evaluation, including failure counts? What specific written approval is needed under section8? What input/identifier access may independent reviewers have, what outputs may survive termination, and what must be deleted, including backups/normalized caches? Please distinguish direct-site terms from any Nasdaq Data Link entitlement and provide the governing dated terms.",
+    "capability_questions": [
+      "Permanent share-class/security IDs, dated ticker/venue/SIC and dated issuer/CIK links.",
+      "Cash plus stock versus election alternatives, fractional shares, warrants, OTC paths, bankrupt reorganizations, cancellations and terminal payoffs.",
+      "Known CVR exclusion and what a narrower qualification can honestly cover.",
+      "As-reported fundamentals dimensions, filing-date indexing versus actual availability, restatements and correction/known-at vintages.",
+      "Approved bounded pre-2024-07-31 sample for the fixed12-case panel, including the unresolved legal-authority records."
+    ],
+    "user_supplies": [
+      "Chosen provider/product/channel and legitimate entitlement or proposed spending cap.",
+      "Explicit permission before account creation, keys, purchases or vendor contact.",
+      "Actual dated licensing/permission receipts in the private source packet; code does not interpret or authenticate them."
+    ],
+    "not_done": "No source selected, licence accepted, price acquired, payment or contact."
+  },
+  "human_annotation_handoff": {
+    "needed": "Two independent human annotators and a third adjudicator when decisions or unitization differ.",
+    "user_supplies": [
+      "People and handling/compensation authorization.",
+      "Approved frozen roster with dated issuer/industry and annual/year-earlier-quarter eligibility.",
+      "Company-disjoint chronological calibration/development/audit bounds and source hashes.",
+      "Full target sections or a declared block-scoped pilot; a block pass cannot establish whole-filing recall."
+    ],
+    "instructions": [
+      "Give each annotator a separate private first-pass file; hide other labels, model suggestions, returns, later news/filings and registered ranks.",
+      "Retain exact evidence, entity/period/unit/scope/modality and completeness. Missing is unknown, not zero change.",
+      "Preserve independent files and guide versions; no model consensus or matching CSVs automatically becomes verified gold.",
+      "Review intake discrepancies and segmentation disagreements before adjudication; later scoring uses the existing measurement contract only with actual verified/complete gold."
+    ],
+    "budget_status": "Draft guide estimates are not approved hours. Time calibration examples before committing a full audit.",
+    "not_done": "No people recruited, actual60-pair roster chosen, labels or AI pre-labels created."
+  },
+  "inference_design_inputs": {
+    "user_supplies": [
+      "Minimum economically meaningful incremental net effect beyond the matched cosine baseline.",
+      "A separately approved qualified historical observation window and enough genuinely independent periods.",
+      "A prospectively specified size-calibrated method at the actual factor/overlap/dependence geometry, including the relevant tail.",
+      "A decision about whether the original formalH1 test remains not testable or a versioned new design is proposed; never silently replace it."
+    ],
+    "current_limit": "No tested monthly method passes T17/18/28. Optimistic MDE arithmetic is not a calibrated project MDE. Opening holdout, training a reader or finding more filings does not create independent months.",
+    "not_done": "No new simulations, parameter sweep, economic margin guessed, return evaluation or holdout opening."
+  },
+  "execution_and_isolation_inputs": {
+    "needed": [
+      "Qualified dated tradability, auction/early-close feasibility, fees/spread/impact and borrow, or a separately specified long-only design.",
+      "Explicit one-way/gross turnover and distribution-in-gross basis; use existing costs reconciliation rather than double count.",
+      "Approved source snapshots and a worker where network, credentials and sealed files are actually unavailable, with negative tests and hard resource controls.",
+      "Personal/public sources only; no employer's code, data, credentials or borrowed entitlement.",
+      "Preserve hashes, failures, exclusions and F7/F8 reconciliation history before any new result."
+    ],
+    "not_done": "No Docker/host ACL/container provisioning, price/return data, source repair or financial rerun."
+  }
+}

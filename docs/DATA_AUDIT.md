@@ -203,6 +203,26 @@ filing-example members were not opened, extracted or used. No financial observat
 Historical UTC, role/calendar qualification and complete cohort coverage remain unresolved;
 no source clock, CIK, input table or financial result was repaired.
 
+### Offline evidence intake, not source or annotation clearance
+
+[The intake CLI](../scripts/check_research_intake.py) is a local-only bridge from
+the existing source panel and annotation guide to reviewable packets. No network,
+account, model, scoring or financial-data loader is invoked. It creates private
+drafts and schemas, not data or labels; empty drafts fail closed. Human files must
+be two separately identified first passes, bind to the frozen manifest, have
+source evidence/explicit coverage and no declared AI suggestions, and respect
+issuer/time splits. Divergent labels or unitization are preserved for adjudication,
+not silently merged into gold.
+
+Source intake checks declared rights receipts, the exact panel digest/cases/fields,
+cutoff and reconciliation evidence. Complete-return scope cannot hide missing
+cash/stock/terminal legs behind a final price; an explicitly price-only packet has
+no complete-return clearance. These are assertions for independent review, not
+authenticated people/rights or source-value verification. The existing studies,
+measurement and costs contracts remain separate. The [unsent decision packet](../results/research_decision_packet.json)
+states what still needs human, rights and scientific decisions; no contact or
+purchase is performed by preparing it.
+
 **2026-11-14 research plan:** the [research plan](RESEARCH_PLAN.md) records the proposed
 experiment workflow and diagram, prerequisites for closing the data/label/power gaps, three
 prospective study ideas and candidate data sources. Acquisition stays on free public sources for

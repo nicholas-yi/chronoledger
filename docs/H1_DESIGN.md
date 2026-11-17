@@ -398,6 +398,18 @@ It contains only headers, no cases, labels, model suggestions or final adjudicat
 Keep separate private copies for the two annotators after the roster, permissions
 and chronological/industry strata have been approved; do not treat it as human gold.
 
+The [offline intake checker](../scripts/check_research_intake.py) can prepare private
+draft packets and validate supplied first-pass files. Its draft operational mapping is
+`NEW/REMOVED -> unmatched`, modifications/`UNCHANGED -> matched`,
+`UNKNOWN/UNMATCHABLE -> unknown`, and exclusions `-> excluded`.
+Coverage and AI-exposure flags must be explicit `true`/`false`; initial blind files
+must say `AI_suggestion_seen=false`. It binds rows to the manifest's source hashes,
+periods, guide and identities, and reuses the company/time split checks. It does not
+verify that the declared human identities, blindness, fiscal comparator or source
+assertions are true. A structurally complete packet is only **ready for human review**:
+it creates no gold, score, scientific acceptance or run permit. Matching first-pass
+files still need source review; differing unitization/labels need adjudication.
+
 ```text
 pair_id, split, pseudonym, form, earlier/current_accession, accepted_at,
 fiscal_period, section/block_id, source_hash, old_claim_id/span/cells,

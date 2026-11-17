@@ -124,6 +124,38 @@ trained to read filings correctly, never to predict historical returns.
 
 ## Claim-level test (H1): draft design
 
+### Preparing reviewable inputs without inventing evidence
+
+The [offline intake command](../scripts/check_research_intake.py) prepares draft
+manifests, JSON schemas, two separate empty first-pass CSVs and unknown receipts for
+the [12 source cases](../results/price_source_test_panel.json). It does not fetch
+data, label text, interpret a licence or certify a vendor. Keep all filled inputs
+private, not in Git:
+
+```powershell
+python scripts\check_research_intake.py templates --directory data\research_intake_templates
+python scripts\check_research_intake.py annotations --manifest data\research_intake_templates\annotation_manifest.json --annotators data\research_intake_templates\annotator_a.csv data\research_intake_templates\annotator_b.csv --output data\annotation_intake_report.json
+python scripts\check_research_intake.py source --packet data\research_intake_templates\source_receipts.json --output data\source_intake_report.json
+```
+
+Untouched drafts deliberately return **blocked** (exit 2). Exit 0 after validation
+means ready for the named **human review**, not accepted gold, source clearance or
+permission to run a study. Existing output files are never overwritten.
+Source receipts contain only declared evidence/status references: do not paste raw
+vendor price tables into them. Rights, all case IDs/fields, relevant payoff legs,
+identity/adjustment reconciliation and the 2024-07-31 cutoff are checked structurally;
+code cannot authenticate the permissions or verify the vendor's observations.
+An explicitly narrower `price_component_only` packet never qualifies full terminal
+returns; the panel still contains no dedicated CVR case.
+
+The [decision packet](../results/research_decision_packet.json) contains unsent
+clock-authority/licensing questions, annotation handoff and the scientific/economic
+inputs still needed. It is not consent to spend, contact people, acquire data,
+change the registered design or open the holdout. Do not equate any intake report
+with the separate study-readiness or execution-permit checks.
+
+### Measurement and return evidence still needed
+
 The [draft H1 design](H1_DESIGN.md) starts with human labels, not returns.
 Two people must independently label real filing pairs; they have not been recruited.
 AI suggestions cannot replace their blind first pass or human adjudication.

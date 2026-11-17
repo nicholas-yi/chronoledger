@@ -1,0 +1,49 @@
+{
+  "scope": "Offline operational intake only, not gold/source/scientific acceptance",
+  "source_SHA256": {
+    "src\\asof\\research_intake.py": "8a49aaa2b97aff7c306e54fbe265db10f373efc5766d7b9e506684248cecd158",
+    "scripts\\check_research_intake.py": "a8d688ccc73fa186f3a43a1d0867669df640d5e9182188fab26ecd50786b63ea",
+    "tests\\test_research_intake.py": "77e540f163a7314bc446db3e5decf7aa6941a25c844f823ad06e9443a3ce2cb4"
+  },
+  "template_directory": "data\\research_intake_templates",
+  "annotation": {
+    "status": "blocked",
+    "rows": 0,
+    "issue_count": 8,
+    "scientific_acceptance": false
+  },
+  "source": {
+    "status": "blocked",
+    "draft_case_receipts": 12,
+    "issue_count": 663,
+    "scientific_acceptance": false
+  },
+  "generated_input_SHA256": {
+    "data\\research_intake_templates\\annotation_intake_report.json": "5a7b9895da0b1da23a5623d94abb3d157f75555812d97d6e55ad65bf62730f4c",
+    "data\\research_intake_templates\\annotation_manifest.json": "ee81bc0676b2cf14df915002356c52462a07e06ba626c4c5d07fcc61ce8befa9",
+    "data\\research_intake_templates\\annotation_manifest.schema.json": "e20d465b6272ec59ac86f7c308e96d8bf2df149768fa21b20f1a28886d4c4dbf",
+    "data\\research_intake_templates\\annotation_stdout.json": "12c70c7aac7ed844f0d215c55c26d9bb704428e94a97f075dc7dcd7ebe9be7f2",
+    "data\\research_intake_templates\\annotator_a.csv": "f1dbf822e5ea18207762ea010fb3b51a7e3fa4edf42d00ffb8b942d44a650161",
+    "data\\research_intake_templates\\annotator_b.csv": "f1dbf822e5ea18207762ea010fb3b51a7e3fa4edf42d00ffb8b942d44a650161",
+    "data\\research_intake_templates\\source_intake_report.json": "72a4fe9b594cc44ceb64f53a49127347a22930e8151544d5b3c2d1f432493677",
+    "data\\research_intake_templates\\source_receipts.json": "5b7cbffadaa9e61521b0f95a5a6a517e078c81f842ea4f860890ec4ebda670d2",
+    "data\\research_intake_templates\\source_receipts.schema.json": "d283833d8c47e2245d36be1784309cbc5e230c478e51549ae87463436c263963",
+    "data\\research_intake_templates\\source_stdout.json": "0a90150f887e0aff9c35bbb698b25a398ae1bb459c13f89c4352c9621a93827f"
+  },
+  "validation": {
+    "full_pytest_passed": 481,
+    "pytest_seconds": 47.73,
+    "warnings": "Two existing sparse-control SingularMatrixWarnings.",
+    "focused_intake_and_measurement_passed": 24,
+    "Ruff_new_Python_files": "passed",
+    "actual_checks": "Generated empty schema-valid drafts; both real CLI commands exited2 and reported explicit missing evidence; no-overwrite covered by tests.",
+    "gold_labels_created": 0,
+    "actual_source_coverage_evaluated": false,
+    "new_network_model_or_marketdata_calls": 0,
+    "local_link_targets": 213,
+    "Markdown_anchors": 34,
+    "external_URL_syntax_only": 101,
+    "external_HTTP": 0
+  },
+  "limits": "Human conduct,source truth,licence/legal permission and fiscal comparators are declared receipts needing independent review. Block-scoped intake cannot establish whole-filing recall. Complete structural packets only become ready for human review, never a run permit or scientific clearance."
+}
