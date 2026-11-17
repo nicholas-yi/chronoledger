@@ -282,7 +282,7 @@ Pylance's workspace-symbol request timed out in this session. Runtime fixture ch
 the existing regression suite and Ruff are the available verification evidence;
 no successful editor type-check is claimed.
 
-Final local validation on 2026-11-17, with numerical library thread counts set to one:
+Initial toolkit validation on 2026-11-17, with numerical library thread counts set to one:
 
 | Command | Observed result |
 |---|---|
@@ -293,3 +293,9 @@ The full suite includes 32 new reference-toolkit tests and the prior 597 regress
 No scientific power/coverage study, empirical return trial or cloud validation was
 performed. No real data, production ledger rows, registered designs, dependency pins,
 study holds or frozen historical outputs were changed. These local changes are not pushed.
+
+Under a later `synthetic_and_plan` approval, a [separately frozen known-truth stress run](QUANT_SYNTHETIC_RESULTS.md)
+completed all nine areas within 34.21 s and approximately 164.8 MiB combined peak RSS.
+Its pre-execution controller/software suite passed 637 tests. The results preserve
+the important negative/adverse controls and are not empirical performance evidence.
+The accompanying [empirical pilot](QUANT_EMPIRICAL_PILOT.md) remains blocked.
