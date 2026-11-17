@@ -1,0 +1,23 @@
+{
+  "check": "clock",
+  "URLs": [
+    "https://www.sec.gov/files/edgar/filermanual/efmvol2-c1.pdf",
+    "https://www.sec.gov/files/edgar/filermanual/efmvol2-aa.pdf",
+    "https://www.sec.gov/files/edgar/filermanual/archive/efmvol2-v60.pdf"
+  ],
+  "budget_start": 3250,
+  "ceiling": 34402,
+  "closure_max_new_requests": 10,
+  "source_provenance": {
+    "results\\closure_clock_specs_config_report.json": "79ea19a845bffe600e628cb39f729425dab13377a601d36841cce6d258a457a7"
+  },
+  "UA_SHA256": "63ef5180b7fe9476b95b0ae8f2bc02dd22ef34e6f7221c533a033de2c4267a52",
+  "protocol": "QPC>=0.667s,serial,30stotal,4MiBbody,no retries/redirects; any error/cap stops. Official docs only,no Archives/filings.",
+  "clock_certification": "No automatic qualification; review field-specific text and historical applicability separately.",
+  "source_SHA256": {
+    "scripts\\check_project_gaps.py": "c72705b21467557d08dac7d82e405b3d15d309acd70d4059a516910578f6e6b5",
+    "src\\asof\\local_model_runtime.py": "8ebe93daa7789fee0774d470ee33056c26a8335f513628ecab7e2fc4c64ae07d",
+    "src\\asof\\sec_documentation.py": "9b9ba544e85672133e1d3047eb00a0f961d992f203727e84f750d8636961574b"
+  },
+  "authorization": "User whole-project closure approval via ask_user,2026-11-17."
+}
