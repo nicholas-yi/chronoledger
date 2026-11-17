@@ -73,7 +73,9 @@ def validate_plan(plan: dict) -> None:
 class WorkerJob:
     """Limits only a newly owned worker; never changes the host or another process."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, memory_bytes: int = 1 << 30) -> None:
+        if isinstance(memory_bytes, bool) or not isinstance(memory_bytes, int) or memory_bytes <= 0:
+            raise ValueError("owned-worker memory limit must be a positive byte count")
         if os.name != "nt":
             raise OSError("this strict validation supervisor currently requires Windows")
         from ctypes import wintypes as w
@@ -121,7 +123,7 @@ class WorkerJob:
         limits = Extended()
         limits.basic.flags = 0x2000 | 0x100 | 0x200 | 0x8
         limits.basic.active = 1
-        limits.process_memory = limits.job_memory = 1 << 30
+        limits.process_memory = limits.job_memory = memory_bytes
         if not kernel.SetInformationJobObject(self.handle, 9, ctypes.byref(limits),
                                              ctypes.sizeof(limits)):
             error = ctypes.WinError(ctypes.get_last_error())
