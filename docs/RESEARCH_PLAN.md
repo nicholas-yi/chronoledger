@@ -29,6 +29,14 @@ reservations or their outcome-source windows. No KPI finding, human-gold accurac
 result is released. Parser repairs and conservative access guards were checked on invented
 fixtures only; no source screen was resumed.
 
+Under [D13](DEVIATIONS.md#d13-exploratory-kpi-disclosure-screen-crossed-reserved-calendars),
+a **separate development-only replacement** screened 50 of a new 64-case roster before its
+frozen cooperative wall stop. All pinned dates passed the [shared guard](DOCUMENT_SCOPE.md).
+The [execution/interpretation](KPI_DEVELOPMENT_STUDY.md) preserves one lexical backlog flag,
+but AI-assisted review found insufficient evidence of an issuer-specific KPI omission.
+There is no gold, novelty or alpha claim, no automatic continuation and no detector retuning.
+The old roster remains quarantined; D13/D6's H4/H6(a) holdout limitation is not cleared.
+
 ## How an idea becomes a result
 
 The project is developed with a small team of AI agents that each play one role: a research agent

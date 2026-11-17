@@ -24,6 +24,11 @@ envelope at the common SEC, derived-feature, KPI and financial-benchmark read bo
 Legacy inputs with unknown dates now stop before reading/fingerprinting source bodies.
 Any replacement KPI roster must be separately frozen from eligible 2012-2018
 cached sources; fewer than 30 eligible issuer triples means stop, not download.
+The [metadata-only count](../results/kpi_development_cache_inventory.json) found 843.
+The separately frozen [development replacement](KPI_DEVELOPMENT_STUDY.md) then stopped
+at its cooperative wall limit after 50/64 cases, with all 263 pinned date records guarded.
+Its aggregate receipt is exploratory only; it does not rehabilitate the superseded roster,
+establish market novelty/alpha or clear the permanent D13/D6 qualification.
 
 ### Approved full timestamp metadata check
 
