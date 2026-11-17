@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import multiprocessing
@@ -28,6 +29,30 @@ def test_prior_attempt_blocks_before_lineage_or_worker_launch(runner, tmp_path, 
     monkeypatch.setattr(runner, "frozen_lineage", lambda: pytest.fail("must not start"))
     with pytest.raises(FileExistsError, match="no retry"):
         runner.main([])
+
+
+def test_frozen_matching_allows_only_line_endings_and_keeps_raw_hashes(
+    runner, tmp_path, monkeypatch,
+) -> None:
+    monkeypatch.setattr(runner, "ROOT", tmp_path)
+    monkeypatch.setattr(runner, "FROZEN", ("module.py",))
+    committed = b"print('frozen')\n"
+    raw = committed.replace(b"\n", b"\r\n")
+    (tmp_path / "module.py").write_bytes(raw)
+
+    def git(arguments, **kwargs):
+        if "status" in arguments:
+            return b""
+        if "show" in arguments:
+            return committed
+        return b"frozen-commit\n"
+
+    monkeypatch.setattr(runner.subprocess, "check_output", git)
+    result = runner.frozen_lineage()
+    assert result["SHA256"]["module.py"] == hashlib.sha256(raw).hexdigest()
+    (tmp_path / "module.py").write_bytes(b"print('modified')\r\n")
+    with pytest.raises(RuntimeError, match="worktree bytes differ"):
+        runner.frozen_lineage()
 
 
 def test_unbounded_worker_cannot_start_without_controller(runner) -> None:

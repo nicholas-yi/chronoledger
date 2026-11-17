@@ -1,7 +1,14 @@
 {
   "label": "FROZEN INVENTED-DATA IMPLEMENTATION CHECK; NOT PROJECT OR TIMESTAMP INFERENCE",
   "version": "audit-cs-validation-v1",
-  "source_pin": "The commit containing this plan, verified against worktree bytes before launch",
+  "source_pin": "The commit containing this plan; only CRLF/LF differences allowed, with actual raw worktree SHA256 recorded before/after",
+  "preflight_correction": {
+    "previous_freeze": "1a0a9c5a59a34ed880036b2582cbdf24b34621ed",
+    "failure": "Git LF blobs differ from Windows CRLF worktree bytes only",
+    "attempt_marker_created": false,
+    "synthetic_paths_started": 0,
+    "design_or_budget_changed": false
+  },
   "source": "https://arxiv.org/html/2006.04347v4",
   "method": "Uniform full-support prior on integer population totals; hypergeometric PPR; union over unread sampled labels",
   "population": 80,

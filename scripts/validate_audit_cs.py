@@ -45,9 +45,14 @@ def frozen_lineage() -> dict:
     if git("status", "--porcelain").strip():
         raise RuntimeError("commit source and clear unrelated changes before the frozen run")
     for relative in FROZEN:
-        if git("show", f"HEAD:{relative}") != ROOT.joinpath(*relative.split("/")).read_bytes():
+        committed = git("show", f"HEAD:{relative}").replace(b"\r\n", b"\n")
+        local = ROOT.joinpath(*relative.split("/")).read_bytes().replace(b"\r\n", b"\n")
+        if committed != local:
             raise RuntimeError(f"worktree bytes differ from frozen HEAD: {relative}")
-    return {"git_commit": git("rev-parse", "HEAD").decode().strip(), "SHA256": hashes(FROZEN)}
+    return {
+        "git_commit": git("rev-parse", "HEAD").decode().strip(), "SHA256": hashes(FROZEN),
+        "matching_policy": "CRLF/LF equivalence only; SHA256 records actual raw worktree bytes",
+    }
 
 
 def validate_plan(plan: dict) -> None:

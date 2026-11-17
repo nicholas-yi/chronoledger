@@ -104,6 +104,12 @@ unreported partial paths are unknown, not successful replicates. This harness ha
 model, pricing or ledger-write code. It hashes the existing ledger, A2 reports and SEC counter
 before/after to detect changes; it does not evaluate them.
 
+Source matching permits only Git LF versus Windows CRLF line-ending equivalence; raw-byte
+SHA256 values are retained and checked again after computation. The initial `1a0a9c5`
+preflight rejected that line-ending difference before any marker, worker or synthetic path.
+The [plan](../results/audit_cs_validation_plan.json) preserves that zero-draw failure.
+Correcting preflight required a new source freeze, not deletion of an attempt receipt.
+
 If a resource/worker/provenance check fails, keep the receipt, inspect the cause and obtain
 a new decision before another attempt. Do not remove the marker to make a run look clean.
 The historical A2 CP results and Eastern-clock qualification limits remain unchanged.
