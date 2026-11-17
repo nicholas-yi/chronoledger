@@ -7,6 +7,9 @@ outcome dataset was an input. Reserved-source overlaps are disclosed below; this
 certify exclusion of all outcome-bearing material. Existing holds and failed results stand.
 
 **STOPPED AND QUARANTINED.** The first screen stopped on an HTML-comment parser error.
+**The `a9d788f` roster is superseded and must not be used.** The original frozen
+plan/manifest and failed receipts remain unchanged; see
+[D13](DEVIATIONS.md#d13-exploratory-kpi-disclosure-screen-crossed-reserved-calendars).
 A subsequent metadata-only review found that the pinned 2021-2024 disclosure roster
 overlaps the separately reserved H4/H6(a) calendar even though it predates the return
 holdout. No cached-case evidence may be used or published pending Lead/owner review.

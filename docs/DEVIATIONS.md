@@ -306,3 +306,43 @@ Lead-D2/D4-D9 stay open.
 
 Equations, source pins, the pre-execution allocation and its limits are in the
 [Batch E contract](DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract).
+
+## D13: exploratory KPI disclosure screen crossed reserved calendars
+
+- **Logged:** 2026-11-17, **after** the incident, under the owner's CL-KPI-D13
+  decision. This records exposure and a prospective access correction, not a
+  new hypothesis, a successful experiment or retrospective holdout clearance.
+- **Bug:** the exploratory cached KPI-omission screen, frozen at `a9d788f`,
+  selected its roster without a reserved-window eligibility filter. Being
+  before the D1 return holdout did not exclude H4/H6(a) validation, holdout or
+  outcome-source windows. The `a9d788f` roster is **superseded, not to be used**;
+  its original plan, manifest, commits and stopped receipts remain historical.
+- **Exposure:** 4-6 raw 10-K bodies were decompressed/parsed inside the
+  H4/H6(a) reserved calendar, 2022-01-01 through 2025-06-30. Three reads are
+  checkpoint-confirmed; the parser crash leaves the exact additional resource
+  inside the next case unknown. Metadata-only annual and 8-K Item rows from
+  July 2021 through June 2024 were loaded. Preparation also fingerprinted all
+  192 pinned compressed annual cache objects, distinct from the smaller
+  decompressed-body count. None of the 93 pinned 8-K bodies was cached/read.
+- **Not extracted or seen:** no fundamental values, outcome labels or joins,
+  prices or returns were extracted or evaluated; no human viewed filing text.
+  Zero usable metric cases were produced. Raw filings and Item metadata can
+  nevertheless carry outcome-bearing content, so this is not a claim that no
+  reserved source material was accessed. The old static `holdout_opened=false`
+  field is not an exposure audit.
+- **Quarantine:** original outputs and the metadata-only exposure audit remain
+  under ignored `data\kpi_omission_v1`; the stopped summary was removed from
+  untracked `results`, not published as scientific evidence. No source was
+  reprocessed after the stop and no trial-ledger row was appended.
+- **Correction:** a shared, mandatory reserved-window eligibility guard must
+  run before every document-reading study accesses a body. Acceptance/knowledge
+  dates, period ends and used context must all pass; unknown/unparseable dates
+  fail closed. Parser repairs and guard verification use invented fixtures.
+  Any rescoped KPI execution requires development-only eligibility, a new
+  frozen roster and the separate minimum-cache-size decision.
+- **Evidence and consequence:** the retained private scope audit distinguishes
+  compressed-byte fingerprints, confirmed body reads, possible additional
+  reads, next-year source relationships and H6 follow-up envelopes. This adds
+  to the existing D6 limitation: **no future H4/H6(a) holdout evaluation may be
+  described as untouched**. Hypotheses, outcomes, registered windows and
+  thresholds are unchanged. No ledger row, holdout release, push or tag follows.

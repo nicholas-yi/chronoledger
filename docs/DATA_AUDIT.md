@@ -6,6 +6,22 @@ and [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-
 Older rebuild receipts and the frozen preregistration describe historical claims,
 not current source-clock certification. The registered first-close rule is unchanged.
 
+### D13: KPI disclosure-source incident
+
+The [retrospective D13 disclosure](DEVIATIONS.md#d13-exploratory-kpi-disclosure-screen-crossed-reserved-calendars)
+records the exploratory `a9d788f` screen's missing reserved-window filter.
+It read 4-6 raw annual bodies inside the H4/H6(a) reserved calendar and
+July 2021-June 2024 filing/Item metadata; no fundamental values, labels/joins,
+prices or returns were extracted, no human viewed filing text and no usable
+metric case resulted. Compressed-cache fingerprints are separately disclosed.
+The roster is superseded/not to be used; stopped outputs and the exposure audit
+remain in ignored `data\kpi_omission_v1`, with no trial-ledger append.
+This adds to D6: future H4/H6(a) holdout work cannot be called untouched.
+A mandatory shared pre-body eligibility check must cover all reserved windows,
+follow-up sources, period ends and used context, failing closed on unknown dates.
+Any replacement KPI roster must be separately frozen from eligible 2012-2018
+cached sources; fewer than 30 eligible issuer triples means stop, not download.
+
 ### Approved full timestamp metadata check
 
 The user approved the [exact full-check proposal](../results/timestamp_full_plan.json)
