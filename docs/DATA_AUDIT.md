@@ -179,6 +179,10 @@ Compute used four threads; the backend separately reported 15 HTTP service threa
 is not a hard four-total-OS-thread quota. Active KV still used 512 MiB.
 This closes the missing bounded smoke validation, not long-report memory safety, reader
 accuracy, the old memory cause or an OS-enforced quota. Shared 11434 was untouched.
+Subsequent startup-failure hardening requires the operator's root creation FILETIME
+(`--root-created-filetime`) before any smoke call, so a failed initial native sample
+still cleans the verified root. That extra error boundary was tested with mocks,
+not another model run; the original three-call receipt remains unchanged.
 
 ### Official acceptance-clock documentation review
 

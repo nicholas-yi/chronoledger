@@ -95,3 +95,29 @@ def test_large_cap_cannot_escape_the_one_approved_manual(tmp_path, monkeypatch):
                       tmp_path / "budget", tmp_path / "receipt", tmp_path / "cache",
                       read_cap_bytes=32 << 20)
     assert m.StrictSecDocumentation.supported_read_caps == (65536, 4 << 20)
+
+
+def test_native_startup_failure_still_cleans_the_verified_owned_root(tmp_path, monkeypatch):
+    m = module(monkeypatch)
+    monkeypatch.setattr(m, "verify_runtime_receipt", lambda *args: None)
+    cleaned = []
+
+    async def fail(*args):
+        raise OSError("invented native sampling startup failure")
+
+    async def cleanup(records):
+        cleaned.extend(records)
+
+    monkeypatch.setattr(m, "_smoke_initialized", fail)
+    monkeypatch.setattr(m, "stop_owned", cleanup)
+    with pytest.raises(OSError, match="sampling startup"):
+        asyncio.run(m.smoke_check({"policy": {}, "operator_root_creation_filetime": 900},
+                                 tmp_path, 123, tmp_path / "receipt"))
+    assert cleaned == [{"pid": 123, "parent_pid": 0, "creation_filetime": 900}]
+
+
+def test_missing_root_creation_identity_refuses_before_native_or_model_work(tmp_path, monkeypatch):
+    m = module(monkeypatch)
+    monkeypatch.setattr(m, "verify_runtime_receipt", lambda *args: None)
+    with pytest.raises(ValueError, match="creation FILETIME"):
+        asyncio.run(m.smoke_check({"policy": {}}, tmp_path, 123, tmp_path / "receipt"))

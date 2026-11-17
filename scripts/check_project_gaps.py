@@ -200,7 +200,7 @@ async def stop_owned(records: list[dict]) -> None:
             raise RuntimeError(f"owned cleanup failed:{error.decode(errors='replace')}")
 
 
-async def smoke_check(config: dict, directory: Path, pid: int, receipt: Path) -> dict:
+async def _smoke_initialized(config: dict, directory: Path, pid: int, receipt: Path) -> dict:
     verify_runtime_receipt(receipt, pid, config["policy"])
     context = {"phase": "runtime_smoke", "call_id": "readiness"}
     memory = OwnedMemory(pid, telemetry_path=directory / "per_PID_memory.jsonl", context=context)
@@ -287,6 +287,18 @@ async def smoke_check(config: dict, directory: Path, pid: int, receipt: Path) ->
     return result
 
 
+async def smoke_check(config: dict, directory: Path, pid: int, receipt: Path) -> dict:
+    verify_runtime_receipt(receipt, pid, config["policy"])
+    created = config.get("operator_root_creation_filetime")
+    if type(created) is not int or created <= 0:
+        raise ValueError("operator-verified root creation FILETIME required before smoke calls")
+    try:
+        return await _smoke_initialized(config, directory, pid, receipt)
+    finally:
+        # Also stop the verified root if native sampling fails before its first snapshot.
+        await stop_owned([{"pid": pid, "parent_pid": 0, "creation_filetime": created}])
+
+
 async def run(args) -> None:
     config = json.loads(args.config.read_bytes())
     common.verify(config["source_SHA256"])
@@ -310,7 +322,9 @@ async def run(args) -> None:
         else:
             if args.pid is None or args.receipt is None:
                 raise ValueError("explicit owned server PID/receipt required")
-            result = await smoke_check(config, directory, args.pid, args.receipt)
+            result = await smoke_check({
+                **config, "operator_root_creation_filetime": args.root_created_filetime,
+            }, directory, args.pid, args.receipt)
     except (RuntimeError, ValueError, OSError, httpx.HTTPError) as exc:
         result.update(status="stopped_final", stop_reason=str(exc))
     finally:
@@ -333,6 +347,8 @@ if __name__ == "__main__":
     parser.add_argument("--url", action="append")
     parser.add_argument("--pid", type=int)
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument("--root-created-filetime", type=int,
+                        help="Get-Process.StartTime.ToUniversalTime().ToFileTimeUtc() for owned root")
     parser.add_argument("--large-manual", action="store_true")
     args = parser.parse_args()
     if args.phase == "freeze":

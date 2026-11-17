@@ -25,6 +25,11 @@
     {
       "issue": "Runtime cache-disable inheritance and native process telemetry had only mocked evidence.",
       "resolution": "Bounded three-call live check completed with native cache-disable log, real per-PID samples and verified owned cleanup. This closes the missing smoke validation, not long-report memory safety or model measurement quality."
+    },
+    {
+      "issue": "A native sampling failure before the first snapshot could bypass the harness's normal cleanup.",
+      "resolution": "A future smoke requires operator-verified root creation FILETIME and guarantees verified-root cleanup across initialization failure. Two additional regressions cover startup failure and refusal without identity.",
+      "provenance": "This post-smoke hardening is unit-tested, not another live model test. The three-call user quota was not repeated; the original live receipt/source revision remains unchanged."
     }
   ],
   "runtime_live_check": {
@@ -158,8 +163,8 @@
     }
   ],
   "validation": {
-    "final_code_full_pytest_passed": 459,
-    "pytest_seconds": 50.61,
+    "final_code_full_pytest_passed": 461,
+    "pytest_seconds": 49.73,
     "warnings": "Two existing sparse-control SingularMatrixWarnings.",
     "focused_final_cap_tests": 34,
     "new_and_changed_operational_files_Ruff": "passed",

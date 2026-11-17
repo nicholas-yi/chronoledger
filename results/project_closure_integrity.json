@@ -74,5 +74,17 @@
   },
   "counter": 3254,
   "ceiling": 34402,
-  "ledger": 74
+  "ledger": 74,
+  "source_revision_scope": "Recorded operational checks; later startup-cleanup hardening was tested offline only,without extra model calls.",
+  "post_check_hardening": {
+    "full_suite_passed": 461,
+    "pytest_seconds": 49.73,
+    "extra_model_calls": 0,
+    "current_source_SHA256": {
+      "scripts\\check_project_gaps.py": "10e6e0530c2a7ba6b84ee110b15741a02dc4ca0403e072f7b529fe97022ba1d4",
+      "tests\\test_project_gap_checks.py": "b9240ccd9598fa050a3f3c59fc5a3522df89c9449b86bdf1b24ad3f5868e60f5",
+      "src\\asof\\referee.py": "9dd9344427fb4276f065c2c175491eca24503bed3ad26d771df5c86b0a472276",
+      "src\\asof\\sec_documentation.py": "afc77cc03cf14229fbc97f6a7e5c6572de6d4302c2c44be413fd0e2c13ab334d"
+    }
+  }
 }
