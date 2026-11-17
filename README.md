@@ -344,10 +344,10 @@ groups, including filings where the two sources agree
 - **Limits.** The check reads header times as Eastern time, which SEC's documentation doesn't
   state. Eight filings per group can't certify all 21,502.
 
-The [amended check](results/timestamp_full_a1_review.json) matched the API on all 108 clock
-disagreements under the Eastern-time assumption (37 bulk records five hours late, 71 four hours
-late), then stopped on a timeout; 1,264 of 16,921 header/index comparisons are complete, but actual
-verified assignment changes remain undetermined.
+The [random-order continuation](results/timestamp_full_a2_review.json) stopped after 50 of 3,000
+new filings; combined with the earlier batch, it found one header disagreement under the Eastern-time
+assumption in 314 readable filings where API and bulk agree (one-sided 95% upper bound 1.50%),
+or a conservative 91.26% upper bound if all 2,955 unread or unvisited selected cases count as errors.
 
 ### Are the significance tests honest at this sample size?
 

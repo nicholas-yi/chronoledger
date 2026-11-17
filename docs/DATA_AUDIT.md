@@ -130,6 +130,24 @@ The wall cap is four hours; ceiling 34,402, starting usage 3,137, combined 4 GiB
 500-resource checkpoints, sleep stop and no automatic continuation remain.
 No repair, price/return use, model run or ledger row is authorized.
 
+**A2 final stop, not the planned sample completed.**
+[The review](../results/timestamp_full_a2_review.json) records a second HTTP 503
+after the allowed retry: 109 attempts, 100 resources and 50 of 3,000 new accessions.
+Eight 600-second waits and one 60-second timeout wait totalled 4,860.300138 QPC
+seconds; the first eight retries succeeded, the ninth returned 503 and stopped.
+All 108 dispatch gaps met 0.667 seconds (minimum 0.668977, median 0.682458).
+Neither prior failed URL was reached; no original completed resource was re-fetched.
+
+The combined sample has 320 visited, 314 readable internally agreeing accessions,
+and one conditional disagreement: both stored clocks are five hours later than
+the header-derived instant under Eastern, with header/index agreement. Complete-case
+one-sided 95% CP upper bounds are 1/304 -> 1.55% for agreement-sensitive, 0/10 ->
+25.89% for boundary, and 1/314 -> 1.50% overall. The all-selected sensitivity
+counts 2,955 unread/unvisited eligible cases as errors: 2,956/3,269 yields a
+91.26% upper bound. These descriptive conditional bounds do not certify selectively
+unread cases, a sequentially stopped population or historical UTC. Actual verified
+assignment changes remain undetermined. Counter 3,246/34,402; ledger 74; no resume.
+
 ### Future local-reader memory safeguards (not run)
 
 The strict-format experiments are stopped; the default local request helper is the existing

@@ -1,0 +1,446 @@
+{
+  "status": "stopped_final",
+  "stop_reason": "HTTP_503",
+  "amendment_commit": "cf65410e871b4eb4411f00d5b8625d174c5b0cf5",
+  "config_SHA256": "c8194b3dcb5becab95f37dcaccc11ccf426442c3baa70c2f2ffeabd66bfb37f6",
+  "predeclared_conditional_error_bounds": {
+    "predeclared": true,
+    "confidence": 0.95,
+    "method": "exact one-sided Clopper-Pearson",
+    "population": "All internally agreeing random-rest strata in the fixed A1+A2 sample; exclude108clock/256CIK priority strata and original sorted-prefix cases.",
+    "selected_accessions_all_strata": 3270,
+    "visited_accessions_all_strata": 320,
+    "excluded_internally_disagreeing_by_pool": {
+      "candidate_calendar_boundary_or_clock_issue": 1
+    },
+    "by_pool_and_overall": {
+      "clock_agreement_sensitive": {
+        "selected_n": 3140,
+        "visited_n": 310,
+        "complete_n": 304,
+        "k": 1,
+        "visited_unread_n": 6,
+        "not_visited_n": 2830,
+        "complete_case_one_sided95_CP_upper": 0.015509056812495217,
+        "all_selected_unknown_n": 2836,
+        "all_selected_unread_as_errors_k": 2837,
+        "all_selected_unread_as_errors_one_sided95_CP_upper": 0.9120488746433932
+      },
+      "candidate_calendar_boundary_or_clock_issue": {
+        "selected_n": 129,
+        "visited_n": 10,
+        "complete_n": 10,
+        "k": 0,
+        "visited_unread_n": 0,
+        "not_visited_n": 119,
+        "complete_case_one_sided95_CP_upper": 0.2588655508930522,
+        "all_selected_unknown_n": 119,
+        "all_selected_unread_as_errors_k": 119,
+        "all_selected_unread_as_errors_one_sided95_CP_upper": 0.9573417114825773
+      },
+      "overall": {
+        "selected_n": 3269,
+        "visited_n": 320,
+        "complete_n": 314,
+        "k": 1,
+        "visited_unread_n": 6,
+        "not_visited_n": 2949,
+        "complete_case_one_sided95_CP_upper": 0.015018080598083305,
+        "all_selected_unknown_n": 2955,
+        "all_selected_unread_as_errors_k": 2956,
+        "all_selected_unread_as_errors_one_sided95_CP_upper": 0.9125999237756804
+      }
+    },
+    "limits": "Conditional on the Eastern assumption, original parsing and the remaining random-rest order, not all EDGAR or the excluded cohort. Complete-case bounds condition on readability and need not bound selectively unread cases. The separate conservative scenario counts EVERY unread selected case, including not-yet-visited cases, as an error. Ordinary CP is not an always-valid sequential confidence bound under error-dependent stopping. Neither bound certifies historical UTC or financial effects."
+  },
+  "conditional_assignments": {
+    "qualified_assignment_changes": null,
+    "qualified_accession_denominator": 0,
+    "reason": "No historically qualified field clock; actual verified changes cannot be established.",
+    "conditional_diagnostics_only": {
+      "stored_pair_versus_conditional": {
+        "conditional_accessions": 1311,
+        "UTC_month_changed": 0,
+        "first_close_unassigned": 0,
+        "first_close_comparable": 1311,
+        "first_registered_close_changed": 0,
+        "eligibility_record_month_instances_changed": 0,
+        "eligibility_accessions_changed": 0,
+        "latest_filing_firm_months_in_scope": 39940,
+        "latest_filing_firm_months_unresolved": 37411,
+        "latest_filing_firm_months_comparable": 2529,
+        "latest_filing_firm_months_changed": 0
+      },
+      "stored_bulk_versus_conditional": {
+        "conditional_accessions": 1311,
+        "UTC_month_changed": 0,
+        "first_close_unassigned": 0,
+        "first_close_comparable": 1311,
+        "first_registered_close_changed": 30,
+        "eligibility_record_month_instances_changed": 1,
+        "eligibility_accessions_changed": 1,
+        "latest_filing_firm_months_in_scope": 39940,
+        "latest_filing_firm_months_unresolved": 37411,
+        "latest_filing_firm_months_comparable": 2529,
+        "latest_filing_firm_months_changed": 1
+      }
+    },
+    "limits": "Eastern-clock assumption and cached nominal16:00ET calendar only. Unaudited competitors are held unchanged in each baseline; incomplete audited competitor contexts are unresolved. Stable source order breaks equal-time ties. No security remaps, signal values, prices, returns or portfolio results."
+  },
+  "combined_pool_summary": {
+    "CIK_disagreement": {
+      "accessions": 256,
+      "agreement_classes": {
+        "both_match_assumption": 204,
+        "unknown_header": 7,
+        "pair_only_matches_assumption": 44,
+        "index_unread_or_conflicting:both_match_assumption": 1
+      },
+      "unique_conditional_UTC": 248
+    },
+    "candidate_calendar_boundary_or_clock_issue": {
+      "accessions": 676,
+      "agreement_classes": {
+        "both_match_assumption": 31,
+        "unknown_header": 645
+      },
+      "unique_conditional_UTC": 31
+    },
+    "clock_agreement_sensitive": {
+      "accessions": 15881,
+      "agreement_classes": {
+        "both_match_assumption": 923,
+        "unknown_header": 14954,
+        "index_unread_or_conflicting:both_match_assumption": 3,
+        "neither_matches_assumption": 1
+      },
+      "unique_conditional_UTC": 924
+    },
+    "clock_disagreement_summer": {
+      "accessions": 71,
+      "agreement_classes": {
+        "pair_only_matches_assumption": 71
+      },
+      "unique_conditional_UTC": 71
+    },
+    "clock_disagreement_winter": {
+      "accessions": 37,
+      "agreement_classes": {
+        "pair_only_matches_assumption": 37
+      },
+      "unique_conditional_UTC": 37
+    }
+  },
+  "qualified_UTC": 0,
+  "unresolved_accessions": 16921,
+  "unique_conditional_UTC": 1311,
+  "A2_attempts": 109,
+  "A2_HTTP_status_counts": {
+    "200": 99,
+    "503": 9,
+    "None": 1
+  },
+  "A2_retries_charged": 9,
+  "A2_waits_started": 9,
+  "A2_status_waits": 8,
+  "cumulative_wait_seconds": 4860.300137500279,
+  "every_wait_and_retry": [
+    {
+      "event": "wait_started",
+      "wait_number": 1,
+      "trigger": "HTTP_503",
+      "wait_seconds": 600,
+      "failed_attempt": 3141,
+      "UTC": "2026-11-16T22:28:55.279014+00:00",
+      "perf_counter": 2570143.2651499,
+      "URL_SHA256": "52720ce073d749dde5ecd19e5f83e570beb5c907b28ce0b465dd077e3c081606"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 1,
+      "trigger": "HTTP_503",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0076741003431,
+      "cumulative_wait_seconds": 600.0076741003431,
+      "UTC": "2026-11-16T22:38:55.291308+00:00",
+      "perf_counter": 2570743.2728369,
+      "URL_SHA256": "52720ce073d749dde5ecd19e5f83e570beb5c907b28ce0b465dd077e3c081606"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_503",
+      "wait_number": 1,
+      "retry_attempt": 3142,
+      "UTC": "2026-11-16T22:38:55.318864+00:00",
+      "perf_counter": 2570743.3003752,
+      "URL_SHA256": "52720ce073d749dde5ecd19e5f83e570beb5c907b28ce0b465dd077e3c081606"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 2,
+      "trigger": "HTTP_503",
+      "wait_seconds": 600,
+      "failed_attempt": 3144,
+      "UTC": "2026-11-16T22:39:04.956787+00:00",
+      "perf_counter": 2570752.9376796,
+      "URL_SHA256": "2e736a2fe77af8002340aae09786b73b77510ca2f06c9ad58189e753e6488666"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 2,
+      "trigger": "HTTP_503",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0033141998574,
+      "cumulative_wait_seconds": 1200.0109883002006,
+      "UTC": "2026-11-16T22:49:04.963924+00:00",
+      "perf_counter": 2571352.9410062,
+      "URL_SHA256": "2e736a2fe77af8002340aae09786b73b77510ca2f06c9ad58189e753e6488666"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_503",
+      "wait_number": 2,
+      "retry_attempt": 3145,
+      "UTC": "2026-11-16T22:49:04.989809+00:00",
+      "perf_counter": 2571352.9678867,
+      "URL_SHA256": "2e736a2fe77af8002340aae09786b73b77510ca2f06c9ad58189e753e6488666"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 3,
+      "trigger": "transport_timeout",
+      "wait_seconds": 60,
+      "failed_attempt": 3157,
+      "UTC": "2026-11-16T22:49:42.774163+00:00",
+      "perf_counter": 2571390.7512105,
+      "URL_SHA256": "91c5872fa3a07eaf78a5ef6430e328ae9b4953ebf6a17054dd838d8cdc6fbb2f"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 3,
+      "trigger": "transport_timeout",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00443290034309,
+      "cumulative_wait_seconds": 1260.0154212005436,
+      "UTC": "2026-11-16T22:50:42.778953+00:00",
+      "perf_counter": 2571450.7556496,
+      "URL_SHA256": "91c5872fa3a07eaf78a5ef6430e328ae9b4953ebf6a17054dd838d8cdc6fbb2f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "transport_timeout",
+      "wait_number": 3,
+      "retry_attempt": 3158,
+      "UTC": "2026-11-16T22:50:42.823674+00:00",
+      "perf_counter": 2571450.7998644,
+      "URL_SHA256": "91c5872fa3a07eaf78a5ef6430e328ae9b4953ebf6a17054dd838d8cdc6fbb2f"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 4,
+      "trigger": "HTTP_503",
+      "wait_seconds": 600,
+      "failed_attempt": 3160,
+      "UTC": "2026-11-16T22:51:13.817925+00:00",
+      "perf_counter": 2571481.7948354,
+      "URL_SHA256": "7d10fa5454c30906426e61f3ab8c2f31eb9af0d7780b56cd14ce3577560c7dfe"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 4,
+      "trigger": "HTTP_503",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.2264905003831,
+      "cumulative_wait_seconds": 1860.2419117009267,
+      "UTC": "2026-11-16T23:01:14.048673+00:00",
+      "perf_counter": 2572082.0213409,
+      "URL_SHA256": "7d10fa5454c30906426e61f3ab8c2f31eb9af0d7780b56cd14ce3577560c7dfe"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_503",
+      "wait_number": 4,
+      "retry_attempt": 3161,
+      "UTC": "2026-11-16T23:01:15.008161+00:00",
+      "perf_counter": 2572082.9808739,
+      "URL_SHA256": "7d10fa5454c30906426e61f3ab8c2f31eb9af0d7780b56cd14ce3577560c7dfe"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 5,
+      "trigger": "HTTP_503",
+      "wait_seconds": 600,
+      "failed_attempt": 3174,
+      "UTC": "2026-11-16T23:01:39.712756+00:00",
+      "perf_counter": 2572107.6848919,
+      "URL_SHA256": "96f76c129bc9f8d649334ff72ac2b97027beb8574f17eb468786d3efac3715cd"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 5,
+      "trigger": "HTTP_503",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0416454002261,
+      "cumulative_wait_seconds": 2460.283557101153,
+      "UTC": "2026-11-16T23:11:39.758129+00:00",
+      "perf_counter": 2572707.726551,
+      "URL_SHA256": "96f76c129bc9f8d649334ff72ac2b97027beb8574f17eb468786d3efac3715cd"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_503",
+      "wait_number": 5,
+      "retry_attempt": 3175,
+      "UTC": "2026-11-16T23:11:39.953166+00:00",
+      "perf_counter": 2572707.9215491,
+      "URL_SHA256": "96f76c129bc9f8d649334ff72ac2b97027beb8574f17eb468786d3efac3715cd"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 6,
+      "trigger": "HTTP_503",
+      "wait_seconds": 600,
+      "failed_attempt": 3187,
+      "UTC": "2026-11-16T23:12:04.734888+00:00",
+      "perf_counter": 2572732.7037039,
+      "URL_SHA256": "ecd261f2907a27d83ac1c81c217ae6935df87053dac59bcecb44b41e7c04db58"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 6,
+      "trigger": "HTTP_503",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0025019999593,
+      "cumulative_wait_seconds": 3060.286059101112,
+      "UTC": "2026-11-16T23:22:04.740566+00:00",
+      "perf_counter": 2573332.706211,
+      "URL_SHA256": "ecd261f2907a27d83ac1c81c217ae6935df87053dac59bcecb44b41e7c04db58"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_503",
+      "wait_number": 6,
+      "retry_attempt": 3188,
+      "UTC": "2026-11-16T23:22:04.862928+00:00",
+      "perf_counter": 2573332.8287763,
+      "URL_SHA256": "ecd261f2907a27d83ac1c81c217ae6935df87053dac59bcecb44b41e7c04db58"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 7,
+      "trigger": "HTTP_503",
+      "wait_seconds": 600,
+      "failed_attempt": 3217,
+      "UTC": "2026-11-16T23:22:34.069436+00:00",
+      "perf_counter": 2573362.036001,
+      "URL_SHA256": "3afe4f1b76713959f46ebba6220a76ea7cb739a20b67f48ec966d64c77e091d2"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 7,
+      "trigger": "HTTP_503",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0052294996567,
+      "cumulative_wait_seconds": 3660.291288600769,
+      "UTC": "2026-11-16T23:32:34.078047+00:00",
+      "perf_counter": 2573962.041246,
+      "URL_SHA256": "3afe4f1b76713959f46ebba6220a76ea7cb739a20b67f48ec966d64c77e091d2"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_503",
+      "wait_number": 7,
+      "retry_attempt": 3218,
+      "UTC": "2026-11-16T23:32:34.133857+00:00",
+      "perf_counter": 2573962.0964869,
+      "URL_SHA256": "3afe4f1b76713959f46ebba6220a76ea7cb739a20b67f48ec966d64c77e091d2"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 8,
+      "trigger": "HTTP_503",
+      "wait_seconds": 600,
+      "failed_attempt": 3227,
+      "UTC": "2026-11-16T23:32:49.250378+00:00",
+      "perf_counter": 2573977.214264,
+      "URL_SHA256": "132c97c4239adac960bf8e1a182ddfa0e25b27833b2ea7491448ab072d8b1e5e"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 8,
+      "trigger": "HTTP_503",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0075943996198,
+      "cumulative_wait_seconds": 4260.298883000389,
+      "UTC": "2026-11-16T23:42:49.261190+00:00",
+      "perf_counter": 2574577.2218625,
+      "URL_SHA256": "132c97c4239adac960bf8e1a182ddfa0e25b27833b2ea7491448ab072d8b1e5e"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_503",
+      "wait_number": 8,
+      "retry_attempt": 3228,
+      "UTC": "2026-11-16T23:42:49.301048+00:00",
+      "perf_counter": 2574577.2626315,
+      "URL_SHA256": "132c97c4239adac960bf8e1a182ddfa0e25b27833b2ea7491448ab072d8b1e5e"
+    },
+    {
+      "event": "wait_started",
+      "wait_number": 9,
+      "trigger": "HTTP_503",
+      "wait_seconds": 600,
+      "failed_attempt": 3245,
+      "UTC": "2026-11-16T23:43:04.858095+00:00",
+      "perf_counter": 2574592.8179261,
+      "URL_SHA256": "9a39624c9aaa2bd761e74881127caea7ea73aaa97c7d885dc5cc2d959e5f0ac6"
+    },
+    {
+      "event": "wait_finished",
+      "wait_number": 9,
+      "trigger": "HTTP_503",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0012544998899,
+      "cumulative_wait_seconds": 4860.300137500279,
+      "UTC": "2026-11-16T23:53:04.861546+00:00",
+      "perf_counter": 2575192.8191858,
+      "URL_SHA256": "9a39624c9aaa2bd761e74881127caea7ea73aaa97c7d885dc5cc2d959e5f0ac6"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_503",
+      "wait_number": 9,
+      "retry_attempt": 3246,
+      "UTC": "2026-11-16T23:53:04.933567+00:00",
+      "perf_counter": 2575192.8912922,
+      "URL_SHA256": "9a39624c9aaa2bd761e74881127caea7ea73aaa97c7d885dc5cc2d959e5f0ac6"
+    }
+  ],
+  "counter": {
+    "actual_HTTP_attempts": 3246,
+    "ceiling": 34402
+  },
+  "A2_resource_outcomes": 100,
+  "A2_order_resources_not_processed": 5900,
+  "effective_unique_resource_outcomes": 3169,
+  "resources_never_attempted": 31185,
+  "QPC_rate": {
+    "sends": 109,
+    "minimum_gap_seconds": 0.6689769998192787,
+    "median_gap_seconds": 0.6824582500848919,
+    "maximum_gap_seconds": 634.1363133997656,
+    "all_observed_gaps_meet0_667": true
+  },
+  "private_hash_manifest": {
+    "data\\timestamp_full_a2\\frozen_3000_order.jsonl": "f421ec1d585dafc1878f1201cfd136c46b4239fe5306407867872c20d912fb9a",
+    "data\\timestamp_full_a2\\frozen_combined_sample.jsonl": "e18129004deae2bb171eee88cd60143d34fd6e0c4b64cebe2d07622cdbe34f34",
+    "data\\timestamp_full_a2\\resource_outcomes.jsonl": "45719b3b6ae31c02e14bfc307c35cbf514f095e4fac4961289d1e80258b37151",
+    "data\\timestamp_full_a2\\requests.jsonl": "b709987246f8b3c050faf5ac5f27079b5aa146632551ca339f779805542b4d62",
+    "data\\timestamp_full_a2\\waits_and_retries.jsonl": "72006537df8fd56896776a49ce5272165a78fb5e82d25a3043b4ec7ac3e88abb",
+    "data\\timestamp_full_a2\\checkpoint.json": "d8c1c39ec1029b3da431db2f185fa47e4405548e778fc508b3bd39f168c105fa",
+    "data\\timestamp_full_a2\\combined_per_accession.jsonl": "d901c7a01d68f2532755fbb4d7625e3d8c1bae02a811041e71dcaebf34a9ad60",
+    "data\\timestamp_full_a2\\raw_hashes.jsonl": "282b9ddfdd0cd268fc17e6d8da36365124c824fef156499724237f21414586d1",
+    "data\\timestamp_full_a2\\receipt_hashes.jsonl": "f803f0b54605ddbc3eb37cf865df0148f374bc99cd1c2e57fc43b6250e68d3a3"
+  },
+  "limits": "Conditional Eastern assumption and original metadata/calendar only. No historically verified UTC or actual assignment-change certification. All ancestor records preserved; no completed resource refetch, repair, backtest, price/return/feature value, sealed observation or ledger row."
+}

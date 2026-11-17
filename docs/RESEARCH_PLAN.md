@@ -76,7 +76,7 @@ launch workers or enforce host isolation. The planned container remains unprovis
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | The [amended check](../results/timestamp_full_a1_review.json) completed conditional comparisons for all 108 designated clock disagreements and 248 of 256 CIK disagreements, then stopped on a timeout; another continuation needs a separate decision | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
+| Filing timestamps | The [bounded A2 continuation](../results/timestamp_full_a2_review.json) stopped after 50 of 3,000 new accessions; review both the complete-case bound and the much wider unread-case sensitivity before any new decision | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Use the [draft annotation guide](H1_DESIGN.md#annotation-guide-h1-claim-guide-draft-01) for two independent human annotations of 60 filing pairs and adjudication | Measured precision and recall on real text, with coverage, agreement and company-separated audit results |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
@@ -92,16 +92,22 @@ cache hits. The user approved at most 34,262 new requests and a project ceiling 
 The [original run](../results/timestamp_full_review.json) stopped on HTTP 503 at total usage
 1,421. Its coarse-clock spacing was a precision miss against our own protocol, not a SEC
 fair-access breach. A separately approved [A1 amendment](../results/timestamp_full_a1_config.json)
-kept the population and parsing unchanged, used high-resolution pacing, and prioritized the
-108 clock and 256 CIK disagreements before a seeded random remainder. It made 1,716 attempts,
-including two successful retries after ten-minute waits, then stopped on a transport timeout;
-total usage is now 3,137 of 34,402. All 1,715 measured QPC gaps exceeded 0.667 seconds.
-The [combined review](../results/timestamp_full_a1_review.json) has 1,264 conditional comparisons:
-no API-side assignment changes, but 30 first-close and one latest-filing choice change versus
-bulk times on the original nominal calendar. These are not verified historical UTC corrections.
-The documentation stage remains skipped for lack of an exact qualifying URL; clock authority,
-filing identity and calendar qualification remain unresolved. Neither the 12-hour nor 4 GiB limit
-was reached. No further continuation, data repair or backtest rerun follows without another decision.
+kept the population and parsing unchanged, used high-resolution pacing, and checked all
+108 clock disagreements before a seeded random remainder. The API matches all 108 under the
+Eastern assumption; bulk is five hours later in 37 cases and four hours later in 71.
+[A2](../results/timestamp_full_a2_review.json) then froze the next 3,000 new random-rest accessions,
+but stopped on a second HTTP 503 after only 50, with 109 attempts and nine waits/retries.
+Total usage is 3,246 of 34,402; all 108 A2 QPC gaps met 0.667 seconds.
+Across the A1+A2 random-rest sample, one of 314 readable internally agreeing cases differs from
+the header under Eastern, giving a nominal one-sided 95% Clopper-Pearson upper bound of 1.50%.
+The fixed selection has 2,955 unread/unvisited eligible cases; treating all as errors raises
+that upper bound to 91.26%, so the complete-case result cannot certify the remaining cohort.
+The statistic was defined after A1 was seen but before A2, and ordinary CP is not a sequential
+confidence guarantee under error-dependent stopping. Cumulative conditional comparisons cover
+1,311 accessions: no API-side assignment changes, but 30 first-close and one latest-filing choice
+change versus bulk on the original nominal calendar. These are not verified UTC corrections.
+Clock authority, identity and calendar qualification remain unresolved; no further continuation,
+data repair or backtest rerun follows without another decision.
 
 A fine-tuned modern model is not automatically free of look-ahead for old filings, even if its
 fine-tuning data is old, because its pretraining may include later text. Measurement models are

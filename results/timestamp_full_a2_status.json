@@ -1,0 +1,26 @@
+{
+  "status": "stopped_final",
+  "amendment_commit": "cf65410e871b4eb4411f00d5b8625d174c5b0cf5",
+  "start_UTC": "2026-11-16T22:28:44.891311+00:00",
+  "wall_cap_seconds": 14400,
+  "resources_recorded": 100,
+  "sleep_interruptions": [],
+  "counter_start": 3137,
+  "config_SHA256": "c8194b3dcb5becab95f37dcaccc11ccf426442c3baa70c2f2ffeabd66bfb37f6",
+  "counter": {
+    "actual_HTTP_attempts": 3246,
+    "ceiling": 34402
+  },
+  "wall_seconds": 5065.75,
+  "disk_bytes_observed": 176507050,
+  "checkpoint_UTC": "2026-11-16T23:53:10.664628+00:00",
+  "latest_retry_event": {
+    "event": "retry_started",
+    "trigger": "HTTP_503",
+    "wait_number": 9,
+    "retry_attempt": 3246,
+    "UTC": "2026-11-16T23:53:04.933567+00:00",
+    "perf_counter": 2575192.8912922
+  },
+  "stop_reason": "HTTP_503"
+}
