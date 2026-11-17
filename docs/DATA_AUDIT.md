@@ -52,16 +52,42 @@ was **not** run here; only invented legacy/chained fixtures were exercised.
 
 CI now declares Windows and Linux Python 3.12 jobs and a Ruff step. Code-specific
 legacy per-file ignores with a TODO preserve known lint debt without mass reformatting.
-**Dependency locking remains pending:** strict offline `uv pip compile` for dev+figures
-could not obtain required cached distributions (DuckDB); no candidate lock was produced.
-Public-PyPI resolution was not tested because network access was forbidden.
-No mirror URL or unverified lock is committed. CI installs a hash-verified
-`requirements-dev.lock` if a verified file is later supplied; until then it emits
-an explicit warning and uses the disclosed unlocked dev+figures fallback.
-Workflow YAML parsed locally with a cached-only YAML tool; actual GitHub execution
-is **untested until an approved push**.
+**CL-LOCK-1: dependency locking is verified locally; locked CI remains pending.**
+The [universal Python 3.12 lock](../requirements-dev.lock) was generated with
+uv 0.11.9 through the machine's configured local pip mirror (passed privately to
+the child uv process, not emitted). It contains 45 exact package pins for dev+figures
+plus the existing `build-system.requires` backend. Compilation used `--universal`,
+`--python-version 3.12`, `--generate-hashes`, `--no-build`, `--no-sources` and disabled
+index emission/annotation; stdin supplied the build requirements from `pyproject.toml`.
+Only generated MD5 hash lines were removed; all 1,310 generated SHA-256 hashes were
+retained and independently matched against file digests from each exact public-PyPI
+release JSON endpoint, fetched with certificate-validating native curl.
+The [verification receipt](../results/dependency_lock_verification.json) records
+per-package counts, public-response digests and the LF-normalized lock SHA-256.
+Neither the lock nor receipt contains the mirror hostname; the lock has no URL or
+index directive. This verifies distribution-byte identity, not upstream safety.
 
-Local validation for this change: `.venv\Scripts\python.exe -m pytest -q` passed
+A fresh Windows CPython 3.12.10 throwaway environment installed all 45 dependencies
+using `uv pip install --require-hashes -r requirements-dev.lock` with an explicit
+target interpreter, source builds disabled and independent copied package files.
+The project was then installed with `--no-build-isolation --no-deps -e .`, using the
+already hash-locked backend rather than fetching floating build dependencies.
+The completed full suite passed **597 tests in 73.30 s**, with two existing synthetic
+rank-deficiency warnings; Ruff passed with the disclosed baseline. An earlier
+captured test invocation exceeded a 300 s harness timeout without retaining progress:
+it remains an incomplete attempt in the receipt, with cause unresolved, not a pass.
+The successful attempt used file-backed logs, a collection check and a 600 s limit,
+without test or research-code changes. Both throwaway environments were removed;
+the project environment's distribution metadata and configuration fingerprint were
+unchanged. No real data, SEC, model, study or production trial-ledger operation was run.
+
+CI now requires this lock, has no unlocked fallback, and disables build isolation
+for the project install. Its current YAML parsed locally with a pre-existing
+cached PyYAML tool, without a new package install. Windows/Linux **locked CI execution is untested until
+the Lead reviews and pushes this commit**. Optional embed and benchmarks extras
+are outside this lock and its validation receipt.
+
+Historical CL-HARDEN-1 local validation: `.venv\Scripts\python.exe -m pytest -q` passed
 597 tests in 51.76 s, with two existing synthetic rank-deficiency warnings;
 `.venv\Scripts\python.exe -m ruff check .` passed with the disclosed baseline.
 These are software/fixture checks, not real-data, cloud or scientific validation.

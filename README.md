@@ -424,11 +424,19 @@ The [draft claim-level design](docs/H1_DESIGN.md) starts with human labels, whil
 
 ```powershell
 uv venv --python 3.12
-uv pip install -e ".[dev,figures,benchmarks]"
-uv run pytest -q                       # Unit tests need no benchmark data or network
-uv run python scripts/make_figures.py  # rebuild every chart from results/
-uv run python -m asof.referee          # the automated referee (needs the local data build)
+uv pip install --require-hashes -r requirements-dev.lock
+uv pip install --no-build-isolation --no-deps -e .
+uv run --no-sync pytest -q                       # Unit tests need no benchmark data or network
+uv run --no-sync python scripts/make_figures.py  # rebuild every chart from results/
+uv run --no-sync python -m asof.referee          # the automated referee (needs the local data build)
 ```
+
+The [lock](requirements-dev.lock) covers Python 3.12 dev+figures dependencies and the
+existing build backend, with universal platform resolution and
+[public-PyPI hash verification](results/dependency_lock_verification.json).
+It excludes the optional embed and benchmarks extras; use a separate environment
+for those, outside this locked-environment receipt. Installation does not lift
+study holds or authorize data access.
 
 Rebuilding the data from SEC EDGAR takes several hours and needs a contact email in
 `ASOF_USER_AGENT`, as the SEC requires; follow the step-by-step
