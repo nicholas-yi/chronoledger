@@ -49,6 +49,17 @@ def parse_document_date(value: DateValue, field: str) -> date:
     raise HoldoutAccessError(f"{field}: unparseable date; no body access")
 
 
+def require_development_dates(values: Mapping[str, DateValue]) -> dict[str, date]:
+    parsed = {field: parse_document_date(value, field) for field, value in values.items()}
+    for field, value in parsed.items():
+        if not DEVELOPMENT_START <= value <= DEVELOPMENT_END:
+            raise HoldoutAccessError(
+                f"{field} {value}: outside D13 development-only source envelope; "
+                "H4/H6 validation/holdout, follow-ups and D1 return reservations "
+                "cannot be cleared by a price cutoff")
+    return parsed
+
+
 def require_eligible_documents(documents: Sequence[DocumentDates] | None) -> None:
     """Allow only fully dated 2012-2018 documents/context; no holdout override.
 
@@ -61,17 +72,10 @@ def require_eligible_documents(documents: Sequence[DocumentDates] | None) -> Non
     for document in documents:
         if not isinstance(document, DocumentDates):
             raise HoldoutAccessError("D13 requires complete typed document/context dates")
-        values = {
-            "acceptance": parse_document_date(document.accepted_at, "acceptance"),
-            "knowledge": parse_document_date(document.knowledge_at, "knowledge"),
-            "period_end": parse_document_date(document.period_end, "period_end"),
-        }
-        for field, value in values.items():
-            if not DEVELOPMENT_START <= value <= DEVELOPMENT_END:
-                raise HoldoutAccessError(
-                    f"{field} {value}: outside D13 development-only source envelope; "
-                    "H4/H6 validation/holdout, follow-ups and D1 return reservations "
-                    "cannot be cleared by a price cutoff")
+        values = require_development_dates({
+            "acceptance": document.accepted_at, "knowledge": document.knowledge_at,
+            "period_end": document.period_end,
+        })
         if values["knowledge"] < values["acceptance"]:
             raise HoldoutAccessError("knowledge date precedes acceptance")
         if values["period_end"] > min(values["acceptance"], values["knowledge"]):

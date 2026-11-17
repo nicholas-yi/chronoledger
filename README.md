@@ -376,6 +376,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 
 ## Caveats
 
+- **Assurance is partial.** Scoped loaders, held outcome stages and ledger integrity checks are not an OS sandbox or byte-level isolation; see [assurance and limits](docs/DATA_AUDIT.md#assurance-and-limits).
 - **Survivorship.** Free price data covers mostly companies that still trade today. Return tests are
   restricted to 2023 onwards, when coverage of large issuers reaches 88-97%
   ([coverage audit](docs/DATA_AUDIT.md#coverage-among-public-equity-issuers-by-public-float)).

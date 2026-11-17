@@ -83,7 +83,7 @@ def test_ledger_records_lineage(tmp_path) -> None:
     entry = json.loads(path.read_text().splitlines()[0])
     lin = entry["lineage"]
     assert len(lin["git_commit"]) == 40
-    assert lin["inputs"]["input.parquet"] == ledger.file_sha256(data)
+    assert lin["inputs"][ledger.input_key(data)] == ledger.file_sha256(data)
     assert isinstance(lin["git_dirty"], bool)
 
 
@@ -105,4 +105,4 @@ def test_failed_development_execution_keeps_partial_metrics_and_prior_entries(tm
     assert entries[1]["period"] == "development"
     assert entries[1]["metrics"]["m_months"] == 18
     assert entries[1]["metrics"]["phase"] == "event_panel"
-    assert entries[1]["lineage"]["inputs"]["input.bin"] == ledger.file_sha256(data)
+    assert entries[1]["lineage"]["inputs"][ledger.input_key(data)] == ledger.file_sha256(data)

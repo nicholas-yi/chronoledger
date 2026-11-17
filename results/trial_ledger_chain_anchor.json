@@ -1,0 +1,12 @@
+{
+  "path": "results/trial_ledger.jsonl",
+  "legacy_rows": 74,
+  "prefix_bytes": 106246,
+  "sha256": "b7b8ecb16d36c95bcdf3b1365eb6992fd9e4af284daa6bcc01862a0ed23d0de3",
+  "hash_provenance": "Owner-verified CL-HARDEN-1 receipt; not recomputed by reading real rows in this task",
+  "size_provenance": "Filesystem size metadata only",
+  "checkout_policy": "Verify the first74 physical rows against the supplied raw prefix hash allowing only LF/CRLF representation equivalence; never rewrite them. The chain seed remains the supplied SHA256 on every OS.",
+  "policy": "Preserve these bytes unchanged; the first chained row references this entire prefix hash. New rows are hash chained and fsynced under an exclusive cooperative lock.",
+  "legacy_entries_rewritten": false,
+  "new_real_rows_appended": 0
+}

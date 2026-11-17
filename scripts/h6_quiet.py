@@ -7,16 +7,24 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import timedelta
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
 from asof import ledger
-from asof.bulk import iter_companyfacts
+from asof.bulk import (
+    FrozenFactWindow,
+    hold_outcome_stage,
+    iter_companyfacts,
+    load_fact_window,
+    require_fact_window,
+)
 from asof.config import DATA_DIR, PROJECT_ROOT, RAW_DIR
 from asof.quiet import IS_TAGS, flatten_usd, quiet_down_revisions
 
@@ -24,19 +32,25 @@ FIL = DATA_DIR / "bulk_filings.parquet"
 DEV_A = (pd.Timestamp("2012-01-01", tz="UTC"), pd.Timestamp("2018-12-31 23:59:59", tz="UTC"))
 
 
-def detect(ciks: set[int], filings: pd.DataFrame) -> pd.DataFrame:
+def detect(
+    ciks: set[int], filings: pd.DataFrame, *, scope: FrozenFactWindow | None = None,
+) -> pd.DataFrame:
+    require_fact_window(scope)
+    hold_outcome_stage("H6.detect")
     by_cik = {c: g for c, g in filings[filings["cik"].isin(ciks)].groupby("cik")}
     out = []
-    for cik, data in iter_companyfacts(ciks):
+    for cik, data in iter_companyfacts(ciks, scope=scope):
         facts = flatten_usd(data.get("facts", {}), cik, IS_TAGS)
         out.append(quiet_down_revisions(facts, by_cik.get(cik, filings.iloc[0:0])))
     return pd.concat(out, ignore_index=True) if out else pd.DataFrame()
 
 
-def part_a(filings: pd.DataFrame) -> dict:
+def part_a(filings: pd.DataFrame, *, scope: FrozenFactWindow | None = None) -> dict:
+    require_fact_window(scope)
+    hold_outcome_stage("H6.part_a")
     sample = set(pd.read_parquet(DATA_DIR / "h4_sample.parquet")["cik"])
     f = filings[filings["cik"].isin(sample)]
-    quiet = detect(sample, f)
+    quiet = detect(sample, f, scope=scope)
     base = f[f["form"].isin(["10-K", "10-Q"]) & f["knowledge_time"].between(*DEV_A)].copy()
     base["quiet_down"] = base["accession"].isin(set(quiet["accession"])).astype(float)
     formal = f[(f["form"] == "10-K/A") | f["items"].fillna("").str.contains(r"\b4\.02\b")]
@@ -61,7 +75,9 @@ def part_a(filings: pd.DataFrame) -> dict:
             "item402_rate_other": float(base.loc[base["quiet_down"] == 0, "item402_12m"].mean())}
 
 
-def part_b(filings: pd.DataFrame) -> dict:
+def part_b(filings: pd.DataFrame, *, scope: FrozenFactWindow | None = None) -> dict:
+    require_fact_window(scope)
+    hold_outcome_stage("H6.part_b")
     from asof.events import car
     from asof.factors import ff5_umd_daily
     from asof.periods import DEV_END, DEV_RETURN_CUTOFF, DEV_START
@@ -70,7 +86,7 @@ def part_b(filings: pd.DataFrame) -> dict:
 
     uni = pd.read_parquet(DATA_DIR / "h0_universe.parquet")
     f = filings[filings["cik"].isin(set(uni["cik"]))]
-    quiet = detect(set(uni["cik"]), f)
+    quiet = detect(set(uni["cik"]), f, scope=scope)
     lo = pd.Timestamp(DEV_START, tz="UTC")
     hi = pd.Timestamp(DEV_END, tz="UTC") + pd.Timedelta(hours=23, minutes=59)
     quiet = quiet[pd.to_datetime(quiet["knowledge_time"], utc=True).between(lo, hi)].merge(uni[["cik", "ticker"]], on="cik")
@@ -96,7 +112,12 @@ def part_b(filings: pd.DataFrame) -> dict:
             "clusters": int(c["month"].nunique())}
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--scope-file", type=Path)
+    args = parser.parse_args(argv)
+    scope = load_fact_window(args.scope_file)
+    hold_outcome_stage("H6.main")
     filings = pd.read_parquet(FIL)
     results = {}
     common = [FIL, RAW_DIR / "bulk" / "companyfacts.zip"]
@@ -108,7 +129,7 @@ def main() -> None:
         with ledger.development_trial("H6", {"test": name}, inputs=inputs) as metrics:
             if name == "H6b_car_60":
                 metrics["scientific_status"] = "invalid_f2_current_ticker_survivorship"
-            m = fn(filings)
+            m = fn(filings, scope=scope)
             metrics.update(m)
         results[name] = m
     out = {"note": "Development only. H6a threshold |t| >= 3 (new). H6b is INVALID under F2; "

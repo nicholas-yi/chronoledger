@@ -6,6 +6,71 @@ and [F9](FINDINGS.md#f9-p0-acceptance-time-authority-is-not-uniformly-certified-
 Older rebuild receipts and the frozen preregistration describe historical claims,
 not current source-clock certification. The registered first-close rule is unchanged.
 
+## Assurance and limits
+
+CL-HARDEN-1 adds a dataset contract at `iter_companyfacts`, `read_companyfacts`,
+`max_public_float` and the fact-member `_load`. Callers must supply an immutable
+`FrozenFactWindow` with explicit fact-period and filing-date bounds and a frozen
+revision reference. Bounds use the [shared date policy](DOCUMENT_SCOPE.md), not a
+second calendar. Returned facts require a known period end and filed/accepted
+date; every supplied date is checked, duration starts are checked when present,
+and omitted records have explicit reason counts. Unknown dates fail closed.
+The revision reference is declared metadata, not authenticated operator authority.
+
+**Filtering returned facts is not byte-level isolation.** The raw per-company
+ZIP member is still decompressed and JSON-decoded in memory before filtering,
+and may contain reserved values. Metadata archive utilities are not a byte
+isolation boundary either. The stronger proposed fix is a separately authorized,
+pre-partitioned, content-pinned development extract with reserved data absent
+from the analytic worker's mounts. That extract is **not implemented or created**.
+
+All legacy H4 file-backed stages are additionally under a hard read hold, including
+sampling (which would open raw companyfacts), metadata ingestion, features/pairs,
+outcome construction, panel loading and testing. H6 `detect`, both parts and its
+CLI are held before data reads or trial logging. A supplied scope file does not
+lift a hold; a new user decision/code freeze is required. The in-memory H4 panel
+transformation remains available for invented regression fixtures only; it is
+not permission to supply reserved frames. Registered scientific definitions and
+historical results are not changed.
+
+The [ledger anchor](../results/trial_ledger_chain_anchor.json) records the provided
+74-row prefix SHA-256
+`b7b8ecb16d36c95bcdf3b1365eb6992fd9e4af284daa6bcc01862a0ed23d0de3`
+and filesystem size metadata, without reading/re-writing the real rows in this task.
+Legacy entries are not retroactively row-chained. Future appends validate the prefix
+and tail under an exclusive OS file lock, store `previous_hash`/`row_hash`, flush and
+fsync. `verify_chain` raises on alteration, a broken link or a truncated row; no
+automatic repair occurs. LF/CRLF checkout equivalence is supported for the anchored
+prefix, without rewriting it, and the chain seed remains the provided SHA.
+Lineage now records missing/non-file inputs explicitly, keys inputs by full
+repo-relative paths (or a full URI across drives), and checks the whole Git tree
+including untracked but excluding ignored files. Git failures are no longer
+success-shaped empty provenance. Locking serializes cooperating writers; the
+unkeyed chain is not writer authentication, and a deliberately recomputed,
+externally unanchored tail is not tamper-proof. Real-prefix chain verification
+was **not** run here; only invented legacy/chained fixtures were exercised.
+
+CI now declares Windows and Linux Python 3.12 jobs and a Ruff step. Code-specific
+legacy per-file ignores with a TODO preserve known lint debt without mass reformatting.
+**Dependency locking remains pending:** strict offline `uv pip compile` for dev+figures
+could not obtain required cached distributions (DuckDB); no candidate lock was produced.
+Public-PyPI resolution was not tested because network access was forbidden.
+No mirror URL or unverified lock is committed. CI installs a hash-verified
+`requirements-dev.lock` if a verified file is later supplied; until then it emits
+an explicit warning and uses the disclosed unlocked dev+figures fallback.
+Workflow YAML parsed locally with a cached-only YAML tool; actual GitHub execution
+is **untested until an approved push**.
+
+Local validation for this change: `.venv\Scripts\python.exe -m pytest -q` passed
+597 tests in 51.76 s, with two existing synthetic rank-deficiency warnings;
+`.venv\Scripts\python.exe -m ruff check .` passed with the disclosed baseline.
+These are software/fixture checks, not real-data, cloud or scientific validation.
+
+Permits and freeze references remain declarative. There is no OS filesystem/network
+sandbox, no byte-isolated bulk input, and no new source-clock, historical identity,
+measurement, statistical or economic acceptance. No real archive/parquet, study,
+model or ledger-row evaluation is authorized by these software changes.
+
 ### D13: KPI disclosure-source incident
 
 The [retrospective D13 disclosure](DEVIATIONS.md#d13-exploratory-kpi-disclosure-screen-crossed-reserved-calendars)

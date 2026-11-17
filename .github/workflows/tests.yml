@@ -6,10 +6,27 @@ on:
 
 jobs:
   pytest:
-    runs-on: ubuntu-latest
+    name: Python 3.12 / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - run: uv venv --python 3.12
-      - run: uv pip install -e ".[dev]"
+      - name: Install pinned dependencies when a verified lock is available
+        if: ${{ hashFiles('requirements-dev.lock') != '' }}
+        run: uv pip install --require-hashes -r requirements-dev.lock
+      - name: Install project without changing locked dependencies
+        if: ${{ hashFiles('requirements-dev.lock') != '' }}
+        run: uv pip install --no-deps -e .
+      - name: Install development environment (lock verification pending)
+        if: ${{ hashFiles('requirements-dev.lock') == '' }}
+        run: |
+          python -c "print('::warning::Verified public-PyPI requirements lock is pending; this fallback is not dependency-locked.')"
+          uv pip install -e ".[dev,figures]"
+      - name: Ruff with documented legacy per-file baseline
+        run: uv run --no-sync ruff check .
       - run: uv run --no-sync pytest -q

@@ -28,11 +28,11 @@ def test_h4_development_winsorization_ignores_future_outcomes(monkeypatch) -> No
         script.ENT: pd.DataFrame({"cik": range(30), "sic": "3500"}),
     }
     monkeypatch.setattr(script.pd, "read_parquet", lambda path: frames[path].copy())
-    with_future = script.build_panel()
+    with_future = script.panel_from_frames(frames[script.PAIRS], frames[script.OUT], frames[script.ENT])
     with_future = with_future[with_future["knowledge_time"].between(*script.DEV)]
     frames[script.PAIRS] = frames[script.PAIRS].iloc[::2].copy()
     frames[script.OUT] = frames[script.OUT][frames[script.OUT]["report_date"] < "2020"]
-    without_future = script.build_panel()
+    without_future = script.panel_from_frames(frames[script.PAIRS], frames[script.OUT], frames[script.ENT])
     pd.testing.assert_frame_equal(
         with_future.reset_index(drop=True), without_future.reset_index(drop=True))
 
@@ -61,7 +61,7 @@ def test_h4_decline_requires_both_observed_income_values(
         script.ENT: pd.DataFrame({"cik": [1], "sic": ["3500"]}),
     }
     monkeypatch.setattr(script.pd, "read_parquet", lambda path: frames[path].copy())
-    panel = script.build_panel()
+    panel = script.panel_from_frames(frames[script.PAIRS], frames[script.OUT], frames[script.ENT])
     decline = panel["decline"].iloc[0]
     if expected is None:
         assert pd.isna(decline)
