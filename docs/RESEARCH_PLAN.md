@@ -16,8 +16,10 @@ sources, assumptions, rejected shortcuts and proposed work packages. These are r
 not new registrations, source clearance, execution permission or replacements for stopped results.
 
 The first implementation is the [offline audit confidence sequence](AUDIT_CONFIDENCE_SEQUENCE.md),
-with conservative unread-sampled-label unions and a separate frozen invented-data validation
-plan. It does not import A2 counts, resume collection or establish the historical sampling
+with conservative unread-sampled-label unions. Its [frozen invented-data check](../results/audit_cs_validation.json)
+completed all 30,000 paths within the approved resource limits and passed the declared
+implementation-QA screen; the full software suite passed 510 tests.
+It does not import A2 counts, resume collection or establish the historical sampling
 and field-clock assumptions. Measurement-error estimators and reader changes remain proposals.
 
 ## How an idea becomes a result

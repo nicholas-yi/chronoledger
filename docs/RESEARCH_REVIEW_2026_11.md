@@ -12,6 +12,11 @@ evaluations, source repairs, holdout access, purchases or human/vendor contact w
 Paper-level published aggregate results are literature, not results from this project.
 Existing registrations, failed experiments and the sealed holdout remain unchanged.
 
+**Subsequent implementation:** the [offline audit confidence sequence](AUDIT_CONFIDENCE_SEQUENCE.md)
+was implemented after this review, with exact checks and a separately frozen, bounded
+invented-data run. The review below preserves its proposal-time interpretation; that follow-up
+does not replace A2 bounds, qualify timestamps or authorize real-data use.
+
 ## Executive recommendation
 
 **Make the next contribution a trustworthy measurement system before trying to make it an

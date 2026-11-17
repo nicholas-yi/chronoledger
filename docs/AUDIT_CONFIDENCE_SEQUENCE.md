@@ -5,6 +5,11 @@ This implements the count-based method proposed in the
 It does not resume collection, import real audit outcomes, change A2 bounds, qualify UTC or
 grant permission to use a historical sample for new inference.
 
+**Implemented and checked on invented data.** The
+[executed validation receipt](../results/audit_cs_validation.json) records the single run
+from freeze `84b79452fd6ac365781a69c07a35919630ccfef6`. This is implementation QA,
+not independent scientific acceptance or a replacement for any stopped audit result.
+
 ## Contract and derivation
 
 The unit is a **population member**, such as one accession with its required evidence,
@@ -113,3 +118,54 @@ Correcting preflight required a new source freeze, not deletion of an attempt re
 If a resource/worker/provenance check fails, keep the receipt, inspect the cause and obtain
 a new decision before another attempt. Do not remove the marker to make a run look clean.
 The historical A2 CP results and Eastern-clock qualification limits remain unchanged.
+
+## Executed validation: 2026-11-17
+
+The actual attempt began at `2026-11-17T17:36:18.627944+00:00`, from the retained
+ignored attempt receipt. No new draws were made after completion.
+
+| Check | Observed result |
+|---|---|
+| Full offline software suite on the final source | 510 passed, two existing sparse-control rank warnings |
+| Ruff | Passed on the five new Python files; not a claim that the legacy repository is lint-free |
+| Frozen synthetic allocation | All 30 cells and 30,000 paths completed, 1,000 per cell |
+| Largest observed anytime noncoverage | 36/1,000 = 3.6%, N=80/K=40, fully observed |
+| Largest simultaneous 95% Monte Carlo upper endpoint | 5.6791%, below the frozen 7.5% implementation-QA tolerance |
+| Controller / worker wall time | 20.5285 / 17.9840 seconds |
+| Worker process CPU time | 12.6406 seconds |
+| Sum of separate controller/worker OS RSS peaks | 337.10 MiB, below 1 GiB |
+| Worker affinity | Exactly one allowed logical processor |
+| Protected metadata and frozen source | Before/after hashes unchanged |
+
+Per-missingness maxima across the six invented error totals:
+
+| Missingness rule | Maximum failures per 1,000 paths | Simultaneous MC upper endpoint |
+|---|---:|---:|
+| Fully observed | 36 | 5.6791% |
+| Hide every error | 11 | 2.4551% |
+| Hide every non-error | 21 | 3.7989% |
+| All unread | 0 | 0.6377% |
+| Unread positional bursts | 0 | 0.6377% |
+
+**Interpretation:** the fixed QA screen passed. The worst Monte Carlo upper endpoint exceeds
+5%, so the experiment alone does not establish a <=5% failure probability. Mathematical
+coverage relies on the sampling assumptions and the published construction/conservative
+union argument; floating-point behavior was checked only in the stated cases.
+The all-unread case covers trivially because its set remains `0..80`, not because it learned
+the true error rate. A passing coverage check is not sufficient evidence of informativeness.
+
+The real CLI also processed an invented N=10 census with two observed errors and three
+unread labels, returning exactly the inclusive set `2..5`, with all sampling/source
+qualification flags false. No actual audit counts were submitted.
+
+Runtime identification read **after** execution: Python 3.12.10 (64-bit), Windows 11
+build 26300, NumPy 2.5.4 and SciPy 1.18.1. These are post-run environment observations,
+not separately attested package versions captured inside the worker. No dependencies
+were installed in this task. Pylance MCP requests timed out; no editor/type-check result
+is claimed. Runtime tests, exact comparisons and Ruff provide the stated software evidence.
+
+SHA-256 of the LF-encoded executed report:
+`c762ed5e6c204239dfa3b50398a6372a746ed52d7f0e00bc2bc452a73033ad7c`.
+The return ledger remains 74 rows and the SEC counter remains 3,254/34,402.
+Measurement-error estimators, reader changes, source collection and real-data statistical
+adoption were not part of this implementation.
