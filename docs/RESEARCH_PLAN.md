@@ -15,6 +15,12 @@ retrospective measurement from historically implementable prediction and include
 sources, assumptions, rejected shortcuts and proposed work packages. These are recommendations,
 not new registrations, source clearance, execution permission or replacements for stopped results.
 
+The [quant research frontiers review](QUANT_RESEARCH_FRONTIERS_2026_11.md) extends
+this agenda into information economics, strategic disclosure, order-aware rough-path
+features, typed economic transmission, the complexity debate, robust dynamic control
+and partial identification. It develops a mechanism-first research thesis and ranked
+proposals from 24 sources, not another implemented strategy or an execution approval.
+
 The first implementation is the [offline audit confidence sequence](AUDIT_CONFIDENCE_SEQUENCE.md),
 with conservative unread-sampled-label unions. Its [frozen invented-data check](../results/audit_cs_validation.json)
 completed all 30,000 paths within the approved resource limits and passed the declared
