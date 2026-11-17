@@ -148,7 +148,7 @@ counts 2,955 unread/unvisited eligible cases as errors: 2,956/3,269 yields a
 unread cases, a sequentially stopped population or historical UTC. Actual verified
 assignment changes remain undetermined. Counter 3,246/34,402; ledger 74; no resume.
 
-### Future local-reader memory safeguards (not run)
+### Local-reader memory safeguards
 
 The strict-format experiments are stopped; the default local request helper is the existing
 answer-first prompt. Experimental modules and frozen records remain available for review.
@@ -156,8 +156,8 @@ The [pinned runtime support receipt](../results/local_model_runtime_support.json
 bundled native `llama-server --help` definition: `--cache-ram N`, environment
 `LLAMA_ARG_CACHE_RAM`, defaults to 8192 MiB and accepts `0` to disable the prompt cache.
 The inspected native build is `6c01da627`, shipped with the pinned Ollama 0.40.16 package;
-executable, implementation-DLL and help hashes are recorded. Only help/version metadata was
-queried, without a model, server or network request.
+executable, implementation-DLL and help hashes are recorded. The original support inspection
+queried only help/version metadata; the separately approved live smoke is reported below.
 
 [RuntimePolicy](../src/asof/local_model_runtime.py) now defaults that environment setting to
 zero, keeps the owned server on 11435, and freezes the setting in future runner contracts.
@@ -170,9 +170,34 @@ Future per-second owned-tree samples also append per-PID parent, creation time, 
 working-set/peak/private/commit bytes, CPU time, UTC/monotonic time and safe arm/UID/stage context
 to ignored logs; observed starts/exits distinguish PID reuse. Prompt and answer payloads are
 rejected from logging context. The existing aggregate memory stop remains.
-Mock tests cover configured environment, launch arguments and process records; no live model
-was run, so inherited child-setting effectiveness and any RSS improvement remain unvalidated.
-This is not proof of the old memory cause or an OS-enforced quota, and shared 11434 is untouched.
+Mock tests cover configured environment, launch arguments and process records. The
+[2026-11-17 live review](../results/project_closure_review.json) completed three tiny invented
+prompts in 77.67 seconds from owned-server start. The native log explicitly says the prompt
+cache is disabled; 35 real per-PID snapshots observed a 3.90 GiB aggregate peak, one actual
+model runner and successful creation-time-verified cleanup. The owned 11435 listener closed.
+Compute used four threads; the backend separately reported 15 HTTP service threads, so this
+is not a hard four-total-OS-thread quota. Active KV still used 512 MiB.
+This closes the missing bounded smoke validation, not long-report memory safety, reader
+accuracy, the old memory cause or an OS-enforced quota. Shared 11434 was untouched.
+
+### Official acceptance-clock documentation review
+
+The [closure review](../results/project_closure_review.json) records eight metered official
+documentation GETs, seven complete bodies and one declared-cap stop. The user explicitly
+approved one same-manual 32 MiB cap amendment after its 23,159,215-byte size was known;
+default metadata/document caps were not widened. Counter is 3,254 of 34,402, ledger 74.
+No stopped accession job was resumed.
+
+The PDS specification (May 2025) defines an acceptance **date**, not the needed field clock.
+Current introduction/messages chapters and the 961-page historical Volume II version 60
+(December 2021) document Eastern operating hours, filing-date cutoffs and acceptance notices.
+Text/normalized field-name searches and targeted section review did not establish an explicit
+historical timezone definition for the 14-digit acceptance field or certify JSON accuracy.
+That is a limit of the reviewed evidence, not proof no definition exists anywhere.
+Only the specification PDF was opened from the official ZIP; its two bundled 2025 `.dissem`
+filing-example members were not opened, extracted or used. No financial observations were read.
+Historical UTC, role/calendar qualification and complete cohort coverage remain unresolved;
+no source clock, CIK, input table or financial result was repaired.
 
 **2026-11-14 research plan:** the [research plan](RESEARCH_PLAN.md) records the proposed
 experiment workflow and diagram, prerequisites for closing the data/label/power gaps, three

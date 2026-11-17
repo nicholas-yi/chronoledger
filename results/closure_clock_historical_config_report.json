@@ -1,0 +1,44 @@
+{
+  "check": "clock",
+  "status": "retrieved_requires_review",
+  "documents": [
+    {
+      "URL": "https://www.sec.gov/files/edgar/filermanual/archive/efmvol2-v60.pdf",
+      "bytes": 23159215,
+      "SHA256": "46c25f804f89bb2477a9b821cf2b0f3d8f196df2e4c3d9fb8004461764405812",
+      "content_type": "application/pdf",
+      "official_links": [],
+      "cache_file": "request_3254.bin",
+      "review": "Requires field-specific/manual version review,not automatic UTC authority."
+    }
+  ],
+  "new_requests": 1,
+  "historical_clock_qualified": false,
+  "last_receipt": {
+    "event": "finished",
+    "url": "https://www.sec.gov/files/edgar/filermanual/archive/efmvol2-v60.pdf",
+    "status": 200,
+    "bytes": 23159215,
+    "SHA256_observed_bytes": "46c25f804f89bb2477a9b821cf2b0f3d8f196df2e4c3d9fb8004461764405812",
+    "body_complete": true,
+    "attempted": true,
+    "stop_reason": null,
+    "historical_attempt": 3254,
+    "request_UTC": "2026-11-17T13:19:04.304211+00:00",
+    "charged_before_send": true,
+    "content_type": "application/pdf",
+    "content_length": "23159215",
+    "ETag": null,
+    "last_modified": "Wed, 28 Sep 2022 13:14:03 GMT",
+    "elapsed_seconds": 0.9070000001229346,
+    "finished_UTC": "2026-11-17T13:19:05.198913+00:00",
+    "cache_file": "request_3254.bin"
+  },
+  "counter": {
+    "actual_HTTP_attempts": 3254,
+    "ceiling": 34402
+  },
+  "config_SHA256": "34f46f7708754ff2672385d439f4789a3c465db6b34f68d170e411f96d68a39d",
+  "source_revision": "04c649a363bef01df4a6c9c48b1e6d4b89e3bf81",
+  "private_directory": "data\\project_closure\\closure_clock_historical_config"
+}

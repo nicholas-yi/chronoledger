@@ -23,6 +23,10 @@ instant?" and gets only that, so a restatement filed in June cannot leak into a 
 
 ---
 
+**Current status:** no tradable-edge claim is supported; historical data, human measurement
+and return-test calibration are still incomplete. The [closure review](results/project_closure_review.json)
+separates verified engineering fixes from the evidence that still needs to be obtained.
+
 ## The question
 
 Every public company files annual (10-K) and quarterly (10-Q) reports with the SEC, and most of each
@@ -454,7 +458,8 @@ point-in-time queries everything is built on.
 - [FINDINGS.md](docs/FINDINGS.md): the research log, including issues that weaken this project
 - [DATA_AUDIT.md](docs/DATA_AUDIT.md): data provenance, coverage audits and the rebuild runbook
 - [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
-- [REFEREE.md](results/REFEREE.md): the latest automated referee report
+- [project_readiness_checks.json](results/project_readiness_checks.json): current scoped clock/calibration checks, both failing
+- [REFEREE.md](results/REFEREE.md): the recorded broader software report, not rerun by the closure check or scientific acceptance
 
 ## License
 

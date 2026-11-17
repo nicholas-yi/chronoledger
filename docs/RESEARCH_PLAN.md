@@ -74,16 +74,23 @@ launch workers or enforce host isolation. The planned container remains unprovis
 
 ## Closing the known gaps
 
+The [2026-11-17 closure review](../results/project_closure_review.json) records what software
+can close and what still needs data, people or a new scientific design. The referee now refuses
+empty success and explicitly checks the recorded clock/calibration failures. A bounded live
+runtime smoke confirms the retained prompt cache is disabled, but does not validate reading
+accuracy or long-report memory safety. None of these fixes creates a trading result.
+
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | The [bounded A2 continuation](../results/timestamp_full_a2_review.json) stopped after 50 of 3,000 new accessions; review both the complete-case bound and the much wider unread-case sensitivity before any new decision | A per-filing table of verified times, with counts of assignments that actually changed and any filings left unresolved |
+| Filing timestamps | The [bounded A2 continuation](../results/timestamp_full_a2_review.json) remains stopped; the [official-document review](../results/project_closure_review.json) did not establish the needed field-clock authority, despite reviewing the historical manual | Applicable clock definitions, qualified calendar/identity and verified per-filing times; conditional agreement alone is insufficient |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
-| Real measurement labels | Use the [draft annotation guide](H1_DESIGN.md#annotation-guide-h1-claim-guide-draft-01) for two independent human annotations of 60 filing pairs and adjudication | Measured precision and recall on real text, with coverage, agreement and company-separated audit results |
+| Real measurement labels | Recruit two annotators and an adjudicator, qualify/freeze the roster and use the [draft guide](H1_DESIGN.md#annotation-guide-h1-claim-guide-draft-01) and [empty first-pass template](h1_annotation_first_pass_template.csv); no labels exist | Measured precision and recall on real text, with coverage, agreement and company-separated audit results |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
 | Claim-level signal (H1) | Start with the [draft measurement-first design](H1_DESIGN.md); resolve inference and power before registering a return test | One valid comparison, reported whatever the outcome, separating registered claim alpha from incremental value beyond word change |
 | More independent periods | Plan a separate older-period study with survivorship-free data | More real, independent months; nominal date ranges alone do not count |
 | Model training | Train a small claim matcher only if the labelled audit shows errors it could fix | Splits separated by time and by company, compared against the frozen baselines |
 | Trading costs | Record which cost components are observed and which are assumed; compute break-even costs | A realistic net comparison, plus a long-only version that needs no borrowing |
+| Local-model runtime | Three invented calls verified the pinned cache-zero setting and per-PID telemetry; keep the existing memory stop | Separately approved long-context stress evidence if needed; a short smoke is not a memory-cure or measurement claim |
 
 The [approved timestamp inventory](../results/timestamp_full_plan.json) covers 16,921 distinct
 assignment-risk accessions, including all 108 designated clock disagreements. It inventories
@@ -97,7 +104,7 @@ kept the population and parsing unchanged, used high-resolution pacing, and chec
 Eastern assumption; bulk is five hours later in 37 cases and four hours later in 71.
 [A2](../results/timestamp_full_a2_review.json) then froze the next 3,000 new random-rest accessions,
 but stopped on a second HTTP 503 after only 50, with 109 attempts and nine waits/retries.
-Total usage is 3,246 of 34,402; all 108 A2 QPC gaps met 0.667 seconds.
+A2 ended at total usage 3,246 of 34,402; all 108 A2 QPC gaps met 0.667 seconds.
 Across the A1+A2 random-rest sample, one of 314 readable internally agreeing cases differs from
 the header under Eastern, giving a nominal one-sided 95% Clopper-Pearson upper bound of 1.50%.
 The fixed selection has 2,955 unread/unvisited eligible cases; treating all as errors raises
@@ -106,6 +113,8 @@ The statistic was defined after A1 was seen but before A2, and ordinary CP is no
 confidence guarantee under error-dependent stopping. Cumulative conditional comparisons cover
 1,311 accessions: no API-side assignment changes, but 30 first-close and one latest-filing choice
 change versus bulk on the original nominal calendar. These are not verified UTC corrections.
+The separate official-document review used eight more GETs (current usage 3,254 of 34,402),
+without continuing any accession job or adding cohort coverage.
 Clock authority, identity and calendar qualification remain unresolved; no further continuation,
 data repair or backtest rerun follows without another decision.
 

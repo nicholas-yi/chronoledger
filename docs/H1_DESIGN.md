@@ -393,6 +393,11 @@ per-class support, not only an aggregate coefficient.
 
 Spreadsheet columns:
 
+An [empty first-pass CSV template](h1_annotation_first_pass_template.csv) is available.
+It contains only headers, no cases, labels, model suggestions or final adjudications.
+Keep separate private copies for the two annotators after the roster, permissions
+and chronological/industry strata have been approved; do not treat it as human gold.
+
 ```text
 pair_id, split, pseudonym, form, earlier/current_accession, accepted_at,
 fiscal_period, section/block_id, source_hash, old_claim_id/span/cells,

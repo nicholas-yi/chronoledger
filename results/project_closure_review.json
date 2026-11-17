@@ -1,0 +1,179 @@
+{
+  "date": "2026-11-17",
+  "scope": "Whole-project offline fixes, at most10official clock-document requests and at most3invented local-runtime prompts/10min; explicit one-manual cap amendment.",
+  "overall_status": "VERIFIED_ENGINEERING_GAPS_FIXED; RESEARCH_NOT_READY_FOR_SUPPORT_CLAIMS",
+  "not_a_claim": "No profitable/tradable result, historical UTC certification, human gold, source licence clearance, new calibrated inference or permission to open holdouts is manufactured by software tests.",
+  "closed_engineering_and_reporting": [
+    {
+      "issue": "An empty/all-nongating referee report could say PASS.",
+      "resolution": "Fail closed unless at least one gating outcome exists; regression covers both cases."
+    },
+    {
+      "issue": "Default project referee omitted known clock qualification and monthly-calibration failures.",
+      "resolution": "New recorded-evidence checks hold project-wide support readiness at level1 for both. Conditional Eastern agreement cannot substitute for qualification, and a passing synthetic harness cannot substitute for acceptable test size.",
+      "evidence": "results/project_readiness_checks.json",
+      "scope_limit": "Only those new metadata/calibration checks executed; no full referee CLI, financial data checks or simulations rerun."
+    },
+    {
+      "issue": "README called an optimistic hypothetical power illustration reliably detectable and implied holdout or estimator substitution cures inference.",
+      "resolution": "Qualify the illustration, scope IM to its tested synthetic geometry and explicitly require adequate measurement/data/inference before a separately approved holdout evaluation. Registered hypotheses and thresholds unchanged."
+    },
+    {
+      "issue": "Relative follow-up receipt paths failed provenance fingerprinting.",
+      "resolution": "Resolve before fingerprinting; successful relative-path regression added."
+    },
+    {
+      "issue": "Runtime cache-disable inheritance and native process telemetry had only mocked evidence.",
+      "resolution": "Bounded three-call live check completed with native cache-disable log, real per-PID samples and verified owned cleanup. This closes the missing smoke validation, not long-report memory safety or model measurement quality."
+    }
+  ],
+  "runtime_live_check": {
+    "config": "results/closure_memory_smoke_config.json",
+    "original_report": "results/closure_memory_smoke_config_report.json",
+    "model": "qwen3.5:4b",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "calls_started": 3,
+    "calls_complete": 3,
+    "inputs": "Invented tiny prompts only; no real benchmark, claim labels, training or pull.",
+    "elapsed_since_owned_server_start_seconds": 77.67041,
+    "sampled_peak_owned_RSS_bytes": 4193091584,
+    "memory_stop_bytes": 10737418240,
+    "per_PID_snapshot_rows": 35,
+    "process_identities": 3,
+    "native_model_runner_identities": 1,
+    "identities": "Owned Ollama root, one actual llama-server model runner and its conhost; no runner reload observed during three calls.",
+    "native_log_proof": {
+      "path": "data/project_closure/owned-server.log",
+      "line": 271,
+      "text": "prompt cache is disabled - use `--cache-ram N` to enable it",
+      "active_KV_buffer_MiB": 512,
+      "compute_threads": 4,
+      "HTTP_service_threads_reported": 15
+    },
+    "thread_scope": "Four model-compute threads, not a hard four-total-OS-thread quota; backend HTTP service threads remain.",
+    "host_CPU_time_weighted_mean_percent": 29.423332315435992,
+    "host_CPU_max_percent": 63.16287878787878,
+    "sleep_interruptions": 0,
+    "cleanup": "Creation FILETIME checked before specific-PID termination, descendants before root; owned11435listener absent afterwards. Shared11434/Docker untouched.",
+    "limits": "Small short-input smoke, sampled at1s plus call boundaries, not an OS-enforced quota or a long-context/repeated-report stress test. Active KV and weights still occupy memory. No retrospective proof of REAL3's memory cause or scientific reader adequacy."
+  },
+  "official_clock_document_audit": {
+    "new_requests": 8,
+    "approved_max_requests": 10,
+    "budget_before": 3246,
+    "budget_after": 3254,
+    "ceiling_unchanged": 34402,
+    "all_HTTP_statuses": 200,
+    "complete_bodies": 7,
+    "explicit_cap_stop": "Historical manual declared23159215bytes; frozen4MiB stage retained0bytes and stopped. User historical_manual=true explicitly authorized ONE amended32MiB GET of the same official URL, within originalten-request quota.",
+    "no_implicit_retry_or_redirect_follow": true,
+    "no_filing_or_bulk_request": true,
+    "sources": [
+      {
+        "URL": "https://www.sec.gov/search-filings/public-dissemination-service-system-contact",
+        "role": "Official discovery source for PDS technical-specification link."
+      },
+      {
+        "URL": "https://www.sec.gov/submit-filings/filer-support-resources",
+        "role": "Official discovery source for Filer Manual page."
+      },
+      {
+        "URL": "https://www.sec.gov/files/edgar/pds_dissemination_spec.zip",
+        "version": "PDS Technical Specification2.1,May2025,84PDFpages",
+        "finding": "PhysicalPDFpage9 defines Acceptance Date as YYYYMMDD; page84 expands ET as Eastern Time. No field-specific acceptance-DATETIME timezone/historical guarantee established.",
+        "PDF_SHA256": "3b7128be38d44c499529d01ea7eaeae6fbbb1a6ffb2109c90303b48ccf254a43",
+        "boundary": "Only specification PDF opened. Two bundled2025.dissem filing-example members were not opened, extracted, ingested or used."
+      },
+      {
+        "URL": "https://www.sec.gov/submit-filings/edgar-filer-manual",
+        "role": "Version/deployment and exact archive/chapter link provenance."
+      },
+      {
+        "URL": "https://www.sec.gov/files/edgar/filermanual/efmvol2-c1.pdf",
+        "version": "September14,2026 introduction,2pages",
+        "finding": "No relevant field-specific clock definition established."
+      },
+      {
+        "URL": "https://www.sec.gov/files/edgar/filermanual/efmvol2-aa.pdf",
+        "version": "September14,2026 acceptance/suspense-message appendix,1page",
+        "finding": "Acceptance notification is not a definition of historical JSON/header timestamp clocks."
+      },
+      {
+        "URL": "https://www.sec.gov/files/edgar/filermanual/archive/efmvol2-v60.pdf",
+        "version": "VolumeII,Version60,December2021,961pages",
+        "bytes": 23159215,
+        "SHA256": "46c25f804f89bb2477a9b821cf2b0f3d8f196df2e4c3d9fb8004461764405812",
+        "review": "Whole-document text and normalized wrapped-field-name search plus targeted receipt/acceptance section review.",
+        "findings": "Physicalpages39,77,817document Eastern operating hours, filing-date cutoffs and acceptance notifications. Those do not define the14digit acceptance field's clock or certify API/bulk historical accuracy.",
+        "applicability_limit": "One historical version is not a blanket contract for all2022–2024source versions."
+      }
+    ],
+    "parser": "Existing pypdf7.0.1; no parser dependency installation required.",
+    "field_clock_qualified": false,
+    "interpretation": "No explicit field-specific historical clock definition was established in the reviewed sources. This is not a claim that none exists anywhere. Eastern remains a labelled assumption; no timestamp repair or old-result rewrite."
+  },
+  "remaining_substantive_requirements": [
+    {
+      "area": "Historical timestamps and coverage",
+      "status": "NOT_RESOLVED_BY_CODE",
+      "evidence": "Only1311of16921accessions have unique conditional comparisons;0historically qualified. A2 completed50of3000new cases;1/314readable discrepancy,nominalupper1.50%,all-selected unread sensitivityupper91.26%.",
+      "needed": "Applicable field-clock authority, qualified venue/early-close calendar and role/identity evidence; separately approved acquisition/continuation if justified. Budget headroom is not automatic resume permission."
+    },
+    {
+      "area": "Survivorship, security identity and point-in-time fundamentals",
+      "status": "NEEDS_RIGHTS_AND_QUALIFIED_DATA",
+      "needed": "Resolve exact product/channel/public-review rights, then authorized pre-cutoff sample qualification on the12-case panel, including permanent IDs, dated ticker/venue/SIC, cash/stock/OTC/fractional/election/warrant/terminal treatment. Add a separately authorized CVR case before claiming general completeness.",
+      "existing_artifact": "results/price_source_test_panel.json",
+      "not_done": "No account, key, purchase, vendor contact or price/fundamental acquisition."
+    },
+    {
+      "area": "Human claim-change gold",
+      "status": "NEEDS_PEOPLE_AND_APPROVED_ROSTER",
+      "needed": "Recruit two independent annotators and adjudicator, authorize handling/hours, qualify historical strata and freeze company/time-disjoint60-pair roster before labels. Empty first-pass template is prepared; no labels or AI gold created.",
+      "existing_artifacts": ["docs/H1_DESIGN.md", "docs/h1_annotation_first_pass_template.csv"]
+    },
+    {
+      "area": "Formal H1 measurement and model validity",
+      "status": "NOT_SCIENTIFICALLY_VALIDATED",
+      "needed": "After human gold, freeze actual extractor/tokenizer/prompt/chunking/parser and ChronoBERT eligible-vintage mapping; compare structural/numeric/dated-TFIDF baselines on untouched companies. Modern pretraining contamination cannot be erased by fine-tuning.",
+      "limits": "Reader QA and three tiny runtime prompts are not paired-claim extraction validation. Strict-format line remains stopped; no training or real-model benchmark was run."
+    },
+    {
+      "area": "Inference, power and economic target",
+      "status": "NO_VALID_CURRENT_MONTHLY_SUPPORT_TEST",
+      "needed": "More genuinely independent eligible periods and prospectively calibrated inference at actual factor/overlap geometry; choose a meaningful incremental net effect before return evaluation. No tested monthly method passes T17/18/28. G7IM evidence applies only to its tested synthetic geometry.",
+      "limits": "No method swap, threshold relaxation, new simulation, hypothesis rewrite or holdout opening. Negative/null findings are not bugs to turn positive."
+    },
+    {
+      "area": "Costs and executable trading",
+      "status": "NEEDS_OBSERVED_INPUTS_AND_FROZEN_ASSUMPTIONS",
+      "needed": "Dated tradability and auction/early-close feasibility, spreads/impact/fees/borrow availability or an explicitly long-only design, plus break-even analysis under approved data. Current spread proxy is not observed full execution cost.",
+      "limits": "No prices, returns, signals, portfolio weights or backtest rerun in this closure pass."
+    },
+    {
+      "area": "Reproducibility and enforced isolation",
+      "status": "PARTIAL_ENGINEERING_ONLY",
+      "needed": "After source qualification, separately authorized reconstruction/reconciliation of remaining F7/F8 identity/version differences and properly scoped execution isolation. Cooperative run receipts are not authenticated permissions or an installed sandbox.",
+      "maintenance": "Legacy referee/test files retain17pre-existing Ruff findings; no new findings introduced. This pass did not silently modernize unrelated code."
+    }
+  ],
+  "validation": {
+    "final_code_full_pytest_passed": 459,
+    "pytest_seconds": 50.61,
+    "warnings": "Two existing sparse-control SingularMatrixWarnings.",
+    "focused_final_cap_tests": 34,
+    "new_and_changed_operational_files_Ruff": "passed",
+    "legacy_referee_Ruff": "16source+1test baseline findings unchanged;0introduced.",
+    "no_editor_typecheck_claim": true,
+    "local_link_targets_checked": 207,
+    "Markdown_anchors_checked": 34,
+    "external_URL_syntax_checks_only": 101,
+    "external_HTTP_during_checks": 0,
+    "annotation_template": "38unique first-pass headers,0cases/labels; CSV parsed and checked.",
+    "ledger_rows_unchanged": 74,
+    "no_bulk_resumption": true,
+    "no_sealed_access": true,
+    "no_paid_calls_accounts_or_keys": true,
+    "no_push_or_tags": true
+  }
+}
