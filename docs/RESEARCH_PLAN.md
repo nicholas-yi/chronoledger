@@ -15,6 +15,11 @@ retrospective measurement from historically implementable prediction and include
 sources, assumptions, rejected shortcuts and proposed work packages. These are recommendations,
 not new registrations, source clearance, execution permission or replacements for stopped results.
 
+The first implementation is the [offline audit confidence sequence](AUDIT_CONFIDENCE_SEQUENCE.md),
+with conservative unread-sampled-label unions and a separate frozen invented-data validation
+plan. It does not import A2 counts, resume collection or establish the historical sampling
+and field-clock assumptions. Measurement-error estimators and reader changes remain proposals.
+
 ## How an idea becomes a result
 
 The project is developed with a small team of AI agents that each play one role: a research agent

@@ -1,0 +1,45 @@
+{
+  "label": "FROZEN INVENTED-DATA IMPLEMENTATION CHECK; NOT PROJECT OR TIMESTAMP INFERENCE",
+  "version": "audit-cs-validation-v1",
+  "source_pin": "The commit containing this plan, verified against worktree bytes before launch",
+  "source": "https://arxiv.org/html/2006.04347v4",
+  "method": "Uniform full-support prior on integer population totals; hypergeometric PPR; union over unread sampled labels",
+  "population": 80,
+  "total_errors": [0, 1, 8, 40, 79, 80],
+  "missingness": ["none", "hide_errors", "hide_nonerrors", "all_unread", "bursts"],
+  "replicates_per_cell": 1000,
+  "planned_paths": 30000,
+  "seed": 2026111701,
+  "delta": 0.05,
+  "confidence_set_evaluations": "Every prefix, including the empty prefix, of every full random permutation",
+  "stopping_diagnostics": [
+    "First readable error, otherwise census",
+    "First upper bound <= 0.10 after at least 20 draws, otherwise census"
+  ],
+  "missingness_details": {
+    "hide_errors": "Unread if the fixed true label is one",
+    "hide_nonerrors": "Unread if the fixed true label is zero",
+    "all_unread": "All sampled labels unresolved",
+    "bursts": "Unread at zero-based positions with position modulo 7 in 0,1,2"
+  },
+  "implementation_QA_rule": {
+    "exact_checks": "All focused rational-reference and exact random-order tests must pass before freeze",
+    "monte_carlo": "Complete every path; simultaneous one-sided 95% Bonferroni CP upper bounds on anytime noncoverage must each be <= 0.075",
+    "MC_family_size": 30,
+    "interpretation": "A finite QA screen, not proof of coverage, source qualification or adoption for historical audits"
+  },
+  "limits": {
+    "controller_wall_seconds": 300,
+    "worker_soft_wall_seconds": 270,
+    "worker_CPU_seconds": 270,
+    "RAM_bytes": 1073741824,
+    "compute_threads": 1,
+    "worker_affinity_logical_processors": 1
+  },
+  "stop_policy": "Final stop; no retry or automatic resume; incomplete work never passes",
+  "prohibitions": [
+    "No A2 replay or replacement bound",
+    "No SEC, market data, models, real labels, return evaluation or holdout",
+    "No ledger row, push or tag"
+  ]
+}
