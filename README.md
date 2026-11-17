@@ -412,7 +412,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
 | Would a trained model measure change better? | Real labelled claim pairs and training/test splits separated by time and by company | A bigger model does not create more independent market evidence |
 | Could anyone actually trade it? | Observed spreads, price impact, fees and borrow availability, plus a long-only version | A spread estimate does not show a short strategy is executable |
-| Does any of it survive out of sample? | One separately approved evaluation on the sealed July 2024 - October 2026 holdout, only after measurement, data and inference are adequate | An untouched sample is necessary, but opening it does not fix bad calibration or low power |
+| Does any of it survive out of sample? | One evaluation on the sealed July 2024 - October 2026 holdout, only after measurement, data and inference are adequate | An untouched sample is necessary, but opening it does not fix bad calibration or low power |
 
 The [research plan](docs/RESEARCH_PLAN.md) describes how each of these will be tested, the
 agent workflow used to run experiments, three new study ideas and candidate data sources.
