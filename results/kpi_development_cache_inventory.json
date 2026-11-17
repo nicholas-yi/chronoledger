@@ -1,0 +1,49 @@
+{
+  "status": "sufficient_for_new_freeze",
+  "knowledge_and_period_envelope": [
+    "2012-01-01",
+    "2018-12-31"
+  ],
+  "metadata_annual_rows": 52483,
+  "scope_or_metadata_rejections": 6286,
+  "cached_eligible_annual_bodies_by_existence": 5027,
+  "eligible_issuer_triples": 843,
+  "minimum_required": 30,
+  "used_context_scope_rejections": 5,
+  "context_metadata_rows_loaded": 63563,
+  "method": "latest eligible annual triple per issuer; all dates checked including used context",
+  "acceptance_mapping": "bulk knowledge_time stores reported SEC acceptance; explicitly declared as both date roles, not independently UTC-certified",
+  "metadata_columns": [
+    "cik",
+    "accession",
+    "form",
+    "knowledge_time",
+    "report_date",
+    "primary_doc"
+  ],
+  "metadata_filters": "10-K,2012-01-01..2018-12-31",
+  "document_bodies_read": 0,
+  "document_cache_objects_hashed": 0,
+  "new_downloads": 0,
+  "model_calls": 0,
+  "return_evaluations": 0,
+  "trial_ledger_rows_appended": 0,
+  "scientific_acceptance": false,
+  "old_quarantined_roster_used": false,
+  "lineage": {
+    "git_commit": "65ae260058c1fe6ba166c5aea989dcd9ba5faaab",
+    "git_dirty": false,
+    "inputs": {},
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  }
+}

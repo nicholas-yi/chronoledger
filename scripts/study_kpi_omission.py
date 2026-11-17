@@ -13,11 +13,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from calibrate_inference import resident_bytes
+from count_kpi_development_cache import MINIMUM, inventory
 from validate_audit_cs import THREAD_VARIABLES, WorkerJob
 
 from asof import ledger
 from asof.config import DATA_DIR, PROJECT_ROOT
-from asof.edgar import response_cache_path
+from asof.document_scope import filing_document_dates, parse_document_date
 from asof.kpi_omission import (
     MAX_BODY,
     MAX_CASES,
@@ -26,22 +27,22 @@ from asof.kpi_omission import (
     SEED,
     analyze_case,
     assert_development_disclosures,
-    filing_url,
     pin_filing,
     read_cached,
     summarize,
 )
 
-PRIVATE = DATA_DIR / "kpi_omission_v1"
+PRIVATE = DATA_DIR / "kpi_omission_dev_v1"
 MANIFEST = PRIVATE / "manifest.json"
-PLAN = PROJECT_ROOT / "results" / "kpi_omission_plan.json"
-REPORT = PROJECT_ROOT / "results" / "kpi_omission_review.json"
+PLAN = PROJECT_ROOT / "results" / "kpi_omission_dev_plan.json"
+REPORT = PROJECT_ROOT / "results" / "kpi_omission_dev_review.json"
 CACHE = DATA_DIR / "raw" / "sec"
 FROZEN = (
     "src/asof/kpi_omission.py", "scripts/study_kpi_omission.py", "tests/test_kpi_omission.py",
     "tests/test_kpi_study_runner.py",
     "src/asof/sections.py", "src/asof/edgar.py", "scripts/validate_audit_cs.py",
-    "scripts/calibrate_inference.py", "results/kpi_omission_plan.json",
+    "scripts/calibrate_inference.py", "src/asof/document_scope.py",
+    "scripts/count_kpi_development_cache.py", "results/kpi_omission_dev_plan.json",
 )
 PROTECTED = (
     DATA_DIR / "p0_SEC_request_receipt.json",
@@ -60,69 +61,48 @@ def write_json(path: Path, data: dict | list) -> None:
 def prepare() -> dict:
     if MANIFEST.exists() or PLAN.exists():
         raise FileExistsError("plan already exists; preserve the frozen selection")
-    assert_development_disclosures([
-        {"accepted_at": "2021-07-01T00:00:00+00:00",
-         "knowledge_time": "2021-07-01T00:00:00+00:00", "report_date": "2021-07-01"},
-        {"accepted_at": "2024-06-30T23:59:59+00:00",
-         "knowledge_time": "2024-06-30T23:59:59+00:00", "report_date": "2024-06-30"},
-    ])
-    import pandas as pd
-
-    metadata = DATA_DIR / "bulk_filings.parquet"
-    frame = pd.read_parquet(
-        metadata, columns=["cik", "accession", "form", "knowledge_time", "report_date",
-                           "primary_doc", "items"],
-        filters=[("form", "in", ["10-K", "8-K"]),
-                 ("knowledge_time", ">=", pd.Timestamp("2021-07-01", tz="UTC")),
-                 ("knowledge_time", "<=", pd.Timestamp("2024-06-30 23:59:59", tz="UTC"))],
-        use_threads=False)
-
-    def row_dict(row) -> dict:
-        return {"cik": int(row.cik), "accession": row.accession, "form": row.form,
-                "knowledge_time": row.knowledge_time.isoformat(),
-                "report_date": str(row.report_date)[:10], "primary_doc": row.primary_doc}
-
-    annual = frame[frame.form == "10-K"].dropna(subset=["report_date", "primary_doc"]).copy()
-    annual["report_date"] = pd.to_datetime(annual["report_date"])
-    annual = annual[annual.report_date <= pd.Timestamp("2024-06-30")]
-    annual["cached"] = [
-        response_cache_path(filing_url(row_dict(r)), CACHE).is_file()
-        for r in annual.itertuples()]
-    pool = []
-    for cik, group in annual[annual.cached].groupby("cik"):
-        group = group.sort_values(["report_date", "knowledge_time", "accession"])
-        group = group.drop_duplicates("report_date", keep="first").tail(3)
-        if (len(group) != 3
-                or not group.report_date.diff().dt.days.iloc[1:].between(330, 400).all()
-                or not group.knowledge_time.is_monotonic_increasing
-                or group.knowledge_time.duplicated().any()):
-            continue
-        refs = [row_dict(r) for r in group.itertuples()]
-        key = hashlib.sha256(f"{SEED}:{int(cik)}".encode()).hexdigest()
-        pool.append((key, int(cik), refs))
+    count, pool = inventory()
+    if len(pool) < MINIMUM:
+        raise RuntimeError("fewer than30 eligible issuer triples; stop without bodies or downloads")
     cases = []
-    for i, (_, cik, refs) in enumerate(sorted(pool)[:MAX_CASES], 1):
-        current = pd.Timestamp(refs[-1]["knowledge_time"])
-        context = frame[
-            (frame.cik == cik) & (frame.form == "8-K")
-            & (frame.knowledge_time < current)
-            & (frame.knowledge_time >= current - pd.Timedelta(days=120))
-            & frame["items"].fillna("").astype(str).str.contains("2.02", regex=False)
-        ].sort_values(["knowledge_time", "accession"]).tail(2)
-        context_refs = [row_dict(r) for r in context.itertuples()]
+    guard_rows = []
+    selected = sorted(pool, key=lambda row: hashlib.sha256(
+        f"{SEED}:{row['cik']}".encode()).hexdigest())[:MAX_CASES]
+    for i, candidate in enumerate(selected, 1):
+        cik, refs, context_refs = candidate["cik"], candidate["annual"], candidate["context"]
         assert_development_disclosures(refs + context_refs)
+        case_id = f"KPI-DEV-{i:03d}"
+        for role, records in (("annual", refs), ("context", context_refs)):
+            for index, ref in enumerate(records):
+                dates = filing_document_dates(ref)
+                guard_rows.append({
+                    "case_id": case_id, "role": role, "index": index,
+                    "accession": ref["accession"], "guard_passed": True,
+                    "acceptance": parse_document_date(dates.accepted_at, "acceptance").isoformat(),
+                    "knowledge": parse_document_date(dates.knowledge_at, "knowledge").isoformat(),
+                    "period_end": parse_document_date(dates.period_end, "period_end").isoformat(),
+                    "source_clock_qualified": False,
+                })
         cases.append({
-            "case_id": f"KPI-{i:03d}", "cik": cik,
-            "annual": [pin_filing(r, CACHE) for r in refs],
-            "context": [pin_filing(r, CACHE) for r in context_refs],
+            "case_id": case_id, "cik": cik,
+            "annual": [pin_filing(r, CACHE, fingerprint=False) for r in refs],
+            "context": [pin_filing(r, CACHE, fingerprint=False) for r in context_refs],
         })
     if not cases:
         raise ValueError("no eligible cached annual triples; do not broaden or fabricate a roster")
-    write_json(MANIFEST, {"cases": cases, "metadata_SHA256": ledger.file_sha256(metadata)})
+    write_json(MANIFEST, {"cases": cases})
+    write_json(PRIVATE / "guard_passes.json", guard_rows)
     result = {
-        "study": "KPI-OMISSION-EXPLORATORY-v1", "status": "frozen_plan_not_executed",
+        "study": "KPI-OMISSION-DEVELOPMENT-v1", "status": "frozen_plan_not_executed",
         "seed": SEED, "metadata_eligible_issuers": len(pool), "selected_cases": len(cases),
+        "period_change": "2012-01-01..2018-12-31 for acceptance/knowledge/period/context; "
+                         "not the superseded2021-2024 roster",
+        "inventory_metadata_annual_rows": count["metadata_annual_rows"],
         "manifest_SHA256": ledger.file_sha256(MANIFEST),
+        "guard_passes_SHA256": ledger.file_sha256(PRIVATE / "guard_passes.json"),
+        "guard_document_count": len(guard_rows),
+        "preparation_body_reads": 0, "preparation_body_fingerprints": 0,
+        "cache_snapshot": "size/mtime pinned before content; SHA256 recorded at first guarded read",
         "selection": "first 64 issuer SHA256(seed:CIK) ranks; latest cached annual triple, "
                      "330-400 day report-period gaps, increasing unqualified stored times",
         "history": "two prior comparable annual reports, not the paper's three-prior-year rule",
@@ -159,7 +139,20 @@ def worker(cases: list[dict], channel) -> None:
             if total_bytes + MAX_BODY + 1 > MAX_TOTAL_BODY:
                 stop = "uncompressed_body_budget_before_next_resource"
                 break
+            assert_development_disclosures([ref])
+            with (PRIVATE / "resource_receipts.jsonl").open("a", encoding="utf-8") as stream:
+                stream.write(json.dumps({
+                    "case_id": case["case_id"], "accession": ref["accession"],
+                    "phase": "guard_pass_before_body", "accepted_at": ref["accepted_at"],
+                    "knowledge_time": ref["knowledge_time"], "period_end": ref["report_date"],
+                }) + "\n")
             doc = read_cached(ref, CACHE)
+            with (PRIVATE / "resource_receipts.jsonl").open("a", encoding="utf-8") as stream:
+                stream.write(json.dumps({
+                    "case_id": case["case_id"], "accession": ref["accession"],
+                    "phase": "completed", "status": doc.status, "reason": doc.reason,
+                    "body_bytes": doc.body_bytes,
+                }) + "\n")
             documents.append(doc)
             total_bytes += doc.body_bytes
             if total_bytes > MAX_TOTAL_BODY:
@@ -243,6 +236,8 @@ def run() -> dict:
     plan = json.loads(PLAN.read_bytes())
     if ledger.file_sha256(MANIFEST) != plan["manifest_SHA256"]:
         raise ValueError("frozen manifest changed")
+    if ledger.file_sha256(PRIVATE / "guard_passes.json") != plan["guard_passes_SHA256"]:
+        raise ValueError("per-document guard receipts changed")
     cases = json.loads(MANIFEST.read_bytes())["cases"]
     assert_development_disclosures([
         ref for case in cases for ref in case["annual"] + case["context"]])
@@ -314,6 +309,10 @@ def run() -> dict:
         manifest_SHA256=ledger.file_sha256(MANIFEST),
         cases_SHA256=ledger.file_sha256(PRIVATE / "cases.json"),
         casebook_SHA256=ledger.file_sha256(PRIVATE / "casebook.md"),
+        guard_passes_SHA256=ledger.file_sha256(PRIVATE / "guard_passes.json"),
+        resource_receipts_SHA256=(
+            ledger.file_sha256(PRIVATE / "resource_receipts.jsonl")
+            if (PRIVATE / "resource_receipts.jsonl").exists() else None),
         controller_wall_seconds=time.perf_counter() - started,
         controller_OS_peak_RSS_bytes=resident_bytes(),
         source_unchanged=all(
@@ -326,9 +325,25 @@ def run() -> dict:
         model_calls=0, new_downloads=0, return_evaluations=0,
         source_scope="conservative_development_guard_not_scientific_clearance",
     )
+    result["sum_of_separate_OS_RSS_peaks_bytes"] = (
+        result["controller_OS_peak_RSS_bytes"] + result.get("worker_OS_peak_RSS_bytes", 1 << 30))
+    result["resource_check_passed"] = (
+        result["controller_wall_seconds"] <= 300
+        and result.get("affinity_logical_processors") == 1
+        and result["sum_of_separate_OS_RSS_peaks_bytes"] < 1 << 30
+        and result.get("body_bytes_read", MAX_TOTAL_BODY + 1) <= MAX_TOTAL_BODY)
+    result["roster_and_guard_receipts_unchanged"] = (
+        result["manifest_SHA256"] == plan["manifest_SHA256"]
+        and result["guard_passes_SHA256"] == plan["guard_passes_SHA256"])
+    failures = []
     if not result["source_unchanged"] or not result["protected_unchanged"]:
+        failures.append("source_or_protected_evidence_changed")
+    if not result["resource_check_passed"] or not result["roster_and_guard_receipts_unchanged"]:
+        failures.append("resource_or_roster_check_unqualified")
+    result["post_run_failure_reasons"] = failures
+    if failures:
         result["status"] = "stopped"
-        result["stop_reason"] = "source_or_protected_evidence_changed"
+        result["stop_reason"] = result["stop_reason"] or ";".join(failures)
     write_json(REPORT, result)
     return result
 

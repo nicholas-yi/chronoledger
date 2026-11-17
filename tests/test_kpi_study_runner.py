@@ -29,11 +29,7 @@ def test_prior_case_attempt_blocks_before_data_or_worker_access(tmp_path, monkey
     assert issues == ["b:truncated_checkpoint"]
 
 
-def test_quarantined_envelope_is_rejected_before_metadata_access(tmp_path, monkeypatch) -> None:
-    import pandas as pd
-
-    from asof.periods import HoldoutAccessError
-
+def test_insufficient_development_cache_stops_before_body_pinning(tmp_path, monkeypatch) -> None:
     scripts = Path(__file__).resolve().parents[1] / "scripts"
     monkeypatch.syspath_prepend(str(scripts))
     spec = importlib.util.spec_from_file_location("kpi_guard_test", scripts / "study_kpi_omission.py")
@@ -43,6 +39,7 @@ def test_quarantined_envelope_is_rejected_before_metadata_access(tmp_path, monke
     spec.loader.exec_module(module)
     monkeypatch.setattr(module, "MANIFEST", tmp_path / "manifest.json")
     monkeypatch.setattr(module, "PLAN", tmp_path / "plan.json")
-    monkeypatch.setattr(pd, "read_parquet", lambda *a, **k: pytest.fail("metadata must not be read"))
-    with pytest.raises(HoldoutAccessError, match="H4/H6"):
+    monkeypatch.setattr(module, "inventory", lambda: ({}, [{}] * 29))
+    monkeypatch.setattr(module, "pin_filing", lambda *a, **k: pytest.fail("no body pin"))
+    with pytest.raises(RuntimeError, match="fewer than30"):
         module.prepare()

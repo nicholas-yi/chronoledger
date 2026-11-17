@@ -10,6 +10,8 @@ certify exclusion of all outcome-bearing material. Existing holds and failed res
 **The `a9d788f` roster is superseded and must not be used.** The original frozen
 plan/manifest and failed receipts remain unchanged; see
 [D13](DEVIATIONS.md#d13-exploratory-kpi-disclosure-screen-crossed-reserved-calendars).
+The separately authorized [development-only replacement](KPI_DEVELOPMENT_STUDY.md)
+uses new paths and a new freeze; it does not release or reinterpret this old evidence.
 A subsequent metadata-only review found that the pinned 2021-2024 disclosure roster
 overlaps the separately reserved H4/H6(a) calendar even though it predates the return
 holdout. No cached-case evidence may be used or published pending Lead/owner review.
@@ -100,10 +102,10 @@ uncertainty direction and incremental alpha cannot be supplied by this screen.
 
 ## Local workflow and safety
 
-These commands document the frozen interface, not permission to continue the quarantined
-roster. Preparation now rejects its reserved-date envelope before reading filing metadata;
+These commands describe the old frozen interface, not permission to continue its quarantined
+roster. The current runner implements only the D13 development replacement with new paths;
 execution checks every pinned annual and context date before any body access. Do not delete
-receipts or adjust dates to force a run. A new approved scope/freeze is required.
+old receipts or point the new runner at quarantine.
 
 ```powershell
 $env:OPENBLAS_NUM_THREADS='1'

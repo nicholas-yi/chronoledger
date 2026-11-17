@@ -117,6 +117,24 @@ def test_body_cap_is_unknown_and_cache_miss_never_constructs_http_client(
     assert capped.reason == "body_cap_not_read_complete"
 
 
+def test_metadata_only_pin_defers_body_hash_until_guarded_execution(tmp_path, monkeypatch) -> None:
+    import asof.kpi_omission as module
+    from asof.edgar import response_cache_path
+
+    row = {"cik": 1, "accession": "0000000001-17-000001", "primary_doc": "a.htm",
+           "form": "10-K", "knowledge_time": "2017-02-01T10:00:00+00:00",
+           "accepted_at": "2017-02-01T10:00:00+00:00", "report_date": "2016-12-31"}
+    path = response_cache_path(module.filing_url(row), tmp_path)
+    path.parent.mkdir()
+    path.write_bytes(gzip.compress(b"<html><p>Backlog 20 units.</p></html>"))
+    monkeypatch.setattr(module, "file_sha256", lambda _: pytest.fail("no preparation body hash"))
+    ref = pin_filing(row, tmp_path, fingerprint=False)
+    assert ref["cache_SHA256"] is None
+    result = read_cached(ref, tmp_path)
+    assert result.status == "available"
+    assert result.provenance["cache_SHA256_at_read"] is not None
+
+
 @pytest.mark.parametrize("period,expected", [
     ("March 31, 2017", "available"),
     ("March 30, 2017", "inline_period_conflict"),

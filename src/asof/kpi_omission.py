@@ -59,14 +59,18 @@ def filing_url(row: dict) -> str:
             f"{row['accession'].replace('-', '')}/{row['primary_doc']}")
 
 
-def pin_filing(row: dict, cache: Path) -> dict:
+def pin_filing(row: dict, cache: Path, *, fingerprint: bool = True) -> dict:
     require_eligible_documents((filing_document_dates(row),))
     url = filing_url(row)
     path = response_cache_path(url, cache)
     present = path.is_file()
+    snapshot = path.stat() if present else None
     return {
         **row, "url": url, "cache_present": present,
-        "cache_SHA256": file_sha256(path) if present else None,
+        "cache_SHA256": file_sha256(path) if present and fingerprint else None,
+        "cache_stat": (
+            {"bytes": snapshot.st_size, "mtime_ns": snapshot.st_mtime_ns} if snapshot else None),
+        "cache_pin_kind": "content_hash" if fingerprint else "stat_only_until_guarded_execution",
     }
 
 
@@ -93,12 +97,21 @@ def read_cached(ref: dict, cache: Path) -> CachedText:
         return CachedText("unavailable", None, 0, provenance, "not_cached_at_freeze")
     if not path.is_file():
         return CachedText("unavailable", None, 0, provenance, "cache_missing_after_freeze")
+    stat = path.stat()
+    if ref.get("cache_stat") and ref["cache_stat"] != {
+            "bytes": stat.st_size, "mtime_ns": stat.st_mtime_ns}:
+        raise ValueError(f"frozen cache changed: {ref['accession']}")
     with path.open("rb") as stream:
         compressed = stream.read((32 << 20) + 1)
     if len(compressed) > 32 << 20:
         return CachedText("unavailable", None, 0, provenance, "compressed_cache_cap")
-    if hashlib.sha256(compressed).hexdigest() != ref["cache_SHA256"]:
+    digest = hashlib.sha256(compressed).hexdigest()
+    if ref["cache_SHA256"] is not None and digest != ref["cache_SHA256"]:
         raise ValueError(f"frozen cache changed: {ref['accession']}")
+    after = path.stat()
+    if (after.st_size, after.st_mtime_ns) != (stat.st_size, stat.st_mtime_ns):
+        raise ValueError(f"frozen cache changed during read: {ref['accession']}")
+    provenance.update(cache_SHA256_at_read=digest, cache_pin_kind=ref.get("cache_pin_kind"))
     try:
         with gzip.GzipFile(fileobj=io.BytesIO(compressed)) as stream:
             body = stream.read(MAX_BODY + 1)
