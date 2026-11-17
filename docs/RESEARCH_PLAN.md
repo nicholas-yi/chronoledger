@@ -21,6 +21,11 @@ features, typed economic transmission, the complexity debate, robust dynamic con
 and partial identification. It develops a mechanism-first research thesis and ranked
 proposals from 24 sources, not another implemented strategy or an execution approval.
 
+Under a subsequent `all_offline` approval, the [offline quant toolkit](OFFLINE_QUANT_TOOLKIT.md)
+implements working reference algorithms for all nine frontier directions. Its
+invented-fixture checks test mathematics and access-free composition, not the
+economic claims, calibration or predictive performance of any proposed study.
+
 The first implementation is the [offline audit confidence sequence](AUDIT_CONFIDENCE_SEQUENCE.md),
 with conservative unread-sampled-label unions. Its [frozen invented-data check](../results/audit_cs_validation.json)
 completed all 30,000 paths within the approved resource limits and passed the declared

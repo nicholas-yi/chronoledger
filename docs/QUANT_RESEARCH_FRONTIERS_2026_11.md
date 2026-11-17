@@ -14,6 +14,13 @@ models, simulations, studies or production ledger rows were accessed or run.
 External papers' aggregate empirical claims are literature, not project results.
 No purchases, keys, institutional entitlements or human/vendor contact were used.
 
+**Subsequent implementation:** under a separate `all_offline` user approval,
+the [offline quant toolkit](OFFLINE_QUANT_TOOLKIT.md) now implements bounded
+in-memory reference algorithms for all nine directions with invented-fixture tests.
+The proposals and authorization statements below retain their original review-time
+meaning. That later approval did not authorize empirical studies, model training,
+source collection, existing hold removal or a financial-performance claim.
+
 ## Executive thesis
 
 **The ambitious project is an economic-information laboratory, not a filing chatbot

@@ -15,6 +15,13 @@ ET = ZoneInfo("America/New_York")
 MARKET_CLOSE_ET = time(16, 0)
 
 
+def aware_utc(value: datetime, name: str = "time") -> datetime:
+    """Validate an aware datetime and normalize its declared instant, not its authority."""
+    if not isinstance(value, datetime) or value.tzinfo is None or value.utcoffset() is None:
+        raise ValueError(f"{name} must be a timezone-aware datetime")
+    return value.astimezone(UTC)
+
+
 def parse_acceptance_utc(value: str) -> datetime:
     """Parse a Z-labeled representation; this does not certify the underlying acceptance instant."""
     if not value.endswith("Z"):

@@ -438,6 +438,11 @@ It excludes the optional embed and benchmarks extras; use a separate environment
 for those, outside this locked-environment receipt. Installation does not lift
 study holds or authorize data access.
 
+The [offline quant toolkit](docs/OFFLINE_QUANT_TOOLKIT.md) provides in-memory
+reference algorithms for economic innovation, event-time paths, typed exposure,
+mechanism twins, robust control, identification bounds and prequential scoring.
+Its invented-fixture tests need no research datasets and do not establish an edge.
+
 Rebuilding the data from SEC EDGAR takes several hours and needs a contact email in
 `ASOF_USER_AGENT`, as the SEC requires; follow the step-by-step
 [runbook](docs/DATA_AUDIT.md#data-rebuild-runbook). The Python package is called `asof`, after the

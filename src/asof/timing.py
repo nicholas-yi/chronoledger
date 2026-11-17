@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import datetime
 from itertools import pairwise
 from typing import Literal
 
 from asof.periods import price_end_allowed
+from asof.timeutil import aware_utc
 
 PlanStatus = Literal["complete", "missing", "unavailable", "censored"]
 
@@ -43,9 +44,7 @@ class ReturnWindowPlan:
 
 
 def _utc(value: datetime, name: str) -> datetime:
-    if not isinstance(value, datetime) or value.tzinfo is None or value.utcoffset() is None:
-        raise ValueError(f"{name} must be a timezone-aware datetime")
-    return value.astimezone(UTC)
+    return aware_utc(value, name)
 
 
 def plan_return_window(
