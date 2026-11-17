@@ -10,6 +10,9 @@ not current source-clock certification. The registered first-close rule is uncha
 
 The [retrospective D13 disclosure](DEVIATIONS.md#d13-exploratory-kpi-disclosure-screen-crossed-reserved-calendars)
 records the exploratory `a9d788f` screen's missing reserved-window filter.
+Its exact six-part access clarification distinguishes compressed-byte fingerprints,
+decompressed bodies, decoded Item metadata and every reserved-calendar overlap.
+The private audit remains uncommitted and is referenced in D13 by path/SHA only.
 It read 4-6 raw annual bodies inside the H4/H6(a) reserved calendar and
 July 2021-June 2024 filing/Item metadata; no fundamental values, labels/joins,
 prices or returns were extracted, no human viewed filing text and no usable
@@ -17,6 +20,8 @@ metric case resulted. Compressed-cache fingerprints are separately disclosed.
 The roster is superseded/not to be used; stopped outputs and the exposure audit
 remain in ignored `data\kpi_omission_v1`, with no trial-ledger append.
 This adds to D6: future H4/H6(a) holdout work cannot be called untouched.
+Prior H0/P0 use of the same bulk-metadata calendar does not cure or authorize
+the additional exposure.
 A mandatory shared pre-body eligibility check must cover all reserved windows,
 follow-up sources, period ends and used context, failing closed on unknown dates.
 The [implemented D13 guard](DOCUMENT_SCOPE.md) uses a conservative development-only

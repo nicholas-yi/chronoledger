@@ -317,27 +317,45 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   before the D1 return holdout did not exclude H4/H6(a) validation, holdout or
   outcome-source windows. The `a9d788f` roster is **superseded, not to be used**;
   its original plan, manifest, commits and stopped receipts remain historical.
-- **Exposure:** 4-6 raw 10-K bodies were decompressed/parsed inside the
-  H4/H6(a) reserved calendar, 2022-01-01 through 2025-06-30. Three reads are
-  checkpoint-confirmed; the parser crash leaves the exact additional resource
-  inside the next case unknown. Metadata-only annual and 8-K Item rows from
-  July 2021 through June 2024 were loaded. Preparation also fingerprinted all
-  192 pinned compressed annual cache objects, distinct from the smaller
-  decompressed-body count. None of the 93 pinned 8-K bodies was cached/read.
-- **Not extracted or seen:** no fundamental values, outcome labels or joins,
-  prices or returns were extracted or evaluated; no human viewed filing text.
-  Zero usable metric cases were produced. Raw filings and Item metadata can
-  nevertheless carry outcome-bearing content, so this is not a claim that no
-  reserved source material was accessed. The old static `holdout_opened=false`
-  field is not an exposure audit.
+- **Access clarification (verbatim CL-KPI-D13 addendum):**
+
+  (a) preparation SHA-256-fingerprinted all 192 pinned compressed annual cache objects, reading their compressed bytes;
+
+  (b) 4–6 annual bodies were decompressed and parsed;
+
+  (c) the full bulk metadata parquet was fingerprinted, and decoded columns were filtered for 2021-07-01..2024-06-30, including Items that can carry H6 event codes;
+
+  (d) 93 8-K context records were metadata only, with zero bodies read;
+
+  (e) the 188 annual and 93 context records fall within H4/H6(a) 2022-01-01..2025-06-30 and the H6(a) follow-up calendar through 2026-06-30; 4 annuals fall in the 2019–2021 validation period; 0 fall in the D1 return holdout from 2024-07-01;
+
+  (f) no fundamentals values, labels, joins, prices, returns or models were evaluated, but the raw sources may contain outcome-bearing material, so exclusion is not certified.
+
+- **Additional limits:** three decompressed reads are checkpoint-confirmed;
+  the crash leaves the exact additional resource in the next case unknown.
+  No fundamental values, outcome labels or joins, prices or returns were
+  extracted. No human viewed filing text and zero usable metric cases were produced.
+  The old static `holdout_opened=false` field is not an exposure audit.
+- **Prior calendar use (context only):** the same July 2021-June 2024
+  bulk-metadata calendar was already used by earlier
+  [H0](../scripts/h0_data.py) and [P0](../scripts/p0_acceptance_audit.py)
+  development work. This does not authorize or cure the additional exposure,
+  establish exclusion of outcome-bearing material, or restore untouched status.
 - **Quarantine:** original outputs and the metadata-only exposure audit remain
   under ignored `data\kpi_omission_v1`; the stopped summary was removed from
   untracked `results`, not published as scientific evidence. No source was
   reprocessed after the stop and no trial-ledger row was appended.
-- **Correction:** a shared, mandatory reserved-window eligibility guard must
-  run before every document-reading study accesses a body. Acceptance/knowledge
-  dates, period ends and used context must all pass; unknown/unparseable dates
-  fail closed. Parser repairs and guard verification use invented fixtures.
+  The private audit is referenced only by path and fingerprint:
+  `data\kpi_omission_v1\reserved_window_audit.json`, SHA-256
+  `b0f1c4306cf592f9d72d03fb5670f4f0fc61ae5b35bf11d5b178391da30dff92`.
+- **Correction:** the shared, mandatory eligibility check is implemented once in
+  [document_scope.py](../src/asof/document_scope.py); guarded document-reading
+  entrypoints call it before body reads or fingerprints. The KPI wrapper delegates
+  to that shared check rather than duplicating the policy; see
+  [entrypoint coverage](DOCUMENT_SCOPE.md#enforced-entrypoints).
+  Acceptance/knowledge dates, period ends and used context must all pass;
+  unknown/unparseable dates fail closed. Parser repairs and guard verification
+  use invented fixtures.
   Any rescoped KPI execution requires development-only eligibility, a new
   frozen roster and the separate minimum-cache-size decision.
 - **Evidence and consequence:** the retained private scope audit distinguishes
