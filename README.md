@@ -365,17 +365,21 @@ Source: <a href="results/robust_inference_calibration.json">robust_inference_cal
 The monthly test regresses 17-28 returns on six factor controls with Newey-West standard errors, the
 standard approach in empirical finance. With so few months it finds an "effect" in pure noise
 **18-37% of the time** instead of 5%. Modern corrections help but do not fully fix it. For the
-seven-year fundamentals panel, the Ibragimov-Müller year-by-year t-test keeps its size; the textbook
-two-way clustered test does not. With fewer than about 30 independent periods, a t-statistic near 2
-is weak evidence, and more data matters more than a better estimator.
+seven-year synthetic fundamentals geometry, the Ibragimov-Müller year-by-year t-test passed that
+specific calibration; this does not establish validity for other panels or overlapping events.
+The textbook two-way clustered test did not pass. None of the tested monthly methods passed at
+17, 18 or 28 months, so opening the holdout or swapping estimators is not a validated cure.
 
 ## Caveats
 
 - **Survivorship.** Free price data covers mostly companies that still trade today. Return tests are
   restricted to 2023 onwards, when coverage of large issuers reaches 88-97%
   ([coverage audit](docs/DATA_AUDIT.md#coverage-among-public-equity-issuers-by-public-float)).
-- **Short samples, low power.** Assuming 3% monthly volatility, 17-18 development months can only
-  reliably detect effects of roughly 2.8-2.9% a month. Anomaly returns typically shrink by more than
+- **Short samples, uncalibrated inference.** An optimistic calculation using a hypothetical 3%
+  monthly residual volatility gives roughly 2.8-2.9% a month for the 3.2 screen, not a reliably
+  detectable project effect: no tested monthly method passed size calibration
+  ([design and limits](docs/H1_DESIGN.md#return-test-calibration-and-power-not-currently-defensible)).
+  Anomaly returns typically shrink by more than
   half after publication ([McLean & Pontiff 2016](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2156623)),
   so a realistic effect would be far smaller.
 - **Timestamps not yet verified filing by filing.** Acceptance times come from SEC JSON, which is
@@ -404,7 +408,7 @@ is weak evidence, and more data matters more than a better estimator.
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
 | Would a trained model measure change better? | Real labelled claim pairs and training/test splits separated by time and by company | A bigger model does not create more independent market evidence |
 | Could anyone actually trade it? | Observed spreads, price impact, fees and borrow availability, plus a long-only version | A spread estimate does not show a short strategy is executable |
-| Does any of it survive out of sample? | One evaluation on the sealed July 2024 - October 2026 holdout, run once after the design is frozen | The only confirmatory test |
+| Does any of it survive out of sample? | One separately approved evaluation on the sealed July 2024 - October 2026 holdout, only after measurement, data and inference are adequate | An untouched sample is necessary, but opening it does not fix bad calibration or low power |
 
 The [research plan](docs/RESEARCH_PLAN.md) describes how each of these will be tested, the
 agent workflow used to run experiments, three new study ideas and candidate data sources.

@@ -12,7 +12,9 @@ Levels per threat:
   4  >= 2 independent checks passed, none failed
   5  level 4 plus a passing mutation check (a planted bug was caught)
 
-A result may enter the README only if every threat is at level >= 4.
+A project-wide support claim needs every gating threat at level >= 4. Scoped
+component diagnostics, nulls and failures may still be reported with their limits.
+Passing defined software checks is not independent scientific acceptance.
 """
 
 from __future__ import annotations
@@ -79,7 +81,7 @@ def evaluate(threats: list[Threat]) -> list[Outcome]:
 def render(outcomes: list[Outcome]) -> str:
     lines = ["# Referee report", ""]
     gating = [o for o in outcomes if o.gating]
-    gate = all(o.level >= 4 for o in gating)
+    gate = bool(gating) and all(o.level >= 4 for o in gating)
     lines.append(f"**Gate: {'PASS' if gate else 'BLOCKED'}** (every gating threat must be at level 4 or higher)")
     lines += ["", ("This reports defined executable checks, not scientific acceptance or permission "
                    "to open holdouts. Some checks read recorded model/extraction artifacts; passing "
@@ -101,6 +103,62 @@ def render(outcomes: list[Outcome]) -> str:
 
 
 # ---------------------------------------------------------------- concrete checks
+
+
+def _monthly_calibration(path: Path) -> tuple[bool, str]:
+    if not path.exists():
+        return False, "missing recorded monthly calibration; software tests do not establish size"
+    value = json.loads(path.read_text())
+    if value.get("status") != "complete":
+        return False, "monthly calibration is incomplete"
+    rows = {str(t): value.get("reliability", {}).get(f"monthly_T{t}", {}).get("registered_NW6", {})
+            for t in (17, 18, 28)}
+    import math
+
+    passed = all(
+        row.get("status") == "reliable_at_this_geometry"
+        and type(row.get("worst_95_upper_5percent")) in (int, float)
+        and math.isfinite(row["worst_95_upper_5percent"])
+        and 0 <= row["worst_95_upper_5percent"] <= 0.075
+        for row in rows.values())
+    return passed, ("Recorded registered NW6 null-size evidence at T=17/18/28: "
+                    + json.dumps(rows, sort_keys=True)
+                    + "; no method substitution, project-return test or new simulation performed")
+
+
+def _calibration_harness(path: Path) -> tuple[bool, str]:
+    if not path.exists():
+        return False, "missing synthetic harness receipt"
+    value = json.loads(path.read_text())
+    ok = value.get("status") == "complete" and value.get("harness_passed") is True
+    return ok, "Recorded synthetic harness completion; not scientific acceptance or a rerun"
+
+
+def _timestamp_qualification(path: Path) -> tuple[bool, str]:
+    if not path.exists():
+        return False, "missing per-accession historical clock qualification"
+    value = json.loads(path.read_text())
+    qualified, unresolved = value.get("qualified_UTC"), value.get("unresolved_accessions")
+    ok = type(qualified) is int and qualified == 16921 and type(unresolved) is int and unresolved == 0
+    return ok, (f"Latest integrated audit: historically qualified UTC={qualified!r}, "
+                f"unresolved={unresolved!r}; conditional Eastern agreement is not qualification")
+
+
+def _timestamp_manifest(path: Path) -> tuple[bool, str]:
+    from asof.ledger import file_sha256
+
+    if not path.exists():
+        return False, "missing timestamp-audit manifest"
+    manifest = json.loads(path.read_text()).get("private_hash_manifest")
+    if not isinstance(manifest, dict) or not manifest:
+        return False, "empty or malformed timestamp manifest"
+    for relative, digest in manifest.items():
+        target = (PROJECT_ROOT / relative).resolve()
+        if not target.is_relative_to((DATA_DIR / "timestamp_full_a2").resolve()):
+            return False, "timestamp manifest points outside its metadata-only audit directory"
+        if not target.is_file() or file_sha256(target) != digest:
+            return False, f"missing or changed timestamp evidence: {relative}"
+    return True, f"{len(manifest)} private metadata artifact hashes match; not clock authority"
 
 
 def _store_invariance(db: Path, n: int = 10) -> tuple[bool, str]:
@@ -503,6 +561,18 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
     bench = bench or PROJECT_ROOT / "results" / "bench_qwen3.5-4b_n300_s0.json"
     swap = swap or PROJECT_ROOT / "results" / "swap_qwen3.5-4b_n160_s0.json"
     return [
+        Threat("time_authority", "Have the required filing clocks been historically qualified?", [
+            Check("qualified per-accession clocks, not conditional agreement",
+                  lambda: _timestamp_qualification(PROJECT_ROOT / "results" / "timestamp_full_a2_report.json")),
+            Check("recorded metadata evidence hashes remain intact",
+                  lambda: _timestamp_manifest(PROJECT_ROOT / "results" / "timestamp_full_a2_report.json")),
+        ]),
+        Threat("inference.calibration", "Does the registered monthly test have acceptable null size?", [
+            Check("registered NW6 meets its recorded calibration adoption rule",
+                  lambda: _monthly_calibration(PROJECT_ROOT / "results" / "robust_inference_calibration.json")),
+            Check("synthetic calibration harness completed",
+                  lambda: _calibration_harness(PROJECT_ROOT / "results" / "robust_inference_calibration.json")),
+        ]),
         Threat("lookahead.store", "Could any fact be read before EDGAR accepted the filing?", [
             Check("invariance of as-of facts", lambda: _store_invariance(db)),
             Check("invariance of revision detection", lambda: _store_revision_invariance(db)),

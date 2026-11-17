@@ -26,6 +26,52 @@ def test_gate_passes_when_all_threats_at_four() -> None:
     assert "Gate: PASS" in render(out)
 
 
+def test_empty_or_only_nongating_report_cannot_pass() -> None:
+    assert "Gate: BLOCKED" in render([])
+    ok = lambda: (True, "fine")
+    out = evaluate([Threat("diagnostic", "q?", [Check("a", ok), Check("b", ok)], gating=False)])
+    assert "Gate: BLOCKED" in render(out)
+
+
+def test_known_bad_monthly_calibration_blocks_despite_a_passing_harness(tmp_path) -> None:
+    import json
+
+    from asof import referee
+
+    path = tmp_path / "calibration.json"
+    value = {"status": "complete", "harness_passed": True, "reliability": {
+        f"monthly_T{t}": {"registered_NW6": {"status": "unreliable_at_this_geometry",
+                                          "worst_95_upper_5percent": 0.25}}
+        for t in (17, 18, 28)}}
+    path.write_text(json.dumps(value))
+    assert referee._calibration_harness(path)[0]
+    assert not referee._monthly_calibration(path)[0]
+    del value["reliability"]["monthly_T18"]
+    path.write_text(json.dumps(value))
+    assert not referee._monthly_calibration(path)[0]
+
+
+def test_conditional_timestamp_coverage_is_not_historical_qualification(tmp_path) -> None:
+    import json
+
+    from asof import referee
+
+    path = tmp_path / "timestamp.json"
+    path.write_text(json.dumps({"qualified_UTC": 0, "unresolved_accessions": 16921,
+                               "unique_conditional_UTC": 16921}))
+    assert not referee._timestamp_qualification(path)[0]
+    path.write_text(json.dumps({"qualified_UTC": 16921, "unresolved_accessions": 1}))
+    assert not referee._timestamp_qualification(path)[0]
+    assert not referee._timestamp_manifest(path)[0]
+
+
+def test_default_referee_includes_recorded_clock_and_calibration_gaps() -> None:
+    from asof.referee import default_threats
+
+    threats = {t.tid: t for t in default_threats()}
+    assert threats["time_authority"].gating and threats["inference.calibration"].gating
+
+
 def test_plausibility_rejects_an_incomplete_variant_output(tmp_path, monkeypatch) -> None:
     import json
 
