@@ -5,6 +5,16 @@ Machine, what it would take to close the gaps listed in the [README](../README.m
 new study ideas, and candidate data sources. The new studies and source proposals remain plans;
 completed measurement checks and audits are labelled below. No new data source has been adopted.
 
+## Literature-backed upgrade priorities
+
+The [2026-11-17 research review](RESEARCH_REVIEW_2026_11.md) connects recent financial NLP and
+econometrics to the recorded failures: evidence-localization and real paired-claim measurement,
+validation-sample correction of model errors, prospectively frozen finite-population audits
+with unread-case accounting, and economically meaningful inference/power design. It separates
+retrospective measurement from historically implementable prediction and includes primary
+sources, assumptions, rejected shortcuts and proposed work packages. These are recommendations,
+not new registrations, source clearance, execution permission or replacements for stopped results.
+
 ## How an idea becomes a result
 
 The project is developed with a small team of AI agents that each play one role: a research agent
