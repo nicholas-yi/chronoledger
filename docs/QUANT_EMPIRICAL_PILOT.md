@@ -1,7 +1,7 @@
 # Development-only empirical pilot: proposal, not execution approval
 
-**2026-11-17. Status: BLOCKED pending a separate user decision and prerequisites.**
-The user approved preparing this plan, not reading any real data, inventorying a real
+**Original proposal: 2026-11-17. Current independent-gold phase: BLOCKED on substantive prerequisites.**
+The original approval covered preparing this plan, not reading any real data, inventorying a real
 cache, extracting a partition, fitting models or running a pilot.
 
 **2026-11-18 execution update:** the user subsequently requested execution with best
@@ -11,6 +11,10 @@ development derivative for unlabelled mechanical input/feature diagnostics. It d
 not relabel proxy counts as economic gold, instantiate missing return inputs, open
 mixed archives or lift any hold. The independent-gold pilot below remains blocked
 on its substantive prerequisites; its original proposal-time language is retained.
+That [mechanical follow-on completed](QUANT_DEV_FEASIBILITY_RESULTS.md) on 50 prior
+development triples: features were computable, but independent gold and complete
+public-history cases were both zero. Seven empirical areas were not evaluable from
+that derivative. The execution request did not supply the missing evidence.
 
 ## 1. First answer a measurement question, not all nine return questions
 

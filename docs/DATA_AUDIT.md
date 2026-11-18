@@ -8,6 +8,20 @@ not current source-clock certification. The registered first-close rule is uncha
 
 ## Assurance and limits
 
+**2026-11-18 development-derived execution:** [CL-QF-DEV-FEAS-01](QUANT_DEV_FEASIBILITY_RESULTS.md)
+rechecked all 263 references in the pinned 2012-2018 development manifest before reading
+629,817 bytes of the old text-containing derived JSON. Its prior content hash matched.
+The curator projected 50 completed issuer triples to 44,813 bytes of dates/counts/coverage;
+the bounded worker received no excerpts, CIKs, accessions, URLs or raw cache paths.
+No new raw-cache body, mixed ZIP/parquet, quarantined KPI-v1 source, price or outcome
+dataset was opened. The old 14 unprocessed triples were not reconstructed.
+This was posthoc after prior exposure, not independent gold or market validation:
+gold and complete-public-history case counts remained zero. No production ledger row,
+hold release, source repair or registered-design change; D6/D13 remains unchanged.
+Access receipts are reviewed-scope/content-pin evidence, not an OS sandbox or UTC
+certification. Only nonreconstructive aggregates are committed; the derivative and
+projection stay private.
+
 CL-HARDEN-1 adds a dataset contract at `iter_companyfacts`, `read_companyfacts`,
 `max_public_float` and the fact-member `_load`. Callers must supply an immutable
 `FrozenFactWindow` with explicit fact-period and filing-date bounds and a frozen

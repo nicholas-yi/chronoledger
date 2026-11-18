@@ -443,6 +443,10 @@ reference algorithms for economic innovation, event-time paths, typed exposure,
 mechanism twins, robust control, identification bounds and prequential scoring.
 Its invented-fixture tests need no research datasets and do not establish an edge.
 
+A [development-input feasibility pass](docs/QUANT_DEV_FEASIBILITY_RESULTS.md) processed
+50 previously exposed issuer triples: lexical features were computable, but independent
+gold and complete public histories were absent. This is not nine validated economic models.
+
 Rebuilding the data from SEC EDGAR takes several hours and needs a contact email in
 `ASOF_USER_AGENT`, as the SEC requires; follow the step-by-step
 [runbook](docs/DATA_AUDIT.md#data-rebuild-runbook). The Python package is called `asof`, after the
