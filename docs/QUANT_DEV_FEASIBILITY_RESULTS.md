@@ -20,7 +20,7 @@ The [scope/code](QUANT_DEV_FEASIBILITY.md) was frozen at
 - 800 compatible count comparisons: 50 sequences x 8 families x 2 updates. These
   include zero differences and are **not 800 economic discoveries or changed KPIs**.
 - Fifty prefix-causal path transformations using declared stored timestamps,
-  retaining the clock and original count-level information.
+  with a clock channel; the original count levels remain in the private projected input.
 - An explicit all-nine input-support assessment, not nine economic model evaluations.
 
 The cohort was exposed by the prior exploratory study and conditioned on its wall-stop
@@ -45,6 +45,9 @@ completion prefix. It is not a new random sample, held-out cohort or independent
 Rank is descriptive, scale-sensitive and computed on unscaled lexical counts plus
 elapsed time. It is not a number of independent bets, effective market months or a
 test of whether an appropriately regularized model could ever be useful.
+The 91-column matrix contains signature coordinates, **not additional initial-level
+columns**. Its rank is not a rank or information-content certificate for the full
+underlying disclosure corpus or even all fields in the projected input.
 
 With three knots/two increments, signed area is algebraically reconstructible from
 the complete ordered lag vectors. The small discrepancy verifies implementation
