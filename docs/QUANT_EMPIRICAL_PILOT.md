@@ -4,6 +4,14 @@
 The user approved preparing this plan, not reading any real data, inventorying a real
 cache, extracting a partition, fitting models or running a pilot.
 
+**2026-11-18 execution update:** the user subsequently requested execution with best
+judgments. The admissible operational follow-on is scoped separately as
+[CL-QF-DEV-FEAS-01](QUANT_DEV_FEASIBILITY.md): reuse the already guarded, content-pinned
+development derivative for unlabelled mechanical input/feature diagnostics. It does
+not relabel proxy counts as economic gold, instantiate missing return inputs, open
+mixed archives or lift any hold. The independent-gold pilot below remains blocked
+on its substantive prerequisites; its original proposal-time language is retained.
+
 ## 1. First answer a measurement question, not all nine return questions
 
 Proposed distinct profile: **CL-QF-M0-PROPOSED**. It is not formal H1, H4 or H6,

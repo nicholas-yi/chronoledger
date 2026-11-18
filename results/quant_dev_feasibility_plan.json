@@ -1,0 +1,26 @@
+{
+  "study": "CL-QF-DEV-FEAS-01",
+  "authorization": "2026-11-18 user: execute them; be decisive and make your best judgements",
+  "purpose": "unlabelled mechanical feasibility on previously exposed development-derived inputs",
+  "source_manifest_sha256": "0944009c8f230372172c0622b560716fc5ee4db00f09cd0b93c5ae32363b4e92",
+  "source_cases_sha256": "1b86638f40b689d7d76da1017b0d9340debc2a55a1a125a1414cf2e2678f4cee",
+  "expected_manifest_cases": 64,
+  "expected_guarded_references": 263,
+  "expected_derived_cases": 50,
+  "minimum_complete_sources": 30,
+  "metadata_cap_bytes": 262144,
+  "derived_cap_bytes": 1048576,
+  "development_start": "2012-01-01",
+  "development_end": "2018-12-31",
+  "selection": "all prior completed rows; not a new random or independent sample",
+  "posthoc_after_prior_exposure": true,
+  "limits": {
+    "wall_seconds": 300,
+    "controller_stop_seconds": 290,
+    "worker_soft_wall_seconds": 240,
+    "worker_RAM_bytes": 939524096,
+    "controller_RSS_allowance": 134217728,
+    "total_RSS_bytes": 1073741824,
+    "compute_CPUs": 1
+  }
+}
