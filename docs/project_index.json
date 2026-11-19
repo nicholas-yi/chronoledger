@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "focused-reader", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_frozen_run", "command": null},
+    {"id": "focused-reader", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "demo", "path": "src/asof/demo.py", "status": "active_offline", "command": "asof demo"},
     {"id": "cli-ingest", "path": "src/asof/cli.py", "status": "guarded_requires_separate_approval", "command": "asof ingest --help"},
     {"id": "repo-check", "path": "scripts/check_repository.py", "status": "active_offline", "command": "python scripts/check_repository.py"},
@@ -32,6 +32,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "focused-reader",
+      "kind": "synthetic_local_model_diagnostic",
+      "path": "results/focused_reader.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "987f956127c23656dd5a521da9a3e7db23b8506a",
+      "status": "stopped_critic_truncation_no_evaluation_or_promotion",
+      "supersedes": []
+    },
     {
       "id": "audit-cs",
       "kind": "synthetic_qa",

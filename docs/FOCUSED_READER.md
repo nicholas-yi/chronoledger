@@ -110,6 +110,8 @@ process-count limit allows up to four owned members (default remains one).
 Descendants inherit one CPU; sampled Job membership/affinity is checked.
 Numerical thread counts and model thread count are one, `num_gpu=0`, and the
 owned server's `/api/ps` must report zero VRAM after every completed request.
+Here completion means a response accepted as complete by the runner; a truncated
+response stops before that post-call model-state check.
 
 Owned-server environment disables cloud and declares native prompt cache zero,
 with the previously verified shipped support. This is not a new experiment proving
@@ -168,3 +170,50 @@ The corrected preflight uses exclusive OS binding; startup health polling tolera
 connection errors/timeouts within its existing 60-second readiness cap.
 No generation retry, budget, prompt, fixture, seed or evaluation rule changed.
 This fix is committed in a new freeze before the single actual model attempt.
+
+## Observed local result: STOPPED, no improvement established
+
+The corrected freeze was `987f956127c23656dd5a521da9a3e7db23b8506a`.
+The [actual receipt](../results/focused_reader.json) is a stopped run, not a passed
+reader comparison:
+
+| Observation | Actual result |
+|---|---|
+| Started model calls | 2 of at most 36 |
+| First development extractor response | Correct invented value `17`, unit `USD million`, period `2016`, supported quote |
+| Extractor cost | 58.422 s wall, 60 generated tokens; includes its first-call/load overhead |
+| First critic response | Hit the frozen 256-token limit, `done_reason=length`; no complete accepted critique |
+| Critic cost | Additional 84.453 s wall, 256 generated tokens |
+| Revisions / completed critic calibration records | 0 / 0 |
+| Evaluation cases reached | 0 of 6 |
+| Verified error-bank/candidate adaptation phase reached | No |
+| Production promotion / weight updates | No / no |
+| Total controller wall | 144.562 s |
+| Observed combined peak working set | 3,776,741,376 bytes, about 3.52 GiB |
+| Resource/source checks | Passed; one inherited CPU and unchanged frozen source during the run |
+
+The incomplete critic output began questioning the correct year/value association,
+then reconsidered itself before truncation. This is a qualitative observation about
+an unfinished response, **not a scored final false rejection**, a completed
+calibration exercise or proof that all judges are unreliable.
+No judge opinion became a training label. One correct development answer is not
+100% extraction accuracy, and the six unattempted evaluation cases are not a measured
+0%-accuracy model. Planned/attempted/invalid counts remain separate in the receipt.
+
+The owned server verified zero VRAM after the first valid call; the second response
+stopped at truncation before post-call state inspection. Every request declared
+`num_gpu=0` and inherited the CPU-only server environment. The owned Job's four
+observed member PIDs exited/are absent; the preexisting shared Ollama PID remained
+untouched and port 11435 no longer had a listener. No persistent server was left.
+
+**Decision:** keep the existing answer-first default. This judge configuration did
+not earn a default role, and its extra latency produced no usable critique or
+observed correction. Do not silently increase tokens, switch models, rerun with
+another seed or call this "self-improvement." A future critic design would be a
+new version and separately approved experiment; the attempt marker is retained.
+
+The full post-preflight software suite passed **669 tests in 40.18 s**, with two
+existing synthetic rank-deficiency warnings; Ruff passed. Those software checks do
+not reverse the stopped model result. Historical quant experiments and source holds
+are preserved; no real corpus, prices, fundamental outcomes, production ledger,
+weight training, model download, cloud inference or push was involved.

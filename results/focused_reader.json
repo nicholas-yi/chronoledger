@@ -1,0 +1,242 @@
+{
+  "study": "CL-FOCUS-LAAJ-01",
+  "plan": {
+    "study": "CL-FOCUS-LAAJ-01",
+    "model": "qwen3.5:4b",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "endpoint": "http://127.0.0.1:11435",
+    "case_count": 12,
+    "max_calls": 36,
+    "wall_seconds": 1200,
+    "controller_stop_seconds": 1180,
+    "RAM_bytes": 6442450944,
+    "controller_RAM_allowance": 134217728,
+    "call_seconds": 90,
+    "startup_seconds": 60,
+    "options": {
+      "temperature": 0,
+      "seed": 202611190611,
+      "num_ctx": 2048,
+      "num_predict": 384,
+      "num_thread": 1,
+      "num_gpu": 0,
+      "num_batch": 64
+    }
+  },
+  "lineage": {
+    "freeze_commit": "987f956127c23656dd5a521da9a3e7db23b8506a",
+    "source_SHA256": {
+      "scripts/run_focused_reader.py": "ea03b9c18ed278cc09a0d8fccfde4720c6906ad20a3085634a71718dc253da2f",
+      "src/asof/focused_reader.py": "e4f210e791f8eaf343e258b4e6c904a2de5f87271781a2b1a1169f70477f2418",
+      "src/asof/runtime.py": "f1d2c76a169d2be520dca057b469efd929afdb642bc50ebb0989d49b609d4a08",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "src/asof/local_model_runtime.py": "8ebe93daa7789fee0774d470ee33056c26a8335f513628ecab7e2fc4c64ae07d",
+      "src/asof/reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+      "src/asof/reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+      "src/asof/reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "src/asof/benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+      "src/asof/ledger.py": "85e6f75a58616514d18c3a1fdfba8343adf23334fb76a939f2d3a97b2f3764b7",
+      "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+      "tests/test_focused_reader.py": "517f9e5aac1e0a656abfcf021aa00dd9280d3fbfeb5800e6063cfba94e764f7d",
+      "results/focused_reader_plan.json": "6bd61ae12bd6e39ddf75b80bef92a977430ea0117e4718b48dcdc8e3d5894e96",
+      "results/local_model_runtime_support.json": "55daf16377dfe43978e61feb3b961d690122926ccb17a8f12f1058c5230c2617",
+      "requirements-dev.lock": "c84cefb3543db283afc0a1021e2cace63ac4e7877a84611f345b928f64077f0c",
+      "docs/FOCUSED_READER.md": "3141d9736de6ea8cb96d2383dcf222ca754b042a2e26def1e86d281a5524d4dd"
+    }
+  },
+  "status": "stopped",
+  "stop_reason": "ValueError:generation incomplete:output_token_limit_or_truncation",
+  "records": {
+    "D01": {
+      "parser": {
+        "answer": {
+          "value": "17",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "FableWren reported revenue of 17 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "17",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "FableWren reported revenue of 17 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 58.42199999978766,
+        "generated_tokens": 60
+      }
+    }
+  },
+  "calls": [
+    {
+      "call_id": 1,
+      "case_id": "D01",
+      "stage": "generate",
+      "request_sha256": "2b1a3fc6405a1895a4764e7f42bd66067c6897fd4d3f0fa3776b82da2d673599",
+      "status": "schema_valid",
+      "latency_seconds": 58.42199999978766,
+      "generated_tokens": 60
+    },
+    {
+      "call_id": 2,
+      "case_id": "D01",
+      "stage": "judge",
+      "request_sha256": "971388602e129ea2ad6c95b0a3997c6eba85efd2ee7a20c4cf1426dff8c3b689",
+      "status": "truncated_or_incomplete",
+      "latency_seconds": 84.45300000021234,
+      "generated_tokens": 256
+    }
+  ],
+  "judge_calibration": [],
+  "candidate": null,
+  "real_data_read": false,
+  "weights_updated": false,
+  "production_ledger_rows": 0,
+  "worker_pid": 124292,
+  "affinity_mask": 1,
+  "server_pid": 97072,
+  "phase": "final",
+  "worker_wall_seconds": 143.78200000012293,
+  "worker_exit_code": 0,
+  "summary": {
+    "development": {
+      "parser": {
+        "planned_cases": 6,
+        "recorded_cases": 1,
+        "correct": 1,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 1,
+        "coverage": 0.16666666666666666,
+        "accuracy_all_planned": 0.16666666666666666,
+        "known_latency_seconds": 0,
+        "missing_latency_records": 1,
+        "known_generated_tokens": 0,
+        "outcomes": {
+          "correct_answer": 1,
+          "not_attempted": 5
+        }
+      },
+      "single_pass": {
+        "planned_cases": 6,
+        "recorded_cases": 1,
+        "correct": 1,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 1,
+        "coverage": 0.16666666666666666,
+        "accuracy_all_planned": 0.16666666666666666,
+        "known_latency_seconds": 58.42199999978766,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 60,
+        "outcomes": {
+          "correct_answer": 1,
+          "not_attempted": 5
+        }
+      },
+      "judge_assisted": {
+        "planned_cases": 6,
+        "recorded_cases": 0,
+        "correct": 0,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 0,
+        "coverage": 0.0,
+        "accuracy_all_planned": 0.0,
+        "known_latency_seconds": 0,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 0,
+        "outcomes": {
+          "not_attempted": 6
+        }
+      }
+    },
+    "evaluation": {
+      "parser": {
+        "planned_cases": 6,
+        "recorded_cases": 0,
+        "correct": 0,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 0,
+        "coverage": 0.0,
+        "accuracy_all_planned": 0.0,
+        "known_latency_seconds": 0,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 0,
+        "outcomes": {
+          "not_attempted": 6
+        }
+      },
+      "single_pass": {
+        "planned_cases": 6,
+        "recorded_cases": 0,
+        "correct": 0,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 0,
+        "coverage": 0.0,
+        "accuracy_all_planned": 0.0,
+        "known_latency_seconds": 0,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 0,
+        "outcomes": {
+          "not_attempted": 6
+        }
+      },
+      "judge_assisted": {
+        "planned_cases": 6,
+        "recorded_cases": 0,
+        "correct": 0,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 0,
+        "coverage": 0.0,
+        "accuracy_all_planned": 0.0,
+        "known_latency_seconds": 0,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 0,
+        "outcomes": {
+          "not_attempted": 6
+        }
+      }
+    }
+  },
+  "promotion": {
+    "promote": false,
+    "independent_audit_supplied": false,
+    "reason": "this invented-case harness cannot authenticate independent semantic audit or promote",
+    "evaluation_complete": false,
+    "corrected": 0,
+    "regressed": 0,
+    "candidate_for_independent_review": false,
+    "weights_updated": false
+  },
+  "controller_wall_seconds": 144.56199999991804,
+  "observed_combined_peak_RSS_bytes": 3776741376,
+  "owned_pids_observed": [
+    9100,
+    97072,
+    124292,
+    187748
+  ],
+  "source_unchanged": true,
+  "resource_check_passed": true
+}

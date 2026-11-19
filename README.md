@@ -31,6 +31,8 @@ the [curated index](docs/project_index.json) distinguishes historical, held and 
 **Active research is now deliberately narrow:** a
 [source-grounded metric reader with a bounded critic](docs/FOCUSED_READER.md).
 The broader quant toolkit is parked reference code, not nine validated trading models.
+The first local critic trial stopped at its output limit; it established no improvement
+and did not replace the answer-first default.
 
 ## The question
 

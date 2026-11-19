@@ -9,6 +9,10 @@ vintages. **No tradable-edge claim is supported.**
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
+The [first bounded local critic run](FOCUSED_READER.md#observed-local-result-stopped-no-improvement-established)
+stopped at the first critic's token cap after one correct development extraction.
+No evaluation case or self-improvement phase was reached. The answer-first default
+remains; a judge has not earned promotion.
 
 ## What exists, and what it establishes
 
