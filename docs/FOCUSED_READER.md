@@ -1490,3 +1490,90 @@ If a window is insufficient, leave it unresolved; approve any additional eligibl
 source context separately. Human gold remains zero until actual independent review
 and adjudication—not merely form validation—are complete.
 No push, holdout opening, source-access release or production promotion occurred.
+
+## One AI reviewer: advisory-only implementation and bounded validation plan
+
+The user requested one LLM-as-a-judge reviewer and the remaining engineering
+shortcomings on 2026-11-19. [`reader_ai_review`](../src/asof/reader_ai_review.py)
+implements exactly one identity, **AI-REVIEWER-01**, explicitly labelled `AI`.
+It is a separate advisory channel, not either named human's blind first pass.
+It cannot rewrite the candidate, override source guards, adjudicate itself into
+gold or count as an independent human reviewer. Existing human forms remain untouched.
+
+The AI receives the requested issuer/metric/year, one candidate answer or abstention,
+and bounded source spans labelled E1, E2, etc. Its strict response contains:
+
+- `verdict`: supported / unsupported / uncertain;
+- up to two bounded issue codes covering values, units, periods, entity/definition/
+  scope, evidence, ambiguity and unnecessary abstention;
+- up to three source-citation IDs.
+
+Supported and unsupported verdicts require citations. Unknown IDs, duplicate
+codes/citations, inconsistent verdicts and malformed JSON remain invalid.
+Stored citations include exact original offsets/text plus a source SHA-256.
+**Citation existence is not entailment.** Constructor/validator agreement,
+model confidence and source co-occurrence do not establish human scientific truth.
+The reviewer may still approve a wrong claim; false support is measured explicitly.
+
+### Evidence-led runtime changes, not relaxed limits
+
+The earlier minimal subprocess diagnostic's launcher observation was not evidence
+that Python multiprocessing necessarily used that launcher: inspection of Python
+3.12's actual Windows spawn implementation shows it already substitutes the base
+interpreter in a virtual environment. A direct single-member multiprocessing
+check reached readiness in **0.782 s**, and both unchanged failing tests passed
+on recheck (**2/2**, 11.73 s). No WorkerJob implementation or test timeout was changed.
+This narrows the diagnosis; it does not erase the earlier intermittent failures.
+
+The stopped model server log shows about **18.2 s cold loading** followed by
+**43.5 s prompt evaluation**, consuming much of the first call's 90-second limit.
+The new profile adds one documented empty-prompt
+[load-only request](https://github.com/ollama/ollama/blob/main/docs/api.md#load-a-model)
+**inside the existing remaining 60-second startup deadline**. It checks empty
+response/no reported generated tokens, then verifies the loaded model and zero
+VRAM on the owned server. Missing load-only token telemetry stays unknown, not zero.
+This startup request is reported separately from evaluated generations; it is not
+a hidden probe, retry, extra training example or a reason to raise limits.
+
+The new compact cell prompt removes duplicated full proof-span payloads while
+retaining the original source, supplied question and source-derived cell IDs,
+years, values and units. Full proofs still bind the final output in code.
+The reviewer prompt likewise uses short citation IDs rather than generated
+offsets/prose rationales. Output ceilings are 64 tokens for cell selection and
+128 for review, replacing unused larger response allowances only in this profile.
+The total 20 minutes, one CPU, zero GPU/cloud/pulls, 6-GiB resource contract and
+90-second generation cap remain unchanged.
+
+### Explicitly new evaluation, not a retry of the old receipt
+
+The [new plan](../results/reader_ai_review_plan.json) allocates **24 generation
+calls maximum**: twelve cell selections plus twelve independent advisory reviews,
+and the separate one load-only startup request. It reuses the already exposed twelve
+source questions from the stopped cell audit; no completed old answer is optimized
+or regraded. All192deterministiccoveragecases remain a separate offline check.
+There is no new paired strict-tuple arm: the prior timeout remains a retained
+failure, not a quietly repaired successful comparison.
+
+The twelve reviewer candidates are frozen authored probes: six supported and six
+unsupported, including wrong period, wrong currency, unnecessary abstention and
+answers to sources with unresolved context. Expected verdicts are never supplied
+to the AI. Order is balanced so six sources are cell-first and six reviewer-first.
+Report valid/schema responses, exact authored verdict matches, false support,
+false rejection, uncertainty, source-qualified cell records and actual cost.
+No numerical score is extrapolated to 24 or to real sources.
+
+One shared small local model is being used in separate inference requests; this
+is **not model diversity or authenticated independence**. Candidate probes come
+from deterministic authored construction, not the AI's own gold labels.
+Neither AI success nor a clean software suite changes the two-human/adjudication
+requirement for the existing independent-review claim. If a future workflow uses
+one human plus one AI instead, it must be labelled AI-assisted review—not two
+independent human passes—and assessed under a separately declared protocol.
+
+Pre-execution validation for this new profile: **723 tests passed** in 102.08 s,
+including both unchanged Windows Job checks, with two existing synthetic
+rank-deficiency warnings. Changed-file Ruff and documentation/index checks passed.
+This is a clean current regression result, not retroactive success for the earlier
+stalled/failed attempts. Runtime and reader tests verify empty-load/no-hidden-generation,
+unknown citations, candidate immutability, explicit AI identity, unknown/invalid
+attempt accounting and both compact request shapes within the context budget.

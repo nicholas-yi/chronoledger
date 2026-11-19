@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import subprocess
+import time
 from dataclasses import dataclass
 from pathlib import Path
+
+import httpx
 
 from asof import ledger
 from asof.benchmark_baseline import TableInput
@@ -95,3 +99,37 @@ def verify_supported_package(executable: Path) -> dict:
         raise ValueError("pinned_Ollama_or_native_backend_changed_requalify_cache_setting")
     return {"support_document_SHA256":ledger.file_sha256(SUPPORT),
             "package_verified":True}
+
+
+def preload_owned_model(client: httpx.Client, *, model: str, options: dict, seconds: float) -> dict:
+    """Load only within the existing startup deadline; never disguise generation as warmup."""
+    if not math.isfinite(seconds) or not 0 < seconds <= 60:
+        raise ValueError("model preload must fit the remaining60secondstartupbudget")
+    started = time.monotonic()
+    response = client.post("/api/generate", json={
+        "model": model, "prompt": "", "stream": False, "keep_alive": "20m", "options": options,
+    }, timeout=seconds)
+    response.raise_for_status()
+    raw = response.json()
+    if (raw.get("done") is not True or raw.get("response") != ""
+            or raw.get("eval_count") not in (None, 0)
+            or raw.get("prompt_eval_count") not in (None, 0)):
+        raise ValueError("preload response contains generation or incomplete load evidence")
+    elapsed = time.monotonic()-started
+    remaining = seconds-elapsed
+    if remaining <= 0:
+        raise TimeoutError("model preload exhaustedstartupdeadline")
+    state = client.get("/api/ps", timeout=remaining)
+    state.raise_for_status()
+    models = state.json().get("models", [])
+    if not models or any(row.get("name") != model or row.get("size_vram") != 0 for row in models):
+        raise ValueError("ownedpreloadmodelidentityorCPUstateunverified")
+    if time.monotonic()-started >= seconds:
+        raise TimeoutError("model preload exceededstartupdeadline")
+    return {
+        "status": "load_only_complete", "wall_seconds": time.monotonic()-started,
+        "model": model, "generated_tokens_reported": raw.get("eval_count"),
+        "load_duration_ns": raw.get("load_duration"), "response_text_empty": True,
+        "separate_from_evaluated_generation": True,
+        "documentation": "https://github.com/ollama/ollama/blob/main/docs/api.md#load-a-model",
+    }

@@ -291,3 +291,28 @@ def test_cell_audit_uses_strict_formats_and_source_candidates_within_context_bud
                    "format": selection_schema(case)}
         assert input_fit(json.dumps(request, sort_keys=True).encode(), plan["options"])[2]
     runner.select_version("v1")
+
+
+def test_ai_review_is_a_separate_bounded_advisory_profile_with_no_human_replacement(runner):
+    from asof.reader_ai_review import Opinion, compact_cell_messages, review_messages, review_tasks
+    from asof.reader_cells import selection_schema
+    from asof.reader_real2_guards import input_fit
+
+    runner.select_version("ai-review")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    tasks = review_tasks()
+    assert len(tasks) == plan["case_count"] == 12 and plan["max_calls"] == 24
+    assert plan["wall_seconds"] == 1200 and plan["call_seconds"] == 90
+    assert {"results/reader_cell_selection.json", "results/reader_cell_selection_accounting.json"} <= set(runner.FROZEN)
+    for task in tasks:
+        for reviewing in (False, True):
+            options = {**plan["options"], "num_predict": 128 if reviewing else 64}
+            body = {
+                "model": plan["model"], "stream": False, "think": False, "keep_alive": "20m",
+                "options": options,
+                "messages": review_messages(task.case, task.candidate) if reviewing else compact_cell_messages(task.case),
+                "format": Opinion.model_json_schema() if reviewing else selection_schema(task.case),
+            }
+            assert input_fit(json.dumps(body, sort_keys=True).encode(), options)[2]
+    runner.select_version("v1")

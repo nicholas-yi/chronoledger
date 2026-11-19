@@ -1,6 +1,7 @@
 import json
 from types import SimpleNamespace
 
+import httpx
 import pytest
 
 from asof import local_model_runtime as runtime
@@ -65,3 +66,31 @@ def test_launcher_receipt_failure_terminates_only_its_mocked_child(tmp_path, mon
     with pytest.raises(OSError):
         runtime.launch_owned_server(executable,tmp_path/"server.log",receipt,runtime.RuntimePolicy())
     assert actions == ["terminate",("wait",10)]
+
+
+def test_model_preload_is_empty_cpu_verified_and_cannot_extend_startup_or_hide_generation():
+    requests = []
+
+    def handler(request):
+        requests.append(request)
+        if request.url.path == "/api/generate":
+            body = json.loads(request.content)
+            assert body["prompt"] == "" and body["options"]["num_gpu"] == 0
+            return httpx.Response(200, json={"done": True, "response": "", "done_reason": "load"})
+        return httpx.Response(200, json={"models": [{"name": "toy", "size_vram": 0}]})
+
+    with httpx.Client(base_url="http://127.0.0.1:11435",
+                      transport=httpx.MockTransport(handler)) as client:
+        result = runtime.preload_owned_model(client, model="toy", options={"num_gpu": 0}, seconds=5)
+        assert result["generated_tokens_reported"] is None
+        assert result["separate_from_evaluated_generation"]
+        with pytest.raises(ValueError, match="startupbudget"):
+            runtime.preload_owned_model(client, model="toy", options={}, seconds=61)
+    assert len(requests) == 2
+    with (
+        httpx.Client(base_url="http://127.0.0.1:11435", transport=httpx.MockTransport(
+            lambda request: httpx.Response(200, json={"done": True, "response": "hidden generation",
+                                                     "eval_count": 1}))) as client,
+        pytest.raises(ValueError, match="contains generation"),
+    ):
+        runtime.preload_owned_model(client, model="toy", options={}, seconds=5)
