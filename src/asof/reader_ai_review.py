@@ -8,7 +8,7 @@ import re
 from dataclasses import dataclass
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError, model_validator
 
 from asof.focused_reader import Answer, Case, abstention
 from asof.reader_cells import account_cell_attempts, audit_fixture, catalog
@@ -34,6 +34,28 @@ class Opinion(BaseModel):
         elif not self.issues or (self.verdict == "unsupported" and not self.citations):
             raise ValueError("non-support needs issues; unsupported also needs a source citation")
         return self
+
+
+class _SupportedOpinion(Opinion):
+    verdict: Literal["supported"]
+    issues: list[Issue] = Field(max_length=0)
+    citations: list[str] = Field(min_length=1, max_length=3)
+
+
+class _UnsupportedOpinion(Opinion):
+    verdict: Literal["unsupported"]
+    issues: list[Issue] = Field(min_length=1, max_length=2)
+    citations: list[str] = Field(min_length=1, max_length=3)
+
+
+class _UncertainOpinion(Opinion):
+    verdict: Literal["uncertain"]
+    issues: list[Issue] = Field(min_length=1, max_length=2)
+
+
+def opinion_schema() -> dict:
+    """Expose verdict/issue dependencies to decoding, not just runtime validators."""
+    return TypeAdapter(_SupportedOpinion | _UnsupportedOpinion | _UncertainOpinion).json_schema()
 
 
 @dataclass(frozen=True)

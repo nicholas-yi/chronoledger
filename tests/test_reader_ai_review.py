@@ -8,6 +8,7 @@ from asof.reader_ai_review import (
     Opinion,
     account_review_attempts,
     compact_cell_messages,
+    opinion_schema,
     review_messages,
     review_record,
     review_tasks,
@@ -77,3 +78,19 @@ def test_interrupted_ai_attempt_is_an_invalid_ai_record_not_a_human_or_unattempt
     summary = summarize_reviews(tasks, records)
     assert summary["recorded"] == 1 and summary["valid"] == 0
     assert summary["human_gold_labels"] == 0
+
+
+def test_wire_schema_expresses_verdict_dependencies_that_runtime_validation_already_enforced():
+    schema = opinion_schema()
+    definitions = schema["$defs"]
+    assert len(schema["anyOf"]) == 3
+    supported = definitions["_SupportedOpinion"]["properties"]
+    assert supported["verdict"]["const"] == "supported"
+    assert supported["issues"]["maxItems"] == 0
+    assert supported["citations"]["minItems"] == 1
+    unsupported = definitions["_UnsupportedOpinion"]["properties"]
+    assert unsupported["issues"]["minItems"] == unsupported["citations"]["minItems"] == 1
+    task = review_tasks()[0]
+    # The observed v1 inconsistency is still invalid; exposing the constraint must not regrade it.
+    raw = '{"verdict":"supported","issues":["value"],"citations":["E1"]}'
+    assert not review_record(task.case, task.candidate, raw)["valid"]

@@ -1577,3 +1577,114 @@ This is a clean current regression result, not retroactive success for the earli
 stalled/failed attempts. Runtime and reader tests verify empty-load/no-hidden-generation,
 unknown citations, candidate immutability, explicit AI identity, unknown/invalid
 attempt accounting and both compact request shapes within the context budget.
+
+## Observed AI reviewer and cell run: cells pass; judge does not earn trust
+
+The [actual receipt](../results/reader_ai_review.json) records the new run frozen
+at `7385fe3d973f6155ffd5184f8db54a27962a15ca`.
+**All 24 evaluated requests completed**, with no transport timeout, output
+truncation, retry, extra seed or candidate revision. Controller wall time was
+**1,066.594 s (17.78 minutes)**. The separate load-only startup completed in
+**9.328 s** within the unchanged startup budget. Its generated-token telemetry
+was absent and remains null; it was not counted as an evaluated generation.
+
+### Source-cell selection: 12/12, not an extrapolated 24/24
+
+| Arm on the same twelve questions | Correct outcomes | Complete positives | Correct refusals | Wrong admitted records |
+|---|---:|---:|---:|---:|
+| Compact source-cell model selection | **12/12** | **6/6** | **6/6** | **0** |
+| Deterministic source-only control | **12/12** | **6/6** | **6/6** | **0** |
+
+All six positive cell records passed all thirteen field checks: 78/78 correlated
+checks, of which 57 targets were known-valued and 21 were explicitly unknown.
+In particular, the mixed-currency/year example that previously caused incorrect
+free tuple generation was selected correctly without regenerating or converting
+its numeric value/unit/year. This supports the bounded source-assisted design,
+not independent semantic discovery or an LLM advantage over the source-only control.
+The source parser already supplied the qualified candidate facts.
+
+The separate deterministic coverage again completed **192/192** cases, retaining
+24 known-positive targets each for scope, basis, period kind and revision status.
+Those are author-visible variants, not independent human gold or a new real-source study.
+
+### AI reviewer: 5/12 correct verdicts and four invalid outputs
+
+All twelve advisory reviews were attempted. Only eight passed the reviewer contract;
+**five of twelve** matched the authored supported/unsupported label.
+
+| Authored candidate status | Valid support | Valid rejection | Uncertain | Invalid |
+|---|---:|---:|---:|---:|
+| Supported (6) | **0** | **3** | 0 | **3** |
+| Unsupported (6) | 0 | **5** | 0 | **1** |
+
+The three valid false rejections were justified abstentions on a missing requested
+year, a non-GAAP-only source for a GAAP query, and a missing per-share amount.
+The judge tended to treat the absent value/unit as an error instead of recognizing
+that an abstention was appropriate.
+
+The four invalid outputs said `supported` while also listing error codes, violating
+the existing runtime contract. One of those invalid support opinions concerned an
+actually incorrect candidate. Therefore **zero valid false-support verdicts is not
+a safety certificate**. A trivial always-reject reference would match six of twelve
+balanced labels, more than this judge's five; that arithmetic contrast needs no
+additional model call.
+
+This implemented reviewer is available as **AI-REVIEWER-01, advisory-only and
+not promoted**. It cannot replace either independent human first pass, cannot
+adjudicate or create gold, and cannot change source/cell candidates. Its actual
+failure is preserved rather than normalized into passing verdicts.
+No AI opinion was supplied to the still-blind human forms or run on the private packet.
+
+### Schema repair after the observation: implemented, not model-tested
+
+Inspection found a concrete wire-contract shortcoming: the original JSON schema
+listed fields/enums, but the dependency between verdict, empty/nonempty issues and
+required citations existed only in a Pydantic runtime validator. Constrained decoding
+could therefore still emit the observed inconsistent combinations.
+
+The request schema now exposes three explicit branches: support requires empty
+issues and at least one citation; rejection requires issues and a citation;
+uncertainty requires issues. The same runtime acceptance criteria are unchanged.
+A regression test keeps the original inconsistent outputs **invalid** and checks
+that the dependencies are present in the generated schema.
+
+This is a post-observation generation-schema fix. **No model rerun was performed
+after it**, no old verdict was regraded and no improved reviewer score is claimed.
+Any further model measurement needs a new frozen profile; the existing attempt
+markers and source hashes prevent silently recycling this run. Schema repair can
+address response consistency, not prove that the judge understands abstentions.
+
+### Cost, verification and remaining shortcomings
+
+Cell requests totalled **422.909 s** and advisory reviews **627.889 s**, excluding
+the load-only startup and controller overhead. The source-only control computation
+over twelve questions totalled about **0.0103 s**. All evaluated calls together
+generated **898 tokens**. These measurements do not establish that paying for a
+judge adds value; this judge did worse than the trivial balanced-label reference.
+
+Observed peak combined working set was **3,916,546,048 bytes (3.65 GiB)**.
+One CPU, source/resource checks and worker exit 0 passed. All four sampled owned
+PIDs were confirmed absent, port 11435 closed and the shared preexisting server
+remained present. All eight older raw model-report hashes plus the prior accounting
+receipt matched. All 24 serialized source/cell records and twelve AI review records
+were reconstructed and checked against the saved source proofs/raw responses.
+No model package/download, real-source/private-review read, financial study or
+production trial-ledger row was used. Ledger file-size metadata remained 106,246 bytes.
+
+The final software suite, including the schema-dependency fix and both unchanged
+Windows containment checks, passed **724 tests** in 140.28 s, with two existing
+rank-deficiency warnings. Ruff and documentation/index checks passed. This closes
+the current full-suite verification gap; historical intermittent failures remain
+documented, and no permanent environmental cure is claimed.
+
+The original transport failure is retained, but this explicitly new compact,
+load-separated run completed within the **same** per-call/total resource limits.
+It is a demonstrated bounded remediation, not a guarantee against future timeouts.
+No broader application default or scientific acceptance gate changed.
+
+Remaining work is substantive, not hidden percentage repair: the judge's semantic
+quality is inadequate, its corrected decoding schema has not been model-evaluated,
+real-source independence/gold remain absent and arbitrary financial formats remain
+outside the source grammar. The [human runbook](#human-actions-still-required-source-review-runbook)
+still applies. A one-human-plus-AI exploratory workflow may be labelled as such,
+but cannot be reported as two independently reviewed human passes.

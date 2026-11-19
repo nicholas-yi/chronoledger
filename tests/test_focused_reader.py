@@ -294,7 +294,12 @@ def test_cell_audit_uses_strict_formats_and_source_candidates_within_context_bud
 
 
 def test_ai_review_is_a_separate_bounded_advisory_profile_with_no_human_replacement(runner):
-    from asof.reader_ai_review import Opinion, compact_cell_messages, review_messages, review_tasks
+    from asof.reader_ai_review import (
+        compact_cell_messages,
+        opinion_schema,
+        review_messages,
+        review_tasks,
+    )
     from asof.reader_cells import selection_schema
     from asof.reader_real2_guards import input_fit
 
@@ -312,7 +317,7 @@ def test_ai_review_is_a_separate_bounded_advisory_profile_with_no_human_replacem
                 "model": plan["model"], "stream": False, "think": False, "keep_alive": "20m",
                 "options": options,
                 "messages": review_messages(task.case, task.candidate) if reviewing else compact_cell_messages(task.case),
-                "format": Opinion.model_json_schema() if reviewing else selection_schema(task.case),
+                "format": opinion_schema() if reviewing else selection_schema(task.case),
             }
             assert input_fit(json.dumps(body, sort_keys=True).encode(), options)[2]
     runner.select_version("v1")

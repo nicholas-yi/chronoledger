@@ -1,0 +1,3635 @@
+{
+  "study": "CL-FOCUS-AI-REVIEW-01",
+  "plan": {
+    "study": "CL-FOCUS-AI-REVIEW-01",
+    "model": "qwen3.5:4b",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "endpoint": "http://127.0.0.1:11435",
+    "case_count": 12,
+    "offline_cases": 192,
+    "max_calls": 24,
+    "evidence_contract": "field-record-v1",
+    "generation_contract": "12_bound_cells_plus12_advisory_AI_reviews_v1",
+    "output_truncation_policy": "count_invalid_and_continue_without_retry",
+    "preload": "one_empty_prompt_load_within_existing_startup_deadline",
+    "wall_seconds": 1200,
+    "controller_stop_seconds": 1180,
+    "RAM_bytes": 6442450944,
+    "controller_RAM_allowance": 134217728,
+    "call_seconds": 90,
+    "startup_seconds": 60,
+    "options": {
+      "temperature": 0,
+      "seed": 202611191555,
+      "num_ctx": 2048,
+      "num_predict": 128,
+      "num_thread": 1,
+      "num_gpu": 0,
+      "num_batch": 64
+    }
+  },
+  "lineage": {
+    "freeze_commit": "7385fe3d973f6155ffd5184f8db54a27962a15ca",
+    "source_SHA256": {
+      "scripts/run_focused_reader.py": "4b9d52527983d0bfa1f56ac9bd27892e6e4365da96ddfe65a22ecd7cd5007b96",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "src/asof/local_model_runtime.py": "cb87cd2921d71c0a50f1b5bc1ea7964b7eb8e4b51831dfd29191a16e5538125e",
+      "src/asof/reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+      "src/asof/reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+      "src/asof/reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "src/asof/benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+      "src/asof/ledger.py": "85e6f75a58616514d18c3a1fdfba8343adf23334fb76a939f2d3a97b2f3764b7",
+      "tests/test_focused_reader.py": "3ab68b4a9499a762fc5f6dade1d84bc99680a1f02842dfb5fc97f98cd146b079",
+      "results/reader_ai_review_plan.json": "a74bae86b08af8bf6f6b17335841e07f8fcb4a8165d1d5b9626a343d793671e6",
+      "results/local_model_runtime_support.json": "55daf16377dfe43978e61feb3b961d690122926ccb17a8f12f1058c5230c2617",
+      "requirements-dev.lock": "c84cefb3543db283afc0a1021e2cace63ac4e7877a84611f345b928f64077f0c",
+      "docs/FOCUSED_READER.md": "d207ea9189e1223b0f2ae0241da31195f96a4b33d78b80b7bd1a058c07582040",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "tests/test_verified_reader.py": "d43bc5af989182d0a9c99be9df776f33060a2bb72638f2c5bcce0a52b754d34e",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7",
+      "results/focused_reader_v2.json": "82bf4630e45ee5ba2edab2b75edf10a0ca1c4bb0cb6c5c3e466d00b96b4f3d14",
+      "src/asof/linked_reader.py": "bfd1b101858efbf97445a8026071853ea1c8c1bcb6baece5a7cc3c9160864309",
+      "tests/test_linked_reader.py": "31a760f49a43c7eff4e631ac3cc02ec747071ba2430fa269f5a9053b2a32dd1a",
+      "src/asof/reader_stress.py": "a7515ea2ac09bdb40cf224b30a0d9aa274493bd6f1a2df29f9b14a34da673cba",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "results/reader_stress.json": "aab4af98e15207aec3799f4db80764df3158814d8219d348ead3d73020ceb9a4",
+      "results/verified_reader.json": "db3414b73043bd1f1e93f2f358f2e74b3a26f9582d3efcfb57d24ff7eddf62de",
+      "src/asof/reader_fields.py": "e5da9a2abf98819561255f543d4bbcf09c6912999be940ad361deb621008c1e3",
+      "tests/test_reader_fields.py": "373d36a4384d736f05b527ebfb917d0f6f22efe8cc3d8fff2921e9374a60c14c",
+      "results/linked_reader.json": "aa90834de02c37826c267cb0450d52184531f830730d5200448b1a6e7579b9e2",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "tests/test_reader_reliability.py": "d1fa6bee69f580b2630efe049774b343905679cbc8adea414121344682e1e3e9",
+      "results/reader_fields.json": "32580a1f4477226e848867dea935726f5731397aa6c71f49c4beeffeecfe46aa",
+      "src/asof/reader_cells.py": "1e3babc16511bcb96238fa7cbdc69104532c44703b3492a548500e7aab2beb05",
+      "src/asof/reader_field_challenge.py": "384c512732ebff3584720039e89dcffd07f7af90622f964021b41713b1b1418f",
+      "tests/test_reader_cells.py": "f79853d62bb09f752b4d285c83d2814fd8c7ff7d248d2163750df8fe44b76206",
+      "results/reader_reliability.json": "cef75a6a50a6a8793ab3101189e4a54e3184a7b4df806bf6b0c41e3253544956",
+      "src/asof/reader_ai_review.py": "834bbc928f7e39df645c3990942b27b24909633caf5841692aba5a75f04e15e4",
+      "tests/test_reader_ai_review.py": "12f96f7fc62c7e87c01b288468305c23e5a98e9e18dc35e30588b8460b314b9f",
+      "tests/test_local_model_runtime.py": "f5863b4261cdb2e88c490472104de858ffbe61934652daa9fc2cbaca85c0a653",
+      "results/reader_cell_selection.json": "8367b709e6e007538a56c49cc23512497e5394f0374a9cf7fb1c7fd31c3868b9",
+      "results/reader_cell_selection_accounting.json": "de4fd1bfdae62a73c0f559d1b75270dd20eb8771595a15ecac274db743734a7c"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "status": "complete_invented_comparison",
+  "stop_reason": null,
+  "records": {
+    "CELL01-0": {
+      "source_control": {
+        "answer": {
+          "value": "39.5",
+          "unit": "eur thousand",
+          "period": "2018",
+          "evidence": "39.5",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "2df36f02bcba1e34e954a25aa8c51bc7b0fd9c17150ac7565a967e0da06f996f",
+          "issuer": "FictionAlder",
+          "metric": "revenue",
+          "value": "39.5",
+          "unit": "eur thousand",
+          "period": "2018",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 21
+            },
+            {
+              "role": "metric",
+              "start": 77,
+              "end": 84
+            },
+            {
+              "role": "period",
+              "start": 53,
+              "end": 57
+            },
+            {
+              "role": "unit",
+              "start": 59,
+              "end": 71
+            },
+            {
+              "role": "value",
+              "start": 92,
+              "end": 96
+            }
+          ]
+        },
+        "context_spans": [],
+        "fields": {
+          "value": "39.5",
+          "sign": "positive",
+          "currency": "EUR",
+          "scale": "thousand",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionAlder",
+          "metric_binding": "revenue",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "unknown",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "linked_source_fact",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0008533000946044922,
+        "model_calls": 0
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "2df36f02bcba1e34e954a25aa8c51bc7b0fd9c17150ac7565a967e0da06f996f",
+        "candidate": {
+          "value": "39.5",
+          "unit": "eur thousand",
+          "period": "2018",
+          "evidence": "39.5",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": false,
+        "opinion": null,
+        "source_citations": [],
+        "errors": [
+          {
+            "type": "value_error",
+            "loc": []
+          }
+        ],
+        "call_id": 1,
+        "attempt_status": "schema_invalid",
+        "latency_seconds": 47.32799999974668,
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      },
+      "cell_selection": {
+        "answer": {
+          "value": "39.5",
+          "unit": "eur thousand",
+          "period": "2018",
+          "evidence": "39.5",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "2df36f02bcba1e34e954a25aa8c51bc7b0fd9c17150ac7565a967e0da06f996f",
+          "issuer": "FictionAlder",
+          "metric": "revenue",
+          "value": "39.5",
+          "unit": "eur thousand",
+          "period": "2018",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 21
+            },
+            {
+              "role": "metric",
+              "start": 77,
+              "end": 84
+            },
+            {
+              "role": "period",
+              "start": 53,
+              "end": 57
+            },
+            {
+              "role": "unit",
+              "start": 59,
+              "end": 71
+            },
+            {
+              "role": "value",
+              "start": 92,
+              "end": 96
+            }
+          ]
+        },
+        "context_spans": [],
+        "fields": {
+          "value": "39.5",
+          "sign": "positive",
+          "currency": "EUR",
+          "scale": "thousand",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionAlder",
+          "metric_binding": "revenue",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "unknown",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "selected_bound_source_cell",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": "Cf6b463cea174",
+          "reason": ""
+        },
+        "call_id": 2,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 40.8910000002943
+      }
+    },
+    "CELL01-1": {
+      "source_control": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "source_unresolved_requires_review"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "unresolved_requires_review",
+        "reasons": [
+          "row_column_unit_conflict"
+        ],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.001113200094550848,
+        "model_calls": 0
+      },
+      "cell_selection": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "unsupported"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "preserved_selection_refusal",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": null,
+          "reason": "unsupported"
+        },
+        "call_id": 3,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 31.813000000081956
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "e1f15dd71575d910527d060922527fdea411a0a2b66b8da730dbead0ecb975bb",
+        "candidate": {
+          "value": "999",
+          "unit": "USD million",
+          "period": "2018",
+          "evidence": "Company: FictionAlder.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "unit",
+            "value"
+          ],
+          "citations": [
+            "E2",
+            "E3"
+          ]
+        },
+        "source_citations": [
+          {
+            "id": "E2",
+            "start": 23,
+            "end": 74,
+            "text": "| Item | 2017 (USD million) | 2018 (EUR thousand) |"
+          },
+          {
+            "id": "E3",
+            "start": 75,
+            "end": 112,
+            "text": "| Revenue (USD million) | 74 | 39.5 |"
+          }
+        ],
+        "call_id": 4,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 50.061999999918044,
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL02-0": {
+      "source_control": {
+        "answer": {
+          "value": "52",
+          "unit": "gbp million",
+          "period": "2018",
+          "evidence": "52",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "d6c0209e2ea9e93993906ab6ebbdda04124b3a02146b7f3983fe2d2529532ac0",
+          "issuer": "FictionCypress",
+          "metric": "revenue",
+          "value": "52",
+          "unit": "gbp million",
+          "period": "2018",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 79,
+              "end": 86
+            },
+            {
+              "role": "period",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "role": "unit",
+              "start": 40,
+              "end": 51
+            },
+            {
+              "role": "value",
+              "start": 89,
+              "end": 91
+            }
+          ]
+        },
+        "context_spans": [],
+        "fields": {
+          "value": "52",
+          "sign": "positive",
+          "currency": "GBP",
+          "scale": "million",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionCypress",
+          "metric_binding": "revenue",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "unknown",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "linked_source_fact",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.002663799561560154,
+        "model_calls": 0
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "d6c0209e2ea9e93993906ab6ebbdda04124b3a02146b7f3983fe2d2529532ac0",
+        "candidate": {
+          "value": "52",
+          "unit": "gbp million",
+          "period": "2016",
+          "evidence": "52",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value",
+            "unit"
+          ],
+          "citations": [
+            "E1",
+            "E3"
+          ]
+        },
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 24,
+            "text": "Company: FictionCypress."
+          },
+          {
+            "id": "E3",
+            "start": 77,
+            "end": 99,
+            "text": "| Revenue | 52 | 910 |"
+          }
+        ],
+        "call_id": 5,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 54.07800000021234,
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      },
+      "cell_selection": {
+        "answer": {
+          "value": "52",
+          "unit": "gbp million",
+          "period": "2018",
+          "evidence": "52",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "d6c0209e2ea9e93993906ab6ebbdda04124b3a02146b7f3983fe2d2529532ac0",
+          "issuer": "FictionCypress",
+          "metric": "revenue",
+          "value": "52",
+          "unit": "gbp million",
+          "period": "2018",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 79,
+              "end": 86
+            },
+            {
+              "role": "period",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "role": "unit",
+              "start": 40,
+              "end": 51
+            },
+            {
+              "role": "value",
+              "start": 89,
+              "end": 91
+            }
+          ]
+        },
+        "context_spans": [],
+        "fields": {
+          "value": "52",
+          "sign": "positive",
+          "currency": "GBP",
+          "scale": "million",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionCypress",
+          "metric_binding": "revenue",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "unknown",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "selected_bound_source_cell",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": "C15a7064927fd",
+          "reason": ""
+        },
+        "call_id": 6,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 42.407000000122935
+      }
+    },
+    "CELL02-1": {
+      "source_control": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "source_unresolved_requires_review"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "unresolved_requires_review",
+        "reasons": [
+          "table_requested_year_column_unavailable"
+        ],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0003804001025855541,
+        "model_calls": 0
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "651252a8636514366d4a0d386ce772cfbe1ab576caeb8c8c141b45e30ea245d3",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "linked_source_unavailable"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value"
+          ],
+          "citations": [
+            "E4"
+          ]
+        },
+        "source_citations": [
+          {
+            "id": "E4",
+            "start": 100,
+            "end": 142,
+            "text": "No reporting-year 2018 amount is supplied."
+          }
+        ],
+        "call_id": 7,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 49.32799999974668,
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      },
+      "cell_selection": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "not_disclosed"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "preserved_selection_refusal",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": null,
+          "reason": "not_disclosed"
+        },
+        "call_id": 8,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 42.60900000017136
+      }
+    },
+    "CELL03-0": {
+      "source_control": {
+        "answer": {
+          "value": "142",
+          "unit": "usd million",
+          "period": "2018",
+          "evidence": "142",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "2e3c035409235cb2a81ce1357446f76f771b62062fec93fde8927d1ed6529d92",
+          "issuer": "FictionFir",
+          "metric": "revenue",
+          "value": "142",
+          "unit": "usd million",
+          "period": "2018",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 19
+            },
+            {
+              "role": "metric",
+              "start": 99,
+              "end": 106
+            },
+            {
+              "role": "period",
+              "start": 90,
+              "end": 94
+            },
+            {
+              "role": "unit",
+              "start": 68,
+              "end": 79
+            },
+            {
+              "role": "value",
+              "start": 109,
+              "end": 112
+            }
+          ]
+        },
+        "context_spans": [
+          {
+            "role": "period_kind",
+            "start": 39,
+            "end": 55
+          },
+          {
+            "role": "period_kind",
+            "start": 39,
+            "end": 55
+          }
+        ],
+        "fields": {
+          "value": "142",
+          "sign": "positive",
+          "currency": "USD",
+          "scale": "million",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionFir",
+          "metric_binding": "revenue",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": "fiscal_year",
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "observed",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "linked_source_fact",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0007218997925519943,
+        "model_calls": 0
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "2e3c035409235cb2a81ce1357446f76f771b62062fec93fde8927d1ed6529d92",
+        "candidate": {
+          "value": "142",
+          "unit": "usd million",
+          "period": "2018",
+          "evidence": "142",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": false,
+        "opinion": null,
+        "source_citations": [],
+        "errors": [
+          {
+            "type": "value_error",
+            "loc": []
+          }
+        ],
+        "call_id": 9,
+        "attempt_status": "schema_invalid",
+        "latency_seconds": 60.436999999918044,
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      },
+      "cell_selection": {
+        "answer": {
+          "value": "142",
+          "unit": "usd million",
+          "period": "2018",
+          "evidence": "142",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "2e3c035409235cb2a81ce1357446f76f771b62062fec93fde8927d1ed6529d92",
+          "issuer": "FictionFir",
+          "metric": "revenue",
+          "value": "142",
+          "unit": "usd million",
+          "period": "2018",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 19
+            },
+            {
+              "role": "metric",
+              "start": 99,
+              "end": 106
+            },
+            {
+              "role": "period",
+              "start": 90,
+              "end": 94
+            },
+            {
+              "role": "unit",
+              "start": 68,
+              "end": 79
+            },
+            {
+              "role": "value",
+              "start": 109,
+              "end": 112
+            }
+          ]
+        },
+        "context_spans": [
+          {
+            "role": "period_kind",
+            "start": 39,
+            "end": 55
+          },
+          {
+            "role": "period_kind",
+            "start": 39,
+            "end": 55
+          }
+        ],
+        "fields": {
+          "value": "142",
+          "sign": "positive",
+          "currency": "USD",
+          "scale": "million",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionFir",
+          "metric_binding": "revenue",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": "fiscal_year",
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "observed",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "selected_bound_source_cell",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": "Ce2da96612f35",
+          "reason": ""
+        },
+        "call_id": 10,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 40.25
+      }
+    },
+    "CELL03-1": {
+      "source_control": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "source_unresolved_requires_review"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "unresolved_requires_review",
+        "reasons": [
+          "period_declaration_incompatible_with_requested_year",
+          "subannual_period_not_supported_by_year_only_query"
+        ],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0015194001607596874,
+        "model_calls": 0
+      },
+      "cell_selection": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "not_disclosed"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "preserved_selection_refusal",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": null,
+          "reason": "not_disclosed"
+        },
+        "call_id": 11,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 33.35900000017136
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "e84b359d22ce11756053b7042a9477b41c713f7dcea729a32ebec376c71de353",
+        "candidate": {
+          "value": "999",
+          "unit": "USD million",
+          "period": "2018",
+          "evidence": "Company: FictionFir.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value",
+            "unit"
+          ],
+          "citations": [
+            "E5",
+            "E6"
+          ]
+        },
+        "source_citations": [
+          {
+            "id": "E5",
+            "start": 102,
+            "end": 119,
+            "text": "| Revenue | 142 |"
+          },
+          {
+            "id": "E6",
+            "start": 120,
+            "end": 154,
+            "text": "The annual amount is not supplied."
+          }
+        ],
+        "call_id": 12,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 58.20299999974668,
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL04-0": {
+      "source_control": {
+        "answer": {
+          "value": "31",
+          "unit": "usd million",
+          "period": "2018",
+          "evidence": "31",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "da16b9777e40939d1616eb5a921dd97c73d4c51b0f835f5e5ca9109baab96fda",
+          "issuer": "FictionHolly",
+          "metric": "GAAP operating income",
+          "value": "31",
+          "unit": "usd million",
+          "period": "2018",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 21
+            },
+            {
+              "role": "metric",
+              "start": 76,
+              "end": 97
+            },
+            {
+              "role": "period",
+              "start": 53,
+              "end": 57
+            },
+            {
+              "role": "unit",
+              "start": 59,
+              "end": 70
+            },
+            {
+              "role": "value",
+              "start": 105,
+              "end": 107
+            }
+          ]
+        },
+        "context_spans": [
+          {
+            "role": "accounting_basis",
+            "start": 76,
+            "end": 97
+          }
+        ],
+        "fields": {
+          "value": "31",
+          "sign": "positive",
+          "currency": "USD",
+          "scale": "million",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionHolly",
+          "metric_binding": "GAAP operating income",
+          "scope": null,
+          "accounting_basis": "gaap",
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "observed",
+          "period_kind": "unknown",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "linked_source_fact",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0005920999683439732,
+        "model_calls": 0
+      },
+      "cell_selection": {
+        "answer": {
+          "value": "31",
+          "unit": "usd million",
+          "period": "2018",
+          "evidence": "31",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "da16b9777e40939d1616eb5a921dd97c73d4c51b0f835f5e5ca9109baab96fda",
+          "issuer": "FictionHolly",
+          "metric": "GAAP operating income",
+          "value": "31",
+          "unit": "usd million",
+          "period": "2018",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 21
+            },
+            {
+              "role": "metric",
+              "start": 76,
+              "end": 97
+            },
+            {
+              "role": "period",
+              "start": 53,
+              "end": 57
+            },
+            {
+              "role": "unit",
+              "start": 59,
+              "end": 70
+            },
+            {
+              "role": "value",
+              "start": 105,
+              "end": 107
+            }
+          ]
+        },
+        "context_spans": [
+          {
+            "role": "accounting_basis",
+            "start": 76,
+            "end": 97
+          }
+        ],
+        "fields": {
+          "value": "31",
+          "sign": "positive",
+          "currency": "USD",
+          "scale": "million",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionHolly",
+          "metric_binding": "GAAP operating income",
+          "scope": null,
+          "accounting_basis": "gaap",
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "observed",
+          "period_kind": "unknown",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "selected_bound_source_cell",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": "Cf64d263643f9",
+          "reason": ""
+        },
+        "call_id": 13,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 39.40599999995902
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "da16b9777e40939d1616eb5a921dd97c73d4c51b0f835f5e5ca9109baab96fda",
+        "candidate": {
+          "value": "31",
+          "unit": "EUR million",
+          "period": "2018",
+          "evidence": "31",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": false,
+        "opinion": null,
+        "source_citations": [],
+        "errors": [
+          {
+            "type": "value_error",
+            "loc": []
+          }
+        ],
+        "call_id": 14,
+        "attempt_status": "schema_invalid",
+        "latency_seconds": 49.90599999995902,
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL04-1": {
+      "source_control": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "source_unresolved_requires_review"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "unresolved_requires_review",
+        "reasons": [
+          "no_unique_supported_query_fact"
+        ],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0001933998428285122,
+        "model_calls": 0
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "9ae4f8c738a777779af5f47379e08c57044edc2c10614936a264977809ee7e3e",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "linked_source_unavailable"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value",
+            "unit"
+          ],
+          "citations": [
+            "E1",
+            "E3"
+          ]
+        },
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 22,
+            "text": "Company: FictionHolly."
+          },
+          {
+            "id": "E3",
+            "start": 74,
+            "end": 113,
+            "text": "| Non-GAAP operating income | 19 | 31 |"
+          }
+        ],
+        "call_id": 15,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 58.29699999978766,
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      },
+      "cell_selection": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "not_disclosed"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "preserved_selection_refusal",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": null,
+          "reason": "not_disclosed"
+        },
+        "call_id": 16,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 25.688000000081956
+      }
+    },
+    "CELL05-0": {
+      "source_control": {
+        "answer": {
+          "value": "40",
+          "unit": "eur million",
+          "period": "2018",
+          "evidence": "40",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "063613be84a65b912b64649b5989c06327f92fc2d20f34e4d94e02f40d0bf598",
+          "issuer": "FictionLinden",
+          "metric": "revenue",
+          "value": "40",
+          "unit": "eur million",
+          "period": "2018",
+          "method": "prose",
+          "priority": "correction",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 81,
+              "end": 94
+            },
+            {
+              "role": "metric",
+              "start": 104,
+              "end": 111
+            },
+            {
+              "role": "period",
+              "start": 134,
+              "end": 138
+            },
+            {
+              "role": "status",
+              "start": 69,
+              "end": 80
+            },
+            {
+              "role": "unit",
+              "start": 118,
+              "end": 129
+            },
+            {
+              "role": "value",
+              "start": 115,
+              "end": 117
+            },
+            {
+              "role": "supersession",
+              "start": 156,
+              "end": 179
+            }
+          ]
+        },
+        "context_spans": [],
+        "fields": {
+          "value": "40",
+          "sign": "positive",
+          "currency": "EUR",
+          "scale": "million",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionLinden",
+          "metric_binding": "revenue",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": "correction",
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "unknown",
+          "revision_status": "observed",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "linked_source_fact",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0010036001913249493,
+        "model_calls": 0
+      },
+      "cell_selection": {
+        "answer": {
+          "value": "40",
+          "unit": "eur million",
+          "period": "2018",
+          "evidence": "40",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "063613be84a65b912b64649b5989c06327f92fc2d20f34e4d94e02f40d0bf598",
+          "issuer": "FictionLinden",
+          "metric": "revenue",
+          "value": "40",
+          "unit": "eur million",
+          "period": "2018",
+          "method": "prose",
+          "priority": "correction",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 81,
+              "end": 94
+            },
+            {
+              "role": "metric",
+              "start": 104,
+              "end": 111
+            },
+            {
+              "role": "period",
+              "start": 134,
+              "end": 138
+            },
+            {
+              "role": "status",
+              "start": 69,
+              "end": 80
+            },
+            {
+              "role": "unit",
+              "start": 118,
+              "end": 129
+            },
+            {
+              "role": "value",
+              "start": 115,
+              "end": 117
+            },
+            {
+              "role": "supersession",
+              "start": 156,
+              "end": 179
+            }
+          ]
+        },
+        "context_spans": [],
+        "fields": {
+          "value": "40",
+          "sign": "positive",
+          "currency": "EUR",
+          "scale": "million",
+          "measure": "currency",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionLinden",
+          "metric_binding": "revenue",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": "correction",
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "unknown",
+          "revision_status": "observed",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "selected_bound_source_cell",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "bundle_errors": []
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": "C1f4178c48502",
+          "reason": ""
+        },
+        "call_id": 17,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 37.485000000335276
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "063613be84a65b912b64649b5989c06327f92fc2d20f34e4d94e02f40d0bf598",
+        "candidate": {
+          "value": "40",
+          "unit": "eur million",
+          "period": "2018",
+          "evidence": "40",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": false,
+        "opinion": null,
+        "source_citations": [],
+        "errors": [
+          {
+            "type": "value_error",
+            "loc": []
+          }
+        ],
+        "call_id": 18,
+        "attempt_status": "schema_invalid",
+        "latency_seconds": 55.71900000004098,
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL05-1": {
+      "source_control": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "source_unresolved_requires_review"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "unresolved_requires_review",
+        "reasons": [
+          "no_unique_supported_query_fact"
+        ],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0006575002335011959,
+        "model_calls": 0
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "6f97dd6efde5c0d1f0328f335cf3a31eb9c84825b2aa6bd9c7e4e723ae6766f6",
+        "candidate": {
+          "value": "999",
+          "unit": "USD million",
+          "period": "2018",
+          "evidence": "Original: FictionLinden reported revenue of 36 EUR million for 2018.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value",
+            "unit"
+          ],
+          "citations": [
+            "E1",
+            "E2",
+            "E3"
+          ]
+        },
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 68,
+            "text": "Original: FictionLinden reported revenue of 36 EUR million for 2018."
+          },
+          {
+            "id": "E2",
+            "start": 68,
+            "end": 139,
+            "text": " Correction: FictionLinden reported revenue of 40 EUR million for 2018."
+          },
+          {
+            "id": "E3",
+            "start": 139,
+            "end": 210,
+            "text": " Correction: FictionLinden reported revenue of 43 EUR million for 2018."
+          }
+        ],
+        "call_id": 19,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 59.54600000008941,
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      },
+      "cell_selection": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "ambiguous"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "preserved_selection_refusal",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": null,
+          "reason": "ambiguous"
+        },
+        "call_id": 20,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 30.655999999959022
+      }
+    },
+    "CELL06-0": {
+      "source_control": {
+        "answer": {
+          "value": "3.25",
+          "unit": "gbp per share",
+          "period": "2018",
+          "evidence": "FictionRowan reported diluted earnings per share of 3.25 GBP per share for 2018.",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "field-source-v1",
+          "source_sha256": "b695ac1c03afa954735c4afff45f705b72c9363851d9e4b319ebda24ea68335b",
+          "issuer": "FictionRowan",
+          "metric": "diluted earnings per share",
+          "value": "3.25",
+          "unit": "gbp per share",
+          "period": "2018",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 12
+            },
+            {
+              "role": "metric",
+              "start": 22,
+              "end": 48
+            },
+            {
+              "role": "value",
+              "start": 52,
+              "end": 56
+            },
+            {
+              "role": "unit",
+              "start": 57,
+              "end": 70
+            },
+            {
+              "role": "period",
+              "start": 75,
+              "end": 79
+            }
+          ]
+        },
+        "context_spans": [],
+        "fields": {
+          "value": "3.25",
+          "sign": "positive",
+          "currency": "GBP",
+          "scale": "unit",
+          "measure": "currency_per_share",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionRowan",
+          "metric_binding": "diluted earnings per share",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "unknown",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "per_share_source_fact",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "bundle_errors": [
+            "unknown_evidence_contract"
+          ]
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0004107002168893814,
+        "model_calls": 0
+      },
+      "cell_selection": {
+        "answer": {
+          "value": "3.25",
+          "unit": "gbp per share",
+          "period": "2018",
+          "evidence": "FictionRowan reported diluted earnings per share of 3.25 GBP per share for 2018.",
+          "abstain": false,
+          "reason": ""
+        },
+        "bundle": {
+          "contract": "field-source-v1",
+          "source_sha256": "b695ac1c03afa954735c4afff45f705b72c9363851d9e4b319ebda24ea68335b",
+          "issuer": "FictionRowan",
+          "metric": "diluted earnings per share",
+          "value": "3.25",
+          "unit": "gbp per share",
+          "period": "2018",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 12
+            },
+            {
+              "role": "metric",
+              "start": 22,
+              "end": 48
+            },
+            {
+              "role": "value",
+              "start": 52,
+              "end": 56
+            },
+            {
+              "role": "unit",
+              "start": 57,
+              "end": 70
+            },
+            {
+              "role": "period",
+              "start": 75,
+              "end": 79
+            }
+          ]
+        },
+        "context_spans": [],
+        "fields": {
+          "value": "3.25",
+          "sign": "positive",
+          "currency": "GBP",
+          "scale": "unit",
+          "measure": "currency_per_share",
+          "reporting_year": "2018",
+          "issuer_binding": "FictionRowan",
+          "metric_binding": "diluted earnings per share",
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": true
+        },
+        "field_states": {
+          "value": "observed",
+          "sign": "observed",
+          "currency": "observed",
+          "scale": "observed",
+          "measure": "observed",
+          "reporting_year": "observed",
+          "issuer_binding": "observed",
+          "metric_binding": "observed",
+          "scope": "unknown",
+          "accounting_basis": "unknown",
+          "period_kind": "unknown",
+          "revision_status": "unknown",
+          "source_evidence": "observed"
+        },
+        "score": {
+          "correct": true,
+          "answered": true,
+          "outcome": "correct_answer"
+        },
+        "field_correct": {
+          "value": true,
+          "sign": true,
+          "currency": true,
+          "scale": true,
+          "measure": true,
+          "reporting_year": true,
+          "issuer_binding": true,
+          "metric_binding": true,
+          "scope": true,
+          "accounting_basis": true,
+          "period_kind": true,
+          "revision_status": true,
+          "source_evidence": true
+        },
+        "status": "selected_bound_source_cell",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "bundle_errors": [
+            "unknown_evidence_contract"
+          ]
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": "C5ca7f5ba8e80",
+          "reason": ""
+        },
+        "call_id": 21,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_answer",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": true,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 32.813000000081956
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "b695ac1c03afa954735c4afff45f705b72c9363851d9e4b319ebda24ea68335b",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "injected_unnecessary_abstention"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value"
+          ],
+          "citations": [
+            "E1"
+          ]
+        },
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 80,
+            "text": "FictionRowan reported diluted earnings per share of 3.25 GBP per share for 2018."
+          }
+        ],
+        "call_id": 22,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 40.407000000122935,
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL06-1": {
+      "source_control": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "source_unresolved_requires_review"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "unresolved_requires_review",
+        "reasons": [
+          "no_unique_supported_query_fact"
+        ],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 0.0001983996480703354,
+        "model_calls": 0
+      },
+      "cell_selection": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "not_disclosed"
+        },
+        "bundle": null,
+        "context_spans": [],
+        "fields": null,
+        "field_states": {
+          "value": "unanswered",
+          "sign": "unanswered",
+          "currency": "unanswered",
+          "scale": "unanswered",
+          "measure": "unanswered",
+          "reporting_year": "unanswered",
+          "issuer_binding": "unanswered",
+          "metric_binding": "unanswered",
+          "scope": "unanswered",
+          "accounting_basis": "unanswered",
+          "period_kind": "unanswered",
+          "revision_status": "unanswered",
+          "source_evidence": "unanswered"
+        },
+        "score": {
+          "correct": true,
+          "answered": false,
+          "outcome": "correct_abstention"
+        },
+        "field_correct": {
+          "value": null,
+          "sign": null,
+          "currency": null,
+          "scale": null,
+          "measure": null,
+          "reporting_year": null,
+          "issuer_binding": null,
+          "metric_binding": null,
+          "scope": null,
+          "accounting_basis": null,
+          "period_kind": null,
+          "revision_status": null,
+          "source_evidence": null
+        },
+        "status": "preserved_selection_refusal",
+        "reasons": [],
+        "legacy_linked_score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false
+        },
+        "contract": "field-record-v1",
+        "raw_response": {
+          "cell_id": null,
+          "reason": "not_disclosed"
+        },
+        "call_id": 23,
+        "response_status": "schema_valid",
+        "diagnostic": {
+          "primary": "correct_refusal",
+          "raw_response_valid": true,
+          "raw_tuple_mismatches": [],
+          "raw_tuple_assessed": false,
+          "raw_field_correct": {},
+          "record_failed_fields": [],
+          "source_qualified_for_query": false,
+          "record_failure_is_not_thirteen_independent_field_errors": true
+        },
+        "latency_seconds": 25.532000000122935
+      },
+      "ai_review": {
+        "reviewer_id": "AI-REVIEWER-01",
+        "reviewer_type": "AI",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "83213acc1a5bf05c5eae05b61f9df8780114e7b95283d29519a51dc8d08909b1",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "linked_source_unavailable"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value"
+          ],
+          "citations": [
+            "E1",
+            "E2"
+          ]
+        },
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 66,
+            "text": "FictionRowan reported total earnings of 3.25 GBP million for 2018."
+          },
+          {
+            "id": "E2",
+            "start": 66,
+            "end": 122,
+            "text": " No diluted share count or per-share amount is supplied."
+          }
+        ],
+        "call_id": 24,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 44.57799999974668,
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    }
+  },
+  "calls": [
+    {
+      "call_id": 1,
+      "case_id": "CELL01-0",
+      "stage": "judge",
+      "request_sha256": "a6b598ce8fd35f0ef745bd535d92018afa77ffee7b742c2701a321acb5a66ed8",
+      "status": "schema_invalid",
+      "latency_seconds": 47.32799999974668,
+      "generated_tokens": 49,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 2,
+      "case_id": "CELL01-0",
+      "stage": "generate",
+      "request_sha256": "d4cae6ac05534d3fd8413629554bb88f1e1373ac943a789e59b82efa47aefa10",
+      "status": "schema_valid",
+      "latency_seconds": 40.8910000002943,
+      "generated_tokens": 28,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 3,
+      "case_id": "CELL01-1",
+      "stage": "generate",
+      "request_sha256": "42de289494d5dfa2ce198045ee89ab0d0c0a637e5248797f759aa45019a47adc",
+      "status": "schema_valid",
+      "latency_seconds": 31.813000000081956,
+      "generated_tokens": 18,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 4,
+      "case_id": "CELL01-1",
+      "stage": "judge",
+      "request_sha256": "6cf6b1ef63d91a048d57185ef1dc2c152aaa7f999b0f4ea52550396817bc17bb",
+      "status": "schema_valid",
+      "latency_seconds": 50.061999999918044,
+      "generated_tokens": 55,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 5,
+      "case_id": "CELL02-0",
+      "stage": "judge",
+      "request_sha256": "eca3d69a00af912523d158bed3daa6739e4fd1bcdcb257e8b739bd313925368c",
+      "status": "schema_valid",
+      "latency_seconds": 54.07800000021234,
+      "generated_tokens": 55,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 6,
+      "case_id": "CELL02-0",
+      "stage": "generate",
+      "request_sha256": "bfbe3a77bfb8a7852790b8dd61aad35bd8d74a84cf52ff44093caeee675f63eb",
+      "status": "schema_valid",
+      "latency_seconds": 42.407000000122935,
+      "generated_tokens": 29,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 7,
+      "case_id": "CELL02-1",
+      "stage": "judge",
+      "request_sha256": "3e206179a7a2f29800f57334a160499545746eb4cacb9f818931665a6d6c6870",
+      "status": "schema_valid",
+      "latency_seconds": 49.32799999974668,
+      "generated_tokens": 44,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 8,
+      "case_id": "CELL02-1",
+      "stage": "generate",
+      "request_sha256": "a77b4b63bda53cb8493352e13912ed3e774fba43265044b32d3f18dd7ecfc6ac",
+      "status": "schema_valid",
+      "latency_seconds": 42.60900000017136,
+      "generated_tokens": 17,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 9,
+      "case_id": "CELL03-0",
+      "stage": "judge",
+      "request_sha256": "8dbd4fa1b7dfd85937dce80a3a44822ebfba209bd0a5be28b74859e8bf6d505b",
+      "status": "schema_invalid",
+      "latency_seconds": 60.436999999918044,
+      "generated_tokens": 49,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 10,
+      "case_id": "CELL03-0",
+      "stage": "generate",
+      "request_sha256": "7f43a58ec49e17f53ae0b762f117030e845fad680f567b2cd4881f8f7850b526",
+      "status": "schema_valid",
+      "latency_seconds": 40.25,
+      "generated_tokens": 28,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 11,
+      "case_id": "CELL03-1",
+      "stage": "generate",
+      "request_sha256": "f955628eb8486fe167dad7a44e86186603642b0bd4f23c8d7045979d52f25f80",
+      "status": "schema_valid",
+      "latency_seconds": 33.35900000017136,
+      "generated_tokens": 20,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 12,
+      "case_id": "CELL03-1",
+      "stage": "judge",
+      "request_sha256": "df3eea2c34e23eee24a6cdd62a51b0b41ea6309713bf46d6985bf1b95dd809c1",
+      "status": "schema_valid",
+      "latency_seconds": 58.20299999974668,
+      "generated_tokens": 55,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 13,
+      "case_id": "CELL04-0",
+      "stage": "generate",
+      "request_sha256": "72087295670610ffba02bd16854439d12ba432f20acb609b8a342f5f27fd70c7",
+      "status": "schema_valid",
+      "latency_seconds": 39.40599999995902,
+      "generated_tokens": 30,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 14,
+      "case_id": "CELL04-0",
+      "stage": "judge",
+      "request_sha256": "3b67640280f7e7a1ff7ffff865e02a7b3e9fc3e7a073415d45386cfbba5d03ba",
+      "status": "schema_invalid",
+      "latency_seconds": 49.90599999995902,
+      "generated_tokens": 44,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 15,
+      "case_id": "CELL04-1",
+      "stage": "judge",
+      "request_sha256": "cc96ea814233019b0cd3bad7377524f9ae2930f88b0d9309d8eb768f2ece463c",
+      "status": "schema_valid",
+      "latency_seconds": 58.29699999978766,
+      "generated_tokens": 55,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 16,
+      "case_id": "CELL04-1",
+      "stage": "generate",
+      "request_sha256": "9e8d2af5a5129b4491cf00b0d189352f7ddc1815953f7862480e38d6df96b854",
+      "status": "schema_valid",
+      "latency_seconds": 25.688000000081956,
+      "generated_tokens": 20,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 17,
+      "case_id": "CELL05-0",
+      "stage": "generate",
+      "request_sha256": "c99405a09bccb67bd014f9b6f86dc4e19c8a2759b54d1bc5edf76550ffb5e1a6",
+      "status": "schema_valid",
+      "latency_seconds": 37.485000000335276,
+      "generated_tokens": 28,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 18,
+      "case_id": "CELL05-0",
+      "stage": "judge",
+      "request_sha256": "93efcf29c232d60bb3354b17e3cf52d37fe6cfcfc3f9689aeb06271f4c9db948",
+      "status": "schema_invalid",
+      "latency_seconds": 55.71900000004098,
+      "generated_tokens": 55,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 19,
+      "case_id": "CELL05-1",
+      "stage": "judge",
+      "request_sha256": "0f7185f7b56c6277d504c9356b934786d0c16c3f36e877b632590b0339ec6b5d",
+      "status": "schema_valid",
+      "latency_seconds": 59.54600000008941,
+      "generated_tokens": 61,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 20,
+      "case_id": "CELL05-1",
+      "stage": "generate",
+      "request_sha256": "ca45712251d6a4f632e8cf5fae38b3dacf1f92d86287656a67c7b1f8382637b1",
+      "status": "schema_valid",
+      "latency_seconds": 30.655999999959022,
+      "generated_tokens": 18,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 21,
+      "case_id": "CELL06-0",
+      "stage": "generate",
+      "request_sha256": "4e6dd6f7c4a8e8c286fc32d24fd43a864e7dd1f51fe70399aa9ddf85ac712266",
+      "status": "schema_valid",
+      "latency_seconds": 32.813000000081956,
+      "generated_tokens": 26,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 22,
+      "case_id": "CELL06-0",
+      "stage": "judge",
+      "request_sha256": "02ed9d70f451b0904e463f600053e3d097938d0e87c0173ab6174dabb7b58601",
+      "status": "schema_valid",
+      "latency_seconds": 40.407000000122935,
+      "generated_tokens": 44,
+      "wire_contract": "advisory_review"
+    },
+    {
+      "call_id": 23,
+      "case_id": "CELL06-1",
+      "stage": "generate",
+      "request_sha256": "2237fddc7502f85860486f80a8bc844f4490358d943df9483868e4fd216c806a",
+      "status": "schema_valid",
+      "latency_seconds": 25.532000000122935,
+      "generated_tokens": 20,
+      "wire_contract": "bound_cell"
+    },
+    {
+      "call_id": 24,
+      "case_id": "CELL06-1",
+      "stage": "judge",
+      "request_sha256": "613978724c552df579bc259ba427dddf9fb0903e8a39d53d7aa9b7c9c8293b05",
+      "status": "schema_valid",
+      "latency_seconds": 44.57799999974668,
+      "generated_tokens": 50,
+      "wire_contract": "advisory_review"
+    }
+  ],
+  "judge_calibration": [],
+  "candidate": null,
+  "real_data_read": false,
+  "weights_updated": false,
+  "production_ledger_rows": 0,
+  "worker_pid": 78212,
+  "affinity_mask": 1,
+  "phase": "final",
+  "offline_baselines": {
+    "status": "complete_deterministic_authored_coverage",
+    "cases": 192,
+    "positive_cases": 96,
+    "negative_cases": 96,
+    "known_targets": {
+      "value": 96,
+      "sign": 96,
+      "currency": 96,
+      "scale": 96,
+      "measure": 96,
+      "reporting_year": 96,
+      "issuer_binding": 96,
+      "metric_binding": 96,
+      "scope": 24,
+      "accounting_basis": 24,
+      "period_kind": 24,
+      "revision_status": 24,
+      "source_evidence": 96
+    },
+    "summary": {
+      "contract": "field-record-v1",
+      "planned": 192,
+      "recorded": 192,
+      "correct": 192,
+      "answered": 96,
+      "correct_answers": 96,
+      "wrong_answers": 0,
+      "answer_precision": 1.0,
+      "answerable_coverage": 1.0,
+      "negative_correct": 96,
+      "outcomes": {
+        "correct_answer": 96,
+        "correct_abstention": 96
+      },
+      "fields": {
+        "value": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        },
+        "sign": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        },
+        "currency": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        },
+        "scale": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        },
+        "measure": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        },
+        "reporting_year": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        },
+        "issuer_binding": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        },
+        "metric_binding": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        },
+        "scope": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 24,
+          "known_value_correct": 24
+        },
+        "accounting_basis": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 24,
+          "known_value_correct": 24
+        },
+        "period_kind": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 24,
+          "known_value_correct": 24
+        },
+        "revision_status": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 24,
+          "known_value_correct": 24
+        },
+        "source_evidence": {
+          "correct": 96,
+          "planned_answerable": 96,
+          "known_value_planned": 96,
+          "known_value_correct": 96
+        }
+      },
+      "selected_arm_seconds_excluding_unused_audit_generation_not_wall": 0
+    },
+    "categories": {
+      "scope": 48,
+      "accounting_basis": 48,
+      "period_kind": 48,
+      "revision_status": 48
+    },
+    "failures": [],
+    "independent_gold": false,
+    "model_calls": 0,
+    "promote": false,
+    "exposure": "All templates and labels author-visible;24variants per dimension are not24independentsemanticformats.",
+    "not_supported": [
+      "arbitrary quarter/YTD extraction",
+      "exact start/end dates",
+      "52/53-week calendars",
+      "partial line-item restatement semantics",
+      "independent entity/concept discovery",
+      "unknown GAAP/IFRS reconciliation mappings",
+      "real-financial-source accuracy"
+    ]
+  },
+  "preload": {
+    "status": "load_only_complete",
+    "wall_seconds": 9.32799999974668,
+    "model": "qwen3.5:4b",
+    "generated_tokens_reported": null,
+    "load_duration_ns": null,
+    "response_text_empty": true,
+    "separate_from_evaluated_generation": true,
+    "documentation": "https://github.com/ollama/ollama/blob/main/docs/api.md#load-a-model"
+  },
+  "server_pid": 50348,
+  "worker_wall_seconds": 1064.2969999997877,
+  "worker_exit_code": 0,
+  "summary": {
+    "cells": {
+      "cell_selection": {
+        "contract": "field-record-v1",
+        "planned": 12,
+        "recorded": 12,
+        "correct": 12,
+        "answered": 6,
+        "correct_answers": 6,
+        "wrong_answers": 0,
+        "answer_precision": 1.0,
+        "answerable_coverage": 1.0,
+        "negative_correct": 6,
+        "outcomes": {
+          "correct_answer": 6,
+          "correct_abstention": 6
+        },
+        "fields": {
+          "value": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "sign": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "currency": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "scale": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "measure": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "reporting_year": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "issuer_binding": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "metric_binding": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "scope": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 0,
+            "known_value_correct": 0
+          },
+          "accounting_basis": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "period_kind": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "revision_status": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "source_evidence": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          }
+        },
+        "selected_arm_seconds_excluding_unused_audit_generation_not_wall": 422.9090000013821
+      },
+      "source_control": {
+        "contract": "field-record-v1",
+        "planned": 12,
+        "recorded": 12,
+        "correct": 12,
+        "answered": 6,
+        "correct_answers": 6,
+        "wrong_answers": 0,
+        "answer_precision": 1.0,
+        "answerable_coverage": 1.0,
+        "negative_correct": 6,
+        "outcomes": {
+          "correct_answer": 6,
+          "correct_abstention": 6
+        },
+        "fields": {
+          "value": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "sign": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "currency": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "scale": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "measure": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "reporting_year": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "issuer_binding": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "metric_binding": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "scope": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 0,
+            "known_value_correct": 0
+          },
+          "accounting_basis": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "period_kind": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "revision_status": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "source_evidence": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          }
+        },
+        "selected_arm_seconds_excluding_unused_audit_generation_not_wall": 0.010307699907571077
+      }
+    },
+    "reviewer": {
+      "reviewer_type": "AI",
+      "planned": 12,
+      "recorded": 12,
+      "valid": 8,
+      "correct_verdicts": 5,
+      "false_support": 0,
+      "false_rejection": 3,
+      "uncertain": 0,
+      "unsupported_candidates_planned": 6,
+      "supported_candidates_planned": 6,
+      "independent_human_reviews": 0,
+      "human_gold_labels": 0,
+      "promote": false,
+      "semantic_citation_entailment_independently_verified": false,
+      "scope": "One advisory AI reviewer on author-visible invented probes; not a blind human first pass."
+    },
+    "call_accounting": {
+      "bound_cell": {
+        "attempted": 12,
+        "known_seconds": 422.9090000013821,
+        "missing_latency": 0
+      },
+      "advisory_review": {
+        "attempted": 12,
+        "known_seconds": 627.8889999990351,
+        "missing_latency": 0
+      }
+    },
+    "promote": false,
+    "independent_human_reviews": 0,
+    "human_gold_labels": 0
+  },
+  "promotion": {
+    "promote": false,
+    "reason": "one advisory AI reviewer, not human gold or decision authority"
+  },
+  "controller_wall_seconds": 1066.594000000041,
+  "observed_combined_peak_RSS_bytes": 3916546048,
+  "owned_pids_observed": [
+    50348,
+    68044,
+    78212,
+    138084
+  ],
+  "source_unchanged": true,
+  "resource_check_passed": true
+}

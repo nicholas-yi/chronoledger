@@ -50,6 +50,7 @@ from asof.reader_ai_review import (
     Opinion,
     account_review_attempts,
     compact_cell_messages,
+    opinion_schema,
     review_messages,
     review_record,
     review_tasks,
@@ -420,7 +421,7 @@ def worker(plan: dict, channel) -> None:
                     body["format"] = selection_schema(case) if selection else WIRE.json_schema()
                 if review_mode:
                     body["messages"] = review_messages(case, tasks[case.id].candidate) if reviewing else compact_cell_messages(case)
-                    body["format"] = Opinion.model_json_schema() if reviewing else selection_schema(case)
+                    body["format"] = opinion_schema() if reviewing else selection_schema(case)
                     body["options"]["num_predict"] = 128 if reviewing else 64
                 if compact and stage == "judge":
                     body["format"] = CompactCritique.model_json_schema()

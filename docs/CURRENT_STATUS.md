@@ -10,15 +10,15 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: [expanded coverage and source-cell selection](FOCUSED_READER.md#observed-cell-audit-coverage-completed-model-comparison-stopped-on-first-timeout)
-completed **192/192 deterministic authored outcomes**, with 24 known-positive
-targets each for scope, basis, period kind and revision status, plus separate
-negative contrasts. These are template variants, not independent semantic formats.
-The model comparison **stopped on its first 90-second request timeout**: zero valid
-outputs and no cell-selection request. The last completed model result remains
-11/12; the raw stopped receipt and separate posthoc attempt-accounting correction
-are both retained. Supplemental context-review forms are prepared, not labelled.
-The full suite also remains unclean/incomplete as documented; 38 affected tests pass.
+Latest: the [AI reviewer and compact cell run](FOCUSED_READER.md#observed-ai-reviewer-and-cell-run-cells-pass-judge-does-not-earn-trust)
+completed all 24 evaluated calls within unchanged limits after separating model loading.
+**Cell selection passed 12/12**, matching the no-model control; offline known-field
+coverage remains 192/192 authored cases. The single labelled **AI reviewer matched
+only 5/12 verdicts**, with 3 false rejections and 4 invalid outputs; it remains advisory,
+not a human pass or gold. A post-run decoding-schema dependency fix is software-tested
+but not model-rerun. The earlier timeout and all old results remain unchanged.
+**724 full-suite tests passed**, including both unchanged Windows containment checks;
+Ruff/docs checks passed. Independent human source review is still uncompleted.
 
 | Retained comparison | Scoped outcome |
 |---|---|
@@ -30,6 +30,7 @@ The full suite also remains unclean/incomplete as documented; 38 affected tests 
 | [Field records](FOCUSED_READER.md#observed-field-comparison-complete-positive-records-fallback-still-adds-a-failure) | Common-contract old parser 21/24, old completion 20/24, guarded parser 24/24, parser-first fallback 23/24 |
 | [Reliability](FOCUSED_READER.md#observed-reliability-audit-valid-shapes-improve-wrong-year-reasoning-remains) | Paired schema 10/12 free vs 12/12 strict; completed records 9/12 baseline vs 11/12 new strict; source control 24/24 full cohort |
 | [Cells/context coverage](FOCUSED_READER.md#observed-cell-audit-coverage-completed-model-comparison-stopped-on-first-timeout) | Deterministic192/192; model comparison stopped first-call timeout; no model accuracy result |
+| [AI reviewer + compact cells](FOCUSED_READER.md#observed-ai-reviewer-and-cell-run-cells-pass-judge-does-not-earn-trust) | Cells 12/12; AI verdicts 5/12, not promoted; full 724 tests pass |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

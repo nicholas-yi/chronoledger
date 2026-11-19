@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "reader-ai-review", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_AI_advisory_and_cell_check", "command": null},
+    {"id": "reader-ai-review", "path": "scripts/run_focused_reader.py", "status": "historical_complete_AI_not_promoted_no_rerun", "command": null},
     {"id": "reader-cell-selection", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_automatic_retry", "command": null},
     {"id": "reader-context-forms", "path": "scripts/prepare_reader_context_forms.py", "status": "blank_forms_prepared_reviews_unassigned_no_overwrite", "command": null},
     {"id": "reader-reliability", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
@@ -42,6 +42,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "reader-ai-review",
+      "kind": "authored_AI_advisory_calibration_and_source_assisted_cell_check",
+      "path": "results/reader_ai_review.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "7385fe3d973f6155ffd5184f8db54a27962a15ca",
+      "status": "complete_cells12of12_AIverdicts5of12_not_promoted_postrun_schemafix_unexecuted",
+      "supersedes": []
+    },
     {
       "id": "reader-cell-selection",
       "kind": "authored_coverage_and_stopped_cell_model_comparison",
