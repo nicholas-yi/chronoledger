@@ -16,6 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "reader-fields", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_frozen_field_challenge", "command": null},
     {"id": "linked-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-stress", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},

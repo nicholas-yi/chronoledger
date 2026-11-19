@@ -1,0 +1,52 @@
+{
+  "pairs": [
+    {"id":"F01","category":"zero_not_missing","relation":"changed","cases":[
+      {"id":"F01-0","issuer":"FictionAmber","metric":"revenue","requested_period":"2017","source":"Company: FictionAmber. Amounts in EUR million.\n| Item | 2017 |\n| Revenue | 0 |","expected":["0","EUR million","2017"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"F01-1","issuer":"FictionAmber","metric":"revenue","requested_period":"2017","source":"Company: FictionAmber. Amounts in EUR million.\n| Item | 2017 |\n| Revenue | - |\nA dash denotes a missing disclosure, not zero.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F02","category":"currency_and_scale","relation":"changed","cases":[
+      {"id":"F02-0","issuer":"FictionBirch","metric":"revenue","requested_period":"2017","source":"Company: FictionBirch. Default units: USD million.\n| Item | 2016 (USD million) | 2017 (EUR thousand) |\n| Revenue | 88 | 37.5 |","expected":["37.5","EUR thousand","2017"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"F02-1","issuer":"FictionBirch","metric":"revenue","requested_period":"2017","source":"Company: FictionBirch. Default units: USD million.\n| Item | 2016 (USD million) | 2017 (EUR thousand) |\n| Revenue (USD million) | 88 | 37.5 |\nThe revenue row and its 2017 column have incompatible unit labels.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F03","category":"fiscal_year_not_quarter","relation":"changed","cases":[
+      {"id":"F03-0","issuer":"FictionCitrine","metric":"revenue","requested_period":"2017","source":"Company: FictionCitrine. Reporting period: fiscal year 2017. Amounts in USD million.\n| Item | 2017 |\n| Revenue | 111 |","expected":["111","USD million","2017"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":"fiscal_year","revision_status":null}},
+      {"id":"F03-1","issuer":"FictionCitrine","metric":"revenue","requested_period":"2017","source":"Company: FictionCitrine. Reporting period: three months ended 2017. Amounts in USD million.\n| Item | 2017 |\n| Revenue | 111 |\nOnly a quarter is shown; the annual reporting-year amount is unavailable.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F04","category":"consolidated_not_segment","relation":"changed","cases":[
+      {"id":"F04-0","issuer":"FictionDahlia","metric":"consolidated revenue","requested_period":"2017","source":"Company: FictionDahlia. Scope: consolidated. Amounts in USD billion.\n| Item | 2017 |\n| Consolidated revenue | 8.2 |\n| Segment revenue | 2.4 |","expected":["8.2","USD billion","2017"],"expected_context":{"scope":"consolidated","accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"F04-1","issuer":"FictionDahlia","metric":"consolidated revenue","requested_period":"2017","source":"Company: FictionDahlia. Scope: segment: north. Amounts in USD billion.\n| Item | 2017 |\n| Segment revenue | 8.2 |\nConsolidated revenue is not supplied.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F05","category":"gaap_not_non_gaap","relation":"changed","cases":[
+      {"id":"F05-0","issuer":"FictionElm","metric":"GAAP operating income","requested_period":"2017","source":"FictionElm reported GAAP operating income of 23 USD million for 2017.","expected":["23","USD million","2017"],"expected_context":{"scope":null,"accounting_basis":"gaap","period_kind":null,"revision_status":null}},
+      {"id":"F05-1","issuer":"FictionElm","metric":"GAAP operating income","requested_period":"2017","source":"FictionElm reported non-GAAP operating income of 23 USD million for 2017.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F06","category":"restatement_priority","relation":"changed","cases":[
+      {"id":"F06-0","issuer":"FictionFlint","metric":"non-GAAP operating income","requested_period":"2017","source":"Original: FictionFlint reported non-GAAP operating income of 17 USD million for 2017. Correction: FictionFlint reported non-GAAP operating income of 19 USD million for 2017. This correction supersedes the original amount.","expected":["19","USD million","2017"],"expected_context":{"scope":null,"accounting_basis":"non-gaap","period_kind":null,"revision_status":"correction"}},
+      {"id":"F06-1","issuer":"FictionFlint","metric":"non-GAAP operating income","requested_period":"2017","source":"Original: FictionFlint reported non-GAAP operating income of 17 USD million for 2017. Correction: FictionFlint reported non-GAAP operating income of 19 USD million for 2017. Correction: FictionFlint reported non-GAAP operating income of 21 USD million for 2017. Each correction supersedes the original, but neither supersedes the other.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F07","category":"footnote_unit_binding","relation":"changed","cases":[
+      {"id":"F07-0","issuer":"FictionGarnet","metric":"revenue","requested_period":"2017","source":"Company: FictionGarnet, fiscal 2017. Default units: EUR million.\n| Revenue (c) | 33 |\n(c) Revenue alone is stated in USD thousand.","expected":["33","USD thousand","2017"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":"fiscal_year","revision_status":null}},
+      {"id":"F07-1","issuer":"FictionGarnet","metric":"revenue","requested_period":"2017","source":"Company: FictionGarnet, fiscal 2017. Default units: EUR million.\n| Revenue (c) | 33 |\n(c) Cost alone is stated in USD thousand.\nThe revenue unit is unresolved.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F08","category":"signed_amount_not_annotation","relation":"changed","cases":[
+      {"id":"F08-0","issuer":"FictionHazel","metric":"operating income","requested_period":"2017","source":"Company: FictionHazel. Reporting period: calendar year 2017. Amounts in USD thousand.\n| Item | 2017 |\n| Operating income | (14) |\nNegative amounts are shown in parentheses.","expected":["-14","USD thousand","2017"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":"calendar_year","revision_status":null}},
+      {"id":"F08-1","issuer":"FictionHazel","metric":"operating income","requested_period":"2017","source":"Company: FictionHazel. Amounts in USD thousand.\n| Item | 2017 |\n| Operating income | (14) |\nParentheses are an editorial annotation, not a financial sign. The signed value is unknown.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F09","category":"entity_and_segment_context","relation":"changed","cases":[
+      {"id":"F09-0","issuer":"FictionIndigo","metric":"segment revenue","requested_period":"2017","source":"Company: FictionIndigo. Scope: segment: north. Amounts in EUR million.\n| Item | 2017 |\n| Segment revenue | 42 |","expected":["42","EUR million","2017"],"expected_context":{"scope":"segment: north","accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"F09-1","issuer":"FictionIndigo","metric":"segment revenue","requested_period":"2017","source":"Company: FictionIndigo. Company: FictionJuniper. Scope: segment: north. Amounts in EUR million.\n| Item | 2017 |\n| Segment revenue | 42 |\nFictionIndigo's own segment amount is not supplied.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F10","category":"percent_not_currency","relation":"changed","cases":[
+      {"id":"F10-0","issuer":"FictionKestrel","metric":"gross margin","requested_period":"2017","source":"FictionKestrel reported gross margin of 12.5 percent for 2017.","expected":["12.5","%","2017"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"F10-1","issuer":"FictionKestrel","metric":"gross margin","requested_period":"2017","source":"FictionKestrel reported operating margin of 12.5 percent for 2017. Gross margin is not supplied.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F11","category":"subscriber_count_not_nil","relation":"changed","cases":[
+      {"id":"F11-0","issuer":"FictionLarch","metric":"subscribers","requested_period":"2017","source":"Company: FictionLarch. Default units: subscribers.\n| Item | 2017 |\n| Subscribers | 1,200 |","expected":["1200","subscribers","2017"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"F11-1","issuer":"FictionLarch","metric":"subscribers","requested_period":"2017","source":"Company: FictionLarch. Default units: subscribers.\n| Item | 2017 |\n| Subscribers | n/a |\nThe count is not supplied; n/a is not zero.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"F12","category":"per_share_denominator","relation":"changed","cases":[
+      {"id":"F12-0","issuer":"FictionMyrtle","metric":"diluted earnings per share","requested_period":"2017","source":"FictionMyrtle reported diluted earnings per share of 1.25 USD per share for 2017.","expected":["1.25","USD per share","2017"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"F12-1","issuer":"FictionMyrtle","metric":"diluted earnings per share","requested_period":"2017","source":"FictionMyrtle reported total earnings of 1.25 USD million for 2017. No diluted share count or per-share amount is disclosed.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]}
+  ]
+}

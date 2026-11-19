@@ -881,3 +881,111 @@ No post-challenge parser/scorer tuning, third-party model/API call, new download
 real-source/private-review read, financial backtest, training, production trial
 ledger row or push occurred. The twelve real-source review windows are still
 unlabelled; independent reviewer assignment and real gold remain outstanding.
+
+## Parser-first field records: frozen comparison plan
+
+The user approved this next step on 2026-11-19: preserve historical scores, add a
+separate parser-first candidate, measure individual fields and complete records,
+broaden the challenge, and obtain independent source review before real-world claims.
+The first four engineering/evaluation tasks can run locally. **Actual human review
+cannot be replaced by this assistant, a model judge or synthetic labels.**
+
+### Historical scores and common new endpoint
+
+All five prior model receipts stay immutable and historically scoped. None is
+deleted, regraded or rerun to chase a perfect headline. Old single-quote and linked
+scores remain different contracts. They are regression/evidence records, not a
+current general-accuracy estimate.
+
+[`asof.reader_fields`](../src/asof/reader_fields.py) introduces `field-record-v1`.
+On identical new inputs, four arms share this endpoint: old linked parser, old
+model-output evidence completion, guarded source parser, and parser-first routing.
+Every arm must pass the same field/context requirements. Per-case legacy linked
+scores are retained separately; historical result files are never altered.
+
+The parser-first candidate tries a qualified deterministic source relation first.
+It can answer independently of an unnecessary model abstention, but that is a
+**separate source-selected answer**, never a rewritten raw model result.
+Explicit incompatible context is refused without model fallback. Unresolved
+grammar can use the saved initial model output, still subject to the same source
+proof and context guards. This fallback shares the finite source validator: it
+does not establish general semantic extraction outside that grammar.
+
+New safeguards reject GAAP substrings inside a non-GAAP definition and subannual
+periods for an annual year-only request. The model's new-profile input explicitly
+states that annual requirement; the old generator module is unchanged.
+An added exact-offset per-share rule accepts one complete canonical source
+sentence, including issuer, requested metric, value, currency/denominator and year.
+It has contract `field-source-v1`; existing relations retain `linked-evidence-v1`.
+Both proofs feed the common field-record scorer. Unsupported prose, quoted examples,
+different denominators and tampered proofs are not accepted by that extra rule.
+
+### Field dictionary and denominators
+
+| Field | Meaning and limit |
+|---|---|
+| `value`, `sign` | Exact stated decimal and derived negative/zero/positive; no economic conversion |
+| `currency`, `scale`, `measure` | Explicit currency/scale; percent, subscribers and the bounded per-share form remain distinct |
+| `reporting_year` | Requested four-digit annual year; no invented period start/end dates |
+| `issuer_binding`, `metric_binding` | Source association to the supplied query, **not independent entity/concept discovery** |
+| `scope` | Bound consolidated/segment label or explicit applicable scope caption; otherwise unknown |
+| `accounting_basis` | Bound GAAP/non-GAAP label or explicit applicable basis caption; not assumed |
+| `period_kind` | Explicit fiscal/calendar-year context; otherwise unknown, never automatically calendar year |
+| `revision_status` | Explicit original/correction selection status; otherwise unknown, not a claim of latest real filing |
+| `source_evidence` | Source hash, exact role offsets, tuple agreement and supported context validation |
+
+`unknown`, `not_applicable` and `unanswered` are separate states. A zero is a
+reported numeric value; a dash/nil is not coerced into zero. Unknown context means
+not established under this bounded source grammar, not absent from an entire filing.
+The source-relation constructor and validator share rules; this is not independent
+semantic adjudication, XBRL conformance or proof of financial truth.
+
+Each positive case contributes to each field denominator, including abstentions,
+invalid outputs and unattempted cases. Known-value counts are also shown separately,
+so correctly leaving many fields unknown cannot masquerade as discovering them.
+Whole-record correctness requires **every field** plus source evidence. Negative
+cases are scored as correct refusals, never as thirteen correctly extracted fields.
+Answer precision, correct-answer coverage and wrong emitted records stay separate;
+abstaining everywhere must not look successful.
+
+### New authored challenge and one-run contract
+
+The [fixture](../tests/fixtures/reader_fields.json) contains 24 cases in twelve
+positive/negative pairs. Families cover zero/missing, currency/scale, annual fiscal
+versus quarterly periods, consolidated/segment scope, GAAP/non-GAAP identity,
+correction priority, footnote units, signs, entity resets, percent, subscriber counts
+and per-share denominators. All cases are invented, author-visible and exposed
+during software development; this is **not blind independent evaluation**.
+
+The [plan](../results/reader_fields_plan.json) permits one frozen paired model
+comparison: 24 initial calls maximum, no judge/revision/retry, existing qwen3.5:4b
+digest, one CPU, zero GPU/cloud/pulls, 20 minutes and the same 6-GiB owned-process
+contract. It uses new output/attempt locations and hashes all five older reports.
+All candidates and the common scorer are frozen before generation.
+Output truncation is an invalid raw response, never salvaged; an independent source
+parser can still answer without using that response.
+
+All 24 initial generations are deliberately requested for the paired comparison,
+even when parser-first could have skipped them. Report actual calls separately
+from **counterfactual** route-needed calls/latency. Do not call those estimated
+savings an observed deployment wall-time result.
+The broader answer-first application default remains unchanged; no automatic
+production promotion, weight learning, hypothesis alteration or source-access release.
+
+### Independent review: an explicit remaining prerequisite
+
+The existing private packet has twelve excerpt windows and two blank first-pass
+forms; actual reviewers remain unassigned and independent labels remain zero.
+This task does not reopen those excerpts, contact anyone, fill the forms or fake
+two independent passes. Two actual blind reviewers must complete them, disagreements
+need adjudication and evidence provenance, and insufficient context stays unresolved.
+Existing value/unit/year forms alone cannot qualify all the new scope/basis/period
+fields: additional source-context annotations are required for full-record gold.
+No synthetic score, model confidence or agreement between these parsers lifts that gate.
+
+Pre-generation verification: **700 tests passed** in 95.63 seconds, with two
+existing synthetic rank-deficiency warnings. Changed-file Ruff and documentation/
+index checks passed. The Pylance reference request timed out; no editor type-check
+success is claimed. The deterministic development check was old linked parser
+21/24 versus guarded parser 24/24 under the common field contract; those authored
+sources and expected labels were visible during development, before model execution.

@@ -236,3 +236,16 @@ def test_linked_challenge_keeps_old_contracts_and_results_separate(runner):
     assert plan["evidence_contract"] == "linked-evidence-v1"
     assert "results/reader_stress.json" in runner.FROZEN
     runner.select_version("v1")
+
+
+def test_field_challenge_is_fresh_and_shares_a_fixed_comparison_contract(runner):
+    runner.select_version("fields")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    values = runner.load_cases(runner.FIXTURE)
+    assert len(values) == plan["case_count"] == plan["max_calls"] == 24
+    assert all(case.id.startswith("F") for case in values)
+    assert plan["evidence_contract"] == "field-record-v1"
+    assert runner.REPORT.name == "reader_fields.json" and runner.PRIVATE.name == "reader_fields_v1"
+    assert {"src/asof/reader_fields.py", "results/linked_reader.json"} <= set(runner.FROZEN)
+    runner.select_version("v1")
