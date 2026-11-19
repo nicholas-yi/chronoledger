@@ -53,6 +53,14 @@ independent verification that the original timestamp is true UTC.
 | KPI raw cache/fingerprints | `pin_filing`, `read_cached` and the runner's roster/context preflight use the shared check |
 | Financial-QA benchmark assets | `verified_assets`, benchmark `fetch`, FinQA quarantine checks, REAL3 native pins and blind input loading refuse unknown dates before body/fingerprint access |
 | Legacy TAT-QA comparison execution | An explicit pre-read check blocks its old unknown-date source path |
+| API companyfacts and ingestion | `EdgarClient.companyfacts(..., scope=...)` and `asof ingest --scope-file` use the shared bulk fact-date/filing-date policy; missing scope refuses before fetch or CLI resource creation |
+
+The API/ZIP fact filter constrains returned records, not raw response/member bytes.
+Both are decoded in memory before filtering. The CLI also filters returned submission
+metadata using period, filing and acceptance dates with omission diagnostics.
+Unknown dates are omitted, not converted into zero or implicitly authorized.
+The general submissions/transport utilities are not universally date-scoped.
+Independent H4/H6 hard holds are not lifted by a valid dataset window.
 
 Legacy runners which lack complete document-date manifests now stop instead of assuming
 that a price cutoff or a document's printed year clears the whole project. This is an

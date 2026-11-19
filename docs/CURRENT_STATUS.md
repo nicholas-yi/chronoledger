@@ -1,0 +1,116 @@
+# Start here: current evidence and safe entrypoints
+
+This is the short navigation map. Historical detail remains in
+[DATA_AUDIT](DATA_AUDIT.md), [deviations](DEVIATIONS.md) and the immutable result
+vintages. **No tradable-edge claim is supported.**
+
+## What exists, and what it establishes
+
+| Layer | Current evidence | Not established |
+|---|---|---|
+| Core engine | Point-in-time code and invented-fixture regressions | Authenticity/completeness of every empirical input |
+| Economic research toolkit | [Nine reference areas](OFFLINE_QUANT_TOOLKIT.md) and a [bounded known-truth run](QUANT_SYNTHETIC_RESULTS.md) | Nine economically validated forecasting models |
+| Real-input feasibility | [50 previously exposed issuer triples](QUANT_DEV_FEASIBILITY_RESULTS.md), lexical proxies and mechanical path diagnostics | Independent gold, complete public history, economic surprise or incremental alpha |
+| Accounting | [Exact declared-context interval reconciliation](ACCOUNTING_CONSISTENCY.md) | Full XBRL conformance, source truth, fraud detection or learned extraction accuracy |
+| Historical returns | Recorded registered/development results, including nulls and invalid studies | Qualified new return tests; documented timestamp/identity/terminal-return and inference gaps remain |
+| Access controls | Shared date contracts, scoped bulk/API ingestion and H4/H6 holds | An OS filesystem/network sandbox or byte-isolated raw responses |
+
+The [curated index](project_index.json) distinguishes source audits, measurement,
+software checks, development diagnostics and synthetic QA. It is not a new return
+trial registry. It does not read or rewrite the trial ledger.
+Unlisted result files are historical/unindexed, **not automatically current evidence**.
+No historical result is deleted or silently superseded by this map.
+
+## Safe onboarding
+
+After the [locked installation](../README.md#run-it):
+
+```powershell
+uv run --no-sync asof demo
+uv run --no-sync python scripts/check_repository.py
+uv run --no-sync pytest -q
+```
+
+The demo is deterministic and invented: compatible rounded accounting values,
+order-sensitive paths and an unbounded unknown-short payoff. It needs no SEC
+User-Agent, data files, models or network; it writes no result or trial row.
+Expected accounting status is `consistent`, signed areas are `-0.5` and `0.5`,
+and the unknown-short lower bound is the string `-infinity`.
+
+The repository checker reads README/documentation/index metadata only. It checks
+local link **target existence**, not Markdown anchor correctness, remote URLs,
+evidence truth or source revision authenticity. Referenced results/data are never
+decoded by this checker. Missing targets and malformed index constraints fail CI.
+
+## Do not confuse these entrypoints
+
+| Entrypoint | Current use |
+|---|---|
+| `asof demo` | Safe invented example |
+| `scripts/check_repository.py` | Read-only documentation/index check |
+| `scripts/smoke_wheel.py` | Offline build/install into an owned temporary directory; verifies wheel imports, reference CSV and demo, then removes it |
+| `asof ingest` | Network/cache/database operation; requires a valid development `--scope-file` before client/directory/DB creation; not authorized merely by installation |
+| H4/H6 file-backed stages | **Hard held**, even with a valid scope file |
+| Completed synthetic/feasibility runners | Historical one-attempt records; **do not rerun or delete attempt markers** |
+| Timestamp A1/A2, stopped KPI screen, retired REAL3 | Historical evidence, not launch instructions or pending automatic work |
+| Other unlisted scripts | Legacy/unreviewed for execution; a script's presence is not approval |
+
+Exact classifications and paths are in the [index](project_index.json). This is
+intentionally a curated catalog, not a claim that every one of the legacy runners
+has been requalified under today's contracts.
+
+## Engineering cleanup boundary
+
+New runners should import owned-process helpers from
+[`asof.runtime`](../src/asof/runtime.py): `WorkerJob`, `peak_rss_bytes`,
+`THREAD_VARIABLES` and exclusive strict-JSON `write_receipt`.
+The helper is an extraction of the previously exercised pattern, with owned-child
+tests; it does not launch a study or grant permissions.
+Windows Job commit limits and observed RSS are different measures.
+
+Frozen historical scripts retain their copies and script-to-script imports to
+preserve their committed source lineage. They were **not migrated, moved or rerun**.
+Future authorized revisions can migrate to the shared package with a new freeze.
+This is a forward consolidation boundary, not a false claim that all legacy
+duplication has already disappeared.
+
+The wheel smoke test builds offline with an installed backend whose version must
+match the committed lock, installs only the project wheel without dependencies into
+an owned temporary target, and imports it with precedence over the editable checkout.
+It reuses the already installed locked numerical dependencies. It is not a clean
+machine dependency-resolver test or remote CI evidence until those jobs actually run.
+An optional `--build-python` selects a separately prepared throwaway build environment
+if the working environment lacks the locked backend; it does not install dependencies
+or silently resolve a different version.
+
+## Next substantive work
+
+1. Define a narrow economic fact/claim task using the
+   [existing intake contracts](../src/asof/research_intake.py), preserving its own identity.
+2. Obtain genuinely independent, outcome-blind labels and qualified public-history
+   coverage under a reviewed source/curation boundary.
+3. Use deterministic accounting constraints as diagnostics, not surrogate human gold.
+4. Only then assess incremental forecasts and constrained, net-of-cost decision value.
+
+The [gold-dependent pilot](QUANT_EMPIRICAL_PILOT.md) still lacks independent reviewers
+and other substantive inputs. Richer optimizers, CRPS/tail-risk scoring and
+misspecification stress experiments remain separate research tasks, not retroactive
+proof that the current models work. No new empirical run, hold release, model call,
+source purchase or return trial is authorized by this page.
+
+## Latest maintenance verification
+
+Local 2026-11-19 checks for the ingestion/accounting/navigation cleanup:
+
+- Full software suite: **660 passed in 45.40 s**, with two existing synthetic
+  rank-deficiency warnings. Inputs for new tests were invented.
+- Whole-repository Ruff passed with the documented existing legacy baseline.
+- Documentation target/index checker and the invented CLI demo passed.
+- Installed-wheel smoke passed, including package origin and reference CSV presence.
+  Two initial offline build attempts could not resolve the missing cached backend;
+  this was not a scientific run. The locked `uv-build==0.8.24` was then restored,
+  using its committed hashes, **only into a throwaway build environment**.
+  The final build/import/demo used that backend and all temporary targets were removed.
+  No dependency manifest/lock or project environment installation was changed.
+- The new wheel/navigation CI steps have not run remotely for this revision;
+  no push was performed. These checks do not certify scientific validity.

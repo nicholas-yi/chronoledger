@@ -17,5 +17,5 @@ data/
 .pytest_cache/
 .ruff_cache/
 
-# Lockfiles here would record a corporate package mirror; regenerate on a personal machine.
+# Use the public-hash-verified requirements-dev.lock; do not capture private index URLs.
 uv.lock

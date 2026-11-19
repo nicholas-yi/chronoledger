@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scope": "Curated navigation, not execution permission or independent evidence certification.",
+  "unlisted_scripts": "legacy_unreviewed_not_authorized",
+  "unlisted_results": "historical_unindexed_not_current_evidence",
+  "entrypoints": [
+    {"id": "demo", "path": "src/asof/demo.py", "status": "active_offline", "command": "asof demo"},
+    {"id": "cli-ingest", "path": "src/asof/cli.py", "status": "guarded_requires_separate_approval", "command": "asof ingest --help"},
+    {"id": "repo-check", "path": "scripts/check_repository.py", "status": "active_offline", "command": "python scripts/check_repository.py"},
+    {"id": "h4", "path": "scripts/h4_fundamentals.py", "status": "hard_held", "command": null},
+    {"id": "h6", "path": "scripts/h6_quiet.py", "status": "hard_held", "command": null},
+    {"id": "timestamp-original", "path": "scripts/run_full_timestamps.py", "status": "historical_stopped_no_resume", "command": null},
+    {"id": "timestamp-a1", "path": "scripts/run_full_timestamps_a1.py", "status": "historical_stopped_no_resume", "command": null},
+    {"id": "timestamp-a2", "path": "scripts/run_full_timestamps_a2.py", "status": "historical_stopped_no_resume", "command": null},
+    {"id": "reader-real3", "path": "scripts/run_reader_real3.py", "status": "retired_historical", "command": null},
+    {"id": "kpi-development", "path": "scripts/study_kpi_omission.py", "status": "historical_stopped_no_resume", "command": null},
+    {"id": "audit-cs-validation", "path": "scripts/validate_audit_cs.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "frontier-synthetic", "path": "scripts/validate_quant_frontiers.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
+  ],
+  "evidence": [
+    {
+      "id": "audit-cs",
+      "kind": "synthetic_qa",
+      "path": "results/audit_cs_validation.json",
+      "report": "docs/AUDIT_CONFIDENCE_SEQUENCE.md",
+      "freeze_revision": "84b79452fd6ac365781a69c07a35919630ccfef6",
+      "status": "completed_scoped_qa_only",
+      "supersedes": []
+    },
+    {
+      "id": "timestamp-a2",
+      "kind": "source_audit",
+      "path": "results/timestamp_full_a2_review.json",
+      "report": "docs/DATA_AUDIT.md",
+      "freeze_revision": "cf65410",
+      "status": "stopped_conditional_clock_assumption",
+      "supersedes": []
+    },
+    {
+      "id": "small-sample-inference",
+      "kind": "synthetic_calibration",
+      "path": "results/robust_inference_calibration.json",
+      "report": "docs/H1_DESIGN.md",
+      "freeze_revision": null,
+      "status": "recorded_failures_geometry_specific",
+      "supersedes": []
+    },
+    {
+      "id": "reader-real3",
+      "kind": "measurement_diagnostic",
+      "path": "results/reader_real3_status.json",
+      "report": "docs/RESEARCH_PLAN.md",
+      "freeze_revision": null,
+      "status": "stopped_reader_retired",
+      "supersedes": []
+    },
+    {
+      "id": "kpi-development",
+      "kind": "development_diagnostic",
+      "path": "results/kpi_omission_dev_review.json",
+      "report": "docs/KPI_DEVELOPMENT_STUDY.md",
+      "freeze_revision": "bdca2029ef35298df1971470250afdd647835417",
+      "status": "stopped_no_independent_gold",
+      "supersedes": []
+    },
+    {
+      "id": "dependency-lock",
+      "kind": "software_verification",
+      "path": "results/dependency_lock_verification.json",
+      "report": "docs/DATA_AUDIT.md",
+      "freeze_revision": null,
+      "status": "local_install_and_public_hash_checks",
+      "supersedes": []
+    },
+    {
+      "id": "frontier-synthetic",
+      "kind": "synthetic_qa",
+      "path": "results/quant_frontiers_validation.json",
+      "report": "docs/QUANT_SYNTHETIC_RESULTS.md",
+      "freeze_revision": "2885d77d8416009231034883ac2c0e92471ea528",
+      "status": "completed_scoped_qa_only",
+      "supersedes": []
+    },
+    {
+      "id": "frontier-feasibility",
+      "kind": "development_diagnostic",
+      "path": "results/quant_dev_feasibility.json",
+      "report": "docs/QUANT_DEV_FEASIBILITY_RESULTS.md",
+      "freeze_revision": "7f5d59a0f25ee2aa150166d0cd5950e73078df88",
+      "status": "completed_proxy_only_not_economic_validation",
+      "supersedes": []
+    }
+  ]
+}

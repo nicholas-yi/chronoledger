@@ -26,6 +26,8 @@ instant?" and gets only that, so a restatement filed in June cannot leak into a 
 **Current status:** no tradable-edge claim is supported; historical data, human measurement
 and return-test calibration are still incomplete. The [closure review](results/project_closure_review.json)
 separates verified engineering fixes from the evidence that still needs to be obtained.
+Start with the [current evidence and entrypoint map](docs/CURRENT_STATUS.md);
+the [curated index](docs/project_index.json) distinguishes historical, held and safe offline work.
 
 ## The question
 
@@ -426,10 +428,16 @@ The [draft claim-level design](docs/H1_DESIGN.md) starts with human labels, whil
 uv venv --python 3.12
 uv pip install --require-hashes -r requirements-dev.lock
 uv pip install --no-build-isolation --no-deps -e .
+uv run --no-sync asof demo                      # Invented example; no data/network or result writes
+uv run --no-sync python scripts/check_repository.py
 uv run --no-sync pytest -q                       # Unit tests need no benchmark data or network
-uv run --no-sync python scripts/make_figures.py  # rebuild every chart from results/
-uv run --no-sync python -m asof.referee          # the automated referee (needs the local data build)
 ```
+
+Figure regeneration and the data-dependent referee are separate historical/evidence
+operations, not installation smoke tests. Do not execute legacy rebuild commands or
+held study stages just to make setup pass. A scoped ingestion contract is required
+before any `asof ingest` client, cache-directory or database creation; see
+[current access limits](docs/CURRENT_STATUS.md#do-not-confuse-these-entrypoints).
 
 The [lock](requirements-dev.lock) covers Python 3.12 dev+figures dependencies and the
 existing build backend, with universal platform resolution and
@@ -475,6 +483,8 @@ point-in-time queries everything is built on.
   decided in advance, and every later change
 - [FINDINGS.md](docs/FINDINGS.md): the research log, including issues that weaken this project
 - [DATA_AUDIT.md](docs/DATA_AUDIT.md): data provenance, coverage audits and the rebuild runbook
+- [CURRENT_STATUS.md](docs/CURRENT_STATUS.md): current evidence, safe onboarding and held/historical entrypoints
+- [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md): exact interval reconciliation and its non-conformance/independence limits
 - [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
 - [project_readiness_checks.json](results/project_readiness_checks.json): current scoped clock/calibration checks, both failing
 - [REFEREE.md](results/REFEREE.md): the recorded broader software report, not rerun by the closure check or scientific acceptance

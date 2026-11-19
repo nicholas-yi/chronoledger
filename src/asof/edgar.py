@@ -16,6 +16,7 @@ from typing import Any
 
 import httpx
 
+from asof.bulk import FrozenFactWindow, filter_companyfacts, require_fact_window
 from asof.config import RAW_DIR, user_agent
 from asof.document_scope import DocumentDates, require_eligible_documents
 
@@ -100,10 +101,14 @@ class EdgarClient:
             row["_entity"] = meta
         return rows
 
-    def companyfacts(self, cik: int, *, refresh: bool = False) -> dict[str, Any]:
-        return self.get_json(
+    def companyfacts(
+        self, cik: int, *, refresh: bool = False, scope: FrozenFactWindow | None = None,
+    ) -> dict[str, Any]:
+        """Filter returned facts, not raw response bytes; never authorizes held research."""
+        require_fact_window(scope)
+        return filter_companyfacts(self.get_json(
             f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json", refresh=refresh
-        )
+        ), scope, source_kind="api_response")
 
     def filing_document(
         self, cik: int, accession: str, document: str, *,

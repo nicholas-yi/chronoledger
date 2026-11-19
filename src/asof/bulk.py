@@ -15,6 +15,7 @@ from collections import Counter
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
+from typing import Literal
 
 import pandas as pd
 
@@ -95,8 +96,13 @@ def _record_rejection(record: dict, bounds: dict[str, date]) -> str | None:
     return None
 
 
-def filter_companyfacts(data: dict, scope: FrozenFactWindow | None) -> dict:
+def filter_companyfacts(
+    data: dict, scope: FrozenFactWindow | None, *,
+    source_kind: Literal["zip_member", "api_response"] = "zip_member",
+) -> dict:
     window = require_fact_window(scope)
+    if source_kind not in ("zip_member", "api_response"):
+        raise ValueError("unknown companyfacts source kind")
     bounds = window.bounds()
     if not isinstance(data, dict) or not isinstance(data.get("facts"), dict):
         raise TypeError("companyfacts member must contain a facts object")
@@ -135,9 +141,29 @@ def filter_companyfacts(data: dict, scope: FrozenFactWindow | None) -> dict:
     result["_scope_filter"] = {
         "input_records": seen, "returned_records": returned, "omitted_by_reason": dict(omitted),
         "window": {k: v.isoformat() for k, v in bounds.items()}, "freeze_ref": window.freeze_ref,
-        "raw_member_decompressed_in_memory": True, "byte_level_isolation": False,
+        "raw_member_decompressed_in_memory": source_kind == "zip_member",
+        "raw_response_decoded_in_memory": True, "byte_level_isolation": False,
     }
     return result
+
+
+def filter_submissions(rows: list[dict], scope: FrozenFactWindow | None) -> tuple[list[dict], dict]:
+    """Constrain metadata returned to scoped ingestion; raw API metadata is still decoded."""
+    window = require_fact_window(scope)
+    bounds = window.bounds()
+    kept = []
+    omitted: Counter[str] = Counter()
+    for row in rows:
+        reason = _record_rejection({
+            "filed": row.get("filingDate"), "accepted": row.get("acceptanceDateTime"),
+            "end": row.get("reportDate"),
+        }, bounds)
+        if reason is None:
+            kept.append(row)
+        else:
+            omitted[reason] += 1
+    return kept, {"input_records": len(rows), "returned_records": len(kept),
+                  "omitted_by_reason": dict(omitted), "freeze_ref": window.freeze_ref}
 
 
 def _rows(block: dict, cik: int) -> list[dict]:

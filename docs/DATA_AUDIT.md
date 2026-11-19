@@ -8,6 +8,19 @@ not current source-clock certification. The registered first-close rule is uncha
 
 ## Assurance and limits
 
+**2026-11-19 ingestion-route correction:** the earlier bulk guard did not cover
+`asof ingest -> EdgarClient.companyfacts -> flatten_companyfacts`. An invented,
+fully mocked 2025 fact reproduced that gap; no real source/client/database was read.
+The CLI now validates a frozen development scope before client, cache-directory or
+database creation. API companyfacts validates before cache/transport access and
+uses the same filtering policy as bulk; scoped CLI submission metadata is also
+filtered with explicit omission counts. Missing/unknown dates fail closed in returned
+data. Raw API responses are still decoded in memory before filtering; source identity,
+historical clock and declarative freeze authority are not independently certified.
+Low-level transport and general metadata methods are not a universal sandbox.
+H4/H6 holds remain unchanged; no real ingestion, study or correction release was run.
+See the [current map](CURRENT_STATUS.md) and [accounting oracle](ACCOUNTING_CONSISTENCY.md).
+
 **2026-11-18 development-derived execution:** [CL-QF-DEV-FEAS-01](QUANT_DEV_FEASIBILITY_RESULTS.md)
 rechecked all 263 references in the pinned 2012-2018 development manifest before reading
 629,817 bytes of the old text-containing derived JSON. Its prior content hash matched.
@@ -874,13 +887,23 @@ with the corrected code. No metadata price is used to calculate returns.
 
 ## Data rebuild runbook
 
+**Historical reproduction record, not current launch instructions.** The commands
+below document an older executed build and retain its original counts/classifications.
+Current date contracts intentionally reject some old calls; H4/H6 stages are hard
+held, and original clock labels do not establish qualified UTC. Do not fix that by
+checking out unguarded code and opening mixed archives. Use the
+[current entrypoint map](CURRENT_STATUS.md) and obtain separate source/resource/study
+approval. No historical command below was rerun for the ingestion cleanup.
+
 Use the project Python 3.12 environment and required SEC contact user agent from the README.
 Run stages one at a time and stop on a nonzero exit or unexplained feature errors.
 Do not run two SEC download pools simultaneously: their rate limiters are per process.
 Large companyfacts work must use `iter_companyfacts`, not a dictionary of all firms.
 The benchmark and referee chronology checks require the pinned historical commit
 and preregistration tags, so use a full clone or explicitly fetch that history.
-Do not commit package-mirror URLs or a mirror-derived lockfile.
+Do not commit private index URLs. The current public-hash-verified dependency lock
+supersedes the original unlocked installation practice; mirror origin alone is not
+distribution-identity verification.
 
 From the repository root in Windows PowerShell:
 
