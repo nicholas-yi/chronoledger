@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "linked-reader", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_linked_challenge", "command": null},
+    {"id": "linked-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-stress", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-review-packet", "path": "scripts/prepare_reader_review.py", "status": "private_packet_prepared_reviews_unassigned", "command": null},
@@ -37,6 +37,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "linked-reader",
+      "kind": "synthetic_linked_evidence_contract_challenge",
+      "path": "results/linked_reader.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "4c0401438d3f12033fefc146d64fdd035e3f6d4b",
+      "status": "complete_new_contract_model23of24_deterministic24of24_no_real_gold",
+      "supersedes": []
+    },
     {
       "id": "reader-stress",
       "kind": "synthetic_format_stress_diagnostic",

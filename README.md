@@ -31,16 +31,13 @@ the [curated index](docs/project_index.json) distinguishes historical, held and 
 **Active research is now deliberately narrow:** a
 [source-grounded metric reader with deterministic verification](docs/FOCUSED_READER.md).
 The broader quant toolkit is parked reference code, not nine validated trading models.
-The first local critic trial stopped at its output limit; it established no improvement
-and did not replace the answer-first default.
-The compact-critic redo completed but scored 4/6 versus 5/6 for single-pass/parser on
-the invented evaluation cases, with higher cost. The judge remains nondefault.
-On a fresh 24-case grammar-controlled robustness run, deterministic verification
-improved raw output from 21 to 24 correct outcomes—but a stronger parser also scored
-24/24 without model cost. No real-data accuracy or model increment is established.
-The harder audit exposed the limit: on twelve out-of-grammar model cases, tuples
-matched 12/12 but full evidence passed 5/12; the current verifier passed 3/12.
-These authored tests identify an evidence/format bottleneck, not real-world accuracy.
+Latest authored challenge: the new source-bound linked-evidence path completed
+23/24 outcomes; its deterministic no-model control scored 24/24. This uses a new
+evidence contract, not regraded old scores or real financial gold.
+The [retained comparisons and limitations](docs/FOCUSED_READER.md) include failed
+judge trials, format-shift failures and posthoc development replays. The judge
+remains nondefault, the broader toolkit stays parked, and independent real-source
+review is still outstanding.
 
 ## The question
 

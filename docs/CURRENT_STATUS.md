@@ -10,30 +10,22 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-The [first bounded local critic run](FOCUSED_READER.md#observed-local-result-stopped-no-improvement-established)
-stopped at the first critic's token cap after one correct development extraction.
-No evaluation case or self-improvement phase was reached. The answer-first default
-remains; a judge has not earned promotion.
-The separately user-authorized [compact-critic v2](FOCUSED_READER.md#observed-v2-result-completed-critic-not-beneficial)
-completed within budget: evaluation parser/single-pass each 5/6, judge-assisted 4/6,
-zero corrections and one regression at about 2.55x model-arm latency.
-The truncation fix worked; promotion was refused. Both versions' evidence is preserved.
-The [verifier-only robustness run](FOCUSED_READER.md#observed-verifier-only-result-and-private-review-preparation)
-completed: raw single-pass/old parser each 21/24; verified output and the stronger
-binding parser each 24/24 on authored grammar cases. Three corrections, zero regressions.
-The stronger parser matched the result without model cost; no LLM increment is established.
+Latest: the [linked-evidence challenge](FOCUSED_READER.md#observed-linked-challenge-2324-completed-2424-deterministic-control)
+completed **23/24 model-assisted and 24/24 no-model** outcomes under a new
+source-bound evidence contract, including all twelve negative controls. One false
+model abstention remained. This is a bounded authored challenge, not independent
+real financial gold, old-score regrading or automatic production promotion.
+
+| Retained comparison | Scoped outcome |
+|---|---|
+| [First critic](FOCUSED_READER.md#observed-local-result-stopped-no-improvement-established) | Stopped on first critic truncation; no evaluation |
+| [Compact critic](FOCUSED_READER.md#observed-v2-result-completed-critic-not-beneficial) | 4/6 versus 5/6 single pass, more cost; nondefault |
+| [Grammar robustness](FOCUSED_READER.md#observed-verifier-only-result-and-private-review-preparation) | Verified and stronger parser both 24/24; no LLM increment |
+| [Harder formats](FOCUSED_READER.md#observed-harder-audit-the-old-perfect-score-was-format-specific) | Twelve stress tuples correct, only 5/12 fully cited; old verifier 3/12 |
+| [Linked evidence](FOCUSED_READER.md#observed-linked-challenge-2324-completed-2424-deterministic-control) | New contract 23/24, deterministic control 24/24; no real gold |
+
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.
-The [harder format audit](FOCUSED_READER.md#observed-harder-audit-the-old-perfect-score-was-format-specific)
-completed with unchanged implementations: 288 deterministic cases plus 24 model
-cases. On twelve stress cases, raw LLM tuples matched 12/12 but full evidence passed
-5/12; the current verifier passed 3/12. The earlier perfect score was grammar-specific.
-No verifier/judge promotion came from that audit; the separately versioned linked
-evidence work below is not independently validated on real sources.
-The next user-approved candidate is now being implemented/frozen as
-[linked-evidence-v1](FOCUSED_READER.md#linked-evidence-improvement-a-new-explicit-contract-not-regraded-old-scores):
-exact-offset source roles and structural bindings, with old scores retained and
-a separately scored fresh challenge. No independent real-source gold is implied.
 
 ## What exists, and what it establishes
 
@@ -129,7 +121,7 @@ misspecification stress experiments remain separate research tasks, not retroact
 proof that the current models work. No new empirical run, hold release, model call,
 source purchase or return trial is authorized by this page.
 
-## Latest maintenance verification
+## Ingestion/accounting maintenance verification record
 
 Local 2026-11-19 checks for the ingestion/accounting/navigation cleanup:
 

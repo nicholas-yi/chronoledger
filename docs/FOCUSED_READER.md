@@ -805,3 +805,79 @@ checks passed. This includes source-role tampering, cross-entity/year/unit/footn
 substitution, missing sign conventions, unranked corrections, unsupported trailing
 scope qualifiers and no-gold construction tests. The older timing-test failure
 remains part of its prior run history; no rate code or old test threshold was changed.
+
+## Observed linked challenge: 23/24 completed, 24/24 deterministic control
+
+The [actual linked receipt](../results/linked_reader.json) records the one challenge
+run frozen at `4c0401438d3f12033fefc146d64fdd035e3f6d4b`.
+All 24 cases completed using 24 initial-generation calls, **zero judge/revision calls**,
+in **570.079 seconds (9.50 minutes)**. There was no output truncation or retry.
+
+| Arm and scoring contract | Correct / 24 | Answerable correct / 12 | Negative correct / 12 | Wrong emitted answers |
+|---|---:|---:|---:|---:|
+| Old parser, original single-quote contract | 13 | 1 | 12 | 0 |
+| Old binding parser, original contract | 13 | 1 | 12 | 0 |
+| Raw LLM, original contract | 14 | 3 | 11 | 8 |
+| Old verified LLM, original contract | 13 | 1 | 12 | 0 |
+| Linked deterministic parser, **new linked contract** | **24** | **12** | **12** | **0** |
+| Same raw LLM output + evidence completion, **new contract** | **23** | **11** | **12** | **0** |
+
+These are not interchangeable score definitions. The old primary `wrong_answer`
+label includes missing source-context evidence, not just wrong numeric tuples.
+The new results require complete source-bound role proofs, rather than deleting
+evidence checks, but they must not be presented as a like-for-like upgrade of old
+single-sentence accuracy or as real financial gold.
+
+A separately labelled **posthoc backward-compatibility check** discarded the new
+bundles and applied the old scorer to the completed answers' retained quotes:
+**15/24**, not 23/24. The 23/24 result specifically depends on the additional,
+validated multi-span evidence. This check changed neither result files nor score
+definitions and is not a new preregistered endpoint.
+
+The one remaining completed-path miss was L01-0: the model incorrectly inferred
+that the question required USD even though the applicable 2017 column explicitly
+used EUR. It abstained despite identifying the EUR amount. Completion deliberately
+preserved that abstention instead of silently substituting a number to hit 24/24.
+The no-model linked parser resolved the column correctly.
+
+One raw negative response was schema-invalid because its unit was blank.
+The source itself had no applicable revenue-unit declaration, so the linked route
+refused the unsupported source fact rather than filling a unit from unrelated text.
+That is a separately scored safe refusal, not retroactive repair of the old raw score.
+
+### Posthoc replay is development, not the fresh challenge
+
+The final frozen rules also completed the old exposed 288 deterministic cases and
+24 saved parsed stress outputs under the new contract: 288/288 and 24/24.
+The latter had originally scored 17/24 under the old evidence rule. Those old scores
+and raw results remain untouched. This replay used no new generation, was explicitly
+after source/outcome exposure and is **not independent validation**.
+
+### What earned support, and what did not
+
+Within the declared financial-prose/Markdown subset, explicit source roles removed
+the earlier citation bottleneck while all twelve fresh negative/cross-context
+controls were correctly refused. Tampered roles/offsets and incompatible context
+also have software regression tests. This is meaningful implementation evidence,
+but the challenge was authored with the design known and the source grammar is bounded.
+
+**The deterministic control matched or exceeded the model-assisted result.**
+It took about **0.0131 s total** over the challenge; model-call latency was
+**567.172 s** and evidence completion added about **0.0050 s**.
+No incremental LLM advantage is established on this challenge, and no global
+production default, model weights, source-access permission or research hypothesis
+was changed. Prefer the deterministic path when its explicit input contract applies;
+unknown formats and real-world semantic adequacy still need separate evidence.
+
+Observed peak combined working set was **3,897,978,880 bytes (3.63 GiB)**.
+One CPU, source/resource checks and worker exit 0 passed. Unique generated tokens
+were 1,401. All four sampled owned PIDs were confirmed absent, port 11435 closed,
+and the preexisting shared Ollama process remained. All four earlier model-result
+hashes matched their frozen values.
+
+The software suite passed 692 tests before this run, with two existing synthetic
+rank-deficiency warnings; Ruff and documentation checks passed.
+No post-challenge parser/scorer tuning, third-party model/API call, new download,
+real-source/private-review read, financial backtest, training, production trial
+ledger row or push occurred. The twelve real-source review windows are still
+unlabelled; independent reviewer assignment and real gold remain outstanding.
