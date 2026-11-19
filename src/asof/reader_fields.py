@@ -295,10 +295,11 @@ def contexts(payload: dict) -> dict[str, dict]:
     return {row["id"]: row["expected_context"] for pair in payload["pairs"] for row in pair["cases"]}
 
 
-def summarize_fields(cases: tuple[Case, ...], records: dict[str, dict], labels: dict[str, dict]) -> dict:
+def summarize_fields(cases: tuple[Case, ...], records: dict[str, dict], labels: dict[str, dict],
+                     *, arm_names: tuple[str, ...] = ARMS) -> dict:
     arms = {}
     positives = sum(case.expected is not None for case in cases)
-    for arm in ARMS:
+    for arm in arm_names:
         pairs = [(case, records.get(case.id, {}).get(arm)) for case in cases]
         rows = [row for _, row in pairs if row is not None]
         answered = sum(row["score"]["answered"] for row in rows)

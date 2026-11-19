@@ -1088,3 +1088,82 @@ supplied. The existing twelve-window preparation receipt is not a completed revi
 and its narrow blank forms cannot establish the expanded context gold without
 additional annotations. Human first passes and adjudication remain a user/independent
 reviewer action; they have not been fabricated or silently counted as done.
+
+## Reliability follow-up: source gating, equivalent units and paired response shapes
+
+The user requested further improvements on 2026-11-19 and resumed the interrupted
+validation before any new model call. The [new module](../src/asof/reader_reliability.py)
+targets the remaining mechanics, without rewriting historical receipts or claiming
+that a repeated synthetic perfect score is independent evidence.
+
+- **Admission before generation:** `source_gated` uses the qualified source parser
+  and sends unresolved cases to review, without calling a model that the same finite
+  source validator cannot admit as a new fact. This is the existing guarded parser's
+  extraction coverage with an explicit no-fallback policy, not a broader parser.
+  An unresolved answerable case still counts as missed, never as proof of absence.
+- **Unit identity, not conversion:** the new completion accepts explicitly
+  equivalent `billion USD`, `billions of USD` and `USD billion` labels, but only
+  when the source-bound value, currency, scale, year and verbatim value/metric
+  seed agree. It accepts the existing qualified per-share proof. It never rewrites
+  a currency, scale, numeric value or reporting year, and records the original
+  response and any normalization operation. Invalid responses remain invalid;
+  unnecessary model abstentions are not overwritten by this completion arm.
+- **Constrained response shape:** a two-branch JSON schema separates complete
+  supported answers from explicit abstentions with null/empty fields. Runtime
+  validation remains authoritative; a decoding constraint does not prove correct
+  reasoning or source support. A model can still confidently choose the wrong fact.
+- **No invented FX requirement:** both new generation arms explicitly receive
+  no target currency/scale and instructions to preserve the selected fact's units.
+  That reminder is shared across the paired comparison, not changed between arms.
+
+### Frozen audit allocation and scoring
+
+The [new fixture](../tests/fixtures/reader_reliability.json) remixes the previous
+twelve authored families with new names, values, units and reporting year.
+All **24** cases receive deterministic source-gated evaluation. A fixed six pairs
+(`U02`, `U03`, `U04`, `U06`, `U10`, `U12`) form the **12-case model audit**:
+selected currency/scale, annual versus quarter, scope, conflicting corrections,
+percent and per-share denominators. Selection targets known development weaknesses;
+it is not a representative sample or blind generalization test.
+
+Each of these twelve cases gets one free-form and one schema-constrained initial
+generation: **24 calls total, not 24 cases per model arm**. Both use identical
+messages, model/digest, seed and resource limits except for the schema parameter.
+SHA-ranked ordering puts constrained generation first on six cases and free-form
+first on six. Each request is an isolated source question; no previous answer or
+gold is supplied. No judges, revisions, seed retries, model pulls or training.
+
+The [plan](../results/reader_reliability_plan.json) retains one CPU, zero GPU/cloud,
+6 GiB and 20 minutes, with a 90-second call cap. Output truncation counts invalid
+without salvage; transport/input/resource failures stop with partial accounting.
+New attempt/result paths and all six older result hashes are frozen before execution.
+
+On each model response, retain both the old evidence-completion baseline and the
+new normalized completion. All four completion arms plus source gating share
+`field-record-v1`; show whole records, field denominators, coverage and wrong answers.
+Separately report original `Answer` schema conformance and stricter wire conformance,
+actual call time, same-output corrections/regressions and normalization events.
+This tests output shaping against the paired free arm; it does not isolate the new
+shared unit reminder from historical prompts. Comparing different vintage scores
+cannot establish a causal improvement in model reasoning.
+
+The no-model source-gated control is measured before either generation and its
+actual computation time is separate from the full paired audit's model time.
+Do not claim that skipping post-hoc failed model answers achieved a faster deployment:
+the source policy is frozen and uses no model output or expected labels.
+
+These are author-visible format/implementation diagnostics, not human financial
+gold. The independent-review gate, all held data paths, the production ledger,
+historical results and broader application default remain unchanged. No real-source
+packet is reopened or labelled, and no push is authorized by this experiment.
+
+Pre-generation validation: the full suite recorded **705 passes and two failures**
+in 532.84 s, with two existing rank-deficiency warnings. Both failures were unchanged
+Windows Job tests whose owned children did not signal readiness within ten seconds
+(`test_job_close_terminates_only_the_owned_blocked_worker` and
+`test_packaged_job_pins_and_terminates_only_the_owned_gated_child`).
+The isolated two containment checks plus affected reader tests then passed **31/31**
+in 30.80 s. No resource code, test threshold or allocation was relaxed; a clean full
+suite is not claimed for this batch. Ruff, documentation/index and input-fit checks
+passed. The author-visible deterministic check was 24/24 over the new source cohort;
+no new generation had yet occurred.

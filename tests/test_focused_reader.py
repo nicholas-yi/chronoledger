@@ -249,3 +249,25 @@ def test_field_challenge_is_fresh_and_shares_a_fixed_comparison_contract(runner)
     assert runner.REPORT.name == "reader_fields.json" and runner.PRIVATE.name == "reader_fields_v1"
     assert {"src/asof/reader_fields.py", "results/linked_reader.json"} <= set(runner.FROZEN)
     runner.select_version("v1")
+
+
+def test_reliability_audit_pairs_formats_without_doubling_the_call_budget(runner):
+    from asof.reader_reliability import WIRE, generation_orders, reliability_messages
+
+    runner.select_version("reliable")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    values = runner.load_cases(runner.FIXTURE)
+    assert len(values) == plan["case_count"] == 12
+    assert plan["max_calls"] == 2*len(values) == 24 and plan["offline_cases"] == 24
+    assert len({case.category for case in values}) == 6
+    assert sum(order[0] == "structured" for order in generation_orders(values).values()) == 6
+    assert "results/reader_fields.json" in runner.FROZEN
+    from asof.reader_real2_guards import input_fit
+
+    for case in values:
+        request = {"model": plan["model"], "stream": False, "think": False, "keep_alive": "20m",
+                   "messages": reliability_messages(case), "options": plan["options"],
+                   "format": WIRE.json_schema()}
+        assert input_fit(json.dumps(request, sort_keys=True).encode(), plan["options"])[2]
+    runner.select_version("v1")

@@ -1,0 +1,52 @@
+{
+  "pairs": [
+    {"id":"U01","category":"zero_not_missing","relation":"changed","cases":[
+      {"id":"U01-0","issuer":"FictionAcacia","metric":"revenue","requested_period":"2018","source":"Company: FictionAcacia. Amounts in GBP million.\n| Item | 2018 |\n| Revenue | 0 |","expected":["0","GBP million","2018"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"U01-1","issuer":"FictionAcacia","metric":"revenue","requested_period":"2018","source":"Company: FictionAcacia. Amounts in GBP million.\n| Item | 2018 |\n| Revenue | - |\nA dash is missing information, not a reported zero.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U02","category":"selected_currency_and_scale","relation":"changed","cases":[
+      {"id":"U02-0","issuer":"FictionBeryl","metric":"revenue","requested_period":"2018","source":"Company: FictionBeryl. Default units: USD million.\n| Item | 2017 (USD million) | 2018 (GBP thousand) |\n| Revenue | 63 | 28.5 |","expected":["28.5","GBP thousand","2018"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"U02-1","issuer":"FictionBeryl","metric":"revenue","requested_period":"2018","source":"Company: FictionBeryl. Default units: USD million.\n| Item | 2017 (USD million) | 2018 (GBP thousand) |\n| Revenue (USD million) | 63 | 28.5 |\nThe row and its 2018 column disagree; neither unit label takes priority.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U03","category":"annual_not_quarter","relation":"changed","cases":[
+      {"id":"U03-0","issuer":"FictionCopper","metric":"revenue","requested_period":"2018","source":"Company: FictionCopper. Reporting period: fiscal year 2018. Amounts in EUR million.\n| Item | 2018 |\n| Revenue | 136 |","expected":["136","EUR million","2018"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":"fiscal_year","revision_status":null}},
+      {"id":"U03-1","issuer":"FictionCopper","metric":"revenue","requested_period":"2018","source":"Company: FictionCopper. Reporting period: three months ended 2018. Amounts in EUR million.\n| Item | 2018 |\n| Revenue | 136 |\nAn annual revenue value is not provided.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U04","category":"scope_and_unit_order","relation":"changed","cases":[
+      {"id":"U04-0","issuer":"FictionDogwood","metric":"consolidated revenue","requested_period":"2018","source":"Company: FictionDogwood. Scope: consolidated. Amounts in USD billion.\n| Item | 2018 |\n| Consolidated revenue | 6.7 |\n| Segment revenue | 1.8 |","expected":["6.7","USD billion","2018"],"expected_context":{"scope":"consolidated","accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"U04-1","issuer":"FictionDogwood","metric":"consolidated revenue","requested_period":"2018","source":"Company: FictionDogwood. Scope: segment: east. Amounts in USD billion.\n| Item | 2018 |\n| Segment revenue | 6.7 |\nOnly a segment amount is supplied, not consolidated revenue.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U05","category":"gaap_definition","relation":"changed","cases":[
+      {"id":"U05-0","issuer":"FictionEvergreen","metric":"GAAP operating income","requested_period":"2018","source":"FictionEvergreen reported GAAP operating income of 34 EUR million for 2018.","expected":["34","EUR million","2018"],"expected_context":{"scope":null,"accounting_basis":"gaap","period_kind":null,"revision_status":null}},
+      {"id":"U05-1","issuer":"FictionEvergreen","metric":"GAAP operating income","requested_period":"2018","source":"FictionEvergreen reported non-GAAP operating income of 34 EUR million for 2018.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U06","category":"unranked_corrections","relation":"changed","cases":[
+      {"id":"U06-0","issuer":"FictionFeldspar","metric":"non-GAAP operating income","requested_period":"2018","source":"Original: FictionFeldspar reported non-GAAP operating income of 22 USD million for 2018. Correction: FictionFeldspar reported non-GAAP operating income of 26 USD million for 2018. This correction supersedes the original amount.","expected":["26","USD million","2018"],"expected_context":{"scope":null,"accounting_basis":"non-gaap","period_kind":null,"revision_status":"correction"}},
+      {"id":"U06-1","issuer":"FictionFeldspar","metric":"non-GAAP operating income","requested_period":"2018","source":"Original: FictionFeldspar reported non-GAAP operating income of 22 USD million for 2018. Correction: FictionFeldspar reported non-GAAP operating income of 26 USD million for 2018. Correction: FictionFeldspar reported non-GAAP operating income of 29 USD million for 2018. Each correction supersedes the original. Neither correction takes priority over the other.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U07","category":"footnote_unit","relation":"changed","cases":[
+      {"id":"U07-0","issuer":"FictionGinkgo","metric":"revenue","requested_period":"2018","source":"Company: FictionGinkgo, fiscal 2018. Default units: USD million.\n| Revenue (f) | 41 |\n(f) Revenue alone is stated in GBP thousand.","expected":["41","GBP thousand","2018"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":"fiscal_year","revision_status":null}},
+      {"id":"U07-1","issuer":"FictionGinkgo","metric":"revenue","requested_period":"2018","source":"Company: FictionGinkgo, fiscal 2018. Default units: USD million.\n| Revenue (f) | 41 |\n(f) Cost alone is stated in GBP thousand.\nThe revenue row has no qualified unit.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U08","category":"negative_not_annotation","relation":"changed","cases":[
+      {"id":"U08-0","issuer":"FictionHemlock","metric":"operating income","requested_period":"2018","source":"Company: FictionHemlock. Reporting period: calendar year 2018. Amounts in EUR thousand.\n| Item | 2018 |\n| Operating income | (17) |\nNegative amounts are shown in parentheses.","expected":["-17","EUR thousand","2018"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":"calendar_year","revision_status":null}},
+      {"id":"U08-1","issuer":"FictionHemlock","metric":"operating income","requested_period":"2018","source":"Company: FictionHemlock. Amounts in EUR thousand.\n| Item | 2018 |\n| Operating income | (17) |\nParentheses are an editorial annotation, not a financial sign. The signed value is not supplied.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U09","category":"entity_reset","relation":"changed","cases":[
+      {"id":"U09-0","issuer":"FictionIolite","metric":"segment revenue","requested_period":"2018","source":"Company: FictionIolite. Scope: segment: east. Amounts in USD million.\n| Item | 2018 |\n| Segment revenue | 57 |","expected":["57","USD million","2018"],"expected_context":{"scope":"segment: east","accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"U09-1","issuer":"FictionIolite","metric":"segment revenue","requested_period":"2018","source":"Company: FictionIolite. Company: FictionJade. Scope: segment: east. Amounts in USD million.\n| Item | 2018 |\n| Segment revenue | 57 |\nNo FictionIolite segment amount is disclosed.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U10","category":"percent_not_currency","relation":"changed","cases":[
+      {"id":"U10-0","issuer":"FictionKoa","metric":"gross margin","requested_period":"2018","source":"FictionKoa reported gross margin of 16.25 percent for 2018.","expected":["16.25","%","2018"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"U10-1","issuer":"FictionKoa","metric":"gross margin","requested_period":"2018","source":"FictionKoa reported operating margin of 16.25 percent for 2018. Gross margin is not supplied.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U11","category":"count_not_nil","relation":"changed","cases":[
+      {"id":"U11-0","issuer":"FictionLupine","metric":"subscribers","requested_period":"2018","source":"Company: FictionLupine. Default units: subscribers.\n| Item | 2018 |\n| Subscribers | 2,400 |","expected":["2400","subscribers","2018"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"U11-1","issuer":"FictionLupine","metric":"subscribers","requested_period":"2018","source":"Company: FictionLupine. Default units: subscribers.\n| Item | 2018 |\n| Subscribers | n/a |\nThe subscriber count is not supplied.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]},
+    {"id":"U12","category":"per_share_denominator","relation":"changed","cases":[
+      {"id":"U12-0","issuer":"FictionMica","metric":"diluted earnings per share","requested_period":"2018","source":"FictionMica reported diluted earnings per share of 2.75 EUR per share for 2018.","expected":["2.75","EUR per share","2018"],"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}},
+      {"id":"U12-1","issuer":"FictionMica","metric":"diluted earnings per share","requested_period":"2018","source":"FictionMica reported total earnings of 2.75 EUR million for 2018. No diluted share count or per-share amount is supplied.","expected":null,"expected_context":{"scope":null,"accounting_basis":null,"period_kind":null,"revision_status":null}}
+    ]}
+  ]
+}
