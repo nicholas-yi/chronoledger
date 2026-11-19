@@ -1,0 +1,51 @@
+{
+  "status": "prepared_unlabelled_not_independently_reviewed",
+  "independent_review_completed": false,
+  "gold_labels": 0,
+  "lineage": {
+    "freeze_commit": "22f4452c183363b9f433c9ba5f19b5eba04d41fe",
+    "source_SHA256": {
+      "src/asof/reader_review.py": "d5d711ec827e40b78cb8f532d5a50f718ae53217ddc2b14b9492ab638b1edde1",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/document_scope.py": "c0d088186bcaf4cafd01223e6d9f1ef4fbb95bcb54f392a87799c86aeb834e79",
+      "src/asof/research/feasibility.py": "1cc467b42bba06e0ca89ee3e55099c02570405765d61d6dbb32ea3c5d888ad60",
+      "src/asof/research_intake.py": "8a49aaa2b97aff7c306e54fbe265db10f373efc5766d7b9e506684248cecd158",
+      "scripts/prepare_reader_review.py": "ab3e14db15eee9edf2f1036b9b0fc9d34159b822b441491e56f622df0b0d2ca9",
+      "tests/test_reader_review.py": "fade3043c99f1a2ac818970b0c8c3de824ddaa6ffbe729f2c01968665e9a5acb",
+      "results/reader_review_plan.json": "2565ef649a3fdab0ad3bbf9be65756abe4cb16aea747aa0bdf6bd59fa44cd86e",
+      "docs/FOCUSED_READER.md": "215db390afe6d1e4a40d81d1dd58d8e504067cae3a8cf062cfe6aa698fb00f59"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "derived_text_bytes_read": 629817,
+  "metadata_bytes_read": 176415,
+  "scope": {
+    "guarded_metadata_references": 263,
+    "manifest_cases": 64,
+    "declared_all_role_date_min": "2012-09-30",
+    "declared_all_role_date_max": "2018-12-06",
+    "source_clock_qualified": false
+  },
+  "item_count": 12,
+  "input_manifest_sha256": "0944009c8f230372172c0622b560716fc5ee4db00f09cd0b93c5ae32363b4e92",
+  "input_cases_sha256": "1b86638f40b689d7d76da1017b0d9340debc2a55a1a125a1414cf2e2678f4cee",
+  "packet_sha256": "3b2cf99bbb7b4e163f0b420a6bdd1f42a13b63b2d24b209ef61cb1b25fefb2a9",
+  "blank_first_pass_files": 2,
+  "intake_status": "blocked",
+  "blockers": [
+    "file1:blind_first_pass_not_declared",
+    "file1:one_named_independent_reviewer_required",
+    "file1:rationale_required",
+    "file1:unfilled_or_invalid_status",
+    "file2:blind_first_pass_not_declared",
+    "file2:one_named_independent_reviewer_required",
+    "file2:rationale_required",
+    "file2:unfilled_or_invalid_status"
+  ],
+  "raw_cache_body_reads": 0,
+  "private_location": "data/reader_review_v1",
+  "model_calls": 0,
+  "preparation_seconds": 0.10900000017136335,
+  "process_peak_RSS_bytes": 35180544,
+  "source_unchanged": true
+}
