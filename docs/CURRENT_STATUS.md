@@ -10,13 +10,14 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: the [field-record comparison](FOCUSED_READER.md#observed-field-comparison-complete-positive-records-fallback-still-adds-a-failure)
-completed **24/24 guarded-parser and 23/24 parser-first-plus-fallback** outcomes.
-Both new paths completed all twelve positive records: 112/112 known-valued field
-checks plus 44/44 unknown/not-applicable targets. One malformed negative model
-fallback remained invalid. All arms used identical inputs and a common new
-field-record endpoint; historical scores remain immutable. This authored,
-development-exposed sample is not independent real gold or production promotion.
+Latest: the [paired reliability audit](FOCUSED_READER.md#observed-reliability-audit-valid-shapes-improve-wrong-year-reasoning-remains)
+completed **12/12 constrained schema-valid responses versus 10/12 free**.
+On the same twelve inputs, old/free completion scored 9/12, new/free 10/12,
+old/constrained 10/12 and new/constrained **11/12**. One substantive wrong-year
+model choice was rejected. The separate source-gated no-model control scored
+**24/24** on the full authored cohort (12/12 on the paired subset).
+No new extraction grammar or independent real-world accuracy was established;
+historical receipts and the human-review gate remain intact.
 
 | Retained comparison | Scoped outcome |
 |---|---|
@@ -26,6 +27,7 @@ development-exposed sample is not independent real gold or production promotion.
 | [Harder formats](FOCUSED_READER.md#observed-harder-audit-the-old-perfect-score-was-format-specific) | Twelve stress tuples correct, only 5/12 fully cited; old verifier 3/12 |
 | [Linked evidence](FOCUSED_READER.md#observed-linked-challenge-2324-completed-2424-deterministic-control) | New contract 23/24, deterministic control 24/24; no real gold |
 | [Field records](FOCUSED_READER.md#observed-field-comparison-complete-positive-records-fallback-still-adds-a-failure) | Common-contract old parser 21/24, old completion 20/24, guarded parser 24/24, parser-first fallback 23/24 |
+| [Reliability](FOCUSED_READER.md#observed-reliability-audit-valid-shapes-improve-wrong-year-reasoning-remains) | Paired schema 10/12 free vs 12/12 strict; completed records 9/12 baseline vs 11/12 new strict; source control 24/24 full cohort |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

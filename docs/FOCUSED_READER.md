@@ -1167,3 +1167,93 @@ in 30.80 s. No resource code, test threshold or allocation was relaxed; a clean 
 suite is not claimed for this batch. Ruff, documentation/index and input-fit checks
 passed. The author-visible deterministic check was 24/24 over the new source cohort;
 no new generation had yet occurred.
+
+## Observed reliability audit: valid shapes improve; wrong-year reasoning remains
+
+The [actual receipt](../results/reader_reliability.json) records the single frozen
+`a76bc7971eb038deac1e11197df97e2156628f82` run. All **24 calls completed** in
+**1,067.094 seconds (17.78 minutes)**. Each of twelve audit cases received both
+generation formats; the separate offline source cohort contained 24 cases.
+There was no retry, output truncation, judge, weight training or post-result tuning.
+
+### Same twelve inputs, common field-record endpoint
+
+| Arm | Correct / 12 | Complete positive records / 6 | Correct negative refusals / 6 | Wrong admitted records |
+|---|---:|---:|---:|---:|
+| Old completion on free generation | 9 | 4 | 5 | 0 |
+| New completion on the same free output | 10 | 5 | 5 | 0 |
+| Old completion on constrained generation | 10 | 4 | 6 | 0 |
+| New completion on the same constrained output | **11** | **5** | **6** | **0** |
+| Source-gated, no generation used | **12** | **6** | **6** | **0** |
+
+Original-answer and strict-wire schema conformance were **10/12 free versus 12/12
+constrained**. This is a paired format comparison, not a comparison of different
+old score contracts. The new completion corrected one outcome and regressed none
+on each version's saved output. Those two corrections were the same per-share case
+U12-0: the new completion can use the already-qualified per-share source proof
+that the old completion lacked. **The measured correctness gain was not a unit
+word-order repair.** This run emitted canonical currency units; `percent` to `%`
+normalization occurred once per generation arm without changing correctness.
+Unit-word-order aliases have software tests, not an observed win in this audit.
+
+The new constrained arm passed 65/78 positive field checks, including 47/56
+known-valued targets. The source-gated audit control passed 78/78, including
+56/56 known-valued targets. These correlated checks are not independent facts.
+No new scope/basis/period discovery coverage is established by repeating templates.
+
+### The unresolved model error is substantive, not malformed JSON
+
+U02-0 requested the 2018 amount, whose column explicitly stated GBP thousand.
+The free response selected the 2017 USD-million amount and simultaneously marked
+it as an abstention with populated answer fields: invalid, not a successful refusal.
+The constrained response obeyed the schema but still selected that **wrong 2017
+fact**. The completion rejected the wrong period/value instead of converting it
+or accepting its valid JSON. The shared no-target-currency reminder did not eliminate
+the mistake. Thus **schema validity is not semantic correctness**.
+
+U02-1's free output also mixed abstention with populated fields and remained invalid.
+Its constrained counterpart correctly refused the incompatible row/column units.
+The earlier conflicting-correction failure did not recur here: both fresh U06-1
+outputs were valid refusals. That observation does not revise the old F06-1 failure.
+
+The source-gated candidate selected the requested-year amount from its bound column
+and sent unresolved sources to review **before any generation**. On the full
+24-case offline cohort it scored **24/24**: twelve complete positive records and
+twelve refusals, no wrong admitted records and zero model calls. All thirteen
+positive field checks passed: 112 known targets plus 44 unknown/not-applicable targets.
+This keeps the guarded parser's existing grammar; it is a routing simplification,
+not evidence of a newly universal reader. Outside its grammar, an answerable item
+can still be sent to review and must count against coverage.
+
+### Actual cost and provenance
+
+The full paired audit made 24 calls and generated 1,628 output tokens.
+Free generation totalled 494.875 s, constrained generation 530.157 s (about 7.1%
+more call time in this single, order-balanced run). Shared-worker conditions mean
+this is not a robust latency estimate. The separately measured source-gated
+computation over all 24 cases totalled 1.876 s, with no model generation used.
+The 17.78-minute audit must not be described as a zero-model deployment run.
+
+Observed peak combined working set was **3,850,702,848 bytes (3.59 GiB)**.
+One CPU, source/resource checks and worker exit 0 passed. An auxiliary two-second
+HTTP health probe timed out; the benchmark's own startup checks and all subsequent
+generation/state requests completed without changing their limits or retrying
+the experiment. All four sampled owned PIDs were confirmed absent, port 11435
+closed and the preexisting shared server remained present.
+
+All **84 serialized field records** (24 offline plus five arms on twelve audit
+cases) were reconstructed and rescored. Raw schema-conformance and normalization
+events were checked against saved responses. All six earlier report hashes matched
+the freeze. Ledger file-size metadata remained 106,246 bytes; no ledger contents
+were read or rows appended.
+
+Validation remains the disclosed **705 passed / two unchanged startup-test failures**
+in the full suite, followed by **31/31 isolated containment and affected-reader
+passes**, with Ruff and documentation checks passing. Only result/documentation/
+navigation edits followed generation; no clean full-suite claim is substituted.
+
+These are author-visible invented cohorts, not independently labelled financial
+sources. Independent reviewers remain unassigned, human gold stays zero, the held
+sources stay held and the broader application default is not silently promoted.
+The defensible gain is better response conformance and source-qualified completion,
+not proof that all financial fields or model reasoning are solved.

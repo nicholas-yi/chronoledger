@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "reader-reliability", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_paired_wire_audit", "command": null},
+    {"id": "reader-reliability", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-fields", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "linked-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-stress", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
@@ -39,6 +39,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "reader-reliability",
+      "kind": "authored_paired_wire_and_source_admission_diagnostic",
+      "path": "results/reader_reliability.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "a76bc7971eb038deac1e11197df97e2156628f82",
+      "status": "complete_wire12of12_completion11of12_source24of24_no_human_gold",
+      "supersedes": []
+    },
     {
       "id": "reader-fields",
       "kind": "authored_common_contract_field_record_comparison",
