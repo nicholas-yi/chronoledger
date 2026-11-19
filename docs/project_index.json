@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "focused-reader-v2", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_frozen_v2_run", "command": null},
+    {"id": "focused-reader-v2", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "focused-reader", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "demo", "path": "src/asof/demo.py", "status": "active_offline", "command": "asof demo"},
     {"id": "cli-ingest", "path": "src/asof/cli.py", "status": "guarded_requires_separate_approval", "command": "asof ingest --help"},
@@ -33,6 +33,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "focused-reader-v2",
+      "kind": "synthetic_local_model_diagnostic",
+      "path": "results/focused_reader_v2.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "0a3882f431da216e75128bbf966e106eac1aadc6",
+      "status": "complete_no_truncation_but_critic_regressed_no_promotion",
+      "supersedes": []
+    },
     {
       "id": "focused-reader",
       "kind": "synthetic_local_model_diagnostic",

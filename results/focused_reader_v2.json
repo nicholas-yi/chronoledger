@@ -1,0 +1,1149 @@
+{
+  "study": "CL-FOCUS-LAAJ-02",
+  "plan": {
+    "study": "CL-FOCUS-LAAJ-02",
+    "model": "qwen3.5:4b",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "endpoint": "http://127.0.0.1:11435",
+    "case_count": 12,
+    "max_calls": 36,
+    "wall_seconds": 1200,
+    "controller_stop_seconds": 1180,
+    "RAM_bytes": 6442450944,
+    "controller_RAM_allowance": 134217728,
+    "call_seconds": 90,
+    "startup_seconds": 60,
+    "critic_contract": "bounded_enums_no_freeform_feedback",
+    "critic_num_predict": 128,
+    "options": {
+      "temperature": 0,
+      "seed": 202611190611,
+      "num_ctx": 2048,
+      "num_predict": 384,
+      "num_thread": 1,
+      "num_gpu": 0,
+      "num_batch": 64
+    }
+  },
+  "lineage": {
+    "freeze_commit": "0a3882f431da216e75128bbf966e106eac1aadc6",
+    "source_SHA256": {
+      "scripts/run_focused_reader.py": "dd0de3f2ed27544e39266e7e359fa6c6c65672a23a5c7b7d91c829b01fc6813e",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/runtime.py": "f1d2c76a169d2be520dca057b469efd929afdb642bc50ebb0989d49b609d4a08",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "src/asof/local_model_runtime.py": "8ebe93daa7789fee0774d470ee33056c26a8335f513628ecab7e2fc4c64ae07d",
+      "src/asof/reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+      "src/asof/reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+      "src/asof/reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "src/asof/benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+      "src/asof/ledger.py": "85e6f75a58616514d18c3a1fdfba8343adf23334fb76a939f2d3a97b2f3764b7",
+      "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+      "tests/test_focused_reader.py": "09f893cbb3780d59b43021e78ae58eb41e178a485e46480a3255f7ef48e232a7",
+      "results/focused_reader_v2_plan.json": "64289de63354a9949a1096f0f76c3426cef81dc4251bf20dfca7c7823793ac8c",
+      "results/local_model_runtime_support.json": "55daf16377dfe43978e61feb3b961d690122926ccb17a8f12f1058c5230c2617",
+      "requirements-dev.lock": "c84cefb3543db283afc0a1021e2cace63ac4e7877a84611f345b928f64077f0c",
+      "docs/FOCUSED_READER.md": "2b57018cc7b6a21b2b55310fd1b3251806e36dcb8f6d19ca50a3a5f9d315e6bc",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7"
+    }
+  },
+  "status": "complete_invented_comparison",
+  "stop_reason": null,
+  "records": {
+    "D01": {
+      "parser": {
+        "answer": {
+          "value": "17",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "FableWren reported revenue of 17 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "17",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "FableWren reported revenue of 17 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 40.79600000008941,
+        "generated_tokens": 60
+      }
+    },
+    "D02": {
+      "parser": {
+        "answer": {
+          "value": "-9",
+          "unit": "USD thousand",
+          "period": "2016",
+          "evidence": "AmberKite reported operating income of -9 USD thousand for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "-9",
+          "unit": "USD thousand",
+          "period": "2016",
+          "evidence": "AmberKite reported operating income of -9 USD thousand for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 38.25,
+        "generated_tokens": 73
+      }
+    },
+    "D03": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "Source states CloudMica did not report its own backlog."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 30.20299999974668,
+        "generated_tokens": 43
+      }
+    },
+    "D04": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "Source explicitly states committed orders were not disclosed and the provided figure is a potential sales pipeline, not contractual backlog."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 34.35900000017136,
+        "generated_tokens": 53
+      }
+    },
+    "D05": {
+      "parser": {
+        "answer": {
+          "value": "30",
+          "unit": "%",
+          "period": "2016",
+          "evidence": "BrambleQuartz reported customer concentration of 30 % for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "30",
+          "unit": "%",
+          "period": "2016",
+          "evidence": "BrambleQuartz reported customer concentration of 30 % for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 36.5,
+        "generated_tokens": 73
+      }
+    },
+    "D06": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "Conflicting eligible values"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 34.234999999869615,
+        "generated_tokens": 50
+      }
+    },
+    "E01": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": null,
+        "score": {
+          "correct": false,
+          "outcome": "invalid_response",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 32.42100000008941,
+        "generated_tokens": 58
+      },
+      "judge_assisted": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "no_deterministically_grounded_output"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "selection": "neither_output_grounded",
+        "judge_verdict": "accept",
+        "latency_seconds": 54.312000000383705,
+        "generated_tokens": 71,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "E02": {
+      "parser": {
+        "answer": {
+          "value": "71",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "VelaAcorn reported capacity utilization of 71 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "71",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "VelaAcorn reported capacity utilization of 71 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 31.110000000335276,
+        "generated_tokens": 58
+      },
+      "judge_assisted": {
+        "answer": {
+          "value": "71",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "VelaAcorn reported capacity utilization of 71 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "selection": "retained_initial_no_verified_revision",
+        "judge_verdict": "accept",
+        "latency_seconds": 51.59400000004098,
+        "generated_tokens": 71,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "E03": {
+      "parser": {
+        "answer": {
+          "value": "14",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "MossLantern reported backlog of 14 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "14",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "MossLantern reported backlog of 14 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 28.938000000081956,
+        "generated_tokens": 61
+      },
+      "judge_assisted": {
+        "answer": {
+          "value": "14",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "MossLantern reported backlog of 14 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "selection": "retained_initial_no_verified_revision",
+        "judge_verdict": "accept",
+        "latency_seconds": 53.01599999982864,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "E04": {
+      "parser": {
+        "answer": {
+          "value": "11",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "TernPetal reported revenue of 11 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "11",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "TernPetal reported revenue of 11 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 29.0,
+        "generated_tokens": 60
+      },
+      "judge_assisted": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The provided source text does not contain a verbatim sentence stating that TernPetal reported revenue of 11 EUR million for 2017. The draft evidence is an unsupported inference."
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "selection": "revision_passed_necessary_grounding",
+        "judge_verdict": "revise",
+        "latency_seconds": 106.09300000034273,
+        "generated_tokens": 165,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "E05": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text only provides revenue data for 2017; no 2018 amount is available."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 37.515000000130385,
+        "generated_tokens": 69
+      },
+      "judge_assisted": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text only provides revenue data for 2017; no 2018 amount is available."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "selection": "revision_passed_necessary_grounding",
+        "judge_verdict": "abstain",
+        "latency_seconds": 112.51500000013039,
+        "generated_tokens": 151,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "E06": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text explicitly states that net revenue retention was not disclosed."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 27.391000000294298,
+        "generated_tokens": 44
+      },
+      "judge_assisted": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text explicitly states that net revenue retention was not disclosed."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "selection": "revision_passed_necessary_grounding",
+        "judge_verdict": "abstain",
+        "latency_seconds": 97.46900000004098,
+        "generated_tokens": 115,
+        "same_initial_generation_as_single_pass": true
+      }
+    }
+  },
+  "calls": [
+    {
+      "call_id": 1,
+      "case_id": "D01",
+      "stage": "generate",
+      "request_sha256": "2b1a3fc6405a1895a4764e7f42bd66067c6897fd4d3f0fa3776b82da2d673599",
+      "status": "schema_valid",
+      "latency_seconds": 40.79600000008941,
+      "generated_tokens": 60
+    },
+    {
+      "call_id": 2,
+      "case_id": "D01",
+      "stage": "judge",
+      "request_sha256": "aafbe2e25e5b94aa5d1cfbc47aae3531dc528066ed1d0cfe9955fb8959c18916",
+      "status": "schema_valid",
+      "latency_seconds": 25.734000000171363,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 3,
+      "case_id": "D01",
+      "stage": "judge",
+      "request_sha256": "6fcf7e7d721b48e29068df5e2a76b0f471f79ef8cd87acddec46208b39435000",
+      "status": "schema_invalid",
+      "latency_seconds": 31.016000000294298,
+      "generated_tokens": 22
+    },
+    {
+      "call_id": 4,
+      "case_id": "D02",
+      "stage": "generate",
+      "request_sha256": "2b54b19e7c4c2322993e2d18a73b55562d868623e3416a505e5b4e2417b81c32",
+      "status": "schema_valid",
+      "latency_seconds": 38.25,
+      "generated_tokens": 73
+    },
+    {
+      "call_id": 5,
+      "case_id": "D02",
+      "stage": "judge",
+      "request_sha256": "f8de4dee6d84948185df625cdf7d0977ad6bce733ba9b7f851139a5dc9900db1",
+      "status": "schema_valid",
+      "latency_seconds": 26.17199999978766,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 6,
+      "case_id": "D02",
+      "stage": "judge",
+      "request_sha256": "194d58fd83d33260f07af3829e4e8ceccacaf6a8250bba89af2d258f376adcca",
+      "status": "schema_valid",
+      "latency_seconds": 28.265999999828637,
+      "generated_tokens": 21
+    },
+    {
+      "call_id": 7,
+      "case_id": "D03",
+      "stage": "generate",
+      "request_sha256": "a344c00e5244d0aebda18b6ae2dfa119a8e5f50855b5c21875d42a6ff6f1bce1",
+      "status": "schema_valid",
+      "latency_seconds": 30.20299999974668,
+      "generated_tokens": 43
+    },
+    {
+      "call_id": 8,
+      "case_id": "D03",
+      "stage": "judge",
+      "request_sha256": "22557a48ccab262a78e6f8eb0ee63680cea122602d090123e6219d28e9e7658e",
+      "status": "schema_valid",
+      "latency_seconds": 28.688000000081956,
+      "generated_tokens": 23
+    },
+    {
+      "call_id": 9,
+      "case_id": "D03",
+      "stage": "judge",
+      "request_sha256": "d18ff0dc0900b3b23b7aa50178d144a697f995419cf1b326c219e539a2e461a5",
+      "status": "schema_invalid",
+      "latency_seconds": 29.155999999959022,
+      "generated_tokens": 20
+    },
+    {
+      "call_id": 10,
+      "case_id": "D04",
+      "stage": "generate",
+      "request_sha256": "eded9137208fda1bb685816bd4c3bd2ffd58aabf336187a42a16711822343049",
+      "status": "schema_valid",
+      "latency_seconds": 34.35900000017136,
+      "generated_tokens": 53
+    },
+    {
+      "call_id": 11,
+      "case_id": "D04",
+      "stage": "judge",
+      "request_sha256": "bebed4a279eba02cad9040fa6fdf09ea6e3ac3b2e4117d0804ff23d4171f1751",
+      "status": "schema_invalid",
+      "latency_seconds": 28.79700000025332,
+      "generated_tokens": 20
+    },
+    {
+      "call_id": 12,
+      "case_id": "D04",
+      "stage": "judge",
+      "request_sha256": "4803fbe43795a6b7c422fb16027ad4054cbbee18bd817bc92c26b8667f73d7ce",
+      "status": "schema_invalid",
+      "latency_seconds": 30.969000000040978,
+      "generated_tokens": 24
+    },
+    {
+      "call_id": 13,
+      "case_id": "D05",
+      "stage": "generate",
+      "request_sha256": "50610086faa1279ed0763a5f7c892c48de2a03d627f795e7aa361bfe30bb2d3d",
+      "status": "schema_valid",
+      "latency_seconds": 36.5,
+      "generated_tokens": 73
+    },
+    {
+      "call_id": 14,
+      "case_id": "D05",
+      "stage": "judge",
+      "request_sha256": "7448e58cf796aaa9099fd646341ce6c61f9ddfe84c88c637a489984de2c79514",
+      "status": "schema_valid",
+      "latency_seconds": 27.79700000025332,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 15,
+      "case_id": "D05",
+      "stage": "judge",
+      "request_sha256": "84acb96bac58c428f0993841c4e91d7c17055dc866054d33509a296a25044075",
+      "status": "schema_valid",
+      "latency_seconds": 27.094000000040978,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 16,
+      "case_id": "D06",
+      "stage": "generate",
+      "request_sha256": "93c5aaf259c1f7d678b087cda173eed427c73ed34d9fec40e1cc2c5b67bf60bb",
+      "status": "schema_valid",
+      "latency_seconds": 34.234999999869615,
+      "generated_tokens": 50
+    },
+    {
+      "call_id": 17,
+      "case_id": "D06",
+      "stage": "judge",
+      "request_sha256": "e83e05c94772436b614712f0112dcf5851f650ab036f777d262eff5c239110a3",
+      "status": "schema_valid",
+      "latency_seconds": 31.75,
+      "generated_tokens": 23
+    },
+    {
+      "call_id": 18,
+      "case_id": "D06",
+      "stage": "judge",
+      "request_sha256": "c965d2cc29c9a644c714986181ba5aaa109c57db6798139b2870d15c2085cd46",
+      "status": "schema_valid",
+      "latency_seconds": 30.57800000021234,
+      "generated_tokens": 20
+    },
+    {
+      "call_id": 19,
+      "case_id": "E01",
+      "stage": "generate",
+      "request_sha256": "babc6248699f4c8b3be570e18615cfa9aa8257f7d3cc74402a8ee700438118e9",
+      "status": "schema_invalid",
+      "latency_seconds": 32.42100000008941,
+      "generated_tokens": 58
+    },
+    {
+      "call_id": 20,
+      "case_id": "E01",
+      "stage": "judge",
+      "request_sha256": "209f8222654193935e4da53c70060a89d5cf28103db6fcb0aa4a63efc58325f6",
+      "status": "schema_valid",
+      "latency_seconds": 21.891000000294298,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 21,
+      "case_id": "E02",
+      "stage": "generate",
+      "request_sha256": "722e5449c090c0f716f8640a15a0fbd7fb9414f8389857b00879fc32ccf8e3a9",
+      "status": "schema_valid",
+      "latency_seconds": 31.110000000335276,
+      "generated_tokens": 58
+    },
+    {
+      "call_id": 22,
+      "case_id": "E02",
+      "stage": "judge",
+      "request_sha256": "816f68ab212bda54dae6a624a203aaaea7a4c2694a6e7252236dd83c22fbe13a",
+      "status": "schema_valid",
+      "latency_seconds": 20.483999999705702,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 23,
+      "case_id": "E03",
+      "stage": "generate",
+      "request_sha256": "638ce01a1afbf890771193126cbbbb052baed2f8acbb877b02d87ac2caef02ef",
+      "status": "schema_valid",
+      "latency_seconds": 28.938000000081956,
+      "generated_tokens": 61
+    },
+    {
+      "call_id": 24,
+      "case_id": "E03",
+      "stage": "judge",
+      "request_sha256": "705c7879f34af726611ae75c5d942ec08d19c175c172f6d7b10de5ef1fac758a",
+      "status": "schema_valid",
+      "latency_seconds": 24.07799999974668,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 25,
+      "case_id": "E04",
+      "stage": "generate",
+      "request_sha256": "ad52820c25d5a0e84686754cc3802ae529e62168f868e83054f5ebc5cbd604b6",
+      "status": "schema_valid",
+      "latency_seconds": 29.0,
+      "generated_tokens": 60
+    },
+    {
+      "call_id": 26,
+      "case_id": "E04",
+      "stage": "judge",
+      "request_sha256": "72f509c3de871f3ba85d9d922d37f6e349c46b80f26d1f66d29221f8563024f1",
+      "status": "schema_valid",
+      "latency_seconds": 26.20300000021234,
+      "generated_tokens": 21
+    },
+    {
+      "call_id": 27,
+      "case_id": "E04",
+      "stage": "revise",
+      "request_sha256": "df932a0ae20257ce68f9f7fb232b736e1f0e215067692a3f0348a76dcd1a3002",
+      "status": "schema_valid",
+      "latency_seconds": 50.890000000130385,
+      "generated_tokens": 84
+    },
+    {
+      "call_id": 28,
+      "case_id": "E05",
+      "stage": "generate",
+      "request_sha256": "3bf5cf8803bbd4ddce64f1756ad9ca5cbb5ab205fcd426c0ac1dd5c55291bcac",
+      "status": "schema_valid",
+      "latency_seconds": 37.515000000130385,
+      "generated_tokens": 69
+    },
+    {
+      "call_id": 29,
+      "case_id": "E05",
+      "stage": "judge",
+      "request_sha256": "75383a7427a0c0fbd28f631b9c6cbd1ec50b2b4a788087da8df7b2c1bc97dd90",
+      "status": "schema_valid",
+      "latency_seconds": 26.094000000040978,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 30,
+      "case_id": "E05",
+      "stage": "revise",
+      "request_sha256": "26f109b01af56c0733856c549ba24d386d0e4e3de5a54646049034ad88ccb4a5",
+      "status": "schema_valid",
+      "latency_seconds": 48.90599999995902,
+      "generated_tokens": 69
+    },
+    {
+      "call_id": 31,
+      "case_id": "E06",
+      "stage": "generate",
+      "request_sha256": "4513ffae9915a4b934b67dc27a211c65dd8572bb0ae2d5571f455ebfc15d3ddb",
+      "status": "schema_valid",
+      "latency_seconds": 27.391000000294298,
+      "generated_tokens": 44
+    },
+    {
+      "call_id": 32,
+      "case_id": "E06",
+      "stage": "judge",
+      "request_sha256": "cbd531ee3dd9a5fb2618a19ec78697823949df1fc43193f4a1134bf8c97aef3a",
+      "status": "schema_valid",
+      "latency_seconds": 24.719000000040978,
+      "generated_tokens": 13
+    },
+    {
+      "call_id": 33,
+      "case_id": "E06",
+      "stage": "revise",
+      "request_sha256": "bb96a68fccf815b91e3eeeb4190422974f05d09977429e4b4cc5ade0408e0828",
+      "status": "schema_valid",
+      "latency_seconds": 45.3589999997057,
+      "generated_tokens": 58
+    }
+  ],
+  "judge_calibration": [
+    {
+      "case_id": "D01",
+      "draft_kind": "actual_development_draft",
+      "draft_known_correct": true,
+      "verdict": "accept",
+      "judge_valid": true,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D01",
+      "draft_kind": "known_wrong_probe",
+      "draft_known_correct": false,
+      "verdict": null,
+      "judge_valid": false,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D02",
+      "draft_kind": "actual_development_draft",
+      "draft_known_correct": true,
+      "verdict": "accept",
+      "judge_valid": true,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D02",
+      "draft_kind": "known_wrong_probe",
+      "draft_known_correct": false,
+      "verdict": "revise",
+      "judge_valid": true,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D03",
+      "draft_kind": "actual_development_draft",
+      "draft_known_correct": true,
+      "verdict": "abstain",
+      "judge_valid": true,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D03",
+      "draft_kind": "known_wrong_probe",
+      "draft_known_correct": false,
+      "verdict": null,
+      "judge_valid": false,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D04",
+      "draft_kind": "actual_development_draft",
+      "draft_known_correct": true,
+      "verdict": null,
+      "judge_valid": false,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D04",
+      "draft_kind": "known_wrong_probe",
+      "draft_known_correct": false,
+      "verdict": null,
+      "judge_valid": false,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D05",
+      "draft_kind": "actual_development_draft",
+      "draft_known_correct": true,
+      "verdict": "accept",
+      "judge_valid": true,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D05",
+      "draft_kind": "known_wrong_probe",
+      "draft_known_correct": false,
+      "verdict": "accept",
+      "judge_valid": true,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D06",
+      "draft_kind": "actual_development_draft",
+      "draft_known_correct": true,
+      "verdict": "abstain",
+      "judge_valid": true,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    },
+    {
+      "case_id": "D06",
+      "draft_kind": "known_wrong_probe",
+      "draft_known_correct": false,
+      "verdict": "abstain",
+      "judge_valid": true,
+      "label_provenance": "authored_invented_fixture_not_human_or_judge_gold"
+    }
+  ],
+  "candidate": {
+    "lessons": [],
+    "development_error_ids": [],
+    "adaptive_rule": "fixed reminder selection from verified development errors only",
+    "before_any_evaluation_model_call": true,
+    "weights_updated": false,
+    "sha256": "df3990cdbf1116c4ad31610ea593c797debce03526b916736e3ad1c4923392f5"
+  },
+  "real_data_read": false,
+  "weights_updated": false,
+  "production_ledger_rows": 0,
+  "worker_pid": 35936,
+  "affinity_mask": 1,
+  "server_pid": 180688,
+  "phase": "final",
+  "worker_wall_seconds": 1037.219000000041,
+  "worker_exit_code": 0,
+  "summary": {
+    "development": {
+      "parser": {
+        "planned_cases": 6,
+        "recorded_cases": 6,
+        "correct": 6,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 3,
+        "coverage": 0.5,
+        "accuracy_all_planned": 1.0,
+        "known_latency_seconds": 0,
+        "missing_latency_records": 6,
+        "known_generated_tokens": 0,
+        "outcomes": {
+          "correct_abstention": 3,
+          "correct_answer": 3
+        }
+      },
+      "single_pass": {
+        "planned_cases": 6,
+        "recorded_cases": 6,
+        "correct": 6,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 3,
+        "coverage": 0.5,
+        "accuracy_all_planned": 1.0,
+        "known_latency_seconds": 214.34299999987707,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 352,
+        "outcomes": {
+          "correct_abstention": 3,
+          "correct_answer": 3
+        }
+      },
+      "judge_assisted": {
+        "planned_cases": 6,
+        "recorded_cases": 0,
+        "correct": 0,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 0,
+        "coverage": 0.0,
+        "accuracy_all_planned": 0.0,
+        "known_latency_seconds": 0,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 0,
+        "outcomes": {
+          "not_attempted": 6
+        }
+      }
+    },
+    "evaluation": {
+      "parser": {
+        "planned_cases": 6,
+        "recorded_cases": 6,
+        "correct": 5,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 3,
+        "coverage": 0.5,
+        "accuracy_all_planned": 0.8333333333333334,
+        "known_latency_seconds": 0,
+        "missing_latency_records": 6,
+        "known_generated_tokens": 0,
+        "outcomes": {
+          "correct_abstention": 2,
+          "correct_answer": 3,
+          "missed_answer": 1
+        }
+      },
+      "single_pass": {
+        "planned_cases": 6,
+        "recorded_cases": 6,
+        "correct": 5,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 3,
+        "coverage": 0.5,
+        "accuracy_all_planned": 0.8333333333333334,
+        "known_latency_seconds": 186.37500000093132,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 350,
+        "outcomes": {
+          "correct_abstention": 2,
+          "correct_answer": 3,
+          "invalid_response": 1
+        }
+      },
+      "judge_assisted": {
+        "planned_cases": 6,
+        "recorded_cases": 6,
+        "correct": 4,
+        "wrong_answers": 0,
+        "necessary_grounding_failures": 0,
+        "answered": 2,
+        "coverage": 0.3333333333333333,
+        "accuracy_all_planned": 0.6666666666666666,
+        "known_latency_seconds": 474.9990000007674,
+        "missing_latency_records": 0,
+        "known_generated_tokens": 647,
+        "outcomes": {
+          "correct_abstention": 2,
+          "correct_answer": 2,
+          "missed_answer": 2
+        }
+      }
+    }
+  },
+  "promotion": {
+    "promote": false,
+    "independent_audit_supplied": false,
+    "reason": "this invented-case harness cannot authenticate independent semantic audit or promote",
+    "evaluation_complete": true,
+    "corrected": 0,
+    "regressed": 1,
+    "candidate_for_independent_review": false,
+    "weights_updated": false
+  },
+  "controller_wall_seconds": 1038.780999999959,
+  "observed_combined_peak_RSS_bytes": 3832442880,
+  "owned_pids_observed": [
+    29196,
+    35936,
+    50672,
+    180688
+  ],
+  "source_unchanged": true,
+  "resource_check_passed": true
+}

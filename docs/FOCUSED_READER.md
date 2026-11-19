@@ -265,3 +265,85 @@ synthetic rank-deficiency warnings; Ruff and documentation/index checks passed.
 New tests reject generated free-form feedback, unknown/repeated/excess codes and
 inconsistent verdicts, and verify unchanged generator/revision messages and isolated
 v1/v2 output selection. No v2 model call occurred during those checks.
+
+## Observed v2 result: completed, critic not beneficial
+
+The [v2 actual receipt](../results/focused_reader_v2.json) records the single run
+frozen at `0a3882f431da216e75128bbf966e106eac1aadc6`. All twelve fixtures were
+processed in **1,038.781 seconds (17.31 minutes)**, with 33 calls of the maximum 36:
+12 initial generations, 18 critiques and 3 evaluation revisions.
+All responses ended normally without token truncation. Format/semantic validation
+still rejected four critiques and one initial answer; completion is not a QA pass.
+
+### Evaluation, six authored invented cases
+
+| Arm | Correct outcomes / 6 | Answered values | Correct abstentions | Other outcomes |
+|---|---:|---:|---:|---|
+| Narrow parser | 5 | 3 | 2 | One missed answer outside its grammar |
+| Single pass | 5 | 3 | 2 | One invalid response: correct number/quote but missing unit |
+| Judge-assisted | 4 | 2 | 2 | Two missed answers; one was a regression from a correct draft |
+
+No wrong numeric answer was emitted in the completed evaluation arms. That is not
+100% accuracy: invalid responses and missed supported answers remain failures.
+The same initial generations were shared between model arms, not independently
+sampled. The critic corrected **zero** outcomes and regressed **one**.
+
+The regression was E04, an invented EUR revenue disclosure. The initial answer
+quoted the exact source correctly. The critic requested revision; the revised model
+abstained, claiming the sentence was absent even though it was present verbatim.
+Abstention passes the necessary output/grounding contract but does not establish
+that evidence is actually missing. The selector did not secretly consult gold to
+undo the regression.
+
+E01's initial response contained the right authored value and source sentence but
+left `unit=""`, so strict parsing rejected it. The critic accepted that raw draft
+instead of requesting a unit repair. This is a task-contract failure, not proof the
+model failed to locate the number. We did not regrade or normalize it post hoc.
+
+### Development critic calibration, not independent gold
+
+All six initial development outputs matched their authored fixture answers, so the
+verified-development error bank was empty. The frozen adaptation rule executed and
+saved an empty-reminder candidate **before** evaluation; no lessons or model weights
+were learned. This is not evidence of iterative improvement.
+
+| Draft type | Accept | Nonaccept | Invalid critique |
+|---|---:|---:|---:|
+| Six correct actual development drafts | 3 | 2 (false rejections) | 1 |
+| Six deliberately wrong authored probes | 1 (false acceptance) | 2 (correct rejections) | 3 |
+
+"False rejection" here follows the frozen wire contract: `accept` must include a
+justified abstention. The two nonaccepts of correct drafts were `abstain` verdicts,
+which can echo the original correct abstention rather than contradict its facts.
+They still violate the routing contract and request unnecessary revision.
+Likewise, two of the three evaluation revisions only regenerated already-correct
+abstentions; the third caused the E04 regression.
+
+The four invalid critiques repeated the same `missing` issue code twice. The bounded
+JSON grammar solved the token-exhaustion problem but did not enforce every semantic
+validator rule. They remain invalid; we did not silently deduplicate/regrade them.
+No error-code/schema repair changes the observed E04 semantic regression.
+
+### Cost, resource and decision
+
+- Evaluation single-pass latency: **186.375 s**; judge-assisted latency including its
+  shared initial generations: **474.999 s**, about **2.55x**.
+- Evaluation output tokens: single pass **350** versus judge-assisted **647**.
+  Summing both arms would double-count the shared initial generation.
+- Total unique generated tokens across the run: **1,224**.
+- Observed combined peak working set: **3,832,442,880 bytes (3.57 GiB)**.
+- One-CPU affinity, source immutability and resource checks passed; worker exited 0.
+  All four observed owned PIDs were confirmed absent after cleanup, port 11435
+  closed, and the original shared Ollama PID remained untouched.
+- V1's public result was included in the frozen hashes and remained unchanged.
+  Neither its result nor either attempt marker was overwritten.
+
+**Decision: the technical truncation fix worked; the critic still did not earn its
+complexity. Keep the existing answer-first default and do not automatically revise
+answers with this judge.** No production promotion, weight update, third automatic
+attempt, real-data study, ledger row, model pull, cloud/API expenditure or push.
+
+The score difference is descriptive for six visible, agent-authored invented
+evaluation cases, not statistical evidence that every judge is harmful or proof
+that a future independently calibrated approach cannot help. This result is an
+honest rejection of this particular configuration under this budget.

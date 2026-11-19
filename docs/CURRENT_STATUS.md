@@ -13,8 +13,10 @@ The [first bounded local critic run](FOCUSED_READER.md#observed-local-result-sto
 stopped at the first critic's token cap after one correct development extraction.
 No evaluation case or self-improvement phase was reached. The answer-first default
 remains; a judge has not earned promotion.
-A separately user-authorized [compact-critic v2](FOCUSED_READER.md#v2-separately-authorized-compact-critic-redo)
-is being frozen for one new attempt; the stopped v1 evidence is retained.
+The separately user-authorized [compact-critic v2](FOCUSED_READER.md#observed-v2-result-completed-critic-not-beneficial)
+completed within budget: evaluation parser/single-pass each 5/6, judge-assisted 4/6,
+zero corrections and one regression at about 2.55x model-arm latency.
+The truncation fix worked; promotion was refused. Both versions' evidence is preserved.
 
 ## What exists, and what it establishes
 

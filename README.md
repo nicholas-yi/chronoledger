@@ -33,6 +33,8 @@ the [curated index](docs/project_index.json) distinguishes historical, held and 
 The broader quant toolkit is parked reference code, not nine validated trading models.
 The first local critic trial stopped at its output limit; it established no improvement
 and did not replace the answer-first default.
+The compact-critic redo completed but scored 4/6 versus 5/6 for single-pass/parser on
+the invented evaluation cases, with higher cost. The judge remains nondefault.
 
 ## The question
 
