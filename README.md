@@ -28,6 +28,9 @@ and return-test calibration are still incomplete. The [closure review](results/p
 separates verified engineering fixes from the evidence that still needs to be obtained.
 Start with the [current evidence and entrypoint map](docs/CURRENT_STATUS.md);
 the [curated index](docs/project_index.json) distinguishes historical, held and safe offline work.
+**Active research is now deliberately narrow:** a
+[source-grounded metric reader with a bounded critic](docs/FOCUSED_READER.md).
+The broader quant toolkit is parked reference code, not nine validated trading models.
 
 ## The question
 

@@ -4,6 +4,12 @@ This is the short navigation map. Historical detail remains in
 [DATA_AUDIT](DATA_AUDIT.md), [deviations](DEVIATIONS.md) and the immutable result
 vintages. **No tradable-edge claim is supported.**
 
+**Active scope is intentionally narrower now:** one
+[evidence-linked metric reader and bounded critic](FOCUSED_READER.md). The broader
+nine-area toolkit is parked reference mathematics, not the current research queue.
+Keep source/date safeguards, exact checks and the simple answer-first baseline;
+do not add more financial models before the measurement task has independent evidence.
+
 ## What exists, and what it establishes
 
 | Layer | Current evidence | Not established |

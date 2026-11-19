@@ -1,6 +1,10 @@
 # Offline quant reference toolkit
 
 **Status: implemented reference mathematics, not an empirical strategy or study release.**
+**2026-11-19 scope decision:** parked references, not nine active model-development
+projects. The active task is the [focused evidence-linked reader](FOCUSED_READER.md).
+Original code, fixtures, failed/null evidence and committed run receipts remain intact.
+
 The user approved `all_offline` on 2026-11-17: all nine directions from the
 [frontiers review](QUANT_RESEARCH_FRONTIERS_2026_11.md), with invented-fixture tests,
 no downloads, model calls/training, empirical backtests, sealed-data access,

@@ -3,7 +3,20 @@
   "scope": "Curated navigation, not execution permission or independent evidence certification.",
   "unlisted_scripts": "legacy_unreviewed_not_authorized",
   "unlisted_results": "historical_unindexed_not_current_evidence",
+  "active_research": "one evidence-linked metric extractor and bounded critic; not market prediction",
+  "parked_reference_modules": [
+    "src/asof/research/economic.py",
+    "src/asof/research/arrivals.py",
+    "src/asof/research/trajectories.py",
+    "src/asof/research/networks.py",
+    "src/asof/research/pricing.py",
+    "src/asof/research/mechanisms.py",
+    "src/asof/research/control.py",
+    "src/asof/research/identification.py",
+    "src/asof/research/prequential.py"
+  ],
   "entrypoints": [
+    {"id": "focused-reader", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_frozen_run", "command": null},
     {"id": "demo", "path": "src/asof/demo.py", "status": "active_offline", "command": "asof demo"},
     {"id": "cli-ingest", "path": "src/asof/cli.py", "status": "guarded_requires_separate_approval", "command": "asof ingest --help"},
     {"id": "repo-check", "path": "scripts/check_repository.py", "status": "active_offline", "command": "python scripts/check_repository.py"},

@@ -37,6 +37,10 @@ def test_packaged_job_pins_and_terminates_only_the_owned_gated_child():
         assert mask.bit_count() == 1
         assert job.pin(process.pid, mask) == mask
         assert ready.wait(timeout=10) and process.is_alive()
+        snapshot = job.sample()
+        assert snapshot["RSS_bytes"] > 0
+        assert {row["pid"] for row in snapshot["processes"]} == {process.pid}
+        assert all(row["affinity_mask"] == mask for row in snapshot["processes"])
         job.close()
         process.join(timeout=10)
         assert not process.is_alive() and not gate.is_set()
@@ -52,3 +56,5 @@ def test_packaged_job_pins_and_terminates_only_the_owned_gated_child():
 def test_invalid_resource_limit_refuses_before_platform_api():
     with pytest.raises(ValueError, match="positive byte"):
         WorkerJob(memory_bytes=0)
+    with pytest.raises(ValueError, match="process limit"):
+        WorkerJob(max_processes=0)
