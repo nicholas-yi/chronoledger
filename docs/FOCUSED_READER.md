@@ -1688,3 +1688,96 @@ real-source independence/gold remain absent and arbitrary financial formats rema
 outside the source grammar. The [human runbook](#human-actions-still-required-source-review-runbook)
 still applies. A one-human-plus-AI exploratory workflow may be labelled as such,
 but cannot be reported as two independently reviewed human passes.
+
+## Current regression consolidation and one small entailment verifier
+
+The user approved three automated follow-ups: fix remaining grammar gaps, enforce
+supported-regression/proof contracts without rewriting history, and benchmark one
+small local source-grounding verifier. Human labelling remains separate.
+
+### Exact-offset grammar fixes and current-candidate matrix
+
+The three reported misses were first reproduced as failing tests: two `had NUMBER
+subscribers` constructions and an issuer/reporting verb separated from its metric
+by a line wrap. The bounded full-source relation has contract `field-prose-v2`,
+preserving SHA and exact offsets into the original source. It permits a qualified
+prior-year subscriber comparison, not arbitrary newline/paragraph concatenation.
+Blank lines, headings/tables, unknown subjects, quoted examples, malformed commas,
+wrong years and trailing counterparty qualifiers do not qualify.
+
+Including the oldest twelve original cases exposed three additional gaps:
+industry/manufacturer attribution under an issuer lead, an explicitly unreconciled
+authority conflict, and a count with a prior-year comparison. The new candidate
+refuses the first two conservatively and binds the latter locally. The third-party
+check is clause-local: an earlier customer distractor must not suppress a later
+explicit issuer-owned fact. Explicit unreconciled authority markers require review;
+this is conservative grammar, not universal semantic interpretation.
+
+[`check_reader_regressions`](../scripts/check_reader_regressions.py) now checks the
+current candidate over original12, grammar24, harder model subset24/all288, linked24,
+field24, reliability24, context192 and cell-source12. Only known invented fixtures/
+constructions are read. Field-labelled cohorts retain `field-record-v1`; older
+cohorts get a **new tuple-plus-source-proof diagnostic**, not their original
+single-quote scores. Wrong admissions, false refusals and invalid proofs stay visible.
+Known-context field checks remain separate from unknown targets. Cohorts overlap
+and are development-exposed: never pool them as independent observations.
+Historical raw results/baselines remain unchanged; zero regression failures is a
+software target, not a real-world guarantee.
+
+### HHEM provenance and isolated dependencies
+
+Selected verifier: [HHEM-2.1-Open](https://huggingface.co/vectara/hallucination_evaluation_model),
+revision `de9a5e6ba9ba49531a022dba17e35ffeb2a6fad8`; Google Flan-T5-base
+config/tokenizer revision `7bcac572ce56db69c1ea7c8af255c5d7c9672fc2`.
+The [artifact receipt](../results/hhem_assets.json) records hashes and sizes.
+Safetensors weights match the public LFS SHA-256; smaller files match their public
+Git blob IDs and are also SHA-256 pinned. No weights/tokenizers enter Git.
+Both cards declare Apache-2.0; this is not licence clearance for every future use.
+
+Both custom-code files were inspected: ordinary Torch/Transformers imports and
+foundation-config/tokenizer loading. Before execution, the loader overrides that
+foundation to the pinned local directory and forces HF/Transformers offline,
+disables telemetry/GPU visibility and uses an owned private module cache.
+`trust_remote_code` applies only to inspected, hash-verified local files.
+No unpinned remote code/model is fetched during evaluation and no pickle weights load.
+
+The optional `verifier` extra pins Torch2.9.1, Transformers4.57.6, safetensors0.7.0
+and sentencepiece0.2.1. Actual CPU Torch2.9.1+cpu was installed only in a throwaway
+venv; project `.venv` is untouched. Modern resolvers failed TLS access to optional
+wheel `.metadata` endpoints; pip's legacy wheel-metadata resolver succeeded without
+disabling TLS verification. The configured mirror URL/credentials are not committed.
+`uv pip check` passed for all26installedpackages.
+The [environment receipt](../results/hhem_environment.json) records exact installed
+versions, **not hash-locked dependency artifacts**. CI remains the core/dev lock;
+this optional model experiment is not a CI execution.
+
+### Frozen 24-claim benchmark and acceptance limits
+
+The [plan](../results/hhem_plan.json) permits one local CPU-only run under 6 GiB/
+20 minutes, with a 2,048-token cap, no truncation and no inference retry. Downloads
+and installation precede execution. The external worker blocks on the owned-Job
+gate before importing Torch/model code; launcher and interpreter are both sampled.
+
+[`hhem_verifier`](../src/asof/hhem_verifier.py) freezes24claims over twelve invented
+sources: one supported and one corrupted claim for value, year, currency, scale,
+sign, entity, definition, scope, accounting basis, per-share denominator, footnote
+applicability and correction priority. Prose and raw tables are retained.
+Threshold **0.5** is fixed before scoring; it is not tuned on this benchmark.
+Report all24cases, false support/rejection, invalids, unattempted cases, tokens,
+latency, model/dependency pins and resources. A model score is not a calibrated
+financial-correctness probability. Do not select only easy cases.
+
+This evaluates **claim entailment, not abstention/answerability**. No claim means
+no entailment verdict, not certified nondisclosure. Source coverage and unresolved
+questions still need review. The verifier is advisory-only: it cannot change source
+guards, candidate tuples, human-review counts/gold, weights, registered studies,
+source permissions or the application default. Historical report hashes remain
+protected. The current regression matrix is captured independently alongside it.
+
+Pre-execution validation: the full core suite passed **744 tests** in 104.65 s
+(two existing rank-deficiency warnings). A subsequently added explicit worker-gate/
+no-overwrite check and the affected tests passed **28/28** in 5.38 s.
+Ruff and documentation checks passed; isolated Torch/Transformers imports succeeded
+with CPU Torch2.9.1+cpu and CUDA unavailable. No weights or benchmark claims were
+evaluated before the source/fixture/asset freeze. The matrix currently passes every
+listed cohort under its declared current contract; old scores remain frozen.

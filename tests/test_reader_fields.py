@@ -128,3 +128,43 @@ def test_fresh_field_challenge_has_complete_annotation_contract():
     payload["pairs"][0]["cases"][0]["expected_context"].pop("scope")
     with pytest.raises(ValueError, match="all context labels"):
         load_field_cases(payload)
+
+
+@pytest.mark.parametrize("source", [
+    "For 2017, FictionGrove had 3700 subscribers.",
+    "For 2017, FictionGrove had 3700 subscribers. Its previous 2016 subscriber count was 3900.",
+    "FictionGrove had 3,700 subscribers in 2017.",
+    "FICTIONGROVE reported\nrevenue of  18 EUR million for 2017.",
+])
+def test_natural_counts_and_wrapped_prose_preserve_source_offsets(source):
+    count = "subscribers" in source
+    case = item(source, metric="subscribers" if count else "revenue",
+                expected=("3700", "subscribers", "2017") if count else ("18", "EUR million", "2017"))
+    result = guarded_parser(case)
+    assert field_record(case, result, EMPTY)["score"]["correct"]
+    assert validate_source(case, result.bundle) == ()
+    for span in result.bundle.spans:
+        assert 0 <= span.start < span.end <= len(source)
+    assert guarded_parser(replace(case, expected=None)) == result
+
+
+@pytest.mark.parametrize("source", [
+    "For 2016, FictionGrove had 3700 subscribers.",
+    "For 2017, FictionGrovePartner had 3700 subscribers.",
+    "For 2017, a customer of FictionGrove had 3700 subscribers.",
+    "For 2017, FictionGrove did not have 3700 subscribers.",
+    "For 2017, FictionGrove had 37,00 subscribers.",
+    "For 2017, FictionGrove had 3700 subscribers for a competitor.",
+    "For 2017, FictionGrove had 3700 subscribers. Its previous 2017 subscriber count was 3900.",
+    "FictionGrove discussed the industry: manufacturers reported revenue of 18 EUR million for 2017.",
+    ("FictionGrove reported subscribers of 110 subscribers for 2017. "
+     "An equally authoritative, unreconciled table states FictionGrove reported "
+     "subscribers of 130 subscribers for 2017."),
+    "FictionGrove reported\n\nrevenue of 18 EUR million for 2017.",
+    "FictionGrove reported\nCompany: Other.\nrevenue of 18 EUR million for 2017.",
+    "FictionGrove reported\n| revenue | 18 EUR million for 2017 |",
+    "'FictionGrove reported\nrevenue of 18 EUR million for 2017.'",
+])
+def test_new_prose_grammar_does_not_borrow_entity_context_across_boundaries(source):
+    case = item(source, metric="subscribers" if "subscribers" in source else "revenue", expected=None)
+    assert guarded_parser(case).answer.abstain

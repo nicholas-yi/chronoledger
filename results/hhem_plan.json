@@ -1,0 +1,12 @@
+{
+  "profile": "HHEM-LOCAL-01",
+  "max_cases": 24,
+  "threshold": 0.5,
+  "wall_seconds": 1200,
+  "controller_stop_seconds": 1180,
+  "RAM_bytes": 6442450944,
+  "controller_RAM_allowance": 134217728,
+  "CPU_count": 1,
+  "input_token_cap": 2048,
+  "GPU": false
+}

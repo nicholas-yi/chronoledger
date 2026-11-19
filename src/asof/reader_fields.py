@@ -12,9 +12,11 @@ from decimal import Decimal
 from asof.extraction import normalize
 from asof.focused_reader import Answer, Case, abstention, messages
 from asof.linked_reader import (
+    UNIT,
     EvidenceBundle,
     EvidenceSpan,
     LinkedResult,
+    _amount,
     challenge_cases,
     complete_evidence,
     linked_parser,
@@ -57,9 +59,54 @@ def _per_share_bundle(case: Case) -> EvidenceBundle | None:
               for role in ("entity", "metric", "value", "unit", "period")))
 
 
+def _extended_prose_bundle(case: Case) -> EvidenceBundle | None:
+    source = case.source
+    if (not source or len(source) > 8192 or "|" in source
+            or re.search(r"\r?\n[ \t]*\r?\n", source)):
+        return None
+    entity = r"\s+".join(re.escape(part) for part in case.issuer.split())
+    metric = r"\s+".join(re.escape(part) for part in case.metric.split())
+    count = r"(?P<value>\d[\d,]*)\s+(?P<metric>subscribers)"
+    previous = (r"(?:\s+Its\s+previous\s+(?P<prior_year>\d{4})\s+subscriber\s+count\s+"
+                r"was\s+(?P<prior_value>\d[\d,]*)\.)?")
+    patterns = []
+    if normalize(case.metric) == "subscribers":
+        patterns.extend((
+            rf"For\s+(?P<period>\d{{4}}),\s+(?P<entity>{entity})\s+had\s+{count}\.{previous}",
+            rf"(?P<entity>{entity})\s+had\s+{count}\s+in\s+(?P<period>\d{{4}})\.{previous}",
+        ))
+    if "\n" in source:
+        patterns.append(
+            rf"(?P<entity>{entity})\s+(?:reported|recorded)\s+(?P<metric>{metric})\s+"
+            rf"(?:of|was|were)\s+(?P<value>[+-]?\d[\d,]*(?:\.\d+)?)\s+"
+            rf"(?P<unit>{UNIT})\s+for\s+(?P<period>\d{{4}})\.")
+    for pattern in patterns:
+        match = re.fullmatch(pattern, source, re.IGNORECASE)
+        if match is None or match["period"] != case.requested_period:
+            continue
+        if match.groupdict().get("prior_year") is not None and (
+                int(match["prior_year"]) >= int(match["period"])
+                or _amount(source, match["prior_value"], table=False)[0] is None):
+            continue
+        value, _ = _amount(source, match["value"], table=False)
+        if value is None:
+            continue
+        unit_group = "unit" if "unit" in match.groupdict() else "metric"
+        spans = tuple(EvidenceSpan(role, *match.span(role))
+                      for role in ("entity", "metric", "value", "period"))
+        spans += (EvidenceSpan("unit", *match.span(unit_group)),)
+        return EvidenceBundle(
+            "field-prose-v2", hashlib.sha256(source.encode()).hexdigest(),
+            case.issuer, case.metric, value, normalize(match[unit_group]), case.requested_period,
+            "bounded_whole_prose", "current", spans)
+    return None
+
+
 def validate_source(case: Case, bundle: EvidenceBundle) -> tuple[str, ...]:
     if bundle.contract == "linked-evidence-v1":
         return validate_bundle(case, bundle)
+    if bundle.contract == "field-prose-v2":
+        return () if bundle == _extended_prose_bundle(case) else ("extended_prose_binding_mismatch",)
     if bundle.contract != "field-source-v1":
         return ("unknown_source_proof_contract",)
     return () if bundle == _per_share_bundle(case) else ("per_share_source_binding_mismatch",)
@@ -148,6 +195,16 @@ def _guard(case: Case, result: LinkedResult) -> LinkedResult:
     errors = validate_source(case, result.bundle)
     if not errors:
         _, _, errors = context_fields(case, result.bundle)
+    if not errors:
+        entity = next(span for span in result.bundle.spans if span.role == "entity")
+        metric = next(span for span in result.bundle.spans if span.role == "metric")
+        lead = case.source[entity.end:metric.start]
+        if (result.bundle.method == "prose" and not re.search(r"[.!?;\n]", lead) and re.search(
+                r"\b(?:industry|manufacturers|customer|competitor|supplier|counterparty)\b",
+                lead, re.IGNORECASE)):
+            errors = ("third_party_subject_after_named_issuer",)
+        if re.search(r"\b(?:unreconciled|equally authoritative)\b", case.source, re.IGNORECASE):
+            errors = (*errors, "explicit_unreconciled_authority_requires_review")
     if errors:
         return LinkedResult(abstention("field_context_unavailable"), None, "context_rejected", errors)
     return result
@@ -156,11 +213,12 @@ def _guard(case: Case, result: LinkedResult) -> LinkedResult:
 def guarded_parser(case: Case) -> LinkedResult:
     result = linked_parser(case)
     if result.bundle is None:
-        bundle = _per_share_bundle(case)
+        bundle = _per_share_bundle(case) or _extended_prose_bundle(case)
         if bundle is not None:
             answer = Answer(value=bundle.value, unit=bundle.unit, period=bundle.period,
                             evidence=case.source, abstain=False, reason="")
-            result = LinkedResult(answer, bundle, "per_share_source_fact")
+            result = LinkedResult(answer, bundle, "per_share_source_fact"
+                                  if bundle.contract == "field-source-v1" else "extended_prose_source_fact")
     return _guard(case, result)
 
 

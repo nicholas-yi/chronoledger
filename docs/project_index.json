@@ -16,6 +16,9 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "reader-current-regressions", "path": "scripts/check_reader_regressions.py", "status": "active_invented_regressions_not_independent_gold", "command": "python scripts/check_reader_regressions.py"},
+    {"id": "hhem-advisory", "path": "scripts/run_hhem_benchmark.py", "status": "approved_once_pending_pinned_local_benchmark", "command": null},
+    {"id": "hhem-assets", "path": "scripts/prepare_hhem_assets.py", "status": "public_artifacts_prepared_hash_pinned_no_inference", "command": null},
     {"id": "reader-ai-review", "path": "scripts/run_focused_reader.py", "status": "historical_complete_AI_not_promoted_no_rerun", "command": null},
     {"id": "reader-cell-selection", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_automatic_retry", "command": null},
     {"id": "reader-context-forms", "path": "scripts/prepare_reader_context_forms.py", "status": "blank_forms_prepared_reviews_unassigned_no_overwrite", "command": null},
