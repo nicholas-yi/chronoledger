@@ -24,9 +24,12 @@ binding parser each 24/24 on authored grammar cases. Three corrections, zero reg
 The stronger parser matched the result without model cost; no LLM increment is established.
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.
-A new [harder format audit](FOCUSED_READER.md#harder-evaluation-format-failure-boundaries-not-higher-looking-scores)
-is being frozen: 288 deterministic cases, plus a separate balanced 24-case model
-audit, with existing implementations unchanged rather than optimized to the test.
+The [harder format audit](FOCUSED_READER.md#observed-harder-audit-the-old-perfect-score-was-format-specific)
+completed with unchanged implementations: 288 deterministic cases plus 24 model
+cases. On twelve stress cases, raw LLM tuples matched 12/12 but full evidence passed
+5/12; the current verifier passed 3/12. The earlier perfect score was grammar-specific.
+No verifier/judge promotion; linked multi-span evidence is a proposed next design,
+not an implemented or empirically validated fix.
 
 ## What exists, and what it establishes
 

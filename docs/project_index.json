@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "reader-stress", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_stress_run", "command": null},
+    {"id": "reader-stress", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-review-packet", "path": "scripts/prepare_reader_review.py", "status": "private_packet_prepared_reviews_unassigned", "command": null},
     {"id": "focused-reader-v2", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
@@ -36,6 +36,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "reader-stress",
+      "kind": "synthetic_format_stress_diagnostic",
+      "path": "results/reader_stress.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "ebfda0d75c3c88ecbec5e1da556b26d4217d3358",
+      "status": "complete_prior_perfect_score_did_not_generalize_evidence_contract_bottleneck",
+      "supersedes": []
+    },
     {
       "id": "verified-reader",
       "kind": "synthetic_local_model_diagnostic",

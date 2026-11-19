@@ -609,3 +609,108 @@ the affected reader tests passed **21/21**. No request-rate implementation or
 threshold was changed, and no second clean full-suite result is claimed.
 The generator/scorer and binding-verifier files were byte-compared with the prior
 24-case run's recorded hashes and were unchanged before this harder execution.
+
+## Observed harder audit: the old perfect score was format-specific
+
+The [actual harder-audit receipt](../results/reader_stress.json) records the one run
+frozen at `ebfda0d75c3c88ecbec5e1da556b26d4217d3358`.
+All **288 deterministic cases** and the separate **24 model cases** completed,
+with 24 initial-generation calls, no critic/retry/training, in **591.391 s (9.86 min)**.
+All model responses were schema-valid and none hit the output cap.
+
+### Offline deterministic coverage: 288 cases, not model generations
+
+| Unchanged implementation | Canonical prose controls | Stress-format variants |
+|---|---:|---:|
+| Old narrow parser | 144/144 | 24/144 |
+| Binding parser | 144/144 | 36/144 |
+
+The narrow parser answered twelve quoted-nonfact examples as if their embedded
+fictional sentence were a disclosure. Its other stress failures were mainly
+abstentions on unfamiliar language. The binding parser avoided those wrong
+answers but still missed 108 answerable stress variants.
+These template repetitions are format coverage, not 288 independent real financial
+observations. The old 24/24 result has not been rewritten; it was limited to its
+supported grammar and did not establish generalization.
+
+### Stratified model audit: twelve control/stress pairs
+
+All arms scored 12/12 on their canonical control cases.
+On the **twelve stress cases**:
+
+| Arm | Full evidence-contract outcomes correct | Value/unit/year outcomes correct, ignoring evidence requirement | Answered values |
+|---|---:|---:|---:|
+| Old narrow parser | 2/12 | 2/12 | 2 |
+| Binding parser | 3/12 | 3/12 | 1 |
+| Single-pass LLM | 5/12 | 12/12 | 10 |
+| Same LLM output + current verifier | 3/12 | 3/12 | 1 |
+
+Correct outcomes include appropriate abstentions on two unanswerable stress cases.
+The LLM's ten other stress answers matched the authored value/unit/year tuples;
+seven did not meet the unchanged evidence contract. **Those are not seven wrong
+financial tuples.** The raw primary `wrong_answer` label includes emitted answers
+that fail source/evidence requirements; the new diagnostic separates that from
+wrong tuple content without changing acceptance or regrading old results.
+Tuple-only correctness does not certify reliable sourcing, real financial validity
+or accuracy beyond these authored cases.
+
+Across all 24 audited cases, full-contract counts were parser **14/24**, binding
+parser **15/24**, single pass **17/24**, and verified **15/24**.
+The verifier corrected zero outcomes and regressed two. The two regressions were
+the superseded-correction and consolidated/segment-scope cases: the raw answers
+already met the primary contract, but the finite binding grammar refused them.
+
+### What actually failed
+
+| Format | Raw tuple | Primary evidence result | Current verifier |
+|---|---|---|---|
+| Table headers / scaled headers | Correct | Selected quote omitted issuer, period and unit context | Refused unsupported grammar |
+| Footnote unit override | Correct | Footnote quote lacked the number and issuer/year context needed to support the tuple | Refused unsupported grammar |
+| Parenthesized negative | Correct | Literal minus-sign number was not present in the quoted parentheses representation | Refused unsupported grammar |
+| Superseded correction | Correct | Passed primary evidence checks | Regressed to abstention |
+| Consolidated versus segment | Correct | Passed primary evidence checks | Regressed to abstention |
+| Pronoun, fiscal-year, counterparty context | Correct | Quote omitted explicit issuer token | Refused unsupported grammar |
+| Dash-not-zero / quoted nonfact | Correct abstention | Passed | Preserved abstention |
+| Malicious source instruction | Correct tuple | Passed in this one audit variant | Passed |
+
+One resisted instruction variant is not an injection-security certificate. Likewise,
+a correct tuple with an incomplete citation is not a qualified evidence-linked answer.
+The failure pattern is a contract/representation limitation as well as a coverage
+limitation, not a justification to loosen checks blindly.
+
+Pairs with both members meeting the full contract were 2/12 for the narrow parser,
+3/12 for the binding parser, 5/12 for the LLM and 3/12 for verified output.
+Raw LLM predictions had zero declared tuple-relation violations; the verifier
+introduced eight by turning valid format-dependent answers into abstentions.
+Neither invariance alone nor a tuple-only score establishes semantic evidence.
+
+### Decision and resources
+
+The result does **not** justify default promotion of the current verifier or an
+automatic return to the judge. It does show that the stronger parser's prior perfect
+score was not evidence that the LLM was useless outside its grammar.
+The model demonstrated broader tuple extraction on this small authored audit,
+but the single-sentence citation contract and narrow verifier did not capture it reliably.
+
+The next candidate design, if separately approved, should represent **linked evidence
+bundles**: value cell/span plus applicable unit/header/footnote, reporting period,
+entity and scope, and explicit correction priority. It should not merely search
+for those words anywhere in a document or remove source checks to inflate accuracy.
+That would be a new version, evaluated beyond these now-exposed cases and eventually
+against independently reviewed real sources. No such parser/scorer change was made
+during or after this audit.
+
+Observed peak combined working set was **4,026,531,840 bytes (3.75 GiB)**; one CPU,
+source/resource checks and worker exit 0 passed. Unique generated tokens were 1,484.
+The 24 model calls consumed about 588.438 s; verification added about 0.0034 s but
+still could not handle the out-of-grammar evidence. All four sampled owned PIDs
+were confirmed absent, port 11435 closed and the shared Ollama process remained.
+No actions were taken against the unrelated preexisting native process.
+
+All three previous model-result hashes remained unchanged. No real disclosure,
+private review packet, held source, prices, fundamental outcomes or production
+trial-ledger content was read; no row was appended, source repaired, model pulled,
+weights trained, experiment retried or push performed.
+The independently reviewable private packet remains unlabelled, with reviewers unassigned.
+Software validation retains the disclosed full-suite timing-test failure and isolated
+recheck; a clean full regression result is not claimed for this batch.

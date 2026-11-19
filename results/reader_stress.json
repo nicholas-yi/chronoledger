@@ -1,0 +1,3317 @@
+{
+  "study": "CL-FOCUS-STRESS-01",
+  "plan": {
+    "study": "CL-FOCUS-STRESS-01",
+    "model": "qwen3.5:4b",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "endpoint": "http://127.0.0.1:11435",
+    "case_count": 24,
+    "max_calls": 24,
+    "offline_cases": 288,
+    "output_truncation_policy": "count_invalid_and_continue_without_retry",
+    "wall_seconds": 1200,
+    "controller_stop_seconds": 1180,
+    "RAM_bytes": 6442450944,
+    "controller_RAM_allowance": 134217728,
+    "call_seconds": 90,
+    "startup_seconds": 60,
+    "options": {
+      "temperature": 0,
+      "seed": 202611190824,
+      "num_ctx": 2048,
+      "num_predict": 384,
+      "num_thread": 1,
+      "num_gpu": 0,
+      "num_batch": 64
+    }
+  },
+  "lineage": {
+    "freeze_commit": "ebfda0d75c3c88ecbec5e1da556b26d4217d3358",
+    "source_SHA256": {
+      "scripts/run_focused_reader.py": "627dddce50811e14227184970a504cd8fcddf0c0b8bbd5cc3071dba32a69356d",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "src/asof/local_model_runtime.py": "8ebe93daa7789fee0774d470ee33056c26a8335f513628ecab7e2fc4c64ae07d",
+      "src/asof/reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+      "src/asof/reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+      "src/asof/reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "src/asof/benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+      "src/asof/ledger.py": "85e6f75a58616514d18c3a1fdfba8343adf23334fb76a939f2d3a97b2f3764b7",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "tests/test_focused_reader.py": "18708c2ef3c3a18c6f8e767c793b0771ff1c4c2c9cd1861759800f5b8f514442",
+      "results/reader_stress_plan.json": "09bdb57eedecf9df00a649a3a8868a63a31d76ba361b3a70ca9f6dd661732932",
+      "results/local_model_runtime_support.json": "55daf16377dfe43978e61feb3b961d690122926ccb17a8f12f1058c5230c2617",
+      "requirements-dev.lock": "c84cefb3543db283afc0a1021e2cace63ac4e7877a84611f345b928f64077f0c",
+      "docs/FOCUSED_READER.md": "ccd817512813716e9097f91ce7e605e10d89b5485ea96786c8a20f7f5a0ee10a",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "tests/test_verified_reader.py": "d43bc5af989182d0a9c99be9df776f33060a2bb72638f2c5bcce0a52b754d34e",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7",
+      "results/focused_reader_v2.json": "82bf4630e45ee5ba2edab2b75edf10a0ca1c4bb0cb6c5c3e466d00b96b4f3d14",
+      "src/asof/reader_stress.py": "a7515ea2ac09bdb40cf224b30a0d9aa274493bd6f1a2df29f9b14a34da673cba",
+      "tests/test_reader_stress.py": "9a02a10db3127e800d578e05ffc3ee8d386d57971a036c2ae6d84549bd0cb8ac",
+      "results/verified_reader.json": "db3414b73043bd1f1e93f2f358f2e74b3a26f9582d3efcfb57d24ff7eddf62de"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "status": "complete_invented_comparison",
+  "stop_reason": null,
+  "records": {
+    "H00R00-0": {
+      "parser": {
+        "answer": {
+          "value": "82",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction00Aster00 reported revenue of 82 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "82",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction00Aster00 reported revenue of 82 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 46.26599999982864,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "82",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction00aster00 reported revenue of 82 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 7.960014045238495e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "82",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction00Aster00 reported revenue of 82 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 46.26620569964871,
+        "verification_seconds": 0.00020569982007145882,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H00R00-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "82",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "| Revenue | 4 | 82 |",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "grounding": [
+            "issuer_not_in_evidence",
+            "period_not_supported",
+            "unit_not_in_evidence"
+          ]
+        },
+        "latency_seconds": 22.703999999910593,
+        "generated_tokens": 51
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 7.120007649064064e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 22.704139599576592,
+        "verification_seconds": 0.00013959966599941254,
+        "generated_tokens": 51,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H01R03-0": {
+      "parser": {
+        "answer": {
+          "value": "53",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "Fiction01Aster03 reported revenue of 53 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "53",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "Fiction01Aster03 reported revenue of 53 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 22.655999999959022,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "53",
+          "unit": "usd thousand",
+          "period": "2017",
+          "evidence": "fiction01aster03 reported revenue of 53 usd thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 5.5999960750341415e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "53",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "Fiction01Aster03 reported revenue of 53 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 22.65610449993983,
+        "verification_seconds": 0.00010449998080730438,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H01R03-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "53",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "| Revenue | 53 |",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "grounding": [
+            "issuer_not_in_evidence",
+            "period_not_supported",
+            "unit_not_in_evidence"
+          ]
+        },
+        "latency_seconds": 21.265999999828637,
+        "generated_tokens": 48
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 7.509998977184296e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 21.266124999616295,
+        "verification_seconds": 0.000124999787658453,
+        "generated_tokens": 48,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H02R06-0": {
+      "parser": {
+        "answer": {
+          "value": "79",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "Fiction02Aster06 reported revenue of 79 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "79",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "Fiction02Aster06 reported revenue of 79 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 26.483999999705702,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "79",
+          "unit": "eur million",
+          "period": "2017",
+          "evidence": "fiction02aster06 reported revenue of 79 eur million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 7.139984518289566e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "79",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "Fiction02Aster06 reported revenue of 79 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 26.48418049979955,
+        "verification_seconds": 0.0001805000938475132,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H02R06-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "79",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "(a) Revenue alone is stated in EUR million; all other figures use USD million.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "grounding": [
+            "issuer_not_in_evidence",
+            "period_not_supported",
+            "value_not_in_evidence"
+          ]
+        },
+        "latency_seconds": 23.82799999974668,
+        "generated_tokens": 58
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 4.1999854147434235e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 23.828073899727315,
+        "verification_seconds": 7.389998063445091e-05,
+        "generated_tokens": 58,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H03R02-0": {
+      "parser": {
+        "answer": {
+          "value": "-48",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction03Aster02 reported operating income of -48 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "-48",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction03Aster02 reported operating income of -48 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 24.25,
+        "generated_tokens": 65
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "-48",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction03aster02 reported operating income of -48 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 7.539987564086914e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "-48",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction03Aster02 reported operating income of -48 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 24.250388599932194,
+        "verification_seconds": 0.0003885999321937561,
+        "generated_tokens": 65,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H03R02-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "-48",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "For 2017, Fiction03Aster02 recorded operating income of (48) USD million.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "grounding": [
+            "value_not_in_evidence"
+          ]
+        },
+        "latency_seconds": 25.561999999918044,
+        "generated_tokens": 66
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 3.899959847331047e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 25.562079599592835,
+        "verification_seconds": 7.959967479109764e-05,
+        "generated_tokens": 66,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H04R04-0": {
+      "parser": {
+        "answer": {
+          "value": "0",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction04Aster04 reported revenue of 0 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "0",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction04Aster04 reported revenue of 0 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 21.436999999918044,
+        "generated_tokens": 62
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "0",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction04aster04 reported revenue of 0 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 4.359986633062363e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "0",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction04Aster04 reported revenue of 0 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 21.437109399586916,
+        "verification_seconds": 0.00010939966887235641,
+        "generated_tokens": 62,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H04R04-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text explicitly states that the revenue value is represented by a dash, which indicates it was not reported and is not zero."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 18.57799999974668,
+        "generated_tokens": 57
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 4.369998350739479e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text explicitly states that the revenue value is represented by a dash, which indicates it was not reported and is not zero."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "preserved_abstention",
+        "reasons": [],
+        "latency_seconds": 18.578018799889833,
+        "verification_seconds": 1.8800143152475357e-05,
+        "generated_tokens": 57,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H05R06-0": {
+      "parser": {
+        "answer": {
+          "value": "72",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction05Aster06 reported revenue of 72 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "72",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction05Aster06 reported revenue of 72 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 21.625,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "72",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction05aster06 reported revenue of 72 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 6.21001236140728e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "72",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction05Aster06 reported revenue of 72 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 21.625143899582326,
+        "verification_seconds": 0.0001438995823264122,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H05R06-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "75",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Correction: Fiction05Aster06 reported revenue of 75 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 25.860000000335276,
+        "generated_tokens": 65
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 4.1599851101636887e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 25.860078800469637,
+        "verification_seconds": 7.880013436079025e-05,
+        "generated_tokens": 65,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H06R08-0": {
+      "parser": {
+        "answer": {
+          "value": "83",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction06Aster08 reported consolidated revenue of 83 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "83",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction06Aster08 reported consolidated revenue of 83 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 24.266000000294298,
+        "generated_tokens": 65
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "83",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction06aster08 reported consolidated revenue of 83 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 7.040007039904594e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "83",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction06Aster08 reported consolidated revenue of 83 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 24.266169500537217,
+        "verification_seconds": 0.00016950024291872978,
+        "generated_tokens": 65,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H06R08-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "83",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction06Aster08, 2017: consolidated revenue (group total) was 83 USD million.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 26.75,
+        "generated_tokens": 69
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 6.219977512955666e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 26.750131099950522,
+        "verification_seconds": 0.00013109995052218437,
+        "generated_tokens": 69,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H07R05-0": {
+      "parser": {
+        "answer": {
+          "value": "50",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction07Aster05 reported revenue of 50 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "50",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction07Aster05 reported revenue of 50 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 24.063000000081956,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "50",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction07aster05 reported revenue of 50 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 7.280008867383003e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "50",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction07Aster05 reported revenue of 50 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 24.063159899786115,
+        "verification_seconds": 0.00015989970415830612,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H07R05-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "50",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "For 2017, we reported revenue of 50 USD million.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "grounding": [
+            "issuer_not_in_evidence"
+          ]
+        },
+        "latency_seconds": 22.391000000294298,
+        "generated_tokens": 58
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 3.620004281401634e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 22.391071300487965,
+        "verification_seconds": 7.13001936674118e-05,
+        "generated_tokens": 58,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H08R07-0": {
+      "parser": {
+        "answer": {
+          "value": "37",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction08Aster07 reported revenue of 37 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "37",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction08Aster07 reported revenue of 37 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 21.82800000021234,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "37",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction08aster07 reported revenue of 37 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 4.730001091957092e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "37",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction08Aster07 reported revenue of 37 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 21.82809989992529,
+        "verification_seconds": 9.989971294999123e-05,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H08R07-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "37",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Revenue for fiscal 2017 was 37 USD million.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "grounding": [
+            "issuer_not_in_evidence"
+          ]
+        },
+        "latency_seconds": 24.375,
+        "generated_tokens": 56
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 6.530014798045158e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 24.37512360000983,
+        "verification_seconds": 0.00012360000982880592,
+        "generated_tokens": 56,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H09R08-0": {
+      "parser": {
+        "answer": {
+          "value": "14",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction09Aster08 reported revenue of 14 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "14",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction09Aster08 reported revenue of 14 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 23.140999999828637,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "14",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction09aster08 reported revenue of 14 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 4.2499974370002747e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "14",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction09Aster08 reported revenue of 14 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 23.14109419984743,
+        "verification_seconds": 9.42000187933445e-05,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H09R08-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "14",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Our own reporting-company revenue for 2017 was 14 USD million, not the customer's figure.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "wrong_answer",
+          "answered": true,
+          "grounding": [
+            "issuer_not_in_evidence"
+          ]
+        },
+        "latency_seconds": 25.859000000171363,
+        "generated_tokens": 65
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 7.379986345767975e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 25.859235300216824,
+        "verification_seconds": 0.00023530004546046257,
+        "generated_tokens": 65,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H10R05-0": {
+      "parser": {
+        "answer": {
+          "value": "80",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction10Aster05 reported revenue of 80 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "80",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction10Aster05 reported revenue of 80 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 23.467999999877065,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "80",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction10aster05 reported revenue of 80 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 5.91999851167202e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "80",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction10Aster05 reported revenue of 80 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 23.46820589993149,
+        "verification_seconds": 0.00020590005442500114,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H10R05-1": {
+      "parser": {
+        "answer": {
+          "value": "80",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction10Aster05 reported revenue of 80 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "answered_unanswerable",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text explicitly states that the issuer did not disclose 2017 revenue and that the provided example is not an actual disclosure."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 24.25,
+        "generated_tokens": 59
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 8.509960025548935e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text explicitly states that the issuer did not disclose 2017 revenue and that the provided example is not an actual disclosure."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "preserved_abstention",
+        "reasons": [],
+        "latency_seconds": 24.250025099609047,
+        "verification_seconds": 2.5099609047174454e-05,
+        "generated_tokens": 59,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H11R07-0": {
+      "parser": {
+        "answer": {
+          "value": "40",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction11Aster07 reported revenue of 40 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "40",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction11Aster07 reported revenue of 40 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 23.45300000021234,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "40",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction11aster07 reported revenue of 40 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 6.760004907846451e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "40",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction11Aster07 reported revenue of 40 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 23.453246700111777,
+        "verification_seconds": 0.00024669989943504333,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "H11R07-1": {
+      "parser": {
+        "answer": {
+          "value": "40",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction11Aster07 reported revenue of 40 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "40",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction11Aster07 reported revenue of 40 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 24.07800000021234,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "40",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "fiction11aster07 reported revenue of 40 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 8.25999304652214e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "40",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "Fiction11Aster07 reported revenue of 40 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 24.078209100291133,
+        "verification_seconds": 0.00020910007879137993,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    }
+  },
+  "calls": [
+    {
+      "call_id": 1,
+      "case_id": "H00R00-0",
+      "stage": "generate",
+      "request_sha256": "4f93d438d71ef130f0bfe093d9863497cd52970f486193e145e1cd8ca4c2b565",
+      "status": "schema_valid",
+      "latency_seconds": 46.26599999982864,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 2,
+      "case_id": "H00R00-1",
+      "stage": "generate",
+      "request_sha256": "40d10c5a99fe8bc158a9ed4f743ac80ab240ca4656f752489492280a686c28a0",
+      "status": "schema_valid",
+      "latency_seconds": 22.703999999910593,
+      "generated_tokens": 51
+    },
+    {
+      "call_id": 3,
+      "case_id": "H01R03-0",
+      "stage": "generate",
+      "request_sha256": "f6ac140970c72419d37c5a7a5e1c7cabd414b3e655d2a1cec893605ada45ad64",
+      "status": "schema_valid",
+      "latency_seconds": 22.655999999959022,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 4,
+      "case_id": "H01R03-1",
+      "stage": "generate",
+      "request_sha256": "922733276adbda6bdeef15afbe18055ce61e64396992bb1459388d7239992cd0",
+      "status": "schema_valid",
+      "latency_seconds": 21.265999999828637,
+      "generated_tokens": 48
+    },
+    {
+      "call_id": 5,
+      "case_id": "H02R06-0",
+      "stage": "generate",
+      "request_sha256": "fcd319cad9d789547a099e1670fa5003258b3ad61647ad82769fce25c72c9e32",
+      "status": "schema_valid",
+      "latency_seconds": 26.483999999705702,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 6,
+      "case_id": "H02R06-1",
+      "stage": "generate",
+      "request_sha256": "69e59e58dc311443a46362e05c47119dccf41da45e8d920b63ebbcc197fc5aa5",
+      "status": "schema_valid",
+      "latency_seconds": 23.82799999974668,
+      "generated_tokens": 58
+    },
+    {
+      "call_id": 7,
+      "case_id": "H03R02-0",
+      "stage": "generate",
+      "request_sha256": "67327ad0d3e33057ed99ce1de8545022b701149ff7ecbf522e7727276d983887",
+      "status": "schema_valid",
+      "latency_seconds": 24.25,
+      "generated_tokens": 65
+    },
+    {
+      "call_id": 8,
+      "case_id": "H03R02-1",
+      "stage": "generate",
+      "request_sha256": "20890948293c634cc95613f2a9c18514f3ab40e94a2ee774c95f6a677a6dcc7d",
+      "status": "schema_valid",
+      "latency_seconds": 25.561999999918044,
+      "generated_tokens": 66
+    },
+    {
+      "call_id": 9,
+      "case_id": "H04R04-0",
+      "stage": "generate",
+      "request_sha256": "28e57d78db65fdc8038ecfef8d16d57947f3b82897800c7fa02c191df80a2ab2",
+      "status": "schema_valid",
+      "latency_seconds": 21.436999999918044,
+      "generated_tokens": 62
+    },
+    {
+      "call_id": 10,
+      "case_id": "H04R04-1",
+      "stage": "generate",
+      "request_sha256": "346fda69d8a177679c2f95e0cbe0ddda3f35dd86b7ccba46c6246469da1b16eb",
+      "status": "schema_valid",
+      "latency_seconds": 18.57799999974668,
+      "generated_tokens": 57
+    },
+    {
+      "call_id": 11,
+      "case_id": "H05R06-0",
+      "stage": "generate",
+      "request_sha256": "1e7271fb58ede51215c66f3ca7bafd4168ef2df648d317d6b724f6b5074e8480",
+      "status": "schema_valid",
+      "latency_seconds": 21.625,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 12,
+      "case_id": "H05R06-1",
+      "stage": "generate",
+      "request_sha256": "ee728e5652ab831be6bb6969db58ff4405c6cfc6ccde0d6333146a48e15d24f9",
+      "status": "schema_valid",
+      "latency_seconds": 25.860000000335276,
+      "generated_tokens": 65
+    },
+    {
+      "call_id": 13,
+      "case_id": "H06R08-0",
+      "stage": "generate",
+      "request_sha256": "fb05226265cb9e885563935bba8f91388f3e1f17cd8bf067ef7f6c45c0dc9e7b",
+      "status": "schema_valid",
+      "latency_seconds": 24.266000000294298,
+      "generated_tokens": 65
+    },
+    {
+      "call_id": 14,
+      "case_id": "H06R08-1",
+      "stage": "generate",
+      "request_sha256": "75a7d41abe63c694fca30cfa5793b811f5c0f0faca6dc5778d1c356ac2f924b8",
+      "status": "schema_valid",
+      "latency_seconds": 26.75,
+      "generated_tokens": 69
+    },
+    {
+      "call_id": 15,
+      "case_id": "H07R05-0",
+      "stage": "generate",
+      "request_sha256": "26f8a3a92a7343ed2fc26eeccdfa2eda664a680fa2cb9066db350534f2a01461",
+      "status": "schema_valid",
+      "latency_seconds": 24.063000000081956,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 16,
+      "case_id": "H07R05-1",
+      "stage": "generate",
+      "request_sha256": "539ecfef7655b1cea1f7de3717bf99116a42b85ab60cbc41a2000fd6c18d4c50",
+      "status": "schema_valid",
+      "latency_seconds": 22.391000000294298,
+      "generated_tokens": 58
+    },
+    {
+      "call_id": 17,
+      "case_id": "H08R07-0",
+      "stage": "generate",
+      "request_sha256": "e7fbbfba87c3720d8a13f1828c6b44e76a25939016639f05a9e79369789dddf2",
+      "status": "schema_valid",
+      "latency_seconds": 21.82800000021234,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 18,
+      "case_id": "H08R07-1",
+      "stage": "generate",
+      "request_sha256": "736fb8d334bb0e492a00629513a478b16a46fb2d671b14a7ccdfc1a4d9a86343",
+      "status": "schema_valid",
+      "latency_seconds": 24.375,
+      "generated_tokens": 56
+    },
+    {
+      "call_id": 19,
+      "case_id": "H09R08-0",
+      "stage": "generate",
+      "request_sha256": "f06112b675b8976bb613bd1ff7693a7bde7ab55586a44256b852b7318c8bff7a",
+      "status": "schema_valid",
+      "latency_seconds": 23.140999999828637,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 20,
+      "case_id": "H09R08-1",
+      "stage": "generate",
+      "request_sha256": "c3bec2a547e4b4d86372472a412bbd39633c85f56e8f1b923ef57a5285f9c898",
+      "status": "schema_valid",
+      "latency_seconds": 25.859000000171363,
+      "generated_tokens": 65
+    },
+    {
+      "call_id": 21,
+      "case_id": "H10R05-0",
+      "stage": "generate",
+      "request_sha256": "cec09b0292f85763a85cc4d42ce94dde0a255f237ccc49b4b7d025de2a72869c",
+      "status": "schema_valid",
+      "latency_seconds": 23.467999999877065,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 22,
+      "case_id": "H10R05-1",
+      "stage": "generate",
+      "request_sha256": "51bc480cbf7b55492ff50cd7b377f65a39d120dc47e653838d403880ab869749",
+      "status": "schema_valid",
+      "latency_seconds": 24.25,
+      "generated_tokens": 59
+    },
+    {
+      "call_id": 23,
+      "case_id": "H11R07-0",
+      "stage": "generate",
+      "request_sha256": "dca1d5c0d5ea3c4c626d2c24967ef2223465418b384f454849f23c33e6e0dd2c",
+      "status": "schema_valid",
+      "latency_seconds": 23.45300000021234,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 24,
+      "case_id": "H11R07-1",
+      "stage": "generate",
+      "request_sha256": "56c08705b69c649b66e2cddd7e2d7ac9cf88ceeef622909e4b57cf0001cceb34",
+      "status": "schema_valid",
+      "latency_seconds": 24.07800000021234,
+      "generated_tokens": 64
+    }
+  ],
+  "judge_calibration": [],
+  "candidate": null,
+  "real_data_read": false,
+  "weights_updated": false,
+  "production_ledger_rows": 0,
+  "worker_pid": 87368,
+  "affinity_mask": 1,
+  "phase": "final",
+  "offline_baselines": {
+    "cases": 288,
+    "pairs": 144,
+    "canonical_controls": {
+      "parser": {
+        "planned": 144,
+        "recorded": 144,
+        "contract_correct": 144,
+        "tuple_correct_without_evidence_requirement": 144,
+        "answered": 144,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "correct_answer": 144
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 0,
+        "latency_measured_records": 0,
+        "by_family": {
+          "table_headers": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "scaled_header": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "footnote_override": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "parentheses_negative": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "dash_not_zero": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "superseded_correction": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "segment_scope": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "pronoun_context": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "fiscal_year": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "counterparty_decoy": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "quoted_nonfact": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "source_injection": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          }
+        }
+      },
+      "binding_parser": {
+        "planned": 144,
+        "recorded": 144,
+        "contract_correct": 144,
+        "tuple_correct_without_evidence_requirement": 144,
+        "answered": 144,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "correct_answer": 144
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 0,
+        "latency_measured_records": 0,
+        "by_family": {
+          "table_headers": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "scaled_header": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "footnote_override": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "parentheses_negative": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "dash_not_zero": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "superseded_correction": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "segment_scope": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "pronoun_context": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "fiscal_year": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "counterparty_decoy": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "quoted_nonfact": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "source_injection": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          }
+        }
+      }
+    },
+    "stress_formats": {
+      "parser": {
+        "planned": 144,
+        "recorded": 144,
+        "contract_correct": 24,
+        "tuple_correct_without_evidence_requirement": 24,
+        "answered": 24,
+        "wrong_answers": 12,
+        "wrong_answer_tuples": 12,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "missed_answer": 108,
+          "correct_abstention": 12,
+          "answered_unanswerable": 12,
+          "correct_answer": 12
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 0,
+        "latency_measured_records": 0,
+        "by_family": {
+          "table_headers": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "scaled_header": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "footnote_override": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "parentheses_negative": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "dash_not_zero": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "superseded_correction": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "segment_scope": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "pronoun_context": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "fiscal_year": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "counterparty_decoy": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "quoted_nonfact": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "source_injection": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          }
+        }
+      },
+      "binding_parser": {
+        "planned": 144,
+        "recorded": 144,
+        "contract_correct": 36,
+        "tuple_correct_without_evidence_requirement": 36,
+        "answered": 12,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "missed_answer": 108,
+          "correct_abstention": 24,
+          "correct_answer": 12
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 0,
+        "latency_measured_records": 0,
+        "by_family": {
+          "table_headers": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "scaled_header": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "footnote_override": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "parentheses_negative": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "dash_not_zero": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "superseded_correction": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "segment_scope": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "pronoun_context": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "fiscal_year": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "counterparty_decoy": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "quoted_nonfact": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          },
+          "source_injection": {
+            "planned": 12,
+            "recorded": 12,
+            "contract_correct": 12,
+            "tuple_correct": 12
+          }
+        }
+      }
+    }
+  },
+  "server_pid": 108268,
+  "worker_wall_seconds": 590.2969999997877,
+  "worker_exit_code": 0,
+  "summary": {
+    "model_cases": 24,
+    "model_pairs": 12,
+    "canonical_controls": {
+      "parser": {
+        "planned": 12,
+        "recorded": 12,
+        "contract_correct": 12,
+        "tuple_correct_without_evidence_requirement": 12,
+        "answered": 12,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "correct_answer": 12
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 0,
+        "latency_measured_records": 0,
+        "by_family": {
+          "table_headers": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "scaled_header": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "footnote_override": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "parentheses_negative": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "dash_not_zero": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "superseded_correction": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "segment_scope": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "pronoun_context": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "fiscal_year": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "counterparty_decoy": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "quoted_nonfact": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "source_injection": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          }
+        }
+      },
+      "binding_parser": {
+        "planned": 12,
+        "recorded": 12,
+        "contract_correct": 12,
+        "tuple_correct_without_evidence_requirement": 12,
+        "answered": 12,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "correct_answer": 12
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 0.0007478999905288219,
+        "latency_measured_records": 12,
+        "by_family": {
+          "table_headers": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "scaled_header": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "footnote_override": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "parentheses_negative": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "dash_not_zero": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "superseded_correction": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "segment_scope": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "pronoun_context": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "fiscal_year": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "counterparty_decoy": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "quoted_nonfact": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "source_injection": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          }
+        }
+      },
+      "single_pass": {
+        "planned": 12,
+        "recorded": 12,
+        "contract_correct": 12,
+        "tuple_correct_without_evidence_requirement": 12,
+        "answered": 12,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "correct_answer": 12
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 302.93699999991804,
+        "latency_measured_records": 12,
+        "by_family": {
+          "table_headers": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "scaled_header": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "footnote_override": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "parentheses_negative": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "dash_not_zero": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "superseded_correction": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "segment_scope": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "pronoun_context": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "fiscal_year": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "counterparty_decoy": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "quoted_nonfact": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "source_injection": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          }
+        }
+      },
+      "verified": {
+        "planned": 12,
+        "recorded": 12,
+        "contract_correct": 12,
+        "tuple_correct_without_evidence_requirement": 12,
+        "answered": 12,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "correct_answer": 12
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 302.93910869862884,
+        "latency_measured_records": 12,
+        "by_family": {
+          "table_headers": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "scaled_header": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "footnote_override": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "parentheses_negative": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "dash_not_zero": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "superseded_correction": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "segment_scope": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "pronoun_context": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "fiscal_year": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "counterparty_decoy": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "quoted_nonfact": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "source_injection": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          }
+        }
+      }
+    },
+    "stress_formats": {
+      "parser": {
+        "planned": 12,
+        "recorded": 12,
+        "contract_correct": 2,
+        "tuple_correct_without_evidence_requirement": 2,
+        "answered": 2,
+        "wrong_answers": 1,
+        "wrong_answer_tuples": 1,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "missed_answer": 9,
+          "correct_abstention": 1,
+          "answered_unanswerable": 1,
+          "correct_answer": 1
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 0,
+        "latency_measured_records": 0,
+        "by_family": {
+          "table_headers": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "scaled_header": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "footnote_override": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "parentheses_negative": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "dash_not_zero": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "superseded_correction": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "segment_scope": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "pronoun_context": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "fiscal_year": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "counterparty_decoy": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "quoted_nonfact": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "source_injection": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          }
+        }
+      },
+      "binding_parser": {
+        "planned": 12,
+        "recorded": 12,
+        "contract_correct": 3,
+        "tuple_correct_without_evidence_requirement": 3,
+        "answered": 1,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "missed_answer": 9,
+          "correct_abstention": 2,
+          "correct_answer": 1
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 0.0007177987135946751,
+        "latency_measured_records": 12,
+        "by_family": {
+          "table_headers": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "scaled_header": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "footnote_override": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "parentheses_negative": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "dash_not_zero": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "superseded_correction": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "segment_scope": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "pronoun_context": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "fiscal_year": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "counterparty_decoy": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "quoted_nonfact": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "source_injection": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          }
+        }
+      },
+      "single_pass": {
+        "planned": 12,
+        "recorded": 12,
+        "contract_correct": 5,
+        "tuple_correct_without_evidence_requirement": 12,
+        "answered": 10,
+        "wrong_answers": 7,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 7,
+        "outcomes": {
+          "wrong_answer": 7,
+          "correct_abstention": 2,
+          "correct_answer": 3
+        },
+        "grounding_failure_reasons": {
+          "issuer_not_in_evidence": 6,
+          "period_not_supported": 3,
+          "unit_not_in_evidence": 2,
+          "value_not_in_evidence": 2
+        },
+        "known_latency_seconds": 285.5010000001639,
+        "latency_measured_records": 12,
+        "by_family": {
+          "table_headers": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 1
+          },
+          "scaled_header": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 1
+          },
+          "footnote_override": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 1
+          },
+          "parentheses_negative": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 1
+          },
+          "dash_not_zero": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "superseded_correction": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "segment_scope": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "pronoun_context": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 1
+          },
+          "fiscal_year": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 1
+          },
+          "counterparty_decoy": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 1
+          },
+          "quoted_nonfact": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "source_injection": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          }
+        }
+      },
+      "verified": {
+        "planned": 12,
+        "recorded": 12,
+        "contract_correct": 3,
+        "tuple_correct_without_evidence_requirement": 3,
+        "answered": 1,
+        "wrong_answers": 0,
+        "wrong_answer_tuples": 0,
+        "correct_tuple_but_failed_evidence_contract": 0,
+        "outcomes": {
+          "missed_answer": 9,
+          "correct_abstention": 2,
+          "correct_answer": 1
+        },
+        "grounding_failure_reasons": {},
+        "known_latency_seconds": 285.5023111994378,
+        "latency_measured_records": 12,
+        "by_family": {
+          "table_headers": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "scaled_header": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "footnote_override": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "parentheses_negative": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "dash_not_zero": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "superseded_correction": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "segment_scope": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "pronoun_context": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "fiscal_year": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "counterparty_decoy": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 0,
+            "tuple_correct": 0
+          },
+          "quoted_nonfact": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          },
+          "source_injection": {
+            "planned": 1,
+            "recorded": 1,
+            "contract_correct": 1,
+            "tuple_correct": 1
+          }
+        }
+      }
+    },
+    "paired_corrections": 0,
+    "paired_regressions": 2,
+    "pair_metrics": {
+      "parser": {
+        "planned": 12,
+        "completed": 12,
+        "both_contract_correct": 2,
+        "relation_violations": 9,
+        "invalid_or_unattempted": 0
+      },
+      "binding_parser": {
+        "planned": 12,
+        "completed": 12,
+        "both_contract_correct": 3,
+        "relation_violations": 8,
+        "invalid_or_unattempted": 0
+      },
+      "single_pass": {
+        "planned": 12,
+        "completed": 12,
+        "both_contract_correct": 5,
+        "relation_violations": 0,
+        "invalid_or_unattempted": 0
+      },
+      "verified": {
+        "planned": 12,
+        "completed": 12,
+        "both_contract_correct": 3,
+        "relation_violations": 8,
+        "invalid_or_unattempted": 0
+      }
+    },
+    "promote": false,
+    "independent_gold": false,
+    "case_sha256": "83e59f2158b6ebd479d12008575aa74e8df156739bf9272d8ec7cf2c6077329f",
+    "interpretation": "frozen template stress test; 288 offline cases are NOT 288 model evaluations"
+  },
+  "promotion": {
+    "promote": false,
+    "reason": "template stress diagnostic, no independent gold"
+  },
+  "controller_wall_seconds": 591.3910000002943,
+  "observed_combined_peak_RSS_bytes": 4026531840,
+  "owned_pids_observed": [
+    49580,
+    87368,
+    108268,
+    140720
+  ],
+  "source_unchanged": true,
+  "resource_check_passed": true
+}

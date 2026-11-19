@@ -38,6 +38,9 @@ the invented evaluation cases, with higher cost. The judge remains nondefault.
 On a fresh 24-case grammar-controlled robustness run, deterministic verification
 improved raw output from 21 to 24 correct outcomes—but a stronger parser also scored
 24/24 without model cost. No real-data accuracy or model increment is established.
+The harder audit exposed the limit: on twelve out-of-grammar model cases, tuples
+matched 12/12 but full evidence passed 5/12; the current verifier passed 3/12.
+These authored tests identify an evidence/format bottleneck, not real-world accuracy.
 
 ## The question
 
