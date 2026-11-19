@@ -28,8 +28,12 @@ The [harder format audit](FOCUSED_READER.md#observed-harder-audit-the-old-perfec
 completed with unchanged implementations: 288 deterministic cases plus 24 model
 cases. On twelve stress cases, raw LLM tuples matched 12/12 but full evidence passed
 5/12; the current verifier passed 3/12. The earlier perfect score was grammar-specific.
-No verifier/judge promotion; linked multi-span evidence is a proposed next design,
-not an implemented or empirically validated fix.
+No verifier/judge promotion came from that audit; the separately versioned linked
+evidence work below is not independently validated on real sources.
+The next user-approved candidate is now being implemented/frozen as
+[linked-evidence-v1](FOCUSED_READER.md#linked-evidence-improvement-a-new-explicit-contract-not-regraded-old-scores):
+exact-offset source roles and structural bindings, with old scores retained and
+a separately scored fresh challenge. No independent real-source gold is implied.
 
 ## What exists, and what it establishes
 

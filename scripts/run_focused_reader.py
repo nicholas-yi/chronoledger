@@ -31,6 +31,15 @@ from asof.focused_reader import (
     summarize,
     verified_error_bank,
 )
+from asof.linked_reader import (
+    LinkedResult,
+    challenge_cases,
+    complete_evidence,
+    development_replay,
+    linked_parser,
+    result_record,
+    summarize_challenge,
+)
 from asof.local_model_runtime import RuntimePolicy, launch_owned_server, verify_supported_package
 from asof.reader_real2_guards import input_fit, truncation_reason
 from asof.reader_stress import audit_cases, build_fixture, model_summary, offline_baselines
@@ -64,24 +73,29 @@ V1_FROZEN = FROZEN
 def select_version(version: str) -> None:
     """Explicit run selection; never recycle the stopped v1 output or attempt marker."""
     global PLAN, REPORT, PRIVATE, FROZEN, FIXTURE
-    if version not in ("v1", "v2", "verifier", "stress"):
+    if version not in ("v1", "v2", "verifier", "stress", "linked"):
         raise ValueError("unknown focused reader version")
     FIXTURE = ROOT / "tests" / "fixtures" / "focused_reader.json"
-    if version in ("verifier", "stress"):
-        stem = "reader_stress" if version == "stress" else "verified_reader"
+    if version in ("verifier", "stress", "linked"):
+        stem = {"stress": "reader_stress", "verifier": "verified_reader", "linked": "linked_reader"}[version]
+        fixture_name = "linked_challenge" if version == "linked" else stem
         PLAN = ROOT / "results" / f"{stem}_plan.json"
         REPORT = ROOT / "results" / f"{stem}.json"
         PRIVATE = ROOT / "data" / f"{stem}_v1"
-        FIXTURE = ROOT / "tests" / "fixtures" / f"{stem}.json"
+        FIXTURE = ROOT / "tests" / "fixtures" / f"{fixture_name}.json"
         FROZEN = tuple(
             f"results/{stem}_plan.json" if path == "results/focused_reader_plan.json"
-            else f"tests/fixtures/{stem}.json" if path == "tests/fixtures/focused_reader.json"
+            else f"tests/fixtures/{fixture_name}.json" if path == "tests/fixtures/focused_reader.json"
             else path for path in V1_FROZEN)
         FROZEN = (*FROZEN, "src/asof/verified_reader.py", "tests/test_verified_reader.py",
                   "results/focused_reader.json", "results/focused_reader_v2.json")
         if version == "stress":
             FROZEN = (*FROZEN, "src/asof/reader_stress.py", "tests/test_reader_stress.py",
                       "results/verified_reader.json")
+        elif version == "linked":
+            FROZEN = (*FROZEN, "src/asof/linked_reader.py", "tests/test_linked_reader.py",
+                      "src/asof/reader_stress.py", "tests/fixtures/reader_stress.json",
+                      "results/reader_stress.json", "results/verified_reader.json")
         return
     suffix = "_v2" if version == "v2" else ""
     PLAN = ROOT / "results" / f"focused_reader{suffix}_plan.json"
@@ -100,6 +114,8 @@ def load_cases(path: Path) -> tuple[Case, ...]:
         return load_robustness_cases(raw)
     if path.name == "reader_stress.json":
         return audit_cases(build_fixture(raw))
+    if path.name == "linked_challenge.json":
+        return challenge_cases(raw)
     if set(raw) != {"development", "evaluation"} or any(len(rows) != 6 for rows in raw.values()):
         raise ValueError("exactly six development and six evaluation invented fixtures required")
     cases = tuple(Case(**{
@@ -148,6 +164,11 @@ def validate_plan(plan: dict) -> None:
         fixed["options"]["seed"] = 202611190824
         fixed["offline_cases"] = 288
         fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
+    elif plan.get("study") == "CL-FOCUS-LINKED-01":
+        fixed["case_count"] = fixed["max_calls"] = 24
+        fixed["options"]["seed"] = 202611190926
+        fixed["evidence_contract"] = "linked-evidence-v1"
+        fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
     elif plan.get("study") != "CL-FOCUS-LAAJ-01":
         raise ValueError("unknown focused reader study")
     if plan != fixed:
@@ -171,9 +192,10 @@ def worker(plan: dict, channel) -> None:
     if plan["study"] == "CL-FOCUS-LAAJ-02":
         select_version("v2")  # Spawned workers do not inherit CLI module-global selection.
     stress = plan["study"] == "CL-FOCUS-STRESS-01"
-    verified = plan["study"] in ("CL-FOCUS-VERIFY-01", "CL-FOCUS-STRESS-01")
+    linked_mode = plan["study"] == "CL-FOCUS-LINKED-01"
+    verified = plan["study"] in ("CL-FOCUS-VERIFY-01", "CL-FOCUS-STRESS-01", "CL-FOCUS-LINKED-01")
     if verified:
-        select_version("stress" if stress else "verifier")
+        select_version("linked" if linked_mode else "stress" if stress else "verifier")
     server = None
     records: dict[str, dict] = {}
     calls = []
@@ -197,6 +219,11 @@ def worker(plan: dict, channel) -> None:
         if stress:
             offline = offline_baselines(build_fixture(json.loads(FIXTURE.read_bytes())))
             checkpoint("offline_288_baselines_complete")
+        elif linked_mode:
+            offline = development_replay(
+                json.loads((ROOT / "tests" / "fixtures" / "reader_stress.json").read_bytes()),
+                json.loads((ROOT / "results" / "reader_stress.json").read_bytes()))
+            checkpoint("posthoc_development_replay_complete")
         executable = shutil.which("ollama")
         if executable is None:
             raise FileNotFoundError("existing Ollama executable absent; no install or pull")
@@ -274,7 +301,7 @@ def worker(plan: dict, channel) -> None:
                 write_receipt(PRIVATE / f"call_{attempt['call_id']:02d}.json",
                               {"attempt": attempt, "response": raw})
                 issue = truncation_reason(raw, body["options"])
-                output_limited = stress and issue == "output_token_limit_or_truncation"
+                output_limited = (stress or linked_mode) and issue == "output_token_limit_or_truncation"
                 if (issue and not output_limited) or raw.get("done") is not True:
                     attempt["status"] = "truncated_or_incomplete"
                     checkpoint("invalid_complete_response")
@@ -377,6 +404,24 @@ def worker(plan: dict, channel) -> None:
                         "verification_seconds": verify_seconds,
                         "generated_tokens": cost["generated_tokens"],
                         "same_initial_generation_as_single_pass": True}
+                    if linked_mode:
+                        before = time.perf_counter()
+                        source_result = linked_parser(case)
+                        source_seconds = time.perf_counter()-before
+                        before = time.perf_counter()
+                        completed = (LinkedResult(None, None, "invalid_response", ("output_truncated",))
+                                     if cost["status"] == "output_truncated_invalid_case"
+                                     else complete_evidence(case, text))
+                        linked_seconds = time.perf_counter()-before
+                        records[case.id]["linked_parser"] = {
+                            **result_record(case, source_result), "latency_seconds": source_seconds,
+                            "generated_tokens": 0}
+                        records[case.id]["linked"] = {
+                            **result_record(case, completed),
+                            "latency_seconds": cost["latency_seconds"]+linked_seconds,
+                            "evidence_completion_seconds": linked_seconds,
+                            "generated_tokens": cost["generated_tokens"],
+                            "same_initial_generation_as_single_pass": True}
                     write_receipt(PRIVATE / f"case_{case.id}.json", records[case.id])
                     checkpoint("verifier_case_complete")
                     continue
@@ -506,7 +551,11 @@ def run() -> int:
                 channel.close()
     cases = load_cases(FIXTURE)
     report["records"] = account_incomplete_attempts(cases, report["records"], report["calls"])
-    if plan["study"] == "CL-FOCUS-STRESS-01":
+    if plan["study"] == "CL-FOCUS-LINKED-01":
+        report["summary"] = summarize_challenge(cases, report["records"])
+        report["development_replay"] = report.pop("offline_baselines", None)
+        report["promotion"] = {"promote": False, "reason": "new evidence contract on authored cases; no real gold"}
+    elif plan["study"] == "CL-FOCUS-STRESS-01":
         report["summary"] = model_summary(cases, report["records"])
         report["promotion"] = {"promote": False, "reason": "template stress diagnostic, no independent gold"}
     elif plan["study"] == "CL-FOCUS-VERIFY-01":
@@ -538,7 +587,7 @@ def run() -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--execute", action="store_true")
-    parser.add_argument("--version", choices=("v1", "v2", "verifier", "stress"), default="v1")
+    parser.add_argument("--version", choices=("v1", "v2", "verifier", "stress", "linked"), default="v1")
     args = parser.parse_args(argv)
     if not args.execute:
         parser.error("--execute required for the single frozen local-model experiment")

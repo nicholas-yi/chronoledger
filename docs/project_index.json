@@ -16,6 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "linked-reader", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_linked_challenge", "command": null},
     {"id": "reader-stress", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-review-packet", "path": "scripts/prepare_reader_review.py", "status": "private_packet_prepared_reviews_unassigned", "command": null},

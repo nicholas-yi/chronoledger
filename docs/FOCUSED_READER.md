@@ -714,3 +714,94 @@ weights trained, experiment retried or push performed.
 The independently reviewable private packet remains unlabelled, with reviewers unassigned.
 Software validation retains the disclosed full-suite timing-test failure and isolated
 recheck; a clean full regression result is not claimed for this batch.
+
+## Linked-evidence improvement: a new explicit contract, not regraded old scores
+
+The user requested the evidence improvements and best supported scoring on
+2026-11-19. [`asof.linked_reader`](../src/asof/linked_reader.py) adds
+`linked-evidence-v1`. The old single-quote scorer, old parser/verifier implementations,
+generator prompt and all old results remain unchanged.
+
+A positive result now carries a source SHA-256 and exact character-offset spans for
+**value, metric, entity, unit and reporting year**, with scope, sign-convention,
+footnote applicability and correction/supersession spans where applicable.
+Evidence can cross a value cell, its year/header, a unit caption and its own footnote.
+It is not enough for those words to occur somewhere in the document:
+
+- Markdown year columns select their own value cells; row/selected-column units
+  override declared defaults only when compatible.
+- A row footnote must have the same marker and target metric. Missing/mismatched
+  notes and contradictory row/column units make the query unavailable.
+- Only explicit topic headings or named/first-person subjects establish entity
+  context. A later different-company heading cannot inherit the earlier issuer.
+- Prose period bindings are local; a publication year is not a reporting year.
+- Parentheses need an explicit negative convention in prose; financial table
+  amounts use the declared table convention unless source text contradicts it.
+  Irregular comma grouping or double signs are rejected.
+- Explicit same-query corrections supersede an original only with source priority
+  evidence. Two unresolved correction values or unranked competing facts abstain.
+- Marked fictional quotations and explicit source-instruction regions cannot supply
+  facts, footnotes, sign rules or supersession evidence.
+
+The validator recomputes the canonical source-bound relation and checks every span,
+query identity and source hash. Changing a value, year, unit, entity, role/offset or
+link path cannot manufacture an accepted proof. Construction/validation share these
+deterministic rules; **they are not independent semantic adjudicators**.
+This is a finite supported prose/Markdown grammar over at most 8,192 source characters,
+not arbitrary financial entailment, an HTML/layout parser or XBRL conformance.
+The existing float-based table baseline is preserved; exact Decimal amounts and
+offset/footnote binding require this separate path rather than silently changing it.
+
+### Same model output, explicit evidence completion
+
+The model still emits the existing value/unit/year and original quote.
+Completion requires that quote to occur in the source and seed at least one linked
+component, and the explicit value/year/unit must match a unique bound fact.
+Only a blank unit can be filled from that fact; an explicit wrong tuple or fabricated
+quote is refused. Original citations and parsed/raw scores remain separate.
+Supported abstentions are not replaced with numbers just to improve coverage.
+
+`linked_parser` supplies a strong **no-model control** using the same source rules.
+If it matches model-assisted scores, do not attribute its deterministic capability
+to the LLM. A full linked score means both the authored tuple/refusal and the new
+source-proof contract pass; it is **not the original single-sentence score renamed**.
+Answerable and unanswerable counts are reported separately to expose abstain-all behavior.
+
+### Development exposure versus fresh challenge
+
+Development has already inspected the earlier 288-case format suite and 24 saved
+parsed model outputs. The initial prototype replay reached 288/288 deterministic
+and 24/24 completed saved outputs under the **new** contract, versus 17/24 raw
+original-contract outcomes. This was an exposed, posthoc engineering diagnostic,
+not an independent gain, new model run, original-score replacement or release criterion.
+The final frozen replay will be recorded separately in the new receipt.
+
+The [new 24-case challenge](../tests/fixtures/linked_challenge.json) contains twelve
+paired supported/insufficient-or-conflicting cases: swapped year columns, row/column
+units, row-specific footnotes, entity resets, competing corrections, consolidated
+scope, sign conventions, unrelated unit mentions, publication dates, instruction-only
+footnotes and duplicate facts. Positive/negative counts are 12/12.
+These cases were authored with the design known; they are not secret or independent
+human gold. Tests reject tampered and cross-context proofs and changing expected
+labels cannot alter construction/completion.
+
+The [plan](../results/linked_reader_plan.json), code, prompts, challenge, posthoc-replay
+inputs and this contract are committed before new generation.
+New private/public paths are `data/linked_reader_v1` and `results/linked_reader.json`;
+all four earlier model results are hash-pinned and retained.
+At most 24 generation calls, no critic/retry/training, same 20 minutes, one CPU,
+no GPU/cloud/pulls and 6-GiB resource contract; seed 202611190926.
+Output-token failures count invalid without salvage/retry; unsafe input/transport/
+scope/resource failures still stop. No post-challenge retuning or automatic promotion.
+
+Independent real-source reviewers remain unassigned and no new private source
+window, fundamental outcome, price, production ledger row or held material is
+accessed by this synthetic/model task. No public raw-source release, push or claim
+that a high synthetic score establishes real-world accuracy.
+
+Pre-inference validation for the linked version: **692 tests passed in 106.79 s**,
+with two existing synthetic rank-deficiency warnings; Ruff and documentation/index
+checks passed. This includes source-role tampering, cross-entity/year/unit/footnote
+substitution, missing sign conventions, unranked corrections, unsupported trailing
+scope qualifiers and no-gold construction tests. The older timing-test failure
+remains part of its prior run history; no rate code or old test threshold was changed.
