@@ -989,3 +989,102 @@ index checks passed. The Pylance reference request timed out; no editor type-che
 success is claimed. The deterministic development check was old linked parser
 21/24 versus guarded parser 24/24 under the common field contract; those authored
 sources and expected labels were visible during development, before model execution.
+
+## Observed field comparison: complete positive records; fallback still adds a failure
+
+The [actual receipt](../results/reader_fields.json) records the single run frozen at
+`f252a592149bdf57f1970cb4e6a0330afa6c926f`. It completed all 24 initial calls in
+**776.922 seconds (12.95 minutes)**, without judge, revision, retry or output
+truncation. There were 23 schema-valid responses and one schema-invalid response.
+No candidate, scorer or fixture was changed after generation.
+
+All four rows below use **the same new inputs and `field-record-v1` endpoint**:
+
+| Arm | Correct outcomes / 24 | Complete positive records / 12 | Correct negative refusals / 12 | Wrong emitted records |
+|---|---:|---:|---:|---:|
+| Old linked parser | 21 | 11 | 10 | 2 |
+| Old model-output evidence completion | 20 | 9 | 11 | 0 |
+| New guarded source parser, no model | **24** | **12** | **12** | **0** |
+| New parser-first + model fallback | **23** | **12** | **11** | **0** |
+
+This is not a regrading of the five historical runs. The new primary endpoint
+includes the additional context requirements, and the annual query is explicit.
+The new source parser achieved 100% answer precision and correct-answer coverage
+on this authored sample, not established real-world accuracy.
+
+### Actual field checks: known values versus unknown/not-applicable targets
+
+Both new paths passed all thirteen field checks on every positive case: **156/156
+field checks**, of which **112** had known-valued targets and **44** were explicitly
+unknown or not applicable (40 unknown context targets; four nonmonetary currency/
+scale targets). These are correlated checks on twelve records, not 156 independent
+facts. Issuer/metric identities were supplied queries; source association, not
+independent entity/concept discovery, was tested.
+
+| Field | Correct on all positive cases | Known-valued targets correct |
+|---|---:|---:|
+| Value, sign, measure, reporting year, issuer binding, metric binding, source evidence (each) | 12/12 | 12/12 each |
+| Currency, scale (each) | 12/12 | 10/10 each |
+| Scope | 12/12 | 2/2 |
+| Accounting basis | 12/12 | 2/2 |
+| Fiscal/calendar period kind | 12/12 | 3/3 |
+| Revision status | 12/12 | 1/1 |
+
+The tiny known-context denominators are a limitation, not evidence that these
+dimensions are solved. We still do not extract complete filing schemas, arbitrary
+period endpoints or every possible unit/definition.
+
+### What improved, and what remains wrong
+
+- The old source parser accepted the quarterly F03-1 amount as annual and matched
+  GAAP inside the non-GAAP F05-1 definition. The separate candidate refused both.
+  Its bounded per-share proof also answered F12-0, which the old grammar missed.
+- The raw model unnecessarily refused F02-0, claiming it needed an exchange rate
+  to convert the explicitly selected EUR-thousand column to a USD-million default.
+  The parser-first answer used the column's stated units without conversion.
+- F04-0's raw model returned `billion USD` rather than the stated `USD billion`.
+  The old completion rejected that explicit noncanonical unit rather than rewriting
+  it. Parser-first selected its own correctly bound source record. This does not
+  establish that unit-word-order normalization is economically unsafe; it documents
+  a remaining limitation of the old canonical-unit contract.
+- F12-0's raw model tuple was correct, but the old source validator did not support
+  that per-share grammar. The new independent source route supplied the qualified proof.
+- **F06-1 remained invalid in the model-fallback path.** The source had two unranked
+  corrections; the raw response violated the answer schema. It was not converted
+  into a successful abstention. The no-model parser correctly refused the ambiguity.
+
+All twelve positive records were selected by the source parser, while two explicit
+context failures took the source-refusal route. Ten remaining cases used model
+fallback: nine correct refusals and one invalid output, **zero added positive
+completions**. For this bounded contract the guarded no-model control did better.
+There is no evidence here that adding a judge, larger model or more retries is the
+next useful step. Keep that conclusion local to this grammar and exposed sample.
+
+### Runtime, provenance and remaining gates
+
+The paired audit actually made **24 model calls** and generated 1,366 unique output
+tokens. The parser-first route would have required ten calls on these same inputs:
+that is a **counterfactual**, not an observed ten-call deployment.
+Summed selected-route time was about 243.623 s versus 769.628 s for the old model
+completion, excluding unused paired generations and startup; these are not
+end-to-end deployment wall-time measurements. Measured guarded-parser computation
+over the challenge totalled about 0.0229 s.
+
+Observed peak combined working set was **3,929,235,456 bytes (3.66 GiB)**.
+One CPU, source/resource checks and worker exit 0 passed. All four sampled owned
+PIDs were confirmed absent, port 11435 closed and the preexisting shared server
+remained present. All 96 serialized arm records were reconstructed and rescored
+without changing the saved receipt; all five historical result hashes matched.
+The production ledger was checked by file-size metadata only (106,246 bytes);
+no row was appended and no ledger content was opened.
+
+The 700-test, Ruff and documentation checks recorded above preceded generation.
+Only result/navigation/documentation edits followed it. No model rerun, source
+retuning, real-source/private-review read, financial study, download, training,
+default promotion or push occurred.
+
+**Independent source review is still blocked:** no actual human labels were
+supplied. The existing twelve-window preparation receipt is not a completed review,
+and its narrow blank forms cannot establish the expanded context gold without
+additional annotations. Human first passes and adjudication remain a user/independent
+reviewer action; they have not been fabricated or silently counted as done.

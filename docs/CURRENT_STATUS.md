@@ -10,11 +10,13 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: the [linked-evidence challenge](FOCUSED_READER.md#observed-linked-challenge-2324-completed-2424-deterministic-control)
-completed **23/24 model-assisted and 24/24 no-model** outcomes under a new
-source-bound evidence contract, including all twelve negative controls. One false
-model abstention remained. This is a bounded authored challenge, not independent
-real financial gold, old-score regrading or automatic production promotion.
+Latest: the [field-record comparison](FOCUSED_READER.md#observed-field-comparison-complete-positive-records-fallback-still-adds-a-failure)
+completed **24/24 guarded-parser and 23/24 parser-first-plus-fallback** outcomes.
+Both new paths completed all twelve positive records: 112/112 known-valued field
+checks plus 44/44 unknown/not-applicable targets. One malformed negative model
+fallback remained invalid. All arms used identical inputs and a common new
+field-record endpoint; historical scores remain immutable. This authored,
+development-exposed sample is not independent real gold or production promotion.
 
 | Retained comparison | Scoped outcome |
 |---|---|
@@ -23,6 +25,7 @@ real financial gold, old-score regrading or automatic production promotion.
 | [Grammar robustness](FOCUSED_READER.md#observed-verifier-only-result-and-private-review-preparation) | Verified and stronger parser both 24/24; no LLM increment |
 | [Harder formats](FOCUSED_READER.md#observed-harder-audit-the-old-perfect-score-was-format-specific) | Twelve stress tuples correct, only 5/12 fully cited; old verifier 3/12 |
 | [Linked evidence](FOCUSED_READER.md#observed-linked-challenge-2324-completed-2424-deterministic-control) | New contract 23/24, deterministic control 24/24; no real gold |
+| [Field records](FOCUSED_READER.md#observed-field-comparison-complete-positive-records-fallback-still-adds-a-failure) | Common-contract old parser 21/24, old completion 20/24, guarded parser 24/24, parser-first fallback 23/24 |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

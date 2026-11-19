@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "reader-fields", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_frozen_field_challenge", "command": null},
+    {"id": "reader-fields", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "linked-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-stress", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
@@ -38,6 +38,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "reader-fields",
+      "kind": "authored_common_contract_field_record_comparison",
+      "path": "results/reader_fields.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "f252a592149bdf57f1970cb4e6a0330afa6c926f",
+      "status": "complete_guarded24of24_parserfirst23of24_no_independent_gold",
+      "supersedes": []
+    },
     {
       "id": "linked-reader",
       "kind": "synthetic_linked_evidence_contract_challenge",
