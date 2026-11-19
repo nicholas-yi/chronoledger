@@ -1404,3 +1404,89 @@ spans or rationales filled. Their SHA-256 values were each
 `c7bbbeeb5d6187be4e80b49063bdbd40b1ab1a9eca20f668e872bd7108d6f38d`.
 Only those new blank forms and the public preparation receipt were read; no
 private packet excerpt or existing human form was opened.
+
+## Observed cell audit: coverage completed; model comparison stopped on first timeout
+
+The [original receipt](../results/reader_cell_selection.json) records the one attempt
+frozen at `6240bac79ba0792721138314f12915bb8e70efcb`.
+**The model comparison did not complete.** The first strict-tuple request
+(`CELL01-0`) timed out after **90.016 s**, before any valid model response or
+cell-selection request. Overall controller time was **117.578 s**.
+There was no retry, limit increase, alternate seed or model-output salvage.
+Thus no model cell-selection accuracy, improvement or speedup is established.
+The last completed model comparison remains the preceding 11/12 reliability result.
+
+### Actual expanded deterministic coverage
+
+The offline coverage completed before that model request:
+
+| Supported dimension | Correct known-valued positive targets |
+|---|---:|
+| Scope | **24/24** |
+| Accounting basis | **24/24** |
+| Fiscal/calendar period kind | **24/24** |
+| Original/correction status | **24/24** |
+| Value, sign, currency, scale, measure, reporting year, issuer binding, metric binding, source evidence (each) | **96/96** |
+
+All **192/192 outcomes** were correct: 96 complete positive records and 96 negative
+contrasts, zero wrong admitted records. Across positives, 960 known-valued field
+targets and 288 explicit unknown-context targets passed (1,248 correlated checks).
+The twelve new model-audit sources also received their source-control results:
+12/12 outcomes, six complete positives and six refusals, **not twelve model outputs**.
+The coverage was exactly revalidated from its frozen deterministic construction.
+
+This closes the tiny *known-target test-count* gap for the four supported context
+dimensions. It does **not** close the semantic-diversity or independently reviewed
+real-source gap: these are four author-visible template families with variants.
+Source-cell selection software tests exercise multiple years, exact bound units,
+foreign IDs, changed-source IDs, wrong-year rejection and preserved abstentions.
+Actual local-model benefit from those cells remains unmeasured.
+
+### Timeout accounting correction: original evidence preserved
+
+The original receipt retained the failed call and its elapsed time, but its arm
+summary incorrectly labelled all tuple cases unattempted: transport failed before
+an arm row was written. That reporting defect was fixed **after** the stopped run,
+with a regression test. The original receipt was not edited.
+
+The separate [posthoc accounting receipt](../results/reader_cell_selection_accounting.json)
+pins that original file and the accounting code, reconstructing:
+
+- strict tuple: **one invalid attempted response**, eleven unattempted cases;
+- cell selection: **zero attempted requests**, twelve unattempted cases;
+- known failed-call time 90.016 s; token telemetry **unknown**, never reported as zero.
+
+This is an accounting correction without new inference or changed acceptance
+criteria, not a result rerun or a claim that the model got zero answers correct.
+Future runner summaries retain incomplete attempts and their known costs directly.
+The original freeze's source/resource checks passed before any accounting edits.
+Only that reporting fix, its tests and result/documentation work followed execution;
+no extraction rule, candidate catalogue or fixture was tuned after seeing a result.
+
+### Verification, cleanup and remaining work
+
+Peak observed combined working set was **3,778,748,416 bytes (3.52 GiB)**.
+One CPU, source/resource checks and worker exit 0 passed. All four sampled owned
+PIDs were confirmed absent, port 11435 closed and the preexisting shared server
+remained present. All seven prior model-report hashes matched their frozen values.
+Ledger file-size metadata remained 106,246 bytes; no ledger content was opened or
+row added. No real-source packet, raw archive/parquet, study or model download was used.
+
+After the accounting fix, **38 affected tests passed in 16.61 s**, with Ruff and
+documentation/index checks passing. The full-suite attempt and two existing
+single-member Job failures remain disclosed above; no clean full regression or
+successful model comparison is claimed.
+
+**Engineering still outstanding:** diagnose the model transport/runtime timeout
+and complete a newly documented bounded comparison on an appropriate ready runtime;
+resolve the single-member Windows test/launcher interaction and obtain a clean
+full-suite run. This is not work that human labellers should have to fix, and it
+does not authorize raising resource limits or rerunning the retained attempt.
+
+**Human actions:** assign two authorized blind reviewers, complete the two existing
+base forms plus the two prepared supplemental context forms, and adjudicate
+disagreements as described in the [review runbook](#human-actions-still-required-source-review-runbook).
+If a window is insufficient, leave it unresolved; approve any additional eligible
+source context separately. Human gold remains zero until actual independent review
+and adjudication—not merely form validation—are complete.
+No push, holdout opening, source-access release or production promotion occurred.

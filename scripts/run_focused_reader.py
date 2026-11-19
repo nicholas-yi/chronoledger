@@ -43,6 +43,7 @@ from asof.linked_reader import (
 from asof.local_model_runtime import RuntimePolicy, launch_owned_server, verify_supported_package
 from asof.reader_cells import (
     Selection,
+    account_cell_attempts,
     audit_fixture,
     cell_messages,
     diagnostic,
@@ -742,7 +743,9 @@ def run() -> int:
     if plan["study"] not in ("CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01"):
         report["records"] = account_incomplete_attempts(cases, report["records"], report["calls"])
     if plan["study"] == "CL-FOCUS-CELLS-01":
-        report["summary"] = summarize_cells(cases, report["records"], audit_fixture()[1])
+        report["records"] = account_cell_attempts(
+            cases, report["records"], audit_fixture()[1], report["calls"])
+        report["summary"] = summarize_cells(cases, report["records"], audit_fixture()[1], report["calls"])
         report["promotion"] = {"promote": False, "reason": "source-assisted cell selection; no human gold"}
     elif plan["study"] == "CL-FOCUS-RELIABLE-01":
         report["summary"] = summarize_reliability(

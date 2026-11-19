@@ -31,11 +31,12 @@ the [curated index](docs/project_index.json) distinguishes historical, held and 
 **Active research is now deliberately narrow:** a
 [source-grounded metric reader with deterministic verification](docs/FOCUSED_READER.md).
 The broader quant toolkit is parked reference code, not nine validated trading models.
-Latest authored reliability audit: strict output shaping improved schema conformance
-from 10/12 to 12/12; qualified completion scored 11/12 versus the paired free
-baseline's 9/12. The source-gated no-model control scored 24/24 on the full cohort.
-One model wrong-year error remained and was refused, not repaired using labels.
-These are bounded author-visible tests, not all-field real-world accuracy.
+Expanded deterministic field coverage passed 192/192 authored cases, including
+24 known-valued targets each for scope, accounting basis, period kind and revision
+status. These are template variants, not independent real-source accuracy.
+The new source-cell model comparison stopped on its first request timeout; no new
+model accuracy is established. The last completed strict model comparison remains
+11/12. Independent human reviews are still needed; supplemental forms are prepared.
 The [retained comparisons and limitations](docs/FOCUSED_READER.md) include failed
 judge trials, format-shift failures and posthoc development replays. The judge
 remains nondefault, the broader toolkit stays parked, and independent real-source

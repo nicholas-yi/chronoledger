@@ -3,7 +3,15 @@ from dataclasses import replace
 
 from asof.focused_reader import Answer, Case
 from asof.linked_reader import LinkedResult
-from asof.reader_cells import catalog, cell_messages, diagnostic, select_cell, selection_schema
+from asof.reader_cells import (
+    account_cell_attempts,
+    catalog,
+    cell_messages,
+    diagnostic,
+    select_cell,
+    selection_schema,
+    summarize_cells,
+)
 from asof.reader_field_challenge import build_coverage, evaluate_coverage
 from asof.reader_fields import field_record
 
@@ -78,3 +86,22 @@ def test_known_dimension_coverage_has_24_positive_cases_and_separate_negative_pa
     assert report["negative_cases"] == 96
     assert not report["independent_gold"] and report["model_calls"] == 0
     assert report["summary"]["correct"] == 192, report["failures"]
+
+
+def test_started_transport_failures_are_invalid_not_zero_cost_unattempted_results():
+    case = item()
+    original = {}
+    calls = [{"case_id": case.id, "call_id": 1, "wire_contract": "structured_tuple",
+              "status": "transport_or_HTTP_failure", "latency_seconds": 90.01, "generated_tokens": None}]
+    records = account_cell_attempts((case,), original, {case.id: EMPTY}, calls)
+    assert original == {} and records[case.id]["structured_tuple"]["answer"] is None
+    summary = summarize_cells((case,), records, {case.id: EMPTY}, calls)
+    assert summary["arms"]["structured_tuple"]["outcomes"] == {"invalid_response": 1}
+    assert summary["arms"]["cell_selection"]["outcomes"] == {"not_attempted": 1}
+    info = summary["attempt_accounting"]["structured_tuple"]
+    assert info["known_call_seconds"] == 90.01 and info["attempted_calls"] == 1
+    assert info["missing_token_telemetry_attempts"] == 1
+    calls[0]["latency_seconds"] = None
+    records = account_cell_attempts((case,), original, {case.id: EMPTY}, calls)
+    summary = summarize_cells((case,), records, {case.id: EMPTY}, calls)
+    assert summary["attempt_accounting"]["structured_tuple"]["missing_latency_attempts"] == 1

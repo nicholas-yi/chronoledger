@@ -10,14 +10,15 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: the [paired reliability audit](FOCUSED_READER.md#observed-reliability-audit-valid-shapes-improve-wrong-year-reasoning-remains)
-completed **12/12 constrained schema-valid responses versus 10/12 free**.
-On the same twelve inputs, old/free completion scored 9/12, new/free 10/12,
-old/constrained 10/12 and new/constrained **11/12**. One substantive wrong-year
-model choice was rejected. The separate source-gated no-model control scored
-**24/24** on the full authored cohort (12/12 on the paired subset).
-No new extraction grammar or independent real-world accuracy was established;
-historical receipts and the human-review gate remain intact.
+Latest: [expanded coverage and source-cell selection](FOCUSED_READER.md#observed-cell-audit-coverage-completed-model-comparison-stopped-on-first-timeout)
+completed **192/192 deterministic authored outcomes**, with 24 known-positive
+targets each for scope, basis, period kind and revision status, plus separate
+negative contrasts. These are template variants, not independent semantic formats.
+The model comparison **stopped on its first 90-second request timeout**: zero valid
+outputs and no cell-selection request. The last completed model result remains
+11/12; the raw stopped receipt and separate posthoc attempt-accounting correction
+are both retained. Supplemental context-review forms are prepared, not labelled.
+The full suite also remains unclean/incomplete as documented; 38 affected tests pass.
 
 | Retained comparison | Scoped outcome |
 |---|---|
@@ -28,9 +29,13 @@ historical receipts and the human-review gate remain intact.
 | [Linked evidence](FOCUSED_READER.md#observed-linked-challenge-2324-completed-2424-deterministic-control) | New contract 23/24, deterministic control 24/24; no real gold |
 | [Field records](FOCUSED_READER.md#observed-field-comparison-complete-positive-records-fallback-still-adds-a-failure) | Common-contract old parser 21/24, old completion 20/24, guarded parser 24/24, parser-first fallback 23/24 |
 | [Reliability](FOCUSED_READER.md#observed-reliability-audit-valid-shapes-improve-wrong-year-reasoning-remains) | Paired schema 10/12 free vs 12/12 strict; completed records 9/12 baseline vs 11/12 new strict; source control 24/24 full cohort |
+| [Cells/context coverage](FOCUSED_READER.md#observed-cell-audit-coverage-completed-model-comparison-stopped-on-first-timeout) | Deterministic192/192; model comparison stopped first-call timeout; no model accuracy result |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.
+Two supplemental context forms (72 rows each) are also prepared. Follow the
+[human review runbook](FOCUSED_READER.md#human-actions-still-required-source-review-runbook);
+independent labels and adjudication cannot be automated into existence.
 
 ## What exists, and what it establishes
 

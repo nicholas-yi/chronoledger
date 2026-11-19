@@ -176,8 +176,37 @@ def diagnostic(case: Case, result: LinkedResult, raw_answer: Answer | None,
     }
 
 
-def summarize_cells(cases: tuple[Case, ...], records: dict, labels: dict) -> dict:
+def account_cell_attempts(cases: tuple[Case, ...], records: dict, labels: dict, calls: list[dict]) -> dict:
+    """A started request without an arm result is invalid, never silently unattempted."""
+    updated = {uid: arms.copy() for uid, arms in records.items()}
+    by_id = {case.id: case for case in cases}
+    for call in calls:
+        arm = {"structured_tuple": "structured_tuple", "bound_cell": "cell_selection"}.get(
+            call.get("wire_contract"))
+        if arm is None or call.get("case_id") not in by_id:
+            raise ValueError("unrecognized cell-audit call identity")
+        case = by_id[call["case_id"]]
+        rows = updated.setdefault(case.id, {})
+        if arm in rows:
+            continue
+        result = LinkedResult(None, None, "incomplete_attempt", (call["status"],))
+        rows[arm] = {
+            **field_record(case, result, labels[case.id]),
+            "call_id": call["call_id"], "response_status": call["status"],
+            "diagnostic": diagnostic(case, result, None, response_valid=False,
+                                     model_fields=arm == "structured_tuple", context=labels[case.id]),
+            "latency_measured": call.get("latency_seconds") is not None,
+        }
+        if call.get("latency_seconds") is not None:
+            rows[arm]["latency_seconds"] = call["latency_seconds"]
+    return updated
+
+
+def summarize_cells(cases: tuple[Case, ...], records: dict, labels: dict,
+                    calls: list[dict] | None = None) -> dict:
     result = summarize_fields(cases, records, labels, arm_names=ARMS)
+    for key in ("routes", "counterfactual_parser_first_model_calls", "paired_audit_calls_are_not_deployment_savings"):
+        result.pop(key)
     result["diagnostics"] = {
         arm: dict(Counter(records.get(case.id, {}).get(arm, {}).get(
             "diagnostic", {}).get("primary", "not_attempted") for case in cases))
@@ -186,6 +215,17 @@ def summarize_cells(cases: tuple[Case, ...], records: dict, labels: dict) -> dic
         "Model selects among already source-qualified period cells; not independent financial "
         "parsing or broader semantic discovery. Source control already resolves requested year.")
     result["independent_gold"] = result["promote"] = False
+    result["attempt_accounting"] = {}
+    for arm, wire in (("structured_tuple", "structured_tuple"), ("cell_selection", "bound_cell")):
+        attempts = [call for call in (calls or []) if call.get("wire_contract") == wire]
+        result["attempt_accounting"][arm] = {
+            "planned_calls": len(cases), "attempted_calls": len(attempts),
+            "statuses": dict(Counter(call["status"] for call in attempts)),
+            "known_call_seconds": sum(call["latency_seconds"] for call in attempts
+                                      if call.get("latency_seconds") is not None),
+            "missing_latency_attempts": sum(call.get("latency_seconds") is None for call in attempts),
+            "missing_token_telemetry_attempts": sum(call.get("generated_tokens") is None for call in attempts),
+        }
     return result
 
 

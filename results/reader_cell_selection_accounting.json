@@ -1,0 +1,434 @@
+{
+  "status": "posthoc_attempt_accounting_no_new_inference",
+  "original_receipt": "results/reader_cell_selection.json",
+  "original_receipt_sha256": "8367b709e6e007538a56c49cc23512497e5394f0374a9cf7fb1c7fd31c3868b9",
+  "original_freeze": "6240bac79ba0792721138314f12915bb8e70efcb",
+  "reason": "The original arm summary omitted the first started request because transport failed before an arm record. Preserve the receipt; count1invalidattemptand11unattemptedtuples,12unattemptedselections.",
+  "original_receipt_modified": false,
+  "new_model_calls": 0,
+  "scientific_score_changed": false,
+  "analysis_sources_sha256": {
+    "src/asof/reader_cells.py": "1e3babc16511bcb96238fa7cbdc69104532c44703b3492a548500e7aab2beb05",
+    "src/asof/reader_fields.py": "e5da9a2abf98819561255f543d4bbcf09c6912999be940ad361deb621008c1e3",
+    "src/asof/reader_field_challenge.py": "384c512732ebff3584720039e89dcffd07f7af90622f964021b41713b1b1418f"
+  },
+  "summary": {
+    "contract": "field-record-v1",
+    "arms": {
+      "structured_tuple": {
+        "contract": "field-record-v1",
+        "planned": 12,
+        "recorded": 1,
+        "correct": 0,
+        "answered": 0,
+        "correct_answers": 0,
+        "wrong_answers": 0,
+        "answer_precision": null,
+        "answerable_coverage": 0.0,
+        "negative_correct": 0,
+        "outcomes": {
+          "invalid_response": 1,
+          "not_attempted": 11
+        },
+        "fields": {
+          "value": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "sign": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "currency": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "scale": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "measure": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "reporting_year": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "issuer_binding": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "metric_binding": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "scope": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 0,
+            "known_value_correct": 0
+          },
+          "accounting_basis": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 0
+          },
+          "period_kind": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 0
+          },
+          "revision_status": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 0
+          },
+          "source_evidence": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          }
+        },
+        "selected_arm_seconds_excluding_unused_audit_generation_not_wall": 90.01599999982864
+      },
+      "cell_selection": {
+        "contract": "field-record-v1",
+        "planned": 12,
+        "recorded": 0,
+        "correct": 0,
+        "answered": 0,
+        "correct_answers": 0,
+        "wrong_answers": 0,
+        "answer_precision": null,
+        "answerable_coverage": 0.0,
+        "negative_correct": 0,
+        "outcomes": {
+          "not_attempted": 12
+        },
+        "fields": {
+          "value": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "sign": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "currency": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "scale": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "measure": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "reporting_year": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "issuer_binding": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "metric_binding": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          },
+          "scope": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 0,
+            "known_value_correct": 0
+          },
+          "accounting_basis": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 0
+          },
+          "period_kind": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 0
+          },
+          "revision_status": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 0
+          },
+          "source_evidence": {
+            "correct": 0,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 0
+          }
+        },
+        "selected_arm_seconds_excluding_unused_audit_generation_not_wall": 0
+      },
+      "source_control": {
+        "contract": "field-record-v1",
+        "planned": 12,
+        "recorded": 12,
+        "correct": 12,
+        "answered": 6,
+        "correct_answers": 6,
+        "wrong_answers": 0,
+        "answer_precision": 1.0,
+        "answerable_coverage": 1.0,
+        "negative_correct": 6,
+        "outcomes": {
+          "correct_answer": 6,
+          "correct_abstention": 6
+        },
+        "fields": {
+          "value": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "sign": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "currency": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "scale": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "measure": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "reporting_year": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "issuer_binding": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "metric_binding": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          },
+          "scope": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 0,
+            "known_value_correct": 0
+          },
+          "accounting_basis": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "period_kind": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "revision_status": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 1,
+            "known_value_correct": 1
+          },
+          "source_evidence": {
+            "correct": 6,
+            "planned_answerable": 6,
+            "known_value_planned": 6,
+            "known_value_correct": 6
+          }
+        },
+        "selected_arm_seconds_excluding_unused_audit_generation_not_wall": 0.10479090036824346
+      }
+    },
+    "planned_positive": 6,
+    "planned_negative": 6,
+    "independent_gold": false,
+    "promote": false,
+    "scope": "Model selects among already source-qualified period cells; not independent financial parsing or broader semantic discovery. Source control already resolves requested year.",
+    "independent_review": {
+      "status": "blocked_reviewers_unassigned",
+      "gold_labels": 0,
+      "full_field_review_requires_additional_context_annotations": true
+    },
+    "diagnostics": {
+      "structured_tuple": {
+        "invalid_response": 1,
+        "not_attempted": 11
+      },
+      "cell_selection": {
+        "not_attempted": 12
+      },
+      "source_control": {
+        "correct_answer": 6,
+        "correct_refusal": 6
+      }
+    },
+    "attempt_accounting": {
+      "structured_tuple": {
+        "planned_calls": 12,
+        "attempted_calls": 1,
+        "statuses": {
+          "transport_or_HTTP_failure": 1
+        },
+        "known_call_seconds": 90.01599999982864,
+        "missing_latency_attempts": 0,
+        "missing_token_telemetry_attempts": 1
+      },
+      "cell_selection": {
+        "planned_calls": 12,
+        "attempted_calls": 0,
+        "statuses": {},
+        "known_call_seconds": 0,
+        "missing_latency_attempts": 0,
+        "missing_token_telemetry_attempts": 0
+      }
+    }
+  },
+  "reconstructed_incomplete_attempt": {
+    "answer": null,
+    "bundle": null,
+    "context_spans": [],
+    "fields": null,
+    "field_states": {
+      "value": "unanswered",
+      "sign": "unanswered",
+      "currency": "unanswered",
+      "scale": "unanswered",
+      "measure": "unanswered",
+      "reporting_year": "unanswered",
+      "issuer_binding": "unanswered",
+      "metric_binding": "unanswered",
+      "scope": "unanswered",
+      "accounting_basis": "unanswered",
+      "period_kind": "unanswered",
+      "revision_status": "unanswered",
+      "source_evidence": "unanswered"
+    },
+    "score": {
+      "correct": false,
+      "answered": false,
+      "outcome": "invalid_response"
+    },
+    "field_correct": {
+      "value": false,
+      "sign": false,
+      "currency": false,
+      "scale": false,
+      "measure": false,
+      "reporting_year": false,
+      "issuer_binding": false,
+      "metric_binding": false,
+      "scope": false,
+      "accounting_basis": false,
+      "period_kind": false,
+      "revision_status": false,
+      "source_evidence": false
+    },
+    "status": "incomplete_attempt",
+    "reasons": [
+      "transport_or_HTTP_failure"
+    ],
+    "legacy_linked_score": {
+      "correct": false,
+      "outcome": "invalid_response",
+      "answered": false
+    },
+    "contract": "field-record-v1",
+    "call_id": 1,
+    "response_status": "transport_or_HTTP_failure",
+    "diagnostic": {
+      "primary": "invalid_response",
+      "raw_response_valid": false,
+      "raw_tuple_mismatches": [],
+      "raw_tuple_assessed": false,
+      "raw_field_correct": {},
+      "record_failed_fields": [
+        "value",
+        "sign",
+        "currency",
+        "scale",
+        "measure",
+        "reporting_year",
+        "issuer_binding",
+        "metric_binding",
+        "scope",
+        "accounting_basis",
+        "period_kind",
+        "revision_status",
+        "source_evidence"
+      ],
+      "source_qualified_for_query": true,
+      "record_failure_is_not_thirteen_independent_field_errors": true
+    },
+    "latency_measured": true,
+    "latency_seconds": 90.01599999982864
+  },
+  "independent_gold": false,
+  "promote": false
+}
