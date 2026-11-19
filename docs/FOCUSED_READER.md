@@ -525,3 +525,87 @@ perform two reviews, contact people, invent labels or declare agreement.
 The source windows are a selected prior exposed cohort and may be too narrow to
 establish identity/unit/year. Reviewers must use `insufficient_context` when necessary.
 No automatic promotion or economic claim follows from packet preparation.
+
+## Harder evaluation: format failure boundaries, not higher-looking scores
+
+The user selected **harder_evaluation** on 2026-11-19. The previous grammar-controlled
+24/24 must not be improved by adapting the same parser to another conveniently
+matching fixture. Instead, the parser, binder/verifier, generator prompt, answer
+schema and existing primary score remain **unchanged** for this new test.
+
+[`asof.reader_stress`](../src/asof/reader_stress.py) generates **288 invented cases
+in 144 pairs**, from a frozen [definition](../tests/fixtures/reader_stress.json).
+Twelve format families each have twelve numeric/name variants and two members:
+one canonical positive prose control, one stress variant. Thus 144 cases are
+controls and 144 are stress formats, not 288 hard real disclosures.
+
+Families: table-header units, scaled-unit headers, footnote unit overrides,
+parenthesized negatives, missing-value dashes versus zero, superseded corrections,
+consolidated/segment scope, pronoun/header entity context, noncalendar fiscal years,
+counterparty distractors, quoted nonfacts and malicious source instructions.
+These are authored semantic examples, not real financial outcomes or an independent
+natural-language gold set. Repeated template variants are not independent market
+observations and no binomial generalization claim will be made from their count.
+
+### Frozen audit allocation
+
+- Evaluate the two unchanged deterministic parsers on all 288 cases.
+- Choose exactly one complete pair per family by minimum SHA-256 of
+  `seed:pair_id`, seed `202611190824`, before any model result: **24 model cases**.
+  Selection does not depend on observed correctness, difficulty or a preferred score.
+- Initial generation only, no judge/revision/retry, at most 24 calls. The verified
+  arm consumes that exact same raw output. No automatic training/promotion.
+- Same model/digest, context/output limits, 20 minutes, one CPU, no GPU/cloud/pulls
+  and 6-GiB owned-process resource contract.
+- New [plan](../results/reader_stress_plan.json), result `results/reader_stress.json`
+  and ignored `data/reader_stress_v1`; preserve/hash all three old model results.
+
+The expansion is **288 deterministic cases plus a 24-case stratified model audit**,
+not 288 model generations. Runtime sampling/seed/code, prompts, metrics and allocation
+are committed before generation. The old simple/verified results are not overwritten.
+Another shared server/native process was observed before this task; it is unrelated
+to the new owned Job and must not be modified or stopped.
+
+### Scoring without hiding contract limitations
+
+Report control and stress strata separately, overall and by family:
+
+1. Original strict answer/evidence contract, with invalid/missing/abstained cases
+   retained in denominators.
+2. Exact authored value/unit/year tuple correctness **without** the evidence-occurrence
+   requirement, as a diagnostic only, never a replacement acceptance score.
+3. Answer coverage, wrong tuples, correct tuples failing evidence checks and specific
+   grounding failures.
+4. Both-correct pairs, relation violations and invalid/unattempted pairs.
+5. Same-output verified corrections/regressions and measured call/verification cost.
+
+Example: a correct negative value read from parentheses may fail the old literal
+minus-sign occurrence check. A correct pronoun-based answer can lack the issuer
+name in its single-sentence quote. Those failures must be distinguished from an
+incorrect financial tuple; neither diagnostic certifies general semantic truth.
+No scorer or verifier is loosened after seeing which cases fail.
+
+### Difficult output accounting
+
+For **this profile only**, a completed generation ending at its output-token limit
+counts as an invalid case and proceeds to the next frozen case, without retry.
+Neither model arm may parse or repair that truncated output, even if a partial JSON
+object happens to look usable. This measures bounded completion instead of allowing
+the first hard output to censor the entire format audit.
+Input truncation, missing input-fit/telemetry evidence, incomplete transport, HTTP/
+timeout, scope or resource failures still stop the run and retain partial receipts.
+The older profiles keep their original stop rules.
+
+This is a failure-discovery experiment, not a requirement to beat the previous
+24/24. Lower scores under realistic format shifts are useful evidence. Independent
+real-source review remains unassigned; this batch does not read or label the private
+review packet or manufacture the missing gold.
+
+Pre-execution validation: Ruff and documentation/index checks passed. The full
+684-test run had **683 passed and one failure** in the unchanged
+`test_serial_start_rate_and_duplicate_request_stop`: the mocked request gap was
+0.485 s against its 0.49 s assertion. The isolated timing test rerun together with
+the affected reader tests passed **21/21**. No request-rate implementation or
+threshold was changed, and no second clean full-suite result is claimed.
+The generator/scorer and binding-verifier files were byte-compared with the prior
+24-case run's recorded hashes and were unchanged before this harder execution.

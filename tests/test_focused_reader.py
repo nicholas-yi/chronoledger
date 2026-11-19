@@ -211,3 +211,15 @@ def test_verifier_run_has_fresh_pairs_and_no_room_for_judge_calls(runner):
     assert runner.REPORT.name == "verified_reader.json"
     assert "results/focused_reader_v2.json" in runner.FROZEN
     runner.select_version("v1")
+
+
+def test_stress_version_expands_offline_coverage_without_claiming_more_model_calls(runner):
+    runner.select_version("stress")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    values = runner.load_cases(runner.FIXTURE)
+    assert len(values) == plan["max_calls"] == 24
+    assert plan["offline_cases"] == 288 and len({case.category for case in values}) == 12
+    assert runner.REPORT.name == "reader_stress.json"
+    assert "results/verified_reader.json" in runner.FROZEN
+    runner.select_version("v1")

@@ -24,6 +24,9 @@ binding parser each 24/24 on authored grammar cases. Three corrections, zero reg
 The stronger parser matched the result without model cost; no LLM increment is established.
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.
+A new [harder format audit](FOCUSED_READER.md#harder-evaluation-format-failure-boundaries-not-higher-looking-scores)
+is being frozen: 288 deterministic cases, plus a separate balanced 24-case model
+audit, with existing implementations unchanged rather than optimized to the test.
 
 ## What exists, and what it establishes
 

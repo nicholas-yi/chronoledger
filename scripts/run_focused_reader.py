@@ -33,9 +33,11 @@ from asof.focused_reader import (
 )
 from asof.local_model_runtime import RuntimePolicy, launch_owned_server, verify_supported_package
 from asof.reader_real2_guards import input_fit, truncation_reason
+from asof.reader_stress import audit_cases, build_fixture, model_summary, offline_baselines
 from asof.runtime import THREAD_VARIABLES, WorkerJob, peak_rss_bytes, write_receipt
 from asof.runtime import frozen_receipt as committed_sources
 from asof.verified_reader import (
+    Verification,
     binding_parser,
     load_robustness_cases,
     summarize_robustness,
@@ -62,20 +64,24 @@ V1_FROZEN = FROZEN
 def select_version(version: str) -> None:
     """Explicit run selection; never recycle the stopped v1 output or attempt marker."""
     global PLAN, REPORT, PRIVATE, FROZEN, FIXTURE
-    if version not in ("v1", "v2", "verifier"):
+    if version not in ("v1", "v2", "verifier", "stress"):
         raise ValueError("unknown focused reader version")
     FIXTURE = ROOT / "tests" / "fixtures" / "focused_reader.json"
-    if version == "verifier":
-        PLAN = ROOT / "results" / "verified_reader_plan.json"
-        REPORT = ROOT / "results" / "verified_reader.json"
-        PRIVATE = ROOT / "data" / "verified_reader_v1"
-        FIXTURE = ROOT / "tests" / "fixtures" / "verified_reader.json"
+    if version in ("verifier", "stress"):
+        stem = "reader_stress" if version == "stress" else "verified_reader"
+        PLAN = ROOT / "results" / f"{stem}_plan.json"
+        REPORT = ROOT / "results" / f"{stem}.json"
+        PRIVATE = ROOT / "data" / f"{stem}_v1"
+        FIXTURE = ROOT / "tests" / "fixtures" / f"{stem}.json"
         FROZEN = tuple(
-            "results/verified_reader_plan.json" if path == "results/focused_reader_plan.json"
-            else "tests/fixtures/verified_reader.json" if path == "tests/fixtures/focused_reader.json"
+            f"results/{stem}_plan.json" if path == "results/focused_reader_plan.json"
+            else f"tests/fixtures/{stem}.json" if path == "tests/fixtures/focused_reader.json"
             else path for path in V1_FROZEN)
         FROZEN = (*FROZEN, "src/asof/verified_reader.py", "tests/test_verified_reader.py",
                   "results/focused_reader.json", "results/focused_reader_v2.json")
+        if version == "stress":
+            FROZEN = (*FROZEN, "src/asof/reader_stress.py", "tests/test_reader_stress.py",
+                      "results/verified_reader.json")
         return
     suffix = "_v2" if version == "v2" else ""
     PLAN = ROOT / "results" / f"focused_reader{suffix}_plan.json"
@@ -92,6 +98,8 @@ def load_cases(path: Path) -> tuple[Case, ...]:
     raw = json.loads(path.read_bytes())
     if path.name == "verified_reader.json":
         return load_robustness_cases(raw)
+    if path.name == "reader_stress.json":
+        return audit_cases(build_fixture(raw))
     if set(raw) != {"development", "evaluation"} or any(len(rows) != 6 for rows in raw.values()):
         raise ValueError("exactly six development and six evaluation invented fixtures required")
     cases = tuple(Case(**{
@@ -135,6 +143,11 @@ def validate_plan(plan: dict) -> None:
     elif plan.get("study") == "CL-FOCUS-VERIFY-01":
         fixed["case_count"] = fixed["max_calls"] = 24
         fixed["options"]["seed"] = 202611190752
+    elif plan.get("study") == "CL-FOCUS-STRESS-01":
+        fixed["case_count"] = fixed["max_calls"] = 24
+        fixed["options"]["seed"] = 202611190824
+        fixed["offline_cases"] = 288
+        fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
     elif plan.get("study") != "CL-FOCUS-LAAJ-01":
         raise ValueError("unknown focused reader study")
     if plan != fixed:
@@ -157,9 +170,10 @@ def worker(plan: dict, channel) -> None:
         raise RuntimeError("owned-process containment handshake required")
     if plan["study"] == "CL-FOCUS-LAAJ-02":
         select_version("v2")  # Spawned workers do not inherit CLI module-global selection.
-    verified = plan["study"] == "CL-FOCUS-VERIFY-01"
+    stress = plan["study"] == "CL-FOCUS-STRESS-01"
+    verified = plan["study"] in ("CL-FOCUS-VERIFY-01", "CL-FOCUS-STRESS-01")
     if verified:
-        select_version("verifier")
+        select_version("stress" if stress else "verifier")
     server = None
     records: dict[str, dict] = {}
     calls = []
@@ -167,6 +181,7 @@ def worker(plan: dict, channel) -> None:
     status, reason = "stopped", None
     started = time.monotonic()
     candidate = None
+    offline = None
     cases = load_cases(FIXTURE)
 
     def check_time() -> None:
@@ -175,9 +190,13 @@ def worker(plan: dict, channel) -> None:
 
     def checkpoint(stage: str) -> None:
         channel.send({"kind": "checkpoint", "records": records, "calls": calls,
-                      "judge_calibration": calibration, "phase": stage, "candidate": candidate})
+                      "judge_calibration": calibration, "phase": stage, "candidate": candidate,
+                      "offline_baselines": offline})
 
     try:
+        if stress:
+            offline = offline_baselines(build_fixture(json.loads(FIXTURE.read_bytes())))
+            checkpoint("offline_288_baselines_complete")
         executable = shutil.which("ollama")
         if executable is None:
             raise FileNotFoundError("existing Ollama executable absent; no install or pull")
@@ -255,23 +274,31 @@ def worker(plan: dict, channel) -> None:
                 write_receipt(PRIVATE / f"call_{attempt['call_id']:02d}.json",
                               {"attempt": attempt, "response": raw})
                 issue = truncation_reason(raw, body["options"])
-                if issue or raw.get("done") is not True:
+                output_limited = stress and issue == "output_token_limit_or_truncation"
+                if (issue and not output_limited) or raw.get("done") is not True:
                     attempt["status"] = "truncated_or_incomplete"
                     checkpoint("invalid_complete_response")
                     raise ValueError(f"generation incomplete:{issue}")
                 content = raw.get("message", {}).get("content")
                 if not isinstance(content, str) or not content.strip():
-                    attempt["status"] = "empty_visible_response"
-                    raise ValueError("model returned empty visible content")
-                try:
-                    if compact and stage == "judge":
-                        parsed = CompactCritique.model_validate_json(content).expanded()
+                    if output_limited:
+                        content = ""
                     else:
-                        parsed = (Critique if stage == "judge" else Answer).model_validate_json(content)
-                    attempt["status"] = "schema_valid"
-                except ValidationError:
+                        attempt["status"] = "empty_visible_response"
+                        raise ValueError("model returned empty visible content")
+                if output_limited:
                     parsed = None
-                    attempt["status"] = "schema_invalid"
+                    attempt["status"] = "output_truncated_invalid_case"
+                else:
+                    try:
+                        if compact and stage == "judge":
+                            parsed = CompactCritique.model_validate_json(content).expanded()
+                        else:
+                            parsed = (Critique if stage == "judge" else Answer).model_validate_json(content)
+                        attempt["status"] = "schema_valid"
+                    except ValidationError:
+                        parsed = None
+                        attempt["status"] = "schema_invalid"
                 model_state = client.get("/api/ps")
                 model_state.raise_for_status()
                 loaded = model_state.json().get("models", [])
@@ -335,7 +362,9 @@ def worker(plan: dict, channel) -> None:
                     stronger = binding_parser(case)
                     parser_seconds = time.perf_counter()-before
                     before = time.perf_counter()
-                    verification = verify_response(case, text)
+                    verification = (Verification(None, "invalid_response", ("output_truncated",))
+                                    if cost["status"] == "output_truncated_invalid_case"
+                                    else verify_response(case, text))
                     verify_seconds = time.perf_counter()-before
                     records[case.id]["binding_parser"] = {
                         "answer": stronger.model_dump(), "score": score(case, stronger),
@@ -383,7 +412,8 @@ def worker(plan: dict, channel) -> None:
     checkpoint("final")
     channel.send({"kind": "final", "status": status, "stop_reason": reason,
                   "records": records, "calls": calls, "judge_calibration": calibration,
-                  "candidate": candidate, "worker_wall_seconds": time.monotonic()-started})
+                  "candidate": candidate, "worker_wall_seconds": time.monotonic()-started,
+                  "offline_baselines": offline})
     channel.close()
 
 
@@ -476,7 +506,10 @@ def run() -> int:
                 channel.close()
     cases = load_cases(FIXTURE)
     report["records"] = account_incomplete_attempts(cases, report["records"], report["calls"])
-    if plan["study"] == "CL-FOCUS-VERIFY-01":
+    if plan["study"] == "CL-FOCUS-STRESS-01":
+        report["summary"] = model_summary(cases, report["records"])
+        report["promotion"] = {"promote": False, "reason": "template stress diagnostic, no independent gold"}
+    elif plan["study"] == "CL-FOCUS-VERIFY-01":
         report["summary"] = summarize_robustness(
             cases, report["records"], json.loads(FIXTURE.read_bytes()))
         report["promotion"] = {"promote": False, "reason": "authored grammar fixtures, no independent gold"}
@@ -505,7 +538,7 @@ def run() -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--execute", action="store_true")
-    parser.add_argument("--version", choices=("v1", "v2", "verifier"), default="v1")
+    parser.add_argument("--version", choices=("v1", "v2", "verifier", "stress"), default="v1")
     args = parser.parse_args(argv)
     if not args.execute:
         parser.error("--execute required for the single frozen local-model experiment")
