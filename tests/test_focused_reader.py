@@ -11,6 +11,7 @@ from pydantic import ValidationError
 from asof.focused_reader import (
     Answer,
     Case,
+    CompactCritique,
     Critique,
     abstention,
     account_incomplete_attempts,
@@ -160,3 +161,41 @@ def test_port_preflight_uses_exclusive_os_binding_not_absent_listener_http(runne
         with pytest.raises(RuntimeError, match="port is unavailable"):
             runner.require_free_port(port)
     runner.require_free_port(port)
+
+
+def test_compact_critic_cannot_emit_freeform_feedback_or_unbounded_codes():
+    raw = CompactCritique(verdict="revise", issues=["wrong_period", "wrong_unit"])
+    expanded = raw.expanded()
+    assert expanded.issues == ["wrong_period", "wrong_unit"]
+    assert "reporting year" in expanded.feedback and "currency" in expanded.feedback
+    assert CompactCritique(verdict="accept", issues=[]).expanded().feedback == ""
+    for data in (
+        {"verdict": "accept", "issues": [], "feedback": "unbounded prose"},
+        {"verdict": "revise", "issues": []},
+        {"verdict": "accept", "issues": ["wrong_value"]},
+        {"verdict": "revise", "issues": ["invented_code"]},
+        {"verdict": "revise", "issues": ["wrong_value"] * 2},
+        {"verdict": "revise", "issues": ["wrong_value", "wrong_unit", "missing", "ambiguous"]},
+    ):
+        with pytest.raises(ValidationError):
+            CompactCritique.model_validate(data)
+    schema = CompactCritique.model_json_schema()
+    assert schema["additionalProperties"] is False
+    assert schema["properties"]["issues"]["maxItems"] == 3
+
+
+def test_v2_only_changes_critic_messages_and_selects_new_attempt_paths(runner):
+    case = cases()[0]
+    assert messages(case, "generate") == messages(case, "generate", compact_critic=True)
+    assert messages(case, "revise", draft="{}", critique="{}") == messages(
+        case, "revise", draft="{}", critique="{}", compact_critic=True)
+    assert messages(case, "judge", draft="{}") != messages(
+        case, "judge", draft="{}", compact_critic=True)
+    old_private, old_report = runner.PRIVATE, runner.REPORT
+    runner.select_version("v2")
+    runner.validate_plan(json.loads(runner.PLAN.read_bytes()))
+    assert runner.PRIVATE != old_private and runner.REPORT != old_report
+    assert runner.PRIVATE.name == "focused_reader_v2"
+    assert "results/focused_reader_v2_plan.json" in runner.FROZEN
+    runner.select_version("v1")
+    assert runner.PRIVATE == old_private and runner.REPORT == old_report

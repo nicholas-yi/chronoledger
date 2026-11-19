@@ -217,3 +217,51 @@ existing synthetic rank-deficiency warnings; Ruff passed. Those software checks 
 not reverse the stopped model result. Historical quant experiments and source holds
 are preserved; no real corpus, prices, fundamental outcomes, production ledger,
 weight training, model download, cloud inference or push was involved.
+
+## V2: separately authorized compact-critic redo
+
+The user explicitly requested "fix and redo" after seeing the stopped v1 result.
+This is a new post-development-failure design, not an automatic resume or a hidden
+replacement of the old evidence. V1's raw result/attempt marker remain intact.
+
+The change targets the observed failure mechanism: v1 asked for free-form feedback,
+which rambled/reconsidered itself and hit the output cap. V2 uses:
+
+```json
+{"verdict":"accept","issues":[]}
+```
+
+The `format` field constrains the critic to a two-field JSON object: verdict is one
+of `accept/revise/abstain`; at most three issue codes from a fixed nine-code enum.
+No generated feedback or reasoning field exists. The critic output cap is **128**,
+down from 256, not an increased budget to accommodate rambling.
+Pydantic still rejects inconsistent verdict/code combinations, repeats or unsupported
+codes. A bounded grammar is not a semantic correctness guarantee.
+
+On revision, code expands the critic codes into fixed source-checking reminders.
+That feedback contains no authored expected answer and no free-form model rationale.
+The model must re-read the source; the deterministic rollback policy is unchanged.
+
+All twelve fixtures, model/digest, generator/revision prompts, seed, split, development
+lesson rule, six wrong probes, 36-call ceiling, 20-minute wall cap, per-call timeout,
+one CPU, no GPU/cloud/pulls and 6-GiB resource contract remain the same.
+No evaluation outputs were observed in v1, but these still are visible, agent-authored
+invented fixtures, not independent gold or a secretly held-out test.
+
+The [v2 plan](../results/focused_reader_v2_plan.json), schema/prompt and tests are
+committed before v2 inference. Explicit launch:
+
+```powershell
+uv run --no-sync python scripts/run_focused_reader.py --version v2 --execute
+```
+
+V2 uses new `data/focused_reader_v2` and `results/focused_reader_v2.json` paths;
+default `v1` still refuses its existing attempt. The v1 public result is included in
+v2's frozen file hashes so accidental alteration is visible. There is no third
+automatic attempt, no promotion of a schema-only success, and no new training.
+
+V2 pre-inference verification: **671 tests passed in 64.51 s**, with two existing
+synthetic rank-deficiency warnings; Ruff and documentation/index checks passed.
+New tests reject generated free-form feedback, unknown/repeated/excess codes and
+inconsistent verdicts, and verify unchanged generator/revision messages and isolated
+v1/v2 output selection. No v2 model call occurred during those checks.

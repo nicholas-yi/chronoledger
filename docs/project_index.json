@@ -16,6 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "focused-reader-v2", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_frozen_v2_run", "command": null},
     {"id": "focused-reader", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "demo", "path": "src/asof/demo.py", "status": "active_offline", "command": "asof demo"},
     {"id": "cli-ingest", "path": "src/asof/cli.py", "status": "guarded_requires_separate_approval", "command": "asof ingest --help"},

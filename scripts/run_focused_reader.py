@@ -19,6 +19,7 @@ from pydantic import ValidationError
 from asof.focused_reader import (
     Answer,
     Case,
+    CompactCritique,
     Critique,
     account_incomplete_attempts,
     choose_final,
@@ -48,6 +49,23 @@ FROZEN = (
     "results/focused_reader_plan.json", "results/local_model_runtime_support.json",
     "requirements-dev.lock", "docs/FOCUSED_READER.md",
 )
+V1_FROZEN = FROZEN
+
+
+def select_version(version: str) -> None:
+    """Explicit run selection; never recycle the stopped v1 output or attempt marker."""
+    global PLAN, REPORT, PRIVATE, FROZEN
+    if version not in ("v1", "v2"):
+        raise ValueError("unknown focused reader version")
+    suffix = "_v2" if version == "v2" else ""
+    PLAN = ROOT / "results" / f"focused_reader{suffix}_plan.json"
+    REPORT = ROOT / "results" / f"focused_reader{suffix}.json"
+    PRIVATE = ROOT / "data" / f"focused_reader_{version}"
+    FROZEN = tuple("results/focused_reader_v2_plan.json" if (
+        version == "v2" and path == "results/focused_reader_plan.json") else path
+                   for path in V1_FROZEN)
+    if version == "v2":
+        FROZEN = (*FROZEN, "results/focused_reader.json")
 
 
 def load_cases(path: Path) -> tuple[Case, ...]:
@@ -89,7 +107,7 @@ def freeze_receipt() -> dict:
 
 def validate_plan(plan: dict) -> None:
     fixed = {
-        "study": "CL-FOCUS-LAAJ-01", "model": "qwen3.5:4b",
+        "study": plan.get("study"), "model": "qwen3.5:4b",
         "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
         "endpoint": "http://127.0.0.1:11435", "case_count": 12,
         "max_calls": 36, "wall_seconds": 1200, "controller_stop_seconds": 1180,
@@ -98,6 +116,11 @@ def validate_plan(plan: dict) -> None:
         "options": {"temperature": 0, "seed": 202611190611, "num_ctx": 2048,
                     "num_predict": 384, "num_thread": 1, "num_gpu": 0, "num_batch": 64},
     }
+    if plan.get("study") == "CL-FOCUS-LAAJ-02":
+        fixed["critic_contract"] = "bounded_enums_no_freeform_feedback"
+        fixed["critic_num_predict"] = 128
+    elif plan.get("study") != "CL-FOCUS-LAAJ-01":
+        raise ValueError("unknown focused reader study")
     if plan != fixed:
         raise ValueError("local model plan differs from the approved fixed allocation")
 
@@ -116,6 +139,8 @@ def require_free_port(port: int = 11435) -> None:
 def worker(plan: dict, channel) -> None:
     if channel.recv() != "focused-reader-owned-job-ready":
         raise RuntimeError("owned-process containment handshake required")
+    if plan["study"] == "CL-FOCUS-LAAJ-02":
+        select_version("v2")  # Spawned workers do not inherit CLI module-global selection.
     server = None
     records: dict[str, dict] = {}
     calls = []
@@ -171,11 +196,16 @@ def worker(plan: dict, channel) -> None:
                 check_time()
                 if len(calls) >= plan["max_calls"]:
                     raise RuntimeError("model-call ceiling before next attempt")
+                compact = plan["study"] == "CL-FOCUS-LAAJ-02"
                 body = {
                     "model": plan["model"], "stream": False, "think": False, "keep_alive": "20m",
-                    "messages": messages(case, stage, draft=draft, critique=critique, lessons=lessons),
-                    "options": {**plan["options"], "num_predict": 256 if stage == "judge" else 384},
+                    "messages": messages(case, stage, draft=draft, critique=critique, lessons=lessons,
+                                         compact_critic=compact),
+                    "options": {**plan["options"], "num_predict": (
+                        plan.get("critic_num_predict", 256) if stage == "judge" else 384)},
                 }
+                if compact and stage == "judge":
+                    body["format"] = CompactCritique.model_json_schema()
                 encoded = json.dumps(body, sort_keys=True).encode()
                 if not input_fit(encoded, body["options"])[2]:
                     raise ValueError("frozen input estimate exceeds context margin; no truncation")
@@ -215,7 +245,10 @@ def worker(plan: dict, channel) -> None:
                     attempt["status"] = "empty_visible_response"
                     raise ValueError("model returned empty visible content")
                 try:
-                    parsed = (Critique if stage == "judge" else Answer).model_validate_json(content)
+                    if compact and stage == "judge":
+                        parsed = CompactCritique.model_validate_json(content).expanded()
+                    else:
+                        parsed = (Critique if stage == "judge" else Answer).model_validate_json(content)
                     attempt["status"] = "schema_valid"
                 except ValidationError:
                     parsed = None
@@ -226,7 +259,9 @@ def worker(plan: dict, channel) -> None:
                 if not loaded or any(item.get("size_vram") != 0 for item in loaded):
                     raise RuntimeError("CPU-only execution not verified by owned server model state")
                 checkpoint("after_model_attempt")
-                return parsed, content, attempt.copy()
+                # Feedback in v2 is a deterministic expansion, not new model-generated claims.
+                effective = parsed.model_dump_json() if compact and stage == "judge" and parsed else content
+                return parsed, effective, attempt.copy()
 
             def judge_record(case: Case, draft: str, gold_correct: bool, label: str):
                 opinion, content, cost = call(case, "judge", draft=draft)
@@ -423,8 +458,11 @@ def run() -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--execute", action="store_true")
-    if not parser.parse_args(argv).execute:
+    parser.add_argument("--version", choices=("v1", "v2"), default="v1")
+    args = parser.parse_args(argv)
+    if not args.execute:
         parser.error("--execute required for the single frozen local-model experiment")
+    select_version(args.version)
     return run()
 
 
