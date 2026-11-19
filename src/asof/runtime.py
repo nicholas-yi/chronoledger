@@ -7,13 +7,32 @@ Job commit limits and observed RSS differ; this is not filesystem/network isolat
 from __future__ import annotations
 
 import ctypes
+import hashlib
 import json
 import os
+import subprocess
 import sys
 from pathlib import Path
 
 THREAD_VARIABLES = ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS",
                     "NUMEXPR_NUM_THREADS")
+
+
+def frozen_receipt(root: Path, paths: tuple[str, ...]) -> dict:
+    """Verify a clean committed source/config selection; never inspect unlisted data payloads."""
+    def git(*args: str) -> bytes:
+        return subprocess.check_output(["git", "--no-pager", *args], cwd=root)
+
+    if git("status", "--porcelain").strip():
+        raise RuntimeError("commit source, fixtures and scope before execution")
+    hashes = {}
+    for path in paths:
+        local = root.joinpath(*path.split("/")).read_bytes()
+        if git("show", f"HEAD:{path}").replace(b"\r\n", b"\n") != local.replace(b"\r\n", b"\n"):
+            raise RuntimeError(f"source differs from its freeze: {path}")
+        hashes[path] = hashlib.sha256(local).hexdigest()
+    return {"freeze_commit": git("rev-parse", "HEAD").decode().strip(), "source_SHA256": hashes,
+            "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"}
 
 
 def write_receipt(path: Path, payload: dict) -> None:

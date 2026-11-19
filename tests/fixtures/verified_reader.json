@@ -1,0 +1,52 @@
+{
+  "pairs": [
+    {"id":"R01","category":"sentence_order","relation":"same","cases":[
+      {"id":"R01-0","issuer":"GarnetHarbor","metric":"revenue","requested_period":"2016","source":"GarnetHarbor reported revenue of 26 USD million for 2016. GarnetHarbor reported revenue of 24 USD million for 2015.","expected":["26","USD million","2016"]},
+      {"id":"R01-1","issuer":"GarnetHarbor","metric":"revenue","requested_period":"2016","source":"GarnetHarbor reported revenue of 24 USD million for 2015. GarnetHarbor reported revenue of 26 USD million for 2016.","expected":["26","USD million","2016"]}
+    ]},
+    {"id":"R02","category":"issuer_counterfactual","relation":"changed","cases":[
+      {"id":"R02-0","issuer":"CopperVale","metric":"backlog","requested_period":"2016","source":"CopperVale reported backlog of 38 USD million for 2016.","expected":["38","USD million","2016"]},
+      {"id":"R02-1","issuer":"CopperVale","metric":"backlog","requested_period":"2016","source":"QuartzBrook reported backlog of 38 USD million for 2016. CopperVale did not disclose backlog.","expected":null}
+    ]},
+    {"id":"R03","category":"year_counterfactual","relation":"changed","cases":[
+      {"id":"R03-0","issuer":"SilverThicket","metric":"revenue","requested_period":"2017","source":"SilverThicket reported revenue of 43 EUR million for 2017.","expected":["43","EUR million","2017"]},
+      {"id":"R03-1","issuer":"SilverThicket","metric":"revenue","requested_period":"2017","source":"SilverThicket reported revenue of 43 EUR million for 2016. No 2017 figure is provided.","expected":null}
+    ]},
+    {"id":"R04","category":"numeric_sign","relation":"changed","cases":[
+      {"id":"R04-0","issuer":"BirchAurora","metric":"operating income","requested_period":"2017","source":"BirchAurora reported operating income of 7 USD thousand for 2017.","expected":["7","USD thousand","2017"]},
+      {"id":"R04-1","issuer":"BirchAurora","metric":"operating income","requested_period":"2017","source":"BirchAurora reported operating income of -7 USD thousand for 2017.","expected":["-7","USD thousand","2017"]}
+    ]},
+    {"id":"R05","category":"currency_counterfactual","relation":"changed","cases":[
+      {"id":"R05-0","issuer":"CedarOrbit","metric":"revenue","requested_period":"2017","source":"CedarOrbit reported revenue of 13 USD million for 2017.","expected":["13","USD million","2017"]},
+      {"id":"R05-1","issuer":"CedarOrbit","metric":"revenue","requested_period":"2017","source":"CedarOrbit reported revenue of 13 EUR million for 2017.","expected":["13","EUR million","2017"]}
+    ]},
+    {"id":"R06","category":"scale_counterfactual","relation":"changed","cases":[
+      {"id":"R06-0","issuer":"JuniperWake","metric":"revenue","requested_period":"2016","source":"JuniperWake reported revenue of 19 USD million for 2016.","expected":["19","USD million","2016"]},
+      {"id":"R06-1","issuer":"JuniperWake","metric":"revenue","requested_period":"2016","source":"JuniperWake reported revenue of 19 USD thousand for 2016.","expected":["19","USD thousand","2016"]}
+    ]},
+    {"id":"R07","category":"conflicting_values","relation":"changed","cases":[
+      {"id":"R07-0","issuer":"MapleBeacon","metric":"backlog","requested_period":"2017","source":"MapleBeacon reported backlog of 21 USD million for 2017.","expected":["21","USD million","2017"]},
+      {"id":"R07-1","issuer":"MapleBeacon","metric":"backlog","requested_period":"2017","source":"MapleBeacon reported backlog of 21 USD million for 2017. MapleBeacon reported backlog of 22 USD million for 2017. Both statements are equally authoritative and unreconciled; neither is a correction.","expected":null}
+    ]},
+    {"id":"R08","category":"industry_distraction","relation":"same","cases":[
+      {"id":"R08-0","issuer":"PineComet","metric":"capacity utilization","requested_period":"2017","source":"PineComet reported capacity utilization of 79 % for 2017.","expected":["79","%","2017"]},
+      {"id":"R08-1","issuer":"PineComet","metric":"capacity utilization","requested_period":"2017","source":"Industry capacity utilization was 96 % for 2017. PineComet reported capacity utilization of 79 % for 2017.","expected":["79","%","2017"]}
+    ]},
+    {"id":"R09","category":"definition_counterfactual","relation":"changed","cases":[
+      {"id":"R09-0","issuer":"AshMeridian","metric":"net revenue retention","requested_period":"2017","source":"AshMeridian reported net revenue retention of 105 % for 2017.","expected":["105","%","2017"]},
+      {"id":"R09-1","issuer":"AshMeridian","metric":"net revenue retention","requested_period":"2017","source":"AshMeridian reported gross customer retention of 105 % for 2017. Net revenue retention is a different definition and was not disclosed.","expected":null}
+    ]},
+    {"id":"R10","category":"natural_subscriber_wording","relation":"same","cases":[
+      {"id":"R10-0","issuer":"CobaltMeadow","metric":"subscribers","requested_period":"2017","source":"For 2017, CobaltMeadow had 3700 subscribers.","expected":["3700","subscribers","2017"]},
+      {"id":"R10-1","issuer":"CobaltMeadow","metric":"subscribers","requested_period":"2017","source":"CobaltMeadow had 3700 subscribers in 2017.","expected":["3700","subscribers","2017"]}
+    ]},
+    {"id":"R11","category":"ambiguous_currency","relation":"changed","cases":[
+      {"id":"R11-0","issuer":"OrchidHaven","metric":"revenue","requested_period":"2017","source":"OrchidHaven reported revenue of 6 USD million for 2017.","expected":["6","USD million","2017"]},
+      {"id":"R11-1","issuer":"OrchidHaven","metric":"revenue","requested_period":"2017","source":"OrchidHaven reported revenue of 6 USD million for 2017. OrchidHaven reported revenue of 6 EUR million for 2017. Both are unreconciled statements of the same metric and scope, with no conversion or correction.","expected":null}
+    ]},
+    {"id":"R12","category":"whitespace_case","relation":"same","cases":[
+      {"id":"R12-0","issuer":"NettleQuay","metric":"revenue","requested_period":"2017","source":"NettleQuay reported revenue of 4.5 EUR million for 2017.","expected":["4.5","EUR million","2017"]},
+      {"id":"R12-1","issuer":"NettleQuay","metric":"revenue","requested_period":"2017","source":"NETTLEQUAY reported\nrevenue of  4.5 EUR million for 2017.","expected":["4.5","EUR million","2017"]}
+    ]}
+  ]
+}

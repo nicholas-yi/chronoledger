@@ -16,6 +16,8 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_verifier_run", "command": null},
+    {"id": "reader-review-packet", "path": "scripts/prepare_reader_review.py", "status": "approved_once_pending_private_packet", "command": null},
     {"id": "focused-reader-v2", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "focused-reader", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "demo", "path": "src/asof/demo.py", "status": "active_offline", "command": "asof demo"},

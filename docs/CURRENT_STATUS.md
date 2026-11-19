@@ -17,6 +17,8 @@ The separately user-authorized [compact-critic v2](FOCUSED_READER.md#observed-v2
 completed within budget: evaluation parser/single-pass each 5/6, judge-assisted 4/6,
 zero corrections and one regression at about 2.55x model-arm latency.
 The truncation fix worked; promotion was refused. Both versions' evidence is preserved.
+The next separately approved task is [verifier-only robustness and review preparation](FOCUSED_READER.md#next-frozen-test-verifier-only-with-fair-deterministic-controls):
+no critic, no broader model expansion, and no real gold manufactured from model opinion.
 
 ## What exists, and what it establishes
 

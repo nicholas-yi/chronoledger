@@ -199,3 +199,15 @@ def test_v2_only_changes_critic_messages_and_selects_new_attempt_paths(runner):
     assert "results/focused_reader_v2_plan.json" in runner.FROZEN
     runner.select_version("v1")
     assert runner.PRIVATE == old_private and runner.REPORT == old_report
+
+
+def test_verifier_run_has_fresh_pairs_and_no_room_for_judge_calls(runner):
+    runner.select_version("verifier")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    values = runner.load_cases(runner.FIXTURE)
+    assert len(values) == plan["case_count"] == plan["max_calls"] == 24
+    assert all(case.split == "evaluation" and case.probe is None for case in values)
+    assert runner.REPORT.name == "verified_reader.json"
+    assert "results/focused_reader_v2.json" in runner.FROZEN
+    runner.select_version("v1")

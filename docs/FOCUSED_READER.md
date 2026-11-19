@@ -347,3 +347,102 @@ The score difference is descriptive for six visible, agent-authored invented
 evaluation cases, not statistical evidence that every judge is harmful or proof
 that a future independently calibrated approach cannot help. This result is an
 honest rejection of this particular configuration under this budget.
+
+## Next frozen test: verifier only, with fair deterministic controls
+
+The user requested the next steps on 2026-11-19: deterministic output repair,
+fresh robustness pairs, an independently reviewable development sample, and no
+return to broad model expansion. The judge remains disabled.
+
+[`asof.verified_reader`](../src/asof/verified_reader.py) may repair **only a blank
+unit**. It first validates every other answer field without coercion, requires a
+verbatim normalized quote and the requested year, then requires a uniquely matching
+issuer/metric/value/year/unit binding in a finite sentence grammar. The binding
+must occur inside the cited quote. Multiple compatible values/units, another year,
+a fabricated quote or a wrong explicit unit are rejected; values/years/explicit
+units are never rewritten to match gold. Unrelated JSON errors remain invalid.
+Existing justified abstentions are preserved; their factual correctness is not certified.
+
+Supported units are USD/EUR million/thousand, `%` and `subscribers`.
+Supported forms are the original explicit reported-metric sentence and two finite
+subscriber wordings. This is **not general financial entailment**: unsupported
+language stays unavailable, and a relation parser cannot establish truth from an
+arbitrarily negated/qualified real-world paragraph.
+Only necessary source checks and this declared grammar are enforced.
+
+### Fresh paired fixture and allocation
+
+The [new authored fixture](../tests/fixtures/verified_reader.json) has 24 cases in
+12 pairs: sentence order, changed issuer/year/sign/currency/scale, conflicting values,
+industry distraction, metric definitions, subscriber wording, ambiguous currency,
+and whitespace/case. It uses new names/numbers, not regraded old cases.
+The [plan](../results/verified_reader_plan.json) is committed before inference:
+
+- At most **24** local generation calls; no critic, revision, retry or prompt search.
+- Existing model/digest, unchanged generator prompt, fixed seed 202611190752.
+- Same 20-minute / one-CPU / no-GPU/cloud/pulls / 6-GiB resource contract.
+- New output `results/verified_reader.json` and private `data/verified_reader_v1`.
+- Preserve/hash both old judge results; do not regrade their missing-unit failures.
+
+Arms: the old narrow parser, a **stronger binding parser**, fixed single-pass LLM,
+and that exact same raw LLM output plus deterministic verification.
+Verification latency is recorded separately as well as added to the shared model
+call. There is no second generation for the verified arm.
+The stronger parser exposes how much apparent improvement is already encoded by
+the binding rules: do not credit the LLM for a capability the deterministic parser has.
+
+Report all-planned correctness/coverage, invalid/wrong answers, corrections/regressions,
+both-correct pairs and transformation violations. A pair of consistently wrong
+answers can satisfy an invariant, so invariant agreement alone is not success.
+Invalid/unattempted pairs remain separate. The authored fixture deliberately uses
+the supported grammar and exercises a known weakness; this is engineering robustness,
+not independent test authorship, unbiased real-data performance or economic value.
+
+### Real-source packet, not invented independent labels
+
+The separate [packet plan](../results/reader_review_plan.json) permits only the
+previously date-cleared, content-pinned `data/kpi_omission_dev_v1` derivative.
+No new raw-cache body, mixed ZIP/parquet, quarantined source, SEC request or outcome
+dataset may be opened. Every annual/context metadata reference is guarded before
+the text-containing derived JSON is read; the old manifest/case pins must match.
+This intentionally reuses the already exposed 2012-2018 cohort, not a fresh holdout.
+
+[`asof.reader_review`](../src/asof/reader_review.py) selects up to 12 mention-bearing
+current excerpt windows, one per issuer, by frozen hash rank `seed:case_id:family`.
+Minimum six or stop; there are no replacements from raw sources. Evidence windows
+are bounded at 1,024 characters. Preparation has a 30-second/256-MiB observed
+RSS check before writing excerpts, with explicit input byte caps (256 KiB manifest,
+1 MiB derived JSON). This is not OS mount isolation.
+
+The private packet includes exact provenance, the metadata reporting-year target,
+source windows and limitations; no model answers, expected values or proposed labels.
+Two first-pass CSV templates have blank reviewer IDs, answers and blindness declarations.
+The existing intake report type is reused, but the original H1 date/label profile
+is **not** broadened or rewritten for this task.
+
+The new check requires distinct declared reviewer IDs, full item coverage, no
+AI-suggestion exposure, explicit supported/unsupported-within-excerpt/insufficient-context
+status and rationale. Supported tuples also need finite values, the requested
+year and verbatim evidence. Declarations do not authenticate independence; even
+agreement remains subject to source/adjudication review and never creates gold automatically.
+
+An excerpt may lack enough entity, definition or period context. The correct
+label then is `insufficient_context`, not an invented number or a claim that the
+full filing lacks the metric. This packet is conditional on prior lexical coverage,
+not a representative accuracy audit. No independent reviewer is currently assigned.
+
+Private outputs stay under `data/reader_review_v1`; public receipt contains counts,
+scope and hashes only. The curator reads old text-containing JSON, including prior
+snippets; it is not metadata-only. Creating blank templates is not completing
+independent review, hiring reviewers or obtaining real gold.
+
+Both operations require committed source/plan freezes and exclusive attempt markers.
+No automatic promotion, weight updates, public raw-text release, source repair,
+H4/H6 hold release, return trial, production ledger row or push.
+
+Pre-execution checks for the verifier/packet profiles: **680 tests passed in
+66.26 s**, with two existing synthetic rank-deficiency warnings; Ruff and local
+documentation/index checks passed. Added fixtures cover unique blank-unit recovery,
+ambiguity/refusal, no-gold behavior, paired metrics, source-date-before-derived-read
+ordering, unlabelled templates and reviewer-independence blockers.
+No new local generation or real derivative read occurred during those checks.

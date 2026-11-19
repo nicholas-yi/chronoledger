@@ -34,6 +34,13 @@ from asof.focused_reader import (
 from asof.local_model_runtime import RuntimePolicy, launch_owned_server, verify_supported_package
 from asof.reader_real2_guards import input_fit, truncation_reason
 from asof.runtime import THREAD_VARIABLES, WorkerJob, peak_rss_bytes, write_receipt
+from asof.runtime import frozen_receipt as committed_sources
+from asof.verified_reader import (
+    binding_parser,
+    load_robustness_cases,
+    summarize_robustness,
+    verify_response,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAN = ROOT / "results" / "focused_reader_plan.json"
@@ -54,9 +61,22 @@ V1_FROZEN = FROZEN
 
 def select_version(version: str) -> None:
     """Explicit run selection; never recycle the stopped v1 output or attempt marker."""
-    global PLAN, REPORT, PRIVATE, FROZEN
-    if version not in ("v1", "v2"):
+    global PLAN, REPORT, PRIVATE, FROZEN, FIXTURE
+    if version not in ("v1", "v2", "verifier"):
         raise ValueError("unknown focused reader version")
+    FIXTURE = ROOT / "tests" / "fixtures" / "focused_reader.json"
+    if version == "verifier":
+        PLAN = ROOT / "results" / "verified_reader_plan.json"
+        REPORT = ROOT / "results" / "verified_reader.json"
+        PRIVATE = ROOT / "data" / "verified_reader_v1"
+        FIXTURE = ROOT / "tests" / "fixtures" / "verified_reader.json"
+        FROZEN = tuple(
+            "results/verified_reader_plan.json" if path == "results/focused_reader_plan.json"
+            else "tests/fixtures/verified_reader.json" if path == "tests/fixtures/focused_reader.json"
+            else path for path in V1_FROZEN)
+        FROZEN = (*FROZEN, "src/asof/verified_reader.py", "tests/test_verified_reader.py",
+                  "results/focused_reader.json", "results/focused_reader_v2.json")
+        return
     suffix = "_v2" if version == "v2" else ""
     PLAN = ROOT / "results" / f"focused_reader{suffix}_plan.json"
     REPORT = ROOT / "results" / f"focused_reader{suffix}.json"
@@ -70,6 +90,8 @@ def select_version(version: str) -> None:
 
 def load_cases(path: Path) -> tuple[Case, ...]:
     raw = json.loads(path.read_bytes())
+    if path.name == "verified_reader.json":
+        return load_robustness_cases(raw)
     if set(raw) != {"development", "evaluation"} or any(len(rows) != 6 for rows in raw.values()):
         raise ValueError("exactly six development and six evaluation invented fixtures required")
     cases = tuple(Case(**{
@@ -93,16 +115,7 @@ def hashes() -> dict:
 
 
 def freeze_receipt() -> dict:
-    def git(*args):
-        return subprocess.check_output(["git", "--no-pager", *args], cwd=ROOT)
-
-    if git("status", "--porcelain").strip():
-        raise RuntimeError("commit source, prompts, fixtures and plan before local inference")
-    for path in FROZEN:
-        if (git("show", f"HEAD:{path}").replace(b"\r\n", b"\n")
-                != ROOT.joinpath(*path.split("/")).read_bytes().replace(b"\r\n", b"\n")):
-            raise RuntimeError(f"source differs from its freeze: {path}")
-    return {"freeze_commit": git("rev-parse", "HEAD").decode().strip(), "source_SHA256": hashes()}
+    return committed_sources(ROOT, FROZEN)
 
 
 def validate_plan(plan: dict) -> None:
@@ -119,6 +132,9 @@ def validate_plan(plan: dict) -> None:
     if plan.get("study") == "CL-FOCUS-LAAJ-02":
         fixed["critic_contract"] = "bounded_enums_no_freeform_feedback"
         fixed["critic_num_predict"] = 128
+    elif plan.get("study") == "CL-FOCUS-VERIFY-01":
+        fixed["case_count"] = fixed["max_calls"] = 24
+        fixed["options"]["seed"] = 202611190752
     elif plan.get("study") != "CL-FOCUS-LAAJ-01":
         raise ValueError("unknown focused reader study")
     if plan != fixed:
@@ -141,6 +157,9 @@ def worker(plan: dict, channel) -> None:
         raise RuntimeError("owned-process containment handshake required")
     if plan["study"] == "CL-FOCUS-LAAJ-02":
         select_version("v2")  # Spawned workers do not inherit CLI module-global selection.
+    verified = plan["study"] == "CL-FOCUS-VERIFY-01"
+    if verified:
+        select_version("verifier")
     server = None
     records: dict[str, dict] = {}
     calls = []
@@ -274,7 +293,7 @@ def worker(plan: dict, channel) -> None:
                 return opinion, content, cost
 
             # Calibration/development first. No revisions here; six probes are deliberately wrong.
-            for case in cases[:6]:
+            for case in (() if verified else cases[:6]):
                 base, text, cost = call(case, "generate")
                 records[case.id] = {
                     "parser": {"answer": parser_answer(case).model_dump(),
@@ -288,18 +307,20 @@ def worker(plan: dict, channel) -> None:
                 judge_record(case, json.dumps(case.probe), False, "known_wrong_probe")
                 checkpoint("development_case_complete")
 
-            errors = verified_error_bank(cases, records)
-            lessons = development_lessons(errors)
-            candidate = {
-                "lessons": list(lessons), "development_error_ids": [e["case_id"] for e in errors],
-                "adaptive_rule": "fixed reminder selection from verified development errors only",
-                "before_any_evaluation_model_call": True, "weights_updated": False,
-            }
-            candidate["sha256"] = hashlib.sha256(json.dumps(candidate, sort_keys=True).encode()).hexdigest()
-            write_receipt(PRIVATE / "verified_development_errors.json", {"errors": errors})
-            write_receipt(PRIVATE / "candidate_before_evaluation.json", candidate)
-            checkpoint("candidate_frozen_before_evaluation")
-            for case in cases[6:]:
+            lessons = ()
+            if not verified:
+                errors = verified_error_bank(cases, records)
+                lessons = development_lessons(errors)
+                candidate = {
+                    "lessons": list(lessons), "development_error_ids": [e["case_id"] for e in errors],
+                    "adaptive_rule": "fixed reminder selection from verified development errors only",
+                    "before_any_evaluation_model_call": True, "weights_updated": False,
+                }
+                candidate["sha256"] = hashlib.sha256(json.dumps(candidate, sort_keys=True).encode()).hexdigest()
+                write_receipt(PRIVATE / "verified_development_errors.json", {"errors": errors})
+                write_receipt(PRIVATE / "candidate_before_evaluation.json", candidate)
+                checkpoint("candidate_frozen_before_evaluation")
+            for case in (cases if verified else cases[6:]):
                 base, text, cost = call(case, "generate")
                 records[case.id] = {
                     "parser": {"answer": parser_answer(case).model_dump(),
@@ -309,6 +330,27 @@ def worker(plan: dict, channel) -> None:
                                     "latency_seconds": cost["latency_seconds"],
                                     "generated_tokens": cost["generated_tokens"]},
                 }
+                if verified:
+                    before = time.perf_counter()
+                    stronger = binding_parser(case)
+                    parser_seconds = time.perf_counter()-before
+                    before = time.perf_counter()
+                    verification = verify_response(case, text)
+                    verify_seconds = time.perf_counter()-before
+                    records[case.id]["binding_parser"] = {
+                        "answer": stronger.model_dump(), "score": score(case, stronger),
+                        "latency_seconds": parser_seconds, "generated_tokens": 0}
+                    records[case.id]["verified"] = {
+                        "answer": verification.answer.model_dump() if verification.answer else None,
+                        "score": score(case, verification.answer), "status": verification.status,
+                        "reasons": list(verification.reasons),
+                        "latency_seconds": cost["latency_seconds"]+verify_seconds,
+                        "verification_seconds": verify_seconds,
+                        "generated_tokens": cost["generated_tokens"],
+                        "same_initial_generation_as_single_pass": True}
+                    write_receipt(PRIVATE / f"case_{case.id}.json", records[case.id])
+                    checkpoint("verifier_case_complete")
+                    continue
                 opinion, feedback, judge_cost = call(case, "judge", draft=text, lessons=lessons)
                 revision = None
                 revision_cost = {"latency_seconds": 0, "generated_tokens": 0}
@@ -434,8 +476,13 @@ def run() -> int:
                 channel.close()
     cases = load_cases(FIXTURE)
     report["records"] = account_incomplete_attempts(cases, report["records"], report["calls"])
-    report["summary"] = summarize(cases, report["records"])
-    report["promotion"] = promotion_gate(cases, report["records"], independent_audit=False)
+    if plan["study"] == "CL-FOCUS-VERIFY-01":
+        report["summary"] = summarize_robustness(
+            cases, report["records"], json.loads(FIXTURE.read_bytes()))
+        report["promotion"] = {"promote": False, "reason": "authored grammar fixtures, no independent gold"}
+    else:
+        report["summary"] = summarize(cases, report["records"])
+        report["promotion"] = promotion_gate(cases, report["records"], independent_audit=False)
     report["controller_wall_seconds"] = time.monotonic()-started
     report["observed_combined_peak_RSS_bytes"] = peak
     report["owned_pids_observed"] = sorted(all_pids)
@@ -458,7 +505,7 @@ def run() -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--execute", action="store_true")
-    parser.add_argument("--version", choices=("v1", "v2"), default="v1")
+    parser.add_argument("--version", choices=("v1", "v2", "verifier"), default="v1")
     args = parser.parse_args(argv)
     if not args.execute:
         parser.error("--execute required for the single frozen local-model experiment")

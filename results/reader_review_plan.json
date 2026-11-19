@@ -1,0 +1,13 @@
+{
+  "profile": "CL-FOCUS-REVIEW-PACKET-01",
+  "authorization": "2026-11-19 user: do all those; reuse approved development inputs only",
+  "manifest_sha256": "0944009c8f230372172c0622b560716fc5ee4db00f09cd0b93c5ae32363b4e92",
+  "cases_sha256": "1b86638f40b689d7d76da1017b0d9340debc2a55a1a125a1414cf2e2678f4cee",
+  "seed": 202611190752,
+  "max_items": 12,
+  "minimum_items": 6,
+  "scope": "2012-2018 prior completed derivative; guard metadata before text; private unlabelled excerpt windows",
+  "independent_reviewers_assigned": false,
+  "raw_cache_reads_allowed": false,
+  "model_calls_allowed": false
+}

@@ -4,7 +4,8 @@ import os
 
 import pytest
 
-from asof.runtime import WorkerJob, peak_rss_bytes, write_receipt
+from asof import runtime
+from asof.runtime import WorkerJob, frozen_receipt, peak_rss_bytes, write_receipt
 
 
 def test_receipts_are_strict_and_never_overwrite_an_attempt(tmp_path):
@@ -58,3 +59,18 @@ def test_invalid_resource_limit_refuses_before_platform_api():
         WorkerJob(memory_bytes=0)
     with pytest.raises(ValueError, match="process limit"):
         WorkerJob(max_processes=0)
+
+
+def test_shared_freeze_receipt_checks_only_committed_paths_and_rejects_source_drift(tmp_path, monkeypatch):
+    (tmp_path / "source.py").write_bytes(b"pass\r\n")
+
+    def git(args, **kwargs):
+        return b"" if "status" in args else b"pass\n" if "show" in args else b"fixture-revision\n"
+
+    monkeypatch.setattr(runtime.subprocess, "check_output", git)
+    receipt = frozen_receipt(tmp_path, ("source.py",))
+    assert receipt["freeze_commit"] == "fixture-revision"
+    assert set(receipt["source_SHA256"]) == {"source.py"}
+    (tmp_path / "source.py").write_text("raise RuntimeError")
+    with pytest.raises(RuntimeError, match="differs from"):
+        frozen_receipt(tmp_path, ("source.py",))
