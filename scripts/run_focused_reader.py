@@ -41,6 +41,16 @@ from asof.linked_reader import (
     summarize_challenge,
 )
 from asof.local_model_runtime import RuntimePolicy, launch_owned_server, verify_supported_package
+from asof.reader_cells import (
+    Selection,
+    audit_fixture,
+    cell_messages,
+    diagnostic,
+    select_cell,
+    selection_schema,
+    summarize_cells,
+)
+from asof.reader_field_challenge import evaluate_coverage
 from asof.reader_fields import (
     contexts,
     field_messages,
@@ -92,12 +102,13 @@ V1_FROZEN = FROZEN
 def select_version(version: str) -> None:
     """Explicit run selection; never recycle the stopped v1 output or attempt marker."""
     global PLAN, REPORT, PRIVATE, FROZEN, FIXTURE
-    if version not in ("v1", "v2", "verifier", "stress", "linked", "fields", "reliable"):
+    if version not in ("v1", "v2", "verifier", "stress", "linked", "fields", "reliable", "cells"):
         raise ValueError("unknown focused reader version")
     FIXTURE = ROOT / "tests" / "fixtures" / "focused_reader.json"
-    if version in ("verifier", "stress", "linked", "fields", "reliable"):
+    if version in ("verifier", "stress", "linked", "fields", "reliable", "cells"):
         stem = {"stress": "reader_stress", "verifier": "verified_reader",
-                "linked": "linked_reader", "fields": "reader_fields", "reliable": "reader_reliability"}[version]
+                "linked": "linked_reader", "fields": "reader_fields", "reliable": "reader_reliability",
+                "cells": "reader_cell_selection"}[version]
         fixture_name = "linked_challenge" if version == "linked" else stem
         PLAN = ROOT / "results" / f"{stem}_plan.json"
         REPORT = ROOT / "results" / f"{stem}.json"
@@ -107,21 +118,26 @@ def select_version(version: str) -> None:
             f"results/{stem}_plan.json" if path == "results/focused_reader_plan.json"
             else f"tests/fixtures/{fixture_name}.json" if path == "tests/fixtures/focused_reader.json"
             else path for path in V1_FROZEN)
+        if version == "cells":
+            FROZEN = tuple(path for path in FROZEN if path != f"tests/fixtures/{fixture_name}.json")
         FROZEN = (*FROZEN, "src/asof/verified_reader.py", "tests/test_verified_reader.py",
                   "results/focused_reader.json", "results/focused_reader_v2.json")
         if version == "stress":
             FROZEN = (*FROZEN, "src/asof/reader_stress.py", "tests/test_reader_stress.py",
                       "results/verified_reader.json")
-        elif version in ("linked", "fields", "reliable"):
+        elif version in ("linked", "fields", "reliable", "cells"):
             FROZEN = (*FROZEN, "src/asof/linked_reader.py", "tests/test_linked_reader.py",
                       "src/asof/reader_stress.py", "tests/fixtures/reader_stress.json",
                       "results/reader_stress.json", "results/verified_reader.json")
-            if version in ("fields", "reliable"):
+            if version in ("fields", "reliable", "cells"):
                 FROZEN = (*FROZEN, "src/asof/reader_fields.py", "tests/test_reader_fields.py",
                           "results/linked_reader.json")
-            if version == "reliable":
+            if version in ("reliable", "cells"):
                 FROZEN = (*FROZEN, "src/asof/reader_reliability.py",
                           "tests/test_reader_reliability.py", "results/reader_fields.json")
+            if version == "cells":
+                FROZEN = (*FROZEN, "src/asof/reader_cells.py", "src/asof/reader_field_challenge.py",
+                          "tests/test_reader_cells.py", "results/reader_reliability.json")
         return
     suffix = "_v2" if version == "v2" else ""
     PLAN = ROOT / "results" / f"focused_reader{suffix}_plan.json"
@@ -135,6 +151,8 @@ def select_version(version: str) -> None:
 
 
 def load_cases(path: Path) -> tuple[Case, ...]:
+    if path.name == "reader_cell_selection.json":
+        return audit_fixture()[0]
     raw = json.loads(path.read_bytes())
     if path.name == "verified_reader.json":
         return load_robustness_cases(raw)
@@ -211,6 +229,13 @@ def validate_plan(plan: dict) -> None:
         fixed["evidence_contract"] = "field-record-v1"
         fixed["generation_contract"] = "paired_free_vs_answer_schema_v1"
         fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
+    elif plan.get("study") == "CL-FOCUS-CELLS-01":
+        fixed["max_calls"] = 24
+        fixed["offline_cases"] = 192
+        fixed["options"]["seed"] = 202611191514
+        fixed["evidence_contract"] = "field-record-v1"
+        fixed["generation_contract"] = "paired_strict_tuple_vs_bound_cell_v1"
+        fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
     elif plan.get("study") != "CL-FOCUS-LAAJ-01":
         raise ValueError("unknown focused reader study")
     if plan != fixed:
@@ -235,13 +260,14 @@ def worker(plan: dict, channel) -> None:
         select_version("v2")  # Spawned workers do not inherit CLI module-global selection.
     stress = plan["study"] == "CL-FOCUS-STRESS-01"
     reliable = plan["study"] == "CL-FOCUS-RELIABLE-01"
-    field_mode = reliable or plan["study"] == "CL-FOCUS-FIELDS-01"
+    cell_mode = plan["study"] == "CL-FOCUS-CELLS-01"
+    field_mode = reliable or cell_mode or plan["study"] == "CL-FOCUS-FIELDS-01"
     linked_mode = field_mode or plan["study"] == "CL-FOCUS-LINKED-01"
     verified = plan["study"] in (
         "CL-FOCUS-VERIFY-01", "CL-FOCUS-STRESS-01", "CL-FOCUS-LINKED-01",
-        "CL-FOCUS-FIELDS-01", "CL-FOCUS-RELIABLE-01")
+        "CL-FOCUS-FIELDS-01", "CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01")
     if verified:
-        select_version("reliable" if reliable else "fields" if field_mode else "linked"
+        select_version("cells" if cell_mode else "reliable" if reliable else "fields" if field_mode else "linked"
                        if linked_mode else "stress" if stress else "verifier")
     server = None
     records: dict[str, dict] = {}
@@ -252,8 +278,9 @@ def worker(plan: dict, channel) -> None:
     candidate = None
     offline = None
     cases = load_cases(FIXTURE)
-    field_labels = contexts(json.loads(FIXTURE.read_bytes())) if field_mode else {}
-    orders = generation_orders(cases) if reliable else {}
+    field_labels = audit_fixture()[1] if cell_mode else (
+        contexts(json.loads(FIXTURE.read_bytes())) if field_mode else {})
+    orders = generation_orders(cases) if reliable or cell_mode else {}
 
     def check_time() -> None:
         if time.monotonic()-started >= plan["controller_stop_seconds"]-15:
@@ -265,7 +292,19 @@ def worker(plan: dict, channel) -> None:
                       "offline_baselines": offline})
 
     try:
-        if reliable:
+        if cell_mode:
+            offline = evaluate_coverage()
+            for case in cases:
+                before = time.perf_counter()
+                source = source_gated(case).result
+                seconds = time.perf_counter()-before
+                records[case.id] = {"source_control": {
+                    **field_record(case, source, field_labels[case.id]),
+                    "diagnostic": diagnostic(case, source, None, response_valid=True, model_fields=False,
+                                             context=field_labels[case.id]),
+                    "latency_seconds": seconds, "model_calls": 0}}
+            checkpoint("known_field_coverage192_complete")
+        elif reliable:
             all_cases = load_field_cases(json.loads(FIXTURE.read_bytes()))
             offline_records = {}
             for case in all_cases:
@@ -320,7 +359,8 @@ def worker(plan: dict, channel) -> None:
             if not ready:
                 raise TimeoutError("owned server readiness timeout")
 
-            def call(case: Case, stage: str, *, draft=None, critique=None, lessons=(), structured=False):
+            def call(case: Case, stage: str, *, draft=None, critique=None, lessons=(),
+                     structured=False, selection=False):
                 check_time()
                 if len(calls) >= plan["max_calls"]:
                     raise RuntimeError("model-call ceiling before next attempt")
@@ -338,6 +378,9 @@ def worker(plan: dict, channel) -> None:
                     body["messages"] = reliability_messages(case)
                     if structured:
                         body["format"] = WIRE.json_schema()
+                if cell_mode:
+                    body["messages"] = cell_messages(case) if selection else reliability_messages(case)
+                    body["format"] = selection_schema(case) if selection else WIRE.json_schema()
                 if compact and stage == "judge":
                     body["format"] = CompactCritique.model_json_schema()
                 encoded = json.dumps(body, sort_keys=True).encode()
@@ -348,6 +391,8 @@ def worker(plan: dict, channel) -> None:
                            "status": "started", "latency_seconds": None, "generated_tokens": None}
                 if reliable:
                     attempt["wire_contract"] = "structured" if structured else "free"
+                if cell_mode:
+                    attempt["wire_contract"] = "bound_cell" if selection else "structured_tuple"
                 calls.append(attempt)
                 write_receipt(PRIVATE / f"call_{attempt['call_id']:02d}_start.json", attempt)
                 checkpoint("before_model_attempt")
@@ -392,9 +437,10 @@ def worker(plan: dict, channel) -> None:
                         if compact and stage == "judge":
                             parsed = CompactCritique.model_validate_json(content).expanded()
                         else:
-                            if reliable and structured:
+                            if (reliable and structured) or (cell_mode and not selection):
                                 WIRE.validate_json(content)
-                            parsed = (Critique if stage == "judge" else Answer).model_validate_json(content)
+                            parsed = (Selection if cell_mode and selection else Critique
+                                      if stage == "judge" else Answer).model_validate_json(content)
                         attempt["status"] = "schema_valid"
                     except ValidationError:
                         parsed = None
@@ -448,6 +494,29 @@ def worker(plan: dict, channel) -> None:
                 write_receipt(PRIVATE / "candidate_before_evaluation.json", candidate)
                 checkpoint("candidate_frozen_before_evaluation")
             for case in (cases if verified else cases[6:]):
+                if cell_mode:
+                    for version in orders[case.id]:
+                        selecting = version == "structured"
+                        base, text, cost = call(case, "generate", selection=selecting)
+                        truncated = cost["status"] == "output_truncated_invalid_case"
+                        if truncated:
+                            result = LinkedResult(None, None, "invalid_response", ("output_truncated",))
+                        else:
+                            result = select_cell(case, text) if selecting else normalized_completion(case, text).result
+                        name = "cell_selection" if selecting else "structured_tuple"
+                        raw_answer = base if isinstance(base, Answer) else None
+                        records[case.id][name] = {
+                            **field_record(case, result, field_labels[case.id]),
+                            "raw_response": base.model_dump() if base is not None else None,
+                            "call_id": cost["call_id"], "response_status": cost["status"],
+                            "diagnostic": diagnostic(case, result, raw_answer,
+                                                     response_valid=base is not None, model_fields=not selecting,
+                                                     context=field_labels[case.id]),
+                            "latency_seconds": cost["latency_seconds"],
+                        }
+                        checkpoint("cell_comparison_arm_recorded")
+                    write_receipt(PRIVATE / f"case_{case.id}.json", records[case.id])
+                    continue
                 if reliable:
                     for version in orders[case.id]:
                         base, text, cost = call(case, "generate", structured=version == "structured")
@@ -670,9 +739,12 @@ def run() -> int:
             if channel is not None:
                 channel.close()
     cases = load_cases(FIXTURE)
-    if plan["study"] != "CL-FOCUS-RELIABLE-01":
+    if plan["study"] not in ("CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01"):
         report["records"] = account_incomplete_attempts(cases, report["records"], report["calls"])
-    if plan["study"] == "CL-FOCUS-RELIABLE-01":
+    if plan["study"] == "CL-FOCUS-CELLS-01":
+        report["summary"] = summarize_cells(cases, report["records"], audit_fixture()[1])
+        report["promotion"] = {"promote": False, "reason": "source-assisted cell selection; no human gold"}
+    elif plan["study"] == "CL-FOCUS-RELIABLE-01":
         report["summary"] = summarize_reliability(
             cases, report["records"], contexts(json.loads(FIXTURE.read_bytes())), report["calls"])
         report["promotion"] = {"promote": False, "reason": "authored paired conformance audit; no human gold"}
@@ -716,7 +788,7 @@ def run() -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--execute", action="store_true")
-    parser.add_argument("--version", choices=("v1", "v2", "verifier", "stress", "linked", "fields", "reliable"), default="v1")
+    parser.add_argument("--version", choices=("v1", "v2", "verifier", "stress", "linked", "fields", "reliable", "cells"), default="v1")
     args = parser.parse_args(argv)
     if not args.execute:
         parser.error("--execute required for the single frozen local-model experiment")

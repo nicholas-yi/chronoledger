@@ -271,3 +271,23 @@ def test_reliability_audit_pairs_formats_without_doubling_the_call_budget(runner
                    "format": WIRE.json_schema()}
         assert input_fit(json.dumps(request, sort_keys=True).encode(), plan["options"])[2]
     runner.select_version("v1")
+
+
+def test_cell_audit_uses_strict_formats_and_source_candidates_within_context_budget(runner):
+    from asof.reader_cells import audit_fixture, cell_messages, selection_schema
+    from asof.reader_real2_guards import input_fit
+
+    runner.select_version("cells")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    values = runner.load_cases(runner.FIXTURE)
+    assert values == audit_fixture()[0] and len(values) == 12
+    assert plan["max_calls"] == 24 and plan["offline_cases"] == 192
+    assert "results/reader_reliability.json" in runner.FROZEN
+    assert all(runner.ROOT.joinpath(*path.split("/")).exists() for path in runner.FROZEN)
+    for case in values:
+        request = {"model": plan["model"], "stream": False, "think": False, "keep_alive": "20m",
+                   "messages": cell_messages(case), "options": plan["options"],
+                   "format": selection_schema(case)}
+        assert input_fit(json.dumps(request, sort_keys=True).encode(), plan["options"])[2]
+    runner.select_version("v1")

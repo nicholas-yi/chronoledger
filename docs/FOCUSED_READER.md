@@ -1257,3 +1257,150 @@ sources. Independent reviewers remain unassigned, human gold stays zero, the hel
 sources stay held and the broader application default is not silently promoted.
 The defensible gain is better response conformance and source-qualified completion,
 not proof that all financial fields or model reasoning are solved.
+
+## Source-cell selection and expanded field coverage: frozen plan
+
+The user approved the field-audit follow-up on 2026-11-19: source-cell selection,
+mandatory constrained model responses, larger known-context tests, differentiated
+failure reporting and concrete independent-review preparation.
+All seven prior model receipts stay immutable. No old score is rerun or rewritten.
+
+### Select a source cell; never regenerate its tuple
+
+[`asof.reader_cells`](../src/asof/reader_cells.py) reuses the guarded source parser
+to enumerate its qualified issuer/metric cells across at most twelve candidate
+reporting years. Each ID hashes the source-bound proof, including source SHA and
+offsets. The catalogue can contain different-year distractors; the model sees
+their explicit year, unit, value and supporting spans without any gold or target
+correctness flag. A source change changes its IDs.
+
+The model returns only an allowed `cell_id` with an empty reason, or null with a
+bounded refusal reason. Numbers, units and years are not generated. Code rechecks
+catalogue membership and requested year, then derives the answer from that cell's
+proof. Foreign IDs, malformed selections and different-year selections are
+rejected; none triggers a convenient substitution of the correct cell.
+A model abstention on a supported query remains a miss.
+
+**This is source-assisted selection, not independent table discovery.** The same
+source parser can already resolve the requested year. A catalogue cannot recover
+facts outside its grammar or ambiguous source contexts. The deterministic
+source-only control is therefore essential; model selection must earn an increment,
+not receive credit for work done by the parser.
+
+### Known-value test expansion
+
+[`reader_field_challenge`](../src/asof/reader_field_challenge.py) freezes **192
+invented cases**: four dimension groups, each with 24 supported positives and 24
+negative contrasts. Scope, accounting basis, period kind and revision status each
+have **24 explicitly known positive targets** instead of mainly unknowns.
+All 96 positives also have explicit value/sign/currency/scale/measure/year and
+source bindings. Variants rotate signs/zero, currencies, scales and fiscal years.
+Scope includes consolidated and named segment captions; basis includes GAAP and
+non-GAAP; period kind includes fiscal/calendar annual captions with quarterly/YTD
+contrasts; revision status includes explicitly original and superseding corrections
+with missing-priority contrasts.
+
+These are author-visible templates and mechanical variants, **not 24 independently
+authored semantic formats per field or independent financial observations**.
+The code records actual failure counts rather than assuming that a designed count
+is a passing score. Unsupported cases remain explicit: arbitrary quarter/YTD
+extraction, exact period dates, 52/53-week calendars, partial line-item restatement
+semantics, independent entity/concept discovery and real financial accuracy.
+Their safe rejection does not amount to extracting those fields successfully.
+
+### Paired model audit
+
+The [fixed plan](../results/reader_cell_selection_plan.json) permits twelve new
+authored source cases (six positive/negative pairs) and **24 calls maximum**:
+one strict tuple generation and one strict cell selection on each source.
+Both response formats are mandatory schemas, not optional free-form arms.
+Cases cover mixed column units, reversed/missing years, annual/subannual context,
+GAAP definition, correction priority and per-share denominators.
+The same model/digest, seed, one CPU, zero GPU/cloud/pulls, 20-minute/6-GiB limits,
+90-second call cap and one-attempt receipts remain.
+
+The reused SHA-order schedule balances cell-first and tuple-first on six sources
+each. The tuple arm sees the original source and existing unit/annual constraints.
+The cell arm additionally sees source-derived candidates, so this is a
+**system-design comparison**, not an equal-information model-format ablation.
+All three arms (strict tuple completion, cell selection and source control) use the
+same `field-record-v1` endpoint. The 192 deterministic cases are separate from
+the twelve model cases; no claim of 192 model generations is permitted.
+
+Per-case diagnostics distinguish malformed response, wrong raw fields, unsupported
+evidence, unnecessary abstention, unsupported grammar/context and correct refusals.
+Raw tuple diagnostics compare numeric value/sign, currency, scale, measure and
+year where a valid raw tuple exists. Record-level failed-field lists remain
+separate: rejecting one wrong-year record is not thirteen independent numeric errors.
+
+### Human actions still required: source-review runbook
+
+The [public preparation receipt](../results/reader_review_packet.json) identifies
+the existing private twelve-window packet and its pin:
+`3b2cf99bbb7b4e163f0b420a6bdd1f42a13b63b2d24b209ef61cb1b25fefb2a9`.
+No private excerpt is reopened by this implementation.
+
+1. **Assign two actual independent reviewers.** Each must have authorized access,
+   do a blind first pass without AI answers or the other person's labels, and use
+   a consistent reviewer ID. This assistant does not contact people or authenticate
+   reviewer identity. If you have seen model suggestions, do not declare an unseen
+   blind pass; use other reviewers or disclose exposure and keep it exploratory.
+2. Provide the existing private `data/reader_review_v1/packet.json` and one of the
+   existing `reviewer_a.csv` / `reviewer_b.csv` forms to each reviewer. Check the
+   packet pin before distribution; do not copy source snippets/identities into Git.
+   Those forms cover supported value/unit/year or insufficient context.
+3. Give each reviewer the matching **new supplemental context form**:
+   `data/reader_review_context_v1/context_reviewer_a.csv` or
+   `context_reviewer_b.csv`. These are generated from the public item count and pin
+   only, without source reads, by
+   `python scripts/prepare_reader_context_forms.py --prepare-blank`.
+   The command creates 72 blank rows per file (six dimensions x twelve items),
+   refuses overwrite and does not complete or authenticate a review.
+4. For every item, annotate issuer binding, metric binding, scope, accounting basis,
+   period kind and revision status. Choose `supported`, `unknown` or `not_applicable`.
+   For supported values, provide zero-based character offsets `[evidence_start,
+   evidence_end)` into the exact packet excerpt plus a rationale. Use `unknown`
+   if required context is outside that window; do not browse a full filing or infer
+   it from background knowledge to complete the form. Unknown/inapplicable rows
+   have no value/span, but still require a rationale. Do not invent fiscal endpoints.
+5. Return both base forms and both supplemental forms privately. The existing
+   `check_reviews` validator checks base declarations. The new
+   [`check_context_reviews`](../src/asof/reader_review_context.py) checks matching
+   reviewer identities, packet pins, complete item/dimension coverage, blind
+   declarations, offset bounds and state/value consistency, and lists value/state
+   disagreements. These are mechanical checks, **not semantic gold**.
+6. **Adjudicate disagreements and inspect supporting spans.** Keep both original
+   passes; record an adjudicator and source-linked rationale. Equal labels or valid
+   offsets alone do not certify entailment. Unresolved items stay out of accepted
+   gold and remain visible in coverage counts.
+7. If excerpts lack necessary context, separately approve a bounded eligible
+   development-context expansion before any new reads. Existing source holds and
+   holdouts stay closed. The selected twelve-window cohort cannot by itself
+   establish broad representative accuracy; an independent evaluation design is
+   still needed before a real-world claim or production promotion.
+
+The required human work is reviewer assignment/access, actual independent labels,
+adjudication and any explicit source-expansion/publication decision. No SEC/model
+credentials, push, holdout opening or automatic release is needed for these steps.
+
+Pre-generation validation: the affected reader/review tests passed **37/37**.
+The full regression attempt stalled after 78 completed tests for over ten minutes
+and its owned command was stopped; no completed/full-suite pass is claimed.
+The two unchanged single-member Windows Job tests then failed their ten-second
+readiness checks, while all 37 affected tests passed again (54.14 s total).
+No resource helper or timeout threshold was changed.
+
+A separate minimal-process check at the benchmark's **already-declared four-member
+allocation** passed readiness in 2.156 s, one-CPU member sampling and kill-on-close.
+It observed two distinct owned members: the virtual-environment launcher and actual
+Python worker. That is relevant to the single-member tests, but does not establish
+the cause of every full-suite stall or replace those failed tests. The model
+runner's existing handshake, membership/affinity sampling and fail-closed limits
+remain authoritative for its actual execution. Ruff and documentation checks passed.
+
+Both supplemental CSVs were actually generated and verified to contain 72 blank
+annotation rows each, with the expected packet pin and no reviewer IDs, labels,
+spans or rationales filled. Their SHA-256 values were each
+`c7bbbeeb5d6187be4e80b49063bdbd40b1ab1a9eca20f668e872bd7108d6f38d`.
+Only those new blank forms and the public preparation receipt were read; no
+private packet excerpt or existing human form was opened.

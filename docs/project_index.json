@@ -16,6 +16,8 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "reader-cell-selection", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_cell_comparison", "command": null},
+    {"id": "reader-context-forms", "path": "scripts/prepare_reader_context_forms.py", "status": "blank_form_preparation_only_no_source_read", "command": "python scripts/prepare_reader_context_forms.py --prepare-blank"},
     {"id": "reader-reliability", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-fields", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "linked-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
