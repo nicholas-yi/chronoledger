@@ -8,6 +8,18 @@ not current source-clock certification. The registered first-close rule is uncha
 
 ## Assurance and limits
 
+**2026-11-19 review-packet preparation:** [the focused-reader follow-on](FOCUSED_READER.md#observed-verifier-only-result-and-private-review-preparation)
+reused only the prior pinned development derivative. All 263 metadata references
+passed the shared date guard before 629,817 derived text-containing bytes were read;
+the original manifest/case content pins matched. Twelve issuer-disjoint current
+excerpt windows and two blank first-pass forms were written privately. This was not
+metadata-only and was not independent review: no reviewer is assigned and no gold
+label was created. No raw filing cache, mixed ZIP/parquet, quarantined KPI-v1 source,
+price or outcome dataset was opened. Public output contains only aggregate scope,
+counts and hashes. The separate 24-case local-model run used invented inputs only.
+No H4/H6 hold, registered design, original H1 intake period or historical result
+was changed; no production trial-ledger row, new source fetch or push occurred.
+
 **2026-11-19 ingestion-route correction:** the earlier bulk guard did not cover
 `asof ingest -> EdgarClient.companyfacts -> flatten_companyfacts`. An invented,
 fully mocked 2025 fact reproduced that gap; no real source/client/database was read.

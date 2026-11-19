@@ -5,7 +5,8 @@ This is the short navigation map. Historical detail remains in
 vintages. **No tradable-edge claim is supported.**
 
 **Active scope is intentionally narrower now:** one
-[evidence-linked metric reader and bounded critic](FOCUSED_READER.md). The broader
+[evidence-linked metric reader with deterministic checks](FOCUSED_READER.md).
+The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
@@ -17,8 +18,12 @@ The separately user-authorized [compact-critic v2](FOCUSED_READER.md#observed-v2
 completed within budget: evaluation parser/single-pass each 5/6, judge-assisted 4/6,
 zero corrections and one regression at about 2.55x model-arm latency.
 The truncation fix worked; promotion was refused. Both versions' evidence is preserved.
-The next separately approved task is [verifier-only robustness and review preparation](FOCUSED_READER.md#next-frozen-test-verifier-only-with-fair-deterministic-controls):
-no critic, no broader model expansion, and no real gold manufactured from model opinion.
+The [verifier-only robustness run](FOCUSED_READER.md#observed-verifier-only-result-and-private-review-preparation)
+completed: raw single-pass/old parser each 21/24; verified output and the stronger
+binding parser each 24/24 on authored grammar cases. Three corrections, zero regressions.
+The stronger parser matched the result without model cost; no LLM increment is established.
+Twelve private real-source review windows and two blank forms are ready, but
+independent reviewers remain unassigned and gold labels remain zero.
 
 ## What exists, and what it establishes
 

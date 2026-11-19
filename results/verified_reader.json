@@ -1,0 +1,2203 @@
+{
+  "study": "CL-FOCUS-VERIFY-01",
+  "plan": {
+    "study": "CL-FOCUS-VERIFY-01",
+    "model": "qwen3.5:4b",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "endpoint": "http://127.0.0.1:11435",
+    "case_count": 24,
+    "max_calls": 24,
+    "wall_seconds": 1200,
+    "controller_stop_seconds": 1180,
+    "RAM_bytes": 6442450944,
+    "controller_RAM_allowance": 134217728,
+    "call_seconds": 90,
+    "startup_seconds": 60,
+    "options": {
+      "temperature": 0,
+      "seed": 202611190752,
+      "num_ctx": 2048,
+      "num_predict": 384,
+      "num_thread": 1,
+      "num_gpu": 0,
+      "num_batch": 64
+    }
+  },
+  "lineage": {
+    "freeze_commit": "018e9e3bf5da1ccc2f094f2312a35dc0cc14e568",
+    "source_SHA256": {
+      "scripts/run_focused_reader.py": "573b8c55e6a7655aeb1b53bad99bdde773dee2fee6198971ed2fdd6292adb218",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "src/asof/local_model_runtime.py": "8ebe93daa7789fee0774d470ee33056c26a8335f513628ecab7e2fc4c64ae07d",
+      "src/asof/reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+      "src/asof/reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+      "src/asof/reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "src/asof/benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+      "src/asof/ledger.py": "85e6f75a58616514d18c3a1fdfba8343adf23334fb76a939f2d3a97b2f3764b7",
+      "tests/fixtures/verified_reader.json": "f36b65c0aa87258a2c1587014b04f064b85539ea45861e525bcf0b658e8524f6",
+      "tests/test_focused_reader.py": "d80966b5598baa50ee99d9e11e052245342f3b5cec84df52a347b219d15f16c2",
+      "results/verified_reader_plan.json": "fca82e78e65c2accb8270787d241f5dc889a1ccb58fd556a148ef27182142173",
+      "results/local_model_runtime_support.json": "55daf16377dfe43978e61feb3b961d690122926ccb17a8f12f1058c5230c2617",
+      "requirements-dev.lock": "c84cefb3543db283afc0a1021e2cace63ac4e7877a84611f345b928f64077f0c",
+      "docs/FOCUSED_READER.md": "215db390afe6d1e4a40d81d1dd58d8e504067cae3a8cf062cfe6aa698fb00f59",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "tests/test_verified_reader.py": "d43bc5af989182d0a9c99be9df776f33060a2bb72638f2c5bcce0a52b754d34e",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7",
+      "results/focused_reader_v2.json": "82bf4630e45ee5ba2edab2b75edf10a0ca1c4bb0cb6c5c3e466d00b96b4f3d14"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "status": "complete_invented_comparison",
+  "stop_reason": null,
+  "records": {
+    "R01-0": {
+      "parser": {
+        "answer": {
+          "value": "26",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "GarnetHarbor reported revenue of 26 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "26",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "GarnetHarbor reported revenue of 26 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 45.28099999995902,
+        "generated_tokens": 61
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "26",
+          "unit": "usd million",
+          "period": "2016",
+          "evidence": "garnetharbor reported revenue of 26 usd million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.0003330996260046959,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "26",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "GarnetHarbor reported revenue of 26 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 45.28112079994753,
+        "verification_seconds": 0.00012079998850822449,
+        "generated_tokens": 61,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R01-1": {
+      "parser": {
+        "answer": {
+          "value": "26",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "GarnetHarbor reported revenue of 26 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "26",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "GarnetHarbor reported revenue of 26 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 22.70300000021234,
+        "generated_tokens": 61
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "26",
+          "unit": "usd million",
+          "period": "2016",
+          "evidence": "garnetharbor reported revenue of 26 usd million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 8.209981024265289e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "26",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "GarnetHarbor reported revenue of 26 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 22.703172500245273,
+        "verification_seconds": 0.00017250003293156624,
+        "generated_tokens": 61,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R02-0": {
+      "parser": {
+        "answer": {
+          "value": "38",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "CopperVale reported backlog of 38 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "38",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "CopperVale reported backlog of 38 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 39.32800000021234,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "38",
+          "unit": "usd million",
+          "period": "2016",
+          "evidence": "coppervale reported backlog of 38 usd million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.0009657996706664562,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "38",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "CopperVale reported backlog of 38 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 39.328388600144535,
+        "verification_seconds": 0.0003885999321937561,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R02-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "CopperVale did not disclose backlog"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 27.45299999974668,
+        "generated_tokens": 39
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 0.0005970001220703125,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "CopperVale did not disclose backlog"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "preserved_abstention",
+        "reasons": [],
+        "latency_seconds": 27.45337909972295,
+        "verification_seconds": 0.0003790999762713909,
+        "generated_tokens": 39,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R03-0": {
+      "parser": {
+        "answer": {
+          "value": "43",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "SilverThicket reported revenue of 43 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "43",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "SilverThicket reported revenue of 43 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 30.905999999959022,
+        "generated_tokens": 73
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "43",
+          "unit": "eur million",
+          "period": "2017",
+          "evidence": "silverthicket reported revenue of 43 eur million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.00047949980944395065,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "43",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "SilverThicket reported revenue of 43 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 30.906149600166827,
+        "verification_seconds": 0.00014960020780563354,
+        "generated_tokens": 73,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R03-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "No 2017 revenue figure provided in source text"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 17.141000000294298,
+        "generated_tokens": 43
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 4.0899962186813354e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "No 2017 revenue figure provided in source text"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "preserved_abstention",
+        "reasons": [],
+        "latency_seconds": 17.14101970056072,
+        "verification_seconds": 1.9700266420841217e-05,
+        "generated_tokens": 43,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R04-0": {
+      "parser": {
+        "answer": {
+          "value": "7",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "BirchAurora reported operating income of 7 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "7",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "BirchAurora reported operating income of 7 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 23.57800000021234,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "7",
+          "unit": "usd thousand",
+          "period": "2017",
+          "evidence": "birchaurora reported operating income of 7 usd thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.00034929998219013214,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "7",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "BirchAurora reported operating income of 7 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 23.578103700187057,
+        "verification_seconds": 0.00010369997471570969,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R04-1": {
+      "parser": {
+        "answer": {
+          "value": "-7",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "BirchAurora reported operating income of -7 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "-7",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "BirchAurora reported operating income of -7 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 21.391000000294298,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "-7",
+          "unit": "usd thousand",
+          "period": "2017",
+          "evidence": "birchaurora reported operating income of -7 usd thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 3.939960151910782e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "-7",
+          "unit": "USD thousand",
+          "period": "2017",
+          "evidence": "BirchAurora reported operating income of -7 USD thousand for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 21.39109310042113,
+        "verification_seconds": 9.310012683272362e-05,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R05-0": {
+      "parser": {
+        "answer": {
+          "value": "13",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "CedarOrbit reported revenue of 13 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "13",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "CedarOrbit reported revenue of 13 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 21.516000000294298,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "13",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "cedarorbit reported revenue of 13 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.00034529995173215866,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "13",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "CedarOrbit reported revenue of 13 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 21.51609960012138,
+        "verification_seconds": 9.959982708096504e-05,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R05-1": {
+      "parser": {
+        "answer": {
+          "value": "13",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "CedarOrbit reported revenue of 13 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "13",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "CedarOrbit reported revenue of 13 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 20.859000000171363,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "13",
+          "unit": "eur million",
+          "period": "2017",
+          "evidence": "cedarorbit reported revenue of 13 eur million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 3.9599835872650146e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "13",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "CedarOrbit reported revenue of 13 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 20.85909190028906,
+        "verification_seconds": 9.190011769533157e-05,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R06-0": {
+      "parser": {
+        "answer": {
+          "value": "19",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "JuniperWake reported revenue of 19 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "19",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "JuniperWake reported revenue of 19 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 20.467999999877065,
+        "generated_tokens": 73
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "19",
+          "unit": "usd million",
+          "period": "2016",
+          "evidence": "juniperwake reported revenue of 19 usd million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.000506300013512373,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "19",
+          "unit": "USD million",
+          "period": "2016",
+          "evidence": "JuniperWake reported revenue of 19 USD million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 20.468112099915743,
+        "verification_seconds": 0.000112100038677454,
+        "generated_tokens": 73,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R06-1": {
+      "parser": {
+        "answer": {
+          "value": "19",
+          "unit": "USD thousand",
+          "period": "2016",
+          "evidence": "JuniperWake reported revenue of 19 USD thousand for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "19",
+          "unit": "USD thousand",
+          "period": "2016",
+          "evidence": "JuniperWake reported revenue of 19 USD thousand for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 20.515999999828637,
+        "generated_tokens": 73
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "19",
+          "unit": "usd thousand",
+          "period": "2016",
+          "evidence": "juniperwake reported revenue of 19 usd thousand for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.0001372997649013996,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "19",
+          "unit": "USD thousand",
+          "period": "2016",
+          "evidence": "JuniperWake reported revenue of 19 USD thousand for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 20.5160921998322,
+        "verification_seconds": 9.220000356435776e-05,
+        "generated_tokens": 73,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R07-0": {
+      "parser": {
+        "answer": {
+          "value": "21",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "MapleBeacon reported backlog of 21 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "21",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "MapleBeacon reported backlog of 21 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 20.967999999877065,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "21",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "maplebeacon reported backlog of 21 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.0003575999289751053,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "21",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "MapleBeacon reported backlog of 21 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 20.968105199746788,
+        "verification_seconds": 0.00010519986972212791,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R07-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "Conflicting eligible values"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 17.875,
+        "generated_tokens": 50
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 5.589984357357025e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "Conflicting eligible values"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "preserved_abstention",
+        "reasons": [],
+        "latency_seconds": 17.87501599965617,
+        "verification_seconds": 1.5999656170606613e-05,
+        "generated_tokens": 50,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R08-0": {
+      "parser": {
+        "answer": {
+          "value": "79",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "PineComet reported capacity utilization of 79 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "79",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "PineComet reported capacity utilization of 79 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 20.42199999978766,
+        "generated_tokens": 72
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "79",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "pinecomet reported capacity utilization of 79 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.00034140003845095634,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "79",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "PineComet reported capacity utilization of 79 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 20.422099799849093,
+        "verification_seconds": 9.980006143450737e-05,
+        "generated_tokens": 72,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R08-1": {
+      "parser": {
+        "answer": {
+          "value": "79",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "PineComet reported capacity utilization of 79 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "79",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "PineComet reported capacity utilization of 79 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 18.359999999869615,
+        "generated_tokens": 58
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "79",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "pinecomet reported capacity utilization of 79 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.00010009994730353355,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "79",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "PineComet reported capacity utilization of 79 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 18.36010940000415,
+        "verification_seconds": 0.00010940013453364372,
+        "generated_tokens": 58,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R09-0": {
+      "parser": {
+        "answer": {
+          "value": "105",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "AshMeridian reported net revenue retention of 105 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "105",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "AshMeridian reported net revenue retention of 105 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 21.890999999828637,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "105",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "ashmeridian reported net revenue retention of 105 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.0003161998465657234,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "105",
+          "unit": "%",
+          "period": "2017",
+          "evidence": "AshMeridian reported net revenue retention of 105 % for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 21.89110150001943,
+        "verification_seconds": 0.00010150019079446793,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R09-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text states that net revenue retention was not disclosed; only gross customer retention is provided."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 20.17199999978766,
+        "generated_tokens": 64
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 4.359986633062363e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "The source text states that net revenue retention was not disclosed; only gross customer retention is provided."
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "preserved_abstention",
+        "reasons": [],
+        "latency_seconds": 20.17201629979536,
+        "verification_seconds": 1.6300007700920105e-05,
+        "generated_tokens": 64,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R10-0": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": null,
+        "score": {
+          "correct": false,
+          "outcome": "invalid_response",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 21.5,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "3700",
+          "unit": "subscribers",
+          "period": "2017",
+          "evidence": "for 2017, cobaltmeadow had 3700 subscribers.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.0007038000039756298,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "3700",
+          "unit": "subscribers",
+          "period": "2017",
+          "evidence": "For 2017, CobaltMeadow had 3700 subscribers.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "repaired_blank_unit",
+        "reasons": [],
+        "latency_seconds": 21.50013589998707,
+        "verification_seconds": 0.00013589998707175255,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R10-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": null,
+        "score": {
+          "correct": false,
+          "outcome": "invalid_response",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 21.328999999910593,
+        "generated_tokens": 74
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "3700",
+          "unit": "subscribers",
+          "period": "2017",
+          "evidence": "cobaltmeadow had 3700 subscribers in 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 8.360017091035843e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "3700",
+          "unit": "subscribers",
+          "period": "2017",
+          "evidence": "CobaltMeadow had 3700 subscribers in 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "repaired_blank_unit",
+        "reasons": [],
+        "latency_seconds": 21.32914280006662,
+        "verification_seconds": 0.00014280015602707863,
+        "generated_tokens": 74,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R11-0": {
+      "parser": {
+        "answer": {
+          "value": "6",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "OrchidHaven reported revenue of 6 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "6",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "OrchidHaven reported revenue of 6 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 23.188000000081956,
+        "generated_tokens": 73
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "6",
+          "unit": "usd million",
+          "period": "2017",
+          "evidence": "orchidhaven reported revenue of 6 usd million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.0003685997799038887,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "6",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "OrchidHaven reported revenue of 6 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 23.188155999872833,
+        "verification_seconds": 0.0001559997908771038,
+        "generated_tokens": 73,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R11-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "6",
+          "unit": "USD million",
+          "period": "2017",
+          "evidence": "OrchidHaven reported revenue of 6 USD million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": false,
+          "outcome": "answered_unanswerable",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 25.530999999959022,
+        "generated_tokens": 73
+      },
+      "binding_parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "binding_grammar_missing_or_conflicting"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "latency_seconds": 4.8900023102760315e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "verifier_binding_missing_or_conflicting"
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_abstention",
+          "answered": false,
+          "grounding": []
+        },
+        "status": "rejected",
+        "reasons": [
+          "binding_missing_or_conflicting"
+        ],
+        "latency_seconds": 25.531078499741852,
+        "verification_seconds": 7.849978283047676e-05,
+        "generated_tokens": 73,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R12-0": {
+      "parser": {
+        "answer": {
+          "value": "4.5",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "NettleQuay reported revenue of 4.5 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "4.5",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "NettleQuay reported revenue of 4.5 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 21.640000000130385,
+        "generated_tokens": 76
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "4.5",
+          "unit": "eur million",
+          "period": "2017",
+          "evidence": "nettlequay reported revenue of 4.5 eur million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 0.0004992000758647919,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "4.5",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "NettleQuay reported revenue of 4.5 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 21.640148600097746,
+        "verification_seconds": 0.00014859996736049652,
+        "generated_tokens": 76,
+        "same_initial_generation_as_single_pass": true
+      }
+    },
+    "R12-1": {
+      "parser": {
+        "answer": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "parser_missing_or_conflicting_supported_grammar"
+        },
+        "score": {
+          "correct": false,
+          "outcome": "missed_answer",
+          "answered": false,
+          "grounding": []
+        }
+      },
+      "single_pass": {
+        "answer": {
+          "value": "4.5",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "NETTLEQUAY reported revenue of 4.5 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 21.79700000025332,
+        "generated_tokens": 77
+      },
+      "binding_parser": {
+        "answer": {
+          "value": "4.5",
+          "unit": "eur million",
+          "period": "2017",
+          "evidence": "nettlequay reported revenue of 4.5 eur million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "latency_seconds": 4.79002483189106e-05,
+        "generated_tokens": 0
+      },
+      "verified": {
+        "answer": {
+          "value": "4.5",
+          "unit": "EUR million",
+          "period": "2017",
+          "evidence": "NETTLEQUAY reported revenue of 4.5 EUR million for 2017.",
+          "abstain": false,
+          "reason": ""
+        },
+        "score": {
+          "correct": true,
+          "outcome": "correct_answer",
+          "answered": true,
+          "grounding": []
+        },
+        "status": "verified_binding",
+        "reasons": [],
+        "latency_seconds": 21.797095500398427,
+        "verification_seconds": 9.55001451075077e-05,
+        "generated_tokens": 77,
+        "same_initial_generation_as_single_pass": true
+      }
+    }
+  },
+  "calls": [
+    {
+      "call_id": 1,
+      "case_id": "R01-0",
+      "stage": "generate",
+      "request_sha256": "61d0f869c833a5e2a2e33448b65334596838734bcba906ce884a085c5256a13c",
+      "status": "schema_valid",
+      "latency_seconds": 45.28099999995902,
+      "generated_tokens": 61
+    },
+    {
+      "call_id": 2,
+      "case_id": "R01-1",
+      "stage": "generate",
+      "request_sha256": "ee5f69997b25074bef0a42f3c17b23dc4d7f870572486aba3a09787eba50ecb5",
+      "status": "schema_valid",
+      "latency_seconds": 22.70300000021234,
+      "generated_tokens": 61
+    },
+    {
+      "call_id": 3,
+      "case_id": "R02-0",
+      "stage": "generate",
+      "request_sha256": "552061cc2999cbcded47c70ed3131e7b36fcf9a659184dec141c68460013ce66",
+      "status": "schema_valid",
+      "latency_seconds": 39.32800000021234,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 4,
+      "case_id": "R02-1",
+      "stage": "generate",
+      "request_sha256": "a99d826cd7ca27b78f11cfba4f56c0c4ef2b19b384f49c6c87cfe243a8c14713",
+      "status": "schema_valid",
+      "latency_seconds": 27.45299999974668,
+      "generated_tokens": 39
+    },
+    {
+      "call_id": 5,
+      "case_id": "R03-0",
+      "stage": "generate",
+      "request_sha256": "f2008f94605f9ba8ab647ced64251d4fdbe2ae2c3031f7edeccd4b4d87774943",
+      "status": "schema_valid",
+      "latency_seconds": 30.905999999959022,
+      "generated_tokens": 73
+    },
+    {
+      "call_id": 6,
+      "case_id": "R03-1",
+      "stage": "generate",
+      "request_sha256": "30ca251802a9170c44ee1ab7142bed2f04156f87f6d1b4772cb884b07dbbfbd6",
+      "status": "schema_valid",
+      "latency_seconds": 17.141000000294298,
+      "generated_tokens": 43
+    },
+    {
+      "call_id": 7,
+      "case_id": "R04-0",
+      "stage": "generate",
+      "request_sha256": "3418241f5ae7842afcab277e3b8d5be001dea52aa2d479bc334679b38c9d1cf6",
+      "status": "schema_valid",
+      "latency_seconds": 23.57800000021234,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 8,
+      "case_id": "R04-1",
+      "stage": "generate",
+      "request_sha256": "e7e9966c31b48f1b2d4337f9d0abbf3658efd2a9f30afa4ab91461e078aff6f0",
+      "status": "schema_valid",
+      "latency_seconds": 21.391000000294298,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 9,
+      "case_id": "R05-0",
+      "stage": "generate",
+      "request_sha256": "60cbaee021b51b7cd149259bd5c2dc318149a6b31e13500931e7509ae3903ba9",
+      "status": "schema_valid",
+      "latency_seconds": 21.516000000294298,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 10,
+      "case_id": "R05-1",
+      "stage": "generate",
+      "request_sha256": "4ca6b9394e62fe489bd1971c4994bedfb3d1f1e2df11eb17a560c220a18308eb",
+      "status": "schema_valid",
+      "latency_seconds": 20.859000000171363,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 11,
+      "case_id": "R06-0",
+      "stage": "generate",
+      "request_sha256": "13bea0506640a50e020b5c4aa8593f7900b3d202ffcb348dc2516a81beb44861",
+      "status": "schema_valid",
+      "latency_seconds": 20.467999999877065,
+      "generated_tokens": 73
+    },
+    {
+      "call_id": 12,
+      "case_id": "R06-1",
+      "stage": "generate",
+      "request_sha256": "8f4fb91e1f60fe30e048285b582c87bc2c392f36b4a39b51a70f72831652e137",
+      "status": "schema_valid",
+      "latency_seconds": 20.515999999828637,
+      "generated_tokens": 73
+    },
+    {
+      "call_id": 13,
+      "case_id": "R07-0",
+      "stage": "generate",
+      "request_sha256": "07b2c477faf5686a53632f3f23db37bed1e70b73eec82247c93271fe5428f575",
+      "status": "schema_valid",
+      "latency_seconds": 20.967999999877065,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 14,
+      "case_id": "R07-1",
+      "stage": "generate",
+      "request_sha256": "bb1cfe6e0ec00e5d2551914b1f1dd0265813936b7eb0fd1ca5116ba6a393d610",
+      "status": "schema_valid",
+      "latency_seconds": 17.875,
+      "generated_tokens": 50
+    },
+    {
+      "call_id": 15,
+      "case_id": "R08-0",
+      "stage": "generate",
+      "request_sha256": "cdc94428d8ea31aa567e94e12f5830c931f03cb3368e01a281d9a7c06a1ff09d",
+      "status": "schema_valid",
+      "latency_seconds": 20.42199999978766,
+      "generated_tokens": 72
+    },
+    {
+      "call_id": 16,
+      "case_id": "R08-1",
+      "stage": "generate",
+      "request_sha256": "6a4f37a46d20292a478f86208e30c84b693cda945662be5f209a76faa7a1fe86",
+      "status": "schema_valid",
+      "latency_seconds": 18.359999999869615,
+      "generated_tokens": 58
+    },
+    {
+      "call_id": 17,
+      "case_id": "R09-0",
+      "stage": "generate",
+      "request_sha256": "2dfa8c92eaff85e5bd7aa3b89dae16d2de401b74ff11bbb4d74d8658420dd74d",
+      "status": "schema_valid",
+      "latency_seconds": 21.890999999828637,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 18,
+      "case_id": "R09-1",
+      "stage": "generate",
+      "request_sha256": "63589b12eabdafb7b17a8a5d580de7b2afc62387923c116dc3a120591b351b87",
+      "status": "schema_valid",
+      "latency_seconds": 20.17199999978766,
+      "generated_tokens": 64
+    },
+    {
+      "call_id": 19,
+      "case_id": "R10-0",
+      "stage": "generate",
+      "request_sha256": "2b9c36e862556dd332ecbb644dcfb1dc7c70e0d65ac5178a0ed2db48a4fc1610",
+      "status": "schema_invalid",
+      "latency_seconds": 21.5,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 20,
+      "case_id": "R10-1",
+      "stage": "generate",
+      "request_sha256": "6302b4fb795d71ed5f277bd4af6fc8e55af2f8dfe73f763d189064b1f461523a",
+      "status": "schema_invalid",
+      "latency_seconds": 21.328999999910593,
+      "generated_tokens": 74
+    },
+    {
+      "call_id": 21,
+      "case_id": "R11-0",
+      "stage": "generate",
+      "request_sha256": "29ed2f32b3793e1024ca386cfce8e7aaf713291cb5a80aac324b05b49d26555e",
+      "status": "schema_valid",
+      "latency_seconds": 23.188000000081956,
+      "generated_tokens": 73
+    },
+    {
+      "call_id": 22,
+      "case_id": "R11-1",
+      "stage": "generate",
+      "request_sha256": "6c7e4e180a521281a36e6a3d91fa5bbdf4d83d369602dcfcd04fe4ed00f0aaf7",
+      "status": "schema_valid",
+      "latency_seconds": 25.530999999959022,
+      "generated_tokens": 73
+    },
+    {
+      "call_id": 23,
+      "case_id": "R12-0",
+      "stage": "generate",
+      "request_sha256": "c2d3ad4511b9549f765c8377c8729fa9295117557d94e69899c4a49ca097f5ef",
+      "status": "schema_valid",
+      "latency_seconds": 21.640000000130385,
+      "generated_tokens": 76
+    },
+    {
+      "call_id": 24,
+      "case_id": "R12-1",
+      "stage": "generate",
+      "request_sha256": "93588d3708c1fb4885a1850ae501fd6bb619849484fd59fe6f8a0bd45eb04ff1",
+      "status": "schema_valid",
+      "latency_seconds": 21.79700000025332,
+      "generated_tokens": 77
+    }
+  ],
+  "judge_calibration": [],
+  "candidate": null,
+  "real_data_read": false,
+  "weights_updated": false,
+  "production_ledger_rows": 0,
+  "worker_pid": 137168,
+  "affinity_mask": 1,
+  "server_pid": 94296,
+  "phase": "final",
+  "worker_wall_seconds": 567.5,
+  "worker_exit_code": 0,
+  "summary": {
+    "arms": {
+      "parser": {
+        "planned": 24,
+        "recorded": 24,
+        "correct": 21,
+        "answered": 16,
+        "wrong_answers": 0,
+        "outcomes": {
+          "correct_abstention": 5,
+          "correct_answer": 16,
+          "missed_answer": 3
+        },
+        "pairs": {
+          "planned": 12,
+          "completed": 12,
+          "both_correct": 10,
+          "relation_violations": 1,
+          "invalid_or_unattempted": 0
+        },
+        "known_latency_seconds": 0,
+        "latency_measured_records": 0
+      },
+      "binding_parser": {
+        "planned": 24,
+        "recorded": 24,
+        "correct": 24,
+        "answered": 19,
+        "wrong_answers": 0,
+        "outcomes": {
+          "correct_abstention": 5,
+          "correct_answer": 19
+        },
+        "pairs": {
+          "planned": 12,
+          "completed": 12,
+          "both_correct": 12,
+          "relation_violations": 0,
+          "invalid_or_unattempted": 0
+        },
+        "known_latency_seconds": 0.006882397923618555,
+        "latency_measured_records": 24
+      },
+      "single_pass": {
+        "planned": 24,
+        "recorded": 24,
+        "correct": 21,
+        "answered": 18,
+        "wrong_answers": 1,
+        "outcomes": {
+          "answered_unanswerable": 1,
+          "correct_abstention": 4,
+          "correct_answer": 17,
+          "invalid_response": 2
+        },
+        "pairs": {
+          "planned": 12,
+          "completed": 12,
+          "both_correct": 10,
+          "relation_violations": 1,
+          "invalid_or_unattempted": 1
+        },
+        "known_latency_seconds": 565.8130000005476,
+        "latency_measured_records": 24
+      },
+      "verified": {
+        "planned": 24,
+        "recorded": 24,
+        "correct": 24,
+        "answered": 19,
+        "wrong_answers": 0,
+        "outcomes": {
+          "correct_abstention": 5,
+          "correct_answer": 19
+        },
+        "pairs": {
+          "planned": 12,
+          "completed": 12,
+          "both_correct": 12,
+          "relation_violations": 0,
+          "invalid_or_unattempted": 0
+        },
+        "known_latency_seconds": 565.81602840079,
+        "latency_measured_records": 24
+      }
+    },
+    "paired_corrections": 3,
+    "paired_regressions": 0,
+    "promote": false,
+    "independent_gold": false,
+    "interpretation": "visible authored grammar cases, not real financial validation"
+  },
+  "promotion": {
+    "promote": false,
+    "reason": "authored grammar fixtures, no independent gold"
+  },
+  "controller_wall_seconds": 568.7820000001229,
+  "observed_combined_peak_RSS_bytes": 3912040448,
+  "owned_pids_observed": [
+    56576,
+    70956,
+    94296,
+    137168
+  ],
+  "source_unchanged": true,
+  "resource_check_passed": true
+}

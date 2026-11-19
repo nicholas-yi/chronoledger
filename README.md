@@ -29,12 +29,15 @@ separates verified engineering fixes from the evidence that still needs to be ob
 Start with the [current evidence and entrypoint map](docs/CURRENT_STATUS.md);
 the [curated index](docs/project_index.json) distinguishes historical, held and safe offline work.
 **Active research is now deliberately narrow:** a
-[source-grounded metric reader with a bounded critic](docs/FOCUSED_READER.md).
+[source-grounded metric reader with deterministic verification](docs/FOCUSED_READER.md).
 The broader quant toolkit is parked reference code, not nine validated trading models.
 The first local critic trial stopped at its output limit; it established no improvement
 and did not replace the answer-first default.
 The compact-critic redo completed but scored 4/6 versus 5/6 for single-pass/parser on
 the invented evaluation cases, with higher cost. The judge remains nondefault.
+On a fresh 24-case grammar-controlled robustness run, deterministic verification
+improved raw output from 21 to 24 correct outcomes—but a stronger parser also scored
+24/24 without model cost. No real-data accuracy or model increment is established.
 
 ## The question
 

@@ -446,3 +446,82 @@ documentation/index checks passed. Added fixtures cover unique blank-unit recove
 ambiguity/refusal, no-gold behavior, paired metrics, source-date-before-derived-read
 ordering, unlabelled templates and reviewer-independence blockers.
 No new local generation or real derivative read occurred during those checks.
+
+## Observed verifier-only result and private review preparation
+
+Code, plans and cases were frozen at
+`22f4452c183363b9f433c9ba5f19b5eba04d41fe`. The private-packet aggregate receipt
+was then committed at `018e9e3bf5da1ccc2f094f2312a35dc0cc14e568`, without changing
+those source files. Model generation froze those same source bytes at the latter
+commit. [Actual verifier receipt](../results/verified_reader.json);
+[packet preparation receipt](../results/reader_review_packet.json).
+
+### Fresh authored robustness comparison
+
+All **24 cases / 12 pairs** completed, using 24 initial-generation calls and **zero
+judge/revision calls**, in **568.782 seconds (9.48 minutes)**.
+
+| Arm | Correct outcomes / 24 | Answered values | Correct abstentions | Other outcomes |
+|---|---:|---:|---:|---|
+| Old narrow parser | 21 | 16 | 5 | Three grammar misses |
+| Stronger binding parser | 24 | 19 | 5 | None on this authored fixture |
+| Raw single pass | 21 | 17 | 4 | Two invalid missing-unit responses, one answer to an ambiguous source |
+| Same single pass + verification | 24 | 19 | 5 | None on this authored fixture |
+
+Verification corrected **three** outcomes and regressed **zero**:
+
+- R10-0/R10-1: the subscriber value, reporting year and quote were present, but
+  the model omitted the unit. The unique quoted binding supplied `subscribers`.
+  Raw model outputs remain scored invalid; the repaired arm is distinct.
+- R11-1: the source made unreconciled USD/EUR claims for the same metric/year.
+  The model answered one; verification refused the ambiguous binding and abstained.
+
+All twelve verified/binding-parser pairs had both cases correct and zero declared
+relation violations. Raw single pass had ten both-correct pairs, one relation
+violation and one invalid-output pair; the old parser had ten both-correct pairs
+and one relation violation. Relation agreement alone can conceal wrong answers;
+both-correct and invalid counts therefore remain visible.
+
+**The stronger parser also got 24/24. That is the most important control.**
+It took about **0.0069 seconds total** for the measured parsing over 24 cases, versus
+**565.813 seconds** of model-call latency. Verification itself added only about
+**0.0030 seconds total**, but it did not remove the cost of the original model call.
+Model arms share that generation; do not sum them as independent call costs.
+Unique model output tokens were 1,632.
+
+This fixture deliberately uses a finite supported grammar and known failure types.
+New names/numbers and paired perturbations are not independent financial gold or
+generalization to real disclosures. **The result supports the deterministic rules
+on this subset; it does not show that the LLM adds value beyond the stronger parser.**
+For known supported language, prefer the deterministic path. The broader
+answer-first default remains unchanged; no experimental model/verification pipeline
+is automatically promoted to an unqualified real-data default.
+
+Resource/source checks passed: observed combined peak working set
+3,912,040,448 bytes (3.64 GiB), one CPU, worker exit 0. Both older judge result
+hashes matched their frozen values. The one-attempt markers and all raw responses
+are retained; no seed changes, retries, model pulls, training or return evaluation.
+
+### Real-source packet: actually prepared, not independently labelled
+
+The approved prior derivative was read only after guarding all 263 references in
+its 64-case parent manifest. All declared date roles were inside the shared
+2012-2018 envelope (combined 2012-09-30 through 2018-12-06).
+Manifest input was 176,415 bytes; text-containing derived JSON was 629,817 bytes
+and matched the preexisting pin. No raw filing cache, mixed ZIP/parquet, quarantined
+source, prices or outcome dataset was opened.
+
+Preparation selected **12 issuer-disjoint current excerpt windows** and wrote a
+private packet plus two blank review CSVs under `data/reader_review_v1`.
+It completed in 0.109 seconds, with process peak RSS 35,180,544 bytes, unchanged source,
+zero model calls and zero raw-cache body reads.
+Packet SHA-256:
+`3b2cf99bbb7b4e163f0b420a6bdd1f42a13b63b2d24b209ef61cb1b25fefb2a9`.
+Only aggregate hashes/counts were committed; snippets and identities remain private.
+
+**Independent reviewers are still unassigned, intake is blocked, and gold labels
+remain zero.** We prepared the evidence and neutral first-pass forms; we did not
+perform two reviews, contact people, invent labels or declare agreement.
+The source windows are a selected prior exposed cohort and may be too narrow to
+establish identity/unit/year. Reviewers must use `insufficient_context` when necessary.
+No automatic promotion or economic claim follows from packet preparation.

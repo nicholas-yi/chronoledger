@@ -3,7 +3,7 @@
   "scope": "Curated navigation, not execution permission or independent evidence certification.",
   "unlisted_scripts": "legacy_unreviewed_not_authorized",
   "unlisted_results": "historical_unindexed_not_current_evidence",
-  "active_research": "one evidence-linked metric extractor and bounded critic; not market prediction",
+  "active_research": "one evidence-linked metric extractor with deterministic verification; model judge nondefault",
   "parked_reference_modules": [
     "src/asof/research/economic.py",
     "src/asof/research/arrivals.py",
@@ -16,8 +16,8 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "approved_once_pending_verifier_run", "command": null},
-    {"id": "reader-review-packet", "path": "scripts/prepare_reader_review.py", "status": "approved_once_pending_private_packet", "command": null},
+    {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "reader-review-packet", "path": "scripts/prepare_reader_review.py", "status": "private_packet_prepared_reviews_unassigned", "command": null},
     {"id": "focused-reader-v2", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "focused-reader", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "demo", "path": "src/asof/demo.py", "status": "active_offline", "command": "asof demo"},
@@ -35,6 +35,24 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "verified-reader",
+      "kind": "synthetic_local_model_diagnostic",
+      "path": "results/verified_reader.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "018e9e3bf5da1ccc2f094f2312a35dc0cc14e568",
+      "status": "complete_deterministic_repairs_help_but_binding_parser_matches",
+      "supersedes": []
+    },
+    {
+      "id": "reader-review-packet",
+      "kind": "source_packet_preparation_not_gold",
+      "path": "results/reader_review_packet.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "22f4452c183363b9f433c9ba5f19b5eba04d41fe",
+      "status": "private_unlabelled_packet_reviewers_unassigned",
+      "supersedes": []
+    },
     {
       "id": "focused-reader-v2",
       "kind": "synthetic_local_model_diagnostic",
