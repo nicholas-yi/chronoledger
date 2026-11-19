@@ -1781,3 +1781,109 @@ Ruff and documentation checks passed; isolated Torch/Transformers imports succee
 with CPU Torch2.9.1+cpu and CUDA unavailable. No weights or benchmark claims were
 evaluated before the source/fixture/asset freeze. The matrix currently passes every
 listed cohort under its declared current contract; old scores remain frozen.
+
+## Observed consolidation: current regressions pass; HHEM is not an approval gate
+
+The [actual receipt](../results/hhem_benchmark.json) records the run frozen at
+`4c436fd48074c369169993cbe67cf0860238e71e`. It contains both the reproducible
+current-candidate matrix and the one local HHEM experiment. Neither the old raw
+model outputs nor their published historical scores were edited.
+
+### Current source candidate: complete declared regression matrix
+
+| Exposed invented cohort | Correct / planned | Contract |
+|---|---:|---|
+| Original focused cases | **12/12** | New current tuple + exact source proof |
+| Grammar robustness | **24/24** | New current tuple + exact source proof |
+| Harder-format model-audit subset | **24/24** | New current tuple + exact source proof |
+| Full harder-format fixture | **288/288** | New current tuple + exact source proof |
+| Linked challenge | **24/24** | New current tuple + exact source proof |
+| Field records | **24/24** | Existing field-record-v1 |
+| Reliability source cohort | **24/24** | Existing field-record-v1 |
+| Expanded context coverage | **192/192** | Existing field-record-v1 |
+| Source-cell questions | **12/12** | Existing field-record-v1 |
+
+Every answered record passed its current source-proof checks; there were zero wrong
+admissions in this matrix. The historical 21/24, 17/24 and other old scores still
+describe those original implementations, outputs and score contracts.
+This matrix is **posthoc development regression**, not new model generation,
+independent human gold or an apples-to-apples rewrite of the old citation score.
+The cohorts overlap and must not be summed into an independent sample size.
+Known-context field targets remain separate from unknown/not-applicable targets.
+The matrix command exits nonzero on any newly missed declared case.
+
+### HHEM result: 17/24 at the predeclared threshold
+
+All24frozenclaims were evaluated, with no truncation, invalid outputs or retries.
+At the fixed0.5support threshold:
+
+| Authored claim | Predicted supported | Predicted unsupported |
+|---|---:|---:|
+| Supported (12) | **12** | 0 |
+| Unsupported (12) | **7** | **5** |
+
+Thus accuracy was **17/24**, false support **7/12 unsupported claims**, and
+false rejection zero. Only **12/19** admitted support predictions were correct.
+There was no threshold tuning, removal of difficult cases or replacement with a
+friendlier model to manufacture 24/24.
+
+| False support | Why the claim was wrong | Support score |
+|---|---|---:|
+| Year/table column | Assigned the 2016 USD amount to reporting year2017 | 0.8527 |
+| Entity | Assigned customer revenue to the reporting issuer | 0.8124 |
+| Definition | Substituted operating margin for gross margin | 0.8079 |
+| Scope | Substituted a segment amount for consolidated revenue | 0.5728 |
+| Denominator | Substituted basic EPS for diluted EPS | 0.6945 |
+| Footnote | Applied the default USD unit despite an EUR-thousand row override | 0.7176 |
+| Correction | Accepted the superseded original rather than corrected value | 0.8859 |
+
+These are precisely the associations where exact source structure matters.
+Several wrong claims received high scores; a raw model score is not a calibrated
+financial correctness probability. The sample is too small/authored to justify
+learning a production threshold. HHEM should **not approve financial records or
+replace deterministic guards**. It is an optional measured advisory baseline only,
+not a validated improvement to the current source path.
+
+This claim-entailment task is also different from the earlier 5/12 generative
+reviewer test. The two percentages must not be presented as a like-for-like
+judge improvement, and HHEM was not tested on abstention/answerability.
+Independent human review remains required for claims outside known source rules.
+
+### Actual local feasibility and verification
+
+The worker loaded pinned weights in **5.562 s** and scored all24claims in
+**16.907 s total**, about0.704sperclaim on one CPU. End-to-end controller time was
+**43.391 s**, including startup, hash verification, imports, matrix replay and cleanup.
+The24inputs totalled1,433tokens, maximum72perclaim pair; none reached the2,048cap.
+Observed combined peak working set was **727,384,064bytes (0.677GiB)**.
+One-CPU affinity, CPU model device, source/resource checks and worker exit0 passed.
+This establishes local computational feasibility, **not sufficient task accuracy**.
+
+All24scores were reconstructed through the frozen threshold/summary, all nine
+matrix cohorts were replayed exactly, artifact hashes were reverified, and all ten
+historical raw/accounting receipt hashes matched. Both owned worker/launcher PIDs
+were confirmed absent; the preexisting Ollama server was untouched.
+The throwaway dependency venv was removed after validation; pinned model/tokenizer
+assets remain in ignored local data for reproducibility. The project `.venv` and
+the dev CI lock were not modified by package installation.
+
+Software validation is the recorded744full-suite passes plus28focused checks,
+with Ruff and documentation/index checks passing. No model or threshold code was
+retuned after this run; only result/navigation/documentation edits followed.
+No real-source/private-review read, financial study, weights training, production
+trial-ledger row, human-review fabrication, source-scope release or push occurred.
+Ledger file-size metadata remained106,246bytes; its contents were not opened.
+
+### Remaining actions
+
+The three requested engineering deliverables are implemented and measured:
+grammar fixes, a current supported-regression target/matrix, and one pinned local
+verifier comparison. **Not every measured model deserves a perfect score.**
+The defensible result is a passing supported-source candidate alongside a verifier
+whose seven false approvals are retained as a reason not to trust it as a gate.
+
+Unresolved: independently labelled eligible real-source accuracy, semantic diversity
+beyond authored templates, arbitrary financial formats and a reliable abstention/
+answerability reviewer. Two actual blind human passes and adjudication are still
+the independent-review protocol; one human plus AI must be labelled AI-assisted.
+Prepared base/context forms remain blank, and human gold remains zero.

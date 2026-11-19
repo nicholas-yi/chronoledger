@@ -31,13 +31,13 @@ the [curated index](docs/project_index.json) distinguishes historical, held and 
 **Active research is now deliberately narrow:** a
 [source-grounded metric reader with deterministic verification](docs/FOCUSED_READER.md).
 The broader quant toolkit is parked reference code, not nine validated trading models.
-Expanded deterministic field coverage passed 192/192 authored cases, including
-24 known-valued targets each for scope, accounting basis, period kind and revision
-status. These are template variants, not independent real-source accuracy.
-The subsequent compact, load-separated cell run completed 12/12 correctly.
-One source-citing AI reviewer was also implemented/tested, but matched only 5/12
-authored verdicts and remains advisory-only, not a human substitute.
-The earlier timed-out attempt is preserved. Independent human reviews are still needed.
+The current source candidate passes every declared exposed regression cohort,
+including the formerly missed grammar cases (now 24/24), full harder-format fixture
+(288/288) and context coverage (192/192). Older cohorts use an explicitly new
+source-proof diagnostic; historical scores remain unchanged.
+A pinned small local verifier was also benchmarked: HHEM scored 17/24 with seven
+false approvals, so it is not an approval gate. These authored regressions are not
+independently reviewed real-world accuracy; human labels remain outstanding.
 The [retained comparisons and limitations](docs/FOCUSED_READER.md) include failed
 judge trials, format-shift failures and posthoc development replays. The judge
 remains nondefault, the broader toolkit stays parked, and independent real-source

@@ -1,0 +1,653 @@
+{
+  "status": "complete_invented_entailment_benchmark",
+  "stop_reason": null,
+  "rows": [
+    {
+      "id": "HHEM-01-0",
+      "support_score": 0.9104934334754944,
+      "input_tokens": 44,
+      "latency_seconds": 1.375
+    },
+    {
+      "id": "HHEM-01-1",
+      "support_score": 0.005573940463364124,
+      "input_tokens": 45,
+      "latency_seconds": 0.7659999998286366
+    },
+    {
+      "id": "HHEM-02-0",
+      "support_score": 0.8999253511428833,
+      "input_tokens": 66,
+      "latency_seconds": 0.9840000001713634
+    },
+    {
+      "id": "HHEM-02-1",
+      "support_score": 0.8526577353477478,
+      "input_tokens": 66,
+      "latency_seconds": 1.5940000000409782
+    },
+    {
+      "id": "HHEM-03-0",
+      "support_score": 0.9232631921768188,
+      "input_tokens": 42,
+      "latency_seconds": 1.3130000000819564
+    },
+    {
+      "id": "HHEM-03-1",
+      "support_score": 0.005154319107532501,
+      "input_tokens": 42,
+      "latency_seconds": 1.5779999997466803
+    },
+    {
+      "id": "HHEM-04-0",
+      "support_score": 0.8205028176307678,
+      "input_tokens": 58,
+      "latency_seconds": 1.6090000001713634
+    },
+    {
+      "id": "HHEM-04-1",
+      "support_score": 0.2579302191734314,
+      "input_tokens": 58,
+      "latency_seconds": 1.3130000000819564
+    },
+    {
+      "id": "HHEM-05-0",
+      "support_score": 0.8856325745582581,
+      "input_tokens": 61,
+      "latency_seconds": 1.233999999705702
+    },
+    {
+      "id": "HHEM-05-1",
+      "support_score": 0.19464252889156342,
+      "input_tokens": 61,
+      "latency_seconds": 0.6559999999590218
+    },
+    {
+      "id": "HHEM-06-0",
+      "support_score": 0.9505025744438171,
+      "input_tokens": 61,
+      "latency_seconds": 0.45300000021234155
+    },
+    {
+      "id": "HHEM-06-1",
+      "support_score": 0.8123682737350464,
+      "input_tokens": 61,
+      "latency_seconds": 0.29699999978765845
+    },
+    {
+      "id": "HHEM-07-0",
+      "support_score": 0.881000816822052,
+      "input_tokens": 54,
+      "latency_seconds": 0.2820000001229346
+    },
+    {
+      "id": "HHEM-07-1",
+      "support_score": 0.8078789114952087,
+      "input_tokens": 54,
+      "latency_seconds": 0.21799999987706542
+    },
+    {
+      "id": "HHEM-08-0",
+      "support_score": 0.8831269145011902,
+      "input_tokens": 61,
+      "latency_seconds": 0.29700000025331974
+    },
+    {
+      "id": "HHEM-08-1",
+      "support_score": 0.5727649927139282,
+      "input_tokens": 61,
+      "latency_seconds": 0.45299999974668026
+    },
+    {
+      "id": "HHEM-09-0",
+      "support_score": 0.8448955416679382,
+      "input_tokens": 61,
+      "latency_seconds": 0.25
+    },
+    {
+      "id": "HHEM-09-1",
+      "support_score": 0.27724969387054443,
+      "input_tokens": 61,
+      "latency_seconds": 0.29700000025331974
+    },
+    {
+      "id": "HHEM-10-0",
+      "support_score": 0.8952041268348694,
+      "input_tokens": 70,
+      "latency_seconds": 0.3440000000409782
+    },
+    {
+      "id": "HHEM-10-1",
+      "support_score": 0.694512665271759,
+      "input_tokens": 70,
+      "latency_seconds": 0.3119999999180436
+    },
+    {
+      "id": "HHEM-11-0",
+      "support_score": 0.8159594535827637,
+      "input_tokens": 66,
+      "latency_seconds": 0.29699999978765845
+    },
+    {
+      "id": "HHEM-11-1",
+      "support_score": 0.7176219820976257,
+      "input_tokens": 66,
+      "latency_seconds": 0.2820000001229346
+    },
+    {
+      "id": "HHEM-12-0",
+      "support_score": 0.8776953220367432,
+      "input_tokens": 72,
+      "latency_seconds": 0.42100000008940697
+    },
+    {
+      "id": "HHEM-12-1",
+      "support_score": 0.885929524898529,
+      "input_tokens": 72,
+      "latency_seconds": 0.2820000001229346
+    }
+  ],
+  "started_cases": [
+    "HHEM-01-0",
+    "HHEM-01-1",
+    "HHEM-02-0",
+    "HHEM-02-1",
+    "HHEM-03-0",
+    "HHEM-03-1",
+    "HHEM-04-0",
+    "HHEM-04-1",
+    "HHEM-05-0",
+    "HHEM-05-1",
+    "HHEM-06-0",
+    "HHEM-06-1",
+    "HHEM-07-0",
+    "HHEM-07-1",
+    "HHEM-08-0",
+    "HHEM-08-1",
+    "HHEM-09-0",
+    "HHEM-09-1",
+    "HHEM-10-0",
+    "HHEM-10-1",
+    "HHEM-11-0",
+    "HHEM-11-1",
+    "HHEM-12-0",
+    "HHEM-12-1"
+  ],
+  "lineage": {
+    "freeze_commit": "4c436fd48074c369169993cbe67cf0860238e71e",
+    "source_SHA256": {
+      "src/asof/hhem_verifier.py": "5670816103ddbd1aab85b12c0379fe5f627e755464a1180997144734fea610d6",
+      "src/asof/reader_regression.py": "a2e12a7220da4bfd6c7e89c5b4f26bd138ee3385c5baeb0db9c7289a3485d277",
+      "src/asof/reader_fields.py": "5a798b67cef1a5296b767d4f3bf12d438b934e6ac7a7c9fe2e5d20d18a9ab705",
+      "src/asof/linked_reader.py": "bfd1b101858efbf97445a8026071853ea1c8c1bcb6baece5a7cc3c9160864309",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/reader_cells.py": "1e3babc16511bcb96238fa7cbdc69104532c44703b3492a548500e7aab2beb05",
+      "src/asof/reader_field_challenge.py": "384c512732ebff3584720039e89dcffd07f7af90622f964021b41713b1b1418f",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/reader_stress.py": "a7515ea2ac09bdb40cf224b30a0d9aa274493bd6f1a2df29f9b14a34da673cba",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "scripts/run_hhem_benchmark.py": "184be55e01715e36918973dc975b6a08f313404fbe43fc6de92b9b25c1b448c6",
+      "scripts/prepare_hhem_assets.py": "e15112c774363eda8019bc7a6da50f83c8293b1a9810fcac9e3b2e40ff0960df",
+      "scripts/check_reader_regressions.py": "456f5e5e7a6997de8bf2a50457368a2afa19ea63f3760ce7019565a0d3cf8891",
+      "tests/test_hhem_verifier.py": "a26e80ab35527397278b4a17cea39c0fd40c6f10ae62b9d0d9d571aa30412737",
+      "tests/test_reader_fields.py": "f53968aed3d9e1380a94412f0d7523d8323ed52327fd96760813d5d6b4602df0",
+      "tests/test_reader_regression.py": "0258af2852994fe8cee7ca2095af00500f53303bdfd085b1713f3061cfe20fb0",
+      "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+      "tests/fixtures/verified_reader.json": "f36b65c0aa87258a2c1587014b04f064b85539ea45861e525bcf0b658e8524f6",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "tests/fixtures/linked_challenge.json": "ac34ab5c2e03ffdeae878e8ef83eb9808e2e78bafd5f4b1890200f24bace9810",
+      "tests/fixtures/reader_fields.json": "ec1c72985dd288c442b7718716409b6e55a2dcc7b24f9634a9fd0346141c20ac",
+      "tests/fixtures/reader_reliability.json": "3663885962ec7930fec547068841f1231c811efc242bf37c4f7e53b3eb96efbd",
+      "results/hhem_assets.json": "85071c1ec0339b4ca78fdbde81f49f3c01ce071a7579c4aa3e24ffbaafa7435e",
+      "results/hhem_environment.json": "594c1e8b4bbd0aa18e2f360327c8457b4a5769ba615276b3ef4ca4867bd7e822",
+      "results/hhem_plan.json": "ffd110574a99543b4eabcfc5496f08392c30d10c860b7da2bd637b9ff62eea5e",
+      "docs/FOCUSED_READER.md": "96d8645572b0ac338ab09690c95e918eef6a273027391b51f83226df2a4084aa",
+      "pyproject.toml": "ec3e7e4b8b4851bbe941712229e57b9d7c8a952585df71768a1b6b8c777624c9",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7",
+      "results/focused_reader_v2.json": "82bf4630e45ee5ba2edab2b75edf10a0ca1c4bb0cb6c5c3e466d00b96b4f3d14",
+      "results/verified_reader.json": "db3414b73043bd1f1e93f2f358f2e74b3a26f9582d3efcfb57d24ff7eddf62de",
+      "results/reader_stress.json": "aab4af98e15207aec3799f4db80764df3158814d8219d348ead3d73020ceb9a4",
+      "results/linked_reader.json": "aa90834de02c37826c267cb0450d52184531f830730d5200448b1a6e7579b9e2",
+      "results/reader_fields.json": "32580a1f4477226e848867dea935726f5731397aa6c71f49c4beeffeecfe46aa",
+      "results/reader_reliability.json": "cef75a6a50a6a8793ab3101189e4a54e3184a7b4df806bf6b0c41e3253544956",
+      "results/reader_cell_selection.json": "8367b709e6e007538a56c49cc23512497e5394f0374a9cf7fb1c7fd31c3868b9",
+      "results/reader_cell_selection_accounting.json": "de4fd1bfdae62a73c0f559d1b75270dd20eb8771595a15ecac274db743734a7c",
+      "results/reader_ai_review.json": "e45b2669984776079a497bb186ec4de58634ff24b138fe0545e8ea82fdffc78b"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "plan": {
+    "profile": "HHEM-LOCAL-01",
+    "max_cases": 24,
+    "threshold": 0.5,
+    "wall_seconds": 1200,
+    "controller_stop_seconds": 1180,
+    "RAM_bytes": 6442450944,
+    "controller_RAM_allowance": 134217728,
+    "CPU_count": 1,
+    "input_token_cap": 2048,
+    "GPU": false
+  },
+  "real_data_read": false,
+  "model": "vectara/hallucination_evaluation_model",
+  "production_ledger_rows": 0,
+  "training": false,
+  "decision_authority": "advisory_only",
+  "current_regressions": {
+    "status": "complete_exposed_current_candidate_regression",
+    "cohorts": {
+      "focused_original12": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 12,
+        "correct": 12,
+        "answerable": 7,
+        "complete_answers": 7,
+        "correct_refusals": 5,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 7,
+          "valid": 7
+        },
+        "field_checks": null
+      },
+      "grammar_robustness24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 19,
+        "complete_answers": 19,
+        "correct_refusals": 5,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 19,
+          "valid": 19
+        },
+        "field_checks": null
+      },
+      "harder_model_subset24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 22,
+        "complete_answers": 22,
+        "correct_refusals": 2,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 22,
+          "valid": 22
+        },
+        "field_checks": null
+      },
+      "harder_all288": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 288,
+        "correct": 288,
+        "answerable": 264,
+        "complete_answers": 264,
+        "correct_refusals": 24,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 264,
+          "valid": 264
+        },
+        "field_checks": null
+      },
+      "linked_challenge24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": null
+      },
+      "reader_fields": {
+        "contract": "field-record-v1",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": {
+          "value": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "sign": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "currency": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scale": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "measure": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "reporting_year": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "issuer_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "metric_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scope": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "accounting_basis": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "period_kind": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "revision_status": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "source_evidence": {
+            "correct": 12,
+            "planned_answerable": 12
+          }
+        }
+      },
+      "reader_reliability": {
+        "contract": "field-record-v1",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": {
+          "value": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "sign": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "currency": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scale": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "measure": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "reporting_year": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "issuer_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "metric_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scope": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "accounting_basis": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "period_kind": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "revision_status": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "source_evidence": {
+            "correct": 12,
+            "planned_answerable": 12
+          }
+        }
+      },
+      "context_coverage192": {
+        "contract": "field-record-v1",
+        "planned": 192,
+        "correct": 192,
+        "answerable": 96,
+        "complete_answers": 96,
+        "correct_refusals": 96,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 96,
+          "valid": 96
+        },
+        "field_checks": {
+          "value": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "sign": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "currency": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "scale": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "measure": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "reporting_year": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "issuer_binding": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "metric_binding": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "scope": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "accounting_basis": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "period_kind": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "revision_status": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "source_evidence": {
+            "correct": 96,
+            "planned_answerable": 96
+          }
+        }
+      },
+      "cell_sources12": {
+        "contract": "field-record-v1",
+        "planned": 12,
+        "correct": 12,
+        "answerable": 6,
+        "complete_answers": 6,
+        "correct_refusals": 6,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 6,
+          "valid": 6
+        },
+        "field_checks": {
+          "value": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "sign": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "currency": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "scale": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "measure": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "reporting_year": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "issuer_binding": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "metric_binding": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "scope": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "accounting_basis": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "period_kind": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "revision_status": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "source_evidence": {
+            "correct": 6,
+            "planned_answerable": 6
+          }
+        }
+      }
+    },
+    "fixture_sha256": {
+      "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+      "tests/fixtures/verified_reader.json": "f36b65c0aa87258a2c1587014b04f064b85539ea45861e525bcf0b658e8524f6",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "tests/fixtures/linked_challenge.json": "ac34ab5c2e03ffdeae878e8ef83eb9808e2e78bafd5f4b1890200f24bace9810",
+      "tests/fixtures/reader_fields.json": "ec1c72985dd288c442b7718716409b6e55a2dcc7b24f9634a9fd0346141c20ac",
+      "tests/fixtures/reader_reliability.json": "3663885962ec7930fec547068841f1231c811efc242bf37c4f7e53b3eb96efbd"
+    },
+    "posthoc_after_source_and_outcome_exposure": true,
+    "historical_results_rewritten": false,
+    "new_model_calls": 0,
+    "independent_gold": false,
+    "promote": false,
+    "overlap": "Harder model subset overlaps all288; coverage/cell sources are reused elsewhere. Do not pool as independent observations.",
+    "contract_warning": "Old cohorts use a new source-proof diagnostic, not their original single-quote scorer. Field-labelled cohorts retain field-record-v1.",
+    "requirements": {
+      "target": "Every declared supported regression case correct; never loosen proof/tuple checks to reach target.",
+      "unknown_context_is_not_discovered_fact": true,
+      "real_world_accuracy_established": false
+    }
+  },
+  "affinity_mask": 1,
+  "load": {
+    "kind": "loaded",
+    "load_seconds": 5.561999999918044,
+    "device": "cpu",
+    "torch_threads": 1
+  },
+  "summary": {
+    "planned": 24,
+    "recorded": 24,
+    "correct": 17,
+    "not_attempted": 0,
+    "invalid": 0,
+    "false_support": 7,
+    "false_rejection": 0,
+    "fixed_threshold": 0.5,
+    "threshold_tuned_on_results": false,
+    "independent_gold": false,
+    "promote": false,
+    "abstention_answerability_evaluated": false,
+    "refusal_policy": "No claim -> no entailment verdict; human/source coverage review required."
+  },
+  "load_seconds": 5.561999999918044,
+  "worker_seconds": 22.469000000040978,
+  "dependencies": {
+    "torch": "2.9.1+cpu",
+    "transformers": "4.57.6",
+    "safetensors": "0.7.0",
+    "tokenizers": "0.22.2",
+    "numpy": "2.5.4"
+  },
+  "no_training": true,
+  "no_human_gold": true,
+  "worker_exit_code": 0,
+  "controller_wall_seconds": 43.3910000002943,
+  "observed_combined_peak_RSS_bytes": 727384064,
+  "owned_pids_observed": [
+    1240,
+    176904
+  ],
+  "fixture_sha256": "78f864987140f9ed1394ebd41f7727acbcae5b51e7a173d2321490e488c2426e",
+  "source_unchanged": true,
+  "resource_check_passed": true
+}
