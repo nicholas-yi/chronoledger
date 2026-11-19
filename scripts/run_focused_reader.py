@@ -8,6 +8,7 @@ import json
 import multiprocessing
 import os
 import shutil
+import socket
 import subprocess
 import time
 from pathlib import Path
@@ -101,6 +102,17 @@ def validate_plan(plan: dict) -> None:
         raise ValueError("local model plan differs from the approved fixed allocation")
 
 
+def require_free_port(port: int = 11435) -> None:
+    """Test OS port ownership, not whether an HTTP request to an absent listener times out."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            probe.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        try:
+            probe.bind(("127.0.0.1", port))
+        except OSError as exc:
+            raise RuntimeError("isolated port is unavailable; never alter another server") from exc
+
+
 def worker(plan: dict, channel) -> None:
     if channel.recv() != "focused-reader-owned-job-ready":
         raise RuntimeError("owned-process containment handshake required")
@@ -142,7 +154,7 @@ def worker(plan: dict, channel) -> None:
                     raise RuntimeError("owned server exited during startup")
                 try:
                     response = client.get("/api/tags")
-                except httpx.ConnectError:
+                except (httpx.ConnectError, httpx.ConnectTimeout):
                     time.sleep(0.25)
                     continue
                 response.raise_for_status()
@@ -306,13 +318,7 @@ def run() -> int:
     load_cases(FIXTURE)
     if any(os.environ.get(key) != "1" for key in THREAD_VARIABLES):
         raise ValueError("all numerical thread environment variables must be one")
-    with httpx.Client(trust_env=False, timeout=2) as client:
-        try:
-            client.get(plan["endpoint"]+"/api/tags")
-        except httpx.ConnectError:
-            pass
-        else:
-            raise RuntimeError("isolated port is already in use; never alter another server")
+    require_free_port()
     lineage = freeze_receipt()
     PRIVATE.mkdir(parents=True, exist_ok=True)
     write_receipt(PRIVATE / "attempt.json", {"lineage": lineage, "plan": plan})

@@ -159,3 +159,12 @@ target checks passed. New tests include a semantically wrong industry answer tha
 passes necessary token checks, wrong-revision rollback without using gold,
 development-only lessons, failed-attempt accounting and owned Job telemetry.
 No model generation occurred during those checks. This is not the local-model result.
+
+Preflight correction, before inference: the initial freeze `8686abb` used an HTTP
+request to test whether port 11435 was occupied. That GET raised ConnectTimeout
+before the attempt marker, owned server or model generation. Both marker/report
+were confirmed absent, and exclusive OS binding confirmed the port unoccupied.
+The corrected preflight uses exclusive OS binding; startup health polling tolerates
+connection errors/timeouts within its existing 60-second readiness cap.
+No generation retry, budget, prompt, fixture, seed or evaluation rule changed.
+This fix is committed in a new freeze before the single actual model attempt.

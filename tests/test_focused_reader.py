@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import multiprocessing
+import socket
 import sys
 from pathlib import Path
 
@@ -148,3 +149,14 @@ def test_stopped_attempts_are_not_reported_as_never_attempted_or_zero_cost():
     result = summarize(values, records)["evaluation"]["judge_assisted"]
     assert result["recorded_cases"] == result["missing_latency_records"] == 1
     assert result["outcomes"] == {"invalid_response": 1, "not_attempted": 5}
+
+
+def test_port_preflight_uses_exclusive_os_binding_not_absent_listener_http(runner):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as occupied:
+        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            occupied.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        occupied.bind(("127.0.0.1", 0))
+        port = occupied.getsockname()[1]
+        with pytest.raises(RuntimeError, match="port is unavailable"):
+            runner.require_free_port(port)
+    runner.require_free_port(port)
