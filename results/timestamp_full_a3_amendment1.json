@@ -1,0 +1,52 @@
+{
+  "kind": "A3 amendment 1: gateway errors handled like 503",
+  "approval": "ask_user a3_502=amend_gateway_as_throttle (2026-11-20), after the full1 stop.",
+  "timing": "Frozen AFTER full1 stopped on one HTTP 502 and BEFORE any further request. Post-stop acquisition-protocol amendment; parsing, qualification, CB1, order, population, ceiling and report rules are unchanged.",
+  "trigger": {
+    "segment": "full1",
+    "stop_reason": "HTTP_502",
+    "charged": 1046,
+    "counter": {
+      "actual_HTTP_attempts": 5300,
+      "ceiling": 34402
+    },
+    "status_SHA256": "b65ece6c56a0ca6ada526e70fc77aae30fe0e747477367d07261356416bd60ca"
+  },
+  "policy": {
+    "HTTP_502_or_504": "Same as 503/429: pause 600 QPC seconds, retry the same URL at >=1.0s gap, counted toward the unchanged cap of 6 pauses across all A3 segments.",
+    "full1_stop_charge": "The full1 502 stop is charged as one throttle pause; the next segment starts at the 1.0s gap and only once >=600s have elapsed since the full1 final checkpoint.",
+    "continuation": "A segment may follow a wall, sleep, transport-streak or (this once) the pre-amendment gateway stop; never a throttle-cap stop.",
+    "unchanged_stops": "403, 500, 501, other 5xx, redirects, other transport errors, scope, budget, integrity, wall, disk, sleep."
+  },
+  "base_config_SHA256": "8c46e1d0fab0f3a0ecc36d6c10bb39f339f6091bb03d3407778c41a1d58c3d70",
+  "original_source_SHA256": {
+    "scripts\\run_full_timestamps_a3.py": "2e93e7a2273ae14316572530f444a36746704b67b8217439b6bae66e9dd559c9",
+    "src\\asof\\filing_timestamp_a3.py": "8dfd38fd607a93e797aebfad2b837ef0fc9842d04431d7872acb7436d35574fd",
+    "src\\asof\\filing_clock_basis.py": "769bc09bff0e2e18f3c45157b525857dedbb6d1445cb4f55a910049df461914c",
+    "src\\asof\\filing_timestamp_a2.py": "fc6cdfd9ed786949fbb2da2b8fd79d9764231aaf66f464c6563ad509e29c0990",
+    "src\\asof\\filing_timestamp_a1.py": "dc96b186a95a44971827bf486df08f0163fe92544e79d0abb0f3e2c084f5e7b3",
+    "src\\asof\\filing_timestamp_audit.py": "de09c7cc201d19a09f70c1b8fce657a449015fa2306f6dfd2dfa305434cbb67d",
+    "src\\asof\\filing_header_pilot.py": "fbbdba7135d98118c6b97c74210b4682708582c69ccc36f6cc8a403a72c09082",
+    "src\\asof\\sec_documentation.py": "afc77cc03cf14229fbc97f6a7e5c6572de6d4302c2c44be413fd0e2c13ab334d",
+    "src\\asof\\timeutil.py": "3a2ad44505de160edd158465224f0f723f51a25275d43cc10238d497e93ab93d",
+    "scripts\\run_full_timestamps.py": "29d9a06ff2fc7d23c689cb2a7f38e5cc9278afc17207801dd466d5cccb0d509d",
+    "scripts\\run_full_timestamps_a1.py": "1dee5fb5ba4042f0581a23c9062441e0ca9bb8805e0301c991e4f60143e56712",
+    "scripts\\run_full_timestamps_a2.py": "a5e81dfade91e3717c20124140ca6edb7951a2cd2c1b495eeca11d5e74fde479",
+    "tests\\test_filing_timestamp_a3.py": "44b325f6cfe3ac0a8104e3997074d9b7b54297d23fa233e733b1aabfc25362aa"
+  },
+  "source_SHA256": {
+    "scripts\\run_full_timestamps_a3.py": "f49fd2e140e411a035e05f7239cb0b2a04d91606620a9c7f5ebfbc47bd5da938",
+    "src\\asof\\filing_timestamp_a3.py": "0afeb34060d5f26d47853ac7dad5901bc31620950b7a8f2967d5d9def7760872",
+    "src\\asof\\filing_clock_basis.py": "769bc09bff0e2e18f3c45157b525857dedbb6d1445cb4f55a910049df461914c",
+    "src\\asof\\filing_timestamp_a2.py": "fc6cdfd9ed786949fbb2da2b8fd79d9764231aaf66f464c6563ad509e29c0990",
+    "src\\asof\\filing_timestamp_a1.py": "dc96b186a95a44971827bf486df08f0163fe92544e79d0abb0f3e2c084f5e7b3",
+    "src\\asof\\filing_timestamp_audit.py": "de09c7cc201d19a09f70c1b8fce657a449015fa2306f6dfd2dfa305434cbb67d",
+    "src\\asof\\filing_header_pilot.py": "fbbdba7135d98118c6b97c74210b4682708582c69ccc36f6cc8a403a72c09082",
+    "src\\asof\\sec_documentation.py": "afc77cc03cf14229fbc97f6a7e5c6572de6d4302c2c44be413fd0e2c13ab334d",
+    "src\\asof\\timeutil.py": "3a2ad44505de160edd158465224f0f723f51a25275d43cc10238d497e93ab93d",
+    "scripts\\run_full_timestamps.py": "29d9a06ff2fc7d23c689cb2a7f38e5cc9278afc17207801dd466d5cccb0d509d",
+    "scripts\\run_full_timestamps_a1.py": "1dee5fb5ba4042f0581a23c9062441e0ca9bb8805e0301c991e4f60143e56712",
+    "scripts\\run_full_timestamps_a2.py": "a5e81dfade91e3717c20124140ca6edb7951a2cd2c1b495eeca11d5e74fde479",
+    "tests\\test_filing_timestamp_a3.py": "22e4849d16de0c6129ab17b87f457c444def704dbd0d8e57b8b44af1dbbd9484"
+  }
+}
