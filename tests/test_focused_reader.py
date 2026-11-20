@@ -372,3 +372,23 @@ def test_fresh_v3_review_arms_share_one_frozen_fixture_and_fit_context(runner):
     first, second = plans.values()
     assert {**first, "study": "", "generation_contract": ""} == {**second, "study": "", "generation_contract": ""}
     runner.select_version("v1")
+
+
+def test_round4_pipeline_profile_reuses_the_unchanged_v2_reviewer_on_new_probes(runner):
+    from asof.reader_ai_review_v3 import ARMS, load_probes
+    from asof.reader_real2_guards import input_fit
+
+    runner.select_version("ai-review-v4")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    assert runner.FIXTURE.name == "reader_ai_review_v4.json" and runner.REPORT.name == "reader_ai_review_v4.json"
+    assert {"src/asof/review_pipeline.py", "results/reader_ai_review_v3_rules.json"} <= set(runner.FROZEN)
+    assert all(runner.ROOT.joinpath(*path.split("/")).exists() for path in runner.FROZEN)
+    probes = load_probes(runner.FIXTURE)
+    assert plan["case_count"] == plan["max_calls"] == len(probes) == 24
+    arm = ARMS["decomposed_v2_control"]
+    for probe in probes:
+        body = {"model": plan["model"], "stream": False, "think": False, "keep_alive": "20m",
+                "options": plan["options"], "messages": arm.messages(probe.task), "format": arm.schema(probe.task)}
+        assert input_fit(json.dumps(body, sort_keys=True).encode(), plan["options"])[2]
+    runner.select_version("v1")
