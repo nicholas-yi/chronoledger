@@ -1,0 +1,49 @@
+{
+  "scope": "Post-report A3 metadata impact; declared before the full A3 report existed",
+  "freeze_commit": "f76e4d53515892e8e648d4fbffe3ef3ea6f67d9c",
+  "source_SHA256": {
+    "scripts/timestamp_a3_impact.py": "7c9c696010daa7371479883815204cbf5625f1c723bef74b293cc7bdfac97943",
+    "tests/test_timestamp_a3_impact.py": "15980ecdfac3ebfc1a17b2102ca0a5603c5966a11dbb5300e589b8ecd3453361"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "declared_rule": "the A3 full report existed (after the pilot-only dry run):\n- Population: universe rows whose accession has an A3 ``qualified_UTC``.\n- For each stored source (``pair`` = the H0 knowledge time, ``bulk``), compare the first\n  registered close after the stored time with the first close after the qualified time.\n  ``stored_earlier_lookahead_risk`` means the stored time could trade before publication.\n- Calendars: the frozen nominal 16:00 ET calendar, and a conservative variant that moves\n  every possible early-close date (Jul 2-3, Dec 23-24, day after Thanksgiving) to 13:00 ET.\n  An early close can hide look-ahead that the nominal calendar cannot see.\n- F7: header identity classes for the CIK-disagreement pool, plus the count of universe\n  CIK disagreements outside the audit roster (never fetched).\nReads only metadata (no prices, returns, signals or ledger) and writes one receipt.",
+  "A3_report_SHA256": "7cca8bb30e2b4649e99d8a15180baba5f0cfed9734cc6ebd3fe705ff6d187952",
+  "qualified_accessions": 2708,
+  "universe_rows": 21502,
+  "first_close_direction": {
+    "stored_pair": {
+      "nominal_16_00": {
+        "same_first_close": 2704,
+        "stored_equals_qualified": 2698,
+        "stored_later_delay_only": 4
+      },
+      "conservative_early_close_13_00": {
+        "same_first_close": 2704,
+        "stored_equals_qualified": 2698,
+        "stored_later_delay_only": 4
+      },
+      "calendar_sensitive_changes": {}
+    },
+    "stored_bulk": {
+      "nominal_16_00": {
+        "same_first_close": 2674,
+        "stored_equals_qualified": 2546,
+        "stored_later_delay_only": 34
+      },
+      "conservative_early_close_13_00": {
+        "same_first_close": 2674,
+        "stored_equals_qualified": 2546,
+        "stored_later_delay_only": 34
+      },
+      "calendar_sensitive_changes": {}
+    }
+  },
+  "F7_identity": {
+    "CIK_disagreement_pool_identity_classes": {
+      "both_CIKs_in_header_co_registrant_evidence": 256
+    },
+    "universe_CIK_disagreement_accessions_in_audit": 256,
+    "universe_CIK_disagreement_accessions_outside_audit_never_fetched": 148
+  },
+  "limits": "Nominal and conservative calendars are bounds, not a certified venue calendar. Direction counts compare stored inputs with qualified times; they are not signal, return or portfolio effects. No input was rewritten."
+}
