@@ -10,7 +10,11 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: [source integrity, second adversarial round and fresh AI-review comparison](FOCUSED_READER.md#observed-source-integrity-second-adversarial-round-and-fresh-ai-review-comparison).
+Latest: [rules-first pipeline v2](FOCUSED_READER.md#observed-rules-first-pipeline-v2-agreement-closes-conflict-and-forecast-false-supports)
+scored **30/30 with zero false supports** on a fresh 30-probe round weighted toward conflicts,
+forecasts and corrections. An AI "supported" now needs an independent single-amount disclosure
+check; that agreement caught all six false supports the unchanged value check made alone (10/16 → 16/16).
+Previously: [source integrity, second adversarial round and fresh AI-review comparison](FOCUSED_READER.md#observed-source-integrity-second-adversarial-round-and-fresh-ai-review-comparison).
 Probing found real false supports (disputed, denied, estimated or hypothetical sources; zero-width,
 soft-hyphen and Cyrillic obfuscation; non-ASCII digits). A fresh 221-case integrity challenge went
 from **83/221 (134 false supports) to 221/221 (0)** after shared guards. A second separately
@@ -56,6 +60,7 @@ Human independent labels remain zero; real-source accuracy is not established.
 | [Source integrity](FOCUSED_READER.md#guards-added-a2e57c4) | Fresh challenge 83/221 (134 false supports) → 221/221 (0); round-2 adversarial one-shot 96/96 |
 | [Fresh AI-review comparison](FOCUSED_READER.md#fresh-ai-review-comparison-on-24-separately-authored-probes) | Blind-extraction v3 17/24 (not adopted); v2 control 20/24; rules 10/10 decided, 14 deferred |
 | [Rules-first pipeline](FOCUSED_READER.md#declared-rules-first-pipeline-on-a-further-fresh-round) | Declared before fresh round 4: 23/24 (AI alone 20/24, rules 9/9 decided); one conflict false support; not promoted |
+| [Rules-first pipeline v2](FOCUSED_READER.md#observed-rules-first-pipeline-v2-agreement-closes-conflict-and-forecast-false-supports) | Declared before fresh 30-probe stress round: 30/30, 0 false supports; value check alone 10/16 with 6 false supports; not promoted |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

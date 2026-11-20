@@ -2464,3 +2464,67 @@ fixed abstention mapping, probe-label consistency, attempt accounting, and pipel
 After all changes the full suite passed **813 tests** in 140.43s (two existing rank-deficiency
 warnings); Ruff and the documentation/index check passed. No package, paid API, real-source or
 private-review read, production ledger row, push or holdout access occurred, and human labels remain zero.
+
+## Observed rules-first pipeline v2: agreement closes conflict and forecast false supports
+
+**Current status:** REVIEW-PIPELINE-02 scored **30/30** on a fresh, separately AI-authored round
+weighted toward the previous failure classes, with zero false supports. Advisory and not promoted;
+not human gold or real-filing accuracy.
+
+### Problem and design
+
+Across rounds 3-4 the AI fallback's remaining errors were conflicts (two equally authoritative
+amounts), forecast/target amounts treated as actuals, and an abstention judged justified despite a
+stated correction. [`review_pipeline_v2.py`](../src/asof/review_pipeline_v2.py) keeps the frozen
+rules first and changes only the AI fallback (AI-REVIEWER-04):
+
+- An answered candidate first gets the **unchanged** AI-REVIEWER-02 value check. An AI `supported`
+  counts only if a second, independent **disclosure question** also answers `stated`; `conflicting`
+  or `not_stated` turns it into `unsupported`, `cannot_tell` into `uncertain`.
+- Abstentions get the disclosure question only, now naming superseding corrections, forecasts,
+  targets, guidance, budgets and conflicts explicitly. Mapping is fixed code, not the model.
+- The model is called only for probes the rules defer, so rule-decided probes cost no calls.
+
+Rejected alternatives: patching prompts against round-3/4 probes (exposed), a numeric
+"value appears once" heuristic (fails on tables and rescaling), and blind extraction (AI-REVIEWER-03
+was 17/24). The cost is up to two calls per deferred answered probe and a possible rise in false
+rejections when the disclosure question is wrong; none occurred here.
+
+### Protocol
+
+| Step | Commit |
+|---|---|
+| Pipeline, tests and unsplit plan frozen before round-5 probes were opened | `de45c0d` |
+| 30 probes frozen; run split into two 15-probe halves **before any model call** because the frozen rules deferred 25/30 (worst case 41 calls exceeds the 36-call, 20-minute allocation); scoring unchanged; the unsplit plan was never executed | `da7c070` |
+| Half A recorded once (frozen `da7c070`), then half B (`567cd1b`), then a one-shot combination (`dc7c67b`) | `567cd1b`, `dc7c67b`, `ae1812a` |
+
+Round 5 was written by a new separate agent from the same rule set, but with at least 6 conflicts,
+5 forecast/target/guidance cases, 5 corrections and 6 header-unit tables (15 should pass, 15 fail, 10
+abstentions). Because it deliberately over-represents known weaknesses, it is a stress test, not a
+representative error rate.
+
+| [Round-5 combined receipt](../results/review_pipeline_v5_combined.json) | Correct | False support | False rejection | Uncertain |
+|---|---|---|---|---|
+| **REVIEW-PIPELINE-02** | **30/30** (95% Wilson 0.886-1.000) | 0 | 0 | 0 |
+| Rules alone (decided 5) | 5/5 decided | 0 | 0 | 25 |
+| AI-REVIEWER-04 on the 25 rule-deferred probes | 25/25 | 0 | 0 | 0 |
+| Ablation: unchanged value check alone, 16 deferred answered probes | 10/16 | **6** | 0 | 0 |
+| Agreement on the same 16 | **16/16** | 0 | 0 | 0 |
+| Abstentions (revised disclosure question) | 10/10 | 0 | 0 | 0 |
+
+The agreement step caught all six value-check false supports, exactly the targeted classes:
+three conflicts (two pages, two sections, press release versus annual report; disclosure answered
+`conflicting`) and three forecast-type amounts (guidance, budget table, target; `not_stated`).
+The rules decided five table probes correctly. Resources: 38 calls in two halves (17 and 21),
+31.4-52.9s each, controller walls 660.0s and 820.5s, combined peak about 3.59 GiB, one CPU, CPU-only,
+no retries, source files unchanged ([half A](../results/review_pipeline_v5a.json),
+[half B](../results/review_pipeline_v5b.json)).
+
+**Limits.** One 30-probe AI-authored stress round; author and reviewer are both AI and the probes
+are invented. The ablation comes from the same run, so it isolates the agreement step but is not a
+separate fresh comparison of pipeline v1. Not established: real-filing accuracy, coverage of the
+conservative guards on real filing text, and human-labelled correctness. Human labels remain zero.
+
+Validation after all changes: **818 tests** passed in 145.92s (two existing rank-deficiency warnings);
+Ruff and the documentation/index check passed. No package, paid API, real-source or private-review
+read, production ledger row, push or holdout access occurred.
