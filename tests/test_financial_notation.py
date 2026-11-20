@@ -1,3 +1,5 @@
+import pytest
+
 from asof.claim_verifier import verify_claim
 from asof.financial_notation import cardinal_value, notation_fact
 
@@ -61,13 +63,15 @@ def test_frozen_notation_challenge_and_metamorphic_grid_stay_exact():
         assert block["resolved_without_valid_proof"] == 0
 
 
-def test_separately_authored_adversarial_cases_are_an_exposed_regression_after_the_adv71_fix():
+@pytest.mark.parametrize("name,count", [("notation_adversarial.json", 72), ("notation_adversarial_r2.json", 96)])
+def test_separately_authored_adversarial_rounds_are_exposed_regressions(name, count):
+    # Round 1 was recorded 71/72 before the ADV-71 fix; round 2 was recorded 96/96 one-shot.
     import json
     from pathlib import Path
 
-    rows = json.loads(Path(__file__).with_name("fixtures").joinpath("notation_adversarial.json").read_bytes())
+    rows = json.loads(Path(__file__).with_name("fixtures").joinpath(name).read_bytes())
     wrong = [row["id"] for row in rows if verify_claim(row["source"], row["claim"])["verdict"] != row["expected_verdict"]]
-    assert len(rows) == 72 and wrong == []
+    assert len(rows) == count and wrong == []
 
 
 def test_notation_v2_defers_on_modal_or_negating_text_but_not_on_substrings():
