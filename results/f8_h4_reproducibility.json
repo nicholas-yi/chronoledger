@@ -1,0 +1,175 @@
+{
+  "scope": "F8 H4 reproducibility on the D15 development-only extract; H4 stages stay held",
+  "freeze_commit": "21c36e5da8cacf78185205ab100f8b66eab64d68",
+  "source_SHA256": {
+    "scripts/h4_dev_reproducibility.py": "6f5e27911b2460c8dfa44b8225c0841d23d8142448ae75ba99348f7e2089fabb",
+    "scripts/h4_fundamentals.py": "b971fb14dc990fc9e992571f6fc392a314e9f3ec792164402c9f63e558cb188f",
+    "scripts/development_diagnostics.py": "3e9b0ef92af780510fb0e56c1c4615e1d969acbab5a96420a502d271139508dd",
+    "src/asof/events.py": "6c9f4d4ed843281744ea62df1c7fcf2d669f5ccef357247961cf62bb2443fc81",
+    "results/h4_dev_extract.json": "cdc7b027521d8b6ae9e8154b782aeee7b0868adbc00ce965b06e1dc6829dbfb7"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "baseline_revision": "15b8a2d0b53942dda7627fdabbaf934334beceef",
+  "host_logical_CPUs": 16,
+  "runs": {
+    "single_A": {
+      "thread_caps": "1",
+      "seconds": 11.6
+    },
+    "single_B": {
+      "thread_caps": "1",
+      "seconds": 6.6
+    },
+    "default_threads": {
+      "thread_caps": "unset (library default)",
+      "seconds": 11.2
+    }
+  },
+  "differences": {
+    "single_A_vs_single_B": [],
+    "single_A_vs_committed_batch_B": [],
+    "default_threads_vs_original_baseline": [],
+    "default_threads_vs_single_A": [
+      {
+        "path": "/change_n->d_roa/coef",
+        "old": -36.171010522566924,
+        "new": -36.17101052256628
+      },
+      {
+        "path": "/change_n->d_roa/t",
+        "old": -1.2006854830520999,
+        "new": -1.2006854830521336
+      },
+      {
+        "path": "/change_n->decline/coef",
+        "old": -0.06129487818527957,
+        "new": -0.06129487818527779
+      },
+      {
+        "path": "/change_n->decline/t",
+        "old": -0.061598561882343125,
+        "new": -0.06159856188226434
+      },
+      {
+        "path": "/change_n->impair_next/coef",
+        "old": 1.9773240845057312,
+        "new": 1.977324084505672
+      },
+      {
+        "path": "/change_n->impair_next/t",
+        "old": 1.2221022878998746,
+        "new": 1.2221022878996899
+      },
+      {
+        "path": "/change->d_roa/coef",
+        "old": -39.187267907155594,
+        "new": -39.18726790715555
+      },
+      {
+        "path": "/change->d_roa/t",
+        "old": -1.1519674015027896,
+        "new": -1.151967401502785
+      },
+      {
+        "path": "/change->decline/coef",
+        "old": -0.10910700086629399,
+        "new": -0.10910700086629066
+      },
+      {
+        "path": "/change->decline/t",
+        "old": -0.18362255057526422,
+        "new": -0.18362255057493412
+      },
+      {
+        "path": "/change->impair_next/coef",
+        "old": 1.8552534648207746,
+        "new": 1.8552534648207741
+      },
+      {
+        "path": "/change->impair_next/t",
+        "old": 1.060381144637406,
+        "new": 1.0603811446371902
+      }
+    ],
+    "single_A_vs_original_baseline": [
+      {
+        "path": "/change_n->d_roa/coef",
+        "old": -36.17101052256628,
+        "new": -36.171010522566924
+      },
+      {
+        "path": "/change_n->d_roa/t",
+        "old": -1.2006854830521336,
+        "new": -1.2006854830520999
+      },
+      {
+        "path": "/change_n->decline/coef",
+        "old": -0.06129487818527779,
+        "new": -0.06129487818527957
+      },
+      {
+        "path": "/change_n->decline/t",
+        "old": -0.06159856188226434,
+        "new": -0.061598561882343125
+      },
+      {
+        "path": "/change_n->impair_next/coef",
+        "old": 1.977324084505672,
+        "new": 1.9773240845057312
+      },
+      {
+        "path": "/change_n->impair_next/t",
+        "old": 1.2221022878996899,
+        "new": 1.2221022878998746
+      },
+      {
+        "path": "/change->d_roa/coef",
+        "old": -39.18726790715555,
+        "new": -39.187267907155594
+      },
+      {
+        "path": "/change->d_roa/t",
+        "old": -1.151967401502785,
+        "new": -1.1519674015027896
+      },
+      {
+        "path": "/change->decline/coef",
+        "old": -0.10910700086629066,
+        "new": -0.10910700086629399
+      },
+      {
+        "path": "/change->decline/t",
+        "old": -0.18362255057493412,
+        "new": -0.18362255057526422
+      },
+      {
+        "path": "/change->impair_next/coef",
+        "old": 1.8552534648207741,
+        "new": 1.8552534648207746
+      },
+      {
+        "path": "/change->impair_next/t",
+        "old": 1.0603811446371902,
+        "new": 1.060381144637406
+      }
+    ]
+  },
+  "difference_counts": {
+    "single_A_vs_single_B": 0,
+    "single_A_vs_committed_batch_B": 0,
+    "default_threads_vs_original_baseline": 0,
+    "default_threads_vs_single_A": 12,
+    "single_A_vs_original_baseline": 12
+  },
+  "max_abs_difference": {
+    "single_A_vs_single_B": 0.0,
+    "single_A_vs_committed_batch_B": 0.0,
+    "default_threads_vs_original_baseline": 0.0,
+    "default_threads_vs_single_A": 6.465938895416912e-13,
+    "single_A_vs_original_baseline": 6.465938895416912e-13
+  },
+  "single_thread_reproducible": true,
+  "baseline_reproduced_with_default_threads": true,
+  "ledger_rows_appended": 18,
+  "limits": "Same host and extract; the original baseline's host and thread count were not recorded. Numerical provenance only, not scientific acceptance. No H4 stage, holdout evaluation or recorded result file was run or rewritten."
+}
