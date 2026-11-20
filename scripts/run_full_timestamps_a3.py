@@ -1,8 +1,10 @@
 """A3: declared clock-basis test, approved pilot-then-full metadata audit and qualification.
 
 Phases (each refuses to repeat): ``freeze`` -> commit -> ``cb1`` -> ``run pilot`` ->
-``run full1`` (only if the pilot gate passed; further ``fullN`` segments only after a
-recorded stop) -> ``report``. No price, return, ledger or holdout access.
+``run full1`` (only if the pilot gate passed). Amendment 1 (``amend``, frozen after the full1
+HTTP 502 stop) handles 502/504 like 503; further ``fullN`` segments follow only a recorded
+wall, sleep, transport-streak or that pre-amendment gateway stop -> ``report``.
+No price, return, ledger or holdout access.
 """
 
 from __future__ import annotations
@@ -39,7 +41,6 @@ from asof.filing_clock_basis import (
 from asof.filing_timestamp_a3 import (
     CEILING,
     MAX_CONSECUTIVE_UNRESOLVED,
-    MAX_THROTTLE_PAUSES,
     PILOT_ATTEMPTS,
     PILOT_MAX_PAUSES,
     READ_CAP,
@@ -51,6 +52,7 @@ from asof.filing_timestamp_a3 import (
     effective_outcomes,
     raw_resource_bytes,
     reeligible,
+    segment_allowance,
 )
 from asof.filing_timestamp_audit import DISK_BYTES, AuditGuard
 from asof.runtime import write_receipt
@@ -58,6 +60,7 @@ from asof.sec_documentation import DocumentationStop, MetadataUnknown
 
 START_USED = 3254
 CONFIG = PROJECT_ROOT / "results" / "timestamp_full_a3_config.json"
+AMENDMENT = PROJECT_ROOT / "results" / "timestamp_full_a3_amendment1.json"
 CB1 = PROJECT_ROOT / "results" / "timestamp_a3_clock_basis_cb1.json"
 GATE = PROJECT_ROOT / "results" / "timestamp_full_a3_pilot_gate.json"
 REPORT = PROJECT_ROOT / "results" / "timestamp_full_a3_report.json"
@@ -90,7 +93,51 @@ def a3_segments() -> list[list[dict]]:
 
 
 def frozen_checks(config: dict) -> None:
-    base.verify({**config["input_SHA256"], **config["source_SHA256"], **config["order_SHA256"]})
+    sources = config["source_SHA256"]
+    if AMENDMENT.exists():
+        amendment = json.loads(AMENDMENT.read_bytes())
+        if amendment["base_config_SHA256"] != ledger.file_sha256(CONFIG):
+            raise DocumentationStop("A3 amendment does not reference this config")
+        sources = amendment["source_SHA256"]
+    base.verify({**config["input_SHA256"], **sources, **config["order_SHA256"]})
+
+
+def amend() -> None:
+    if AMENDMENT.exists():
+        raise RuntimeError("A3 amendment 1 already frozen; preserve it")
+    config = json.loads(CONFIG.read_bytes())
+    base.verify({**config["input_SHA256"], **config["order_SHA256"]})
+    full1 = json.loads(status_path("full1").read_bytes())
+    if full1.get("stop_reason") != "HTTP_502" or status_path("full2").exists():
+        raise ValueError("amendment 1 applies only after the recorded full1 HTTP 502 stop")
+    used = START_USED + sum(json.loads(status_path(s).read_bytes())["charged"] for s in ("pilot", "full1"))
+    if json.loads(base.BUDGET.read_bytes()) != {"actual_HTTP_attempts": used, "ceiling": CEILING}:
+        raise ValueError("counter moved since the full1 stop")
+    value = {
+        "kind": "A3 amendment 1: gateway errors handled like 503",
+        "approval": "ask_user a3_502=amend_gateway_as_throttle (2026-11-20), after the full1 stop.",
+        "timing": "Frozen AFTER full1 stopped on one HTTP 502 and BEFORE any further request. "
+                  "Post-stop acquisition-protocol amendment; parsing, qualification, CB1, order, "
+                  "population, ceiling and report rules are unchanged.",
+        "trigger": {"segment": "full1", "stop_reason": "HTTP_502", "charged": full1["charged"],
+                    "counter": full1["counter"], "status_SHA256": ledger.file_sha256(status_path("full1"))},
+        "policy": {
+            "HTTP_502_or_504": "Same as 503/429: pause 600 QPC seconds, retry the same URL at >=1.0s "
+                               "gap, counted toward the unchanged cap of 6 pauses across all A3 segments.",
+            "full1_stop_charge": "The full1 502 stop is charged as one throttle pause; the next "
+                                 "segment starts at the 1.0s gap and only once >=600s have elapsed "
+                                 "since the full1 final checkpoint.",
+            "continuation": "A segment may follow a wall, sleep, transport-streak or (this once) "
+                            "the pre-amendment gateway stop; never a throttle-cap stop.",
+            "unchanged_stops": "403, 500, 501, other 5xx, redirects, other transport errors, "
+                               "scope, budget, integrity, wall, disk, sleep.",
+        },
+        "base_config_SHA256": ledger.file_sha256(CONFIG),
+        "original_source_SHA256": config["source_SHA256"],
+        "source_SHA256": base.pin(SOURCES),
+    }
+    base.atomic_json(AMENDMENT, value)
+    print(json.dumps({"amendment_SHA256": ledger.file_sha256(AMENDMENT), "counter": used}))
 
 
 def freeze() -> None:
@@ -203,6 +250,11 @@ def committed_config() -> dict:
                                cwd=PROJECT_ROOT, capture_output=True, check=True).stdout
     if committed.replace(b"\r\n", b"\n") != CONFIG.read_bytes().replace(b"\r\n", b"\n"):
         raise RuntimeError("A3 config differs from the committed freeze")
+    if AMENDMENT.exists():
+        committed = subprocess.run(["git", "show", "HEAD:results/timestamp_full_a3_amendment1.json"],
+                                   cwd=PROJECT_ROOT, capture_output=True, check=True).stdout
+        if committed.replace(b"\r\n", b"\n") != AMENDMENT.read_bytes().replace(b"\r\n", b"\n"):
+            raise RuntimeError("A3 amendment differs from its committed freeze")
     return config | {"_lineage": lineage}
 
 
@@ -261,13 +313,15 @@ async def run(segment: str) -> None:
         raise RuntimeError(f"A3 {segment} already attempted; no automatic continuation")
     index = SEGMENTS.index(segment)
     prior_status = [json.loads(status_path(s).read_bytes()) for s in SEGMENTS[:index]]
-    if segment != "pilot":
+    amended = AMENDMENT.exists()
+    if segment == "pilot":
+        allowance = {"pauses_before": 0, "credited_gateway_stop_pause": 0,
+                     "max_pauses": PILOT_MAX_PAUSES, "start_gap": START_GAP}
+    else:
         if not GATE.exists() or json.loads(GATE.read_bytes())["gate_passed"] is not True:
             raise RuntimeError("pilot gate did not pass; full audit not authorized")
-        if index > 1 and prior_status[-1].get("stop_reason") not in (
-                "A3_wall_cap", "host_sleep_or_suspend_no_automatic_resume", "transport_unresolved_streak"):
-            raise RuntimeError("continuation allowed only after a wall, sleep or transport-streak stop")
-    pauses_before = sum(s["throttle_pauses"] for s in prior_status)
+        allowance = segment_allowance(prior_status, amended, datetime.now(UTC))
+    pauses_before, max_pauses = allowance["pauses_before"], allowance["max_pauses"]
     charged_before = sum(s["charged"] for s in prior_status)
     if json.loads(base.BUDGET.read_bytes()) != {"actual_HTTP_attempts": START_USED + charged_before,
                                                 "ceiling": CEILING}:
@@ -277,9 +331,6 @@ async def run(segment: str) -> None:
     done = effective_outcomes(a3_segments())
     order = [r for r in base.load_lines(ORDER) if r["URL"] not in done or str(
         done[r["URL"]]["parsed"].get("unknown", "")).startswith("resource_failed:")]
-    max_pauses = PILOT_MAX_PAUSES if segment == "pilot" else MAX_THROTTLE_PAUSES - pauses_before
-    if max_pauses <= 0 and segment != "pilot":
-        raise RuntimeError("shared throttle-pause cap already used")
     private.mkdir(parents=True)
     outcomes, requests, events = (private / n for n in (
         "resource_outcomes.jsonl", "requests.jsonl", "waits_and_retries.jsonl"))
@@ -297,6 +348,8 @@ async def run(segment: str) -> None:
               "start_UTC": datetime.now(UTC).isoformat(), "wall_cap_seconds": wall,
               "counter_start": START_USED + charged_before, "resources_recorded": 0, "charged": 0,
               "throttle_pauses": 0, "throttle_pauses_before": pauses_before,
+              "credited_gateway_stop_pause": allowance["credited_gateway_stop_pause"],
+              "gateway_as_throttle": amended,
               "max_throttle_pauses": max_pauses, "transport_unresolved": 0,
               "sleep_interruptions": guard.interruptions, "config_SHA256": ledger.file_sha256(CONFIG)}
 
@@ -321,14 +374,14 @@ async def run(segment: str) -> None:
 
     keep_awake(True)
     checkpoint()
-    limiter = AdaptiveLimiter(gap=START_GAP if pauses_before == 0 else SLOW_GAP)
+    limiter = AdaptiveLimiter(gap=allowance["start_gap"])
     streak = 0
     try:
         async with A3Session(
                 {r["URL"] for r in order if r["proposed_HTTP_needed"]}, base.BUDGET, private, guard,
                 start_used=START_USED + charged_before, max_pauses=max_pauses,
                 attempt_limit=PILOT_ATTEMPTS if segment == "pilot" else None,
-                limiter=limiter, on_event=checkpoint) as session:
+                limiter=limiter, on_event=checkpoint, gateway_as_throttle=amended) as session:
             for resource in order:
                 guard.check()
                 if segment == "pilot" and session.charged >= PILOT_ATTEMPTS:
@@ -478,6 +531,7 @@ def report() -> None:
         "status": [{k: s.get(k) for k in ("segment", "status", "stop_reason", "charged",
                                           "throttle_pauses", "transport_unresolved")} for s in statuses],
         "config_SHA256": ledger.file_sha256(CONFIG), "report_lineage": config["_lineage"],
+        "amendment1_SHA256": ledger.file_sha256(AMENDMENT) if AMENDMENT.exists() else None,
         "clock_basis": {"CB1_passed": cb1_value["passed"], "CB1_SHA256": ledger.file_sha256(CB1),
                         "CB1R_replication": replication, "CB1R_estimable": estimable,
                         "basis_accepted_for_qualification": basis},
@@ -514,7 +568,7 @@ def report() -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("freeze", "cb1", "run", "report"))
+    parser.add_argument("phase", choices=("freeze", "cb1", "amend", "run", "report"))
     parser.add_argument("segment", nargs="?", choices=SEGMENTS)
     args = parser.parse_args()
     if any(os.environ.get(k) != "1" for k in
@@ -524,6 +578,8 @@ if __name__ == "__main__":
         freeze()
     elif args.phase == "cb1":
         cb1()
+    elif args.phase == "amend":
+        amend()
     elif args.phase == "run":
         if not args.segment:
             raise SystemExit("run requires a segment")

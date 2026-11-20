@@ -9,6 +9,7 @@ import json
 import threading
 import time
 from collections.abc import Awaitable, Callable
+from datetime import datetime
 from pathlib import Path
 
 from asof.filing_timestamp_a1 import (
@@ -35,6 +36,37 @@ READ_CAP = 4 << 20
 CAP_UNKNOWNS = ("body_reached_read_cap_unqualified", "declared_body_at_read_cap",
                 "cached_metadata_at_read_cap")
 ATTEMPT_KEYS = ("request", "A1_attempts", "A2_attempts", "A3_attempts")
+# Amendment 1 (after the full1 HTTP 502 stop): gateway errors are handled like 503.
+GATEWAY = ("HTTP_502", "HTTP_504")
+CONTINUABLE = ("A3_wall_cap", "host_sleep_or_suspend_no_automatic_resume",
+               "transport_unresolved_streak")
+
+
+def segment_allowance(prior: list[dict], gateway_amendment: bool, now: datetime) -> dict:
+    """Throttle pauses already charged and start gap for the next full segment.
+
+    A gateway stop recorded before amendment 1 is charged as one throttle pause and needs
+    at least the throttle wait to have elapsed since its final checkpoint.
+    """
+    pauses = sum(s["throttle_pauses"] for s in prior)
+    credited = 0
+    if prior and prior[-1]["segment"] != "pilot":
+        last = prior[-1]
+        reason = last.get("stop_reason")
+        if gateway_amendment and reason in GATEWAY:
+            waited = (now - datetime.fromisoformat(last["checkpoint_UTC"])).total_seconds()
+            if waited < THROTTLE_WAIT:
+                raise RuntimeError("a gateway stop needs the 600-second pause before resuming")
+            credited = 1
+        elif reason not in CONTINUABLE:
+            raise RuntimeError("continuation allowed only after a wall, sleep, transport-streak "
+                               "or amended gateway stop")
+    pauses += credited
+    if pauses >= MAX_THROTTLE_PAUSES:
+        raise RuntimeError("shared throttle-pause cap already used")
+    return {"pauses_before": pauses, "credited_gateway_stop_pause": credited,
+            "max_pauses": MAX_THROTTLE_PAUSES - pauses,
+            "start_gap": START_GAP if pauses == 0 else SLOW_GAP}
 
 
 class AdaptiveLimiter(QpcLimiter):
@@ -137,7 +169,8 @@ class A3Session(AmendedSession):
     def __init__(self, allowed_urls: set[str], budget: Path, private: Path, guard, *,
                  start_used: int, max_pauses: int, attempt_limit: int | None = None,
                  transport=None, limiter: AdaptiveLimiter | None = None,
-                 on_event: Callable[[dict], None] | None = None) -> None:
+                 on_event: Callable[[dict], None] | None = None,
+                 gateway_as_throttle: bool = False) -> None:
         super().__init__(allowed_urls, budget, private, guard, transport=transport,
                          limiter=limiter or AdaptiveLimiter(), on_event=on_event)
         if not isinstance(self.limiter, AdaptiveLimiter):
@@ -145,6 +178,7 @@ class A3Session(AmendedSession):
         if max_pauses < 0 or max_pauses > MAX_THROTTLE_PAUSES:
             raise ValueError("throttle-pause allowance outside the approved cap")
         self.start_used, self.max_pauses, self.attempt_limit = start_used, max_pauses, attempt_limit
+        self.gateway_as_throttle = gateway_as_throttle
         self.throttle_pauses = 0
         self.waiting_seconds = 0.0
 
@@ -223,7 +257,8 @@ class A3Session(AmendedSession):
                 except MetadataUnknown:
                     raise
                 except DocumentationStop as exc:
-                    kind = retry_kind(exc)
+                    kind = retry_kind(exc) or (
+                        str(exc) if self.gateway_as_throttle and str(exc) in GATEWAY else None)
                     if kind is None:
                         raise
                     if kind.startswith("HTTP_"):

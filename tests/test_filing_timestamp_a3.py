@@ -1,7 +1,7 @@
 import asyncio
 import hashlib
 import json
-from datetime import date, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 
 import httpx
 import pytest
@@ -22,6 +22,7 @@ from asof.filing_timestamp_a3 import (
     a3_order,
     effective_outcomes,
     raw_resource_bytes,
+    segment_allowance,
 )
 from asof.filing_timestamp_audit import AuditGuard
 from asof.sec_documentation import DocumentationStop, MetadataUnknown
@@ -177,6 +178,7 @@ def url():
 
 def session(tmp_path, monkeypatch, handler, *, max_pauses=6, limit=None):
     monkeypatch.setenv("ASOF_USER_AGENT", "Fictional Test test@example.invalid")
+    tmp_path.mkdir(parents=True, exist_ok=True)
     budget = tmp_path / "budget.json"
     budget.write_text(json.dumps({"actual_HTTP_attempts": 3254, "ceiling": 34402}))
     clock = Clock()
@@ -248,3 +250,51 @@ def test_bodies_above_the_old_64KiB_bound_are_read_completely(tmp_path, monkeypa
     body = b"x" * 100_000
     s, _ = session(tmp_path, monkeypatch, lambda r: httpx.Response(200, stream=httpx.ByteStream(body)))
     assert run_fetch(s) == body
+
+
+@pytest.mark.parametrize("status", [502, 504])
+def test_gateway_errors_stop_unless_amended_then_count_as_throttle_pauses(tmp_path, monkeypatch, status):
+    calls = []
+
+    def handler(request):
+        calls.append(1)
+        return httpx.Response(status if len(calls) == 1 else 200, stream=httpx.ByteStream(b"ok"))
+
+    s, _ = session(tmp_path / "frozen", monkeypatch, handler)
+    with pytest.raises(DocumentationStop, match=f"HTTP_{status}"):
+        run_fetch(s)
+    assert s.stopped and s.throttle_pauses == 0
+    calls.clear()
+    s, clock = session(tmp_path / "amended", monkeypatch, handler)
+    s.gateway_as_throttle = True
+    assert run_fetch(s) == b"ok"
+    assert s.throttle_pauses == 1 and s.limiter.gap == 1.0 and clock.now >= 600
+
+
+def test_gateway_error_still_stops_at_the_shared_pause_cap(tmp_path, monkeypatch):
+    s, _ = session(tmp_path, monkeypatch,
+                   lambda r: httpx.Response(502, stream=httpx.ByteStream(b"")), max_pauses=0)
+    s.gateway_as_throttle = True
+    with pytest.raises(DocumentationStop, match="A3_throttle_pause_cap"):
+        run_fetch(s)
+
+
+def test_segment_allowance_charges_the_preamendment_gateway_stop():
+    stop = datetime(2026, 11, 20, 15, 10, 44, tzinfo=UTC)
+    pilot = {"segment": "pilot", "throttle_pauses": 0, "stop_reason": "pilot_attempt_limit_reached"}
+    full1 = {"segment": "full1", "throttle_pauses": 0, "stop_reason": "HTTP_502",
+             "checkpoint_UTC": stop.isoformat()}
+    assert segment_allowance([pilot], False, stop) == {
+        "pauses_before": 0, "credited_gateway_stop_pause": 0, "max_pauses": 6, "start_gap": 0.667}
+    with pytest.raises(RuntimeError, match="continuation"):
+        segment_allowance([pilot, full1], False, stop + timedelta(hours=1))
+    with pytest.raises(RuntimeError, match="600-second"):
+        segment_allowance([pilot, full1], True, stop + timedelta(seconds=599))
+    assert segment_allowance([pilot, full1], True, stop + timedelta(seconds=600)) == {
+        "pauses_before": 1, "credited_gateway_stop_pause": 1, "max_pauses": 5, "start_gap": 1.0}
+    capped = {**full1, "throttle_pauses": 6, "stop_reason": "A3_throttle_pause_cap"}
+    with pytest.raises(RuntimeError, match="continuation"):
+        segment_allowance([pilot, capped], True, stop + timedelta(hours=1))
+    walled = {**full1, "throttle_pauses": 6, "stop_reason": "A3_wall_cap"}
+    with pytest.raises(RuntimeError, match="cap already used"):
+        segment_allowance([pilot, walled], True, stop + timedelta(hours=1))
