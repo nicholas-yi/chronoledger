@@ -392,3 +392,30 @@ def test_round4_pipeline_profile_reuses_the_unchanged_v2_reviewer_on_new_probes(
                 "options": plan["options"], "messages": arm.messages(probe.task), "format": arm.schema(probe.task)}
         assert input_fit(json.dumps(body, sort_keys=True).encode(), plan["options"])[2]
     runner.select_version("v1")
+
+
+def test_round5_pipeline_halves_cover_all_probes_once_within_the_call_ceiling(runner):
+    from asof.reader_ai_review_v3 import load_probes
+    from asof.reader_real2_guards import input_fit
+    from asof.review_pipeline_v2 import request, start_entry
+
+    covered = []
+    for version in ("pipeline-v5a", "pipeline-v5b"):
+        runner.select_version(version)
+        plan = json.loads(runner.PLAN.read_bytes())
+        runner.validate_plan(plan)
+        assert runner.FIXTURE.name == "review_pipeline_v5.json"
+        assert all(runner.ROOT.joinpath(*path.split("/")).exists() for path in runner.FROZEN)
+        part = load_probes(runner.FIXTURE, 30)[slice(*plan["case_slice"])]
+        covered.extend(probe.task.case.id for probe in part)
+        worst = sum(0 if start_entry(probe)["decided_by"] else (1 if probe.task.candidate.abstain else 2)
+                    for probe in part)
+        assert worst <= plan["max_calls"]
+        for probe in part:
+            for step in ("disclosure",) if probe.task.candidate.abstain else ("value", "disclosure"):
+                body = {"model": plan["model"], "stream": False, "think": False, "keep_alive": "20m",
+                        "options": plan["options"], "messages": request(probe.task, step)["messages"],
+                        "format": request(probe.task, step)["format"]}
+                assert input_fit(json.dumps(body, sort_keys=True).encode(), plan["options"])[2]
+    assert len(covered) == len(set(covered)) == 30
+    runner.select_version("v1")
