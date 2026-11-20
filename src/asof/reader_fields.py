@@ -196,7 +196,8 @@ def context_fields(case: Case, bundle: EvidenceBundle) -> tuple[dict, tuple[Evid
 
 DISPUTED_OR_NONASSERTED = re.compile(
     r"\b(?:false(?:ly)?|untrue|incorrect\w*|inaccura\w*|erroneous\w*|errors?|mistak\w*|misstat\w*"
-    r"|restat\w*|retract\w*|withdr(?:awn|ew|aw)\w*|den(?:y|ies|ied|ial)|disput\w*|alleg\w*|rumou?r\w*"
+    r"|restat\w*|retract\w*|withdr(?:awn|ew|aw)\w*|den(?:y|ies|ied|ial)|disput\w*"
+    r"|alleg(?:e|ed|edly|es|ing|ations?)|rumou?r\w*"
     r"|reportedly|unconfirmed|unverified|suppos\w*|imagin\w*|hypothetic\w*|assum\w*|scenario\w*"
     r"|what\s+if|estimat\w*|preliminary|provisional|unaudited|draft"
     r"|not\s+(?:true|accurate|correct|final|audited))\b", re.IGNORECASE)
