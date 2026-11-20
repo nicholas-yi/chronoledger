@@ -8,10 +8,12 @@ Development: signals known 2023-01-01..2024-06-30; returns through 2024-07-31.
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from dataclasses import asdict, replace
 from datetime import UTC, date, datetime
+from pathlib import Path
 from time import perf_counter
 
 import numpy as np
@@ -181,7 +183,7 @@ def event_test(sig: pd.DataFrame, signal: str, daily_ret, engine: CarEngine, uni
     return {"coef": p.coef, "t": p.t_stat, "n_events": p.n_events, "clusters": p.n_clusters}
 
 
-def main() -> None:
+def main(output: Path | None = None) -> None:
     started = perf_counter()
     uni, sig, shares, ent, ma, panel, daily_ret = load_inputs()
     factors = ff5_umd_monthly().loc[: pd.Period(DEV_RETURN_CUTOFF, "M")]
@@ -254,9 +256,12 @@ def main() -> None:
                             r.attrs["excluded_price_returns"] for r in daily_ret.values())},
            "results": results, "n_trials": {"H0": ledger.n_trials("H0"), "H1n": ledger.n_trials("H1n")},
            "elapsed_seconds": perf_counter() - started}
-    (PROJECT_ROOT / "results" / "returns_h0_development.json").write_text(json.dumps(out, indent=2, default=float))
+    (output or PROJECT_ROOT / "results" / "returns_h0_development.json").write_text(
+        json.dumps(out, indent=2, default=float))
     json.dump(out, sys.stdout, indent=2, default=float)
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, help="write here instead of the recorded results file")
+    main(parser.parse_args().output)
