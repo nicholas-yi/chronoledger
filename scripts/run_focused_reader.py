@@ -127,7 +127,7 @@ V1_FROZEN = FROZEN
 
 
 VERSIONS = ("v1", "v2", "verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review",
-            "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control")
+            "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4")
 
 
 def select_version(version: str) -> None:
@@ -136,12 +136,13 @@ def select_version(version: str) -> None:
     if version not in VERSIONS:
         raise ValueError("unknown focused reader version")
     FIXTURE = ROOT / "tests" / "fixtures" / "focused_reader.json"
-    if version in ("verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
+    if version in ("verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
         stem = {"stress": "reader_stress", "verifier": "verified_reader",
                 "linked": "linked_reader", "fields": "reader_fields", "reliable": "reader_reliability",
                 "cells": "reader_cell_selection", "ai-review": "reader_ai_review",
                 "ai-review-v2": "reader_ai_review_v2", "ai-review-v2b": "reader_ai_review_v2b",
-                "ai-review-v3": "reader_ai_review_v3", "ai-review-v3-control": "reader_ai_review_v3_control"}[version]
+                "ai-review-v3": "reader_ai_review_v3", "ai-review-v3-control": "reader_ai_review_v3_control",
+                "ai-review-v4": "reader_ai_review_v4"}[version]
         fixture_name = ("linked_challenge" if version == "linked" else
                         "reader_ai_review_v3" if version == "ai-review-v3-control" else stem)
         PLAN = ROOT / "results" / f"{stem}_plan.json"
@@ -159,29 +160,36 @@ def select_version(version: str) -> None:
         if version == "stress":
             FROZEN = (*FROZEN, "src/asof/reader_stress.py", "tests/test_reader_stress.py",
                       "results/verified_reader.json")
-        elif version in ("linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
+        elif version in ("linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
             FROZEN = (*FROZEN, "src/asof/linked_reader.py", "tests/test_linked_reader.py",
                       "src/asof/reader_stress.py", "tests/fixtures/reader_stress.json",
                       "results/reader_stress.json", "results/verified_reader.json")
-            if version in ("fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
+            if version in ("fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
                 FROZEN = (*FROZEN, "src/asof/reader_fields.py", "tests/test_reader_fields.py",
                           "results/linked_reader.json")
-            if version in ("reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
+            if version in ("reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
                 FROZEN = (*FROZEN, "src/asof/reader_reliability.py",
                           "tests/test_reader_reliability.py", "results/reader_fields.json")
-            if version in ("cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
+            if version in ("cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
                 FROZEN = (*FROZEN, "src/asof/reader_cells.py", "src/asof/reader_field_challenge.py",
                           "tests/test_reader_cells.py", "results/reader_reliability.json")
-            if version in ("ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
+            if version in ("ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
                 FROZEN = (*FROZEN, "src/asof/reader_ai_review.py", "tests/test_reader_ai_review.py",
                           "tests/test_local_model_runtime.py", "results/reader_cell_selection.json",
                           "results/reader_cell_selection_accounting.json")
-            if version in ("ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
+            if version in ("ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
                 FROZEN = (*FROZEN, "src/asof/reader_ai_review_v2.py", "tests/test_reader_ai_review_v2.py",
                           "results/reader_ai_review.json")
             if version == "ai-review-v2b":
                 # Same reviewer after a zero-call startup stop; the stopped receipt stays pinned.
                 FROZEN = (*FROZEN, "results/reader_ai_review_v2_plan.json", "results/reader_ai_review_v2.json")
+            if version == "ai-review-v4":
+                # Round 4 runs the unchanged v2 reviewer as the AI fallback of a declared rules-first pipeline.
+                FROZEN = (*FROZEN, "src/asof/reader_ai_review_v3.py", "tests/test_reader_ai_review_v3.py",
+                          "src/asof/review_pipeline.py", "tests/test_review_pipeline.py",
+                          "scripts/validate_review_pipeline.py", "src/asof/claim_verifier.py",
+                          "results/reader_ai_review_v3_rules.json", "results/reader_ai_review_v3_control.json")
+                FROZEN = tuple(dict.fromkeys(FROZEN))
             if version in ("ai-review-v3", "ai-review-v3-control"):
                 # Both arms pin the same fresh fixture, each other's plan and the v2b result they follow.
                 FROZEN = (*FROZEN, "src/asof/reader_ai_review_v3.py", "tests/test_reader_ai_review_v3.py",
@@ -204,7 +212,7 @@ def select_version(version: str) -> None:
 def load_cases(path: Path) -> tuple[Case, ...]:
     if path.name in ("reader_ai_review_v2.json", "reader_ai_review_v2b.json"):
         return tuple(probe.task.case for probe in v2_probes())
-    if path.name == "reader_ai_review_v3.json":
+    if path.name in ("reader_ai_review_v3.json", "reader_ai_review_v4.json"):
         return tuple(probe.task.case for probe in load_v3_probes(path))
     if path.name in ("reader_cell_selection.json", "reader_ai_review.json"):
         return audit_fixture()[0]
@@ -305,6 +313,12 @@ def validate_plan(plan: dict) -> None:
         fixed["generation_contract"] = "6_fresh_plus_12_exposed_decomposed_AI_reviews_v2"
         fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
         fixed["preload"] = "one_empty_prompt_load_within_existing_startup_deadline"
+    elif plan.get("study") == "CL-FOCUS-AI-REVIEW-04":
+        fixed["case_count"] = fixed["max_calls"] = 24
+        fixed["options"].update(seed=202611200215, num_predict=128)
+        fixed["generation_contract"] = "24_fresh_v2_reviews_as_fallback_of_rules_first_pipeline"
+        fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
+        fixed["preload"] = "one_empty_prompt_load_within_existing_startup_deadline"
     elif plan.get("study") in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C"):
         fixed["case_count"] = fixed["max_calls"] = 24
         fixed["options"].update(seed=202611200130, num_predict=128)
@@ -338,17 +352,19 @@ def worker(plan: dict, channel) -> None:
     reliable = plan["study"] == "CL-FOCUS-RELIABLE-01"
     review_mode = plan["study"] == "CL-FOCUS-AI-REVIEW-01"
     review2 = plan["study"] in ("CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B")
-    review3 = plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C")
-    v3_arm = V3_ARMS["decomposed_v2_control" if plan["study"].endswith("03C") else "blind_extraction_v3"] if review3 else None
+    review3 = plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C", "CL-FOCUS-AI-REVIEW-04")
+    v3_arm = V3_ARMS["blind_extraction_v3" if plan["study"].endswith("03") else "decomposed_v2_control"] if review3 else None
     cell_mode = review_mode or plan["study"] == "CL-FOCUS-CELLS-01"
     field_mode = reliable or cell_mode or plan["study"] == "CL-FOCUS-FIELDS-01"
     linked_mode = field_mode or plan["study"] == "CL-FOCUS-LINKED-01"
     verified = plan["study"] in (
         "CL-FOCUS-VERIFY-01", "CL-FOCUS-STRESS-01", "CL-FOCUS-LINKED-01",
         "CL-FOCUS-FIELDS-01", "CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01", "CL-FOCUS-AI-REVIEW-01",
-        "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B", "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C")
+        "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B", "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C",
+        "CL-FOCUS-AI-REVIEW-04")
     if verified:
-        select_version(("ai-review-v3-control" if plan["study"].endswith("03C") else "ai-review-v3") if review3 else
+        select_version({"CL-FOCUS-AI-REVIEW-03": "ai-review-v3", "CL-FOCUS-AI-REVIEW-03C": "ai-review-v3-control",
+                        "CL-FOCUS-AI-REVIEW-04": "ai-review-v4"}[plan["study"]] if review3 else
                        ("ai-review-v2b" if plan["study"].endswith("02B") else "ai-review-v2") if review2 else "ai-review" if review_mode else "cells" if cell_mode else "reliable" if reliable else "fields" if field_mode else "linked"
                        if linked_mode else "stress" if stress else "verifier")
     server = None
@@ -898,10 +914,10 @@ def run() -> int:
     cases = load_cases(FIXTURE)
     if plan["study"] not in ("CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01", "CL-FOCUS-AI-REVIEW-01",
                              "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B",
-                             "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C"):
+                             "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C", "CL-FOCUS-AI-REVIEW-04"):
         report["records"] = account_incomplete_attempts(cases, report["records"], report["calls"])
-    if plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C"):
-        arm = "decomposed_v2_control" if plan["study"].endswith("03C") else "blind_extraction_v3"
+    if plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C", "CL-FOCUS-AI-REVIEW-04"):
+        arm = "blind_extraction_v3" if plan["study"].endswith("03") else "decomposed_v2_control"
         probes = load_v3_probes(FIXTURE)
         report["records"] = account_v3_attempts(probes, report["records"], report["calls"], arm)
         report["summary"] = summarize_v3(probes, report["records"], arm)
