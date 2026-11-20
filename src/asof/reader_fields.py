@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import unicodedata
 from collections import Counter
 from dataclasses import asdict, dataclass
 from decimal import Decimal
@@ -40,16 +41,20 @@ class Decision:
 
 
 def _per_share_bundle(case: Case) -> EvidenceBundle | None:
-    # This additional grammar is deliberately one whole source sentence, not token search.
+    # One whole asserted sentence; other sentences may exist only if they say nothing about shares or EPS.
     if not case.source or len(case.source) > 8192:
         return None
     entity = r"\s+".join(re.escape(part) for part in case.issuer.split())
     metric = r"\s+".join(re.escape(part) for part in case.metric.split())
-    match = re.fullmatch(
-        rf"(?P<entity>{entity}) reported (?P<metric>{metric}) of "
-        rf"(?P<value>[+-]?\d+(?:\.\d+)?) (?P<unit>[A-Z]{{3}} per share) "
-        rf"for (?P<period>{re.escape(case.requested_period)})\.", case.source, re.IGNORECASE)
-    if match is None:
+    matches = list(re.finditer(
+        rf"(?:\A|(?<=[.!?])\s+)(?P<sentence>(?P<entity>{entity}) reported (?P<metric>{metric}) of "
+        rf"(?P<value>[+-]?[0-9]+(?:\.[0-9]+)?) (?P<unit>[A-Z]{{3}} per share) "
+        rf"for (?P<period>{re.escape(case.requested_period)})\.)(?=\s|\Z)", case.source, re.IGNORECASE))
+    if len(matches) != 1:
+        return None
+    match = matches[0]
+    residual = case.source[:match.start("sentence")]+" "+case.source[match.end("sentence"):]
+    if re.search(r"\b(?:earnings|eps|per\s+share|shares?|dilut\w*|basic|loss(?:es)?)\b", residual, re.IGNORECASE):
         return None
     return EvidenceBundle(
         "field-source-v1", hashlib.sha256(case.source.encode()).hexdigest(),
@@ -189,9 +194,32 @@ def context_fields(case: Case, bundle: EvidenceBundle) -> tuple[dict, tuple[Evid
     return values, tuple(spans), tuple(sorted(set(issues)))
 
 
+DISPUTED_OR_NONASSERTED = re.compile(
+    r"\b(?:false(?:ly)?|untrue|incorrect\w*|inaccura\w*|erroneous\w*|errors?|mistak\w*|misstat\w*"
+    r"|restat\w*|retract\w*|withdr(?:awn|ew|aw)\w*|den(?:y|ies|ied|ial)|disput\w*|alleg\w*|rumou?r\w*"
+    r"|reportedly|unconfirmed|unverified|suppos\w*|imagin\w*|hypothetic\w*|assum\w*|scenario\w*"
+    r"|what\s+if|estimat\w*|preliminary|provisional|unaudited|draft"
+    r"|not\s+(?:true|accurate|correct|final|audited))\b", re.IGNORECASE)
+
+
+def text_integrity_issues(text: str) -> tuple[str, ...]:
+    """Invisible format characters, non-ASCII digits and non-Latin letters can disguise or fake text."""
+    for char in text:
+        category = unicodedata.category(char)
+        if category == "Cf" or (category == "Cc" and char not in "\n\r\t"):
+            return ("invisible_or_control_character_requires_review",)
+        if category == "Nd" and not "0" <= char <= "9":
+            return ("non_ascii_digit_requires_review",)
+        if category.startswith("L") and not char.isascii() and not unicodedata.name(char, "").startswith("LATIN"):
+            return ("non_latin_or_confusable_letter_requires_review",)
+    return ()
+
+
 def source_admission_issues(source: str, spans: tuple[EvidenceSpan, ...]) -> tuple[str, ...]:
     """Conservative actual-disclosure checks shared by source readers and claim proofs."""
-    issues = []
+    issues = list(text_integrity_issues(source))
+    if DISPUTED_OR_NONASSERTED.search(source):
+        issues.append("disputed_hypothetical_estimated_or_restated_source_requires_review")
     if re.search(
             r"\b(?:hypothetical|illustrative|fictional)\s+example\b"
             r"|\bnot\s+(?:an?\s+)?actual\s+disclosure\b", source, re.IGNORECASE):

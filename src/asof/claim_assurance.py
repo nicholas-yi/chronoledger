@@ -83,7 +83,7 @@ def evaluate() -> dict:
         "limitations": [
             "Finite explicit source-admission rules are not general natural-language entailment.",
             "Mixed illustrative/actual documents may be conservatively deferred.",
-            ("Turnover/top-line equal revenue only under the declared financial-notation-v1 alias policy; "
+            ("Turnover/top-line equal revenue only under the declared financial-notation-v2 alias policy; "
              "spelled amounts are limited to 1-999 cardinals with one scale word and explicit currency."),
             "Human-labelled independent real-source accuracy remains unavailable.",
         ],

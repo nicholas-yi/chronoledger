@@ -72,7 +72,7 @@ def test_declared_fresh_coverage_and_formerly_deferred_boundaries_resolve_with_p
     boundary = summarize_structured(boundary_controls(), [])
     assert boundary["requires_review"] == 0 and boundary["correct"] == boundary["resolved"] == 6
     contracts = {row["source_fact"]["contract"] for row in boundary["decisions"].values()}
-    assert contracts == {"financial-notation-v1", "compact-eps-claim-v1"}
+    assert contracts == {"financial-notation-v2", "compact-eps-claim-v1"}
     assert all(row["proof_valid"] for row in boundary["decisions"].values())
 
 
@@ -158,3 +158,37 @@ def test_assurance_reports_policy_success_separately_from_financial_coverage():
         "resolved": 30, "requires_review": 0,
     }
     assert report["no_model_calls"] and not report["independent_gold"]
+
+
+@pytest.mark.parametrize("source", [
+    "FictionTest reported revenue of \uff11\uff18 USD million for 2016.",
+    "FictionTest reported revenue of \u0661\u0668 USD million for 2016.",
+    "FictionTest reported revenue of 18 USD million for 2016. That figure is incorrect.",
+    "FictionTest reported revenue of 18 USD million for 2016. The company denied this.",
+    "Suppose the following. FictionTest reported revenue of 18 USD million for 2016.",
+    "FictionTest reported revenue of 18 USD million for 2016. Figures are preliminary.",
+    "FictionTest reported revenue of 18 USD million for 2016. Figures were later restated.",
+    "FictionTest reported revenue of 18 USD million for 2016. Figures were re\u200bstated.",
+    "FictionTest reported revenue of 18 USD million for 2016. S\u0430les were restated.",
+    "FictionTest reported revenue of 18 USD million for 2016. The board met in Lo\u00addon.",
+])
+def test_disputed_estimated_or_obfuscated_sources_never_support_an_actual_fact(source):
+    assert verify_claim(source, "FictionTest's 2016 revenue was 18 USD million.")["verdict"] == "review"
+
+
+def test_claims_must_be_plain_ascii_and_latin_accents_or_curly_quotes_in_sources_are_allowed():
+    source = "FictionTest reported revenue of 18 USD million for 2016. The caf\u00e9 \u201cMar\u00eda\u201d opened."
+    assert verify_claim(source, "FictionTest's 2016 revenue was 18 USD million.")["verdict"] == "supported"
+    for claim in ("FictionTest's 2016 revenue was \uff11\uff18 USD million.",
+                  "FictionTest's 2016 revenue was 18 USD million.\u200b"):
+        assert verify_claim(source, claim)["verdict"] == "review"
+
+
+def test_per_share_sentence_tolerates_unrelated_text_but_not_other_share_wording():
+    fact = "FictionTest reported diluted earnings per share of 2.15 GBP per share for 2015."
+    claim = "FictionTest's 2015 diluted earnings per share was 2.15 GBP per share."
+    assert verify_claim(f"{fact} The board met in London.", claim)["verdict"] == "supported"
+    assert verify_claim(f"Intro. {fact}", claim)["verdict"] == "supported"
+    for extra in ("Shares were split two for one.", "Basic EPS is not disclosed.", "Net losses narrowed.",
+                  f"{fact}"):
+        assert verify_claim(f"{fact} {extra}", claim)["verdict"] == "review", extra

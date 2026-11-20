@@ -20,7 +20,7 @@ from asof.reader_fields import (
 from asof.reader_reliability import canonical_unit
 
 UNIT = r"(?:[A-Z]{3}\s+(?:thousand|million|billion|per share)|percent|%|subscribers)"
-NUMBER = r"[+-]?\d[\d,]*(?:\.\d+)?"
+NUMBER = r"[+-]?[0-9][0-9,]*(?:\.[0-9]+)?"
 
 
 @dataclass(frozen=True)
@@ -34,15 +34,16 @@ class Claim:
 
 
 def parse_claim(text: str) -> Claim | None:
-    if not text or len(text) > 1024:
+    # Claims are machine-generated ASCII; other scripts, digits or invisible characters are not parsed.
+    if not text or len(text) > 1024 or not text.isascii() or not text.isprintable():
         return None
     entity = r"(?P<issuer>[A-Za-z][A-Za-z0-9 ]{0,80}?)"
     metric = r"(?P<metric>[A-Za-z][A-Za-z -]{0,100}?)"
     amount = rf"(?:(?P<sign>negative|positive)\s+)?(?P<value>{NUMBER})\s+(?P<unit>{UNIT})"
     patterns = (
-        (rf"{entity}'s\s+(?P<corrected_prefix>corrected\s+)?(?P<year>\d{{4}})\s+"
+        (rf"{entity}'s\s+(?P<corrected_prefix>corrected\s+)?(?P<year>[0-9]{{4}})\s+"
          rf"(?P<corrected>corrected\s+)?{metric}\s+was\s+{amount}\."),
-        rf"{entity}\s+reported\s+{metric}\s+of\s+{amount}\s+for\s+(?P<year>\d{{4}})\.",
+        rf"{entity}\s+reported\s+{metric}\s+of\s+{amount}\s+for\s+(?P<year>[0-9]{{4}})\.",
     )
     for pattern in patterns:
         match = re.fullmatch(pattern, text, re.IGNORECASE)
@@ -70,11 +71,11 @@ def _compound_fact(source: str, claim: Claim) -> EvidenceBundle | None:
     metric = r"[A-Za-z][A-Za-z -]{0,100}?"
     eps = r"(?:basic|diluted) earnings per share"
     patterns = (
-        (rf"For\s+(?P<year>\d{{4}}),\s+(?P<entity>{issuer})\s+reported\s+"
+        (rf"For\s+(?P<year>[0-9]{{4}}),\s+(?P<entity>{issuer})\s+reported\s+"
          rf"(?P<metric1>{metric})\s+of\s+(?P<value1>{NUMBER})\s+(?P<unit1>{UNIT})\s+and\s+"
          rf"(?P<metric2>{metric})\s+of\s+(?P<value2>{NUMBER})\s+(?P<unit2>{UNIT})\."),
         (rf"(?P<entity>{issuer})\s+reported\s+(?P<metric1>{eps})\s+of\s+"
-         rf"(?P<value1>{NUMBER})\s+(?P<unit1>[A-Z]{{3}} per share)\s+for\s+(?P<year>\d{{4}})\.\s+"
+         rf"(?P<value1>{NUMBER})\s+(?P<unit1>[A-Z]{{3}} per share)\s+for\s+(?P<year>[0-9]{{4}})\.\s+"
          rf"(?P<metric2>{eps})\s+was\s+(?P<value2>{NUMBER})\s+(?P<unit2>[A-Z]{{3}} per share)\."),
     )
     for pattern in patterns:
@@ -106,7 +107,7 @@ def _compact_eps_fact(source: str, claim: Claim) -> EvidenceBundle | None:
     cell1 = rf"(?P<metric1>EPS\((?P<kind1>basic|diluted)\))\s*=\s*(?P<currency1>[A-Z]{{3}})(?P<value1>{NUMBER})"
     cell2 = rf"(?P<metric2>EPS\((?P<kind2>basic|diluted)\))\s*=\s*(?P<currency2>[A-Z]{{3}})(?P<value2>{NUMBER})"
     match = re.fullmatch(
-        rf"(?P<entity>{issuer}):\s*fiscal\s*(?P<year>\d{{4}})\s+{cell1};\s*{cell2}\.",
+        rf"(?P<entity>{issuer}):\s*fiscal\s*(?P<year>[0-9]{{4}})\s+{cell1};\s*{cell2}\.",
         source, re.IGNORECASE)
     if match is None or match["year"] != claim.year:
         return None

@@ -1,5 +1,6 @@
 """One-shot record of separately authored adversarial notation cases against the frozen verifier."""
 
+import argparse
 import hashlib
 import json
 import time
@@ -10,27 +11,37 @@ from asof.claim_verifier import verify_claim
 from asof.runtime import frozen_receipt, peak_rss_bytes, write_receipt
 
 ROOT = Path(__file__).resolve().parents[1]
-FIXTURE = "tests/fixtures/notation_adversarial.json"
-SOURCES = (FIXTURE, "scripts/validate_notation_adversarial.py", "src/asof/financial_notation.py",
-           "src/asof/claim_verifier.py", "src/asof/reader_fields.py", "src/asof/linked_reader.py",
-           "src/asof/reader_reliability.py", "src/asof/runtime.py", "results/notation_baseline.json")
+ROUNDS = {
+    1: ("notation_adversarial", 72, "financial-notation-v1"),
+    2: ("notation_adversarial_r2", 96, "financial-notation-v2 (v1 plus dispute, modal and text-integrity guards)"),
+}
+COMMON = ("scripts/validate_notation_adversarial.py", "src/asof/financial_notation.py",
+          "src/asof/claim_verifier.py", "src/asof/reader_fields.py", "src/asof/linked_reader.py",
+          "src/asof/reader_reliability.py", "src/asof/runtime.py", "results/notation_baseline.json")
 
 
-def load(path: Path) -> list[dict]:
+def load(path: Path, count: int) -> list[dict]:
     rows = json.loads(path.read_bytes())
-    if (len(rows) != 72 or len({row["id"] for row in rows}) != 72
+    if (len(rows) != count or len({row["id"] for row in rows}) != count
             or any(row["expected_verdict"] not in ("supported", "contradicted", "review") for row in rows)
             or any(len(row["source"]) > 600 for row in rows)):
         raise ValueError("adversarial fixture violates its declared shape")
     return rows
 
 
-def main():
-    destination = ROOT / "results" / "notation_adversarial.json"
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--round", type=int, choices=sorted(ROUNDS), required=True)
+    args = parser.parse_args(argv)
+    stem, count, policy = ROUNDS[args.round]
+    fixture = f"tests/fixtures/{stem}.json"
+    destination = ROOT / "results" / f"{stem}.json"
     if destination.exists():
         raise FileExistsError("adversarial receipt exists; never overwrite or retry")
-    lineage = frozen_receipt(ROOT, SOURCES)
-    cases = load(ROOT / FIXTURE)
+    sources = (fixture, *COMMON) if args.round == 1 else (
+        fixture, *COMMON, "results/notation_adversarial.json", "results/integrity_final.json")
+    lineage = frozen_receipt(ROOT, sources)
+    cases = load(ROOT / fixture, count)
     started = time.monotonic()
     rows = []
     for case in cases:
@@ -53,8 +64,8 @@ def main():
         "resolved_without_valid_proof": sum(row["verdict"] != "review" and not row["proof_valid"]
                                             for row in rows),
         "disagreements": [row for row in rows if not row["correct"]], "rows": rows,
-        "fixture_sha256": hashlib.sha256((ROOT / FIXTURE).read_bytes()).hexdigest(),
-        "authorship": ("Separate AI agent instance given only the written financial-notation-v1 policy and "
+        "round": args.round, "fixture_sha256": hashlib.sha256((ROOT / fixture).read_bytes()).hexdigest(),
+        "authorship": (f"Separate AI agent instance given only the written {policy} policy and "
                        "claim grammar, instructed not to read repository code; not human, not gold."),
         "verifier_frozen_before_fixture_was_read": True,
         "disagreement_is_not_automatically_verifier_error": True,

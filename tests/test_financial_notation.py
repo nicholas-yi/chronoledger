@@ -68,3 +68,13 @@ def test_separately_authored_adversarial_cases_are_an_exposed_regression_after_t
     rows = json.loads(Path(__file__).with_name("fixtures").joinpath("notation_adversarial.json").read_bytes())
     wrong = [row["id"] for row in rows if verify_claim(row["source"], row["claim"])["verdict"] != row["expected_verdict"]]
     assert len(rows) == 72 and wrong == []
+
+
+def test_notation_v2_defers_on_modal_or_negating_text_but_not_on_substrings():
+    claim = "FictionQuill's 2016 revenue was 26 GBP million."
+    fact = "FictionQuill's turnover reached GBP26m during FY2016."
+    for extra in ("Results could change.", "Not audited.", "Its topline fell in 2020.", "Group turnovers differ.",
+                  "The plan is unchanged.", "If so, fine."):
+        assert verify_claim(f"{fact} {extra}", claim)["verdict"] == "review", extra
+    for extra in ("Notable guests met in Mayfair.", "The ifs were few."):
+        assert verify_claim(f"{fact} {extra}", claim)["verdict"] == "supported", extra

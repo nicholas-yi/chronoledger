@@ -1,6 +1,6 @@
 """Bounded financial notation for claim proofs: compact currency scales, spelled cardinals, revenue aliases.
 
-Policy (financial-notation-v1), declared before the final measurement:
+Policy (financial-notation-v2; v1 plus the document-level guards below), declared before measurement:
 - ISO codes are an explicit uppercase allowlist; the only accepted symbol is the euro sign. ``$``, ``£`` and
   bare "dollars"/"pounds" stay ambiguous because several currencies share them.
 - Scale suffixes are lowercase ``k``/``m``/``mn``/``bn``; ``M``/``MM`` conventions differ, so they are refused.
@@ -9,6 +9,9 @@ Policy (financial-notation-v1), declared before the final measurement:
   possessive or "said its"; employee/inventory/asset/segment turnover, ratios and net sales never qualify.
 - One asserted sentence must bind issuer, metric, amount and fiscal year; any trailing clause, other
   unparsed revenue wording, revision or sub-annual language elsewhere in the source defers to review.
+- v2: modal, forecast, hypothetical or negating words anywhere else in the source also defer, as do the
+  shared dispute/estimate/restatement vocabulary and text-integrity checks (invisible characters,
+  non-ASCII digits, non-Latin look-alike letters). Only ASCII digits are read.
 """
 
 from __future__ import annotations
@@ -19,7 +22,7 @@ import re
 from asof.extraction import normalize
 from asof.linked_reader import EvidenceBundle, EvidenceSpan, _amount
 
-CONTRACT = "financial-notation-v1"
+CONTRACT = "financial-notation-v2"
 ISO_CODES = ("USD", "EUR", "GBP", "JPY", "CHF", "CAD", "AUD")
 SUFFIX_SCALE = {"k": "thousand", "m": "million", "mn": "million", "bn": "billion"}
 CURRENCY_WORDS = {"euro": "EUR", "euros": "EUR", "pounds sterling": "GBP", "us dollars": "USD",
@@ -30,10 +33,10 @@ _TEENS = ("ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen
 _TENS = ("twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")
 _BELOW_100 = rf"(?:(?:{'|'.join(_TENS)})(?:[- ](?:{'|'.join(_UNITS)}))?|{'|'.join(_TEENS)}|{'|'.join(_UNITS)})"
 CARDINAL = rf"(?:(?:{'|'.join(_UNITS)})\s+hundred(?:\s+(?:and\s+)?{_BELOW_100})?|{_BELOW_100})"
-NUMBER = r"\d[\d,]*(?:\.\d+)?"
+NUMBER = r"[0-9][0-9,]*(?:\.[0-9]+)?"
 ALIAS = r"revenues?|turnover|top[- ]line"
 VERB = r"reached|totall?ed|amounted\s+to|came\s+to|was|were"
-PERIOD = r"(?:during|for|in)\s+(?:FY\s?|fiscal\s+year\s+|fiscal\s+|financial\s+year\s+)?(?P<year>\d{4})"
+PERIOD = r"(?:during|for|in)\s+(?:FY\s?|fiscal\s+year\s+|fiscal\s+|financial\s+year\s+)?(?P<year>[0-9]{4})"
 AMOUNT = (
     rf"(?:(?P<code>[A-Za-z]{{3}}|\u20ac)\s?(?P<value>{NUMBER})"
     r"(?:(?P<suffix>mn|bn|m|k)|\s+(?P<scale_word>thousand|million|billion))"
@@ -41,8 +44,12 @@ AMOUNT = (
     r"(?P<currency_words>euros?|pounds\s+sterling|U\.S\.\s+dollars|US\s+dollars|United\s+States\s+dollars))"
 )
 RESIDUAL_GUARD = (
-    r"\b(?:revenues?|turnover|top[- ]line|sales|restat\w*|correct\w*|revis\w*|amend\w*|unreconciled"
-    r"|authoritative|quarter\w*|interim|half[- ]year|months|year[- ]to[- ]date|ytd)\b"
+    r"\b(?:revenues?|turnovers?|top[- ]?lines?|sales?|restat\w*|correct\w*|revis\w*|amend\w*|unreconciled"
+    r"|authoritative|quarter\w*|interim|half[- ]year|months|year[- ]to[- ]date|ytd"
+    # financial-notation-v2: the notation layer also defers on any nonassertive, modal or forecast wording.
+    r"|forecast\w*|project\w*|expect\w*|guidance|target\w*|budget\w*|outlook|anticipat\w*|plan(?:s|ned)?"
+    r"|if|would|could|might|may|should|examples?|illustrat\w*|samples?|fictional|pro\s+forma"
+    r"|not|never|neither|nor)\b"
 )
 
 
