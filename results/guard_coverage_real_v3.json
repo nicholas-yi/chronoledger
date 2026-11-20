@@ -1,0 +1,280 @@
+{
+  "status": "complete_aggregate_only_guard_coverage_on_real_mdna",
+  "round": 3,
+  "protocol": "One-shot, aggregate-only coverage cost of the shared guards on real 10-K MD&A text.\n\nPre-declared protocol (frozen before any filing body is read):\n- Population: cached 10-K primary documents in bulk_filings with knowledge_time inside the D13\n  development window (every body read passes the EDGAR client's require_eligible_documents check);\n  cache only, no network. Filings and issuers in the private review packet are excluded; only the\n  packet's accession and CIK fields are read, and neither is printed nor stored.\n- Sample: one filing per issuer (lowest sha256(accession)), then the 150 lowest-hash issuers.\n- Candidates: MD&A (Item 7) sentences containing a revenue/sales word and a dollar amount.\n- Windows: the sentence alone, +/-1 sentence and +/-3 sentences, capped at 8192 characters.\n- Measures: share of windows the shared admission guard would defer (split into pre-existing\n  checks versus the new text-integrity and dispute/estimate vocabulary), share the notation\n  residual guard would defer, and aggregate trigger-term and character-name counts.\n- Output: aggregate counts only. No passage, sentence or excerpt is printed or stored. A deferral\n  is a coverage cost, not an error; this measures neither accuracy nor correctness.\n- Round 2 (declared after round 1, before running it): MD&A text first passes the declared\n  normalize_filing_text ingestion step; measured on the round-1 sample (exposed aggregates) and on a\n  fresh disjoint sample of the next 150 issuers by the same hash order.\n- Round 3 (declared after round 2 exposed an imagin* stem over-match, before running it): normalized,\n  on a further fresh disjoint sample (issuers ranked 301-450 by the same hash order).\n",
+  "measurements": {
+    "second_fresh_disjoint_sample_normalized": {
+      "counts": {
+        "ineligible_dates": 17,
+        "filings_read": 133,
+        "mdna_without_candidates": 15,
+        "filings_with_candidates": 115,
+        "candidate_sentences": 1741,
+        "no_mdna": 3
+      },
+      "normalization_repairs": {
+        "cp1252_c1_repaired": 3089,
+        "invisible_format_removed": 2867
+      },
+      "windows": {
+        "sentence": {
+          "windows": 1741,
+          "shared_any": {
+            "deferred": 36,
+            "rate": 0.0207,
+            "wilson95": [
+              0.015,
+              0.0285
+            ]
+          },
+          "pre_existing": {
+            "deferred": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.0022
+            ]
+          },
+          "integrity": {
+            "deferred": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.0022
+            ]
+          },
+          "dispute_vocabulary": {
+            "deferred": 36,
+            "rate": 0.0207,
+            "wilson95": [
+              0.015,
+              0.0285
+            ]
+          },
+          "new_only": {
+            "deferred": 36,
+            "rate": 0.0207,
+            "wilson95": [
+              0.015,
+              0.0285
+            ]
+          },
+          "notation_residual": {
+            "deferred": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.0022
+            ]
+          },
+          "filing_macro_mean_shared_any": 0.023
+        },
+        "pm1": {
+          "windows": 1741,
+          "shared_any": {
+            "deferred": 82,
+            "rate": 0.0471,
+            "wilson95": [
+              0.0381,
+              0.0581
+            ]
+          },
+          "pre_existing": {
+            "deferred": 1,
+            "rate": 0.0006,
+            "wilson95": [
+              0.0001,
+              0.0032
+            ]
+          },
+          "integrity": {
+            "deferred": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.0022
+            ]
+          },
+          "dispute_vocabulary": {
+            "deferred": 81,
+            "rate": 0.0465,
+            "wilson95": [
+              0.0376,
+              0.0575
+            ]
+          },
+          "new_only": {
+            "deferred": 81,
+            "rate": 0.0465,
+            "wilson95": [
+              0.0376,
+              0.0575
+            ]
+          },
+          "notation_residual": {
+            "deferred": 1457,
+            "rate": 0.8369,
+            "wilson95": [
+              0.8188,
+              0.8535
+            ]
+          },
+          "filing_macro_mean_shared_any": 0.0604
+        },
+        "pm3": {
+          "windows": 1741,
+          "shared_any": {
+            "deferred": 171,
+            "rate": 0.0982,
+            "wilson95": [
+              0.0851,
+              0.1131
+            ]
+          },
+          "pre_existing": {
+            "deferred": 3,
+            "rate": 0.0017,
+            "wilson95": [
+              0.0006,
+              0.0051
+            ]
+          },
+          "integrity": {
+            "deferred": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.0022
+            ]
+          },
+          "dispute_vocabulary": {
+            "deferred": 170,
+            "rate": 0.0976,
+            "wilson95": [
+              0.0846,
+              0.1125
+            ]
+          },
+          "new_only": {
+            "deferred": 168,
+            "rate": 0.0965,
+            "wilson95": [
+              0.0835,
+              0.1113
+            ]
+          },
+          "notation_residual": {
+            "deferred": 1697,
+            "rate": 0.9747,
+            "wilson95": [
+              0.9662,
+              0.9811
+            ]
+          },
+          "filing_macro_mean_shared_any": 0.1149
+        }
+      },
+      "top_dispute_terms_pm1": [
+        [
+          "estimated",
+          51
+        ],
+        [
+          "estimate",
+          17
+        ],
+        [
+          "restated",
+          15
+        ],
+        [
+          "unaudited",
+          14
+        ],
+        [
+          "estimates",
+          14
+        ],
+        [
+          "assuming",
+          5
+        ],
+        [
+          "assumptions",
+          3
+        ],
+        [
+          "restatement",
+          3
+        ],
+        [
+          "scenario",
+          3
+        ],
+        [
+          "withdraw",
+          2
+        ],
+        [
+          "error",
+          2
+        ],
+        [
+          "withdrew",
+          1
+        ],
+        [
+          "assume",
+          1
+        ],
+        [
+          "withdrawals",
+          1
+        ],
+        [
+          "provisional",
+          1
+        ],
+        [
+          "withdrawal",
+          1
+        ]
+      ],
+      "top_integrity_characters_pm1": [],
+      "sample": {
+        "filings_planned": 150,
+        "issuers": 150,
+        "accessions_sha256": "aca20806c0a02b2c90e741eaf20e0d687470e31196060b08f44b57114eb7f4ed",
+        "knowledge_time_min": "2012-01-05 20:00:38+00:00",
+        "knowledge_time_max": "2018-11-29 15:42:53+00:00"
+      }
+    }
+  },
+  "exclusions": {
+    "review_accessions": 12,
+    "review_issuers": 12,
+    "identifiers_printed_or_stored": false
+  },
+  "no_passages_stored": true,
+  "network_requests_expected": 0,
+  "accuracy_or_correctness_measured": false,
+  "lineage": {
+    "freeze_commit": "a0ec24b44924dc96de237f4db9477ecdcecd1350",
+    "source_SHA256": {
+      "scripts/measure_guard_coverage_real.py": "49a45614d2a0b768717a16c14e3e5d0977274f79ae760d5c71a6666278c7f726",
+      "src/asof/reader_fields.py": "d0ac78d527b001764fbd54819067f5c086650c379bc29df80bbee84ed38fbbbd",
+      "src/asof/financial_notation.py": "9c92b6b087924f51c5e71f00cec3eff93ab7fd63b38975b4df82db7ebe6f6256",
+      "src/asof/sections.py": "c9f59037a0f5528270a4d4e9a321a7cbc9d1f917fab28e8fa84577dd07a27429",
+      "src/asof/edgar.py": "e90e4600435d59e38f4b88f6c94c03d46a62d423b398c28c2347489d6cb99448",
+      "src/asof/document_scope.py": "c0d088186bcaf4cafd01223e6d9f1ef4fbb95bcb54f392a87799c86aeb834e79",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/text_normalization.py": "27cecbd2dbd9d009f015e3791f549ec50015437c65f440b149623c43f5989be4",
+      "tests/test_text_normalization.py": "e0ada723dc00c448a7370b72f6e8cabfa5af8dc3b49d896f8bd3e2466b979e9d",
+      "results/guard_coverage_real.json": "3d702143a5a88fce3ab2e9e175a842894924e25addd9f88561effa20f1f2b686",
+      "results/guard_coverage_real_v2.json": "e53f0875f59656fd495a8b6270d8167849e415cbbe061a834e217d15dae0b8ce"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "wall_seconds": 144.2960000000894,
+  "process_peak_RSS_bytes": 643977216
+}
