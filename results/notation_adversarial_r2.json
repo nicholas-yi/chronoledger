@@ -1,0 +1,912 @@
+{
+  "status": "complete_one_shot_adversarial_record",
+  "planned": 96,
+  "correct": 96,
+  "expected": {
+    "supported": 24,
+    "contradicted": 24,
+    "review": 48
+  },
+  "verdicts": {
+    "supported": 24,
+    "contradicted": 24,
+    "review": 48
+  },
+  "false_support": 0,
+  "false_contradiction": 0,
+  "missed_resolution": 0,
+  "resolved_without_valid_proof": 0,
+  "disagreements": [],
+  "rows": [
+    {
+      "id": "ADV2-01",
+      "attack": "fy_space_thousand_word_residual",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-02",
+      "attack": "k_to_billion_rescale",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-03",
+      "attack": "turnover_were_no_agreement",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-04",
+      "attack": "jpy_bn_group_vs_claim_billion",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-05",
+      "attack": "other_year_sibling_crlf",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-06",
+      "attack": "spelled_hundred_and_rescale_to_million",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-07",
+      "attack": "bidi_override_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-08",
+      "attack": "provisional_uppercase",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-09",
+      "attack": "left_single_quote_possessive",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-10",
+      "attack": "assumptions_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-11",
+      "attack": "greek_delta_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-12",
+      "attack": "disputed_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-13",
+      "attack": "curly_quote_after_terminal_period",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-14",
+      "attack": "rescale_billion_decimal_shift",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-15",
+      "attack": "misstatement_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-16",
+      "attack": "spelled_sixty_vs_sixteen_accent",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-17",
+      "attack": "allegedly_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-18",
+      "attack": "spelled_one_hundred_and_one",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-19",
+      "attack": "claim_thousand_overshoot",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-20",
+      "attack": "fiscal_year_extra_decimal_digit",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-21",
+      "attack": "issuer_name_7a_word_contradicted",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-22",
+      "attack": "fy_double_space",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-23",
+      "attack": "estimates_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-24",
+      "attack": "top_line_double_space",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-25",
+      "attack": "top_lines_plural_metric",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-26",
+      "attack": "zero_width_space_in_metric",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-27",
+      "attack": "the_fiscal_year_article",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-28",
+      "attack": "question_tab_boundary",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-29",
+      "attack": "suffix_plus_scale_word",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-30",
+      "attack": "cyrillic_o_source_issuer",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-31",
+      "attack": "spelled_teen_euro_singular_residual",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-32",
+      "attack": "rule8_equal_but_preliminary",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-33",
+      "attack": "spelled_hundred_and_eight",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-34",
+      "attack": "spelled_teen_vs_tens",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-35",
+      "attack": "uppercase_metric_verb_scale",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-36",
+      "attack": "vertical_tab_separator",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-37",
+      "attack": "five_digit_year",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-38",
+      "attack": "issuer_name_contains_draft",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-39",
+      "attack": "restaurant_substring_not_restat",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-40",
+      "attack": "fiscal_newline_year_k_rescale",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-41",
+      "attack": "mn_vs_thousand_claim",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-42",
+      "attack": "amounted_missing_to",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-43",
+      "attack": "claim_style_amount_in_source",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-44",
+      "attack": "dollar_sign_residual_harmless",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-45",
+      "attack": "rule8_equal_claim_currency_differs",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-46",
+      "attack": "tab_inside_multiword_issuer",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-47",
+      "attack": "curly_quote_residual_currency",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-48",
+      "attack": "month_may_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-49",
+      "attack": "said_that_its",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-50",
+      "attack": "nbsp_boundary_and_tokens",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-51",
+      "attack": "spelled_tens_space_unit_financial_year",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-52",
+      "attack": "hundred_without_unit",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-53",
+      "attack": "rumours_british_spelling",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-54",
+      "attack": "rule8_standard_equal_rescaled",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-55",
+      "attack": "leading_decimal_point",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-56",
+      "attack": "spelled_thousand_vs_million",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-57",
+      "attack": "other_issuer_profit_sentence",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-58",
+      "attack": "other_issuer_valid_sentence_blocks",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-59",
+      "attack": "what_if_question_boundary",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-60",
+      "attack": "wholesale_residual_currency",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-61",
+      "attack": "math_bold_letter_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-62",
+      "attack": "rescale_k_vs_other_year_m",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-63",
+      "attack": "euro_sign_bn_rescale",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-64",
+      "attack": "planetarium_substring",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-65",
+      "attack": "claim_cyrillic_homoglyph",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "claim_outside_supported_grammar",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-66",
+      "attack": "issuer_name_7a_word_in_header",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-67",
+      "attack": "k_decimal_vs_claim_thousand",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-68",
+      "attack": "aud_vs_usd_said_its",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-69",
+      "attack": "curly_quote_residual_tab_tokens",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-70",
+      "attack": "exclamation_terminator",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-71",
+      "attack": "projector_star_match",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-72",
+      "attack": "claim_accented_issuer_exact_match",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "claim_outside_supported_grammar",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-73",
+      "attack": "claim_nbsp_separator",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "claim_outside_supported_grammar",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-74",
+      "attack": "restaurant_residual_contradicted",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-75",
+      "attack": "k_group_claim_million_magnitude",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-76",
+      "attack": "soft_hyphen_issuer",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-77",
+      "attack": "arabic_indic_digit_residual",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-78",
+      "attack": "parenthesized_sentence",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-79",
+      "attack": "issuer_name_7a_word_only_in_fact",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-80",
+      "attack": "nbsp_tokens_value_mismatch",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-81",
+      "attack": "correspondence_not_correct",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-82",
+      "attack": "accented_latin_residual",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-83",
+      "attack": "bare_b_suffix",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-84",
+      "attack": "tab_tokens_decimal_mismatch",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-85",
+      "attack": "ifs_northern_substrings",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-86",
+      "attack": "uppercase_scale_word_mismatch",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-87",
+      "attack": "withdrawal_star_form",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-88",
+      "attack": "possessive_without_s",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-89",
+      "attack": "chf_fractional_k_vs_million",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-90",
+      "attack": "notable_mayfair_wholesale_substrings",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-91",
+      "attack": "euro_sign_bn_vs_claim_million",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV2-92",
+      "attack": "twelve_hundred_not_grammar",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-93",
+      "attack": "rule8_currency_differs",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-94",
+      "attack": "bom_prefix",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-95",
+      "attack": "equivalent_rescaled_duplicate",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV2-96",
+      "attack": "fullwidth_digits_year",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    }
+  ],
+  "round": 2,
+  "fixture_sha256": "cfcfc7ad61964a1b1fc2f7e0a012a713f61605c5ff22119a836da9e3918a334d",
+  "authorship": "Separate AI agent instance given only the written financial-notation-v2 (v1 plus dispute, modal and text-integrity guards) policy and claim grammar, instructed not to read repository code; not human, not gold.",
+  "verifier_frozen_before_fixture_was_read": true,
+  "disagreement_is_not_automatically_verifier_error": true,
+  "lineage": {
+    "freeze_commit": "c46ffef62e92842d2f50c89d4de4c9992e6181f8",
+    "source_SHA256": {
+      "tests/fixtures/notation_adversarial_r2.json": "cfcfc7ad61964a1b1fc2f7e0a012a713f61605c5ff22119a836da9e3918a334d",
+      "scripts/validate_notation_adversarial.py": "9f2369921a9cca4460abbedff02ca293c47a8507702957a2ea179e9037acf5c3",
+      "src/asof/financial_notation.py": "9c92b6b087924f51c5e71f00cec3eff93ab7fd63b38975b4df82db7ebe6f6256",
+      "src/asof/claim_verifier.py": "4d6187c4ba220aed4d9f2de8f538664c1cc784d0eea0788cd033f9708eac7a7c",
+      "src/asof/reader_fields.py": "3b1fa0053c963289ac90d74de3608be09ba3726c75e662a52514b577a75cadac",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "results/notation_baseline.json": "5cf7bcc7a54f489afe7fae6a19e0721d227922eb8b5f23f0b9b7a0b21c5a4632",
+      "results/notation_adversarial.json": "6b8c773a41a38fdb3a9c81911ee88b898c6c6b5729d7c9118ff1f5693a225cb8",
+      "results/integrity_final.json": "6bc28f587d9b5da802f2dd5c1e5a4146e7e3b3f9b580d4ea63e4a158616df90f"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "independent_human_gold": false,
+  "model_calls": 0,
+  "wall_seconds": 0.5940000000409782,
+  "process_peak_RSS_bytes": 37584896
+}
