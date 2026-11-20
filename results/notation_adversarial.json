@@ -1,0 +1,703 @@
+{
+  "status": "complete_one_shot_adversarial_record",
+  "planned": 72,
+  "correct": 71,
+  "expected": {
+    "supported": 18,
+    "contradicted": 18,
+    "review": 36
+  },
+  "verdicts": {
+    "supported": 19,
+    "contradicted": 18,
+    "review": 35
+  },
+  "false_support": 1,
+  "false_contradiction": 0,
+  "missed_resolution": 0,
+  "resolved_without_valid_proof": 0,
+  "disagreements": [
+    {
+      "id": "ADV-71",
+      "attack": "near_miss_sibling_sentence",
+      "expected_verdict": "review",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": false
+    }
+  ],
+  "rows": [
+    {
+      "id": "ADV-01",
+      "attack": "unicode_right_single_quote",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-02",
+      "attack": "currency_mismatch_no_fx",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-03",
+      "attack": "year_mismatch_missing_fact",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-04",
+      "attack": "issuer_prefix_collision",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-05",
+      "attack": "rescale_thousand_to_million",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-06",
+      "attack": "scale_mismatch_bn_vs_million",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-07",
+      "attack": "issuer_longer_name_group",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-08",
+      "attack": "qualified_metric_net",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-09",
+      "attack": "trailing_zero_decimal_claim",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-10",
+      "attack": "near_equality_extra_digit",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-11",
+      "attack": "sales_metric_not_allowlisted",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-12",
+      "attack": "third_party_possessive",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-13",
+      "attack": "exact_decimal_precision",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-14",
+      "attack": "float_precision_trap",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-15",
+      "attack": "negated_verb",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-16",
+      "attack": "modal_verb",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-17",
+      "attack": "said_its_amounted_to_financial_year",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-18",
+      "attack": "euro_sign_vs_usd_claim",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-19",
+      "attack": "unlisted_verb_rose_to",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-20",
+      "attack": "dollar_sign_currency",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-21",
+      "attack": "top_line_hyphen_thousand_commas",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-22",
+      "attack": "spelled_scale_mismatch",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-23",
+      "attack": "lowercase_iso_code",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-24",
+      "attack": "non_allowlisted_code",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-25",
+      "attack": "euro_sign_mn_suffix",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-26",
+      "attack": "spelled_digit_transposition",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-27",
+      "attack": "uppercase_scale_suffix",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-28",
+      "attack": "space_before_suffix",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-29",
+      "attack": "spelled_cardinal_euros",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-30",
+      "attack": "code_word_decimal_shift",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-31",
+      "attack": "double_space_after_code",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-32",
+      "attack": "malformed_thousands_commas",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-33",
+      "attack": "us_dollars_internal_periods",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-34",
+      "attack": "chf_vs_cad_currency",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-35",
+      "attack": "bare_dollars_spelled",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-36",
+      "attack": "compound_spelled_number",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-37",
+      "attack": "spelled_pounds_sterling_rescale",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-38",
+      "attack": "rescale_wrong_magnitude",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-39",
+      "attack": "fraction_in_words",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-40",
+      "attack": "trillion_scale_word",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-41",
+      "attack": "code_scale_word_rescale",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-42",
+      "attack": "wrong_year_value_multi_year",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-43",
+      "attack": "two_digit_fiscal_year",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-44",
+      "attack": "fiscal_year_range",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-45",
+      "attack": "multi_year_newline_siblings",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-46",
+      "attack": "comma_thousands_misread",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-47",
+      "attack": "quarter_period",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-48",
+      "attack": "calendar_prefix_not_allowed",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-49",
+      "attack": "multi_word_issuer_top_line",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-50",
+      "attack": "claim_thousand_rescale_mismatch",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-51",
+      "attack": "trailing_clause",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-52",
+      "attack": "no_whitespace_after_boundary",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-53",
+      "attack": "case_insensitive_issuer",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-54",
+      "attack": "unicode_apostrophe_value_mismatch",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-55",
+      "attack": "leading_phrase_before_issuer",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-56",
+      "attack": "header_line_without_period",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-57",
+      "attack": "exclamation_boundary_jpy_rescale",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-58",
+      "attack": "injection_claims_supported",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-59",
+      "attack": "missing_terminal_period",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-60",
+      "attack": "sibling_mentions_sales",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-61",
+      "attack": "injection_benign_supported",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_same_currency_quantity_equivalence",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-62",
+      "attack": "claim_currency_not_allowlisted",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-63",
+      "attack": "restatement_mention",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-64",
+      "attack": "authoritative_injection",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-65",
+      "attack": "question_boundary_decimal",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-66",
+      "attack": "decimal_truncated",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-67",
+      "attack": "duplicate_same_amount",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-68",
+      "attack": "standard_reader_conflict",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    },
+    {
+      "id": "ADV-69",
+      "attack": "spelled_upper_bound_999",
+      "expected_verdict": "supported",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-70",
+      "attack": "pounds_sterling_vs_eur",
+      "expected_verdict": "contradicted",
+      "verdict": "contradicted",
+      "reason": "source_fact_differs",
+      "proof_valid": true,
+      "correct": true
+    },
+    {
+      "id": "ADV-71",
+      "attack": "near_miss_sibling_sentence",
+      "expected_verdict": "review",
+      "verdict": "supported",
+      "reason": "exact_claim_matches_bound_source",
+      "proof_valid": true,
+      "correct": false
+    },
+    {
+      "id": "ADV-72",
+      "attack": "illustrative_disclaimer",
+      "expected_verdict": "review",
+      "verdict": "review",
+      "reason": "no_unique_source_proof_requires_review",
+      "proof_valid": false,
+      "correct": true
+    }
+  ],
+  "fixture_sha256": "5c2ca4b16384376203f00fcc943c1ada92f912f0e0724a2142c5b024ed842549",
+  "authorship": "Separate AI agent instance given only the written financial-notation-v1 policy and claim grammar, instructed not to read repository code; not human, not gold.",
+  "verifier_frozen_before_fixture_was_read": true,
+  "disagreement_is_not_automatically_verifier_error": true,
+  "lineage": {
+    "freeze_commit": "8eae93e8f2473cefeacb4e220e36eb7adcf8cb3d",
+    "source_SHA256": {
+      "tests/fixtures/notation_adversarial.json": "5c2ca4b16384376203f00fcc943c1ada92f912f0e0724a2142c5b024ed842549",
+      "scripts/validate_notation_adversarial.py": "b973ca65deefdd0450480ae5be80d8d2d15c1c92ece3d7c94276898a38c8d17f",
+      "src/asof/financial_notation.py": "06ba5e8ebc721a17d551a6c00a2141c330eadfa0cbc8104ddd4eba5c85211499",
+      "src/asof/claim_verifier.py": "70a81e2317616e0b10f9a7936e24060f162625120f17d6bf0f80607a548cafe5",
+      "src/asof/reader_fields.py": "bde1ca7a373e8e806c5f429a3fca5bc90d7a841e6eadb44ee7fbb10f6051f5ac",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "results/notation_baseline.json": "5cf7bcc7a54f489afe7fae6a19e0721d227922eb8b5f23f0b9b7a0b21c5a4632"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "independent_human_gold": false,
+  "model_calls": 0,
+  "wall_seconds": 0.42199999978765845,
+  "process_peak_RSS_bytes": 35266560
+}
