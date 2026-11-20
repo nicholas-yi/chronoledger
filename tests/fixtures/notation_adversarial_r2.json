@@ -1,0 +1,770 @@
+[
+  {
+    "id": "ADV2-01",
+    "source": "FictionCobalt's revenue was AUD 980 thousand for FY 2010. Chart omitted for space.",
+    "claim": "FictionCobalt's 2010 revenue was 0.98 AUD million.",
+    "expected_verdict": "supported",
+    "attack": "fy_space_thousand_word_residual",
+    "rationale": "AUD 980 thousand rescales exactly to 0.98 AUD million and the residual sentence contains no blocked word."
+  },
+  {
+    "id": "ADV2-02",
+    "source": "FictionHeron's revenue was JPY 2,500,000k in 2008.",
+    "claim": "FictionHeron's 2008 revenue was 2.5 JPY billion.",
+    "expected_verdict": "supported",
+    "attack": "k_to_billion_rescale",
+    "rationale": "JPY 2,500,000k is JPY 2,500,000,000, exactly 2.5 JPY billion."
+  },
+  {
+    "id": "ADV2-03",
+    "source": "FictionPike's turnover were CHF 72m during 2012.",
+    "claim": "FictionPike's 2012 revenue was 72 CHF million.",
+    "expected_verdict": "supported",
+    "attack": "turnover_were_no_agreement",
+    "rationale": "Were is an allowlisted verb for any listed metric and the policy imposes no subject-verb agreement rule."
+  },
+  {
+    "id": "ADV2-04",
+    "source": "FictionSorrel's revenue was JPY 1,200bn in 2008.",
+    "claim": "FictionSorrel's 2008 revenue was 1.2 JPY billion.",
+    "expected_verdict": "contradicted",
+    "attack": "jpy_bn_group_vs_claim_billion",
+    "rationale": "JPY 1,200bn is 1,200 JPY billion, a thousand times the claimed 1.2 JPY billion."
+  },
+  {
+    "id": "ADV2-05",
+    "source": "FictionVale said its top line came to AUD 88m in fiscal 2020.\r\nFictionVale's revenue was AUD 91m in fiscal 2021.",
+    "claim": "FictionVale's 2021 revenue was 91 AUD million.",
+    "expected_verdict": "supported",
+    "attack": "other_year_sibling_crlf",
+    "rationale": "Both CRLF-separated sentences are valid for the same issuer but different years, so both are removed and the 2021 fact proves 91 AUD million."
+  },
+  {
+    "id": "ADV2-06",
+    "source": "FictionBrook's revenue amounted to one hundred and twenty-five thousand United States dollars in 2013.",
+    "claim": "FictionBrook's 2013 revenue was 0.125 USD million.",
+    "expected_verdict": "supported",
+    "attack": "spelled_hundred_and_rescale_to_million",
+    "rationale": "One hundred and twenty-five thousand United States dollars is USD 125,000, exactly 0.125 USD million."
+  },
+  {
+    "id": "ADV2-07",
+    "source": "FictionMoss's revenue was USD 9m in 2013. Ref: \u202e7102\u202c.",
+    "claim": "FictionMoss's 2013 revenue was 9 USD million.",
+    "expected_verdict": "review",
+    "attack": "bidi_override_residual",
+    "rationale": "The right-to-left override and pop-directional controls are bidi characters prohibited by rule 7c."
+  },
+  {
+    "id": "ADV2-08",
+    "source": "FictionSorrel's revenue was JPY 40bn in 2009. STATUS: PROVISIONAL.",
+    "claim": "FictionSorrel's 2009 revenue was 40 JPY billion.",
+    "expected_verdict": "review",
+    "attack": "provisional_uppercase",
+    "rationale": "PROVISIONAL matches the case-insensitive 7b word provisional."
+  },
+  {
+    "id": "ADV2-09",
+    "source": "FictionQuill\u2018s revenue was GBP26m in 2016.",
+    "claim": "FictionQuill's 2016 revenue was 26 GBP million.",
+    "expected_verdict": "review",
+    "attack": "left_single_quote_possessive",
+    "rationale": "Only the ASCII apostrophe or U+2019 may form the possessive, so U+2018 leaves the fact unprovable."
+  },
+  {
+    "id": "ADV2-10",
+    "source": "FictionPike's revenue was CHF 5m in 2010. Assumptions apply to costs only.",
+    "claim": "FictionPike's 2010 revenue was 5 CHF million.",
+    "expected_verdict": "review",
+    "attack": "assumptions_residual",
+    "rationale": "Assumptions matches the 7b pattern assum*."
+  },
+  {
+    "id": "ADV2-11",
+    "source": "FictionVale's revenue was AUD 91m in 2021. \u0394 to prior year is shown below.",
+    "claim": "FictionVale's 2021 revenue was 91 AUD million.",
+    "expected_verdict": "review",
+    "attack": "greek_delta_residual",
+    "rationale": "The Greek capital delta is a non-Latin letter that fails rule 7c anywhere in the source."
+  },
+  {
+    "id": "ADV2-12",
+    "source": "FictionLark's revenue was EUR 3m in 2014. Shareholders disputed the dividend.",
+    "claim": "FictionLark's 2014 revenue was 3 EUR million.",
+    "expected_verdict": "review",
+    "attack": "disputed_residual",
+    "rationale": "Disputed matches the 7b pattern disput* even though it refers to the dividend."
+  },
+  {
+    "id": "ADV2-13",
+    "source": "FictionHeron's revenue was USD 11m in 2007.\u201d",
+    "claim": "FictionHeron's 2007 revenue was 11 USD million.",
+    "expected_verdict": "review",
+    "attack": "curly_quote_after_terminal_period",
+    "rationale": "The terminal period is followed by a closing quote rather than whitespace or end of source, so the sentence never ends validly."
+  },
+  {
+    "id": "ADV2-14",
+    "source": "FictionGarnet's revenues were EUR 450m in 2000.",
+    "claim": "FictionGarnet's 2000 revenue was 0.045 EUR billion.",
+    "expected_verdict": "contradicted",
+    "attack": "rescale_billion_decimal_shift",
+    "rationale": "EUR 450m equals 0.45 EUR billion, so 0.045 EUR billion is ten times too small."
+  },
+  {
+    "id": "ADV2-15",
+    "source": "FictionHeron's revenue was USD 11m in 2007. The audit found no misstatement.",
+    "claim": "FictionHeron's 2007 revenue was 11 USD million.",
+    "expected_verdict": "review",
+    "attack": "misstatement_residual",
+    "rationale": "Misstatement matches the 7b pattern misstat* even in a reassuring sentence."
+  },
+  {
+    "id": "ADV2-16",
+    "source": "FictionCinder's revenue was sixty thousand euros in 2010. Bureau \u00e0 Montr\u00e9al.",
+    "claim": "FictionCinder's 2010 revenue was 16 EUR thousand.",
+    "expected_verdict": "contradicted",
+    "attack": "spelled_sixty_vs_sixteen_accent",
+    "rationale": "The accented residual is allowed and sixty thousand euros proves 60 EUR thousand, not 16 EUR thousand."
+  },
+  {
+    "id": "ADV2-17",
+    "source": "FictionOtter's revenue was CAD 14m in 2012. The memo was allegedly leaked.",
+    "claim": "FictionOtter's 2012 revenue was 14 CAD million.",
+    "expected_verdict": "review",
+    "attack": "allegedly_residual",
+    "rationale": "Allegedly matches the 7b pattern alleg*."
+  },
+  {
+    "id": "ADV2-18",
+    "source": "FictionCopper's revenue came to one hundred and one thousand US dollars in 2001.",
+    "claim": "FictionCopper's 2001 revenue was 100.1 USD thousand.",
+    "expected_verdict": "contradicted",
+    "attack": "spelled_one_hundred_and_one",
+    "rationale": "One hundred and one thousand US dollars is 101 USD thousand, not 100.1 USD thousand."
+  },
+  {
+    "id": "ADV2-19",
+    "source": "FictionNimbus's revenue was GBP26m in 2009.",
+    "claim": "FictionNimbus's 2009 revenue was 26,000,000 GBP thousand.",
+    "expected_verdict": "contradicted",
+    "attack": "claim_thousand_overshoot",
+    "rationale": "26,000,000 GBP thousand equals 26 GBP billion, not the proven 26 GBP million."
+  },
+  {
+    "id": "ADV2-20",
+    "source": "FictionMarlow said its revenues were CAD 9.9m in fiscal year 2003.",
+    "claim": "FictionMarlow's 2003 revenue was 9.99 CAD million.",
+    "expected_verdict": "contradicted",
+    "attack": "fiscal_year_extra_decimal_digit",
+    "rationale": "The proven 9.9 CAD million is not exactly equal to 9.99 CAD million."
+  },
+  {
+    "id": "ADV2-21",
+    "source": "Fiction Budget Air's revenue was GBP 410m in 2018.",
+    "claim": "Fiction Budget Air's 2018 revenue was 401 GBP million.",
+    "expected_verdict": "contradicted",
+    "attack": "issuer_name_7a_word_contradicted",
+    "rationale": "Budget appears only in the removed valid fact, which proves 410 GBP million rather than 401 GBP million."
+  },
+  {
+    "id": "ADV2-22",
+    "source": "FictionCobalt's revenue was AUD 980k in FY  2010.",
+    "claim": "FictionCobalt's 2010 revenue was 980 AUD thousand.",
+    "expected_verdict": "review",
+    "attack": "fy_double_space",
+    "rationale": "The FY prefix may be followed by at most one space, so two spaces make the period invalid."
+  },
+  {
+    "id": "ADV2-23",
+    "source": "FictionQuill's revenue was GBP26m in 2016. Analyst estimates differ.",
+    "claim": "FictionQuill's 2016 revenue was 26 GBP million.",
+    "expected_verdict": "review",
+    "attack": "estimates_residual",
+    "rationale": "Estimates matches the 7b shared vocabulary estimat* anywhere in the source."
+  },
+  {
+    "id": "ADV2-24",
+    "source": "FictionVale's top  line was AUD 91m in 2021.",
+    "claim": "FictionVale's 2021 revenue was 91 AUD million.",
+    "expected_verdict": "review",
+    "attack": "top_line_double_space",
+    "rationale": "The top line metric allows exactly one space or hyphen, so two spaces make the sentence invalid."
+  },
+  {
+    "id": "ADV2-25",
+    "source": "FictionCopper's top lines were GBP 7.25m in 2007.",
+    "claim": "FictionCopper's 2007 revenue was 7.25 GBP million.",
+    "expected_verdict": "review",
+    "attack": "top_lines_plural_metric",
+    "rationale": "Top lines is not an allowlisted metric, unlike revenues, so the sentence is invalid and its metric word blocks."
+  },
+  {
+    "id": "ADV2-26",
+    "source": "FictionPebble's rev\u200benue was CAD 12.5k in 2011.",
+    "claim": "FictionPebble's 2011 revenue was 12.5 CAD thousand.",
+    "expected_verdict": "review",
+    "attack": "zero_width_space_in_metric",
+    "rationale": "A zero-width space inside the metric word is an invisible format character under rule 7c."
+  },
+  {
+    "id": "ADV2-27",
+    "source": "FictionMarlow said its revenues were CAD 9.9m in the fiscal year 2003.",
+    "claim": "FictionMarlow's 2003 revenue was 9.9 CAD million.",
+    "expected_verdict": "review",
+    "attack": "the_fiscal_year_article",
+    "rationale": "The article the is not an allowed period prefix, so the sentence is not a valid fact."
+  },
+  {
+    "id": "ADV2-28",
+    "source": "Was it a record year?\tFictionCopper's revenue reached GBP 7.25m in 2007.",
+    "claim": "FictionCopper's 2007 revenue was 7,250 GBP thousand.",
+    "expected_verdict": "supported",
+    "attack": "question_tab_boundary",
+    "rationale": "A question mark followed by a tab is a valid sentence boundary and the residual question contains no blocked word."
+  },
+  {
+    "id": "ADV2-29",
+    "source": "FictionNimbus's revenue was GBP 26m million in 2009.",
+    "claim": "FictionNimbus's 2009 revenue was 26 GBP million.",
+    "expected_verdict": "review",
+    "attack": "suffix_plus_scale_word",
+    "rationale": "Combining a suffix with a scale word fits neither amount form, so the sentence is not provable."
+  },
+  {
+    "id": "ADV2-30",
+    "source": "Ficti\u043enQuill's revenue was GBP26m in 2016.",
+    "claim": "FictionQuill's 2016 revenue was 26 GBP million.",
+    "expected_verdict": "review",
+    "attack": "cyrillic_o_source_issuer",
+    "rationale": "The source issuer contains a Cyrillic letter, a non-Latin letter that fails the 7c integrity check."
+  },
+  {
+    "id": "ADV2-31",
+    "source": "FictionThistle's top line was thirteen million euro in 2009. Euro is the reporting currency.",
+    "claim": "FictionThistle's 2009 revenue was 13 EUR million.",
+    "expected_verdict": "supported",
+    "attack": "spelled_teen_euro_singular_residual",
+    "rationale": "Thirteen million euro is a valid spelled amount and the residual sentence about the reporting currency has no blocked word."
+  },
+  {
+    "id": "ADV2-32",
+    "source": "FictionJuniper reported revenue of 26 GBP million for 2016. FictionJuniper's turnover totalled GBP26,000k in 2016. All amounts are preliminary.",
+    "claim": "FictionJuniper's 2016 revenue was 26 GBP million.",
+    "expected_verdict": "review",
+    "attack": "rule8_equal_but_preliminary",
+    "rationale": "The standard and notation amounts agree but rule 7b still applies to such documents and preliminary blocks."
+  },
+  {
+    "id": "ADV2-33",
+    "source": "FictionFern's revenue was eight hundred and eight thousand US dollars in 2014.",
+    "claim": "FictionFern's 2014 revenue was 880 USD thousand.",
+    "expected_verdict": "contradicted",
+    "attack": "spelled_hundred_and_eight",
+    "rationale": "Eight hundred and eight thousand US dollars is 808 USD thousand, not 880 USD thousand."
+  },
+  {
+    "id": "ADV2-34",
+    "source": "FictionRook's turnover was nineteen million pounds sterling in 2013.",
+    "claim": "FictionRook's 2013 revenue was 90 GBP million.",
+    "expected_verdict": "contradicted",
+    "attack": "spelled_teen_vs_tens",
+    "rationale": "Nineteen million pounds sterling proves 19 GBP million, which differs from 90 GBP million."
+  },
+  {
+    "id": "ADV2-35",
+    "source": "FictionSlate's TOP-LINE TOTALED USD 1,750 MILLION IN 2011.",
+    "claim": "FictionSlate's 2011 revenue was 1.75 USD billion.",
+    "expected_verdict": "supported",
+    "attack": "uppercase_metric_verb_scale",
+    "rationale": "Metric, verb, scale word and preposition are case-insensitive while the code stays uppercase, and 1,750 million equals 1.75 billion."
+  },
+  {
+    "id": "ADV2-36",
+    "source": "FictionTide's revenue\u000bwas GBP 780k in 2016.",
+    "claim": "FictionTide's 2016 revenue was 780 GBP thousand.",
+    "expected_verdict": "review",
+    "attack": "vertical_tab_separator",
+    "rationale": "Vertical tab is a control character other than newline, carriage return or tab, so rule 7c applies."
+  },
+  {
+    "id": "ADV2-37",
+    "source": "FictionOtter's revenue was CAD 14m in 20120.",
+    "claim": "FictionOtter's 2012 revenue was 14 CAD million.",
+    "expected_verdict": "review",
+    "attack": "five_digit_year",
+    "rationale": "The period requires exactly four digits before the terminal period, so 20120 proves no 2012 fact."
+  },
+  {
+    "id": "ADV2-38",
+    "source": "Fiction Draft Studios's revenue was EUR 8m in 2015.",
+    "claim": "Fiction Draft Studios's 2015 revenue was 8 EUR million.",
+    "expected_verdict": "review",
+    "attack": "issuer_name_contains_draft",
+    "rationale": "Rule 7b applies inside issuer names, so the whole word Draft in the issuer makes the claim review."
+  },
+  {
+    "id": "ADV2-39",
+    "source": "FictionLark's turnover totalled EUR1,250k in 2019. The group also opened a restaurant in Lyon.",
+    "claim": "FictionLark's 2019 revenue was 1.25 EUR million.",
+    "expected_verdict": "supported",
+    "attack": "restaurant_substring_not_restat",
+    "rationale": "EUR1,250k rescales exactly to 1.25 EUR million and the residual word restaurant does not begin with restat, so nothing blocks."
+  },
+  {
+    "id": "ADV2-40",
+    "source": "FictionWillow's revenue was CHF 1,234,567k in fiscal\nyear 2001.",
+    "claim": "FictionWillow's 2001 revenue was 1,234.567 CHF million.",
+    "expected_verdict": "supported",
+    "attack": "fiscal_newline_year_k_rescale",
+    "rationale": "Whitespace inside fiscal year is flexible and CHF 1,234,567k equals exactly 1,234.567 CHF million."
+  },
+  {
+    "id": "ADV2-41",
+    "source": "FictionPike's revenue was GBP 5.5mn in 2015.",
+    "claim": "FictionPike's 2015 revenue was 550 GBP thousand.",
+    "expected_verdict": "contradicted",
+    "attack": "mn_vs_thousand_claim",
+    "rationale": "GBP 5.5mn equals 5,500 GBP thousand, not 550 GBP thousand."
+  },
+  {
+    "id": "ADV2-42",
+    "source": "FictionFern's revenue amounted USD 808k in 2014.",
+    "claim": "FictionFern's 2014 revenue was 808 USD thousand.",
+    "expected_verdict": "review",
+    "attack": "amounted_missing_to",
+    "rationale": "Only amounted to is allowlisted, so amounted without to is not a valid verb."
+  },
+  {
+    "id": "ADV2-43",
+    "source": "FictionUmber's revenue was 26 GBP million in 2016.",
+    "claim": "FictionUmber's 2016 revenue was 26 GBP million.",
+    "expected_verdict": "review",
+    "attack": "claim_style_amount_in_source",
+    "rationale": "Source amounts must put the currency code before the number, so the claim-style ordering is not a valid notation."
+  },
+  {
+    "id": "ADV2-44",
+    "source": "FictionLantern's revenue was USD 3m in 2006. Its shares traded near $4 at year end.",
+    "claim": "FictionLantern's 2006 revenue was 3,000 USD thousand.",
+    "expected_verdict": "supported",
+    "attack": "dollar_sign_residual_harmless",
+    "rationale": "Currency symbols are allowed in residual text without blocked words, and USD 3m equals 3,000 USD thousand."
+  },
+  {
+    "id": "ADV2-45",
+    "source": "FictionUmber reported revenue of 26 GBP million for 2016. FictionUmber's revenue was GBP26m in 2016.",
+    "claim": "FictionUmber's 2016 revenue was 26 EUR million.",
+    "expected_verdict": "contradicted",
+    "attack": "rule8_equal_claim_currency_differs",
+    "rationale": "The standard and notation amounts agree at 26 GBP million, so the claim is decided from that amount and its EUR currency differs."
+  },
+  {
+    "id": "ADV2-46",
+    "source": "Fiction\tMarlow's revenue came to CAD 12.5m in fiscal 2019.",
+    "claim": "Fiction Marlow's 2019 revenue was 12,500 CAD thousand.",
+    "expected_verdict": "supported",
+    "attack": "tab_inside_multiword_issuer",
+    "rationale": "Tokens may be separated by any whitespace including tab, so both issuer words still match and CAD 12.5m equals 12,500 CAD thousand."
+  },
+  {
+    "id": "ADV2-47",
+    "source": "FictionHeron's revenue was AUD 4m in 2002. Staff called it \u2018a solid year\u2019.",
+    "claim": "FictionHeron's 2002 revenue was 4 USD million.",
+    "expected_verdict": "contradicted",
+    "attack": "curly_quote_residual_currency",
+    "rationale": "Curly quotes in the residual are allowed, and the proven AUD amount contradicts a USD claim without FX conversion."
+  },
+  {
+    "id": "ADV2-48",
+    "source": "FictionSaffron's revenue was GBP 15mn in 2002. The filing was made in May.",
+    "claim": "FictionSaffron's 2002 revenue was 15 GBP million.",
+    "expected_verdict": "review",
+    "attack": "month_may_residual",
+    "rationale": "The month name May is the whole word may under case-insensitive 7a matching."
+  },
+  {
+    "id": "ADV2-49",
+    "source": "FictionKestrel said that its revenue was AUD 61m for 2010.",
+    "claim": "FictionKestrel's 2010 revenue was 61 AUD million.",
+    "expected_verdict": "review",
+    "attack": "said_that_its",
+    "rationale": "The second shape requires said its with nothing between, so the extra word that invalidates the sentence."
+  },
+  {
+    "id": "ADV2-50",
+    "source": "Annual report extract.\u00a0Fiction Harbor's\u00a0revenues\u00a0were\u00a0JPY 950bn in fiscal year 2017.",
+    "claim": "Fiction Harbor's 2017 revenue was 950,000 JPY million.",
+    "expected_verdict": "supported",
+    "attack": "nbsp_boundary_and_tokens",
+    "rationale": "A no-break space counts as whitespace after the boundary period and between tokens, and JPY 950bn equals 950,000 JPY million."
+  },
+  {
+    "id": "ADV2-51",
+    "source": "FictionGarnet said its revenues were forty two billion US dollars during financial year 2022.",
+    "claim": "FictionGarnet's 2022 revenue was 42,000 USD million.",
+    "expected_verdict": "supported",
+    "attack": "spelled_tens_space_unit_financial_year",
+    "rationale": "Forty two with a space is a valid tens-unit cardinal, financial year is a valid prefix, and 42 billion equals 42,000 million."
+  },
+  {
+    "id": "ADV2-52",
+    "source": "FictionRook's revenue was hundred thousand pounds sterling in 2011.",
+    "claim": "FictionRook's 2011 revenue was 100 GBP thousand.",
+    "expected_verdict": "review",
+    "attack": "hundred_without_unit",
+    "rationale": "Hundred must be preceded by a unit word, so a bare hundred is outside the spelled grammar."
+  },
+  {
+    "id": "ADV2-53",
+    "source": "FictionRook's revenue was GBP 2m in 2011. Rumours of a merger persist.",
+    "claim": "FictionRook's 2011 revenue was 2 GBP million.",
+    "expected_verdict": "review",
+    "attack": "rumours_british_spelling",
+    "rationale": "Rumours matches the 7b pattern rumour* in its British spelling."
+  },
+  {
+    "id": "ADV2-54",
+    "source": "FictionJuniper reported revenue of 26 GBP million for 2016. FictionJuniper's turnover totalled GBP26,000k in 2016.",
+    "claim": "FictionJuniper's 2016 revenue was 26,000 GBP thousand.",
+    "expected_verdict": "supported",
+    "attack": "rule8_standard_equal_rescaled",
+    "rationale": "The standard-reader amount equals the notation amount after same-currency rescaling, so the claim is decided from that equal amount."
+  },
+  {
+    "id": "ADV2-55",
+    "source": "FictionTide's revenue was GBP .78m in 2016.",
+    "claim": "FictionTide's 2016 revenue was 0.78 GBP million.",
+    "expected_verdict": "review",
+    "attack": "leading_decimal_point",
+    "rationale": "The number must start with ASCII digits, so .78 is not a valid amount."
+  },
+  {
+    "id": "ADV2-56",
+    "source": "FictionBasalt's top line was ninety-nine thousand euros in 2006.",
+    "claim": "FictionBasalt's 2006 revenue was 99 EUR million.",
+    "expected_verdict": "contradicted",
+    "attack": "spelled_thousand_vs_million",
+    "rationale": "Ninety-nine thousand euros is 99 EUR thousand, not 99 EUR million."
+  },
+  {
+    "id": "ADV2-57",
+    "source": "FictionOtter's profit was EUR 5m in 2016. FictionThistle's revenue was EUR 26m in 2016.",
+    "claim": "FictionThistle's 2016 revenue was 26 EUR million.",
+    "expected_verdict": "supported",
+    "attack": "other_issuer_profit_sentence",
+    "rationale": "The other issuer's sentence uses profit, which is not a blocked word, so the residual is harmless and the FictionThistle fact proves the claim."
+  },
+  {
+    "id": "ADV2-58",
+    "source": "FictionOtter's revenue was EUR 5m in 2016. FictionThistle's revenue was EUR 26m in 2016.",
+    "claim": "FictionThistle's 2016 revenue was 26 EUR million.",
+    "expected_verdict": "review",
+    "attack": "other_issuer_valid_sentence_blocks",
+    "rationale": "Only the claimed issuer's valid sentences are removed, so the other issuer's revenue sentence stays in the residual and blocks."
+  },
+  {
+    "id": "ADV2-59",
+    "source": "What if costs rise? FictionMoss's revenue was USD 9m in 2013.",
+    "claim": "FictionMoss's 2013 revenue was 9 USD million.",
+    "expected_verdict": "review",
+    "attack": "what_if_question_boundary",
+    "rationale": "The phrase what if is 7b vocabulary and if is also a 7a residual word."
+  },
+  {
+    "id": "ADV2-60",
+    "source": "FictionSlate's top line reached CHF 66m in 2017. Most units are wholesale.",
+    "claim": "FictionSlate's 2017 revenue was 66 CAD million.",
+    "expected_verdict": "contradicted",
+    "attack": "wholesale_residual_currency",
+    "rationale": "Wholesale is not the whole word sale, and the proven CHF amount contradicts a CAD claim."
+  },
+  {
+    "id": "ADV2-61",
+    "source": "FictionWren's turnover was GBP 640k in 2014. Visit \ud835\udc05ictionWren online.",
+    "claim": "FictionWren's 2014 revenue was 640 GBP thousand.",
+    "expected_verdict": "review",
+    "attack": "math_bold_letter_residual",
+    "rationale": "A mathematical bold capital F is not a Latin-script letter, so rule 7c applies."
+  },
+  {
+    "id": "ADV2-62",
+    "source": "FictionTide's revenue was GBP 780k in 2016.\nFictionTide's revenue was GBP 7.8m in 2015.",
+    "claim": "FictionTide's 2016 revenue was 7.8 GBP million.",
+    "expected_verdict": "contradicted",
+    "attack": "rescale_k_vs_other_year_m",
+    "rationale": "The 2016 fact proves 0.78 GBP million, so a claim borrowing the 2015 figure of 7.8 GBP million differs."
+  },
+  {
+    "id": "ADV2-63",
+    "source": "FictionMeadow's revenues totalled \u20ac1.2bn in 2005.",
+    "claim": "FictionMeadow's 2005 revenue was 1,200 EUR million.",
+    "expected_verdict": "supported",
+    "attack": "euro_sign_bn_rescale",
+    "rationale": "The euro sign maps to EUR and 1.2bn equals 1,200 million."
+  },
+  {
+    "id": "ADV2-64",
+    "source": "FictionSaffron's revenue was GBP 15mn in 2002. The Planetarium wing reopened in spring.",
+    "claim": "FictionSaffron's 2002 revenue was 15 GBP million.",
+    "expected_verdict": "supported",
+    "attack": "planetarium_substring",
+    "rationale": "The mn suffix means million and Planetarium is not the whole word plan."
+  },
+  {
+    "id": "ADV2-65",
+    "source": "FictionQuill's revenue was GBP26m in 2016.",
+    "claim": "FictionQuill's 2016 revenue w\u0430s 26 GBP million.",
+    "expected_verdict": "review",
+    "attack": "claim_cyrillic_homoglyph",
+    "rationale": "The claim contains a Cyrillic a in was, and any non-ASCII character in a claim forces review."
+  },
+  {
+    "id": "ADV2-66",
+    "source": "Fiction Outlook Media annual report. Fiction Outlook Media's revenue was CAD 310k in 2018.",
+    "claim": "Fiction Outlook Media's 2018 revenue was 310 CAD thousand.",
+    "expected_verdict": "review",
+    "attack": "issuer_name_7a_word_in_header",
+    "rationale": "The header sentence is not removed, so the issuer word Outlook remains in the residual and matches the 7a word outlook."
+  },
+  {
+    "id": "ADV2-67",
+    "source": "FictionPebble's revenue was CAD12.5k in 2011.",
+    "claim": "FictionPebble's 2011 revenue was 125 CAD thousand.",
+    "expected_verdict": "contradicted",
+    "attack": "k_decimal_vs_claim_thousand",
+    "rationale": "CAD12.5k is 12.5 CAD thousand, so the claimed 125 CAD thousand is ten times too large."
+  },
+  {
+    "id": "ADV2-68",
+    "source": "FictionKestrel said its revenue was AUD 61m for 2010.",
+    "claim": "FictionKestrel's 2010 revenue was 61 USD million.",
+    "expected_verdict": "contradicted",
+    "attack": "aud_vs_usd_said_its",
+    "rationale": "The source proves an AUD amount and FX conversion is never allowed, so a USD claim is contradicted."
+  },
+  {
+    "id": "ADV2-69",
+    "source": "FictionQuill\u2019s\trevenue\twas\tGBP26m\tin\t2016. The chair called it \u201ca steady year\u201d at the AGM.",
+    "claim": "FictionQuill's 2016 revenue was 26 GBP million.",
+    "expected_verdict": "supported",
+    "attack": "curly_quote_residual_tab_tokens",
+    "rationale": "Tab-separated tokens with a U+2019 possessive form a valid fact and the curly-quoted residual sentence has no blocked word or integrity problem."
+  },
+  {
+    "id": "ADV2-70",
+    "source": "FictionPike's revenue was CHF 5m in 2010!",
+    "claim": "FictionPike's 2010 revenue was 5 CHF million.",
+    "expected_verdict": "review",
+    "attack": "exclamation_terminator",
+    "rationale": "A fact sentence must end with a period, so an exclamation mark terminator is not provable."
+  },
+  {
+    "id": "ADV2-71",
+    "source": "FictionLantern's revenue was USD 3m in 2006. A new projector was installed.",
+    "claim": "FictionLantern's 2006 revenue was 3 USD million.",
+    "expected_verdict": "review",
+    "attack": "projector_star_match",
+    "rationale": "Projector is a word continuation of project*, so the 7a residual rule blocks."
+  },
+  {
+    "id": "ADV2-72",
+    "source": "FictionCaf\u00e9's revenue was EUR 26m in 2016.",
+    "claim": "FictionCaf\u00e9's 2016 revenue was 26 EUR million.",
+    "expected_verdict": "review",
+    "attack": "claim_accented_issuer_exact_match",
+    "rationale": "Accented Latin is fine in the source but the claim itself contains a non-ASCII character, which always forces review."
+  },
+  {
+    "id": "ADV2-73",
+    "source": "FictionSlate's top line reached CHF 66m in 2017.",
+    "claim": "FictionSlate's 2017 revenue was 66\u00a0CHF million.",
+    "expected_verdict": "review",
+    "attack": "claim_nbsp_separator",
+    "rationale": "The claim uses a no-break space, a non-ASCII character that forces review even though the source is valid."
+  },
+  {
+    "id": "ADV2-74",
+    "source": "FictionLark's turnover totalled EUR 1,250k in 2019. Staff run a restaurant nearby.",
+    "claim": "FictionLark's 2019 revenue was 12.5 EUR million.",
+    "expected_verdict": "contradicted",
+    "attack": "restaurant_residual_contradicted",
+    "rationale": "The restaurant residual is harmless and EUR 1,250k equals 1.25 EUR million, not 12.5 EUR million."
+  },
+  {
+    "id": "ADV2-75",
+    "source": "FictionVale's revenue was USD 1,234,567k in 2023.",
+    "claim": "FictionVale's 2023 revenue was 1,234,567 USD million.",
+    "expected_verdict": "contradicted",
+    "attack": "k_group_claim_million_magnitude",
+    "rationale": "USD 1,234,567k is 1,234.567 USD million, not 1,234,567 USD million."
+  },
+  {
+    "id": "ADV2-76",
+    "source": "Fiction\u00adLark's revenue was EUR 3m in 2014.",
+    "claim": "FictionLark's 2014 revenue was 3 EUR million.",
+    "expected_verdict": "review",
+    "attack": "soft_hyphen_issuer",
+    "rationale": "A soft hyphen inside the issuer name is an invisible format character under rule 7c."
+  },
+  {
+    "id": "ADV2-77",
+    "source": "FictionBrook's revenue was USD 125k in 2013. See note \u0663.",
+    "claim": "FictionBrook's 2013 revenue was 125 USD thousand.",
+    "expected_verdict": "review",
+    "attack": "arabic_indic_digit_residual",
+    "rationale": "An Arabic-Indic digit in a footnote reference is a non-ASCII decimal digit under rule 7c."
+  },
+  {
+    "id": "ADV2-78",
+    "source": "(FictionLark's revenue was EUR 3m in 2014.)",
+    "claim": "FictionLark's 2014 revenue was 3 EUR million.",
+    "expected_verdict": "review",
+    "attack": "parenthesized_sentence",
+    "rationale": "The opening parenthesis precedes the issuer and the period is followed by a parenthesis, so no valid sentence exists."
+  },
+  {
+    "id": "ADV2-79",
+    "source": "Fiction Outlook Media's revenue was CAD 310k in 2018.",
+    "claim": "Fiction Outlook Media's 2018 revenue was 310 CAD thousand.",
+    "expected_verdict": "supported",
+    "attack": "issuer_name_7a_word_only_in_fact",
+    "rationale": "The 7a word outlook occurs only inside the removed valid fact sentence and is not on the 7b list, so the empty residual cannot block."
+  },
+  {
+    "id": "ADV2-80",
+    "source": "FictionWillow\u2019s\u00a0turnover\u00a0came to\u00a0GBP 3.3bn\u00a0during\u00a02004.",
+    "claim": "FictionWillow's 2004 revenue was 3,030 GBP million.",
+    "expected_verdict": "contradicted",
+    "attack": "nbsp_tokens_value_mismatch",
+    "rationale": "GBP 3.3bn is 3,300 GBP million, which differs from 3,030 GBP million."
+  },
+  {
+    "id": "ADV2-81",
+    "source": "FictionEmber's Revenue was EUR 0.4m During 2003. Correspondence: Rue de l\u2019\u00c9glise, Li\u00e8ge.",
+    "claim": "FictionEmber's 2003 revenue was 400 EUR thousand.",
+    "expected_verdict": "supported",
+    "attack": "correspondence_not_correct",
+    "rationale": "Correspondence does not begin with correct, accented Latin and curly apostrophes are allowed, and EUR 0.4m equals 400 EUR thousand."
+  },
+  {
+    "id": "ADV2-82",
+    "source": "FictionCinder's revenue reached \u20ac 3.4m in FY 2015. Si\u00e8ge social : Caf\u00e9 Lumi\u00e8re, Gen\u00e8ve.",
+    "claim": "FictionCinder's 2015 revenue was 3,400 EUR thousand.",
+    "expected_verdict": "supported",
+    "attack": "accented_latin_residual",
+    "rationale": "Euro sign plus one space and FY plus one space are valid, 3.4m equals 3,400 thousand, and accented Latin letters in the residual are allowed."
+  },
+  {
+    "id": "ADV2-83",
+    "source": "FictionSorrel's revenue was JPY 40b in 2009.",
+    "claim": "FictionSorrel's 2009 revenue was 40 JPY billion.",
+    "expected_verdict": "review",
+    "attack": "bare_b_suffix",
+    "rationale": "Only k, m, mn and bn are allowlisted suffixes, so a bare b is not provable."
+  },
+  {
+    "id": "ADV2-84",
+    "source": "FictionEmber's\trevenue\twas\tUSD 26.01m\tin\t2005.",
+    "claim": "FictionEmber's 2005 revenue was 26.1 USD million.",
+    "expected_verdict": "contradicted",
+    "attack": "tab_tokens_decimal_mismatch",
+    "rationale": "The tab-separated fact proves 26.01 USD million, which is not exactly 26.1 USD million."
+  },
+  {
+    "id": "ADV2-85",
+    "source": "FictionWren's turnover was GBP 640k in 2014. No ifs about it: the Northern stores did well.",
+    "claim": "FictionWren's 2014 revenue was 0.64 GBP million.",
+    "expected_verdict": "supported",
+    "attack": "ifs_northern_substrings",
+    "rationale": "GBP 640k equals 0.64 GBP million and the residual words ifs and Northern are not the whole words if or nor."
+  },
+  {
+    "id": "ADV2-86",
+    "source": "FictionBrook's revenue was AUD 7 BILLION in 2014.",
+    "claim": "FictionBrook's 2014 revenue was 7 AUD million.",
+    "expected_verdict": "contradicted",
+    "attack": "uppercase_scale_word_mismatch",
+    "rationale": "The case-insensitive scale word BILLION proves 7 AUD billion, not 7 AUD million."
+  },
+  {
+    "id": "ADV2-87",
+    "source": "FictionTopaz's revenue was AUD 6m in 2008. A withdrawal of the bond followed.",
+    "claim": "FictionTopaz's 2008 revenue was 6 AUD million.",
+    "expected_verdict": "review",
+    "attack": "withdrawal_star_form",
+    "rationale": "Withdrawal matches the 7b pattern withdraw*."
+  },
+  {
+    "id": "ADV2-88",
+    "source": "Fiction Mills' revenue was GBP 26m in 2016.",
+    "claim": "Fiction Mills's 2016 revenue was 26 GBP million.",
+    "expected_verdict": "review",
+    "attack": "possessive_without_s",
+    "rationale": "The policy shape requires an apostrophe followed by s, so the bare trailing apostrophe is not a valid fact."
+  },
+  {
+    "id": "ADV2-89",
+    "source": "FictionTopaz's revenue was CHF 0.5k in 2007.",
+    "claim": "FictionTopaz's 2007 revenue was 0.5 CHF million.",
+    "expected_verdict": "contradicted",
+    "attack": "chf_fractional_k_vs_million",
+    "rationale": "CHF 0.5k is CHF 500, not CHF 500,000."
+  },
+  {
+    "id": "ADV2-90",
+    "source": "FictionMoss said its revenue was USD 4.2bn for FY2021. Notable sites include Mayfair and two wholesale depots.",
+    "claim": "FictionMoss's 2021 revenue was 4,200 USD million.",
+    "expected_verdict": "supported",
+    "attack": "notable_mayfair_wholesale_substrings",
+    "rationale": "USD 4.2bn equals 4,200 USD million and Notable, Mayfair and wholesale contain not, may and sale only as substrings, never as whole words."
+  },
+  {
+    "id": "ADV2-91",
+    "source": "FictionOtter's revenue was \u20ac0.75bn in 2012.",
+    "claim": "FictionOtter's 2012 revenue was 75 EUR million.",
+    "expected_verdict": "contradicted",
+    "attack": "euro_sign_bn_vs_claim_million",
+    "rationale": "EUR 0.75bn equals 750 EUR million, not 75 EUR million."
+  },
+  {
+    "id": "ADV2-92",
+    "source": "FictionBasalt's revenue was twelve hundred thousand euros in 2006.",
+    "claim": "FictionBasalt's 2006 revenue was 1.2 EUR million.",
+    "expected_verdict": "review",
+    "attack": "twelve_hundred_not_grammar",
+    "rationale": "The spelled grammar only allows a single unit before hundred, so twelve hundred is not provable."
+  },
+  {
+    "id": "ADV2-93",
+    "source": "FictionThistle reported revenue of 13 EUR million for 2009. FictionThistle's top line was GBP 13m in 2009.",
+    "claim": "FictionThistle's 2009 revenue was 13 GBP million.",
+    "expected_verdict": "review",
+    "attack": "rule8_currency_differs",
+    "rationale": "The standard-reader amount is in EUR while the notation is in GBP, so the quantities differ and rule 8 requires review."
+  },
+  {
+    "id": "ADV2-94",
+    "source": "\ufeffFictionGarnet's revenues were EUR 450m in 2000.",
+    "claim": "FictionGarnet's 2000 revenue was 450 EUR million.",
+    "expected_verdict": "review",
+    "attack": "bom_prefix",
+    "rationale": "A leading byte order mark U+FEFF is an invisible format character under rule 7c."
+  },
+  {
+    "id": "ADV2-95",
+    "source": "FictionQuill's revenue was GBP780k in 2016. FictionQuill's turnover totalled GBP0.78m in fiscal 2016.",
+    "claim": "FictionQuill's 2016 revenue was 0.78 GBP million.",
+    "expected_verdict": "review",
+    "attack": "equivalent_rescaled_duplicate",
+    "rationale": "Two valid notation sentences for the same issuer and year force review even when they are equal after rescaling."
+  },
+  {
+    "id": "ADV2-96",
+    "source": "FictionCobalt's revenue was AUD 980 thousand in \uff12\uff10\uff11\uff10.",
+    "claim": "FictionCobalt's 2010 revenue was 0.98 AUD million.",
+    "expected_verdict": "review",
+    "attack": "fullwidth_digits_year",
+    "rationale": "The year is written with full-width digits, which are non-ASCII decimal digits under rule 7c."
+  }
+]
