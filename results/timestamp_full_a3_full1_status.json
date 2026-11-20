@@ -1,0 +1,25 @@
+{
+  "segment": "full1",
+  "status": "stopped_final",
+  "commit": "4ee1cc2239b4d7e32827a6c767b099f652a66075",
+  "start_UTC": "2026-11-20T14:57:49.961439+00:00",
+  "wall_cap_seconds": 50400,
+  "counter_start": 4254,
+  "resources_recorded": 1050,
+  "charged": 1046,
+  "throttle_pauses": 0,
+  "throttle_pauses_before": 0,
+  "max_throttle_pauses": 6,
+  "transport_unresolved": 0,
+  "sleep_interruptions": [],
+  "config_SHA256": "8c46e1d0fab0f3a0ecc36d6c10bb39f339f6091bb03d3407778c41a1d58c3d70",
+  "counter": {
+    "actual_HTTP_attempts": 5300,
+    "ceiling": 34402
+  },
+  "wall_seconds": 774.9530000000013,
+  "disk_bytes_observed": 269138783,
+  "checkpoint_UTC": "2026-11-20T15:10:44.905916+00:00",
+  "gap_seconds": 0.667,
+  "stop_reason": "HTTP_502"
+}
