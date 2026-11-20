@@ -35,3 +35,9 @@ def test_allegation_vocabulary_no_longer_matches_issuer_names_with_the_same_stem
         assert DISPUTED_OR_NONASSERTED.search(f"The {word} item.")
     for name in ("Allegro", "Allegheny", "Allegion", "Allegiant"):
         assert DISPUTED_OR_NONASSERTED.search(f"{name} Corp reported results.") is None
+
+
+def test_imagine_forms_still_block_but_imaging_businesses_do_not():
+    for word in ("Imagine", "imagined", "imagines", "imagining", "imaginary"):
+        assert DISPUTED_OR_NONASSERTED.search(f"{word} this scenario-free sentence.")
+    assert DISPUTED_OR_NONASSERTED.search("Imaging segment sales rose.") is None

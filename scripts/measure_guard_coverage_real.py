@@ -16,6 +16,8 @@ Pre-declared protocol (frozen before any filing body is read):
 - Round 2 (declared after round 1, before running it): MD&A text first passes the declared
   normalize_filing_text ingestion step; measured on the round-1 sample (exposed aggregates) and on a
   fresh disjoint sample of the next 150 issuers by the same hash order.
+- Round 3 (declared after round 2 exposed an imagin* stem over-match, before running it): normalized,
+  on a further fresh disjoint sample (issuers ranked 301-450 by the same hash order).
 """
 
 import argparse
@@ -49,6 +51,7 @@ SOURCES = ("scripts/measure_guard_coverage_real.py", "src/asof/reader_fields.py"
            "src/asof/sections.py", "src/asof/edgar.py", "src/asof/document_scope.py", "src/asof/runtime.py")
 ROUND2_SOURCES = (*SOURCES, "src/asof/text_normalization.py", "tests/test_text_normalization.py",
                   "results/guard_coverage_real.json")
+ROUND3_SOURCES = (*ROUND2_SOURCES, "results/guard_coverage_real_v2.json")
 REVENUE = re.compile(r"\b(?:net\s+)?(?:revenues?|sales)\b", re.IGNORECASE)
 DOLLARS = re.compile(r"\$\s?[0-9][0-9,]*(?:\.[0-9]+)?(?:\s*(?:million|billion|thousand))?", re.IGNORECASE)
 SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z(])")
@@ -158,12 +161,13 @@ def measure(client: EdgarClient, rows: pd.DataFrame, *, normalize: bool) -> dict
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--round", type=int, choices=(1, 2), required=True)
+    parser.add_argument("--round", type=int, choices=(1, 2, 3), required=True)
     args = parser.parse_args(argv)
-    destination = ROOT / "results" / ("guard_coverage_real.json" if args.round == 1 else "guard_coverage_real_v2.json")
+    destination = ROOT / "results" / {1: "guard_coverage_real.json", 2: "guard_coverage_real_v2.json",
+                                      3: "guard_coverage_real_v3.json"}[args.round]
     if destination.exists():
         raise FileExistsError("coverage receipt exists; never overwrite or retry")
-    lineage = frozen_receipt(ROOT, SOURCES if args.round == 1 else ROUND2_SOURCES)
+    lineage = frozen_receipt(ROOT, {1: SOURCES, 2: ROUND2_SOURCES, 3: ROUND3_SOURCES}[args.round])
     started = time.monotonic()
     packet = json.loads((ROOT / "data" / "reader_review_v1" / "packet.json").read_bytes())
     excluded_accessions = {item["provenance"]["accession"] for item in packet["items"]}
@@ -173,6 +177,9 @@ def main(argv=None):
     try:
         if args.round == 1:
             measured = {"round1": measure(client, sample_rows(excluded_accessions, excluded_ciks), normalize=False)}
+        elif args.round == 3:
+            measured = {"second_fresh_disjoint_sample_normalized": measure(
+                client, sample_rows(excluded_accessions, excluded_ciks, start=2*SAMPLE), normalize=True)}
         else:
             measured = {
                 "same_sample_normalized_exposed": measure(
