@@ -1,0 +1,35 @@
+{
+  "segment": "full2",
+  "status": "stopped_final",
+  "commit": "bfdf731011647453a05a702e885941aab5cc1ee5",
+  "start_UTC": "2026-11-20T15:21:31.512397+00:00",
+  "wall_cap_seconds": 50400,
+  "counter_start": 5300,
+  "resources_recorded": 749,
+  "charged": 754,
+  "throttle_pauses": 5,
+  "throttle_pauses_before": 1,
+  "credited_gateway_stop_pause": 1,
+  "gateway_as_throttle": true,
+  "max_throttle_pauses": 5,
+  "transport_unresolved": 0,
+  "sleep_interruptions": [],
+  "config_SHA256": "8c46e1d0fab0f3a0ecc36d6c10bb39f339f6091bb03d3407778c41a1d58c3d70",
+  "counter": {
+    "actual_HTTP_attempts": 6054,
+    "ceiling": 34402
+  },
+  "wall_seconds": 3853.811999999998,
+  "disk_bytes_observed": 286617300,
+  "checkpoint_UTC": "2026-11-20T16:25:45.313097+00:00",
+  "latest_wait_event": {
+    "event": "wait_not_started",
+    "trigger": "HTTP_502",
+    "reason": "A3_throttle_pause_cap",
+    "throttle_pauses": 5,
+    "UTC": "2026-11-20T16:25:45.274102+00:00",
+    "perf_counter": 36562.9875577
+  },
+  "gap_seconds": 1.0,
+  "stop_reason": "A3_throttle_pause_cap"
+}
