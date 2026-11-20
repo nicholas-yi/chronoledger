@@ -99,6 +99,14 @@ from asof.reader_reliability import (
 )
 from asof.reader_reliability import audit_cases as reliability_audit_cases
 from asof.reader_stress import audit_cases, build_fixture, model_summary, offline_baselines
+from asof.review_pipeline_v2 import account_attempts as account_p2_attempts
+from asof.review_pipeline_v2 import finish_entry as finish_p2_entry
+from asof.review_pipeline_v2 import first_step as p2_first_step
+from asof.review_pipeline_v2 import next_step as p2_next_step
+from asof.review_pipeline_v2 import record_step as p2_record_step
+from asof.review_pipeline_v2 import request as p2_request
+from asof.review_pipeline_v2 import start_entry as p2_start_entry
+from asof.review_pipeline_v2 import summarize as summarize_p2
 from asof.runtime import THREAD_VARIABLES, WorkerJob, peak_rss_bytes, write_receipt
 from asof.runtime import frozen_receipt as committed_sources
 from asof.verified_reader import (
@@ -127,7 +135,7 @@ V1_FROZEN = FROZEN
 
 
 VERSIONS = ("v1", "v2", "verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review",
-            "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4")
+            "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4", "pipeline-v5")
 
 
 def select_version(version: str) -> None:
@@ -136,13 +144,13 @@ def select_version(version: str) -> None:
     if version not in VERSIONS:
         raise ValueError("unknown focused reader version")
     FIXTURE = ROOT / "tests" / "fixtures" / "focused_reader.json"
-    if version in ("verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
+    if version in ("verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4", "pipeline-v5"):
         stem = {"stress": "reader_stress", "verifier": "verified_reader",
                 "linked": "linked_reader", "fields": "reader_fields", "reliable": "reader_reliability",
                 "cells": "reader_cell_selection", "ai-review": "reader_ai_review",
                 "ai-review-v2": "reader_ai_review_v2", "ai-review-v2b": "reader_ai_review_v2b",
                 "ai-review-v3": "reader_ai_review_v3", "ai-review-v3-control": "reader_ai_review_v3_control",
-                "ai-review-v4": "reader_ai_review_v4"}[version]
+                "ai-review-v4": "reader_ai_review_v4", "pipeline-v5": "review_pipeline_v5"}[version]
         fixture_name = ("linked_challenge" if version == "linked" else
                         "reader_ai_review_v3" if version == "ai-review-v3-control" else stem)
         PLAN = ROOT / "results" / f"{stem}_plan.json"
@@ -160,29 +168,36 @@ def select_version(version: str) -> None:
         if version == "stress":
             FROZEN = (*FROZEN, "src/asof/reader_stress.py", "tests/test_reader_stress.py",
                       "results/verified_reader.json")
-        elif version in ("linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
+        elif version in ("linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4", "pipeline-v5"):
             FROZEN = (*FROZEN, "src/asof/linked_reader.py", "tests/test_linked_reader.py",
                       "src/asof/reader_stress.py", "tests/fixtures/reader_stress.json",
                       "results/reader_stress.json", "results/verified_reader.json")
-            if version in ("fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
+            if version in ("fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4", "pipeline-v5"):
                 FROZEN = (*FROZEN, "src/asof/reader_fields.py", "tests/test_reader_fields.py",
                           "results/linked_reader.json")
-            if version in ("reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
+            if version in ("reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4", "pipeline-v5"):
                 FROZEN = (*FROZEN, "src/asof/reader_reliability.py",
                           "tests/test_reader_reliability.py", "results/reader_fields.json")
-            if version in ("cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
+            if version in ("cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4", "pipeline-v5"):
                 FROZEN = (*FROZEN, "src/asof/reader_cells.py", "src/asof/reader_field_challenge.py",
                           "tests/test_reader_cells.py", "results/reader_reliability.json")
-            if version in ("ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
+            if version in ("ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4", "pipeline-v5"):
                 FROZEN = (*FROZEN, "src/asof/reader_ai_review.py", "tests/test_reader_ai_review.py",
                           "tests/test_local_model_runtime.py", "results/reader_cell_selection.json",
                           "results/reader_cell_selection_accounting.json")
-            if version in ("ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4"):
+            if version in ("ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control", "ai-review-v4", "pipeline-v5"):
                 FROZEN = (*FROZEN, "src/asof/reader_ai_review_v2.py", "tests/test_reader_ai_review_v2.py",
                           "results/reader_ai_review.json")
             if version == "ai-review-v2b":
                 # Same reviewer after a zero-call startup stop; the stopped receipt stays pinned.
                 FROZEN = (*FROZEN, "results/reader_ai_review_v2_plan.json", "results/reader_ai_review_v2.json")
+            if version == "pipeline-v5":
+                # Declared rules-first pipeline v2 on fresh round-5 probes; earlier pipeline receipts stay pinned.
+                FROZEN = (*FROZEN, "src/asof/reader_ai_review_v3.py", "src/asof/review_pipeline.py",
+                          "src/asof/review_pipeline_v2.py", "tests/test_review_pipeline_v2.py",
+                          "src/asof/claim_verifier.py", "results/review_pipeline_v4.json",
+                          "results/reader_ai_review_v4.json")
+                FROZEN = tuple(dict.fromkeys(FROZEN))
             if version == "ai-review-v4":
                 # Round 4 runs the unchanged v2 reviewer as the AI fallback of a declared rules-first pipeline.
                 FROZEN = (*FROZEN, "src/asof/reader_ai_review_v3.py", "tests/test_reader_ai_review_v3.py",
@@ -212,6 +227,8 @@ def select_version(version: str) -> None:
 def load_cases(path: Path) -> tuple[Case, ...]:
     if path.name in ("reader_ai_review_v2.json", "reader_ai_review_v2b.json"):
         return tuple(probe.task.case for probe in v2_probes())
+    if path.name == "review_pipeline_v5.json":
+        return tuple(probe.task.case for probe in load_v3_probes(path, 30))
     if path.name in ("reader_ai_review_v3.json", "reader_ai_review_v4.json"):
         return tuple(probe.task.case for probe in load_v3_probes(path))
     if path.name in ("reader_cell_selection.json", "reader_ai_review.json"):
@@ -313,6 +330,12 @@ def validate_plan(plan: dict) -> None:
         fixed["generation_contract"] = "6_fresh_plus_12_exposed_decomposed_AI_reviews_v2"
         fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
         fixed["preload"] = "one_empty_prompt_load_within_existing_startup_deadline"
+    elif plan.get("study") == "CL-FOCUS-REVIEW-PIPELINE-02":
+        fixed["case_count"] = 30
+        fixed["options"].update(seed=202611200330, num_predict=128)
+        fixed["generation_contract"] = "rules_first_then_value_check_and_disclosure_agreement_v2"
+        fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
+        fixed["preload"] = "one_empty_prompt_load_within_existing_startup_deadline"
     elif plan.get("study") == "CL-FOCUS-AI-REVIEW-04":
         fixed["case_count"] = fixed["max_calls"] = 24
         fixed["options"].update(seed=202611200215, num_predict=128)
@@ -353,6 +376,7 @@ def worker(plan: dict, channel) -> None:
     review_mode = plan["study"] == "CL-FOCUS-AI-REVIEW-01"
     review2 = plan["study"] in ("CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B")
     review3 = plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C", "CL-FOCUS-AI-REVIEW-04")
+    pipeline2 = plan["study"] == "CL-FOCUS-REVIEW-PIPELINE-02"
     v3_arm = V3_ARMS["blind_extraction_v3" if plan["study"].endswith("03") else "decomposed_v2_control"] if review3 else None
     cell_mode = review_mode or plan["study"] == "CL-FOCUS-CELLS-01"
     field_mode = reliable or cell_mode or plan["study"] == "CL-FOCUS-FIELDS-01"
@@ -361,9 +385,10 @@ def worker(plan: dict, channel) -> None:
         "CL-FOCUS-VERIFY-01", "CL-FOCUS-STRESS-01", "CL-FOCUS-LINKED-01",
         "CL-FOCUS-FIELDS-01", "CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01", "CL-FOCUS-AI-REVIEW-01",
         "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B", "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C",
-        "CL-FOCUS-AI-REVIEW-04")
+        "CL-FOCUS-AI-REVIEW-04", "CL-FOCUS-REVIEW-PIPELINE-02")
     if verified:
-        select_version({"CL-FOCUS-AI-REVIEW-03": "ai-review-v3", "CL-FOCUS-AI-REVIEW-03C": "ai-review-v3-control",
+        select_version("pipeline-v5" if pipeline2 else
+                       {"CL-FOCUS-AI-REVIEW-03": "ai-review-v3", "CL-FOCUS-AI-REVIEW-03C": "ai-review-v3-control",
                         "CL-FOCUS-AI-REVIEW-04": "ai-review-v4"}[plan["study"]] if review3 else
                        ("ai-review-v2b" if plan["study"].endswith("02B") else "ai-review-v2") if review2 else "ai-review" if review_mode else "cells" if cell_mode else "reliable" if reliable else "fields" if field_mode else "linked"
                        if linked_mode else "stress" if stress else "verifier")
@@ -383,6 +408,7 @@ def worker(plan: dict, channel) -> None:
     tasks = {task.case.id: task for task in review_tasks()} if review_mode else {}
     v2_tasks = {probe.task.case.id: probe for probe in v2_probes()} if review2 else {}
     v3_tasks = {probe.task.case.id: probe for probe in load_v3_probes(FIXTURE)} if review3 else {}
+    p2_probes = {probe.task.case.id: probe for probe in load_v3_probes(FIXTURE, 30)} if pipeline2 else {}
 
     def check_time() -> None:
         if time.monotonic()-started >= plan["controller_stop_seconds"]-15:
@@ -460,7 +486,7 @@ def worker(plan: dict, channel) -> None:
                 break
             if not ready:
                 raise TimeoutError("owned server readiness timeout")
-            if review_mode or review2 or review3:
+            if review_mode or review2 or review3 or pipeline2:
                 preload = {"status": "load_only_started"}
                 checkpoint("before_load_only_request")
                 preload = preload_owned_model(
@@ -469,7 +495,8 @@ def worker(plan: dict, channel) -> None:
                 checkpoint("model_loaded_before_generation")
 
             def call(case: Case, stage: str, *, draft=None, critique=None, lessons=(),
-                     structured=False, selection=False, reviewing=False, review2_task=None, review3_task=None):
+                     structured=False, selection=False, reviewing=False, review2_task=None, review3_task=None,
+                     custom=None):
                 check_time()
                 if len(calls) >= plan["max_calls"]:
                     raise RuntimeError("model-call ceiling before next attempt")
@@ -498,6 +525,10 @@ def worker(plan: dict, channel) -> None:
                     body["messages"] = v3_arm.messages(review3_task)
                     body["format"] = v3_arm.schema(review3_task)
                     body["options"]["num_predict"] = 128
+                if custom is not None:
+                    body["messages"] = custom["messages"]
+                    body["format"] = custom["format"]
+                    body["options"]["num_predict"] = 128
                 if review2_task is not None:
                     body["messages"] = v2_messages(review2_task)
                     body["format"] = v2_schema(review2_task)
@@ -519,6 +550,8 @@ def worker(plan: dict, channel) -> None:
                     attempt["wire_contract"] = "decomposed_review"
                 if review3_task is not None:
                     attempt["wire_contract"] = v3_arm.wire_contract
+                if custom is not None:
+                    attempt["wire_contract"] = custom["wire"]
                 calls.append(attempt)
                 write_receipt(PRIVATE / f"call_{attempt['call_id']:02d}_start.json", attempt)
                 checkpoint("before_model_attempt")
@@ -543,7 +576,7 @@ def worker(plan: dict, channel) -> None:
                 write_receipt(PRIVATE / f"call_{attempt['call_id']:02d}.json",
                               {"attempt": attempt, "response": raw})
                 issue = truncation_reason(raw, body["options"])
-                output_limited = (stress or linked_mode or review2 or review3) and issue == "output_token_limit_or_truncation"
+                output_limited = (stress or linked_mode or review2 or review3 or pipeline2) and issue == "output_token_limit_or_truncation"
                 if (issue and not output_limited) or raw.get("done") is not True:
                     attempt["status"] = "truncated_or_incomplete"
                     checkpoint("invalid_complete_response")
@@ -560,7 +593,9 @@ def worker(plan: dict, channel) -> None:
                     attempt["status"] = "output_truncated_invalid_case"
                 else:
                     try:
-                        if review3_task is not None:
+                        if custom is not None:
+                            parsed = custom["parse"](content)
+                        elif review3_task is not None:
                             parsed = v3_arm.parse(review3_task, content)
                         elif review2_task is not None:
                             parsed = v2_parse(review2_task, content)
@@ -626,6 +661,26 @@ def worker(plan: dict, channel) -> None:
                 write_receipt(PRIVATE / "candidate_before_evaluation.json", candidate)
                 checkpoint("candidate_frozen_before_evaluation")
             for case in (cases if verified else cases[6:]):
+                if pipeline2:
+                    probe = p2_probes[case.id]
+                    entry = p2_start_entry(probe)
+                    records[case.id] = {"pipeline_v2": entry}
+                    step = None if entry["decided_by"] == "rules" else p2_first_step(probe.task)
+                    while step is not None:
+                        base, text, cost = call(case, "judge", custom=p2_request(probe.task, step),
+                                                draft=probe.task.candidate.model_dump_json())
+                        truncated = cost["status"] == "output_truncated_invalid_case"
+                        entry["ai_steps"].append({
+                            **p2_record_step(probe.task, step, "" if truncated else text),
+                            "call_id": cost["call_id"], "attempt_status": cost["status"],
+                            "latency_seconds": cost["latency_seconds"]})
+                        checkpoint("pipeline_step_recorded")
+                        step = p2_next_step(probe.task, entry["ai_steps"])
+                    records[case.id]["pipeline_v2"] = finish_p2_entry(probe, entry)
+                    records[case.id]["authored_expected_verdict_not_supplied_to_model"] = True
+                    write_receipt(PRIVATE / f"case_{case.id}.json", records[case.id])
+                    checkpoint("pipeline_case_recorded")
+                    continue
                 if review3:
                     probe = v3_tasks[case.id]
                     base, text, cost = call(case, "judge", review3_task=probe.task,
@@ -914,9 +969,15 @@ def run() -> int:
     cases = load_cases(FIXTURE)
     if plan["study"] not in ("CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01", "CL-FOCUS-AI-REVIEW-01",
                              "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B",
-                             "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C", "CL-FOCUS-AI-REVIEW-04"):
+                             "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C", "CL-FOCUS-AI-REVIEW-04",
+                             "CL-FOCUS-REVIEW-PIPELINE-02"):
         report["records"] = account_incomplete_attempts(cases, report["records"], report["calls"])
-    if plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C", "CL-FOCUS-AI-REVIEW-04"):
+    if plan["study"] == "CL-FOCUS-REVIEW-PIPELINE-02":
+        probes = load_v3_probes(FIXTURE, 30)
+        report["records"] = account_p2_attempts(probes, report["records"], report["calls"])
+        report["summary"] = summarize_p2(probes, report["records"])
+        report["promotion"] = {"promote": False, "reason": "advisory rules-plus-AI pipeline, not human gold or decision authority"}
+    elif plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C", "CL-FOCUS-AI-REVIEW-04"):
         arm = "blind_extraction_v3" if plan["study"].endswith("03") else "decomposed_v2_control"
         probes = load_v3_probes(FIXTURE)
         report["records"] = account_v3_attempts(probes, report["records"], report["calls"], arm)

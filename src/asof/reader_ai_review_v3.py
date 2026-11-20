@@ -97,10 +97,10 @@ def _authored_rule(status: str, fact, year: str, candidate: Answer) -> str:
     return "supported" if ok else "unsupported"
 
 
-def load_probes(path: Path) -> tuple[Probe, ...]:
+def load_probes(path: Path, count: int = 24) -> tuple[Probe, ...]:
     rows = json.loads(path.read_bytes())
-    if len(rows) != 24 or len({row["id"] for row in rows}) != 24:
-        raise ValueError("exactly 24 uniquely identified probes required")
+    if len(rows) != count or len({row["id"] for row in rows}) != count:
+        raise ValueError(f"exactly {count} uniquely identified probes required")
     probes = []
     for row in rows:
         candidate = Answer(**{**row["candidate"], "evidence": row["source"] if not row["candidate"]["abstain"] else ""})
