@@ -2188,3 +2188,151 @@ independently labelled real-source accuracy or universal correctness is establis
 The [human review runbook](#human-actions-still-required-source-review-runbook) remains
 necessary. Correctness requires preserving those uncertainties, not forcing every
 item into a confident binary verdict.
+
+## Observed notation coverage and decomposed AI review
+
+**Current status:** two development-only improvements, each frozen before measurement.
+Neither is human gold, real-source accuracy or an approval gate. Historical receipts
+(claim assurance 26/30, raw HHEM 17/24, AI-REVIEWER-01 5/12) are unchanged.
+
+### Problem
+
+1. Four original boundary claims stayed in review because the verifier could not prove
+   `turnover reached GBP26m during FY2016` or `top line came to twenty million euros in 2016`.
+2. AI-REVIEWER-01 scored 5/12: four supported outputs were schema-invalid and three
+   justified abstentions were rejected, because one question mixed "is this value
+   supported?" with "is any value disclosed?".
+
+### Notation policy (`financial-notation-v1`)
+
+[`financial_notation.py`](../src/asof/financial_notation.py) adds one bounded proof
+contract, used by [`claim_verifier.py`](../src/asof/claim_verifier.py) only after the
+existing guarded reader finds nothing and never after it refuses (`context_rejected`).
+
+| Accepted | Deliberately left in review |
+|---|---|
+| Allowlisted uppercase ISO code or euro sign, number, lowercase `k`/`m`/`mn`/`bn` (`GBP26m`, `EUR 4.5bn`, `GBP780k`) or `EUR 26 million` | `$`, `£`, bare dollars/pounds, lowercase or unlisted codes, `M`/`MM`/`K`, malformed commas |
+| Spelled cardinal 1-999 plus one scale word plus explicit currency (`forty-two million US dollars`) | Compound spelled numbers, trillions, words-as-fractions, percentages |
+| `revenue`, `turnover`, `top line` as the bare head noun after `<Issuer>'s` or `<Issuer> said its` | Employee/inventory/asset/segment turnover, turnover ratio, net sales, competitors' figures |
+| `reached`, `totalled/totaled`, `amounted to`, `came to`, `was/were` | Modal, negated, forecast or other verbs |
+| `during/for/in` + optional `FY`/`fiscal (year)`/`financial year` + four-digit year | Two-digit years, ranges, quarters, halves, months, YTD |
+
+One sentence must bind issuer, metric, amount and year; trailing clauses fail. Other
+same-issuer notation sentences for other years are allowed only if fully valid. Any
+other revenue/sales wording, revision, unreconciled, sub-annual, illustrative or
+forecast-wide text keeps the claim in review. If the standard reader proves a revenue
+amount and a same-year alias sentence states a different quantity, the claim is review
+instead of "first parser wins". Equivalence remains exact, same-currency only and without FX.
+
+Rejected alternatives: general NLI or model entailment (raw HHEM approved seven false
+claims), treating `$`/`£`/pounds as one currency, equating net sales with revenue, and
+open-ended spelled-number parsing. "Turnover" and "top line" as revenue are declared
+policy choices, not universal truths; `top line` can mean gross revenue in some reports.
+
+### Notation protocol and results
+
+| Step | Commit | Evidence |
+|---|---|---|
+| Fresh 24-case challenge and 780-row metamorphic grid frozen before implementation | `b2e68c2` | [`notation_challenge.py`](../src/asof/notation_challenge.py) |
+| Baseline on unchanged verifier | `b2e68c2` | [`notation_baseline.json`](../results/notation_baseline.json) |
+| Implementation frozen before separately authored cases were read | `0dc4992` | — |
+| 72 adversarial cases recorded once | `8eae93e` | [`notation_adversarial.json`](../results/notation_adversarial.json) |
+| Post-hoc ADV-71 fix, then final record | `b97dcf6` | [`notation_final.json`](../results/notation_final.json) |
+
+| Measure | Baseline | Final |
+|---|---|---|
+| Fresh challenge (12 resolvable + 12 review traps) | 12/24 (0/12 resolved) | **24/24** |
+| Metamorphic grid (60 bases x 13 relations) | 540/780 (0/240 resolved) | **780/780** (60/60 for every relation) |
+| False support / false contradiction | 0 / 0 | 0 / 0 |
+| Original 30-case coverage (exposed) | 26/30 | **30/30** |
+| Named policy controls (exposed) | 37/37 | 37/37 |
+| Current reader regression cohorts | 9/9 pass | 9/9 pass |
+
+The grid's 13 relations are exact, exact rescaling, changed value, changed currency,
+absent claim year, absent claim metric, qualified metric, non-asserted verb, trailing
+qualification, illustrative document, ambiguous currency, third-party subject and
+issuer-prefix collision. Expected verdicts follow from construction; both the grid and
+the challenge are author-visible.
+
+**Separately authored adversarial set.** A separate AI agent instance wrote 72 cases
+(18 supported, 18 contradicted, 36 review) from the written policy only and was told
+not to read repository code. The one-shot result was **71/72** (95% Wilson interval
+0.925-0.998) with **one false support**, zero false contradictions and zero missed
+resolutions. ADV-71 (`GBP20M in 2007. ... GBP26m in 2008.`) exposed a real defect: the
+case-insensitive sentence match exempted an invalid uppercase-`M` sibling from the
+document-level guard. The fix exempts only fully valid siblings (`b97dcf6`). Afterwards
+all 72 pass, but that is an **exposed regression**, not a fresh measurement; the 71/72
+receipt stays authoritative. The authoring agent is AI, not an independent human.
+
+Resources: baseline 0.547s, adversarial 0.422s, final 3.485s (including reader
+regressions and assurance recompute); peak process working set at most 36.44 MiB; no
+model calls, network or data reads.
+
+### Decomposed AI reviewer (AI-REVIEWER-02)
+
+[`reader_ai_review_v2.py`](../src/asof/reader_ai_review_v2.py) splits the task:
+
+- **Answered candidate:** value check with the verdict/issue/citation union schema
+  that encodes supported-needs-citations-no-issues during decoding.
+- **Abstention:** a separate question, "does the source state this amount?" answered
+  `stated` / `not_stated` / `conflicting` / `cannot_tell`. A fixed code table, not the
+  model, maps `not_stated`/`conflicting` to a justified abstention, `stated` to an
+  unnecessary abstention and `cannot_tell` to uncertain.
+- The payload carries only issuer, metric, year, citable source lines and the
+  candidate tuple; the duplicated evidence text and authored expectations are excluded.
+
+Probes: 6 new probes written before any v2 call (3 should pass, 3 should fail, including
+2 abstentions) plus the 12 exposed v1 probes. The 12 exposed probes and v1 failures
+informed the design. Model `qwen3.5:4b` (digest `d8b0f5e9...`), temperature 0, one CPU,
+6 GiB, 90s call cap, 20-minute wall, 18-call ceiling, no retries.
+
+**First attempt stopped.** `CL-FOCUS-AI-REVIEW-02` (frozen `989095b`) stopped after
+22.3s with zero model calls: the owned server accepted connections during its ~4s
+device discovery, and `/api/tags` exceeded the 3s read timeout, which readiness
+polling treated as fatal. [That receipt](../results/reader_ai_review_v2.json) is kept.
+Readiness polling now treats `ReadTimeout` like a connection error until the same
+60s startup deadline. The identical plan and seed ran once as `CL-FOCUS-AI-REVIEW-02B`
+(frozen `749b515`).
+
+| AI-REVIEWER-02 ([receipt](../results/reader_ai_review_v2b.json)) | Result |
+|---|---|
+| Valid outputs | **18/18** |
+| Correct verdicts, all probes | **17/18** (95% Wilson 0.742-0.990) |
+| Fresh probes | **6/6** (95% Wilson 0.610-1.000) |
+| Exposed v1 probes | 11/12 (v1 on the same probes: 5/12) |
+| Abstention disclosure questions | 6/6 |
+| Answered value checks | 11/12 |
+| False support / false rejection / uncertain | 1 / 0 / 0 |
+
+The false support is CELL04-0: candidate `31 EUR million`; the table header states
+`USD million`. The model cited only the value row, where currency does not appear.
+A post-hoc "cited line must contain value and currency" rule was considered and
+**rejected**: it would also have downgraded two correct table verdicts (CELL01-0,
+CELL03-0), which cite only value rows, and tuning a rule to one observed miss would
+overfit. Header-bound currency checking is already the job of the deterministic cell
+reader (12/12).
+
+Resources: 18 calls, 14.9-44.0s each (559.2s total), 15.7s preload, controller wall
+579.8s, combined peak working set 3.66 GiB, one-CPU affinity, CPU-only server state,
+source files unchanged. The reviewer remains **advisory and not promoted**: six fresh
+probes are too few to establish reliability, the probes are author-written, and the
+reviewer is not an independent human.
+
+### Validation and remaining limits
+
+Focused tests cover cardinal bounds, exact proof offsets, ambiguous-notation refusal,
+sibling handling (including the ADV-71 class), standard-reader conflicts, the frozen
+challenge/grid and the exposed adversarial regression, v2 probe balance, prompt
+redaction, fixed abstention mapping and attempt accounting. Two older tests that
+encoded the four deferred boundaries were updated to require resolution with valid
+proofs; the historical 26/30 receipt is unchanged. After all changes the full suite
+passed **782 tests** in 111.07s (two existing rank-deficiency warnings); Ruff and the
+documentation/index check passed. An earlier full run during development had one
+timing-sensitive SEC request-rate test failure under load; that test passed 3/3 in
+isolation and in the final full run. No package, paid API, real-source or private-review
+read, ledger row, push or holdout access occurred.
+
+Not established: real-filing notation coverage, human-labelled accuracy, behavior on
+unlisted wording, and AI-reviewer reliability beyond 18 author-written probes. Human
+independent labels remain zero; the
+[human review runbook](#human-actions-still-required-source-review-runbook) is still required.

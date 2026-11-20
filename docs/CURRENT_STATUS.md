@@ -10,14 +10,21 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: [broader source-claim-v2 assurance](FOCUSED_READER.md#observed-broader-assurance-real-decision-defects-fixed-coverage-rises-to2630)
+Latest: [notation coverage and decomposed AI review](FOCUSED_READER.md#observed-notation-coverage-and-decomposed-ai-review).
+A declared `financial-notation-v1` proof contract (compact `GBP26m`-style amounts,
+bounded spelled amounts, turnover/top-line as revenue under explicit rules) took a
+fresh frozen challenge from **12/24 to 24/24** and a 780-row metamorphic grid from
+**540/780 to 780/780**, with zero false decisions, and the exposed original set from
+26/30 to **30/30**. A separately written AI adversarial set scored **71/72** on its one
+shot; its single false support (ADV-71) was a real defect, fixed afterwards and disclosed.
+The decomposed AI reviewer (AI-REVIEWER-02) scored **17/18** (fresh **6/6**, exposed
+11/12 versus v1's 5/12) with one currency false support; it stays advisory.
+The first v2 attempt stopped on a startup readiness timeout with zero model calls and is retained.
+Earlier: [broader source-claim-v2 assurance](FOCUSED_READER.md#observed-broader-assurance-real-decision-defects-fixed-coverage-rises-to2630)
 fixed actual negated/forecast/illustrative false admissions, ignored source-wide
 qualifications, exact-denomination semantics and long-negative-number precision.
-Compact EPS support raises original-format coverage to **26/30 (86.7%)**, with
-four ambiguous metric/wording cases unresolved. The supported claim set remains
-**24/24**, and all nine current reader regression cohorts still pass.
-**37/37 policy controls** pass (nine expect review, not resolved facts), alongside
-40 passing arithmetic-property examples and **769 full-suite software tests**.
+The supported claim set remains **24/24**, and all nine current reader regression cohorts still pass.
+**37/37 policy controls** pass (nine expect review, not resolved facts).
 Raw HHEM17/24 and the earlier AI judge5/12 remain unchanged/non-promoted.
 Human independent labels remain zero; real-source accuracy is not established.
 
@@ -35,6 +42,8 @@ Human independent labels remain zero; real-source accuracy is not established.
 | [Current source regressions + HHEM](FOCUSED_READER.md#observed-consolidation-current-regressions-pass-hhem-is-not-an-approval-gate) | All 9 current cohorts pass; HHEM 17/24 with seven false approvals, not promoted |
 | [Source-rule claims](FOCUSED_READER.md#observed-source-rule-comparison-2424-resolved-claims-six-visible-deferrals) | Same-input raw 17/24 vs source 24/24; six boundaries deferred, overall 24/30 coverage |
 | [Broader claim assurance](FOCUSED_READER.md#observed-broader-assurance-real-decision-defects-fixed-coverage-rises-to2630) | 37/37 policy controls; supported24/24; coverage26/30 with4review;769tests pass |
+| [Notation coverage](FOCUSED_READER.md#notation-protocol-and-results) | Fresh challenge 12/24→24/24; grid 540/780→780/780; exposed original 30/30; separate adversarial one-shot 71/72, ADV-71 fixed post hoc |
+| [Decomposed AI reviewer](FOCUSED_READER.md#decomposed-ai-reviewer-ai-reviewer-02) | First attempt stopped, 0 calls; rerun 17/18 valid-correct (fresh 6/6, exposed 11/12), one false support, not promoted |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

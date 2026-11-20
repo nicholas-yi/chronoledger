@@ -16,6 +16,9 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "notation-claims", "path": "scripts/validate_notation.py", "status": "historical_complete_baseline_and_final_no_rerun", "command": null},
+    {"id": "notation-adversarial", "path": "scripts/validate_notation_adversarial.py", "status": "historical_complete_one_shot_71of72_no_rerun", "command": null},
+    {"id": "reader-ai-review-v2", "path": "scripts/run_focused_reader.py", "status": "historical_complete_02B_17of18_AI_not_promoted_no_rerun", "command": null},
     {"id": "source-claim-assurance", "path": "scripts/validate_claim_assurance.py", "status": "historical_complete_policy37of37_supported24of24_coverage26of30", "command": null},
     {"id": "source-structured-verifier", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_source24of24_raw17of24_boundaries6unresolved", "command": null},
     {"id": "reader-current-regressions", "path": "scripts/check_reader_regressions.py", "status": "active_invented_regressions_not_independent_gold", "command": "python scripts/check_reader_regressions.py"},
@@ -47,6 +50,51 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "notation-final",
+      "kind": "authored_frozen_challenge_and_metamorphic_grid_not_human_gold",
+      "path": "results/notation_final.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "b97dcf6356a3a73c7a390be8dc34d2ba04cc6ae5",
+      "status": "challenge24of24_grid780of780_exposed_original30of30_policy37of37_after_disclosed_ADV71_fix",
+      "supersedes": []
+    },
+    {
+      "id": "notation-baseline",
+      "kind": "pre_implementation_baseline_of_frozen_notation_challenge",
+      "path": "results/notation_baseline.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "b2e68c202357e86cdf718c8426eb6b68c71858cc",
+      "status": "challenge12of24_grid540of780_zero_resolved_zero_false_decisions",
+      "supersedes": []
+    },
+    {
+      "id": "notation-adversarial",
+      "kind": "separate_AI_authored_policy_adversarial_cases_not_human_gold",
+      "path": "results/notation_adversarial.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "8eae93e8f2473cefeacb4e220e36eb7adcf8cb3d",
+      "status": "one_shot_71of72_one_false_support_ADV71_fixed_posthoc",
+      "supersedes": []
+    },
+    {
+      "id": "reader-ai-review-v2b",
+      "kind": "advisory_local_AI_reviewer_on_authored_probes_not_human_gold",
+      "path": "results/reader_ai_review_v2b.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "749b515aaf82a91502f32630c9761ae9c3aaf29b",
+      "status": "valid18of18_correct17of18_fresh6of6_exposed11of12_one_false_support_not_promoted",
+      "supersedes": []
+    },
+    {
+      "id": "reader-ai-review-v2-stopped",
+      "kind": "stopped_local_model_attempt_retained",
+      "path": "results/reader_ai_review_v2.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "989095be59c7a8658749fdf42103f7f7579f2072",
+      "status": "stopped_startup_readiness_ReadTimeout_zero_model_calls",
+      "supersedes": []
+    },
     {
       "id": "source-claim-v2-assurance",
       "kind": "deterministic_admission_quantity_and_EPS_assurance_not_model_or_human_gold",

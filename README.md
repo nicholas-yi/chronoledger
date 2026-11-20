@@ -37,9 +37,14 @@ including the formerly missed grammar cases (now 24/24), full harder-format fixt
 source-proof diagnostic; historical scores remain unchanged.
 The source-rule verifier retains 24/24 on its authored claim set. Broader assurance
 fixed false admissions of negated/forecast/illustrative statements, exact-quantity
-and long-number errors, and added compact EPS support. Overall format coverage is
-now 26/30, with four ambiguous-alias cases still under review.
-37/37 named policy controls and 769 software tests pass; review decisions are not
+and long-number errors, and added compact EPS support. A declared notation policy
+(compact `GBP26m` amounts, bounded spelled amounts, turnover/top line as revenue) took
+a fresh frozen challenge from 12/24 to 24/24 and a 780-row variant grid from 540/780
+to 780/780 with zero false decisions; the exposed original format set is now 30/30.
+A separately written AI adversarial set scored 71/72 on its one shot; the miss was a
+real defect, fixed afterwards and disclosed. A decomposed advisory AI reviewer scored
+17/18 (6/6 on fresh probes), up from the retained 5/12, and is still not promoted.
+37/37 named policy controls pass; review decisions are not
 counted as resolved facts. Raw HHEM remains 17/24, and human labels remain outstanding.
 The [retained comparisons and limitations](docs/FOCUSED_READER.md) include failed
 judge trials, format-shift failures and posthoc development replays. The judge
