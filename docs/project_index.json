@@ -16,6 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "guard-coverage-real", "path": "scripts/measure_guard_coverage_real.py", "status": "historical_complete_rounds_1_to_3_aggregate_only_no_rerun", "command": null},
     {"id": "review-pipeline-v5", "path": "scripts/combine_review_pipeline_v5.py", "status": "historical_complete_30of30_not_promoted_no_rerun", "command": null},
     {"id": "integrity-claims", "path": "scripts/validate_integrity.py", "status": "historical_complete_baseline_and_final_no_rerun", "command": null},
     {"id": "review-pipeline-v4", "path": "scripts/validate_review_pipeline.py", "status": "historical_complete_23of24_not_promoted_no_rerun", "command": null},
@@ -55,6 +56,33 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "guard-coverage-real-v3",
+      "kind": "aggregate_only_real_mdna_deferral_rate_fresh_issuers_not_accuracy",
+      "path": "results/guard_coverage_real_v3.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "a0ec24b",
+      "status": "normalized_sentence2.1pct_pm1_4.7pct_pm3_9.8pct_integrity0pct",
+      "supersedes": []
+    },
+    {
+      "id": "guard-coverage-real-v2",
+      "kind": "aggregate_only_real_mdna_deferral_rate_same_and_fresh_samples",
+      "path": "results/guard_coverage_real_v2.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "45910e5",
+      "status": "normalized_same3.3pct_fresh2.8pct_sentence_integrity0pct_imaging_overmatch_found",
+      "supersedes": []
+    },
+    {
+      "id": "guard-coverage-real",
+      "kind": "aggregate_only_real_mdna_deferral_rate_raw_text_baseline",
+      "path": "results/guard_coverage_real.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "c8475f5",
+      "status": "raw_sentence8.9pct_pm1_14.7pct_pm3_24.3pct_integrity_artifacts",
+      "supersedes": []
+    },
     {
       "id": "review-pipeline-v5-combined",
       "kind": "declared_rules_first_agreement_pipeline_on_fresh_AI_authored_stress_probes_not_human_gold",

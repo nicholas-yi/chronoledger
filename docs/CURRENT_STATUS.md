@@ -10,7 +10,12 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: [rules-first pipeline v2](FOCUSED_READER.md#observed-rules-first-pipeline-v2-agreement-closes-conflict-and-forecast-false-supports)
+Latest: [guard coverage cost on real 10-K MD&A](FOCUSED_READER.md#observed-guard-coverage-cost-on-real-10-k-mda-text-aggregate-only)
+is now measured, aggregate-only, with the private review filings excluded: after a declared
+ingestion normalization (cp1252 repair, invisible-character removal) and two stem fixes, the guards
+defer **2.1% / 4.7% / 9.8%** of real revenue sentences (alone / ±1 / ±3 sentences) on fresh issuers,
+down from 8.9% / 14.7% / 24.3% on raw text; text-integrity deferrals fell from 6% to 0%.
+Also: [rules-first pipeline v2](FOCUSED_READER.md#observed-rules-first-pipeline-v2-agreement-closes-conflict-and-forecast-false-supports)
 scored **30/30 with zero false supports** on a fresh 30-probe round weighted toward conflicts,
 forecasts and corrections. An AI "supported" now needs an independent single-amount disclosure
 check; that agreement caught all six false supports the unchanged value check made alone (10/16 → 16/16).
@@ -61,6 +66,7 @@ Human independent labels remain zero; real-source accuracy is not established.
 | [Fresh AI-review comparison](FOCUSED_READER.md#fresh-ai-review-comparison-on-24-separately-authored-probes) | Blind-extraction v3 17/24 (not adopted); v2 control 20/24; rules 10/10 decided, 14 deferred |
 | [Rules-first pipeline](FOCUSED_READER.md#declared-rules-first-pipeline-on-a-further-fresh-round) | Declared before fresh round 4: 23/24 (AI alone 20/24, rules 9/9 decided); one conflict false support; not promoted |
 | [Rules-first pipeline v2](FOCUSED_READER.md#observed-rules-first-pipeline-v2-agreement-closes-conflict-and-forecast-false-supports) | Declared before fresh 30-probe stress round: 30/30, 0 false supports; value check alone 10/16 with 6 false supports; not promoted |
+| [Real-text guard coverage](FOCUSED_READER.md#observed-guard-coverage-cost-on-real-10-k-mda-text-aggregate-only) | Aggregate-only, review filings excluded: raw 8.9% sentence deferral → 2.1% on fresh issuers after declared normalization and stem fixes; deferral, not accuracy |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

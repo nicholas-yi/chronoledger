@@ -2528,3 +2528,64 @@ conservative guards on real filing text, and human-labelled correctness. Human l
 Validation after all changes: **818 tests** passed in 145.92s (two existing rank-deficiency warnings);
 Ruff and the documentation/index check passed. No package, paid API, real-source or private-review
 read, production ledger row, push or holdout access occurred.
+
+## Observed guard coverage cost on real 10-K MD&A text (aggregate only)
+
+**Current status:** the conservative guards' coverage cost on real filing text is now measured.
+After a declared ingestion normalization and two stem fixes, they defer **2.1% of single revenue
+sentences, 4.7% with one neighbour each side and 9.8% with three** on a fresh real sample. This
+measures deferral (coverage), not accuracy; deferred items go to review rather than to a wrong answer.
+
+### Protocol and privacy boundary
+
+[`measure_guard_coverage_real.py`](../scripts/measure_guard_coverage_real.py) was frozen before any
+filing body was read (`c8475f5`). With the user's approval, it reads only the `accession` and `cik`
+fields of the private review packet to exclude all 12 review filings and their 12 issuers; those
+identifiers are never printed or stored, and no review window or answer is read. Population: cached
+10-K primary documents with acceptance-time knowledge inside the D13 2012-2018 development window,
+each body passing the EDGAR client's `require_eligible_documents` check (no network requests). Sample:
+one filing per issuer, 150 issuers per round by a fixed SHA-256 order of accession; rounds use disjoint
+issuer ranks. Candidates: MD&A sentences containing a revenue/sales word and a dollar amount. Output:
+aggregate rates, trigger-term counts and Unicode character names only; **no passage is stored or shown**.
+
+### Results
+
+| Round (freeze) | Sample | Integrity deferral (sentence) | Shared-guard deferral: sentence / ±1 / ±3 |
+|---|---|---|---|
+| 1 raw text (`c8475f5`) | issuers 1-150, 1,814 sentences | 5.95% | 8.9% (7.7-10.3) / 14.7% / 24.3% |
+| 2 normalized (`45910e5`) | same 150 (exposed) | 0% | 3.3% / 6.2% / 12.0% |
+| 2 normalized | fresh issuers 151-300, 2,167 sentences | 0% | 2.8% (2.2-3.6) / 6.1% / 11.8% |
+| 3 normalized, `imagin*` narrowed (`a0ec24b`) | fresh issuers 301-450, 1,741 sentences | 0% | **2.1% (1.5-2.9)** / 4.7% / 9.8% |
+
+Round 1 showed that the text-integrity guard fired on benign encoding artifacts, not attacks: zero-width
+spaces (570 occurrences in ±1 windows) and Windows-1252 smart quotes, dashes, bullets and trademark
+signs mis-decoded as C1 controls (U+0091-U+0099). [`text_normalization.py`](../src/asof/text_normalization.py)
+now repairs C1 bytes to their cp1252 characters and removes invisible formatting (zero-width
+characters, word joiner, BOM, soft hyphen) as a declared, counted ingestion step for real filing
+text. Bidirectional controls and undefined C1 bytes are kept, so the verifier still defers them, and
+the strict verifier is unchanged on raw input: every frozen challenge, both adversarial rounds, the 37
+controls, the original 30 and all nine reader cohorts still pass. Normalization cannot turn a hidden
+blocking word into support; removing a zero-width space inside "re`U+200B`stated" exposes "restated" to the
+dispute guard (tested).
+
+Two stems over-matched issuer and industry words and were narrowed: `alleg*` matched "Allegro"
+(now allege/alleged/allegedly/alleges/alleging/allegation[s]) and, on the fresh round-2 sample,
+`imagin*` matched "imaging" 28 times (now imagine/imagined/imagines/imagining/imaginary). Round 3 was
+declared after that fix and run once on unseen issuers.
+
+The remaining deferrals come from intended vocabulary near revenue figures: "estimated/estimate(s)",
+"restated/restatement", "unaudited", "assumption(s)/assumed", "withdraw(al)" and "provisional".
+These are deliberate: estimated, unaudited or restated amounts are not plain annual actuals. The
+notation path's extra residual guard defers 84-97% of multi-sentence windows, but US MD&A uses
+`$`, which that path refuses by design, so it neither adds nor removes US coverage. The pre-existing
+admission checks almost never fire on real MD&A (0-0.2%).
+
+**Limits.** Development-window US 10-K MD&A only; a revenue-sentence heuristic defines candidates;
+window sizes are proxies for the windows a production reader would pass; and a deferral rate is not
+an error rate. Real-filing *accuracy* still requires human labels. Resources: 94.7s, 240.7s and
+144.3s; peak working set at most 751 MiB.
+
+Validation after these changes: **823 tests** passed in 150.30s (two existing rank-deficiency
+warnings); Ruff and the documentation/index check passed. Real filings were read only as approved
+above (aggregate counts, review filings excluded, cache only, D13 window); no network request, paid
+API, production ledger row, push or holdout access occurred, and human labels remain zero.
