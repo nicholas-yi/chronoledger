@@ -1,0 +1,1501 @@
+{
+  "phase": "baseline",
+  "challenge": {
+    "planned": 221,
+    "correct": 83,
+    "review_planned": 183,
+    "review_correct": 49,
+    "supported_planned": 38,
+    "supported_correct": 34,
+    "false_support": 134,
+    "verdicts": {
+      "supported": 168,
+      "review": 53
+    },
+    "by_path": {
+      "notation": {
+        "planned": 137,
+        "correct": 41,
+        "review_planned": 114,
+        "review_correct": 18,
+        "supported_planned": 23,
+        "supported_correct": 23,
+        "false_support": 96,
+        "verdicts": {
+          "supported": 119,
+          "review": 18
+        }
+      },
+      "standard": {
+        "planned": 84,
+        "correct": 42,
+        "review_planned": 69,
+        "review_correct": 31,
+        "supported_planned": 15,
+        "supported_correct": 11,
+        "false_support": 38,
+        "verdicts": {
+          "supported": 49,
+          "review": 35
+        }
+      }
+    },
+    "by_relation": {
+      "exact_control": {
+        "planned": 7,
+        "correct": 7,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 7,
+        "supported_correct": 7,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 7
+        }
+      },
+      "dispute_suffix": {
+        "planned": 49,
+        "correct": 7,
+        "review_planned": 49,
+        "review_correct": 7,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 42,
+        "verdicts": {
+          "supported": 42,
+          "review": 7
+        }
+      },
+      "dispute_prefix": {
+        "planned": 14,
+        "correct": 2,
+        "review_planned": 14,
+        "review_correct": 2,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 12,
+        "verdicts": {
+          "supported": 12,
+          "review": 2
+        }
+      },
+      "hypothetical_prefix": {
+        "planned": 21,
+        "correct": 3,
+        "review_planned": 21,
+        "review_correct": 3,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 18,
+        "verdicts": {
+          "supported": 18,
+          "review": 3
+        }
+      },
+      "estimate_suffix": {
+        "planned": 21,
+        "correct": 3,
+        "review_planned": 21,
+        "review_correct": 3,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 18,
+        "verdicts": {
+          "supported": 18,
+          "review": 3
+        }
+      },
+      "restatement_suffix": {
+        "planned": 7,
+        "correct": 5,
+        "review_planned": 7,
+        "review_correct": 5,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 2,
+        "verdicts": {
+          "review": 5,
+          "supported": 2
+        }
+      },
+      "invisible_or_confusable": {
+        "planned": 28,
+        "correct": 10,
+        "review_planned": 28,
+        "review_correct": 10,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 18,
+        "verdicts": {
+          "supported": 18,
+          "review": 10
+        }
+      },
+      "fullwidth_digits": {
+        "planned": 6,
+        "correct": 6,
+        "review_planned": 6,
+        "review_correct": 6,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 6
+        }
+      },
+      "arabic_indic_digits": {
+        "planned": 6,
+        "correct": 6,
+        "review_planned": 6,
+        "review_correct": 6,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 6
+        }
+      },
+      "claim_fullwidth_digits": {
+        "planned": 7,
+        "correct": 7,
+        "review_planned": 7,
+        "review_correct": 7,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 7
+        }
+      },
+      "benign_suffix": {
+        "planned": 21,
+        "correct": 18,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 21,
+        "supported_correct": 18,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 18,
+          "review": 3
+        }
+      },
+      "notation_nonassertion_vocabulary": {
+        "planned": 24,
+        "correct": 0,
+        "review_planned": 24,
+        "review_correct": 0,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 24,
+        "verdicts": {
+          "supported": 24
+        }
+      },
+      "no_break_space_control": {
+        "planned": 4,
+        "correct": 4,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 4,
+        "supported_correct": 4,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 4
+        }
+      },
+      "curly_apostrophe_control": {
+        "planned": 3,
+        "correct": 3,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 3,
+        "supported_correct": 3,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 3
+        }
+      },
+      "unrelated_customer_forecast_control": {
+        "planned": 3,
+        "correct": 2,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 3,
+        "supported_correct": 2,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 2,
+          "review": 1
+        }
+      }
+    },
+    "errors": [
+      {
+        "id": "INTEGRITY-002",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-003",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-004",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-005",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-006",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-007",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-008",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-009",
+        "path": "notation",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-010",
+        "path": "notation",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-011",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-012",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-013",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-014",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-015",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-016",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-018",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-020",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-021",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-028",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-029",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-030",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-031",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-032",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-033",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-037",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-038",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-039",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-040",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-041",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-042",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-043",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-044",
+        "path": "notation",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-045",
+        "path": "notation",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-046",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-047",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-048",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-049",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-050",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-051",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-053",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-055",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-056",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-061",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-062",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-063",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-064",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-065",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-066",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-069",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-070",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-071",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-072",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-073",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-074",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-075",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-076",
+        "path": "notation",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-077",
+        "path": "notation",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-078",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-079",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-080",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-081",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-082",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-083",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-085",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-087",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-088",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-095",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-096",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-097",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-098",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-099",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-100",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-104",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-105",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-106",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-107",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-108",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-109",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-110",
+        "path": "notation",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-111",
+        "path": "notation",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-112",
+        "path": "notation",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-113",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-114",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-115",
+        "path": "notation",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-116",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-117",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-118",
+        "path": "notation",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-120",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-122",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-123",
+        "path": "notation",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-130",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-131",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-132",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-133",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-134",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-135",
+        "path": "notation",
+        "relation": "notation_nonassertion_vocabulary",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-139",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-140",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-141",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-142",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-143",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-144",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-145",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-146",
+        "path": "standard",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-147",
+        "path": "standard",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-148",
+        "path": "standard",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-149",
+        "path": "standard",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-150",
+        "path": "standard",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-151",
+        "path": "standard",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-152",
+        "path": "standard",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-153",
+        "path": "standard",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-154",
+        "path": "standard",
+        "relation": "restatement_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-155",
+        "path": "standard",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-156",
+        "path": "standard",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-157",
+        "path": "standard",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-167",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-168",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-169",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-170",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-171",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-172",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-173",
+        "path": "standard",
+        "relation": "dispute_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-174",
+        "path": "standard",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-175",
+        "path": "standard",
+        "relation": "dispute_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-176",
+        "path": "standard",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-177",
+        "path": "standard",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-178",
+        "path": "standard",
+        "relation": "hypothetical_prefix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-179",
+        "path": "standard",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-180",
+        "path": "standard",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-181",
+        "path": "standard",
+        "relation": "estimate_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-182",
+        "path": "standard",
+        "relation": "restatement_suffix",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-183",
+        "path": "standard",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-184",
+        "path": "standard",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-185",
+        "path": "standard",
+        "relation": "invisible_or_confusable",
+        "expected_verdict": "review",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-218",
+        "path": "standard",
+        "relation": "benign_suffix",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-219",
+        "path": "standard",
+        "relation": "benign_suffix",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-220",
+        "path": "standard",
+        "relation": "benign_suffix",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "correct": false
+      },
+      {
+        "id": "INTEGRITY-221",
+        "path": "standard",
+        "relation": "unrelated_customer_forecast_control",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "correct": false
+      }
+    ],
+    "author_visible_not_blind": true,
+    "independent_gold": false,
+    "model_calls": 0
+  },
+  "lineage": {
+    "freeze_commit": "5c80476f959580a5f4b5d2cda20d7afccb080fc5",
+    "source_SHA256": {
+      "src/asof/integrity_challenge.py": "bcc6805b83830a94fff8e02ae81125f2dab66555126bc19170fa0dd87e219902",
+      "scripts/validate_integrity.py": "6f4c0a032feed921e4044ae5e0a85c110a26a777a4252a589f69428c7928d2f6",
+      "src/asof/claim_verifier.py": "70a81e2317616e0b10f9a7936e24060f162625120f17d6bf0f80607a548cafe5",
+      "src/asof/financial_notation.py": "7a028988770ee67f3401b8f928caf4827744789bddda1b54711e30d149e14437",
+      "src/asof/reader_fields.py": "bde1ca7a373e8e806c5f429a3fca5bc90d7a841e6eadb44ee7fbb10f6051f5ac",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "cases_sha256": "2f496c70f6a6b8922d844fbf0f121720609b881c3a0c788b2c0ae20845063c54",
+  "author_visible_not_blind": true,
+  "independent_gold": false,
+  "model_calls": 0,
+  "wall_seconds": 0.2809999999590218,
+  "process_peak_RSS_bytes": 35647488
+}
