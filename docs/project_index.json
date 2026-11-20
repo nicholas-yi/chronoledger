@@ -16,6 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "source-claim-assurance", "path": "scripts/validate_claim_assurance.py", "status": "approved_once_pending_nonmodel_assurance", "command": null},
     {"id": "source-structured-verifier", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_source24of24_raw17of24_boundaries6unresolved", "command": null},
     {"id": "reader-current-regressions", "path": "scripts/check_reader_regressions.py", "status": "active_invented_regressions_not_independent_gold", "command": "python scripts/check_reader_regressions.py"},
     {"id": "hhem-advisory", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_17of24_seven_false_support_not_promoted", "command": null},

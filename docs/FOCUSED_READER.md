@@ -2048,3 +2048,86 @@ real-source review/gold, broad semantic coverage and a reliable general AI judge
 The earlier5/12reviewer and17/24HHEM results are still retained failures, not
 silently repaired historic scores. The new source-rule verifier is a separately
 measured narrower component; it does not eliminate the human-review requirement.
+
+## Correctness hardening beyond the friendly grammar
+
+The user requested broader correctness, not another conveniently perfect benchmark.
+Direct pre-edit probes found three actual false admissions in the current rule path:
+negated (`never actually reported`), forecast (`forecast revenue`) and illustrative
+source statements were accepted as actual reported facts. An exactly equivalent
+denomination (18 USD million versus 18,000 USD thousand) was falsely labelled
+contradictory. Compact basic/diluted EPS notation was unnecessarily unresolved.
+Those are reproduced implementation defects/limitations, not evidence that the prior
+24/24 sample established general correctness.
+
+### Actual-disclosure admission and precise quantity semantics
+
+The guarded reader and additional claim-proof grammars now share explicit
+source-admission checks. A clause-local named-issuer relation with negation or
+forecast/modality terms is not an actual disclosed fact. Explicit source-wide
+illustrative/nonactual and quarterly/forecast qualifications require review,
+including qualifications on a following line. An unrelated customer's forecast
+in a separate clause does not invalidate the reporting issuer's actual fact.
+Mixed actual/illustrative documents can be conservatively deferred; these finite
+checks do **not** solve arbitrary natural-language entailment or every paraphrase.
+
+The claim decision contract is now explicitly **`source-claim-v2`**.
+It recognizes exact same-currency denomination equivalence, retaining both original
+values/units and their source spans. For example, 18 USD million and 18,000 USD
+thousand describe the same exact quantity; the extraction output is not rewritten.
+No FX conversion, metric alias substitution, approximate matching or rounding is used.
+The source-stated record contract remains distinct from this verifier's semantic
+quantity check. A nearby unequal amount still contradicts the qualified source.
+
+Equivalence compares decimal digit/exponent tuples, not context-rounded arithmetic.
+Two related precision bugs were fixed: parenthesized negatives in the shared amount
+parser and explicit `negative` claim wording now use context-independent sign
+operations. Multiplication/unary negation had silently rounded sufficiently long
+amounts under a low Decimal precision. Tests cover signed values up to40digits
+and low precision without changing the source or claim value.
+
+### Compact EPS support, not speculative revenue synonyms
+
+The new bounded `compact-eps-claim-v1` source proof accepts a complete issuer/
+fiscal-year statement with explicit `EPS(basic)` and `EPS(diluted)` entries.
+The exact notation supplies the share-denominator definition; each entry owns
+its currency, amount and character offsets. Wrong classes, years, currencies,
+changed-source proofs and conflicting same-class duplicates cannot silently bind.
+This supports the two previously deferred compact-EPS controls.
+
+Turnover/top-line wording is **not automatically equated to revenue**, and
+spelled-out amounts in those ambiguous-alias examples remain unresolved. The
+original six boundary items are retained unchanged, with all30items still in the
+overall coverage denominator. Historical model scores are not regraded.
+
+### Assurance protocol and limits
+
+[`claim_assurance`](../src/asof/claim_assurance.py) defines named controls for the
+observed nonactual/negated/forecast errors, exact quantity equivalence versus
+one-unit inequalities, unrelated-customer context and basic/diluted EPS.
+The [offline validator](../scripts/validate_claim_assurance.py) freezes source/
+control hashes before writing one new receipt. It also recomputes all current
+reader regression cohorts. It uses no model calls, weight reads, network, new
+dependencies, real-source/private-review data or production trial-ledger content.
+
+Report **policy checks** separately from resolved financial verdicts. Correctly
+deferring a forecast or unsupported source is a successful admission-policy check,
+not an extracted actual financial fact. The fixed 24-pair source challenge,
+original six format boundaries and named policy controls remain separate; no
+independent sample-size claim is made by pooling overlapping authored examples.
+Property tests independently vary40large signed amounts/currencies, checking exact
+equivalence and adjacent inequality under low Decimal precision.
+
+This hardens known behavior and broadens an unambiguous supported notation.
+It cannot guarantee perfect correctness on arbitrary unseen financial documents.
+Independent eligible human source labels, adjudication and broader format evidence
+remain required; an AI judge or rule-generated expected answer does not create them.
+No old result, model threshold/weights, application default, source hold or
+registered financial design is changed by this assurance work.
+
+Pre-receipt validation: **769 tests passed** in198.98s, with two existing synthetic
+rank-deficiency warnings. Changed-file Ruff and documentation/index checks passed.
+The named development controls were37/37policy-correct, including nine expected
+review decisions and28resolvedfinancialverdicts. The existing24claimset passed;
+the original30-case total now has26resolved/correct and4unresolved. These
+development-exposed checks are not independent financial accuracy evidence.

@@ -105,7 +105,7 @@ def _amount(source: str, raw: str, *, table: bool) -> tuple[str | None, Evidence
             return None, None
         if "," in inside and re.fullmatch(r"[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?", inside) is None:
             return None, None
-        number = -Decimal(clean[1:-1]) if parenthesized else Decimal(clean)
+        number = Decimal(clean[1:-1]).copy_negate() if parenthesized else Decimal(clean)
     except InvalidOperation:
         return None, None
     if not number.is_finite():

@@ -189,10 +189,35 @@ def context_fields(case: Case, bundle: EvidenceBundle) -> tuple[dict, tuple[Evid
     return values, tuple(spans), tuple(sorted(set(issues)))
 
 
+def source_admission_issues(source: str, spans: tuple[EvidenceSpan, ...]) -> tuple[str, ...]:
+    """Conservative actual-disclosure checks shared by source readers and claim proofs."""
+    issues = []
+    if re.search(
+            r"\b(?:hypothetical|illustrative|fictional)\s+example\b"
+            r"|\bnot\s+(?:an?\s+)?actual\s+disclosure\b", source, re.IGNORECASE):
+        issues.append("nonactual_source_context_requires_review")
+    if re.search(
+            r"\b(?:these|all|the\s+above)\s+(?:amounts|figures|values|data)\b[^.\n]{0,100}"
+            r"\b(?:quarter(?:ly)?|year.to.date|forecasts?|illustrative|hypothetical)\b",
+            source, re.IGNORECASE):
+        issues.append("source_wide_scope_qualification_requires_review")
+    entity = next((span for span in spans if span.role == "entity"), None)
+    metric = next((span for span in spans if span.role == "metric"), None)
+    if entity is not None and metric is not None:
+        lead = source[entity.end:metric.start]
+        if not re.search(r"[.!?;\n]", lead) and re.search(
+                r"\b(?:not|never|forecasts?|forecasted|projected|expected|expects|"
+                r"would|could|might|may)\b", lead, re.IGNORECASE):
+            issues.append("nonasserted_or_forecast_source_relation")
+    return tuple(issues)
+
+
 def _guard(case: Case, result: LinkedResult) -> LinkedResult:
     if result.bundle is None:
         return result
     errors = validate_source(case, result.bundle)
+    if not errors:
+        errors = source_admission_issues(case.source, result.bundle.spans)
     if not errors:
         _, _, errors = context_fields(case, result.bundle)
     if not errors:
