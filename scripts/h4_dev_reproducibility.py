@@ -55,6 +55,11 @@ def extract_frames(pairs: pd.DataFrame, outcomes: pd.DataFrame) -> tuple[pd.Data
     return dev_pairs, outcomes[pd.to_datetime(outcomes["report_date"]) <= cutoff]
 
 
+def label(path: Path) -> str:
+    """Data paths are recorded relative to DATA_DIR, which may live outside the checkout."""
+    return (Path("data") / path.relative_to(DATA_DIR)).as_posix()
+
+
 def year_counts(values: pd.Series) -> dict[str, int]:
     return {str(k): int(v) for k, v in sorted(Counter(pd.to_datetime(values).dt.year).items())}
 
@@ -63,7 +68,7 @@ def extract() -> None:
     if EXTRACT_RECEIPT.exists() or EXTRACT.exists():
         raise RuntimeError("D15 extract already made; preserve it")
     freeze = frozen_receipt(PROJECT_ROOT, SOURCES)
-    inputs = {str(p.relative_to(PROJECT_ROOT)): file_sha256(p) for p in (h4.PAIRS, h4.OUT, h4.ENT)}
+    inputs = {label(p): file_sha256(p) for p in (h4.PAIRS, h4.OUT, h4.ENT)}
     pairs, outcomes, ent = (pd.read_parquet(p) for p in (h4.PAIRS, h4.OUT, h4.ENT))
     dev_pairs, dev_outcomes = extract_frames(pairs, outcomes)
     EXTRACT.mkdir(parents=True)
@@ -92,7 +97,7 @@ def extract() -> None:
             "note": "Rows were decoded in memory by this one process; only these counts leave it."},
         "extract": {"pairs_rows": len(dev_pairs), "outcome_rows": len(dev_outcomes),
                     "outcome_report_date_max": str(pd.to_datetime(dev_outcomes["report_date"]).max().date()),
-                    "SHA256": {str(p.relative_to(PROJECT_ROOT)): file_sha256(p) for p in (PAIRS, OUTCOMES)}},
+                    "SHA256": {label(p): file_sha256(p) for p in (PAIRS, OUTCOMES)}},
         "equivalence": {"panel_rows": len(full), "panel_from_extract_equals_full_panel_exactly": True},
     })
     print(EXTRACT_RECEIPT.read_text())
@@ -101,7 +106,7 @@ def extract() -> None:
 def child(output: Path) -> None:
     receipt = json.loads(EXTRACT_RECEIPT.read_bytes())
     for path, digest in receipt["extract"]["SHA256"].items():
-        if file_sha256(PROJECT_ROOT / path) != digest:
+        if file_sha256(DATA_DIR / Path(path).relative_to("data")) != digest:
             raise ValueError(f"extract changed: {path}")
     panel = h4.panel_from_frames(pd.read_parquet(PAIRS), pd.read_parquet(OUTCOMES), pd.read_parquet(h4.ENT))
     output.write_text(json.dumps({"results": h4.results_from_panel(panel, [PAIRS, OUTCOMES, h4.ENT])}, indent=2))
