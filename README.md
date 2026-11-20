@@ -23,42 +23,29 @@ instant?" and gets only that, so a restatement filed in June cannot leak into a 
 
 ---
 
-**Current status:** no tradable-edge claim is supported; historical data, human measurement
-and return-test calibration are still incomplete. The [closure review](results/project_closure_review.json)
-separates verified engineering fixes from the evidence that still needs to be obtained.
-Start with the [current evidence and entrypoint map](docs/CURRENT_STATUS.md);
-the [curated index](docs/project_index.json) distinguishes historical, held and safe offline work.
-**Active research is now deliberately narrow:** a
+**Current status:** no tradable-edge claim is supported. Return tests, historical data coverage
+and human measurement are still incomplete; the [closure review](results/project_closure_review.json)
+separates verified engineering fixes from evidence that still needs to be obtained.
+Start with the [current evidence map](docs/CURRENT_STATUS.md); the [curated index](docs/project_index.json)
+distinguishes historical, held and safe offline work.
+
+**Active work is deliberately narrow:** a
 [source-grounded metric reader with deterministic verification](docs/FOCUSED_READER.md).
-The broader quant toolkit is parked reference code, not nine validated trading models.
-The current source candidate passes every declared exposed regression cohort,
-including the formerly missed grammar cases (now 24/24), full harder-format fixture
-(288/288) and context coverage (192/192). Older cohorts use an explicitly new
-source-proof diagnostic; historical scores remain unchanged.
-The source-rule verifier retains 24/24 on its authored claim set. Broader assurance
-fixed false admissions of negated/forecast/illustrative statements, exact-quantity
-and long-number errors, and added compact EPS support. A declared notation policy
-(compact `GBP26m` amounts, bounded spelled amounts, turnover/top line as revenue) took
-a fresh frozen challenge from 12/24 to 24/24 and a 780-row variant grid from 540/780
-to 780/780 with zero false decisions; the exposed original format set is now 30/30.
-A separately written AI adversarial set scored 71/72 on its one shot; the miss was a
-real defect, fixed afterwards and disclosed. A decomposed advisory AI reviewer scored
-17/18 (6/6 on fresh probes), up from the retained 5/12, and is still not promoted.
-Further probing found real false supports from disputed/estimated/hypothetical sources and
-disguised text; shared integrity guards took a fresh 221-case challenge from 83/221 to
-221/221, and a second adversarial round scored 96/96 one-shot. On fresh review probes a
-declared rules-first pipeline scored 23/24 versus 20/24 for the AI reviewer alone; a new
-blind-extraction reviewer (17/24) was not adopted. Pipeline v2, where an AI "supported" also
-needs an independent single-amount disclosure check, then scored 30/30 with zero false supports
-on a fresh round weighted toward conflicts, forecasts and corrections. On real 10-K MD&A text
-(aggregate counts only, private review filings excluded), the cautious guards now defer 2.1% of
-revenue sentences on fresh issuers, down from 8.9%, after fixing encoding-artifact false alarms.
-37/37 named policy controls pass; review decisions are not
-counted as resolved facts. Raw HHEM remains 17/24, and human labels remain outstanding.
-The [retained comparisons and limitations](docs/FOCUSED_READER.md) include failed
-judge trials, format-shift failures and posthoc development replays. The judge
-remains nondefault, the broader toolkit stays parked, and independent real-source
-review is still outstanding.
+The scores below come from invented or AI-written test cases, not human-labelled real filings;
+the real-filing figure is a deferral rate, not an accuracy measure.
+
+- **Deterministic source rules** pass every frozen challenge, including 221/221 disguised-text
+  and disputed-source cases and 780/780 notation variants. Two separately written adversarial
+  rounds scored 71/72 and 96/96 on their first run; the one miss was a real bug, fixed and disclosed.
+- **A rules-first review pipeline** with a local AI fallback scored 30/30, with no false supports,
+  on a fresh round weighted toward conflicting figures, forecasts and corrections. The AI
+  reviewer alone scored 20/24 on an earlier fresh round. It stays advisory.
+- **On real 10-K MD&A text** (aggregate counts only), the conservative guards send 2.1% of
+  revenue sentences to review rather than risk a wrong answer.
+- **Still missing:** independent human labels, so accuracy on real filings is unmeasured.
+  Weaker and failed results, such as raw HHEM 17/24 and the first AI judge's 5/12, stay on record.
+
+The broader quant toolkit is parked reference code, not validated trading models.
 
 ## The question
 
@@ -506,6 +493,7 @@ point-in-time queries everything is built on.
 | [`ledger.py`](src/asof/ledger.py), [`referee.py`](src/asof/referee.py) | Append-only trial ledger and the automated referee |
 | [`costs.py`](src/asof/costs.py), [`studies.py`](src/asof/studies.py), [`measurement.py`](src/asof/measurement.py) | Trading-cost breakdowns, pre-run study checklists and evidence-linked measurement scoring |
 | [`benchmark_baseline.py`](src/asof/benchmark_baseline.py), [`reader_real_report.py`](src/asof/reader_real_report.py) | Real-report reading tests: rule baseline, local-model reader and benchmark scoring |
+| [`reader_fields.py`](src/asof/reader_fields.py), [`claim_verifier.py`](src/asof/claim_verifier.py), [`financial_notation.py`](src/asof/financial_notation.py), [`review_pipeline_v2.py`](src/asof/review_pipeline_v2.py) | Active work: source-bound metric reading, source-proved claim checks and the rules-first review pipeline |
 | [`scripts/`](scripts) · [`results/`](results) · [`tests/`](tests) | Data builds and study runners · every published number · unit, invariance and mutation tests |
 
 ## Documentation
@@ -515,6 +503,7 @@ point-in-time queries everything is built on.
 - [FINDINGS.md](docs/FINDINGS.md): the research log, including issues that weaken this project
 - [DATA_AUDIT.md](docs/DATA_AUDIT.md): data provenance, coverage audits and the rebuild runbook
 - [CURRENT_STATUS.md](docs/CURRENT_STATUS.md): current evidence, safe onboarding and held/historical entrypoints
+- [FOCUSED_READER.md](docs/FOCUSED_READER.md): the active metric-reader work, with every run's protocol, results and limits
 - [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md): exact interval reconciliation and its non-conformance/independence limits
 - [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
 - [project_readiness_checks.json](results/project_readiness_checks.json): current scoped clock/calibration checks, both failing
