@@ -63,6 +63,10 @@ from asof.reader_ai_review_v2 import probes as v2_probes
 from asof.reader_ai_review_v2 import record as v2_record
 from asof.reader_ai_review_v2 import schema as v2_schema
 from asof.reader_ai_review_v2 import summarize as summarize_v2
+from asof.reader_ai_review_v3 import ARMS as V3_ARMS
+from asof.reader_ai_review_v3 import account_attempts as account_v3_attempts
+from asof.reader_ai_review_v3 import load_probes as load_v3_probes
+from asof.reader_ai_review_v3 import summarize as summarize_v3
 from asof.reader_cells import (
     Selection,
     account_cell_attempts,
@@ -123,7 +127,7 @@ V1_FROZEN = FROZEN
 
 
 VERSIONS = ("v1", "v2", "verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review",
-            "ai-review-v2", "ai-review-v2b")
+            "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control")
 
 
 def select_version(version: str) -> None:
@@ -132,12 +136,14 @@ def select_version(version: str) -> None:
     if version not in VERSIONS:
         raise ValueError("unknown focused reader version")
     FIXTURE = ROOT / "tests" / "fixtures" / "focused_reader.json"
-    if version in ("verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b"):
+    if version in ("verifier", "stress", "linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
         stem = {"stress": "reader_stress", "verifier": "verified_reader",
                 "linked": "linked_reader", "fields": "reader_fields", "reliable": "reader_reliability",
                 "cells": "reader_cell_selection", "ai-review": "reader_ai_review",
-                "ai-review-v2": "reader_ai_review_v2", "ai-review-v2b": "reader_ai_review_v2b"}[version]
-        fixture_name = "linked_challenge" if version == "linked" else stem
+                "ai-review-v2": "reader_ai_review_v2", "ai-review-v2b": "reader_ai_review_v2b",
+                "ai-review-v3": "reader_ai_review_v3", "ai-review-v3-control": "reader_ai_review_v3_control"}[version]
+        fixture_name = ("linked_challenge" if version == "linked" else
+                        "reader_ai_review_v3" if version == "ai-review-v3-control" else stem)
         PLAN = ROOT / "results" / f"{stem}_plan.json"
         REPORT = ROOT / "results" / f"{stem}.json"
         PRIVATE = ROOT / "data" / f"{stem}_v1"
@@ -153,29 +159,36 @@ def select_version(version: str) -> None:
         if version == "stress":
             FROZEN = (*FROZEN, "src/asof/reader_stress.py", "tests/test_reader_stress.py",
                       "results/verified_reader.json")
-        elif version in ("linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b"):
+        elif version in ("linked", "fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
             FROZEN = (*FROZEN, "src/asof/linked_reader.py", "tests/test_linked_reader.py",
                       "src/asof/reader_stress.py", "tests/fixtures/reader_stress.json",
                       "results/reader_stress.json", "results/verified_reader.json")
-            if version in ("fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b"):
+            if version in ("fields", "reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
                 FROZEN = (*FROZEN, "src/asof/reader_fields.py", "tests/test_reader_fields.py",
                           "results/linked_reader.json")
-            if version in ("reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b"):
+            if version in ("reliable", "cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
                 FROZEN = (*FROZEN, "src/asof/reader_reliability.py",
                           "tests/test_reader_reliability.py", "results/reader_fields.json")
-            if version in ("cells", "ai-review", "ai-review-v2", "ai-review-v2b"):
+            if version in ("cells", "ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
                 FROZEN = (*FROZEN, "src/asof/reader_cells.py", "src/asof/reader_field_challenge.py",
                           "tests/test_reader_cells.py", "results/reader_reliability.json")
-            if version in ("ai-review", "ai-review-v2", "ai-review-v2b"):
+            if version in ("ai-review", "ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
                 FROZEN = (*FROZEN, "src/asof/reader_ai_review.py", "tests/test_reader_ai_review.py",
                           "tests/test_local_model_runtime.py", "results/reader_cell_selection.json",
                           "results/reader_cell_selection_accounting.json")
-            if version in ("ai-review-v2", "ai-review-v2b"):
+            if version in ("ai-review-v2", "ai-review-v2b", "ai-review-v3", "ai-review-v3-control"):
                 FROZEN = (*FROZEN, "src/asof/reader_ai_review_v2.py", "tests/test_reader_ai_review_v2.py",
                           "results/reader_ai_review.json")
             if version == "ai-review-v2b":
                 # Same reviewer after a zero-call startup stop; the stopped receipt stays pinned.
                 FROZEN = (*FROZEN, "results/reader_ai_review_v2_plan.json", "results/reader_ai_review_v2.json")
+            if version in ("ai-review-v3", "ai-review-v3-control"):
+                # Both arms pin the same fresh fixture, each other's plan and the v2b result they follow.
+                FROZEN = (*FROZEN, "src/asof/reader_ai_review_v3.py", "tests/test_reader_ai_review_v3.py",
+                          "results/reader_ai_review_v3_plan.json", "results/reader_ai_review_v3_control_plan.json",
+                          "tests/fixtures/reader_ai_review_v3.json", "results/reader_ai_review_v2b.json",
+                          "src/asof/claim_verifier.py")
+                FROZEN = tuple(dict.fromkeys(FROZEN))
         return
     suffix = "_v2" if version == "v2" else ""
     PLAN = ROOT / "results" / f"focused_reader{suffix}_plan.json"
@@ -191,6 +204,8 @@ def select_version(version: str) -> None:
 def load_cases(path: Path) -> tuple[Case, ...]:
     if path.name in ("reader_ai_review_v2.json", "reader_ai_review_v2b.json"):
         return tuple(probe.task.case for probe in v2_probes())
+    if path.name == "reader_ai_review_v3.json":
+        return tuple(probe.task.case for probe in load_v3_probes(path))
     if path.name in ("reader_cell_selection.json", "reader_ai_review.json"):
         return audit_fixture()[0]
     raw = json.loads(path.read_bytes())
@@ -290,6 +305,13 @@ def validate_plan(plan: dict) -> None:
         fixed["generation_contract"] = "6_fresh_plus_12_exposed_decomposed_AI_reviews_v2"
         fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
         fixed["preload"] = "one_empty_prompt_load_within_existing_startup_deadline"
+    elif plan.get("study") in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C"):
+        fixed["case_count"] = fixed["max_calls"] = 24
+        fixed["options"].update(seed=202611200130, num_predict=128)
+        fixed["generation_contract"] = ("24_fresh_blind_extraction_reviews_v3" if plan["study"].endswith("03")
+                                        else "24_fresh_decomposed_v2_control_reviews")
+        fixed["output_truncation_policy"] = "count_invalid_and_continue_without_retry"
+        fixed["preload"] = "one_empty_prompt_load_within_existing_startup_deadline"
     elif plan.get("study") != "CL-FOCUS-LAAJ-01":
         raise ValueError("unknown focused reader study")
     if plan != fixed:
@@ -316,15 +338,18 @@ def worker(plan: dict, channel) -> None:
     reliable = plan["study"] == "CL-FOCUS-RELIABLE-01"
     review_mode = plan["study"] == "CL-FOCUS-AI-REVIEW-01"
     review2 = plan["study"] in ("CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B")
+    review3 = plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C")
+    v3_arm = V3_ARMS["decomposed_v2_control" if plan["study"].endswith("03C") else "blind_extraction_v3"] if review3 else None
     cell_mode = review_mode or plan["study"] == "CL-FOCUS-CELLS-01"
     field_mode = reliable or cell_mode or plan["study"] == "CL-FOCUS-FIELDS-01"
     linked_mode = field_mode or plan["study"] == "CL-FOCUS-LINKED-01"
     verified = plan["study"] in (
         "CL-FOCUS-VERIFY-01", "CL-FOCUS-STRESS-01", "CL-FOCUS-LINKED-01",
         "CL-FOCUS-FIELDS-01", "CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01", "CL-FOCUS-AI-REVIEW-01",
-        "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B")
+        "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B", "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C")
     if verified:
-        select_version(("ai-review-v2b" if plan["study"].endswith("02B") else "ai-review-v2") if review2 else "ai-review" if review_mode else "cells" if cell_mode else "reliable" if reliable else "fields" if field_mode else "linked"
+        select_version(("ai-review-v3-control" if plan["study"].endswith("03C") else "ai-review-v3") if review3 else
+                       ("ai-review-v2b" if plan["study"].endswith("02B") else "ai-review-v2") if review2 else "ai-review" if review_mode else "cells" if cell_mode else "reliable" if reliable else "fields" if field_mode else "linked"
                        if linked_mode else "stress" if stress else "verifier")
     server = None
     records: dict[str, dict] = {}
@@ -341,6 +366,7 @@ def worker(plan: dict, channel) -> None:
     orders = generation_orders(cases) if reliable or cell_mode else {}
     tasks = {task.case.id: task for task in review_tasks()} if review_mode else {}
     v2_tasks = {probe.task.case.id: probe for probe in v2_probes()} if review2 else {}
+    v3_tasks = {probe.task.case.id: probe for probe in load_v3_probes(FIXTURE)} if review3 else {}
 
     def check_time() -> None:
         if time.monotonic()-started >= plan["controller_stop_seconds"]-15:
@@ -418,7 +444,7 @@ def worker(plan: dict, channel) -> None:
                 break
             if not ready:
                 raise TimeoutError("owned server readiness timeout")
-            if review_mode or review2:
+            if review_mode or review2 or review3:
                 preload = {"status": "load_only_started"}
                 checkpoint("before_load_only_request")
                 preload = preload_owned_model(
@@ -427,7 +453,7 @@ def worker(plan: dict, channel) -> None:
                 checkpoint("model_loaded_before_generation")
 
             def call(case: Case, stage: str, *, draft=None, critique=None, lessons=(),
-                     structured=False, selection=False, reviewing=False, review2_task=None):
+                     structured=False, selection=False, reviewing=False, review2_task=None, review3_task=None):
                 check_time()
                 if len(calls) >= plan["max_calls"]:
                     raise RuntimeError("model-call ceiling before next attempt")
@@ -452,6 +478,10 @@ def worker(plan: dict, channel) -> None:
                     body["messages"] = review_messages(case, tasks[case.id].candidate) if reviewing else compact_cell_messages(case)
                     body["format"] = opinion_schema() if reviewing else selection_schema(case)
                     body["options"]["num_predict"] = 128 if reviewing else 64
+                if review3_task is not None:
+                    body["messages"] = v3_arm.messages(review3_task)
+                    body["format"] = v3_arm.schema(review3_task)
+                    body["options"]["num_predict"] = 128
                 if review2_task is not None:
                     body["messages"] = v2_messages(review2_task)
                     body["format"] = v2_schema(review2_task)
@@ -471,6 +501,8 @@ def worker(plan: dict, channel) -> None:
                                                 "bound_cell" if selection else "structured_tuple")
                 if review2_task is not None:
                     attempt["wire_contract"] = "decomposed_review"
+                if review3_task is not None:
+                    attempt["wire_contract"] = v3_arm.wire_contract
                 calls.append(attempt)
                 write_receipt(PRIVATE / f"call_{attempt['call_id']:02d}_start.json", attempt)
                 checkpoint("before_model_attempt")
@@ -495,7 +527,7 @@ def worker(plan: dict, channel) -> None:
                 write_receipt(PRIVATE / f"call_{attempt['call_id']:02d}.json",
                               {"attempt": attempt, "response": raw})
                 issue = truncation_reason(raw, body["options"])
-                output_limited = (stress or linked_mode or review2) and issue == "output_token_limit_or_truncation"
+                output_limited = (stress or linked_mode or review2 or review3) and issue == "output_token_limit_or_truncation"
                 if (issue and not output_limited) or raw.get("done") is not True:
                     attempt["status"] = "truncated_or_incomplete"
                     checkpoint("invalid_complete_response")
@@ -512,7 +544,9 @@ def worker(plan: dict, channel) -> None:
                     attempt["status"] = "output_truncated_invalid_case"
                 else:
                     try:
-                        if review2_task is not None:
+                        if review3_task is not None:
+                            parsed = v3_arm.parse(review3_task, content)
+                        elif review2_task is not None:
                             parsed = v2_parse(review2_task, content)
                         elif reviewing:
                             parsed = Opinion.model_validate_json(content)
@@ -576,6 +610,20 @@ def worker(plan: dict, channel) -> None:
                 write_receipt(PRIVATE / "candidate_before_evaluation.json", candidate)
                 checkpoint("candidate_frozen_before_evaluation")
             for case in (cases if verified else cases[6:]):
+                if review3:
+                    probe = v3_tasks[case.id]
+                    base, text, cost = call(case, "judge", review3_task=probe.task,
+                                            draft=probe.task.candidate.model_dump_json())
+                    truncated = cost["status"] == "output_truncated_invalid_case"
+                    records[case.id] = {"ai_review_v3": {
+                        **v3_arm.record(probe.task, "" if truncated else text), "arm": v3_arm.name,
+                        "call_id": cost["call_id"], "attempt_status": cost["status"],
+                        "latency_seconds": cost["latency_seconds"],
+                        "authored_expected_verdict": probe.task.expected_verdict,
+                        "expected_verdict_not_supplied_to_model": True}}
+                    write_receipt(PRIVATE / f"case_{case.id}.json", records[case.id])
+                    checkpoint("fresh_review_recorded")
+                    continue
                 if review2:
                     probe = v2_tasks[case.id]
                     base, text, cost = call(case, "judge", review2_task=probe.task,
@@ -849,9 +897,16 @@ def run() -> int:
                 channel.close()
     cases = load_cases(FIXTURE)
     if plan["study"] not in ("CL-FOCUS-RELIABLE-01", "CL-FOCUS-CELLS-01", "CL-FOCUS-AI-REVIEW-01",
-                             "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B"):
+                             "CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B",
+                             "CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C"):
         report["records"] = account_incomplete_attempts(cases, report["records"], report["calls"])
-    if plan["study"] in ("CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B"):
+    if plan["study"] in ("CL-FOCUS-AI-REVIEW-03", "CL-FOCUS-AI-REVIEW-03C"):
+        arm = "decomposed_v2_control" if plan["study"].endswith("03C") else "blind_extraction_v3"
+        probes = load_v3_probes(FIXTURE)
+        report["records"] = account_v3_attempts(probes, report["records"], report["calls"], arm)
+        report["summary"] = summarize_v3(probes, report["records"], arm)
+        report["promotion"] = {"promote": False, "reason": "one advisory AI reviewer arm, not human gold or decision authority"}
+    elif plan["study"] in ("CL-FOCUS-AI-REVIEW-02", "CL-FOCUS-AI-REVIEW-02B"):
         report["records"] = account_v2_attempts(report["records"], report["calls"])
         report["summary"] = summarize_v2(report["records"])
         report["promotion"] = {"promote": False, "reason": "one advisory AI reviewer, not human gold or decision authority"}

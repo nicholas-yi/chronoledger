@@ -1,0 +1,26 @@
+{
+  "RAM_bytes": 6442450944,
+  "call_seconds": 90,
+  "case_count": 24,
+  "controller_RAM_allowance": 134217728,
+  "controller_stop_seconds": 1180,
+  "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+  "endpoint": "http://127.0.0.1:11435",
+  "generation_contract": "24_fresh_blind_extraction_reviews_v3",
+  "max_calls": 24,
+  "model": "qwen3.5:4b",
+  "options": {
+    "num_batch": 64,
+    "num_ctx": 2048,
+    "num_gpu": 0,
+    "num_predict": 128,
+    "num_thread": 1,
+    "seed": 202611200130,
+    "temperature": 0
+  },
+  "output_truncation_policy": "count_invalid_and_continue_without_retry",
+  "preload": "one_empty_prompt_load_within_existing_startup_deadline",
+  "startup_seconds": 60,
+  "study": "CL-FOCUS-AI-REVIEW-03",
+  "wall_seconds": 1200
+}
