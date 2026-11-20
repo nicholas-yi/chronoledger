@@ -16,6 +16,10 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
+    {"id": "integrity-claims", "path": "scripts/validate_integrity.py", "status": "historical_complete_baseline_and_final_no_rerun", "command": null},
+    {"id": "review-pipeline-v4", "path": "scripts/validate_review_pipeline.py", "status": "historical_complete_23of24_not_promoted_no_rerun", "command": null},
+    {"id": "review-probes-rules-v3", "path": "scripts/validate_review_probes_rules.py", "status": "historical_complete_10of10_decided_no_rerun", "command": null},
+    {"id": "reader-ai-review-v3", "path": "scripts/run_focused_reader.py", "status": "historical_complete_v3_17of24_control_20of24_round4_20of24_no_rerun", "command": null},
     {"id": "notation-claims", "path": "scripts/validate_notation.py", "status": "historical_complete_baseline_and_final_no_rerun", "command": null},
     {"id": "notation-adversarial", "path": "scripts/validate_notation_adversarial.py", "status": "historical_complete_one_shot_71of72_no_rerun", "command": null},
     {"id": "reader-ai-review-v2", "path": "scripts/run_focused_reader.py", "status": "historical_complete_02B_17of18_AI_not_promoted_no_rerun", "command": null},
@@ -50,6 +54,78 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "review-pipeline-v4",
+      "kind": "declared_rules_first_AI_fallback_pipeline_on_fresh_AI_authored_probes_not_human_gold",
+      "path": "results/review_pipeline_v4.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "424fe20",
+      "status": "pipeline23of24_ai_alone20of24_rules9of9_decided_one_conflict_false_support_not_promoted",
+      "supersedes": []
+    },
+    {
+      "id": "reader-ai-review-v4-fallback",
+      "kind": "advisory_local_AI_reviewer_on_fresh_AI_authored_probes",
+      "path": "results/reader_ai_review_v4.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "2b42bdf",
+      "status": "20of24_three_false_support_one_false_rejection",
+      "supersedes": []
+    },
+    {
+      "id": "reader-ai-review-v3-blind",
+      "kind": "advisory_blind_extraction_AI_reviewer_on_fresh_AI_authored_probes",
+      "path": "results/reader_ai_review_v3.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "daa5219",
+      "status": "17of24_extraction12of24_not_adopted",
+      "supersedes": []
+    },
+    {
+      "id": "reader-ai-review-v3-control",
+      "kind": "advisory_v2_reviewer_control_on_same_fresh_probes",
+      "path": "results/reader_ai_review_v3_control.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "6bce097",
+      "status": "20of24_four_false_support",
+      "supersedes": []
+    },
+    {
+      "id": "review-probes-rules-v3",
+      "kind": "frozen_deterministic_rules_on_fresh_review_probes_plus_labelled_posthoc_compositions",
+      "path": "results/reader_ai_review_v3_rules.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "81c1b66",
+      "status": "rules10of10_decided_14_deferred_posthoc_composition22of24_exposed",
+      "supersedes": []
+    },
+    {
+      "id": "integrity-final",
+      "kind": "authored_frozen_integrity_challenge_not_human_gold",
+      "path": "results/integrity_final.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "a2e57c4",
+      "status": "221of221_zero_false_support_from_baseline83of221",
+      "supersedes": []
+    },
+    {
+      "id": "integrity-baseline",
+      "kind": "pre_implementation_baseline_of_frozen_integrity_challenge",
+      "path": "results/integrity_baseline.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "5c80476",
+      "status": "83of221_134_false_supports",
+      "supersedes": []
+    },
+    {
+      "id": "notation-adversarial-r2",
+      "kind": "separate_AI_authored_policy_adversarial_cases_not_human_gold",
+      "path": "results/notation_adversarial_r2.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "c46ffef",
+      "status": "one_shot_96of96_zero_false_decisions",
+      "supersedes": []
+    },
     {
       "id": "notation-final",
       "kind": "authored_frozen_challenge_and_metamorphic_grid_not_human_gold",

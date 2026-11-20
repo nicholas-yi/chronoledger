@@ -2336,3 +2336,131 @@ Not established: real-filing notation coverage, human-labelled accuracy, behavio
 unlisted wording, and AI-reviewer reliability beyond 18 author-written probes. Human
 independent labels remain zero; the
 [human review runbook](#human-actions-still-required-source-review-runbook) is still required.
+
+## Observed source integrity, second adversarial round and fresh AI-review comparison
+
+**Current status:** four development-only measurements, each frozen before measurement. None is
+human gold, real-filing accuracy or an approval gate. Every earlier receipt is unchanged.
+
+### Problem found by probing before any change
+
+Direct probes of the frozen verifier showed real false supports on both the notation path and the
+older standard-reader path: a claim stayed `supported` when the same source also said the figure was
+false, incorrect, denied, retracted, disputed, preliminary, an estimate or a supposition; when a
+blocking word such as "restated" was hidden with a zero-width space, soft hyphen or Cyrillic letter;
+and when the amount used full-width or Arabic-Indic digits. A fresh 221-case
+[integrity challenge](../src/asof/integrity_challenge.py) was frozen at `5c80476` and its
+[baseline](../results/integrity_baseline.json) recorded before any fix: **83/221 correct with 134
+false supports**. Four supported controls also failed: a diluted-EPS sentence followed by any
+unrelated sentence was deferred because that grammar accepted only a whole-source sentence.
+
+### Guards added (`a2e57c4`)
+
+- **Shared admission guard** in [`reader_fields.py`](../src/asof/reader_fields.py), used by the
+  reader and every claim proof: dispute, denial, retraction, misstatement/restatement, estimate,
+  preliminary/provisional/unaudited/draft and hypothetical-framing vocabulary anywhere in the source
+  defers to review. Bare forecast words are deliberately *not* shared, so the existing control
+  "Its customer may forecast lower costs." still supports an unrelated actual figure.
+- **Text integrity:** invisible format/control characters, non-ASCII decimal digits and non-Latin
+  letters (Cyrillic, Greek, full-width or mathematical letters) defer. Accented Latin letters,
+  currency symbols, curly quotes and no-break spaces remain allowed. Claims must be printable ASCII.
+- **`financial-notation-v2`:** the notation path additionally defers on modal, forecast, plan,
+  example, negation and `topline`/`turnovers` wording elsewhere in the source, and reads ASCII digits only.
+- **Per-share sentence:** may now sit among unrelated sentences, but any other EPS, share, dilution,
+  basic or loss wording still defers.
+
+Rejected alternatives: blocking bare forecast words for every path (breaks a deliberate control),
+Unicode normalization that silently rewrites look-alikes (hides evidence), and accepting non-ASCII
+digits as numbers (ambiguous provenance). The guards are conservative: harmless real-world text
+that happens to contain these words will be deferred, and that coverage cost is unmeasured on real filings.
+
+| [Integrity receipt](../results/integrity_final.json) | Baseline | Final |
+|---|---|---|
+| All 221 cases | 83 | **221** (95% Wilson 0.983-1.000) |
+| False supports | 134 | **0** |
+| Supported controls (NBSP, curly quote, accents, unrelated forecast, EPS + benign text) | 34/38 | 38/38 |
+| Exposed: original 30 / controls 37 / notation 24 and 780 / round-1 adversarial 72 | 30 / 37 / 24, 780 / 72 | unchanged |
+| Current reader regression cohorts | 9/9 | 9/9 |
+
+The frozen challenge's two digit relations translated the year as well as the amount, so they were
+already deferred at baseline; amount-only digit substitutions are covered by unit tests instead.
+
+### Second adversarial round (`financial-notation-v2`)
+
+A new, separate AI agent instance wrote 96 cases (24 supported, 24 contradicted, 48 review) from
+the written v2 policy only, without repository access, avoiding round-1 attack ideas; 24 target
+disputes, homoglyphs, invisible characters and non-ASCII digits and 12 are supported cases with
+harmless extra text. The verifier had not changed since `a2e57c4`; the fixture was frozen at
+`c46ffef` and recorded once: **[96/96](../results/notation_adversarial_r2.json)** (95% Wilson
+0.962-1.000), zero false supports, false contradictions or missed resolutions. The author is AI,
+not an independent human. Both rounds are now exposed regressions.
+
+### Fresh AI-review comparison on 24 separately authored probes
+
+A separate agent wrote 24 probes (12 should pass, 12 should fail; 8 abstentions; 12 tables with
+units only in headers or "Amounts in" lines) from a written rule set. Both reviewer arms and both
+plans were frozen at `85b4d72` before the probe file was opened; the probes were frozen at `daa5219`.
+
+- **AI-REVIEWER-03** ([`reader_ai_review_v3.py`](../src/asof/reader_ai_review_v3.py)): the model
+  never sees the candidate; it extracts the stated amount from header-bound table views, and fixed
+  code compares extraction and candidate. Designed to remove anchoring after the v2 currency miss.
+- **AI-REVIEWER-02 control:** the unchanged v2 reviewer on the same probes.
+- **Rules:** the frozen deterministic verifier (unchanged since `a2e57c4`, before the probes were
+  opened), mapping answered candidates to claim sentences and abstentions to "refuted only if a
+  source fact is proved"; otherwise uncertain.
+
+| Same 24 fresh probes | Correct | False support | False rejection | Uncertain | Notes |
+|---|---|---|---|---|---|
+| [AI-REVIEWER-03 blind extraction](../results/reader_ai_review_v3.json) | 17/24 (0.508-0.851) | 1 | 4 | 2 | Extraction itself correct 12/24 |
+| [AI-REVIEWER-02 control](../results/reader_ai_review_v3_control.json) | **20/24** (0.641-0.933) | 4 | 0 | 0 | Two false supports were header-unit table cases |
+| [Deterministic rules](../results/reader_ai_review_v3_rules.json) | 10/24 decided, **10/10 correct** | 0 | 0 | 14 | Cannot prove non-disclosure; prose corrections and conflicts deferred |
+
+**AI-REVIEWER-03 did not beat the control and is not adopted.** The 4B model answered
+`not_stated` for plainly present amounts (four false rejections), invented minus signs for positive
+values whenever an "Amounts in" line was present, and used `cannot_tell` instead of `conflicting`.
+Removing the candidate removed anchoring but exposed weaker extraction. This is a negative result
+retained as such. Resources: v3 24 calls, 40.6-50.0s each, wall 1,083.9s; control 24 calls,
+25.9-44.2s, wall 855.0s; combined peak about 3.6 GiB; one CPU; no retries.
+
+The rules decided every header-unit case on which the control gave false supports. A **post-hoc**
+composition (rules first, recorded control verdict otherwise) scores 22/24 with two false supports,
+but it was defined after reading these probes, so it is labelled exposed and is not a fresh score.
+
+### Declared rules-first pipeline on a further fresh round
+
+To score that composition honestly, [`review_pipeline.py`](../src/asof/review_pipeline.py)
+(REVIEW-PIPELINE-01: frozen rules first, unchanged AI-REVIEWER-02 only where rules defer) was
+declared and frozen at `eec14b5`, before another separate agent's 24 round-4 probes were opened
+(frozen at `2b42bdf`, same written rule set and composition, 10 tables). The AI fallback ran once
+(new seed, same limits), then the pipeline was recorded once.
+
+| Round-4 fresh probes ([AI receipt](../results/reader_ai_review_v4.json), [pipeline receipt](../results/review_pipeline_v4.json)) | Correct | False support | False rejection | Uncertain |
+|---|---|---|---|---|
+| AI-REVIEWER-02 alone | 20/24 (0.641-0.933) | 3 | 1 | 0 |
+| Deterministic rules alone | 9 decided, **9/9 correct** | 0 | 0 | 15 |
+| **REVIEW-PIPELINE-01** (rules decided 9, AI 15) | **23/24** (0.798-0.993) | 1 | 0 | 0 |
+
+The rules corrected three of the AI's four errors: two wrong-scale table false supports (RV4-02,
+RV4-06) and one false rejection of an exact same-currency rescaling (RV4-04). The remaining miss, RV4-15,
+is a source with two equally authoritative revenue amounts: the rules correctly deferred and the AI
+accepted one of them. Conflict detection remains the main AI weakness; it was not patched after
+this result. AI run: 24 calls, 26.2-45.0s each, wall 901.6s, combined peak about 3.63 GiB.
+The AI receipt's provenance string says "both reviewer arms" because it reuses the round-3
+summarizer; for round 4 the frozen items were the pipeline and its single AI arm.
+
+**Interpretation and limits.** On two fresh 24-probe rounds the deterministic rules made **19/19
+correct decisions with zero errors** but decided only 40% of probes. The pipeline's 23/24 is one
+fresh round of author-written AI probes, not human gold, real-filing accuracy or a calibrated rate;
+its 95% interval is wide (0.80-0.99). The pipeline is advisory and is not promoted. Not established:
+behavior on real filings, coverage cost of the conservative guards on real text, and AI conflict detection.
+
+### Validation
+
+Focused tests cover the shared guards (amount-only non-ASCII digits, disputes, hypotheticals,
+estimates, restatements, zero-width/soft-hyphen/Cyrillic obfuscation, ASCII-only claims, allowed
+accents and curly quotes), per-share tolerance and refusal, notation-v2 modal guards and substring
+safety, both adversarial rounds as exposed regressions, v3 header-bound views, blind comparison,
+fixed abstention mapping, probe-label consistency, attempt accounting, and pipeline routing.
+After all changes the full suite passed **813 tests** in 140.43s (two existing rank-deficiency
+warnings); Ruff and the documentation/index check passed. No package, paid API, real-source or
+private-review read, production ledger row, push or holdout access occurred, and human labels remain zero.

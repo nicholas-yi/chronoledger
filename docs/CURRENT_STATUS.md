@@ -10,7 +10,16 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: [notation coverage and decomposed AI review](FOCUSED_READER.md#observed-notation-coverage-and-decomposed-ai-review).
+Latest: [source integrity, second adversarial round and fresh AI-review comparison](FOCUSED_READER.md#observed-source-integrity-second-adversarial-round-and-fresh-ai-review-comparison).
+Probing found real false supports (disputed, denied, estimated or hypothetical sources; zero-width,
+soft-hyphen and Cyrillic obfuscation; non-ASCII digits). A fresh 221-case integrity challenge went
+from **83/221 (134 false supports) to 221/221 (0)** after shared guards. A second separately
+written adversarial round scored **96/96** one-shot. On fresh, separately written review probes,
+the new blind-extraction AI reviewer scored 17/24 and **was not adopted**; the unchanged v2 reviewer
+scored 20/24; the frozen rules were **19/19 correct across two rounds** but decided only 40%. A
+declared rules-first pipeline then scored **23/24** on a further fresh round (AI alone 20/24),
+with one conflict-detection false support. All are AI-authored probes, not human gold.
+Previously: [notation coverage and decomposed AI review](FOCUSED_READER.md#observed-notation-coverage-and-decomposed-ai-review).
 A declared `financial-notation-v1` proof contract (compact `GBP26m`-style amounts,
 bounded spelled amounts, turnover/top-line as revenue under explicit rules) took a
 fresh frozen challenge from **12/24 to 24/24** and a 780-row metamorphic grid from
@@ -44,6 +53,9 @@ Human independent labels remain zero; real-source accuracy is not established.
 | [Broader claim assurance](FOCUSED_READER.md#observed-broader-assurance-real-decision-defects-fixed-coverage-rises-to2630) | 37/37 policy controls; supported24/24; coverage26/30 with4review;769tests pass |
 | [Notation coverage](FOCUSED_READER.md#notation-protocol-and-results) | Fresh challenge 12/24→24/24; grid 540/780→780/780; exposed original 30/30; separate adversarial one-shot 71/72, ADV-71 fixed post hoc |
 | [Decomposed AI reviewer](FOCUSED_READER.md#decomposed-ai-reviewer-ai-reviewer-02) | First attempt stopped, 0 calls; rerun 17/18 valid-correct (fresh 6/6, exposed 11/12), one false support, not promoted |
+| [Source integrity](FOCUSED_READER.md#guards-added-a2e57c4) | Fresh challenge 83/221 (134 false supports) → 221/221 (0); round-2 adversarial one-shot 96/96 |
+| [Fresh AI-review comparison](FOCUSED_READER.md#fresh-ai-review-comparison-on-24-separately-authored-probes) | Blind-extraction v3 17/24 (not adopted); v2 control 20/24; rules 10/10 decided, 14 deferred |
+| [Rules-first pipeline](FOCUSED_READER.md#declared-rules-first-pipeline-on-a-further-fresh-round) | Declared before fresh round 4: 23/24 (AI alone 20/24, rules 9/9 decided); one conflict false support; not promoted |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

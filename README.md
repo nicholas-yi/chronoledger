@@ -44,6 +44,11 @@ to 780/780 with zero false decisions; the exposed original format set is now 30/
 A separately written AI adversarial set scored 71/72 on its one shot; the miss was a
 real defect, fixed afterwards and disclosed. A decomposed advisory AI reviewer scored
 17/18 (6/6 on fresh probes), up from the retained 5/12, and is still not promoted.
+Further probing found real false supports from disputed/estimated/hypothetical sources and
+disguised text; shared integrity guards took a fresh 221-case challenge from 83/221 to
+221/221, and a second adversarial round scored 96/96 one-shot. On fresh review probes a
+declared rules-first pipeline scored 23/24 versus 20/24 for the AI reviewer alone; a new
+blind-extraction reviewer (17/24) was not adopted.
 37/37 named policy controls pass; review decisions are not
 counted as resolved facts. Raw HHEM remains 17/24, and human labels remain outstanding.
 The [retained comparisons and limitations](docs/FOCUSED_READER.md) include failed
