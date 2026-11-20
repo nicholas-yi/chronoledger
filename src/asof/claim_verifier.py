@@ -8,6 +8,7 @@ from dataclasses import asdict, dataclass
 from decimal import Decimal
 
 from asof.extraction import normalize
+from asof.financial_notation import notation_fact, year_quantities
 from asof.focused_reader import Case
 from asof.linked_reader import EvidenceBundle, EvidenceSpan, _amount
 from asof.reader_fields import (
@@ -127,6 +128,12 @@ def _compact_eps_fact(source: str, claim: Claim) -> EvidenceBundle | None:
     return candidates[0] if len(identities) == 1 else None
 
 
+def _same_currency_quantity(left: tuple[str, str], right: tuple[str, str]) -> bool:
+    first, second = _unit_fields(left[1]), _unit_fields(right[1])
+    return (first["measure"] == second["measure"] == "currency" and first["currency"] == second["currency"]
+            and _quantity_key(left[0], first["scale"]) == _quantity_key(right[0], second["scale"]))
+
+
 def resolve_fact(source: str, claim: Claim) -> EvidenceBundle | None:
     if not source or len(source) > 8192:
         return None
@@ -136,8 +143,19 @@ def resolve_fact(source: str, claim: Claim) -> EvidenceBundle | None:
     query = Case("claim-source", "evaluation", "claim", claim.issuer, claim.metric,
                  claim.year, source, None)
     parsed = guarded_parser(query)
+    if parsed.status == "context_rejected":
+        return None
+    revenue = normalize(claim.metric) in ("revenue", "revenues")
     if parsed.bundle is not None and not validate_source(query, parsed.bundle):
+        # A declared alias sentence stating a different same-year amount is an unresolved conflict.
+        alternatives = year_quantities(source, claim.issuer, claim.year) if revenue else []
+        if any(quantity is None or not _same_currency_quantity(
+                quantity, (parsed.bundle.value, parsed.bundle.unit)) for quantity in alternatives):
+            return None
         return parsed.bundle
+    notation = notation_fact(source, claim.issuer, claim.metric, claim.year) if revenue else None
+    if notation is not None and not source_admission_issues(source, notation.spans):
+        return notation
     return None
 
 

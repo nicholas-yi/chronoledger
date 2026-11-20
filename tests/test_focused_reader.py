@@ -321,3 +321,22 @@ def test_ai_review_is_a_separate_bounded_advisory_profile_with_no_human_replacem
             }
             assert input_fit(json.dumps(body, sort_keys=True).encode(), options)[2]
     runner.select_version("v1")
+
+
+def test_decomposed_ai_review_v2_profile_is_new_bounded_and_fits_context(runner):
+    from asof.reader_ai_review_v2 import messages, probes, schema
+    from asof.reader_real2_guards import input_fit
+
+    runner.select_version("ai-review-v2")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    assert runner.REPORT.name == "reader_ai_review_v2.json" and runner.PRIVATE.name == "reader_ai_review_v2_v1"
+    assert runner.load_cases(runner.FIXTURE) == tuple(probe.task.case for probe in probes())
+    assert plan["case_count"] == plan["max_calls"] == 18 and plan["call_seconds"] == 90
+    assert "results/reader_ai_review.json" in runner.FROZEN
+    assert all(runner.ROOT.joinpath(*path.split("/")).exists() for path in runner.FROZEN)
+    for probe in probes():
+        body = {"model": plan["model"], "stream": False, "think": False, "keep_alive": "20m",
+                "options": plan["options"], "messages": messages(probe.task), "format": schema(probe.task)}
+        assert input_fit(json.dumps(body, sort_keys=True).encode(), plan["options"])[2]
+    runner.select_version("v1")

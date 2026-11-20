@@ -65,13 +65,15 @@ def test_conflicts_wrong_periods_and_unestablished_corrections_never_become_sour
                         "FictionTest's corrected 2016 revenue was 4 USD million.")["verdict"] == "review"
 
 
-def test_declared_fresh_coverage_and_boundary_deferrals_are_separate_and_visible():
+def test_declared_fresh_coverage_and_formerly_deferred_boundaries_resolve_with_proofs():
     result = summarize_structured(fixture(), [])
     assert result["correct"] == result["resolved"] == 24, result["decisions"]
     assert not result["independent_gold"] and not result["model_increment_established"]
     boundary = summarize_structured(boundary_controls(), [])
-    assert boundary["requires_review"] == 4 and boundary["correct"] == 2
-    assert boundary["resolved"] == 2
+    assert boundary["requires_review"] == 0 and boundary["correct"] == boundary["resolved"] == 6
+    contracts = {row["source_fact"]["contract"] for row in boundary["decisions"].values()}
+    assert contracts == {"financial-notation-v1", "compact-eps-claim-v1"}
+    assert all(row["proof_valid"] for row in boundary["decisions"].values())
 
 
 @pytest.mark.parametrize("source", [
@@ -152,7 +154,7 @@ def test_assurance_reports_policy_success_separately_from_financial_coverage():
         if result["verdict"] != "review":
             assert result["proof_valid"] and result["source_fact"] is not None
     assert report["overall_30_case_coverage"] == {
-        "planned": 30, "correct_including_unresolved_as_misses": 26,
-        "resolved": 26, "requires_review": 4,
+        "planned": 30, "correct_including_unresolved_as_misses": 30,
+        "resolved": 30, "requires_review": 0,
     }
     assert report["no_model_calls"] and not report["independent_gold"]
