@@ -116,7 +116,9 @@ def notation_fact(source: str, issuer: str, metric: str, year: str) -> EvidenceB
     matches = list(_sentence_pattern(issuer).finditer(source))
     residual = source
     for match in reversed(matches):
-        residual = residual[:match.start("sentence")]+" "+residual[match.end("sentence"):]
+        # Only fully valid sibling sentences are exempt; a near-miss (e.g. GBP20M) keeps blocking the document.
+        if _quantity(source, match) is not None:
+            residual = residual[:match.start("sentence")]+" "+residual[match.end("sentence"):]
     if re.search(RESIDUAL_GUARD, residual, re.IGNORECASE):
         return None
     selected = [match for match in matches if match["year"] == year]

@@ -34,6 +34,14 @@ def test_other_years_are_allowed_but_unparsed_revenue_text_blocks():
         assert verify_claim(f"FictionQuill's turnover reached GBP26m during FY2016. {extra}", claim)["verdict"] == "review"
 
 
+def test_near_miss_sibling_sentences_block_instead_of_being_exempted():
+    # Post-hoc regression for separately authored case ADV-71 (recorded 71/72 before this fix).
+    claim = "FictionQuill's 2016 revenue was 26 GBP million."
+    for sibling in ("GBP24M", "gbp24m", "SEK24m", "GBP2,40m", "USD24MM"):
+        source = f"FictionQuill's turnover was {sibling} in 2015. FictionQuill's turnover reached GBP26m during FY2016."
+        assert verify_claim(source, claim)["verdict"] == "review", sibling
+
+
 def test_alias_conflict_with_standard_reader_is_review_not_first_parser_wins():
     claim = "FictionQuill's 2016 revenue was 26 GBP million."
     standard = "FictionQuill reported revenue of 26 GBP million for 2016."
@@ -51,3 +59,12 @@ def test_frozen_notation_challenge_and_metamorphic_grid_stay_exact():
         assert block["planned"] == block["correct"] == planned
         assert block["false_support"] == block["false_contradiction"] == 0
         assert block["resolved_without_valid_proof"] == 0
+
+
+def test_separately_authored_adversarial_cases_are_an_exposed_regression_after_the_adv71_fix():
+    import json
+    from pathlib import Path
+
+    rows = json.loads(Path(__file__).with_name("fixtures").joinpath("notation_adversarial.json").read_bytes())
+    wrong = [row["id"] for row in rows if verify_claim(row["source"], row["claim"])["verdict"] != row["expected_verdict"]]
+    assert len(rows) == 72 and wrong == []
