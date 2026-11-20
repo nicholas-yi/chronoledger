@@ -1,0 +1,82 @@
+{
+  "kind": "APPROVED CL-TS-A4 continuation: short gateway retries, ceiling 35,000, F7 identity",
+  "approval": "ask_user 2026-11-20 after the A3 pause-cap stop: gateway_policy=short_retry, ceiling=35000, f7_identity=true. Metadata only.",
+  "timing": "Frozen after A3 results were seen and before any A4 request. Acquisition and identity rules are post-A3 decisions; the A3 qualification rule is unchanged.",
+  "scope": {
+    "resources": 28574,
+    "HTTP_primary": 28550,
+    "F7_accessions": 148,
+    "F7_max_fallback_requests": 148,
+    "timestamp_resources": 28426,
+    "counter_start": 6054,
+    "ceiling": 35000,
+    "previous_ceiling": 34402,
+    "retry_margin_before_fallbacks": 396,
+    "order": "F7 headers first (pair-CIK path), then A3's frozen order of resources never recorded or resource_failed. No completed refetch."
+  },
+  "policy": {
+    "HTTP_502_or_504": "First occurrence on a URL: wait 60s and retry, not counted. A repeat on the same URL: counted 600s pause.",
+    "HTTP_503_or_429": "Counted 600s pause, then retry; gap becomes 1.0s.",
+    "counted_pause_cap": "12 across all A4 segments; the next one stops.",
+    "gateway_rate_stop": "Stop when the last 500 charged attempts hold more than 15 gateway errors (3%).",
+    "transport": "Unchanged from A3: 60s, one retry, then transport_unresolved unknown; three in a row stop.",
+    "pacing": "0.667s minimum gap; 1.0s after any counted pause. Wall 14h per segment.",
+    "unchanged_stops": "403, 500, 501, other 5xx, redirects, other transport errors, scope, budget, integrity, disk, sleep."
+  },
+  "F7_identity_rule": "For every universe CIK-disagreement accession: read the header (F7 fetch, pair-CIK path, falling back to the bulk-CIK path only on 404; or the A3 header). Qualified when the header lists both stored CIKs and exactly one of them, the pair CIK, is in the frozen price universe. Other classes are reported, not repaired.",
+  "report_rule": "Same A3 qualification rule and CB1 basis; additionally the A4 headers must not fail a CB1 replication when estimable (n>=30 in S1). Impact uses the declared timestamp_a3_impact functions on all qualified accessions.",
+  "budget_change": {
+    "before": {
+      "actual_HTTP_attempts": 6054,
+      "ceiling": 34402
+    },
+    "after": {
+      "actual_HTTP_attempts": 6054,
+      "ceiling": 35000
+    }
+  },
+  "User_Agent_SHA256": "63ef5180b7fe9476b95b0ae8f2bc02dd22ef34e6f7221c533a033de2c4267a52",
+  "input_SHA256": {
+    "data\\timestamp_full_a3\\frozen_order.jsonl": "b98bd9b0f1b11b522f2c5ab4b4f5efc2b7c70ca21690252f2714927ab8981289",
+    "data\\timestamp_full_a3\\qualified_per_accession.jsonl": "20b58ebc2eb20ffbe9147d05c1c55d1f86543632d9036ac04745ee03d4059323",
+    "data\\timestamp_full_a3\\pilot\\raw_hashes.jsonl": "6ce955a499d3e3d7da918ddbdd118807814ee20235c8aececd9c483b5f40dd5f",
+    "data\\timestamp_full_a3\\pilot\\receipt_hashes.jsonl": "5d350e9ecc90343ed1f97d63b2c0a085d5e03903cfe9118b6a82cea6dabbb43b",
+    "data\\timestamp_full_a3\\full1\\raw_hashes.jsonl": "44bb7e6d120bee05dec95cc28b5b748a3612515b684b090f04674ffc3b1936f5",
+    "data\\timestamp_full_a3\\full1\\receipt_hashes.jsonl": "144d81042cf5b0c72cd0188409a699b1f1f24cd40f2e7d66e0685cab3a801705",
+    "data\\timestamp_full_a3\\full2\\raw_hashes.jsonl": "28c059d6b45ed1d5524171ccae1c3dea885277c07a5f3da0e62498bbc28553b5",
+    "data\\timestamp_full_a3\\full2\\receipt_hashes.jsonl": "3131239d3359bd3bdab66962783977d2bd0cba46ea83498dd758722a7c54be4a",
+    "data\\timestamp_full_a3\\pilot\\resource_outcomes.jsonl": "b8a51a2b88ed4e4dc98b90325a8a95de121afca2a30cbd872b438fba2e29c022",
+    "data\\timestamp_full_a3\\pilot\\requests.jsonl": "aee0be18e79d7c969ea0541c5dbcc415cb9d04df178127da657385b18c9a9604",
+    "data\\timestamp_full_a3\\full1\\resource_outcomes.jsonl": "06df9558a9f70512126ace30cea58986221bf975ff9317775d556e1781913ebf",
+    "data\\timestamp_full_a3\\full1\\requests.jsonl": "0836a0d6dbe1e83975ab3669aa83023d3f2a6d945e63242772f2910c47b7d6da",
+    "data\\timestamp_full_a3\\full2\\resource_outcomes.jsonl": "f6c2cf08b1fa43e748ba646d971c8d0a733dc8e7621c9fe171f8fc1d56db0967",
+    "data\\timestamp_full_a3\\full2\\requests.jsonl": "8cfc11dc813720e56ee4a0ddfe4c5cced2ac4c855ba9d7594578c28828d27aba",
+    "data\\timestamp_full_a3\\full2\\waits_and_retries.jsonl": "7c34ffc65d02442f357f9ec67fcb57e0c509af24e34623ded17249942bebdce4",
+    "results\\timestamp_full_a3_config.json": "8c46e1d0fab0f3a0ecc36d6c10bb39f339f6091bb03d3407778c41a1d58c3d70",
+    "results\\timestamp_full_a3_amendment1.json": "7f565a3819f6555f1640076d415d0c51e69586fe69d9f28a60886a900c137df8",
+    "results\\timestamp_full_a3_report.json": "7cca8bb30e2b4649e99d8a15180baba5f0cfed9734cc6ebd3fe705ff6d187952",
+    "data\\h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017"
+  },
+  "source_SHA256": {
+    "scripts\\run_full_timestamps_a3.py": "f49fd2e140e411a035e05f7239cb0b2a04d91606620a9c7f5ebfbc47bd5da938",
+    "src\\asof\\filing_timestamp_a3.py": "0afeb34060d5f26d47853ac7dad5901bc31620950b7a8f2967d5d9def7760872",
+    "src\\asof\\filing_clock_basis.py": "769bc09bff0e2e18f3c45157b525857dedbb6d1445cb4f55a910049df461914c",
+    "src\\asof\\filing_timestamp_a2.py": "fc6cdfd9ed786949fbb2da2b8fd79d9764231aaf66f464c6563ad509e29c0990",
+    "src\\asof\\filing_timestamp_a1.py": "dc96b186a95a44971827bf486df08f0163fe92544e79d0abb0f3e2c084f5e7b3",
+    "src\\asof\\filing_timestamp_audit.py": "de09c7cc201d19a09f70c1b8fce657a449015fa2306f6dfd2dfa305434cbb67d",
+    "src\\asof\\filing_header_pilot.py": "fbbdba7135d98118c6b97c74210b4682708582c69ccc36f6cc8a403a72c09082",
+    "src\\asof\\sec_documentation.py": "afc77cc03cf14229fbc97f6a7e5c6572de6d4302c2c44be413fd0e2c13ab334d",
+    "src\\asof\\timeutil.py": "3a2ad44505de160edd158465224f0f723f51a25275d43cc10238d497e93ab93d",
+    "scripts\\run_full_timestamps.py": "29d9a06ff2fc7d23c689cb2a7f38e5cc9278afc17207801dd466d5cccb0d509d",
+    "scripts\\run_full_timestamps_a1.py": "1dee5fb5ba4042f0581a23c9062441e0ca9bb8805e0301c991e4f60143e56712",
+    "scripts\\run_full_timestamps_a2.py": "a5e81dfade91e3717c20124140ca6edb7951a2cd2c1b495eeca11d5e74fde479",
+    "tests\\test_filing_timestamp_a3.py": "22e4849d16de0c6129ab17b87f457c444def704dbd0d8e57b8b44af1dbbd9484",
+    "scripts\\run_full_timestamps_a4.py": "bad69fac115ced67989f6a974e1baeca9b010d5fc3534b3f1caa54f4674b8ca3",
+    "src\\asof\\filing_timestamp_a4.py": "72264f5162d2288a122e8c76512c3b0d74e0934c8075aa70165a008a8bad7feb",
+    "scripts\\timestamp_a3_impact.py": "7c9c696010daa7371479883815204cbf5625f1c723bef74b293cc7bdfac97943",
+    "tests\\test_filing_timestamp_a4.py": "82b41e05fae53b1e27cdd73a6ff926cafa228ccf252083f90726899613e6c95e"
+  },
+  "order_SHA256": {
+    "data\\timestamp_full_a4\\frozen_order.jsonl": "9be11808baaf32637bbd42d4db56790d7cefade800c5e0e838435e8bec5e0a4e"
+  }
+}
