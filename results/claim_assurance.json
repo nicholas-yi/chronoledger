@@ -1,0 +1,4348 @@
+{
+  "status": "complete_deterministic_source_claim_v2_assurance",
+  "contract": "source-claim-v2",
+  "policy_controls": {
+    "planned": 37,
+    "correct": 37,
+    "expected_review": 9,
+    "factual_verdicts_resolved": 28,
+    "review_policy_checks_are_not_resolved_financial_facts": true,
+    "records": [
+      {
+        "id": "ASSURE-01",
+        "category": "negation",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "8ffa04943bdfe45fa5de957ade0ae159fbede5e674fc3c02876ca55df5463da9",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-02",
+        "category": "negation",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "edcf3a7868411c95e1676aa995df28ab00d921c56459936f2c87ce505720007f",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-03",
+        "category": "forecast",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "04fc7f10b8d2279b5e2f4fafe0f9e75c0ad93b70642cea84517ec1b74e380208",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-04",
+        "category": "forecast",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "0fcbf17aa3542671cde9982b38045faf20d55a96933f3a8cf414b6588a4c0917",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-05",
+        "category": "forecast",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "dba8d325cb6cb90c9502187e9e1432be0b99ac2874911715fc204e19647ed3e6",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-06",
+        "category": "illustration",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "5ea4a4aa78d610272925a31e2073638ae1840d3a80a9c86626c57599085f9706",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-07",
+        "category": "annual_scope",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "64ed71fd0dcd9555915067a72fe5d506b33567fdbca51f7c1abf067b8d00b338",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-08",
+        "category": "forecast_scope",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "d191205048895bb3a19cb20c0ba2f055ffab1ef00fe9788728c7f826e6d567ff",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-09",
+        "category": "unrelated_customer_forecast",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "05bcfd96725855a3b4883734ce4800eaf403c8b76ee31f5f7242e77a6594882b",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "05bcfd96725855a3b4883734ce4800eaf403c8b76ee31f5f7242e77a6594882b",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-10",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "usd thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "3062d20351bdef2cc0bf42cf206ecd3e8271a43b48e95c02c8f1000faf45285a",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 50,
+                "end": 54
+              },
+              {
+                "role": "unit",
+                "start": 34,
+                "end": 45
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 33
+              }
+            ]
+          },
+          "mismatches": [
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "3062d20351bdef2cc0bf42cf206ecd3e8271a43b48e95c02c8f1000faf45285a",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-11",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "1",
+            "unit": "usd thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "3062d20351bdef2cc0bf42cf206ecd3e8271a43b48e95c02c8f1000faf45285a",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 50,
+                "end": 54
+              },
+              {
+                "role": "unit",
+                "start": 34,
+                "end": 45
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 33
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "3062d20351bdef2cc0bf42cf206ecd3e8271a43b48e95c02c8f1000faf45285a",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-12",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18000",
+            "unit": "usd thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "783e6c8fc6c672ba7718ac2c4130cd0d55c33137abd0adebf69f87c985edfd87",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "783e6c8fc6c672ba7718ac2c4130cd0d55c33137abd0adebf69f87c985edfd87",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-13",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18001",
+            "unit": "usd thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "783e6c8fc6c672ba7718ac2c4130cd0d55c33137abd0adebf69f87c985edfd87",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "783e6c8fc6c672ba7718ac2c4130cd0d55c33137abd0adebf69f87c985edfd87",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-14",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23000",
+            "unit": "usd thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "8fc2a2199f9fa4dc137ec736c4e07112ecde85f394520f76559d436e3e09657c",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "8fc2a2199f9fa4dc137ec736c4e07112ecde85f394520f76559d436e3e09657c",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-15",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-22999",
+            "unit": "usd thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "8fc2a2199f9fa4dc137ec736c4e07112ecde85f394520f76559d436e3e09657c",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "8fc2a2199f9fa4dc137ec736c4e07112ecde85f394520f76559d436e3e09657c",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-16",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789000",
+            "unit": "usd thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "a4e3553f61a41653d1e219f9158d8ac36b4d8ced0da8d76e91d23dd0738f5c43",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 88,
+                "end": 92
+              },
+              {
+                "role": "unit",
+                "start": 72,
+                "end": 83
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 71
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "a4e3553f61a41653d1e219f9158d8ac36b4d8ced0da8d76e91d23dd0738f5c43",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-17",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789001",
+            "unit": "usd thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "a4e3553f61a41653d1e219f9158d8ac36b4d8ced0da8d76e91d23dd0738f5c43",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789",
+            "unit": "usd million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 88,
+                "end": 92
+              },
+              {
+                "role": "unit",
+                "start": 72,
+                "end": 83
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 71
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "a4e3553f61a41653d1e219f9158d8ac36b4d8ced0da8d76e91d23dd0738f5c43",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-18",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "eur thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "563865b4d0864a075e3740f7fe6193c4472f643b9052aec9e71c203759859f6b",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "eur million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 50,
+                "end": 54
+              },
+              {
+                "role": "unit",
+                "start": 34,
+                "end": 45
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 33
+              }
+            ]
+          },
+          "mismatches": [
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "563865b4d0864a075e3740f7fe6193c4472f643b9052aec9e71c203759859f6b",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-19",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "1",
+            "unit": "eur thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "563865b4d0864a075e3740f7fe6193c4472f643b9052aec9e71c203759859f6b",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "eur million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 50,
+                "end": 54
+              },
+              {
+                "role": "unit",
+                "start": 34,
+                "end": 45
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 33
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "563865b4d0864a075e3740f7fe6193c4472f643b9052aec9e71c203759859f6b",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-20",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18000",
+            "unit": "eur thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "4364ac158caf97e306ddc9d3daa6e94678c0be4cd6e07217e606601f8beb1b42",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "eur million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4364ac158caf97e306ddc9d3daa6e94678c0be4cd6e07217e606601f8beb1b42",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-21",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18001",
+            "unit": "eur thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "4364ac158caf97e306ddc9d3daa6e94678c0be4cd6e07217e606601f8beb1b42",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "eur million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4364ac158caf97e306ddc9d3daa6e94678c0be4cd6e07217e606601f8beb1b42",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-22",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23000",
+            "unit": "eur thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "661349acd659c003562ee8e1b810fc442a35a1a4aae013ff22f849e8dc1def56",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23",
+            "unit": "eur million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "661349acd659c003562ee8e1b810fc442a35a1a4aae013ff22f849e8dc1def56",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-23",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-22999",
+            "unit": "eur thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "661349acd659c003562ee8e1b810fc442a35a1a4aae013ff22f849e8dc1def56",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23",
+            "unit": "eur million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "661349acd659c003562ee8e1b810fc442a35a1a4aae013ff22f849e8dc1def56",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-24",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789000",
+            "unit": "eur thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "e1ef3410493935451e0e74038f54efeef0413bbdfa1182056719c07451dbc153",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789",
+            "unit": "eur million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 88,
+                "end": 92
+              },
+              {
+                "role": "unit",
+                "start": 72,
+                "end": 83
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 71
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "e1ef3410493935451e0e74038f54efeef0413bbdfa1182056719c07451dbc153",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-25",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789001",
+            "unit": "eur thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "e1ef3410493935451e0e74038f54efeef0413bbdfa1182056719c07451dbc153",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789",
+            "unit": "eur million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 88,
+                "end": 92
+              },
+              {
+                "role": "unit",
+                "start": 72,
+                "end": 83
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 71
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "e1ef3410493935451e0e74038f54efeef0413bbdfa1182056719c07451dbc153",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-26",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "gbp thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "92994bdd7c09bcd36f0b1aef7a8319653a83313244edf6a924cfa3fc32a86eb2",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "gbp million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 50,
+                "end": 54
+              },
+              {
+                "role": "unit",
+                "start": 34,
+                "end": 45
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 33
+              }
+            ]
+          },
+          "mismatches": [
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "92994bdd7c09bcd36f0b1aef7a8319653a83313244edf6a924cfa3fc32a86eb2",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-27",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "1",
+            "unit": "gbp thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "92994bdd7c09bcd36f0b1aef7a8319653a83313244edf6a924cfa3fc32a86eb2",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "0",
+            "unit": "gbp million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 50,
+                "end": 54
+              },
+              {
+                "role": "unit",
+                "start": 34,
+                "end": 45
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 33
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "92994bdd7c09bcd36f0b1aef7a8319653a83313244edf6a924cfa3fc32a86eb2",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-28",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18000",
+            "unit": "gbp thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "d0d3ace304e6438dc759b0cce3995dc6e02c9dd3b8f9d558e85b393b7edbade8",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "gbp million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "d0d3ace304e6438dc759b0cce3995dc6e02c9dd3b8f9d558e85b393b7edbade8",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-29",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18001",
+            "unit": "gbp thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "d0d3ace304e6438dc759b0cce3995dc6e02c9dd3b8f9d558e85b393b7edbade8",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "gbp million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "d0d3ace304e6438dc759b0cce3995dc6e02c9dd3b8f9d558e85b393b7edbade8",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-30",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23000",
+            "unit": "gbp thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "4e6ad743fe839d24f7531d845f1cde50b2f030aee2498eeaf47175fb84d34f4a",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23",
+            "unit": "gbp million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4e6ad743fe839d24f7531d845f1cde50b2f030aee2498eeaf47175fb84d34f4a",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-31",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-22999",
+            "unit": "gbp thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "4e6ad743fe839d24f7531d845f1cde50b2f030aee2498eeaf47175fb84d34f4a",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "-23",
+            "unit": "gbp million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4e6ad743fe839d24f7531d845f1cde50b2f030aee2498eeaf47175fb84d34f4a",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-32",
+        "category": "exact_equivalence",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789000",
+            "unit": "gbp thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "904d697872003c9bd8c587edf93731dce61ae99098eac2ac2f2633726b732ff7",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789",
+            "unit": "gbp million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 88,
+                "end": 92
+              },
+              {
+                "role": "unit",
+                "start": 72,
+                "end": 83
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 71
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "904d697872003c9bd8c587edf93731dce61ae99098eac2ac2f2633726b732ff7",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": true,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-33",
+        "category": "nearby_inequality",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789001",
+            "unit": "gbp thousand",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "904d697872003c9bd8c587edf93731dce61ae99098eac2ac2f2633726b732ff7",
+            "issuer": "FictionTest",
+            "metric": "revenue",
+            "value": "123456789012345678901234567890123456789",
+            "unit": "gbp million",
+            "period": "2016",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 88,
+                "end": 92
+              },
+              {
+                "role": "unit",
+                "start": 72,
+                "end": 83
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 71
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "904d697872003c9bd8c587edf93731dce61ae99098eac2ac2f2633726b732ff7",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-34",
+        "category": "basic_diluted_eps",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "diluted earnings per share",
+            "value": "2.20",
+            "unit": "gbp per share",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "compact-eps-claim-v1",
+            "source_sha256": "4138649ab784b18c53cd111ae8a1de7767f9b2d29f511200bc8cf2065c8f6d04",
+            "issuer": "FictionTest",
+            "metric": "diluted earnings per share",
+            "value": "2.20",
+            "unit": "gbp per share",
+            "period": "2016",
+            "method": "explicit_basic_diluted_eps_notation",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "period",
+                "start": 19,
+                "end": 23
+              },
+              {
+                "role": "metric",
+                "start": 24,
+                "end": 36
+              },
+              {
+                "role": "measure_definition",
+                "start": 24,
+                "end": 36
+              },
+              {
+                "role": "unit",
+                "start": 37,
+                "end": 40
+              },
+              {
+                "role": "value",
+                "start": 40,
+                "end": 44
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4138649ab784b18c53cd111ae8a1de7767f9b2d29f511200bc8cf2065c8f6d04",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-35",
+        "category": "basic_diluted_eps",
+        "expected_verdict": "contradicted",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "diluted earnings per share",
+            "value": "2.50",
+            "unit": "gbp per share",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "compact-eps-claim-v1",
+            "source_sha256": "4138649ab784b18c53cd111ae8a1de7767f9b2d29f511200bc8cf2065c8f6d04",
+            "issuer": "FictionTest",
+            "metric": "diluted earnings per share",
+            "value": "2.20",
+            "unit": "gbp per share",
+            "period": "2016",
+            "method": "explicit_basic_diluted_eps_notation",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "period",
+                "start": 19,
+                "end": 23
+              },
+              {
+                "role": "metric",
+                "start": 24,
+                "end": 36
+              },
+              {
+                "role": "measure_definition",
+                "start": 24,
+                "end": 36
+              },
+              {
+                "role": "unit",
+                "start": 37,
+                "end": 40
+              },
+              {
+                "role": "value",
+                "start": 40,
+                "end": 44
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4138649ab784b18c53cd111ae8a1de7767f9b2d29f511200bc8cf2065c8f6d04",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-36",
+        "category": "basic_diluted_eps",
+        "expected_verdict": "supported",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "basic earnings per share",
+            "value": "2.50",
+            "unit": "eur per share",
+            "year": "2016",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "compact-eps-claim-v1",
+            "source_sha256": "4138649ab784b18c53cd111ae8a1de7767f9b2d29f511200bc8cf2065c8f6d04",
+            "issuer": "FictionTest",
+            "metric": "basic earnings per share",
+            "value": "2.50",
+            "unit": "eur per share",
+            "period": "2016",
+            "method": "explicit_basic_diluted_eps_notation",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "period",
+                "start": 19,
+                "end": 23
+              },
+              {
+                "role": "metric",
+                "start": 46,
+                "end": 56
+              },
+              {
+                "role": "measure_definition",
+                "start": 46,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 57,
+                "end": 60
+              },
+              {
+                "role": "value",
+                "start": 60,
+                "end": 64
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4138649ab784b18c53cd111ae8a1de7767f9b2d29f511200bc8cf2065c8f6d04",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      },
+      {
+        "id": "ASSURE-37",
+        "category": "basic_diluted_eps",
+        "expected_verdict": "review",
+        "decision": {
+          "contract": "source-claim-v2",
+          "verdict": "review",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": {
+            "issuer": "FictionTest",
+            "metric": "diluted earnings per share",
+            "value": "2.20",
+            "unit": "gbp per share",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": null,
+          "mismatches": [],
+          "proof_valid": false,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4138649ab784b18c53cd111ae8a1de7767f9b2d29f511200bc8cf2065c8f6d04",
+          "no_claim_is_not_a_supported_nondisclosure": true,
+          "representation_equivalent": false,
+          "claim_and_source_values_unchanged": true,
+          "no_FX_conversion": true
+        },
+        "policy_correct": true
+      }
+    ]
+  },
+  "current_supported_challenge": {
+    "planned": 24,
+    "resolved": 24,
+    "correct": 24,
+    "false_support": 0,
+    "false_rejection": 0,
+    "requires_review": 0,
+    "model_increment_established": false,
+    "model_weights_or_threshold_changed": false,
+    "decisions": {
+      "STRUCT-01-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionCamellia",
+          "metric": "revenue",
+          "value": "26",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+          "issuer": "FictionCamellia",
+          "metric": "revenue",
+          "value": "26",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 15
+            },
+            {
+              "role": "metric",
+              "start": 25,
+              "end": 32
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 39,
+              "end": 50
+            },
+            {
+              "role": "value",
+              "start": 36,
+              "end": 38
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-01-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionCamellia",
+          "metric": "revenue",
+          "value": "62",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+          "issuer": "FictionCamellia",
+          "metric": "revenue",
+          "value": "26",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 15
+            },
+            {
+              "role": "metric",
+              "start": 25,
+              "end": 32
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 39,
+              "end": 50
+            },
+            {
+              "role": "value",
+              "start": 36,
+              "end": 38
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-02-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionDogrose",
+          "metric": "revenue",
+          "value": "34.5",
+          "unit": "gbp thousand",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "43f24f4c58e44b66a23b6c3b2e903321d1871c7a7b261a684747bdda38c571b7",
+          "issuer": "FictionDogrose",
+          "metric": "revenue",
+          "value": "34.5",
+          "unit": "gbp thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 79,
+              "end": 86
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 61,
+              "end": 73
+            },
+            {
+              "role": "value",
+              "start": 94,
+              "end": 98
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "43f24f4c58e44b66a23b6c3b2e903321d1871c7a7b261a684747bdda38c571b7",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-02-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionDogrose",
+          "metric": "revenue",
+          "value": "82",
+          "unit": "usd million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "43f24f4c58e44b66a23b6c3b2e903321d1871c7a7b261a684747bdda38c571b7",
+          "issuer": "FictionDogrose",
+          "metric": "revenue",
+          "value": "34.5",
+          "unit": "gbp thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 79,
+              "end": 86
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 61,
+              "end": 73
+            },
+            {
+              "role": "value",
+              "start": 94,
+              "end": 98
+            }
+          ]
+        },
+        "mismatches": [
+          "value",
+          "currency",
+          "scale"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "43f24f4c58e44b66a23b6c3b2e903321d1871c7a7b261a684747bdda38c571b7",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-03-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionElder",
+          "metric": "revenue",
+          "value": "27",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+          "issuer": "FictionElder",
+          "metric": "revenue",
+          "value": "27",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 12
+            },
+            {
+              "role": "metric",
+              "start": 22,
+              "end": 29
+            },
+            {
+              "role": "period",
+              "start": 52,
+              "end": 56
+            },
+            {
+              "role": "unit",
+              "start": 36,
+              "end": 47
+            },
+            {
+              "role": "value",
+              "start": 33,
+              "end": 35
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-03-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionElder",
+          "metric": "revenue",
+          "value": "27",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+          "issuer": "FictionElder",
+          "metric": "revenue",
+          "value": "27",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 12
+            },
+            {
+              "role": "metric",
+              "start": 22,
+              "end": 29
+            },
+            {
+              "role": "period",
+              "start": 52,
+              "end": 56
+            },
+            {
+              "role": "unit",
+              "start": 36,
+              "end": 47
+            },
+            {
+              "role": "value",
+              "start": 33,
+              "end": 35
+            }
+          ]
+        },
+        "mismatches": [
+          "currency"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-04-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionFreesia",
+          "metric": "revenue",
+          "value": "38",
+          "unit": "eur thousand",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "893de6a55d6ed889775509d33c5d2e076808ee413772d11be39508c9de1ad09f",
+          "issuer": "FictionFreesia",
+          "metric": "revenue",
+          "value": "38",
+          "unit": "eur thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 68,
+              "end": 75
+            },
+            {
+              "role": "period",
+              "start": 59,
+              "end": 63
+            },
+            {
+              "role": "unit",
+              "start": 36,
+              "end": 48
+            },
+            {
+              "role": "value",
+              "start": 78,
+              "end": 80
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "893de6a55d6ed889775509d33c5d2e076808ee413772d11be39508c9de1ad09f",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-04-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionFreesia",
+          "metric": "revenue",
+          "value": "38",
+          "unit": "eur billion",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "893de6a55d6ed889775509d33c5d2e076808ee413772d11be39508c9de1ad09f",
+          "issuer": "FictionFreesia",
+          "metric": "revenue",
+          "value": "38",
+          "unit": "eur thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 68,
+              "end": 75
+            },
+            {
+              "role": "period",
+              "start": 59,
+              "end": 63
+            },
+            {
+              "role": "unit",
+              "start": 36,
+              "end": 48
+            },
+            {
+              "role": "value",
+              "start": 78,
+              "end": 80
+            }
+          ]
+        },
+        "mismatches": [
+          "scale"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "893de6a55d6ed889775509d33c5d2e076808ee413772d11be39508c9de1ad09f",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-05-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionGentian",
+          "metric": "operating income",
+          "value": "-23",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "23eb8c6993e7ba3a610c761f0bce2187c2e126cda43be38a17cc5f76c0f99641",
+          "issuer": "FictionGentian",
+          "metric": "operating income",
+          "value": "-23",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 40
+            },
+            {
+              "role": "period",
+              "start": 65,
+              "end": 69
+            },
+            {
+              "role": "sign_convention",
+              "start": 71,
+              "end": 100
+            },
+            {
+              "role": "unit",
+              "start": 49,
+              "end": 60
+            },
+            {
+              "role": "value",
+              "start": 44,
+              "end": 48
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "23eb8c6993e7ba3a610c761f0bce2187c2e126cda43be38a17cc5f76c0f99641",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-05-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionGentian",
+          "metric": "operating income",
+          "value": "23",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "23eb8c6993e7ba3a610c761f0bce2187c2e126cda43be38a17cc5f76c0f99641",
+          "issuer": "FictionGentian",
+          "metric": "operating income",
+          "value": "-23",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 40
+            },
+            {
+              "role": "period",
+              "start": 65,
+              "end": 69
+            },
+            {
+              "role": "sign_convention",
+              "start": 71,
+              "end": 100
+            },
+            {
+              "role": "unit",
+              "start": 49,
+              "end": 60
+            },
+            {
+              "role": "value",
+              "start": 44,
+              "end": 48
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "23eb8c6993e7ba3a610c761f0bce2187c2e126cda43be38a17cc5f76c0f99641",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-06-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionHeather",
+          "metric": "revenue",
+          "value": "46",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+          "issuer": "FictionHeather",
+          "metric": "revenue",
+          "value": "46",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 31
+            },
+            {
+              "role": "period",
+              "start": 54,
+              "end": 58
+            },
+            {
+              "role": "unit",
+              "start": 38,
+              "end": 49
+            },
+            {
+              "role": "value",
+              "start": 35,
+              "end": 37
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-06-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionHeather",
+          "metric": "revenue",
+          "value": "58",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+          "issuer": "FictionHeather",
+          "metric": "revenue",
+          "value": "46",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 31
+            },
+            {
+              "role": "period",
+              "start": 54,
+              "end": 58
+            },
+            {
+              "role": "unit",
+              "start": 38,
+              "end": 49
+            },
+            {
+              "role": "value",
+              "start": 35,
+              "end": 37
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-07-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionJonquil",
+          "metric": "gross margin",
+          "value": "17",
+          "unit": "%",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+          "issuer": "FictionJonquil",
+          "metric": "gross margin",
+          "value": "17",
+          "unit": "%",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 36
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 43,
+              "end": 50
+            },
+            {
+              "role": "value",
+              "start": 40,
+              "end": 42
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-07-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionJonquil",
+          "metric": "gross margin",
+          "value": "9",
+          "unit": "%",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+          "issuer": "FictionJonquil",
+          "metric": "gross margin",
+          "value": "17",
+          "unit": "%",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 36
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 43,
+              "end": 50
+            },
+            {
+              "role": "value",
+              "start": 40,
+              "end": 42
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-08-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionKalmia",
+          "metric": "consolidated revenue",
+          "value": "84",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "c10a01f6b6447abf347febf0de456cc27c6777d522a25cde52175236f7ce49f8",
+          "issuer": "FictionKalmia",
+          "metric": "consolidated revenue",
+          "value": "84",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "role": "metric",
+              "start": 23,
+              "end": 43
+            },
+            {
+              "role": "period",
+              "start": 66,
+              "end": 70
+            },
+            {
+              "role": "scope",
+              "start": 23,
+              "end": 43
+            },
+            {
+              "role": "unit",
+              "start": 50,
+              "end": 61
+            },
+            {
+              "role": "value",
+              "start": 47,
+              "end": 49
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "c10a01f6b6447abf347febf0de456cc27c6777d522a25cde52175236f7ce49f8",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-08-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionKalmia",
+          "metric": "consolidated revenue",
+          "value": "29",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "c10a01f6b6447abf347febf0de456cc27c6777d522a25cde52175236f7ce49f8",
+          "issuer": "FictionKalmia",
+          "metric": "consolidated revenue",
+          "value": "84",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "role": "metric",
+              "start": 23,
+              "end": 43
+            },
+            {
+              "role": "period",
+              "start": 66,
+              "end": 70
+            },
+            {
+              "role": "scope",
+              "start": 23,
+              "end": 43
+            },
+            {
+              "role": "unit",
+              "start": 50,
+              "end": 61
+            },
+            {
+              "role": "value",
+              "start": 47,
+              "end": 49
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "c10a01f6b6447abf347febf0de456cc27c6777d522a25cde52175236f7ce49f8",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-09-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionLotus",
+          "metric": "GAAP operating income",
+          "value": "21",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compound-claim-source-v1",
+          "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+          "issuer": "FictionLotus",
+          "metric": "GAAP operating income",
+          "value": "21",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "bounded_compound_disclosure",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 10,
+              "end": 22
+            },
+            {
+              "role": "period",
+              "start": 4,
+              "end": 8
+            },
+            {
+              "role": "metric",
+              "start": 32,
+              "end": 53
+            },
+            {
+              "role": "value",
+              "start": 57,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 60,
+              "end": 71
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-09-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionLotus",
+          "metric": "GAAP operating income",
+          "value": "32",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compound-claim-source-v1",
+          "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+          "issuer": "FictionLotus",
+          "metric": "GAAP operating income",
+          "value": "21",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "bounded_compound_disclosure",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 10,
+              "end": 22
+            },
+            {
+              "role": "period",
+              "start": 4,
+              "end": 8
+            },
+            {
+              "role": "metric",
+              "start": 32,
+              "end": 53
+            },
+            {
+              "role": "value",
+              "start": 57,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 60,
+              "end": 71
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-10-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionMagnolia",
+          "metric": "diluted earnings per share",
+          "value": "2.15",
+          "unit": "gbp per share",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compound-claim-source-v1",
+          "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+          "issuer": "FictionMagnolia",
+          "metric": "diluted earnings per share",
+          "value": "2.15",
+          "unit": "gbp per share",
+          "period": "2016",
+          "method": "bounded_compound_disclosure",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 15
+            },
+            {
+              "role": "period",
+              "start": 78,
+              "end": 82
+            },
+            {
+              "role": "metric",
+              "start": 25,
+              "end": 51
+            },
+            {
+              "role": "value",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 60,
+              "end": 73
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-10-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionMagnolia",
+          "metric": "diluted earnings per share",
+          "value": "2.45",
+          "unit": "gbp per share",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compound-claim-source-v1",
+          "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+          "issuer": "FictionMagnolia",
+          "metric": "diluted earnings per share",
+          "value": "2.15",
+          "unit": "gbp per share",
+          "period": "2016",
+          "method": "bounded_compound_disclosure",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 15
+            },
+            {
+              "role": "period",
+              "start": 78,
+              "end": 82
+            },
+            {
+              "role": "metric",
+              "start": 25,
+              "end": 51
+            },
+            {
+              "role": "value",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 60,
+              "end": 73
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-11-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionNarcissus",
+          "metric": "revenue",
+          "value": "48",
+          "unit": "gbp thousand",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "0f261d97f63f726beca21527ce216ffdd473c92d16d71ba97569623d97bfac22",
+          "issuer": "FictionNarcissus",
+          "metric": "revenue",
+          "value": "48",
+          "unit": "gbp thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 25
+            },
+            {
+              "role": "footnote_reference",
+              "start": 78,
+              "end": 81
+            },
+            {
+              "role": "metric",
+              "start": 70,
+              "end": 81
+            },
+            {
+              "role": "period",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "role": "unit",
+              "start": 120,
+              "end": 132
+            },
+            {
+              "role": "unit_applicability",
+              "start": 89,
+              "end": 133
+            },
+            {
+              "role": "value",
+              "start": 84,
+              "end": 86
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "0f261d97f63f726beca21527ce216ffdd473c92d16d71ba97569623d97bfac22",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-11-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionNarcissus",
+          "metric": "revenue",
+          "value": "48",
+          "unit": "usd million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "0f261d97f63f726beca21527ce216ffdd473c92d16d71ba97569623d97bfac22",
+          "issuer": "FictionNarcissus",
+          "metric": "revenue",
+          "value": "48",
+          "unit": "gbp thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 25
+            },
+            {
+              "role": "footnote_reference",
+              "start": 78,
+              "end": 81
+            },
+            {
+              "role": "metric",
+              "start": 70,
+              "end": 81
+            },
+            {
+              "role": "period",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "role": "unit",
+              "start": 120,
+              "end": 132
+            },
+            {
+              "role": "unit_applicability",
+              "start": 89,
+              "end": 133
+            },
+            {
+              "role": "value",
+              "start": 84,
+              "end": 86
+            }
+          ]
+        },
+        "mismatches": [
+          "currency",
+          "scale"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "0f261d97f63f726beca21527ce216ffdd473c92d16d71ba97569623d97bfac22",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-12-0": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionOleander",
+          "metric": "revenue",
+          "value": "57",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": true
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "8813c2722d8f5cbd80c4fc7ae5f8c2d68e64c927d2a4c53871555fc40235cfac",
+          "issuer": "FictionOleander",
+          "metric": "revenue",
+          "value": "57",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "correction",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 83,
+              "end": 98
+            },
+            {
+              "role": "metric",
+              "start": 108,
+              "end": 115
+            },
+            {
+              "role": "period",
+              "start": 138,
+              "end": 142
+            },
+            {
+              "role": "status",
+              "start": 71,
+              "end": 82
+            },
+            {
+              "role": "unit",
+              "start": 122,
+              "end": 133
+            },
+            {
+              "role": "value",
+              "start": 119,
+              "end": 121
+            },
+            {
+              "role": "supersession",
+              "start": 160,
+              "end": 183
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "8813c2722d8f5cbd80c4fc7ae5f8c2d68e64c927d2a4c53871555fc40235cfac",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "STRUCT-12-1": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionOleander",
+          "metric": "revenue",
+          "value": "52",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": true
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "8813c2722d8f5cbd80c4fc7ae5f8c2d68e64c927d2a4c53871555fc40235cfac",
+          "issuer": "FictionOleander",
+          "metric": "revenue",
+          "value": "57",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "correction",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 83,
+              "end": 98
+            },
+            {
+              "role": "metric",
+              "start": 108,
+              "end": 115
+            },
+            {
+              "role": "period",
+              "start": 138,
+              "end": 142
+            },
+            {
+              "role": "status",
+              "start": 71,
+              "end": 82
+            },
+            {
+              "role": "unit",
+              "start": 122,
+              "end": 133
+            },
+            {
+              "role": "value",
+              "start": 119,
+              "end": 121
+            },
+            {
+              "role": "supersession",
+              "start": 160,
+              "end": 183
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "8813c2722d8f5cbd80c4fc7ae5f8c2d68e64c927d2a4c53871555fc40235cfac",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      }
+    },
+    "raw_model_records": 0,
+    "independent_gold": false,
+    "scope": "A new source-rule verifier, not repaired raw HHEM predictions or a general financial judge."
+  },
+  "prior_format_boundaries": {
+    "planned": 6,
+    "resolved": 2,
+    "correct": 2,
+    "false_support": 0,
+    "false_rejection": 0,
+    "requires_review": 4,
+    "model_increment_established": false,
+    "model_weights_or_threshold_changed": false,
+    "decisions": {
+      "BOUNDARY-01": {
+        "contract": "source-claim-v2",
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionPeony",
+          "metric": "revenue",
+          "value": "26",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "6e6b5613af785670b06266dbb86585c995b368575bb4d6b640dad4ec3f7c06db",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "BOUNDARY-02": {
+        "contract": "source-claim-v2",
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionPeony",
+          "metric": "revenue",
+          "value": "62",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "6e6b5613af785670b06266dbb86585c995b368575bb4d6b640dad4ec3f7c06db",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "BOUNDARY-03": {
+        "contract": "source-claim-v2",
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionRue",
+          "metric": "revenue",
+          "value": "20",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "31b4fcfa19cbb455ee42f9aa9354799989ee979047dca7549d64d25609a26362",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "BOUNDARY-04": {
+        "contract": "source-claim-v2",
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionRue",
+          "metric": "revenue",
+          "value": "30",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "31b4fcfa19cbb455ee42f9aa9354799989ee979047dca7549d64d25609a26362",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "BOUNDARY-05": {
+        "contract": "source-claim-v2",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionSorrel",
+          "metric": "diluted earnings per share",
+          "value": "2.20",
+          "unit": "gbp per share",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compact-eps-claim-v1",
+          "source_sha256": "1f01947ad74be594ad8dcc99abc3cea1956760957ceedec56206970bd5ecdf3e",
+          "issuer": "FictionSorrel",
+          "metric": "diluted earnings per share",
+          "value": "2.20",
+          "unit": "gbp per share",
+          "period": "2016",
+          "method": "explicit_basic_diluted_eps_notation",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "role": "period",
+              "start": 21,
+              "end": 25
+            },
+            {
+              "role": "metric",
+              "start": 26,
+              "end": 38
+            },
+            {
+              "role": "measure_definition",
+              "start": 26,
+              "end": 38
+            },
+            {
+              "role": "unit",
+              "start": 39,
+              "end": 42
+            },
+            {
+              "role": "value",
+              "start": 42,
+              "end": 46
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "1f01947ad74be594ad8dcc99abc3cea1956760957ceedec56206970bd5ecdf3e",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      },
+      "BOUNDARY-06": {
+        "contract": "source-claim-v2",
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionSorrel",
+          "metric": "diluted earnings per share",
+          "value": "2.50",
+          "unit": "gbp per share",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compact-eps-claim-v1",
+          "source_sha256": "1f01947ad74be594ad8dcc99abc3cea1956760957ceedec56206970bd5ecdf3e",
+          "issuer": "FictionSorrel",
+          "metric": "diluted earnings per share",
+          "value": "2.20",
+          "unit": "gbp per share",
+          "period": "2016",
+          "method": "explicit_basic_diluted_eps_notation",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "role": "period",
+              "start": 21,
+              "end": 25
+            },
+            {
+              "role": "metric",
+              "start": 26,
+              "end": 38
+            },
+            {
+              "role": "measure_definition",
+              "start": 26,
+              "end": 38
+            },
+            {
+              "role": "unit",
+              "start": 39,
+              "end": 42
+            },
+            {
+              "role": "value",
+              "start": 42,
+              "end": 46
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "1f01947ad74be594ad8dcc99abc3cea1956760957ceedec56206970bd5ecdf3e",
+        "no_claim_is_not_a_supported_nondisclosure": true,
+        "representation_equivalent": false,
+        "claim_and_source_values_unchanged": true,
+        "no_FX_conversion": true
+      }
+    },
+    "raw_model_records": 0,
+    "independent_gold": false,
+    "scope": "A new source-rule verifier, not repaired raw HHEM predictions or a general financial judge."
+  },
+  "overall_30_case_coverage": {
+    "planned": 30,
+    "correct_including_unresolved_as_misses": 26,
+    "resolved": 26,
+    "requires_review": 4
+  },
+  "no_model_calls": true,
+  "historical_results_rewritten": false,
+  "independent_gold": false,
+  "promote": false,
+  "limitations": [
+    "Finite explicit source-admission rules are not general natural-language entailment.",
+    "Mixed illustrative/actual documents may be conservatively deferred.",
+    "Turnover/top-line aliases and spelled-out amounts are not silently equated to revenue.",
+    "Human-labelled independent real-source accuracy remains unavailable."
+  ],
+  "current_reader_regressions": {
+    "status": "complete_exposed_current_candidate_regression",
+    "cohorts": {
+      "focused_original12": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 12,
+        "correct": 12,
+        "answerable": 7,
+        "complete_answers": 7,
+        "correct_refusals": 5,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 7,
+          "valid": 7
+        },
+        "field_checks": null
+      },
+      "grammar_robustness24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 19,
+        "complete_answers": 19,
+        "correct_refusals": 5,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 19,
+          "valid": 19
+        },
+        "field_checks": null
+      },
+      "harder_model_subset24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 22,
+        "complete_answers": 22,
+        "correct_refusals": 2,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 22,
+          "valid": 22
+        },
+        "field_checks": null
+      },
+      "harder_all288": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 288,
+        "correct": 288,
+        "answerable": 264,
+        "complete_answers": 264,
+        "correct_refusals": 24,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 264,
+          "valid": 264
+        },
+        "field_checks": null
+      },
+      "linked_challenge24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": null
+      },
+      "reader_fields": {
+        "contract": "field-record-v1",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": {
+          "value": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "sign": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "currency": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scale": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "measure": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "reporting_year": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "issuer_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "metric_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scope": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "accounting_basis": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "period_kind": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "revision_status": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "source_evidence": {
+            "correct": 12,
+            "planned_answerable": 12
+          }
+        }
+      },
+      "reader_reliability": {
+        "contract": "field-record-v1",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": {
+          "value": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "sign": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "currency": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scale": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "measure": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "reporting_year": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "issuer_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "metric_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scope": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "accounting_basis": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "period_kind": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "revision_status": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "source_evidence": {
+            "correct": 12,
+            "planned_answerable": 12
+          }
+        }
+      },
+      "context_coverage192": {
+        "contract": "field-record-v1",
+        "planned": 192,
+        "correct": 192,
+        "answerable": 96,
+        "complete_answers": 96,
+        "correct_refusals": 96,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 96,
+          "valid": 96
+        },
+        "field_checks": {
+          "value": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "sign": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "currency": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "scale": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "measure": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "reporting_year": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "issuer_binding": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "metric_binding": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "scope": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "accounting_basis": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "period_kind": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "revision_status": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "source_evidence": {
+            "correct": 96,
+            "planned_answerable": 96
+          }
+        }
+      },
+      "cell_sources12": {
+        "contract": "field-record-v1",
+        "planned": 12,
+        "correct": 12,
+        "answerable": 6,
+        "complete_answers": 6,
+        "correct_refusals": 6,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 6,
+          "valid": 6
+        },
+        "field_checks": {
+          "value": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "sign": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "currency": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "scale": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "measure": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "reporting_year": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "issuer_binding": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "metric_binding": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "scope": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "accounting_basis": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "period_kind": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "revision_status": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "source_evidence": {
+            "correct": 6,
+            "planned_answerable": 6
+          }
+        }
+      }
+    },
+    "fixture_sha256": {
+      "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+      "tests/fixtures/verified_reader.json": "f36b65c0aa87258a2c1587014b04f064b85539ea45861e525bcf0b658e8524f6",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "tests/fixtures/linked_challenge.json": "ac34ab5c2e03ffdeae878e8ef83eb9808e2e78bafd5f4b1890200f24bace9810",
+      "tests/fixtures/reader_fields.json": "ec1c72985dd288c442b7718716409b6e55a2dcc7b24f9634a9fd0346141c20ac",
+      "tests/fixtures/reader_reliability.json": "3663885962ec7930fec547068841f1231c811efc242bf37c4f7e53b3eb96efbd"
+    },
+    "posthoc_after_source_and_outcome_exposure": true,
+    "historical_results_rewritten": false,
+    "new_model_calls": 0,
+    "independent_gold": false,
+    "promote": false,
+    "overlap": "Harder model subset overlaps all288; coverage/cell sources are reused elsewhere. Do not pool as independent observations.",
+    "contract_warning": "Old cohorts use a new source-proof diagnostic, not their original single-quote scorer. Field-labelled cohorts retain field-record-v1.",
+    "requirements": {
+      "target": "Every declared supported regression case correct; never loosen proof/tuple checks to reach target.",
+      "unknown_context_is_not_discovered_fact": true,
+      "real_world_accuracy_established": false
+    }
+  },
+  "lineage": {
+    "freeze_commit": "61ee7e7fe7046429edc8021761750f55ab3767c4",
+    "source_SHA256": {
+      "src/asof/claim_assurance.py": "5fbf7ca59b8c534a3b06fd8d3dd7f87f397b71f7cfd99bbd19dc7b46dececd22",
+      "src/asof/claim_verifier.py": "730d0008a170a22dca1316be28126271d47fd18769704ccf44d6593ae2368efc",
+      "src/asof/claim_challenge.py": "a3d27d50e1aa82b486866af48beac2b8841e63c0d22cc5a0e29811dc3d432937",
+      "src/asof/reader_fields.py": "bde1ca7a373e8e806c5f429a3fca5bc90d7a841e6eadb44ee7fbb10f6051f5ac",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "src/asof/reader_regression.py": "a2e12a7220da4bfd6c7e89c5b4f26bd138ee3385c5baeb0db9c7289a3485d277",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/reader_cells.py": "1e3babc16511bcb96238fa7cbdc69104532c44703b3492a548500e7aab2beb05",
+      "src/asof/reader_field_challenge.py": "384c512732ebff3584720039e89dcffd07f7af90622f964021b41713b1b1418f",
+      "src/asof/reader_stress.py": "a7515ea2ac09bdb40cf224b30a0d9aa274493bd6f1a2df29f9b14a34da673cba",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "scripts/validate_claim_assurance.py": "f9ceeb471d2cecc4fbaa0a1e31ffe8721fe390aa10600bd634877c66078a7cb6",
+      "tests/test_claim_verifier.py": "0f0432a754f533c3202f3d70323bce3eed95081cfa6234bc0dad62f02a64f8be",
+      "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+      "tests/fixtures/verified_reader.json": "f36b65c0aa87258a2c1587014b04f064b85539ea45861e525bcf0b658e8524f6",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "tests/fixtures/linked_challenge.json": "ac34ab5c2e03ffdeae878e8ef83eb9808e2e78bafd5f4b1890200f24bace9810",
+      "tests/fixtures/reader_fields.json": "ec1c72985dd288c442b7718716409b6e55a2dcc7b24f9634a9fd0346141c20ac",
+      "tests/fixtures/reader_reliability.json": "3663885962ec7930fec547068841f1231c811efc242bf37c4f7e53b3eb96efbd",
+      "results/hhem_structured.json": "78b075667c8319e73575af926568b85d42be7d44b33a18506366cdffafa38bbb",
+      "results/hhem_benchmark.json": "629b7db88a2ae9be845c2cf2c39a4236462e77b938a16e1390b9e7c18c9ae4a8",
+      "results/reader_ai_review.json": "e45b2669984776079a497bb186ec4de58634ff24b138fe0545e8ea82fdffc78b",
+      "docs/FOCUSED_READER.md": "e17e1bcf4c557e291f29548067daa3102ec164a2d95e980496c226eb6251ab34"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "controls_sha256": "e8c8de761de953a7a090225bda775f796695212fd0f5c1de5a52f207449144bc",
+  "wall_seconds": 2.109999999869615,
+  "process_peak_RSS_bytes": 37056512,
+  "source_unchanged": true,
+  "resource_check_passed": true,
+  "checks_passed": true
+}

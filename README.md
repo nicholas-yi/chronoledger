@@ -35,11 +35,12 @@ The current source candidate passes every declared exposed regression cohort,
 including the formerly missed grammar cases (now 24/24), full harder-format fixture
 (288/288) and context coverage (192/192). Older cohorts use an explicitly new
 source-proof diagnostic; historical scores remain unchanged.
-A new source-rule verifier scored 24/24 on the same invented claims where raw HHEM
-scored 17/24 with seven false approvals. Six additional unfamiliar-format controls
-were unresolved: overall coverage is 24/30, not universal perfection.
-The gain comes from source proofs, not improved model weights. These authored
-regressions are not independently reviewed real-world accuracy; human labels remain outstanding.
+The source-rule verifier retains 24/24 on its authored claim set. Broader assurance
+fixed false admissions of negated/forecast/illustrative statements, exact-quantity
+and long-number errors, and added compact EPS support. Overall format coverage is
+now 26/30, with four ambiguous-alias cases still under review.
+37/37 named policy controls and 769 software tests pass; review decisions are not
+counted as resolved facts. Raw HHEM remains 17/24, and human labels remain outstanding.
 The [retained comparisons and limitations](docs/FOCUSED_READER.md) include failed
 judge trials, format-shift failures and posthoc development replays. The judge
 remains nondefault, the broader toolkit stays parked, and independent real-source

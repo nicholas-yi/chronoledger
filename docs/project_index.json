@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "source-claim-assurance", "path": "scripts/validate_claim_assurance.py", "status": "approved_once_pending_nonmodel_assurance", "command": null},
+    {"id": "source-claim-assurance", "path": "scripts/validate_claim_assurance.py", "status": "historical_complete_policy37of37_supported24of24_coverage26of30", "command": null},
     {"id": "source-structured-verifier", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_source24of24_raw17of24_boundaries6unresolved", "command": null},
     {"id": "reader-current-regressions", "path": "scripts/check_reader_regressions.py", "status": "active_invented_regressions_not_independent_gold", "command": "python scripts/check_reader_regressions.py"},
     {"id": "hhem-advisory", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_17of24_seven_false_support_not_promoted", "command": null},
@@ -47,6 +47,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "source-claim-v2-assurance",
+      "kind": "deterministic_admission_quantity_and_EPS_assurance_not_model_or_human_gold",
+      "path": "results/claim_assurance.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "61ee7e7fe7046429edc8021761750f55ab3767c4",
+      "status": "policy37of37_9review_supported24of24_overall26of30_4unresolved",
+      "supersedes": []
+    },
     {
       "id": "source-structured-claims",
       "kind": "authored_source_rule_vs_raw_entailment_with_boundary_controls",

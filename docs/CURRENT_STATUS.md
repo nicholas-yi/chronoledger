@@ -10,16 +10,16 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: the [source-rule claim verifier](FOCUSED_READER.md#observed-source-rule-comparison-2424-resolved-claims-six-visible-deferrals)
-scored **24/24 on the same new claims where raw HHEM scored 17/24**, eliminating
-seven false approvals within its declared grammar. This is a separate rule-based
-component, not improved model weights; its source-only control is identical.
-Six extra unfamiliar-format controls stayed unresolved: **24/30 overall resolved
-coverage (80%)**, not universal perfection. The current reader's nine exposed
-regression cohorts still pass, and historical scores are unchanged.
-The earlier 5/12 AI reviewer remains nondefault and human gold remains zero.
-Validation: **756 full-suite tests passed**, Ruff/docs pass; measured new run
-51.875 s / 0.680 GiB / one CPU. Independent real-source review is still required.
+Latest: [broader source-claim-v2 assurance](FOCUSED_READER.md#observed-broader-assurance-real-decision-defects-fixed-coverage-rises-to2630)
+fixed actual negated/forecast/illustrative false admissions, ignored source-wide
+qualifications, exact-denomination semantics and long-negative-number precision.
+Compact EPS support raises original-format coverage to **26/30 (86.7%)**, with
+four ambiguous metric/wording cases unresolved. The supported claim set remains
+**24/24**, and all nine current reader regression cohorts still pass.
+**37/37 policy controls** pass (nine expect review, not resolved facts), alongside
+40 passing arithmetic-property examples and **769 full-suite software tests**.
+Raw HHEM17/24 and the earlier AI judge5/12 remain unchanged/non-promoted.
+Human independent labels remain zero; real-source accuracy is not established.
 
 | Retained comparison | Scoped outcome |
 |---|---|
@@ -34,6 +34,7 @@ Validation: **756 full-suite tests passed**, Ruff/docs pass; measured new run
 | [AI reviewer + compact cells](FOCUSED_READER.md#observed-ai-reviewer-and-cell-run-cells-pass-judge-does-not-earn-trust) | Cells 12/12; AI verdicts 5/12, not promoted; full 724 tests pass |
 | [Current source regressions + HHEM](FOCUSED_READER.md#observed-consolidation-current-regressions-pass-hhem-is-not-an-approval-gate) | All 9 current cohorts pass; HHEM 17/24 with seven false approvals, not promoted |
 | [Source-rule claims](FOCUSED_READER.md#observed-source-rule-comparison-2424-resolved-claims-six-visible-deferrals) | Same-input raw 17/24 vs source 24/24; six boundaries deferred, overall 24/30 coverage |
+| [Broader claim assurance](FOCUSED_READER.md#observed-broader-assurance-real-decision-defects-fixed-coverage-rises-to2630) | 37/37 policy controls; supported24/24; coverage26/30 with4review;769tests pass |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

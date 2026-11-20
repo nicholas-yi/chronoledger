@@ -2131,3 +2131,60 @@ The named development controls were37/37policy-correct, including nine expected
 review decisions and28resolvedfinancialverdicts. The existing24claimset passed;
 the original30-case total now has26resolved/correct and4unresolved. These
 development-exposed checks are not independent financial accuracy evidence.
+
+## Observed broader assurance: real decision defects fixed, coverage rises to26/30
+
+The [source-claim-v2 assurance receipt](../results/claim_assurance.json) is frozen
+at `61ee7e7fe7046429edc8021761750f55ab3767c4`. It completed in **2.110s** with
+peak process working set **35.34MiB**, no model calls and no source/data downloads.
+This is deterministic software assurance, not another model benchmark.
+
+### Actual behavior changes verified
+
+| Before-edit defect/limitation | New behavior |
+|---|---|
+| Negated `never actually reported` statement accepted as an actual fact | Review, not supported |
+| Forecast accepted as actual reported revenue | Review, not supported |
+| Explicit illustrative/nonactual example accepted | Review, not supported |
+| Following-line quarterly/forecast qualification ignored | Review, not an annual actual |
+| Same-currency equivalent denomination called contradictory | Exact quantity equivalence recognized, original values retained |
+| Long negative amount rounded by the ambient Decimal context | Exact sign/amount preserved |
+| Explicit compact basic/diluted EPS notation unresolved | Source-offset-bound EPS proof, with class/currency/year kept distinct |
+
+These are producer/semantic fixes to observed behavior, not a threshold change,
+relabelling of previous model responses or acceptance of unsupported aliases.
+Source-reader regression results stayed passing across all nine exposed cohorts.
+
+### Separate correctness axes, with no hidden denominator
+
+- **Existing supported claim challenge:24/24** source decisions correct.
+- **Named policy controls:37/37** expected decisions correct. Nine explicitly
+  expect review; only28are resolved financial verdicts. Do not call these37extractedfacts.
+- **Exact-arithmetic property test:40passing /0failing /0invalid** examples,
+  exercising equivalence and adjacent inequalities under deliberately low
+  Decimal precision. These are mechanical variants, not independent human gold.
+- **Original format boundary set:** two compact-EPS cases are now resolved correctly;
+  four turnover/top-line/spelled-number cases remain unresolved.
+- **Full original30-case denominator:26correct/resolved,4review (86.7%coverage)**,
+  improved from24/30(80%). No unresolved case is counted as a correct financial verdict.
+
+All28serialized financial proofs in the policy-control records were reconstructed
+and revalidated against original source text; current results were recomputed after
+JSON serialization. The old HHEM17/24, rule-v1 24/24with6deferrals and generative
+judge5/12receipts remain untouched and pinned. No raw model accuracy improvement
+is claimed, and no model was rerun to obtain a better-looking percentage.
+
+The full suite passed **769 tests** in198.98s, with two existing rank-deficiency
+warnings. Changed-file Ruff and documentation/index checks passed.
+No new package, paid API, real-source/private-review read, financial study,
+production ledger row, human-review fabrication, source-scope release, application
+promotion or push occurred. Ledger file-size metadata remained106,246bytes;
+its contents were not opened.
+
+**Remaining limits:** finite admission patterns do not understand every negation,
+disclaimer or forecast paraphrase; conservative source-wide holds can reduce
+coverage in mixed documents; ambiguous metric aliases remain unresolved; no
+independently labelled real-source accuracy or universal correctness is established.
+The [human review runbook](#human-actions-still-required-source-review-runbook) remains
+necessary. Correctness requires preserving those uncertainties, not forcing every
+item into a confident binary verdict.
