@@ -37,7 +37,9 @@ def test_packaged_job_pins_and_terminates_only_the_owned_gated_child():
         mask = job.attach(process.pid)
         assert mask.bit_count() == 1
         assert job.pin(process.pid, mask) == mask
-        assert ready.wait(timeout=10) and process.is_alive()
+        # A spawned, single-CPU-pinned interpreter can need well over 10s to start on a loaded host;
+        # the wait returns as soon as the child signals, so a generous bound only removes flakiness.
+        assert ready.wait(timeout=60) and process.is_alive()
         snapshot = job.sample()
         assert snapshot["RSS_bytes"] > 0
         assert {row["pid"] for row in snapshot["processes"]} == {process.pid}

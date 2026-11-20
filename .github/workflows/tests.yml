@@ -13,8 +13,12 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v10.3.3
+        with:
+          cache-dependency-glob: |
+            requirements-dev.lock
+            pyproject.toml
       - run: uv venv --python 3.12
       - name: Install pinned development and figures dependencies
         run: uv pip install --require-hashes -r requirements-dev.lock
