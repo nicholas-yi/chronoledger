@@ -1,0 +1,378 @@
+{
+  "status": "complete_offline_rules_on_fresh_probes",
+  "rules": {
+    "planned": 24,
+    "correct_verdicts": 10,
+    "false_support": 0,
+    "false_rejection": 0,
+    "uncertain_or_invalid": 14,
+    "resolved": 10,
+    "resolved_correct": 10
+  },
+  "posthoc_exposed_compositions": {
+    "posthoc_rules_then_reader_ai_review_v3": {
+      "planned": 24,
+      "correct_verdicts": 18,
+      "false_support": 1,
+      "false_rejection": 3,
+      "uncertain_or_invalid": 2,
+      "resolved": 22,
+      "resolved_correct": 18
+    },
+    "posthoc_rules_then_reader_ai_review_v3_control": {
+      "planned": 24,
+      "correct_verdicts": 22,
+      "false_support": 2,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 24,
+      "resolved_correct": 22
+    }
+  },
+  "rows": [
+    {
+      "id": "RV3-01",
+      "category": "table_header_exact",
+      "expected": "supported",
+      "rules": "supported",
+      "rule_detail": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": "FictionAlder Systems's 2018 revenue was 39.5 EUR thousand.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-02",
+      "category": "table_header_wrong_scale",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionBirch Holdings's 2019 operating income was 71250 GBP million.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-03",
+      "category": "table_header_wrong_currency",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionCedar Labs's 2020 net income was 29.8 CHF million.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-04",
+      "category": "table_unit_line_exact",
+      "expected": "supported",
+      "rules": "supported",
+      "rule_detail": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": "FictionDelta Works's 2016 operating income was 104.7 GBP million.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-05",
+      "category": "table_unit_line_wrong_scale",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionEmber Retail's 2021 revenue was 455.3 JPY million.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-06",
+      "category": "table_unit_line_wrong_currency",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionFjord Shipping's 2017 net income was 412 USD million.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-07",
+      "category": "table_diluted_vs_basic",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionGarnet Foods's 2019 diluted earnings per share was 2.63 CAD per share.",
+        "proof_valid": false
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-08",
+      "category": "table_negative_parentheses",
+      "expected": "supported",
+      "rules": "supported",
+      "rule_detail": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": "FictionHarbor Energy's 2020 net income was -12.4 EUR million.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-09",
+      "category": "table_exact_rescaling",
+      "expected": "supported",
+      "rules": "supported",
+      "rule_detail": {
+        "verdict": "supported",
+        "reason": "exact_same_currency_quantity_equivalence",
+        "claim": "FictionIris Analytics's 2018 revenue was 39.5 EUR million.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-10",
+      "category": "table_other_year_value",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionJuniper Media's 2019 operating income was 61.7 AUD million.",
+        "proof_valid": true
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-11",
+      "category": "table_year_absent_abstain",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-12",
+      "category": "table_stated_abstain",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_proved"
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-13",
+      "category": "correction_superseded",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionMarrow Logistics's 2019 revenue was 832 USD million.",
+        "proof_valid": false
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-14",
+      "category": "correction_stated_abstain",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-15",
+      "category": "prompt_injection_ignored",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionOrchid Pharma's 2020 diluted earnings per share was 3.12 USD per share.",
+        "proof_valid": false
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-16",
+      "category": "prompt_injection_forecast",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionPioneer Motors's 2023 revenue was 2.4 GBP billion.",
+        "proof_valid": false
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-17",
+      "category": "gaap_vs_non_gaap",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionQuartz Semiconductors's 2018 GAAP operating income was 538 USD million.",
+        "proof_valid": false
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-18",
+      "category": "conflicting_answered",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionRidge Telecom's 2017 net income was 214 EUR million.",
+        "proof_valid": false
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "uncertain",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-19",
+      "category": "conflicting_abstain",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "uncertain",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-20",
+      "category": "quarterly_only_abstain",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-21",
+      "category": "segment_only_abstain",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    },
+    {
+      "id": "RV3-22",
+      "category": "prompt_injection_stated_abstain",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-23",
+      "category": "quarterly_customer_distractor_abstain",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "supported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "unsupported"
+    },
+    {
+      "id": "RV3-24",
+      "category": "segment_competitor_distractor",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionXenon Aerospace's 2016 operating income was 318 CAD million.",
+        "proof_valid": false
+      },
+      "posthoc_rules_then_reader_ai_review_v3": "unsupported",
+      "posthoc_rules_then_reader_ai_review_v3_control": "supported"
+    }
+  ],
+  "fixture_sha256": "97a44d8672ded0b52cd9279f621f23910df64943a813703e3edb2247e118cd45",
+  "verifier_code_frozen_before_probes_opened": "a2e57c4 (verifier) precedes daa5219 (probes added)",
+  "mapping_note": "Offline: the deterministic source-rule verifier (frozen before the probes were opened) on the 24 fresh probes.\n\nMapping, fixed in code: an answered candidate becomes a claim sentence; supported -> supported,\ncontradicted -> unsupported, review -> uncertain. An abstention is unsupported when the verifier can\nprove the requested fact from the source; otherwise uncertain, because rules cannot prove non-disclosure.\nA post-hoc composition (rules first, recorded AI verdict only when rules are uncertain) is reported\nseparately and labelled exposed: it uses recorded model outputs and probes already read.\n",
+  "lineage": {
+    "freeze_commit": "81c1b66c90e62d0c00c7056eeb34615330983e03",
+    "source_SHA256": {
+      "tests/fixtures/reader_ai_review_v3.json": "97a44d8672ded0b52cd9279f621f23910df64943a813703e3edb2247e118cd45",
+      "scripts/validate_review_probes_rules.py": "c7d347026c934e8ad016d7979454b819f646b57c1680a20c6555c0dda3bd7be1",
+      "src/asof/claim_verifier.py": "4d6187c4ba220aed4d9f2de8f538664c1cc784d0eea0788cd033f9708eac7a7c",
+      "src/asof/financial_notation.py": "9c92b6b087924f51c5e71f00cec3eff93ab7fd63b38975b4df82db7ebe6f6256",
+      "src/asof/reader_fields.py": "3b1fa0053c963289ac90d74de3608be09ba3726c75e662a52514b577a75cadac",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/reader_ai_review_v3.py": "2b6ca77e456d7b341af93c1fa9d84cbf97f4f11540568aaa86d01261e1fe474c",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "results/reader_ai_review_v3.json": "487608b5c99689e85e2d40d00b59a967689f332151dedf982c712fc8ac53ec7b",
+      "results/reader_ai_review_v3_control.json": "88c259523cb8254723147389dd3be95678b4de0c198735e258304f37308270f6"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "independent_human_gold": false,
+  "model_calls": 0,
+  "wall_seconds": 0.2820000001229346,
+  "process_peak_RSS_bytes": 36757504
+}
