@@ -1,0 +1,77 @@
+{
+  "test": "CB1 declared header clock-basis test",
+  "config_SHA256": "8c46e1d0fab0f3a0ecc36d6c10bb39f339f6091bb03d3407778c41a1d58c3d70",
+  "lineage": {
+    "git_commit": "47a6c51d98782a86ad144a3e91b8e016dae75f7e",
+    "git_dirty": false,
+    "inputs": {},
+    "input_status": {},
+    "missing_inputs": [],
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  },
+  "headers_considered": 1564,
+  "declared_rule": {
+    "S1_fixed_EST_rejection": "Daylight-season weekday headers with wall in [16:30,17:30): n>=30 and same-day FILING-DATE share >=0.99.",
+    "S2_UTC_rejection": "Weekday headers with wall in [17:35,21:30): n>=20 and later FILING-DATE share >=0.95. If n<20, S3 decides: >=20 walls in [06:00,10:00) and operating-window violations <=0.1%.",
+    "integrity": "Weekday walls <=17:30 whose FILING-DATE rolled forward <=0.5%, and walls outside [06:00,22:00] <=0.1% of the evaluated population.",
+    "passed": "S1 AND UTC rejection AND integrity.",
+    "population": "Readable headers with one acceptance wall, one filing date and a unique Eastern conversion; Rule 13(a)(3)-(4) 22:00-cutoff forms excluded."
+  },
+  "evaluated_headers": 1564,
+  "excluded": {},
+  "S1_daylight_16_30_to_17_30_same_day": {
+    "n": 240,
+    "k": 240,
+    "share": 1.0
+  },
+  "S1_control_standard_16_30_to_17_30_same_day": {
+    "n": 126,
+    "k": 126,
+    "share": 1.0
+  },
+  "S2_17_35_to_21_30_rolled": {
+    "n": 197,
+    "k": 196,
+    "share": 0.9949238578680203
+  },
+  "S3_walls_06_00_to_10_00": 13,
+  "S3_walls_outside_06_00_to_22_00": 0,
+  "weekday_at_or_before_17_30_rolled": {
+    "n": 1355,
+    "k": 0,
+    "share": 0.0
+  },
+  "filing_date_earlier_than_acceptance": 0,
+  "weekend_acceptances": 0,
+  "descriptive_cutoff_brackets": {
+    "daylight": {
+      "latest_same_day_wall": "18:26:42",
+      "earliest_rolled_wall_after_noon": "17:33:08",
+      "same_day_after_17_30": 3,
+      "rolled_at_or_before_17_30": 0
+    },
+    "standard": {
+      "latest_same_day_wall": "17:31:58",
+      "earliest_rolled_wall_after_noon": "17:33:16",
+      "same_day_after_17_30": 2,
+      "rolled_at_or_before_17_30": 0
+    }
+  },
+  "fixed_EST_rejected": true,
+  "UTC_rejected": true,
+  "UTC_route": "S2",
+  "integrity_passed": true,
+  "passed": true,
+  "interpretation_if_passed": "Header walls behave as the Rule 13(a)(2) Eastern civil clock (EST or EDT in effect). This rejects fixed-EST and UTC readings; it does not verify EDGAR's synchronization to UTC or correctness of any JSON timestamp.",
+  "data_boundary": "Metadata headers only; no HTTP request in this phase."
+}
