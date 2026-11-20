@@ -190,11 +190,24 @@ def panel_from_frames(pairs: pd.DataFrame, out: pd.DataFrame, ent: pd.DataFrame)
 def stage_test(*, scope: FrozenFactWindow | None = None) -> None:
     require_fact_window(scope)
     hold_outcome_stage("H4.stage_test")
+    out = {"note": "Development period (10-Ks accepted 2012-2018) only. Primary: change_n -> d_roa; "
+                   "expected sign: negative for d_roa, positive for decline and impair_next. "
+                   "SIC controls use current bulk metadata, not verified historical classifications; "
+                   "interpret these as conditional development diagnostics.",
+           "results": results_from_panel(build_panel(scope=scope), [PAIRS, OUT, SAMPLE, ENT])}
+    (PROJECT_ROOT / "results" / "h4_development.json").write_text(json.dumps(out, indent=2))
+    json.dump(out, sys.stdout, indent=2)
+
+
+def results_from_panel(panel: pd.DataFrame, inputs: list[Path]) -> dict:
+    """Registered H4 development regressions on an in-memory panel; logs every trial.
+
+    Grants no file access: callers own how the panel was obtained (D15).
+    """
     import statsmodels.api as sm
 
     from asof.events import neutralize
 
-    panel = build_panel(scope=scope)
     dev = panel[pd.to_datetime(panel["knowledge_time"]).between(*DEV)].copy()
     dev["change_n"] = np.nan
     for y, g in dev.groupby("year"):
@@ -203,7 +216,7 @@ def stage_test(*, scope: FrozenFactWindow | None = None) -> None:
     for sig in ("change_n", "change"):
         for outcome in ("d_roa", "decline", "impair_next"):
             with ledger.development_trial(
-                "H4", {"signal": sig, "outcome": outcome}, inputs=[PAIRS, OUT, SAMPLE, ENT],
+                "H4", {"signal": sig, "outcome": outcome}, inputs=inputs,
             ) as metrics:
                 cols = [sig, "log_assets", "roa", "sales_growth"]
                 d = dev.dropna(subset=[outcome, *cols, "sic2"])
@@ -216,13 +229,7 @@ def stage_test(*, scope: FrozenFactWindow | None = None) -> None:
                        "outcome_mean": float(d[outcome].mean())}
                 metrics.update(res)
             results[f"{sig}->{outcome}"] = res
-    out = {"note": "Development period (10-Ks accepted 2012-2018) only. Primary: change_n -> d_roa; "
-                   "expected sign: negative for d_roa, positive for decline and impair_next. "
-                   "SIC controls use current bulk metadata, not verified historical classifications; "
-                   "interpret these as conditional development diagnostics.",
-           "results": results}
-    (PROJECT_ROOT / "results" / "h4_development.json").write_text(json.dumps(out, indent=2))
-    json.dump(out, sys.stdout, indent=2)
+    return results
 
 
 def main(argv: list[str] | None = None) -> None:

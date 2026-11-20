@@ -387,3 +387,21 @@ Equations, source pins, the pre-execution allocation and its limits are in the
 - **Scope:** H0 only. The H4 1e-13 coefficient differences were not examined,
   and H4 stays on hard hold. This explains a stopped gate; it is not scientific
   acceptance, and it releases no H4/H6 stage, holdout or new hypothesis.
+
+## D15: one development-only H4 extract for the F8 numerical check
+
+- **Logged:** 2026-11-20, **before** the extract or any H4 regression, under the
+  owner's `h4=dev_extract_repro` decision. It changes no hypothesis, outcome,
+  window, threshold or estimate, so no tag.
+- **Exposure, declared in advance:** one process reads `h4_pairs` and
+  `h4_outcomes` in full, including rows in the H4 holdout window (2022+). Only
+  aggregate row counts by year leave that process, in the
+  [extract receipt](../results/h4_dev_extract.json). This adds to D6/D13: the H4
+  holdout was already not untouched, and it still must not be described that way.
+- **Extract:** development pairs (accepted 2012-2018) and outcome rows dated no
+  later than the last development report date plus 430 days. Nothing is written
+  unless the panel built from the extract equals the full-file panel exactly.
+- **Use:** only the [F8 H4 thread check](../scripts/h4_dev_reproducibility.py),
+  which follows the H0 rule in D14. Its runs append ledger rows with existing
+  config hashes. Every H4 file-reading stage stays hard held; the extract does
+  not release H4 tests, validation, holdout evaluation or H6.
