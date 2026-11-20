@@ -327,6 +327,13 @@ def test_decomposed_ai_review_v2_profile_is_new_bounded_and_fits_context(runner)
     from asof.reader_ai_review_v2 import messages, probes, schema
     from asof.reader_real2_guards import input_fit
 
+    runner.select_version("ai-review-v2b")
+    plan = json.loads(runner.PLAN.read_bytes())
+    runner.validate_plan(plan)
+    stopped = json.loads((runner.ROOT / "results" / "reader_ai_review_v2_plan.json").read_bytes())
+    assert {**plan, "study": stopped["study"]} == stopped
+    assert runner.REPORT.name == "reader_ai_review_v2b.json" and runner.PRIVATE.name == "reader_ai_review_v2b_v1"
+    assert "results/reader_ai_review_v2.json" in runner.FROZEN
     runner.select_version("ai-review-v2")
     plan = json.loads(runner.PLAN.read_bytes())
     runner.validate_plan(plan)
