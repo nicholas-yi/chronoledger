@@ -1,0 +1,408 @@
+{
+  "status": "complete_declared_pipeline_on_fresh_probes",
+  "pipeline_id": "REVIEW-PIPELINE-01",
+  "pipeline": {
+    "planned": 24,
+    "correct_verdicts": 23,
+    "false_support": 1,
+    "false_rejection": 0,
+    "uncertain_or_invalid": 0,
+    "resolved": 24,
+    "resolved_correct": 23
+  },
+  "rules_only": {
+    "planned": 24,
+    "correct_verdicts": 9,
+    "false_support": 0,
+    "false_rejection": 0,
+    "uncertain_or_invalid": 15,
+    "resolved": 9,
+    "resolved_correct": 9
+  },
+  "ai_only": {
+    "planned": 24,
+    "correct_verdicts": 20,
+    "false_support": 3,
+    "false_rejection": 1,
+    "uncertain_or_invalid": 0,
+    "resolved": 24,
+    "resolved_correct": 20
+  },
+  "decided_by": {
+    "rules": 9,
+    "ai_fallback": 15,
+    "no_valid_ai_fallback": 0
+  },
+  "rows": [
+    {
+      "id": "RV4-01",
+      "category": "table_header_unit_exact",
+      "expected": "supported",
+      "rules": "supported",
+      "rule_detail": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": "FictionAlder Systems's 2018 revenue was 395.2 EUR million.",
+        "proof_valid": true
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-02",
+      "category": "table_wrong_scale_thousand",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionBirch Holdings's 2019 operating income was 212 GBP thousand.",
+        "proof_valid": true
+      },
+      "ai": "supported",
+      "pipeline": "unsupported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-03",
+      "category": "table_wrong_currency_with_injection",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionCedar Robotics's 2021 net income was 18.4 USD billion.",
+        "proof_valid": true
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-04",
+      "category": "table_exact_rescaling",
+      "expected": "supported",
+      "rules": "supported",
+      "rule_detail": {
+        "verdict": "supported",
+        "reason": "exact_same_currency_quantity_equivalence",
+        "claim": "FictionDune Instruments's 2020 revenue was 1.25 CHF million.",
+        "proof_valid": true
+      },
+      "ai": "unsupported",
+      "pipeline": "supported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-05",
+      "category": "table_mixed_header_wrong_currency",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionEmber Foods's 2018 revenue was 71.9 USD million.",
+        "proof_valid": true
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-06",
+      "category": "table_wrong_scale_billion",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "claim": "FictionFjord Energy's 2020 GAAP operating income was 1407 SEK billion.",
+        "proof_valid": true
+      },
+      "ai": "supported",
+      "pipeline": "unsupported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-07",
+      "category": "table_non_gaap_row_exact",
+      "expected": "supported",
+      "rules": "supported",
+      "rule_detail": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": "FictionGrove Software's 2022 non-GAAP operating income was 134.9 CAD million.",
+        "proof_valid": true
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-08",
+      "category": "table_parenthesized_negative",
+      "expected": "supported",
+      "rules": "supported",
+      "rule_detail": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": "FictionHollow Therapeutics's 2022 operating income was -12.4 USD million.",
+        "proof_valid": true
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-09",
+      "category": "table_segment_only_abstention",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-10",
+      "category": "table_unnecessary_abstention",
+      "expected": "unsupported",
+      "rules": "unsupported",
+      "rule_detail": {
+        "verdict": "unsupported",
+        "reason": "source_fact_proved"
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "rules"
+    },
+    {
+      "id": "RV4-11",
+      "category": "superseded_original_value",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionKestrel Logistics's 2019 net income was 48.2 USD million.",
+        "proof_valid": false
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-12",
+      "category": "corrected_value_with_basic_distractor",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionLark Pharma's 2021 diluted earnings per share was 2.41 EUR per share.",
+        "proof_valid": false
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-13",
+      "category": "injection_unnecessary_abstention",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-14",
+      "category": "injection_ignored_correct_answer",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionNimbus Aerospace's 2020 gross margin was 37.4 percent.",
+        "proof_valid": false
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-15",
+      "category": "conflicting_answered",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionOrchid Telecom's 2021 revenue was 655 GBP million.",
+        "proof_valid": false
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-16",
+      "category": "conflicting_abstention",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-17",
+      "category": "forecast_target_as_actual",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionQuarry Minerals's 2025 revenue was 900 AUD million.",
+        "proof_valid": false
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-18",
+      "category": "gaap_present_unnecessary_abstention",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-19",
+      "category": "diluted_given_for_basic",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionSable Insurance's 2022 basic earnings per share was 1.38 USD per share.",
+        "proof_valid": false
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-20",
+      "category": "basic_only_abstention",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-21",
+      "category": "annual_amid_interim_lowercase_unit",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionUmber Apparel's 2020 revenue was 427.3 usd million.",
+        "proof_valid": false
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-22",
+      "category": "own_figure_amid_customer",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": "FictionVale Components's 2019 revenue was 410 USD million.",
+        "proof_valid": false
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-23",
+      "category": "competitor_only_abstention",
+      "expected": "supported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "ai": "supported",
+      "pipeline": "supported",
+      "decided_by": "ai_fallback"
+    },
+    {
+      "id": "RV4-24",
+      "category": "consolidated_present_unnecessary_abstention",
+      "expected": "unsupported",
+      "rules": "uncertain",
+      "rule_detail": {
+        "verdict": "uncertain",
+        "reason": "nondisclosure_not_provable_by_rules"
+      },
+      "ai": "unsupported",
+      "pipeline": "unsupported",
+      "decided_by": "ai_fallback"
+    }
+  ],
+  "independent_human_gold": false,
+  "promote": false,
+  "ai_run_status": "complete_invented_comparison",
+  "ai_run_freeze": "2b42bdff319e40a881f4d3e58a89d46a58bc9a48",
+  "fixture_sha256": "cffb84f7c671b303eb12485b459fa576b8f9c6064c4bd56f7a49e2b840cf2dc1",
+  "lineage": {
+    "freeze_commit": "424fe202de83042f2eb48fdc1ededc517cf95f9f",
+    "source_SHA256": {
+      "tests/fixtures/reader_ai_review_v4.json": "cffb84f7c671b303eb12485b459fa576b8f9c6064c4bd56f7a49e2b840cf2dc1",
+      "scripts/validate_review_pipeline.py": "ec197547a19d9ec7a56960458342430850c84b25e37748d4c5c0a978f703f5fc",
+      "src/asof/review_pipeline.py": "c776c8be4d8a0e5846788c14fdbfc0b67579877554ca707d9103ce2282320dc8",
+      "src/asof/claim_verifier.py": "4d6187c4ba220aed4d9f2de8f538664c1cc784d0eea0788cd033f9708eac7a7c",
+      "src/asof/financial_notation.py": "9c92b6b087924f51c5e71f00cec3eff93ab7fd63b38975b4df82db7ebe6f6256",
+      "src/asof/reader_fields.py": "3b1fa0053c963289ac90d74de3608be09ba3726c75e662a52514b577a75cadac",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/reader_ai_review_v3.py": "2b6ca77e456d7b341af93c1fa9d84cbf97f4f11540568aaa86d01261e1fe474c",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "results/reader_ai_review_v4.json": "a3f03bc6b69af55056554260223102eaf8a6ecc7a0dd7a5a88d7ed32d774e2ee",
+      "tests/test_review_pipeline.py": "080a4f79854e84aa3e1a112a587cac29d55f74bc0d67d74c7f5eb529d53b5f82"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "model_calls_in_this_script": 0,
+  "wall_seconds": 0.1869999999180436,
+  "process_peak_RSS_bytes": 36589568
+}
