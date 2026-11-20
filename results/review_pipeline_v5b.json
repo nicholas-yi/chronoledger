@@ -1,0 +1,1212 @@
+{
+  "study": "CL-FOCUS-REVIEW-PIPELINE-02B",
+  "plan": {
+    "RAM_bytes": 6442450944,
+    "call_seconds": 90,
+    "case_count": 30,
+    "case_slice": [
+      15,
+      30
+    ],
+    "controller_RAM_allowance": 134217728,
+    "controller_stop_seconds": 1180,
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "endpoint": "http://127.0.0.1:11435",
+    "generation_contract": "rules_first_then_value_check_and_disclosure_agreement_v2",
+    "max_calls": 36,
+    "model": "qwen3.5:4b",
+    "options": {
+      "num_batch": 64,
+      "num_ctx": 2048,
+      "num_gpu": 0,
+      "num_predict": 128,
+      "num_thread": 1,
+      "seed": 202611200330,
+      "temperature": 0
+    },
+    "output_truncation_policy": "count_invalid_and_continue_without_retry",
+    "preload": "one_empty_prompt_load_within_existing_startup_deadline",
+    "startup_seconds": 60,
+    "study": "CL-FOCUS-REVIEW-PIPELINE-02B",
+    "wall_seconds": 1200
+  },
+  "lineage": {
+    "freeze_commit": "567cd1bd912f15755930867df2450a217a2e184d",
+    "source_SHA256": {
+      "scripts/run_focused_reader.py": "f251ffb403e0620f60f96ff9f4e73b54eb19083f3e5dd31a6b83416c73b908c7",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "src/asof/local_model_runtime.py": "cb87cd2921d71c0a50f1b5bc1ea7964b7eb8e4b51831dfd29191a16e5538125e",
+      "src/asof/reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+      "src/asof/reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+      "src/asof/reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "src/asof/benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+      "src/asof/ledger.py": "85e6f75a58616514d18c3a1fdfba8343adf23334fb76a939f2d3a97b2f3764b7",
+      "tests/fixtures/review_pipeline_v5.json": "e299975c7b63261f9372d1a89c80ce5bc4bcc6c50a53f2eba9545f6caff4a4b9",
+      "tests/test_focused_reader.py": "38346c8980c760d0d52177bda6c029194c188292c73f2f6d0d0d1d5ec161bcad",
+      "results/review_pipeline_v5b_plan.json": "2b6b39b2ea825ea5eb2f30888c1778eef8aac660eb357e0a31357b7eaecfd532",
+      "results/local_model_runtime_support.json": "55daf16377dfe43978e61feb3b961d690122926ccb17a8f12f1058c5230c2617",
+      "requirements-dev.lock": "c84cefb3543db283afc0a1021e2cace63ac4e7877a84611f345b928f64077f0c",
+      "docs/FOCUSED_READER.md": "0af9e902c4ce840114ef4f4636bec0440858a8155b8582fd604b93e20dbfd4f9",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "tests/test_verified_reader.py": "d43bc5af989182d0a9c99be9df776f33060a2bb72638f2c5bcce0a52b754d34e",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7",
+      "results/focused_reader_v2.json": "82bf4630e45ee5ba2edab2b75edf10a0ca1c4bb0cb6c5c3e466d00b96b4f3d14",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "tests/test_linked_reader.py": "31a760f49a43c7eff4e631ac3cc02ec747071ba2430fa269f5a9053b2a32dd1a",
+      "src/asof/reader_stress.py": "a7515ea2ac09bdb40cf224b30a0d9aa274493bd6f1a2df29f9b14a34da673cba",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "results/reader_stress.json": "aab4af98e15207aec3799f4db80764df3158814d8219d348ead3d73020ceb9a4",
+      "results/verified_reader.json": "db3414b73043bd1f1e93f2f358f2e74b3a26f9582d3efcfb57d24ff7eddf62de",
+      "src/asof/reader_fields.py": "3b1fa0053c963289ac90d74de3608be09ba3726c75e662a52514b577a75cadac",
+      "tests/test_reader_fields.py": "f53968aed3d9e1380a94412f0d7523d8323ed52327fd96760813d5d6b4602df0",
+      "results/linked_reader.json": "aa90834de02c37826c267cb0450d52184531f830730d5200448b1a6e7579b9e2",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "tests/test_reader_reliability.py": "d1fa6bee69f580b2630efe049774b343905679cbc8adea414121344682e1e3e9",
+      "results/reader_fields.json": "32580a1f4477226e848867dea935726f5731397aa6c71f49c4beeffeecfe46aa",
+      "src/asof/reader_cells.py": "1e3babc16511bcb96238fa7cbdc69104532c44703b3492a548500e7aab2beb05",
+      "src/asof/reader_field_challenge.py": "384c512732ebff3584720039e89dcffd07f7af90622f964021b41713b1b1418f",
+      "tests/test_reader_cells.py": "f79853d62bb09f752b4d285c83d2814fd8c7ff7d248d2163750df8fe44b76206",
+      "results/reader_reliability.json": "cef75a6a50a6a8793ab3101189e4a54e3184a7b4df806bf6b0c41e3253544956",
+      "src/asof/reader_ai_review.py": "ee500422e7b1c4f4eb1685199424034efb2f755ba1451c0f92525f6329f7cd42",
+      "tests/test_reader_ai_review.py": "65b546c91626bdb2d4052aa25d541b27806742fb89b6041a59cbec11a72e2f83",
+      "tests/test_local_model_runtime.py": "f5863b4261cdb2e88c490472104de858ffbe61934652daa9fc2cbaca85c0a653",
+      "results/reader_cell_selection.json": "8367b709e6e007538a56c49cc23512497e5394f0374a9cf7fb1c7fd31c3868b9",
+      "results/reader_cell_selection_accounting.json": "de4fd1bfdae62a73c0f559d1b75270dd20eb8771595a15ecac274db743734a7c",
+      "src/asof/reader_ai_review_v2.py": "3424814e190143d1a0e68d5e6b47fedea7f6034a96686149be55d4e71b7df7dd",
+      "tests/test_reader_ai_review_v2.py": "81137eb953ade407dc932de4d873029b4850ce82866ff81da89454f10ba5f1d6",
+      "results/reader_ai_review.json": "e45b2669984776079a497bb186ec4de58634ff24b138fe0545e8ea82fdffc78b",
+      "src/asof/reader_ai_review_v3.py": "f0545a6e9be312f3dd9696c5ecbed1a216758be4536c961c49cfbab397da3bd8",
+      "src/asof/review_pipeline.py": "c776c8be4d8a0e5846788c14fdbfc0b67579877554ca707d9103ce2282320dc8",
+      "src/asof/review_pipeline_v2.py": "e7a0ae7a987f678036dc6bb2326cee423f2d3844a3e192bbd4a3285f2b95b899",
+      "tests/test_review_pipeline_v2.py": "f4f7f098a5c700d8fa4fdecea232ead8ae3ef22e0bc09043756e57f683418ae0",
+      "src/asof/claim_verifier.py": "4d6187c4ba220aed4d9f2de8f538664c1cc784d0eea0788cd033f9708eac7a7c",
+      "results/review_pipeline_v4.json": "166aa7837e45080ccb29636178da3d85d41308b86a40a09931793bd489348755",
+      "results/reader_ai_review_v4.json": "a3f03bc6b69af55056554260223102eaf8a6ecc7a0dd7a5a88d7ed32d774e2ee",
+      "results/review_pipeline_v5_plan.json": "83fa778fbcbbd189b80ffb3495279c417423a329ab60c742384eacf10d720dc7",
+      "results/review_pipeline_v5a_plan.json": "b6935f9db542a8bb398e6624d85853a13230403e96493fe354db29f4778eb0d9",
+      "scripts/combine_review_pipeline_v5.py": "238d453de0007d18613cb2b9c0ddcaa5daff97ff2f09643b26aeff01f2ddb674"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "status": "complete_invented_comparison",
+  "stop_reason": null,
+  "records": {
+    "RV5-16": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionDune Mobility's 2020 diluted earnings per share was 1.84 USD per share.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "unsupported",
+              "issues": [
+                "value",
+                "unit"
+              ],
+              "citations": [
+                "E3",
+                "E4"
+              ]
+            },
+            "outcome": "unsupported",
+            "source_citations": [
+              {
+                "id": "E3",
+                "start": 112,
+                "end": 302,
+                "text": " Amendment dated 14 April 2021: the diluted share count was understated, so full-year 2020 diluted earnings per share is corrected to USD 1.79, superseding the previously published USD 1.84."
+              },
+              {
+                "id": "E4",
+                "start": 302,
+                "end": 363,
+                "text": " Basic earnings per share for 2020 of USD 1.91 is unaffected."
+              }
+            ],
+            "call_id": 1,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 48.0
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_check_unsupported",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-17": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "conflicting",
+              "citations": [
+                "E4",
+                "E7"
+              ]
+            },
+            "outcome": "conflicting",
+            "source_citations": [
+              {
+                "id": "E4",
+                "start": 89,
+                "end": 110,
+                "text": "| Net income | 41.2 |"
+              },
+              {
+                "id": "E7",
+                "start": 177,
+                "end": 198,
+                "text": "| Net income | 43.8 |"
+              }
+            ],
+            "call_id": 2,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 42.360000000335276
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "abstention_vs_conflicting",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-18": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionOrchid Health's 2021 basic earnings per share was 4.21 ZAR per share.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E3"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E3",
+                "start": 137,
+                "end": 241,
+                "text": " Shareholder information section: basic earnings per share for the year ended 30 June 2021 was ZAR 4.21."
+              }
+            ],
+            "call_id": 3,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 41.109999999869615
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "conflicting",
+              "citations": [
+                "E2",
+                "E3"
+              ]
+            },
+            "outcome": "conflicting",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 40,
+                "end": 137,
+                "text": " Results overview section: basic earnings per share for the year ended 30 June 2021 was ZAR 4.12."
+              },
+              {
+                "id": "E3",
+                "start": 137,
+                "end": 241,
+                "text": " Shareholder information section: basic earnings per share for the year ended 30 June 2021 was ZAR 4.21."
+              }
+            ],
+            "call_id": 4,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 39.32799999974668
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_supported_disclosure_conflicting",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-19": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionYarrow Networks's 2023 non-GAAP operating income was 287 USD million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E3"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E3",
+                "start": 107,
+                "end": 252,
+                "text": " Excluding stock-based compensation and amortization of acquired intangibles, non-GAAP operating income for fiscal year 2023 was USD 287 million."
+              }
+            ],
+            "call_id": 5,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 38.10900000017136
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E3"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E3",
+                "start": 107,
+                "end": 252,
+                "text": " Excluding stock-based compensation and amortization of acquired intangibles, non-GAAP operating income for fiscal year 2023 was USD 287 million."
+              }
+            ],
+            "call_id": 6,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 38.70300000021234
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "value_supported_disclosure_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-20": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionHarbor Energy's 2025 gross margin was 42.0 percent.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 46,
+                "end": 125,
+                "text": " Management has set a gross margin target of 42.0 percent for fiscal year 2025."
+              }
+            ],
+            "call_id": 7,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 37.436999999918044
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "not_stated",
+              "citations": []
+            },
+            "outcome": "not_stated",
+            "source_citations": [],
+            "call_id": 8,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 35.85900000017136
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_supported_disclosure_not_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-21": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionAurora Streaming's 2022 subscribers was 3415000 subscribers.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 43,
+                "end": 138,
+                "text": " Total subscribers at 31 December 2022 were 3415000, compared with 2980000 at 31 December 2021."
+              }
+            ],
+            "call_id": 9,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 42.25
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E1",
+                "E2"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E1",
+                "start": 0,
+                "end": 43,
+                "text": "FictionAurora Streaming annual report 2022."
+              },
+              {
+                "id": "E2",
+                "start": 43,
+                "end": 138,
+                "text": " Total subscribers at 31 December 2022 were 3415000, compared with 2980000 at 31 December 2021."
+              }
+            ],
+            "call_id": 10,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 39.32800000021234
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "value_supported_disclosure_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-22": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E3"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E3",
+                "start": 128,
+                "end": 293,
+                "text": " Correction: owing to a duplicated partner feed, total subscribers at 31 December 2023 were 1198300, and this figure supersedes the one in the earlier press release."
+              }
+            ],
+            "call_id": 11,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 34.71900000004098
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "abstention_vs_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-23": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionXenon Chemicals's 2023 diluted earnings per share was 2.62 USD per share.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E4"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E4",
+                "start": 131,
+                "end": 175,
+                "text": "| Diluted earnings per share | 2.41 | 2.62 |"
+              }
+            ],
+            "call_id": 12,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 35.98400000017136
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E4"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E4",
+                "start": 131,
+                "end": 175,
+                "text": "| Diluted earnings per share | 2.41 | 2.62 |"
+              }
+            ],
+            "call_id": 13,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 35.984999999869615
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "value_supported_disclosure_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-24": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "unsupported",
+          "reason": "source_fact_differs",
+          "claim": "FictionVale Instruments's 2020 net income was 14.6 CHF million.",
+          "proof_valid": true
+        },
+        "ai_steps": [],
+        "decided_by": "rules",
+        "verdict": "unsupported",
+        "reason": "source_fact_differs",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-25": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "not_stated",
+              "citations": []
+            },
+            "outcome": "not_stated",
+            "source_citations": [],
+            "call_id": 14,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 38.70300000021234
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "abstention_vs_not_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-26": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionPebble Mining's 2020 net income was 125.7 USD million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E3"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E3",
+                "start": 213,
+                "end": 307,
+                "text": " The annual report states net income for the year ended 31 December 2020 of USD 125.7 million."
+              }
+            ],
+            "call_id": 15,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 39.889999999664724
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "conflicting",
+              "citations": [
+                "E2",
+                "E3"
+              ]
+            },
+            "outcome": "conflicting",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 119,
+                "end": 213,
+                "text": " The press release states net income for the year ended 31 December 2020 of USD 127.5 million."
+              },
+              {
+                "id": "E3",
+                "start": 213,
+                "end": 307,
+                "text": " The annual report states net income for the year ended 31 December 2020 of USD 125.7 million."
+              }
+            ],
+            "call_id": 16,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 36.01599999982864
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_supported_disclosure_conflicting",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-27": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionZephyr Marine's 2017 revenue was 948 EUR million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 40,
+                "end": 118,
+                "text": " Consolidated revenue for the year ended 31 December 2017 was EUR 948 million."
+              }
+            ],
+            "call_id": 17,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 40.610000000335276
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 40,
+                "end": 118,
+                "text": " Consolidated revenue for the year ended 31 December 2017 was EUR 948 million."
+              }
+            ],
+            "call_id": 18,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 34.04699999978766
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "value_supported_disclosure_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-28": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "unsupported",
+          "reason": "source_fact_proved"
+        },
+        "ai_steps": [],
+        "decided_by": "rules",
+        "verdict": "unsupported",
+        "reason": "source_fact_proved",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-29": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionBasalt Ceramics's 2020 gross margin was 44.8 percent.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 42,
+                "end": 96,
+                "text": " Gross margin for the full year 2020 was 44.8 percent."
+              }
+            ],
+            "call_id": 19,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 34.7339999997057
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 42,
+                "end": 96,
+                "text": " Gross margin for the full year 2020 was 44.8 percent."
+              }
+            ],
+            "call_id": 20,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 36.59400000004098
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "value_supported_disclosure_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-30": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 40,
+                "end": 159,
+                "text": " Basic earnings per share for the year ended 31 December 2019 was SGD 0.87 and diluted earnings per share was SGD 0.85."
+              }
+            ],
+            "call_id": 21,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 33.1410000002943
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "abstention_vs_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    }
+  },
+  "calls": [
+    {
+      "call_id": 1,
+      "case_id": "RV5-16",
+      "stage": "judge",
+      "request_sha256": "4e5de4dbef25fd7e44be27de17f7a11ba106ff6b2ec707b2c1d59dbc21cfe28f",
+      "status": "schema_valid",
+      "latency_seconds": 48.0,
+      "generated_tokens": 54,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 2,
+      "case_id": "RV5-17",
+      "stage": "judge",
+      "request_sha256": "c2c2988527d9af1d804a994b0e76d644883d8bceb0d800c55ace8ba43b13f8e3",
+      "status": "schema_valid",
+      "latency_seconds": 42.360000000335276,
+      "generated_tokens": 20,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 3,
+      "case_id": "RV5-18",
+      "stage": "judge",
+      "request_sha256": "9899d9328ccd2a9d1bd77a5cb56241431ae0085dbad748fe8561bdb85e1ae689",
+      "status": "schema_valid",
+      "latency_seconds": 41.109999999869615,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 4,
+      "case_id": "RV5-18",
+      "stage": "judge",
+      "request_sha256": "ea348dec01ba69bb8d4905d95116890517d46c32d4553550635ac5fef691b8a2",
+      "status": "schema_valid",
+      "latency_seconds": 39.32799999974668,
+      "generated_tokens": 20,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 5,
+      "case_id": "RV5-19",
+      "stage": "judge",
+      "request_sha256": "adb670a660450d4f5acbe158deeaf072cd23a46b72b688a5a26cdb905d0f7c7e",
+      "status": "schema_valid",
+      "latency_seconds": 38.10900000017136,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 6,
+      "case_id": "RV5-19",
+      "stage": "judge",
+      "request_sha256": "ede23caa31b32e31a176f948ebafb143efc493d21cf29d303ece8cba8b273a35",
+      "status": "schema_valid",
+      "latency_seconds": 38.70300000021234,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 7,
+      "case_id": "RV5-20",
+      "stage": "judge",
+      "request_sha256": "1ba654633bb6c05bb9b9ad8673b778429a19de935656556d1dddf30b259aaf9a",
+      "status": "schema_valid",
+      "latency_seconds": 37.436999999918044,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 8,
+      "case_id": "RV5-20",
+      "stage": "judge",
+      "request_sha256": "99f355be28d4b53e1ad36314302ac271a2fb86898d330a301966cd86bc7b4dc2",
+      "status": "schema_valid",
+      "latency_seconds": 35.85900000017136,
+      "generated_tokens": 15,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 9,
+      "case_id": "RV5-21",
+      "stage": "judge",
+      "request_sha256": "dfce4b0721240f25462ceb6b0090ec982145f6a3269cedd956a270abe57cf738",
+      "status": "schema_valid",
+      "latency_seconds": 42.25,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 10,
+      "case_id": "RV5-21",
+      "stage": "judge",
+      "request_sha256": "c9ece2c275c1be037f7ea906f74923cf68b93113d4a0fc4ae759c4546900f85f",
+      "status": "schema_valid",
+      "latency_seconds": 39.32800000021234,
+      "generated_tokens": 20,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 11,
+      "case_id": "RV5-22",
+      "stage": "judge",
+      "request_sha256": "f5352a3cf022420dab8f6228deeb42126115c0cb009e1a40157f1c6c7aee9b6b",
+      "status": "schema_valid",
+      "latency_seconds": 34.71900000004098,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 12,
+      "case_id": "RV5-23",
+      "stage": "judge",
+      "request_sha256": "f8da8c5eb58a36a7bb260e13275e652c4a9ccf0bc3deca6866cc4f46bb13ea07",
+      "status": "schema_valid",
+      "latency_seconds": 35.98400000017136,
+      "generated_tokens": 33,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 13,
+      "case_id": "RV5-23",
+      "stage": "judge",
+      "request_sha256": "a3ba92eb680653e8458bdd32ea58c26aa9bc439884ed52e6a8f3276e95c9c3d9",
+      "status": "schema_valid",
+      "latency_seconds": 35.984999999869615,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 14,
+      "case_id": "RV5-25",
+      "stage": "judge",
+      "request_sha256": "48f2b6bb8b8c2da47014eda6f9426cdf9b56884caecb09f800bffc4cab6dbf5b",
+      "status": "schema_valid",
+      "latency_seconds": 38.70300000021234,
+      "generated_tokens": 15,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 15,
+      "case_id": "RV5-26",
+      "stage": "judge",
+      "request_sha256": "8a7326d3729c98394d7811deaaf697f122b97d8e0cc5674706a119c847807461",
+      "status": "schema_valid",
+      "latency_seconds": 39.889999999664724,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 16,
+      "case_id": "RV5-26",
+      "stage": "judge",
+      "request_sha256": "916741fb96ef02af425f9df5aebfaee4879a86edc937aa2ce6e1756a17e397eb",
+      "status": "schema_valid",
+      "latency_seconds": 36.01599999982864,
+      "generated_tokens": 20,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 17,
+      "case_id": "RV5-27",
+      "stage": "judge",
+      "request_sha256": "2a966034664b47ab6935b23de72db3d421c4ea90638cc68089c919998d1d3637",
+      "status": "schema_valid",
+      "latency_seconds": 40.610000000335276,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 18,
+      "case_id": "RV5-27",
+      "stage": "judge",
+      "request_sha256": "d8fb99b8fdfaa4a84c02a3240727341b208feac8dada0771e2bb6568b83a4d61",
+      "status": "schema_valid",
+      "latency_seconds": 34.04699999978766,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 19,
+      "case_id": "RV5-29",
+      "stage": "judge",
+      "request_sha256": "dd5a1d54220da096e04888063d53d6bc5f24f067ea33e43d0596d6fa7479c8b9",
+      "status": "schema_valid",
+      "latency_seconds": 34.7339999997057,
+      "generated_tokens": 20,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 20,
+      "case_id": "RV5-29",
+      "stage": "judge",
+      "request_sha256": "a2a14e75124ad32b44692b46c3364c784bc32fe24762b9ff63565eb18a1dc548",
+      "status": "schema_valid",
+      "latency_seconds": 36.59400000004098,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 21,
+      "case_id": "RV5-30",
+      "stage": "judge",
+      "request_sha256": "ca1baf6e4d9c2b83a2b59a290b64936a5b17ca4f6296f52b0b56c2cf33ad0ab4",
+      "status": "schema_valid",
+      "latency_seconds": 33.1410000002943,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    }
+  ],
+  "judge_calibration": [],
+  "candidate": null,
+  "real_data_read": false,
+  "weights_updated": false,
+  "production_ledger_rows": 0,
+  "worker_pid": 87644,
+  "affinity_mask": 1,
+  "server_pid": 183868,
+  "phase": "final",
+  "offline_baselines": null,
+  "preload": {
+    "status": "load_only_complete",
+    "wall_seconds": 12.719000000040978,
+    "model": "qwen3.5:4b",
+    "generated_tokens_reported": null,
+    "load_duration_ns": null,
+    "response_text_empty": true,
+    "separate_from_evaluated_generation": true,
+    "documentation": "https://github.com/ollama/ollama/blob/main/docs/api.md#load-a-model"
+  },
+  "worker_wall_seconds": 818.1719999997877,
+  "worker_exit_code": 0,
+  "summary": {
+    "pipeline_id": "REVIEW-PIPELINE-02",
+    "reviewer_id": "AI-REVIEWER-04",
+    "pipeline": {
+      "planned": 15,
+      "correct_verdicts": 15,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 15,
+      "resolved_correct": 15
+    },
+    "rules_only": {
+      "planned": 15,
+      "correct_verdicts": 2,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 13,
+      "resolved": 2,
+      "resolved_correct": 2
+    },
+    "ai_on_rule_deferred": {
+      "planned": 13,
+      "correct_verdicts": 13,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 13,
+      "resolved_correct": 13
+    },
+    "ablation_value_check_alone_on_deferred_answered": {
+      "planned": 9,
+      "correct_verdicts": 6,
+      "false_support": 3,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 9,
+      "resolved_correct": 6
+    },
+    "agreement_on_deferred_answered": {
+      "planned": 9,
+      "correct_verdicts": 9,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 9,
+      "resolved_correct": 9
+    },
+    "abstentions": {
+      "planned": 5,
+      "correct_verdicts": 5,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 5,
+      "resolved_correct": 5
+    },
+    "decided_by": {
+      "rules": 2,
+      "ai_fallback": 13
+    },
+    "ai_calls_recorded": 21,
+    "independent_human_reviews": 0,
+    "human_gold_labels": 0,
+    "promote": false,
+    "scope": "Declared before fresh, separately AI-authored probes were opened; deliberately weighted toward conflicts, forecasts and corrections. Not human gold or real-filing accuracy."
+  },
+  "promotion": {
+    "promote": false,
+    "reason": "advisory rules-plus-AI pipeline, not human gold or decision authority"
+  },
+  "controller_wall_seconds": 820.4840000001714,
+  "observed_combined_peak_RSS_bytes": 3851890688,
+  "owned_pids_observed": [
+    87644,
+    92000,
+    183868,
+    185592
+  ],
+  "source_unchanged": true,
+  "resource_check_passed": true
+}
