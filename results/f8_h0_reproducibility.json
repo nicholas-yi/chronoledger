@@ -1,0 +1,241 @@
+{
+  "scope": "F8 H0-only reproducibility diagnostic (approved f8_rerun=h0_only); H4 held",
+  "freeze_commit": "3326228272064f2a1a433c330b622af764567165",
+  "source_SHA256": {
+    "scripts/f8_h0_reproducibility.py": "9061108e58f96d7efa88a9ac3780305f457c24097d00ee42a6e7af55a5616c16",
+    "scripts/h0_backtest.py": "a84a75061645341e7afd170f9b798e34a3c842a05752f1baa10f77aecb2da721",
+    "scripts/development_diagnostics.py": "3e9b0ef92af780510fb0e56c1c4615e1d969acbab5a96420a502d271139508dd",
+    "src/asof/events.py": "6c9f4d4ed843281744ea62df1c7fcf2d669f5ccef357247961cf62bb2443fc81",
+    "src/asof/backtest.py": "f3368a0b665fe46f09ecd240b4209effd10f9fc073d57fd018ec05936b3933ec"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "declared_rule": "- single_A and single_B use one numerical thread; default_threads unsets the caps.\n- Comparison scope is ``results`` and ``coverage`` with exact float equality (NaN == NaN).\n- ``single_thread_reproducible`` iff single_A == single_B == the committed Batch B file.\n- ``baseline_reproduced_with_default_threads`` iff default_threads equals the original\n  multi-thread baseline revision; informational because the baseline's host/thread count\n  was not recorded.\n- The mechanism diagnostic compares neutralized formation residuals and within-month\n  ranks between one thread and default threads; it reads no returns.",
+  "baseline_revision": "15b8a2d0b53942dda7627fdabbaf934334beceef",
+  "host_logical_CPUs": 16,
+  "BLAS": {
+    "name": "scipy-openblas",
+    "version": "0.3.34.106.0",
+    "openblas configuration": "OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=24"
+  },
+  "runs": {
+    "single_A": {
+      "thread_caps": "1",
+      "seconds": 92.2
+    },
+    "single_B": {
+      "thread_caps": "1",
+      "seconds": 57.4
+    },
+    "default_threads": {
+      "thread_caps": "unset (library default)",
+      "seconds": 65.4
+    }
+  },
+  "differences": {
+    "single_A_vs_single_B": [],
+    "single_A_vs_committed_batch_B": [],
+    "default_threads_vs_original_baseline": [],
+    "default_threads_vs_single_A": [
+      {
+        "path": "/2/monthly/mean_ic",
+        "old": -0.004142428285648768,
+        "new": -0.004142337259517049
+      },
+      {
+        "path": "/2/monthly/ic_t",
+        "old": -0.3306136301624041,
+        "new": -0.3306059466858673
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/0.0/mean_ic",
+        "old": -0.004142428285648768,
+        "new": -0.004142337259517049
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/0.0/ic_t",
+        "old": -0.3306136301624041,
+        "new": -0.3306059466858673
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/-0.3/mean_ic",
+        "old": -0.004142428285648768,
+        "new": -0.004142337259517049
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/-0.3/ic_t",
+        "old": -0.3306136301624041,
+        "new": -0.3306059466858673
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/-1.0/mean_ic",
+        "old": -0.004142428285648768,
+        "new": -0.004142337259517049
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/-1.0/ic_t",
+        "old": -0.3306136301624041,
+        "new": -0.3306059466858673
+      },
+      {
+        "path": "/3/monthly/mean_ic",
+        "old": -0.012302692054807066,
+        "new": -0.012303772737190249
+      },
+      {
+        "path": "/3/monthly/ic_t",
+        "old": -1.4971314052134872,
+        "new": -1.4972251182836223
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/0.0/mean_ic",
+        "old": -0.012302692054807066,
+        "new": -0.012303772737190249
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/0.0/ic_t",
+        "old": -1.4971314052134872,
+        "new": -1.4972251182836223
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/-0.3/mean_ic",
+        "old": -0.012302692054807066,
+        "new": -0.012303772737190249
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/-0.3/ic_t",
+        "old": -1.4971314052134872,
+        "new": -1.4972251182836223
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/-1.0/mean_ic",
+        "old": -0.012302692054807066,
+        "new": -0.012303772737190249
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/-1.0/ic_t",
+        "old": -1.4971314052134872,
+        "new": -1.4972251182836223
+      }
+    ],
+    "single_A_vs_original_baseline": [
+      {
+        "path": "/2/monthly/mean_ic",
+        "old": -0.004142337259517049,
+        "new": -0.004142428285648768
+      },
+      {
+        "path": "/2/monthly/ic_t",
+        "old": -0.3306059466858673,
+        "new": -0.3306136301624041
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/0.0/mean_ic",
+        "old": -0.004142337259517049,
+        "new": -0.004142428285648768
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/0.0/ic_t",
+        "old": -0.3306059466858673,
+        "new": -0.3306136301624041
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/-0.3/mean_ic",
+        "old": -0.004142337259517049,
+        "new": -0.004142428285648768
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/-0.3/ic_t",
+        "old": -0.3306059466858673,
+        "new": -0.3306136301624041
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/-1.0/mean_ic",
+        "old": -0.004142337259517049,
+        "new": -0.004142428285648768
+      },
+      {
+        "path": "/2/monthly_missing_return_sensitivity/-1.0/ic_t",
+        "old": -0.3306059466858673,
+        "new": -0.3306136301624041
+      },
+      {
+        "path": "/3/monthly/mean_ic",
+        "old": -0.012303772737190249,
+        "new": -0.012302692054807066
+      },
+      {
+        "path": "/3/monthly/ic_t",
+        "old": -1.4972251182836223,
+        "new": -1.4971314052134872
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/0.0/mean_ic",
+        "old": -0.012303772737190249,
+        "new": -0.012302692054807066
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/0.0/ic_t",
+        "old": -1.4972251182836223,
+        "new": -1.4971314052134872
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/-0.3/mean_ic",
+        "old": -0.012303772737190249,
+        "new": -0.012302692054807066
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/-0.3/ic_t",
+        "old": -1.4972251182836223,
+        "new": -1.4971314052134872
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/-1.0/mean_ic",
+        "old": -0.012303772737190249,
+        "new": -0.012302692054807066
+      },
+      {
+        "path": "/3/monthly_missing_return_sensitivity/-1.0/ic_t",
+        "old": -1.4972251182836223,
+        "new": -1.4971314052134872
+      }
+    ]
+  },
+  "difference_counts": {
+    "single_A_vs_single_B": 0,
+    "single_A_vs_committed_batch_B": 0,
+    "default_threads_vs_original_baseline": 0,
+    "default_threads_vs_single_A": 16,
+    "single_A_vs_original_baseline": 16
+  },
+  "single_thread_reproducible": true,
+  "baseline_reproduced_with_default_threads": true,
+  "thread_sensitivity_observed": true,
+  "residual_mechanism_one_vs_default_threads": {
+    "rows": 91430,
+    "non_missing": 54684,
+    "bitwise_different_rows": 39984,
+    "max_abs_difference": 1.734723475976807e-17,
+    "months": 38,
+    "months_with_rank_change": 2,
+    "rank_changed_rows": 4,
+    "near_tie_gaps_total": 79,
+    "months_with_rank_change_detail": [
+      {
+        "key": "10-K",
+        "month": "2023-02",
+        "n": 991,
+        "rows_with_rank_change": 2,
+        "adjacent_gaps_below_1e-9_sd": 3
+      },
+      {
+        "key": "latest",
+        "month": "2023-05",
+        "n": 1620,
+        "rows_with_rank_change": 2,
+        "adjacent_gaps_below_1e-9_sd": 3
+      }
+    ]
+  },
+  "ledger_rows_appended": 36,
+  "limits": "Same host and inputs; the original baseline's host and thread count were not recorded. Exact reproduction of a summary is numerical provenance, not scientific acceptance. No recorded results file, H4 output or holdout data was touched."
+}
