@@ -1,0 +1,726 @@
+{
+  "phase": "final",
+  "challenge": {
+    "planned": 221,
+    "correct": 221,
+    "review_planned": 183,
+    "review_correct": 183,
+    "supported_planned": 38,
+    "supported_correct": 38,
+    "false_support": 0,
+    "verdicts": {
+      "supported": 38,
+      "review": 183
+    },
+    "by_path": {
+      "notation": {
+        "planned": 137,
+        "correct": 137,
+        "review_planned": 114,
+        "review_correct": 114,
+        "supported_planned": 23,
+        "supported_correct": 23,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 23,
+          "review": 114
+        }
+      },
+      "standard": {
+        "planned": 84,
+        "correct": 84,
+        "review_planned": 69,
+        "review_correct": 69,
+        "supported_planned": 15,
+        "supported_correct": 15,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 15,
+          "review": 69
+        }
+      }
+    },
+    "by_relation": {
+      "exact_control": {
+        "planned": 7,
+        "correct": 7,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 7,
+        "supported_correct": 7,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 7
+        }
+      },
+      "dispute_suffix": {
+        "planned": 49,
+        "correct": 49,
+        "review_planned": 49,
+        "review_correct": 49,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 49
+        }
+      },
+      "dispute_prefix": {
+        "planned": 14,
+        "correct": 14,
+        "review_planned": 14,
+        "review_correct": 14,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 14
+        }
+      },
+      "hypothetical_prefix": {
+        "planned": 21,
+        "correct": 21,
+        "review_planned": 21,
+        "review_correct": 21,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 21
+        }
+      },
+      "estimate_suffix": {
+        "planned": 21,
+        "correct": 21,
+        "review_planned": 21,
+        "review_correct": 21,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 21
+        }
+      },
+      "restatement_suffix": {
+        "planned": 7,
+        "correct": 7,
+        "review_planned": 7,
+        "review_correct": 7,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 7
+        }
+      },
+      "invisible_or_confusable": {
+        "planned": 28,
+        "correct": 28,
+        "review_planned": 28,
+        "review_correct": 28,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 28
+        }
+      },
+      "fullwidth_digits": {
+        "planned": 6,
+        "correct": 6,
+        "review_planned": 6,
+        "review_correct": 6,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 6
+        }
+      },
+      "arabic_indic_digits": {
+        "planned": 6,
+        "correct": 6,
+        "review_planned": 6,
+        "review_correct": 6,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 6
+        }
+      },
+      "claim_fullwidth_digits": {
+        "planned": 7,
+        "correct": 7,
+        "review_planned": 7,
+        "review_correct": 7,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 7
+        }
+      },
+      "benign_suffix": {
+        "planned": 21,
+        "correct": 21,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 21,
+        "supported_correct": 21,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 21
+        }
+      },
+      "notation_nonassertion_vocabulary": {
+        "planned": 24,
+        "correct": 24,
+        "review_planned": 24,
+        "review_correct": 24,
+        "supported_planned": 0,
+        "supported_correct": 0,
+        "false_support": 0,
+        "verdicts": {
+          "review": 24
+        }
+      },
+      "no_break_space_control": {
+        "planned": 4,
+        "correct": 4,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 4,
+        "supported_correct": 4,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 4
+        }
+      },
+      "curly_apostrophe_control": {
+        "planned": 3,
+        "correct": 3,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 3,
+        "supported_correct": 3,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 3
+        }
+      },
+      "unrelated_customer_forecast_control": {
+        "planned": 3,
+        "correct": 3,
+        "review_planned": 0,
+        "review_correct": 0,
+        "supported_planned": 3,
+        "supported_correct": 3,
+        "false_support": 0,
+        "verdicts": {
+          "supported": 3
+        }
+      }
+    },
+    "errors": [],
+    "author_visible_not_blind": true,
+    "independent_gold": false,
+    "model_calls": 0
+  },
+  "lineage": {
+    "freeze_commit": "a2e57c49a79be416c972ae1261d86e5dff604aae",
+    "source_SHA256": {
+      "src/asof/integrity_challenge.py": "bcc6805b83830a94fff8e02ae81125f2dab66555126bc19170fa0dd87e219902",
+      "scripts/validate_integrity.py": "6f4c0a032feed921e4044ae5e0a85c110a26a777a4252a589f69428c7928d2f6",
+      "src/asof/claim_verifier.py": "4d6187c4ba220aed4d9f2de8f538664c1cc784d0eea0788cd033f9708eac7a7c",
+      "src/asof/financial_notation.py": "9c92b6b087924f51c5e71f00cec3eff93ab7fd63b38975b4df82db7ebe6f6256",
+      "src/asof/reader_fields.py": "3b1fa0053c963289ac90d74de3608be09ba3726c75e662a52514b577a75cadac",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "results/integrity_baseline.json": "9f63fec1d9eab02b35025d01e8f9db829725b736f4e0d76f9630733b4ea102dc",
+      "tests/test_financial_notation.py": "a7e7591317a00782fbd85fd6a866e3812b5bf256d0bbb41c4293735584df7642",
+      "tests/test_claim_verifier.py": "a0884e99cddccb49afe452bf46fcd918b9d22bdb15e87d3334bcc565eb99b322",
+      "src/asof/claim_assurance.py": "ffc27b0bfe38170c76535ac0ec82b58a24591db7b94336352097890feb1d934c",
+      "src/asof/claim_challenge.py": "a3d27d50e1aa82b486866af48beac2b8841e63c0d22cc5a0e29811dc3d432937",
+      "src/asof/notation_challenge.py": "b3909d6a1c2e88e7852bb8f3b00502e2f110ec76b4af06dadceb751a528a7d7e",
+      "src/asof/reader_regression.py": "a2e12a7220da4bfd6c7e89c5b4f26bd138ee3385c5baeb0db9c7289a3485d277",
+      "tests/fixtures/notation_adversarial.json": "5c2ca4b16384376203f00fcc943c1ada92f912f0e0724a2142c5b024ed842549"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "cases_sha256": "2f496c70f6a6b8922d844fbf0f121720609b881c3a0c788b2c0ae20845063c54",
+  "author_visible_not_blind": true,
+  "independent_gold": false,
+  "model_calls": 0,
+  "baseline": {
+    "planned": 221,
+    "correct": 83,
+    "review_planned": 183,
+    "review_correct": 49,
+    "supported_planned": 38,
+    "supported_correct": 34,
+    "false_support": 134,
+    "verdicts": {
+      "supported": 168,
+      "review": 53
+    },
+    "by_path": {
+      "notation": {
+        "planned": 137,
+        "correct": 41,
+        "review_planned": 114,
+        "review_correct": 18,
+        "supported_planned": 23,
+        "supported_correct": 23,
+        "false_support": 96,
+        "verdicts": {
+          "supported": 119,
+          "review": 18
+        }
+      },
+      "standard": {
+        "planned": 84,
+        "correct": 42,
+        "review_planned": 69,
+        "review_correct": 31,
+        "supported_planned": 15,
+        "supported_correct": 11,
+        "false_support": 38,
+        "verdicts": {
+          "supported": 49,
+          "review": 35
+        }
+      }
+    },
+    "author_visible_not_blind": true,
+    "independent_gold": false,
+    "model_calls": 0
+  },
+  "exposed": {
+    "original_30": {
+      "planned": 30,
+      "correct_including_unresolved_as_misses": 30,
+      "resolved": 30,
+      "requires_review": 0
+    },
+    "policy_controls": {
+      "planned": 37,
+      "correct": 37,
+      "expected_review": 9,
+      "factual_verdicts_resolved": 28,
+      "review_policy_checks_are_not_resolved_financial_facts": true
+    },
+    "supported_24": 24,
+    "notation_challenge": {
+      "planned": 24,
+      "correct": 24,
+      "resolvable_planned": 12,
+      "resolvable_correct": 12,
+      "review_planned": 12,
+      "review_correct": 12,
+      "false_support": 0,
+      "false_contradiction": 0,
+      "unresolved_resolvable": 0,
+      "verdicts": {
+        "supported": 6,
+        "contradicted": 6,
+        "review": 12
+      },
+      "resolved_without_valid_proof": 0
+    },
+    "notation_grid": {
+      "planned": 780,
+      "correct": 780,
+      "resolvable_planned": 240,
+      "resolvable_correct": 240,
+      "review_planned": 540,
+      "review_correct": 540,
+      "false_support": 0,
+      "false_contradiction": 0,
+      "unresolved_resolvable": 0,
+      "verdicts": {
+        "supported": 120,
+        "contradicted": 120,
+        "review": 540
+      },
+      "resolved_without_valid_proof": 0
+    },
+    "notation_adversarial_round1_regression": 72,
+    "reader_regressions": {
+      "status": "complete_exposed_current_candidate_regression",
+      "cohorts": {
+        "focused_original12": {
+          "contract": "current_tuple_and_source_proof_diagnostic",
+          "planned": 12,
+          "correct": 12,
+          "answerable": 7,
+          "complete_answers": 7,
+          "correct_refusals": 5,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 7,
+            "valid": 7
+          },
+          "field_checks": null
+        },
+        "grammar_robustness24": {
+          "contract": "current_tuple_and_source_proof_diagnostic",
+          "planned": 24,
+          "correct": 24,
+          "answerable": 19,
+          "complete_answers": 19,
+          "correct_refusals": 5,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 19,
+            "valid": 19
+          },
+          "field_checks": null
+        },
+        "harder_model_subset24": {
+          "contract": "current_tuple_and_source_proof_diagnostic",
+          "planned": 24,
+          "correct": 24,
+          "answerable": 22,
+          "complete_answers": 22,
+          "correct_refusals": 2,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 22,
+            "valid": 22
+          },
+          "field_checks": null
+        },
+        "harder_all288": {
+          "contract": "current_tuple_and_source_proof_diagnostic",
+          "planned": 288,
+          "correct": 288,
+          "answerable": 264,
+          "complete_answers": 264,
+          "correct_refusals": 24,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 264,
+            "valid": 264
+          },
+          "field_checks": null
+        },
+        "linked_challenge24": {
+          "contract": "current_tuple_and_source_proof_diagnostic",
+          "planned": 24,
+          "correct": 24,
+          "answerable": 12,
+          "complete_answers": 12,
+          "correct_refusals": 12,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 12,
+            "valid": 12
+          },
+          "field_checks": null
+        },
+        "reader_fields": {
+          "contract": "field-record-v1",
+          "planned": 24,
+          "correct": 24,
+          "answerable": 12,
+          "complete_answers": 12,
+          "correct_refusals": 12,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 12,
+            "valid": 12
+          },
+          "field_checks": {
+            "value": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "sign": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "currency": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "scale": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "measure": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "reporting_year": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "issuer_binding": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "metric_binding": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "scope": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "accounting_basis": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "period_kind": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "revision_status": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "source_evidence": {
+              "correct": 12,
+              "planned_answerable": 12
+            }
+          }
+        },
+        "reader_reliability": {
+          "contract": "field-record-v1",
+          "planned": 24,
+          "correct": 24,
+          "answerable": 12,
+          "complete_answers": 12,
+          "correct_refusals": 12,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 12,
+            "valid": 12
+          },
+          "field_checks": {
+            "value": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "sign": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "currency": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "scale": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "measure": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "reporting_year": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "issuer_binding": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "metric_binding": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "scope": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "accounting_basis": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "period_kind": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "revision_status": {
+              "correct": 12,
+              "planned_answerable": 12
+            },
+            "source_evidence": {
+              "correct": 12,
+              "planned_answerable": 12
+            }
+          }
+        },
+        "context_coverage192": {
+          "contract": "field-record-v1",
+          "planned": 192,
+          "correct": 192,
+          "answerable": 96,
+          "complete_answers": 96,
+          "correct_refusals": 96,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 96,
+            "valid": 96
+          },
+          "field_checks": {
+            "value": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "sign": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "currency": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "scale": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "measure": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "reporting_year": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "issuer_binding": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "metric_binding": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "scope": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "accounting_basis": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "period_kind": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "revision_status": {
+              "correct": 96,
+              "planned_answerable": 96
+            },
+            "source_evidence": {
+              "correct": 96,
+              "planned_answerable": 96
+            }
+          }
+        },
+        "cell_sources12": {
+          "contract": "field-record-v1",
+          "planned": 12,
+          "correct": 12,
+          "answerable": 6,
+          "complete_answers": 6,
+          "correct_refusals": 6,
+          "wrong_admitted_answers": 0,
+          "misses": [],
+          "proof_checks": {
+            "answered": 6,
+            "valid": 6
+          },
+          "field_checks": {
+            "value": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "sign": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "currency": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "scale": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "measure": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "reporting_year": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "issuer_binding": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "metric_binding": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "scope": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "accounting_basis": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "period_kind": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "revision_status": {
+              "correct": 6,
+              "planned_answerable": 6
+            },
+            "source_evidence": {
+              "correct": 6,
+              "planned_answerable": 6
+            }
+          }
+        }
+      },
+      "fixture_sha256": {
+        "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+        "tests/fixtures/verified_reader.json": "f36b65c0aa87258a2c1587014b04f064b85539ea45861e525bcf0b658e8524f6",
+        "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+        "tests/fixtures/linked_challenge.json": "ac34ab5c2e03ffdeae878e8ef83eb9808e2e78bafd5f4b1890200f24bace9810",
+        "tests/fixtures/reader_fields.json": "ec1c72985dd288c442b7718716409b6e55a2dcc7b24f9634a9fd0346141c20ac",
+        "tests/fixtures/reader_reliability.json": "3663885962ec7930fec547068841f1231c811efc242bf37c4f7e53b3eb96efbd"
+      },
+      "posthoc_after_source_and_outcome_exposure": true,
+      "historical_results_rewritten": false,
+      "new_model_calls": 0,
+      "independent_gold": false,
+      "promote": false,
+      "overlap": "Harder model subset overlaps all288; coverage/cell sources are reused elsewhere. Do not pool as independent observations.",
+      "contract_warning": "Old cohorts use a new source-proof diagnostic, not their original single-quote scorer. Field-labelled cohorts retain field-record-v1.",
+      "requirements": {
+        "target": "Every declared supported regression case correct; never loosen proof/tuple checks to reach target.",
+        "unknown_context_is_not_discovered_fact": true,
+        "real_world_accuracy_established": false
+      }
+    }
+  },
+  "checks_passed": true,
+  "wall_seconds": 4.844000000040978,
+  "process_peak_RSS_bytes": 39714816
+}
