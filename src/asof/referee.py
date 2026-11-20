@@ -146,8 +146,8 @@ def _timestamp_qualification(path: Path) -> tuple[bool, str]:
     value = json.loads(path.read_text())
     qualified, unresolved = value.get("qualified_UTC"), value.get("unresolved_accessions")
     ok = type(qualified) is int and qualified == 16921 and type(unresolved) is int and unresolved == 0
-    return ok, (f"Latest integrated audit: historically qualified UTC={qualified!r}, "
-                f"unresolved={unresolved!r}; conditional Eastern agreement is not qualification")
+    return ok, (f"Latest integrated audit: historically qualified UTC={qualified!r} of 16921 required, "
+                f"unresolved={unresolved!r}; every required accession must qualify")
 
 
 def _timestamp_manifest(path: Path) -> tuple[bool, str]:

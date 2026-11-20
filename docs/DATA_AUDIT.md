@@ -307,6 +307,56 @@ counts 2,955 unread/unvisited eligible cases as errors: 2,956/3,269 yields a
 unread cases, a sequentially stopped population or historical UTC. Actual verified
 assignment changes remain undetermined. Counter 3,246/34,402; ledger 74; no resume.
 
+**A3: clock-basis test, pilot-then-full continuation and qualification (2026-11-20).**
+The user approved `pilot_then_full`: a 1,000-request pilot, then the full audit only
+if throttling stayed low. On a 503, pause 10 minutes and resume more slowly, and stop
+permanently after six throttle pauses. Metadata only.
+
+[run_full_timestamps_a3.py](../scripts/run_full_timestamps_a3.py) froze the
+following at `47a6c51`, before any A3 request
+([config](../results/timestamp_full_a3_config.json)):
+
+- **Order:** 31,223 resources. The 38 earlier outcomes that were re-eligible come
+  first: 35 unknowns caused only by the old 64 KiB read bound, two 503 failures and
+  one timeout. The unrecorded remainder follows in A1's seeded order.
+- **Read bound:** raised to the adapter's supported 4 MiB. In the pilot, 46 bodies
+  exceeded 64 KiB.
+- **Pacing:** a 0.667-second minimum gap, 1.0 seconds after any pause.
+- **Errors:** a second transport failure on one resource records an explicit
+  unknown; three in a row stop the run. The ceiling stays 34,402, so 47 resources
+  would remain unread even after a complete run.
+- **Clock-basis test (CB1):** declared at the same time, before any filing-date
+  analysis. It passed on 1,564 previously fetched headers.
+- **Qualification rule:** declared at the same time.
+
+Rule, statistics and interpretation are in the
+[F9 update](FINDINGS.md#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20).
+
+| Segment | Requests | Outcome |
+|---|---:|---|
+| Pilot | 1,000 | All HTTP 200, no pauses; [gate passed](../results/timestamp_full_a3_pilot_gate.json) |
+| Full 1 | 1,046 | Stopped on one HTTP 502, which the frozen policy did not allow retrying |
+| Amendment 1 | 0 | User-approved after that stop: 502/504 handled like 503 within the same six-pause cap, with the full-1 stop charged as one pause ([record](../results/timestamp_full_a3_amendment1.json)) |
+| Full 2 | 754 | Five more gateway errors, each recovered after a 10-minute pause; the sixth stopped the audit permanently |
+
+Totals: 2,800 A3 requests, 2,793 HTTP 200, four 502 and three 504. No 503 or 429
+occurred. Every dispatch gap met its minimum: at least 0.667 seconds in the pilot and
+full 1 (medians 0.677 seconds), and at least 1.0 seconds in full 2 (median 1.013).
+
+The [A3 report](../results/timestamp_full_a3_report.json) merges the base, A1, A2 and
+A3 outcomes. Coverage is 5,929 of 34,354 resources; 28,425 were never attempted.
+It qualifies **2,708 of 16,921** accessions. The remaining 14,213 are unread, and
+none failed the rule. CB1 replicated on 1,400 newly fetched headers.
+
+The [impact receipt](../results/timestamp_a3_impact.json), declared before the
+report, finds **0** qualified accessions whose stored pair or bulk time reaches an
+earlier first close. That holds on the nominal calendar and on a conservative
+calendar with 13:00 closes on possible early-close dates. Counter 6,054/34,402.
+The ledger was not touched. Raw metadata stays under ignored
+`data\timestamp_full_a3`, hash-pinned in the report. No timestamp or research input
+was rewritten. A further continuation would need a new decision, because the
+approved pause cap is used up.
+
 ### Local-reader memory safeguards
 
 The strict-format experiments are stopped; the default local request helper is the existing

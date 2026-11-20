@@ -45,6 +45,13 @@ the real-filing figure is a deferral rate, not an accuracy measure.
 - **Still missing:** independent human labels, so accuracy on real filings is unmeasured.
   Weaker and failed results, such as raw HHEM 17/24 and the first AI judge's 5/12, stay on record.
 
+**Data integrity:** a [filing-time audit](docs/FINDINGS.md#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20)
+showed that SEC filing headers use Eastern time, by checking them against the SEC's 5:30 p.m.
+filing-date rule. It qualified 2,708 of 16,921 filings and found none that the backtest could
+trade before publication; the rest are not yet read. Monthly significance tests remain
+unreliable with only 17–18 months of data, a [permanent limit](docs/FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20)
+of this design.
+
 The broader quant toolkit is parked reference code, not validated trading models.
 
 ## The question
@@ -365,14 +372,29 @@ groups, including filings where the two sources agree
   the future.
 - **Agreement isn't proof.** In two filings both sources were 4 hours late. Those happened to be
   filings whose trading day doesn't depend on the hour.
-- **Limits.** The check reads header times as Eastern time, which SEC's documentation doesn't
-  state. Eight filings per group can't certify all 21,502.
+- **Limits.** This check read header times as Eastern time without yet testing that
+  assumption (now tested; see below). Eight filings per group can't certify all 21,502.
 
 A [random-order continuation](results/timestamp_full_a2_review.json) was cut short by repeated SEC
 server errors after 50 of 3,000 new filings. Across the 314 readable filings where the API and bulk
 archive agree, one header disagreed with both, and both sources were five hours *late*, not early.
 That puts such shared errors at no more than about 1.5% (one-sided 95% bound) among readable
 filings. Most of the planned sample is still unread, so this is not a bound for every filing.
+
+**Which clock do the headers use?** SEC Rule 13(a)(2) dates a filing submitted after 5:30 p.m.
+Eastern (standard or daylight, whichever is in effect) to the next business day. So if header
+times are Eastern, the header's filing date should change at 17:30 in summer and winter alike.
+A [declared test](results/timestamp_a3_clock_basis_cb1.json) on 1,564 headers found exactly that:
+every daylight-time filing accepted between 16:30 and 17:30 kept its date (240 of 240), almost
+every one accepted after 17:35 moved to the next day (196 of 197), and none accepted by 17:30 moved.
+A UTC or fixed-EST clock would break this pattern. The test repeated on 1,400 newly read headers.
+
+A [third audit pass](results/timestamp_full_a3_report.json) then qualified **2,708 of 16,921**
+filings that need checking, including all 364 audited filings where the two sources disagree on
+the time or the company ID.
+[None of them](results/timestamp_a3_impact.json) has a stored time that the backtest could trade
+before publication, even allowing for early market closes: the H0 time is either exact or late.
+SEC gateway errors used up the approved retry allowance, so the other 14,213 are still unread.
 
 ### Are the significance tests honest at this sample size?
 
@@ -427,7 +449,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 
 | Open question | What it needs | Why it matters |
 |---|---|---|
-| Is every trading-day assignment right? | Verify each filing's acceptance time against its own SEC header wherever an offset could move its first tradable close | Rules out the remaining timestamp-driven look-ahead |
+| Is every trading-day assignment right? | Read the remaining 14,213 filing headers; 2,708 are already verified, with no early timestamps found | Rules out the remaining timestamp-driven look-ahead |
 | Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2011 | The current sample can only detect implausibly large effects |
 | Does *what* changes matter more than *how much*? | The claim-level signal (H1), first checked against human-labelled real filing pairs and simple baselines | Synthetic benchmark scores are not real measurement accuracy |
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
@@ -506,7 +528,7 @@ point-in-time queries everything is built on.
 - [FOCUSED_READER.md](docs/FOCUSED_READER.md): the active metric-reader work, with every run's protocol, results and limits
 - [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md): exact interval reconciliation and its non-conformance/independence limits
 - [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
-- [project_readiness_checks.json](results/project_readiness_checks.json): current scoped clock/calibration checks, both failing
+- [project_readiness_checks.json](results/project_readiness_checks.json): the 2026-11-17 scoped clock/calibration checks, both failing then; the referee now reads the newer timestamp audit, and both checks still fail for the reasons in FINDINGS F9 and F10
 - [REFEREE.md](results/REFEREE.md): the recorded broader software report, not rerun by the closure check or scientific acceptance
 
 ## License

@@ -49,6 +49,8 @@
     {"id": "timestamp-original", "path": "scripts/run_full_timestamps.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "timestamp-a1", "path": "scripts/run_full_timestamps_a1.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "timestamp-a2", "path": "scripts/run_full_timestamps_a2.py", "status": "historical_stopped_no_resume", "command": null},
+    {"id": "timestamp-a3", "path": "scripts/run_full_timestamps_a3.py", "status": "historical_stopped_no_resume", "command": null},
+    {"id": "timestamp-a3-impact", "path": "scripts/timestamp_a3_impact.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "f8-h0-reproducibility", "path": "scripts/f8_h0_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-real3", "path": "scripts/run_reader_real3.py", "status": "retired_historical", "command": null},
     {"id": "kpi-development", "path": "scripts/study_kpi_omission.py", "status": "historical_stopped_no_resume", "command": null},
@@ -370,6 +372,33 @@
       "report": "docs/DATA_AUDIT.md",
       "freeze_revision": "cf65410",
       "status": "stopped_conditional_clock_assumption",
+      "supersedes": []
+    },
+    {
+      "id": "timestamp-a3-clock-basis",
+      "kind": "source_audit_declared_clock_basis_test",
+      "path": "results/timestamp_a3_clock_basis_cb1.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "47a6c51",
+      "status": "passed_rule13a2_eastern_civil_clock_replicated_on_new_headers",
+      "supersedes": []
+    },
+    {
+      "id": "timestamp-a3",
+      "kind": "source_audit",
+      "path": "results/timestamp_full_a3_report.json",
+      "report": "docs/DATA_AUDIT.md",
+      "freeze_revision": "47a6c51",
+      "status": "stopped_pause_cap_2708_of_16921_qualified_14213_unread",
+      "supersedes": ["timestamp-a2"]
+    },
+    {
+      "id": "timestamp-a3-impact",
+      "kind": "source_audit_direction_counts_not_return_effects",
+      "path": "results/timestamp_a3_impact.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "20e3fa4",
+      "status": "zero_lookahead_among_2708_qualified_nominal_and_conservative_calendars",
       "supersedes": []
     },
     {

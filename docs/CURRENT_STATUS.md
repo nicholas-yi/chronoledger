@@ -10,7 +10,15 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: [guard coverage cost on real 10-K MD&A](FOCUSED_READER.md#observed-guard-coverage-cost-on-real-10-k-mda-text-aggregate-only)
+Latest (data integrity): the
+[filing-time audit](FINDINGS.md#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20)
+established which clock EDGAR headers use, by testing them against the SEC's 5:30 p.m. Eastern
+filing-date rule, and qualified **2,708 of 16,921** accessions. None has a stored time that
+trades before publication. The other 14,213 are unread, not failed. The
+[F8 numerical gap](FINDINGS.md#f8-update-explained-by-the-numerical-thread-setting-2026-11-20)
+is explained by the thread setting, and H0 reproduces exactly (D14). Monthly calibration stays
+failing as a [permanent design limit](FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20).
+Latest (reader): [guard coverage cost on real 10-K MD&A](FOCUSED_READER.md#observed-guard-coverage-cost-on-real-10-k-mda-text-aggregate-only)
 is now measured, aggregate-only, with the private review filings excluded: after a declared
 ingestion normalization (cp1252 repair, invisible-character removal) and two stem fixes, the guards
 defer **2.1% / 4.7% / 9.8%** of real revenue sentences (alone / ±1 / ±3 sentences) on fresh issuers,
@@ -122,7 +130,7 @@ decoded by this checker. Missing targets and malformed index constraints fail CI
 | `asof ingest` | Network/cache/database operation; requires a valid development `--scope-file` before client/directory/DB creation; not authorized merely by installation |
 | H4/H6 file-backed stages | **Hard held**, even with a valid scope file |
 | Completed synthetic/feasibility runners | Historical one-attempt records; **do not rerun or delete attempt markers** |
-| Timestamp A1/A2, stopped KPI screen, retired REAL3 | Historical evidence, not launch instructions or pending automatic work |
+| Timestamp A1/A2/A3, stopped KPI screen, retired REAL3 | Historical evidence, not launch instructions or pending automatic work |
 | Other unlisted scripts | Legacy/unreviewed for execution; a script's presence is not approval |
 
 Exact classifications and paths are in the [index](project_index.json). This is

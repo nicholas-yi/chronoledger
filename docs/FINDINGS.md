@@ -10,7 +10,10 @@ own revisions, not resolution of these new discrepancies.
 **Update 2026-11-20:** the H0 part of F8 is explained by the numerical-thread
 setting and reproduces exactly under each setting
 ([F8 update](#f8-update-explained-by-the-numerical-thread-setting-2026-11-20), D14).
-F7 identity and H4 remain open.
+The header clock basis is now established, and 2,708 accessions have qualified
+times with no look-ahead found
+([F9 update](#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20)).
+F7 security identity, the 14,213 unread accessions and H4 remain open.
 
 ## Development rerun reconciliation (2026-11-13)
 
@@ -273,6 +276,12 @@ F2/F4/F6 and holdout-isolation restrictions remain. The existing technical refer
 does not automatically test this cross-source discrepancy; a technical PASS does
 not clear F7.
 
+**Update 2026-11-20:** A3 read the headers of all 256 audited CIK-disagreement
+accessions, and every one lists both CIKs (co-registrant evidence). The 148 other
+disagreements were outside the audit roster. See the
+[F9 update](#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20).
+Security-identity adjudication remains open.
+
 ## F8: single-thread Batch B does not reproduce every recorded summary bit-for-bit
 
 **Status:** exact-comparison stop gates triggered; no empirical retry or tuning.
@@ -439,6 +448,81 @@ post-`8642597` helper code; selected Ruff checks passed. Two pre-existing synthe
 rank-deficiency warnings remain. These tests validate audit arithmetic and code
 contracts, not the correctness of all live timestamps. No referee rerun was needed:
 research inputs were unchanged, and the prior referee does not certify P0.
+
+### F9 update: header clock basis established; 2,708 accessions qualified (2026-11-20)
+
+**Status: partly resolved.** The missing piece was evidence of which clock the
+filing header uses. A3 tested that against the SEC's own filing-date rule, then
+qualified every accession it could read. The other 14,213 remain unresolved
+because they were never read, not because they failed.
+
+**Clock basis (CB1).** Regulation S-T Rule 13(a)(2)
+([17 CFR 232.13](https://www.ecfr.gov/current/title-17/section-232.13)) deems a
+filing submitted after 5:30 p.m. "Eastern Standard Time or Eastern Daylight Saving
+Time, whichever is currently in effect" filed on the next business day. If the header
+`ACCEPTANCE-DATETIME` is that Eastern civil clock, its `FILING-DATE` must roll at 17:30
+in both seasons. A fixed-EST clock (the PDS field label) would roll at 16:30 in
+summer; a UTC clock would roll around 21:30. The test and its thresholds were frozen
+at `47a6c51` before any A3 request or filing-date analysis
+([CB1 receipt](../results/timestamp_a3_clock_basis_cb1.json)):
+
+| Statistic | Previously fetched headers (CB1) | New A3 headers (CB1-R) |
+|---|---:|---:|
+| Daylight weekday, accepted 16:30–17:30, same-day filing date | 240/240 | 262/262 |
+| Weekday accepted 17:35–21:30, filing date rolled forward | 196/197 | 111/112 |
+| Weekday accepted at or before 17:30 but rolled forward | 0/1,355 | 0/1,277 |
+| Decision | Pass | Pass (replicated) |
+
+This rejects the fixed-EST and UTC readings of the header. It assumes EDGAR's own
+clock was synchronized; it does not verify each second against an external clock,
+and it says nothing about JSON `Z` fields.
+
+**Qualification.** An accession qualifies when the clock basis passed and every
+archive-path header and index was read. The header and index walls must agree,
+convert uniquely through daylight-saving changes, lie inside the frozen candidate
+envelope, and carry a filing date consistent with the 17:30 cutoff. The
+[A3 report](../results/timestamp_full_a3_report.json) qualifies **2,708 of
+16,921** required accessions: all 108 designated clock disagreements, all 256 CIK
+disagreements, and 2,344 accessions from the seeded random remainder. No read
+accession failed the rule. All 2,708 first closes are assigned on the nominal
+16:00 ET calendar; none falls in the early-close window.
+
+**Look-ahead direction.** The declared
+[impact analysis](../results/timestamp_a3_impact.json) compares each stored time with
+its qualified time. It uses the nominal calendar and a conservative one that moves
+every possible early-close date to 13:00 ET:
+
+| Stored time | Equal to qualified | Same first close | Later close (delay only) | Earlier close (look-ahead) |
+|---|---:|---:|---:|---:|
+| Pair (H0 knowledge time) | 2,698 | 2,704 | 4 | **0** |
+| Bulk | 2,546 | 2,674 | 34 | **0** |
+
+The results are identical under both calendars. All 108 designated disagreements
+match the pair time; bulk is four or five hours late. Ten random-remainder
+accessions match neither stored time: both stored sources are four (seven cases)
+or five (three cases) hours **late**, like the earlier `0000003545-24-000034`
+example. A late time can only delay a trade.
+
+Among the 2,344 randomly ordered qualified accessions, 0 show pair-time look-ahead.
+A one-sided 95% Clopper-Pearson upper bound computed **after** seeing that count is
+0.13% for this population. The stop came from gateway errors, which are unrelated to
+filing times, but this is still not a certificate for the 14,213 unread accessions.
+
+**Identity (F7).** All 256 audited CIK-disagreement accessions list **both** CIKs in
+the filing header, which is co-registrant evidence. The other 148 universe
+disagreements were outside the frozen audit roster and were never fetched. Header
+roles still do not adjudicate which company's security a signal belongs to.
+
+**Acquisition.** 2,800 A3 requests: 2,793 HTTP 200, four 502 and three 504 gateway
+errors, and no 503 throttling. The first 502 stopped the run under the frozen
+policy. The owner then approved amendment 1, which handles 502/504 like 503 under the
+same six-pause cap. The sixth gateway pause stopped the audit permanently at
+6,054 of 34,402 requests. Dispatch gaps met 0.667 seconds throughout, and 1.0
+seconds after the amendment.
+
+No timestamp, table, signal, price, return or ledger row was changed, and the
+holdout remains sealed. The referee's `time_authority` check now reads this report
+and still fails, correctly, because 14,213 accessions are unresolved.
 
 ## F10: synthetic finite-sample size distortion of the registered tests
 

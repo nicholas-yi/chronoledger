@@ -125,7 +125,7 @@ accuracy or long-report memory safety. None of these fixes creates a trading res
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | The [bounded A2 continuation](../results/timestamp_full_a2_review.json) remains stopped; the [official-document review](../results/project_closure_review.json) did not establish the needed field-clock authority, despite reviewing the historical manual | Applicable clock definitions, qualified calendar/identity and verified per-filing times; conditional agreement alone is insufficient |
+| Filing timestamps | [A3](../results/timestamp_full_a3_report.json) established the header clock basis against the SEC filing-date rule and qualified 2,708 of 16,921 accessions with no look-ahead found; it stopped at its approved pause cap | Read and qualify the 14,213 unread accessions, plus qualified calendar and security identity |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Recruit two annotators and an adjudicator, qualify/freeze the roster and use the [draft guide](H1_DESIGN.md#annotation-guide-h1-claim-guide-draft-01) and [empty first-pass template](h1_annotation_first_pass_template.csv); no labels exist | Measured precision and recall on real text, with coverage, agreement and company-separated audit results |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
@@ -158,8 +158,14 @@ confidence guarantee under error-dependent stopping. Cumulative conditional comp
 change versus bulk on the original nominal calendar. These are not verified UTC corrections.
 The separate official-document review used eight more GETs (current usage 3,254 of 34,402),
 without continuing any accession job or adding cohort coverage.
-Clock authority, identity and calendar qualification remain unresolved; no further continuation,
-data repair or backtest rerun follows without another decision.
+[A3](../results/timestamp_full_a3_report.json) then tested the header clock directly. Under
+SEC Rule 13(a)(2), filing dates roll at 5:30 p.m. Eastern in both seasons, and the headers
+roll exactly there (240/240 and 262/262 same-day just before the cutoff, 0 early rolls in
+2,632 cases). That rejects fixed-EST and UTC readings. A3 qualified 2,708 accessions,
+including all 364 priority disagreements, and none has a stored time that trades before
+publication. Gateway errors used up the approved pause cap at usage 6,054 of 34,402. The
+14,213 unread accessions, calendar and security identity remain open, and no data repair
+or backtest rerun follows without another decision.
 
 A fine-tuned modern model is not automatically free of look-ahead for old filings, even if its
 fine-tuning data is old, because its pretraining may include later text. Measurement models are
