@@ -1,0 +1,390 @@
+{
+  "status": [
+    {
+      "segment": "pilot",
+      "status": "stopped_final",
+      "stop_reason": "pilot_attempt_limit_reached",
+      "charged": 1000,
+      "throttle_pauses": 0,
+      "transport_unresolved": 0
+    },
+    {
+      "segment": "full1",
+      "status": "stopped_final",
+      "stop_reason": "HTTP_502",
+      "charged": 1046,
+      "throttle_pauses": 0,
+      "transport_unresolved": 0
+    },
+    {
+      "segment": "full2",
+      "status": "stopped_final",
+      "stop_reason": "A3_throttle_pause_cap",
+      "charged": 754,
+      "throttle_pauses": 5,
+      "transport_unresolved": 0
+    }
+  ],
+  "config_SHA256": "8c46e1d0fab0f3a0ecc36d6c10bb39f339f6091bb03d3407778c41a1d58c3d70",
+  "report_lineage": {
+    "git_commit": "7c11671e35dd0bd2f3857fb2e2ea72e4b6a4140c",
+    "git_dirty": false,
+    "inputs": {},
+    "input_status": {},
+    "missing_inputs": [],
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  },
+  "amendment1_SHA256": "7f565a3819f6555f1640076d415d0c51e69586fe69d9f28a60886a900c137df8",
+  "clock_basis": {
+    "CB1_passed": true,
+    "CB1_SHA256": "0aa2e4c6f6cc535dad0423439c9512292a2d2f980e8d67be52acd565f2913869",
+    "CB1R_replication": {
+      "declared_rule": {
+        "S1_fixed_EST_rejection": "Daylight-season weekday headers with wall in [16:30,17:30): n>=30 and same-day FILING-DATE share >=0.99.",
+        "S2_UTC_rejection": "Weekday headers with wall in [17:35,21:30): n>=20 and later FILING-DATE share >=0.95. If n<20, S3 decides: >=20 walls in [06:00,10:00) and operating-window violations <=0.1%.",
+        "integrity": "Weekday walls <=17:30 whose FILING-DATE rolled forward <=0.5%, and walls outside [06:00,22:00] <=0.1% of the evaluated population.",
+        "passed": "S1 AND UTC rejection AND integrity.",
+        "population": "Readable headers with one acceptance wall, one filing date and a unique Eastern conversion; Rule 13(a)(3)-(4) 22:00-cutoff forms excluded."
+      },
+      "evaluated_headers": 1400,
+      "excluded": {},
+      "S1_daylight_16_30_to_17_30_same_day": {
+        "n": 262,
+        "k": 262,
+        "share": 1.0
+      },
+      "S1_control_standard_16_30_to_17_30_same_day": {
+        "n": 152,
+        "k": 152,
+        "share": 1.0
+      },
+      "S2_17_35_to_21_30_rolled": {
+        "n": 112,
+        "k": 111,
+        "share": 0.9910714285714286
+      },
+      "S3_walls_06_00_to_10_00": 12,
+      "S3_walls_outside_06_00_to_22_00": 0,
+      "weekday_at_or_before_17_30_rolled": {
+        "n": 1277,
+        "k": 0,
+        "share": 0.0
+      },
+      "filing_date_earlier_than_acceptance": 0,
+      "weekend_acceptances": 0,
+      "descriptive_cutoff_brackets": {
+        "daylight": {
+          "latest_same_day_wall": "17:44:13",
+          "earliest_rolled_wall_after_noon": "17:32:01",
+          "same_day_after_17_30": 4,
+          "rolled_at_or_before_17_30": 0
+        },
+        "standard": {
+          "latest_same_day_wall": "17:31:40",
+          "earliest_rolled_wall_after_noon": "17:32:27",
+          "same_day_after_17_30": 2,
+          "rolled_at_or_before_17_30": 0
+        }
+      },
+      "fixed_EST_rejected": true,
+      "UTC_rejected": true,
+      "UTC_route": "S2",
+      "integrity_passed": true,
+      "passed": true,
+      "interpretation_if_passed": "Header walls behave as the Rule 13(a)(2) Eastern civil clock (EST or EDT in effect). This rejects fixed-EST and UTC readings; it does not verify EDGAR's synchronization to UTC or correctness of any JSON timestamp."
+    },
+    "CB1R_estimable": true,
+    "basis_accepted_for_qualification": true
+  },
+  "qualified_UTC": 2708,
+  "unresolved_accessions": 14213,
+  "required_accessions": 16921,
+  "unresolved_reason_counts": {
+    "missing_unread_or_conflicting_header_index_pair": 14213,
+    "filing_date_unread_or_nonunique": 14213
+  },
+  "filing_date_consistency": {
+    "consistent": 2698,
+    "null": 14213,
+    "consistent_commencement_lag_possible": 10
+  },
+  "first_close_status": {
+    "nominal_16_00_assignment_qualified": 2708,
+    "null": 14213
+  },
+  "by_pool": {
+    "CIK_disagreement": {
+      "accessions": 256,
+      "qualified": 256,
+      "identity:both_CIKs_in_header_co_registrant_evidence": 256,
+      "qualified_equals_both": 212,
+      "equals_pair_only": 44
+    },
+    "candidate_calendar_boundary_or_clock_issue": {
+      "accessions": 676,
+      "qualified": 88,
+      "identity:agreeing_CIK_in_header": 88,
+      "qualified_equals_both": 88,
+      "identity:header_unread": 588
+    },
+    "clock_agreement_sensitive": {
+      "accessions": 15881,
+      "qualified": 2256,
+      "identity:agreeing_CIK_in_header": 2256,
+      "qualified_equals_both": 2246,
+      "identity:header_unread": 13625,
+      "equals_neither": 10
+    },
+    "clock_disagreement_summer": {
+      "accessions": 71,
+      "qualified": 71,
+      "identity:agreeing_CIK_in_header": 71,
+      "equals_pair_only": 71
+    },
+    "clock_disagreement_winter": {
+      "accessions": 37,
+      "qualified": 37,
+      "identity:agreeing_CIK_in_header": 37,
+      "equals_pair_only": 37
+    }
+  },
+  "first_close_direction": {
+    "stored_pair": {
+      "same_first_close": 2704,
+      "stored_time_equals_qualified": 2698,
+      "unqualified_rows": 14213,
+      "stored_later_delay_only": 4
+    },
+    "stored_bulk": {
+      "same_first_close": 2674,
+      "stored_time_equals_qualified": 2546,
+      "unqualified_rows": 14213,
+      "stored_later_delay_only": 34
+    }
+  },
+  "eligibility_and_latest_filing_vs_qualified": {
+    "stored_pair_versus_conditional": {
+      "conditional_accessions": 2708,
+      "UTC_month_changed": 0,
+      "first_close_unassigned": 0,
+      "first_close_comparable": 2708,
+      "first_registered_close_changed": 4,
+      "eligibility_record_month_instances_changed": 1,
+      "eligibility_accessions_changed": 1,
+      "latest_filing_firm_months_in_scope": 39940,
+      "latest_filing_firm_months_unresolved": 36530,
+      "latest_filing_firm_months_comparable": 3410,
+      "latest_filing_firm_months_changed": 0
+    },
+    "stored_bulk_versus_conditional": {
+      "conditional_accessions": 2708,
+      "UTC_month_changed": 0,
+      "first_close_unassigned": 0,
+      "first_close_comparable": 2708,
+      "first_registered_close_changed": 34,
+      "eligibility_record_month_instances_changed": 2,
+      "eligibility_accessions_changed": 2,
+      "latest_filing_firm_months_in_scope": 39940,
+      "latest_filing_firm_months_unresolved": 36530,
+      "latest_filing_firm_months_comparable": 3410,
+      "latest_filing_firm_months_changed": 1
+    }
+  },
+  "A3_attempts": 2800,
+  "A3_HTTP_status_counts": {
+    "200": 2793,
+    "502": 4,
+    "504": 3
+  },
+  "A3_retries_charged": 5,
+  "every_wait_and_retry": [
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 600,
+      "throttle_pauses": 1,
+      "failed_attempt": 5472,
+      "UTC": "2026-11-20T15:24:39.496559+00:00",
+      "perf_counter": 32897.2102211,
+      "URL_SHA256": "ddb02587f2013669a80485b4931be04d32af9a1b9f38577b66c76c60aa91510f"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.011497499996,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T15:34:39.507815+00:00",
+      "perf_counter": 33497.2217224,
+      "URL_SHA256": "ddb02587f2013669a80485b4931be04d32af9a1b9f38577b66c76c60aa91510f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 5473,
+      "UTC": "2026-11-20T15:34:39.528294+00:00",
+      "perf_counter": 33497.2418007,
+      "URL_SHA256": "ddb02587f2013669a80485b4931be04d32af9a1b9f38577b66c76c60aa91510f"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 600,
+      "throttle_pauses": 2,
+      "failed_attempt": 5593,
+      "UTC": "2026-11-20T15:36:55.699150+00:00",
+      "perf_counter": 33633.4121612,
+      "URL_SHA256": "f1fff66d2f22eacb1e16a49b4f739bbb78d480de67911947067292bf5d862260"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0143432999976,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T15:46:55.713434+00:00",
+      "perf_counter": 34233.4265127,
+      "URL_SHA256": "f1fff66d2f22eacb1e16a49b4f739bbb78d480de67911947067292bf5d862260"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 5594,
+      "UTC": "2026-11-20T15:46:55.720448+00:00",
+      "perf_counter": 34233.4336106,
+      "URL_SHA256": "f1fff66d2f22eacb1e16a49b4f739bbb78d480de67911947067292bf5d862260"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 600,
+      "throttle_pauses": 3,
+      "failed_attempt": 5625,
+      "UTC": "2026-11-20T15:47:32.172745+00:00",
+      "perf_counter": 34269.8861279,
+      "URL_SHA256": "b61d6d7638f6642647ce65b947b63b2431f2dbf31069195b29549304e805d147"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0093369000024,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T15:57:32.181752+00:00",
+      "perf_counter": 34869.8954749,
+      "URL_SHA256": "b61d6d7638f6642647ce65b947b63b2431f2dbf31069195b29549304e805d147"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 5626,
+      "UTC": "2026-11-20T15:57:32.189302+00:00",
+      "perf_counter": 34869.9024482,
+      "URL_SHA256": "b61d6d7638f6642647ce65b947b63b2431f2dbf31069195b29549304e805d147"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 600,
+      "throttle_pauses": 4,
+      "failed_attempt": 5727,
+      "UTC": "2026-11-20T15:59:43.765433+00:00",
+      "perf_counter": 35001.4786694,
+      "URL_SHA256": "bfa43eda7e74b117d75cff1df1ad4c7d22827bdfb076b144ad59a88ad738a00d"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0066766000018,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T16:09:43.772146+00:00",
+      "perf_counter": 35601.4853575,
+      "URL_SHA256": "bfa43eda7e74b117d75cff1df1ad4c7d22827bdfb076b144ad59a88ad738a00d"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 5728,
+      "UTC": "2026-11-20T16:09:43.779024+00:00",
+      "perf_counter": 35601.4928009,
+      "URL_SHA256": "bfa43eda7e74b117d75cff1df1ad4c7d22827bdfb076b144ad59a88ad738a00d"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 600,
+      "throttle_pauses": 5,
+      "failed_attempt": 5738,
+      "UTC": "2026-11-20T16:10:04.495197+00:00",
+      "perf_counter": 35622.2083239,
+      "URL_SHA256": "1b83a32bb7600c3b1baeb510205f50ca34ccf322e1b6ed6d1a513c932615c30c"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0126703999995,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T16:20:04.507523+00:00",
+      "perf_counter": 36222.2210052,
+      "URL_SHA256": "1b83a32bb7600c3b1baeb510205f50ca34ccf322e1b6ed6d1a513c932615c30c"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 5739,
+      "UTC": "2026-11-20T16:20:04.527427+00:00",
+      "perf_counter": 36222.2413187,
+      "URL_SHA256": "1b83a32bb7600c3b1baeb510205f50ca34ccf322e1b6ed6d1a513c932615c30c"
+    },
+    {
+      "event": "wait_not_started",
+      "trigger": "HTTP_502",
+      "reason": "A3_throttle_pause_cap",
+      "throttle_pauses": 5,
+      "UTC": "2026-11-20T16:25:45.274102+00:00",
+      "perf_counter": 36562.9875577,
+      "URL_SHA256": "73e6415511ca5a6060857b2813de749b041627920b426f1e6e9ef9d77d7d72ed"
+    }
+  ],
+  "counter": {
+    "actual_HTTP_attempts": 6054,
+    "ceiling": 34402
+  },
+  "effective_unique_resource_outcomes": 5929,
+  "resources_never_attempted": 28425,
+  "QPC_rate": {
+    "sends": 2800,
+    "minimum_gap_seconds": 0.6681203999978607,
+    "median_gap_seconds": 0.6795478000021831
+  },
+  "private_hash_manifest": {
+    "data\\timestamp_full_a3\\frozen_order.jsonl": "b98bd9b0f1b11b522f2c5ab4b4f5efc2b7c70ca21690252f2714927ab8981289",
+    "data\\timestamp_full_a3\\qualified_per_accession.jsonl": "20b58ebc2eb20ffbe9147d05c1c55d1f86543632d9036ac04745ee03d4059323",
+    "data\\timestamp_full_a3\\pilot\\raw_hashes.jsonl": "6ce955a499d3e3d7da918ddbdd118807814ee20235c8aececd9c483b5f40dd5f",
+    "data\\timestamp_full_a3\\pilot\\receipt_hashes.jsonl": "5d350e9ecc90343ed1f97d63b2c0a085d5e03903cfe9118b6a82cea6dabbb43b",
+    "data\\timestamp_full_a3\\full1\\raw_hashes.jsonl": "44bb7e6d120bee05dec95cc28b5b748a3612515b684b090f04674ffc3b1936f5",
+    "data\\timestamp_full_a3\\full1\\receipt_hashes.jsonl": "144d81042cf5b0c72cd0188409a699b1f1f24cd40f2e7d66e0685cab3a801705",
+    "data\\timestamp_full_a3\\full2\\raw_hashes.jsonl": "28c059d6b45ed1d5524171ccae1c3dea885277c07a5f3da0e62498bbc28553b5",
+    "data\\timestamp_full_a3\\full2\\receipt_hashes.jsonl": "3131239d3359bd3bdab66962783977d2bd0cba46ea83498dd758722a7c54be4a",
+    "data\\timestamp_full_a3\\pilot\\resource_outcomes.jsonl": "b8a51a2b88ed4e4dc98b90325a8a95de121afca2a30cbd872b438fba2e29c022",
+    "data\\timestamp_full_a3\\pilot\\requests.jsonl": "aee0be18e79d7c969ea0541c5dbcc415cb9d04df178127da657385b18c9a9604",
+    "data\\timestamp_full_a3\\full1\\resource_outcomes.jsonl": "06df9558a9f70512126ace30cea58986221bf975ff9317775d556e1781913ebf",
+    "data\\timestamp_full_a3\\full1\\requests.jsonl": "0836a0d6dbe1e83975ab3669aa83023d3f2a6d945e63242772f2910c47b7d6da",
+    "data\\timestamp_full_a3\\full2\\resource_outcomes.jsonl": "f6c2cf08b1fa43e748ba646d971c8d0a733dc8e7621c9fe171f8fc1d56db0967",
+    "data\\timestamp_full_a3\\full2\\requests.jsonl": "8cfc11dc813720e56ee4a0ddfe4c5cced2ac4c855ba9d7594578c28828d27aba",
+    "data\\timestamp_full_a3\\full2\\waits_and_retries.jsonl": "7c34ffc65d02442f357f9ec67fcb57e0c509af24e34623ded17249942bebdce4"
+  },
+  "limits": "Qualification assumes EDGAR's own clock was synchronized and the declared Rule 13(a)(2) basis; it is not second-level UTC verification. Identity is reported, not adjudicated. Direction counts compare stored inputs with qualified times; no timestamp, table, signal, price, return or ledger row was changed and no holdout data was read."
+}
