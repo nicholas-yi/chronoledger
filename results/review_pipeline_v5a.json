@@ -1,0 +1,1075 @@
+{
+  "study": "CL-FOCUS-REVIEW-PIPELINE-02A",
+  "plan": {
+    "RAM_bytes": 6442450944,
+    "call_seconds": 90,
+    "case_count": 30,
+    "case_slice": [
+      0,
+      15
+    ],
+    "controller_RAM_allowance": 134217728,
+    "controller_stop_seconds": 1180,
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "endpoint": "http://127.0.0.1:11435",
+    "generation_contract": "rules_first_then_value_check_and_disclosure_agreement_v2",
+    "max_calls": 36,
+    "model": "qwen3.5:4b",
+    "options": {
+      "num_batch": 64,
+      "num_ctx": 2048,
+      "num_gpu": 0,
+      "num_predict": 128,
+      "num_thread": 1,
+      "seed": 202611200330,
+      "temperature": 0
+    },
+    "output_truncation_policy": "count_invalid_and_continue_without_retry",
+    "preload": "one_empty_prompt_load_within_existing_startup_deadline",
+    "startup_seconds": 60,
+    "study": "CL-FOCUS-REVIEW-PIPELINE-02A",
+    "wall_seconds": 1200
+  },
+  "lineage": {
+    "freeze_commit": "da7c070e4ede143c708df9dd1fb92089820dacf8",
+    "source_SHA256": {
+      "scripts/run_focused_reader.py": "f251ffb403e0620f60f96ff9f4e73b54eb19083f3e5dd31a6b83416c73b908c7",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "src/asof/local_model_runtime.py": "cb87cd2921d71c0a50f1b5bc1ea7964b7eb8e4b51831dfd29191a16e5538125e",
+      "src/asof/reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+      "src/asof/reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+      "src/asof/reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "src/asof/benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+      "src/asof/ledger.py": "85e6f75a58616514d18c3a1fdfba8343adf23334fb76a939f2d3a97b2f3764b7",
+      "tests/fixtures/review_pipeline_v5.json": "e299975c7b63261f9372d1a89c80ce5bc4bcc6c50a53f2eba9545f6caff4a4b9",
+      "tests/test_focused_reader.py": "38346c8980c760d0d52177bda6c029194c188292c73f2f6d0d0d1d5ec161bcad",
+      "results/review_pipeline_v5a_plan.json": "b6935f9db542a8bb398e6624d85853a13230403e96493fe354db29f4778eb0d9",
+      "results/local_model_runtime_support.json": "55daf16377dfe43978e61feb3b961d690122926ccb17a8f12f1058c5230c2617",
+      "requirements-dev.lock": "c84cefb3543db283afc0a1021e2cace63ac4e7877a84611f345b928f64077f0c",
+      "docs/FOCUSED_READER.md": "0af9e902c4ce840114ef4f4636bec0440858a8155b8582fd604b93e20dbfd4f9",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "tests/test_verified_reader.py": "d43bc5af989182d0a9c99be9df776f33060a2bb72638f2c5bcce0a52b754d34e",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7",
+      "results/focused_reader_v2.json": "82bf4630e45ee5ba2edab2b75edf10a0ca1c4bb0cb6c5c3e466d00b96b4f3d14",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "tests/test_linked_reader.py": "31a760f49a43c7eff4e631ac3cc02ec747071ba2430fa269f5a9053b2a32dd1a",
+      "src/asof/reader_stress.py": "a7515ea2ac09bdb40cf224b30a0d9aa274493bd6f1a2df29f9b14a34da673cba",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "results/reader_stress.json": "aab4af98e15207aec3799f4db80764df3158814d8219d348ead3d73020ceb9a4",
+      "results/verified_reader.json": "db3414b73043bd1f1e93f2f358f2e74b3a26f9582d3efcfb57d24ff7eddf62de",
+      "src/asof/reader_fields.py": "3b1fa0053c963289ac90d74de3608be09ba3726c75e662a52514b577a75cadac",
+      "tests/test_reader_fields.py": "f53968aed3d9e1380a94412f0d7523d8323ed52327fd96760813d5d6b4602df0",
+      "results/linked_reader.json": "aa90834de02c37826c267cb0450d52184531f830730d5200448b1a6e7579b9e2",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "tests/test_reader_reliability.py": "d1fa6bee69f580b2630efe049774b343905679cbc8adea414121344682e1e3e9",
+      "results/reader_fields.json": "32580a1f4477226e848867dea935726f5731397aa6c71f49c4beeffeecfe46aa",
+      "src/asof/reader_cells.py": "1e3babc16511bcb96238fa7cbdc69104532c44703b3492a548500e7aab2beb05",
+      "src/asof/reader_field_challenge.py": "384c512732ebff3584720039e89dcffd07f7af90622f964021b41713b1b1418f",
+      "tests/test_reader_cells.py": "f79853d62bb09f752b4d285c83d2814fd8c7ff7d248d2163750df8fe44b76206",
+      "results/reader_reliability.json": "cef75a6a50a6a8793ab3101189e4a54e3184a7b4df806bf6b0c41e3253544956",
+      "src/asof/reader_ai_review.py": "ee500422e7b1c4f4eb1685199424034efb2f755ba1451c0f92525f6329f7cd42",
+      "tests/test_reader_ai_review.py": "65b546c91626bdb2d4052aa25d541b27806742fb89b6041a59cbec11a72e2f83",
+      "tests/test_local_model_runtime.py": "f5863b4261cdb2e88c490472104de858ffbe61934652daa9fc2cbaca85c0a653",
+      "results/reader_cell_selection.json": "8367b709e6e007538a56c49cc23512497e5394f0374a9cf7fb1c7fd31c3868b9",
+      "results/reader_cell_selection_accounting.json": "de4fd1bfdae62a73c0f559d1b75270dd20eb8771595a15ecac274db743734a7c",
+      "src/asof/reader_ai_review_v2.py": "3424814e190143d1a0e68d5e6b47fedea7f6034a96686149be55d4e71b7df7dd",
+      "tests/test_reader_ai_review_v2.py": "81137eb953ade407dc932de4d873029b4850ce82866ff81da89454f10ba5f1d6",
+      "results/reader_ai_review.json": "e45b2669984776079a497bb186ec4de58634ff24b138fe0545e8ea82fdffc78b",
+      "src/asof/reader_ai_review_v3.py": "f0545a6e9be312f3dd9696c5ecbed1a216758be4536c961c49cfbab397da3bd8",
+      "src/asof/review_pipeline.py": "c776c8be4d8a0e5846788c14fdbfc0b67579877554ca707d9103ce2282320dc8",
+      "src/asof/review_pipeline_v2.py": "e7a0ae7a987f678036dc6bb2326cee423f2d3844a3e192bbd4a3285f2b95b899",
+      "tests/test_review_pipeline_v2.py": "f4f7f098a5c700d8fa4fdecea232ead8ae3ef22e0bc09043756e57f683418ae0",
+      "src/asof/claim_verifier.py": "4d6187c4ba220aed4d9f2de8f538664c1cc784d0eea0788cd033f9708eac7a7c",
+      "results/review_pipeline_v4.json": "166aa7837e45080ccb29636178da3d85d41308b86a40a09931793bd489348755",
+      "results/reader_ai_review_v4.json": "a3f03bc6b69af55056554260223102eaf8a6ecc7a0dd7a5a88d7ed32d774e2ee",
+      "results/review_pipeline_v5_plan.json": "83fa778fbcbbd189b80ffb3495279c417423a329ab60c742384eacf10d720dc7",
+      "results/review_pipeline_v5b_plan.json": "2b6b39b2ea825ea5eb2f30888c1778eef8aac660eb357e0a31357b7eaecfd532",
+      "scripts/combine_review_pipeline_v5.py": "238d453de0007d18613cb2b9c0ddcaa5daff97ff2f09643b26aeff01f2ddb674"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "status": "complete_invented_comparison",
+  "stop_reason": null,
+  "records": {
+    "RV5-01": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionBirch Analytics's 2021 revenue was 621.4 EUR million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E4"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E4",
+                "start": 222,
+                "end": 287,
+                "text": " The corrected revenue for fiscal year 2021 is EUR 621.4 million."
+              }
+            ],
+            "call_id": 1,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 38.25
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E2",
+                "E3",
+                "E4"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 42,
+                "end": 140,
+                "text": " Revenue for fiscal year 2021 was initially reported in our February release as EUR 612.4 million."
+              },
+              {
+                "id": "E3",
+                "start": 140,
+                "end": 222,
+                "text": " Correction notice: that figure contained a transcription error and is superseded."
+              },
+              {
+                "id": "E4",
+                "start": 222,
+                "end": 287,
+                "text": " The corrected revenue for fiscal year 2021 is EUR 621.4 million."
+              }
+            ],
+            "call_id": 2,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 38.20399999991059
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "value_supported_disclosure_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-02": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionCedar Logistics's 2019 net income was 48.7 GBP million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "unsupported",
+              "issues": [
+                "unnecessary_abstention"
+              ],
+              "citations": [
+                "E2",
+                "E3"
+              ]
+            },
+            "outcome": "unsupported",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 42,
+                "end": 141,
+                "text": " Erratum: the net income for fiscal year 2019 printed on page 12 as GBP 48.7 million was incorrect."
+              },
+              {
+                "id": "E3",
+                "start": 141,
+                "end": 270,
+                "text": " It is replaced by the restated net income for fiscal year 2019 of GBP 46.9 million, which reflects a reclassified tax provision."
+              }
+            ],
+            "call_id": 3,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 52.92200000025332
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_check_unsupported",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-03": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "not_stated",
+              "citations": []
+            },
+            "outcome": "not_stated",
+            "source_citations": [],
+            "call_id": 4,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 37.20299999974668
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "abstention_vs_not_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-04": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionGlade Robotics's 2024 revenue was 2350 SEK million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 52,
+                "end": 182,
+                "text": " For fiscal year 2024 we expect revenue of approximately SEK 2350 million, up from SEK 2010 million reported for fiscal year 2023."
+              }
+            ],
+            "call_id": 5,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 36.67199999978766
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "not_stated",
+              "citations": []
+            },
+            "outcome": "not_stated",
+            "source_citations": [],
+            "call_id": 6,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 35.5
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_supported_disclosure_not_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-05": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": "FictionSable Devices's 2018 revenue was 52.75 EUR thousand.",
+          "proof_valid": true
+        },
+        "ai_steps": [],
+        "decided_by": "rules",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-06": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionMarble Retail's 2020 revenue was 743.2 AUD million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E3"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E3",
+                "start": 129,
+                "end": 216,
+                "text": " Page 22, five-year summary: revenue for the 2020 financial year was AUD 743.2 million."
+              }
+            ],
+            "call_id": 7,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 35.42200000025332
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "conflicting",
+              "citations": [
+                "E1",
+                "E2",
+                "E3"
+              ]
+            },
+            "outcome": "conflicting",
+            "source_citations": [
+              {
+                "id": "E1",
+                "start": 0,
+                "end": 40,
+                "text": "FictionMarble Retail annual report 2020."
+              },
+              {
+                "id": "E2",
+                "start": 40,
+                "end": 129,
+                "text": " Page 6, financial highlights: revenue for the 2020 financial year was AUD 734.2 million."
+              },
+              {
+                "id": "E3",
+                "start": 129,
+                "end": 216,
+                "text": " Page 22, five-year summary: revenue for the 2020 financial year was AUD 743.2 million."
+              }
+            ],
+            "call_id": 8,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 41.23400000017136
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_supported_disclosure_conflicting",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-07": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E3"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E3",
+                "start": 179,
+                "end": 309,
+                "text": " Following the correction of an inventory costing error, operating income for the year ended 31 December 2022 is CHF 84.5 million."
+              }
+            ],
+            "call_id": 9,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 34.765000000130385
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "abstention_vs_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-08": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "conflicting",
+              "citations": [
+                "E2",
+                "E3"
+              ]
+            },
+            "outcome": "conflicting",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 65,
+                "end": 158,
+                "text": " Its 2019 investor fact sheet states that gross margin for fiscal year 2019 was 31.4 percent."
+              },
+              {
+                "id": "E3",
+                "start": 158,
+                "end": 264,
+                "text": " Its 2019 annual report, operating review, states that gross margin for fiscal year 2019 was 33.1 percent."
+              }
+            ],
+            "call_id": 10,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 40.25
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "abstention_vs_conflicting",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-09": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionJuniper Labs's 2022 net income was 315 NOK million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 39,
+                "end": 175,
+                "text": " Net income for the year ended 31 December 2022 was NOK 315 million, compared with our guidance of NOK 340 million issued in March 2022."
+              }
+            ],
+            "call_id": 11,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 36.07800000021234
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 39,
+                "end": 175,
+                "text": " Net income for the year ended 31 December 2022 was NOK 315 million, compared with our guidance of NOK 340 million issued in March 2022."
+              }
+            ],
+            "call_id": 12,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 32.53099999995902
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "value_supported_disclosure_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-10": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionIris Telecom's 2023 operating income was 57 JPY billion.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "supported",
+              "issues": [],
+              "citations": [
+                "E4"
+              ]
+            },
+            "outcome": "supported",
+            "source_citations": [
+              {
+                "id": "E4",
+                "start": 119,
+                "end": 149,
+                "text": "| Operating income | 51 | 57 |"
+              }
+            ],
+            "call_id": 13,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 31.42199999978766
+          },
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "not_stated",
+              "citations": []
+            },
+            "outcome": "not_stated",
+            "source_citations": [],
+            "call_id": 14,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 34.34400000004098
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_supported_disclosure_not_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-11": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": "FictionUmber Brewing's 2022 operating income was 36.9 GBP million.",
+          "proof_valid": true
+        },
+        "ai_steps": [],
+        "decided_by": "rules",
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-12": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "no_unique_source_proof_requires_review",
+          "claim": "FictionNimbus Software's 2018 operating income was 92.6 CAD million.",
+          "proof_valid": false
+        },
+        "ai_steps": [
+          {
+            "step": "value",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "verdict": "unsupported",
+              "issues": [
+                "value",
+                "unit"
+              ],
+              "citations": [
+                "E1",
+                "E2"
+              ]
+            },
+            "outcome": "unsupported",
+            "source_citations": [
+              {
+                "id": "E1",
+                "start": 0,
+                "end": 90,
+                "text": "FictionNimbus Software reported operating income of CAD 92.6 million for fiscal year 2018."
+              },
+              {
+                "id": "E2",
+                "start": 90,
+                "end": 212,
+                "text": " Later in the same release, FictionNimbus Software states that operating income for fiscal year 2018 was CAD 96.2 million."
+              }
+            ],
+            "call_id": 15,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 33.45300000021234
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "value_check_unsupported",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-13": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "not_stated",
+              "citations": []
+            },
+            "outcome": "not_stated",
+            "source_citations": [],
+            "call_id": 16,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 37.15599999995902
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "supported",
+        "reason": "abstention_vs_not_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-14": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "uncertain",
+          "reason": "nondisclosure_not_provable_by_rules"
+        },
+        "ai_steps": [
+          {
+            "step": "disclosure",
+            "reviewer_id": "AI-REVIEWER-04",
+            "valid": true,
+            "raw": {
+              "answer": "stated",
+              "citations": [
+                "E2"
+              ]
+            },
+            "outcome": "stated",
+            "source_citations": [
+              {
+                "id": "E2",
+                "start": 42,
+                "end": 93,
+                "text": " Revenue for fiscal year 2021 was DKK 1840 million."
+              }
+            ],
+            "call_id": 17,
+            "attempt_status": "schema_valid",
+            "latency_seconds": 39.95300000021234
+          }
+        ],
+        "decided_by": "ai_fallback",
+        "verdict": "unsupported",
+        "reason": "abstention_vs_stated",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    },
+    "RV5-15": {
+      "pipeline_v2": {
+        "pipeline_id": "REVIEW-PIPELINE-02",
+        "rules": {
+          "verdict": "supported",
+          "reason": "exact_same_currency_quantity_equivalence",
+          "claim": "FictionTundra Games's 2019 revenue was 0.0475 EUR million.",
+          "proof_valid": true
+        },
+        "ai_steps": [],
+        "decided_by": "rules",
+        "verdict": "supported",
+        "reason": "exact_same_currency_quantity_equivalence",
+        "candidate_changed": false,
+        "counts_as_independent_human": false,
+        "creates_gold": false
+      },
+      "authored_expected_verdict_not_supplied_to_model": true
+    }
+  },
+  "calls": [
+    {
+      "call_id": 1,
+      "case_id": "RV5-01",
+      "stage": "judge",
+      "request_sha256": "bd01328b0e3f423bac2aaf4bc01fe8594a43eb85af20f77ac257ea576d685bbb",
+      "status": "schema_valid",
+      "latency_seconds": 38.25,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 2,
+      "case_id": "RV5-01",
+      "stage": "judge",
+      "request_sha256": "f46b6121807dc37cb170e949e1ceaf8ea8432558187376dd49ea0dc2556dfca0",
+      "status": "schema_valid",
+      "latency_seconds": 38.20399999991059,
+      "generated_tokens": 24,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 3,
+      "case_id": "RV5-02",
+      "stage": "judge",
+      "request_sha256": "a9a15733ff5825fb971c1641e346e317c08d81446015f08a28988c06bd7427bf",
+      "status": "schema_valid",
+      "latency_seconds": 52.92200000025332,
+      "generated_tokens": 58,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 4,
+      "case_id": "RV5-03",
+      "stage": "judge",
+      "request_sha256": "1fb12a1e132873bb45d6209ec183eb8ef44951e76609b09001acd7677c9093e0",
+      "status": "schema_valid",
+      "latency_seconds": 37.20299999974668,
+      "generated_tokens": 15,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 5,
+      "case_id": "RV5-04",
+      "stage": "judge",
+      "request_sha256": "1fd9cd6dc0ad843e48153b61a98e68ba057a6d93e3383393456b03868a404a57",
+      "status": "schema_valid",
+      "latency_seconds": 36.67199999978766,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 6,
+      "case_id": "RV5-04",
+      "stage": "judge",
+      "request_sha256": "c1f0fe7e25a989d112191f360523655756d4053a9c6d6a46af0b6ae50bd07031",
+      "status": "schema_valid",
+      "latency_seconds": 35.5,
+      "generated_tokens": 15,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 7,
+      "case_id": "RV5-06",
+      "stage": "judge",
+      "request_sha256": "b58b35f2fbc3daef4ce176373092717f52640228cd2d7d1afd1e3b075f6c655a",
+      "status": "schema_valid",
+      "latency_seconds": 35.42200000025332,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 8,
+      "case_id": "RV5-06",
+      "stage": "judge",
+      "request_sha256": "3e09560abdc11755739a1e504405bde1b7f25b6361f849fccd91c743d1d2c2a3",
+      "status": "schema_valid",
+      "latency_seconds": 41.23400000017136,
+      "generated_tokens": 24,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 9,
+      "case_id": "RV5-07",
+      "stage": "judge",
+      "request_sha256": "fbc2189f7497fa9227a1b83ed7e9c21122afc6046c9c39b04c73f577380c1d29",
+      "status": "schema_valid",
+      "latency_seconds": 34.765000000130385,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 10,
+      "case_id": "RV5-08",
+      "stage": "judge",
+      "request_sha256": "58ecc64443b75baa11c2fb344e66369ac27805ab0d037624f5df544595c387ac",
+      "status": "schema_valid",
+      "latency_seconds": 40.25,
+      "generated_tokens": 20,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 11,
+      "case_id": "RV5-09",
+      "stage": "judge",
+      "request_sha256": "243720c9c858d652d24218c002f8133f68b05210ea26363209100656a82a7687",
+      "status": "schema_valid",
+      "latency_seconds": 36.07800000021234,
+      "generated_tokens": 32,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 12,
+      "case_id": "RV5-09",
+      "stage": "judge",
+      "request_sha256": "688965459a74971d583bcd8c827d3136d48c296c63022fbd5c6893a8681bfac1",
+      "status": "schema_valid",
+      "latency_seconds": 32.53099999995902,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 13,
+      "case_id": "RV5-10",
+      "stage": "judge",
+      "request_sha256": "20d0bb47b57060b43428a77bd0d96f79d057fddbb6231aa2ba83b377f31a8f15",
+      "status": "schema_valid",
+      "latency_seconds": 31.42199999978766,
+      "generated_tokens": 20,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 14,
+      "case_id": "RV5-10",
+      "stage": "judge",
+      "request_sha256": "336dd421728e2352e34a3e88c9fba6bd008c635d232200638d4926cbd95137a0",
+      "status": "schema_valid",
+      "latency_seconds": 34.34400000004098,
+      "generated_tokens": 15,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 15,
+      "case_id": "RV5-12",
+      "stage": "judge",
+      "request_sha256": "dea33e00476b20455dcef389889d3824e003e2dabb5753d36d14ce567f6f05fb",
+      "status": "schema_valid",
+      "latency_seconds": 33.45300000021234,
+      "generated_tokens": 29,
+      "wire_contract": "value_check"
+    },
+    {
+      "call_id": 16,
+      "case_id": "RV5-13",
+      "stage": "judge",
+      "request_sha256": "a9f20f3e5495c48289a8e918ff5780630ce269fe35a28c0dde20ac8514c4a602",
+      "status": "schema_valid",
+      "latency_seconds": 37.15599999995902,
+      "generated_tokens": 15,
+      "wire_contract": "disclosure_check"
+    },
+    {
+      "call_id": 17,
+      "case_id": "RV5-14",
+      "stage": "judge",
+      "request_sha256": "4781ef9956406386cabee81193efff075f8be51e793e924fa512452bcf44bd6f",
+      "status": "schema_valid",
+      "latency_seconds": 39.95300000021234,
+      "generated_tokens": 16,
+      "wire_contract": "disclosure_check"
+    }
+  ],
+  "judge_calibration": [],
+  "candidate": null,
+  "real_data_read": false,
+  "weights_updated": false,
+  "production_ledger_rows": 0,
+  "worker_pid": 101992,
+  "affinity_mask": 1,
+  "server_pid": 85016,
+  "phase": "final",
+  "offline_baselines": null,
+  "preload": {
+    "status": "load_only_complete",
+    "wall_seconds": 16.25,
+    "model": "qwen3.5:4b",
+    "generated_tokens_reported": null,
+    "load_duration_ns": null,
+    "response_text_empty": true,
+    "separate_from_evaluated_generation": true,
+    "documentation": "https://github.com/ollama/ollama/blob/main/docs/api.md#load-a-model"
+  },
+  "worker_wall_seconds": 658.405999999959,
+  "worker_exit_code": 0,
+  "summary": {
+    "pipeline_id": "REVIEW-PIPELINE-02",
+    "reviewer_id": "AI-REVIEWER-04",
+    "pipeline": {
+      "planned": 15,
+      "correct_verdicts": 15,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 15,
+      "resolved_correct": 15
+    },
+    "rules_only": {
+      "planned": 15,
+      "correct_verdicts": 3,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 12,
+      "resolved": 3,
+      "resolved_correct": 3
+    },
+    "ai_on_rule_deferred": {
+      "planned": 12,
+      "correct_verdicts": 12,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 12,
+      "resolved_correct": 12
+    },
+    "ablation_value_check_alone_on_deferred_answered": {
+      "planned": 7,
+      "correct_verdicts": 4,
+      "false_support": 3,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 7,
+      "resolved_correct": 4
+    },
+    "agreement_on_deferred_answered": {
+      "planned": 7,
+      "correct_verdicts": 7,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 7,
+      "resolved_correct": 7
+    },
+    "abstentions": {
+      "planned": 5,
+      "correct_verdicts": 5,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 5,
+      "resolved_correct": 5
+    },
+    "decided_by": {
+      "rules": 3,
+      "ai_fallback": 12
+    },
+    "ai_calls_recorded": 17,
+    "independent_human_reviews": 0,
+    "human_gold_labels": 0,
+    "promote": false,
+    "scope": "Declared before fresh, separately AI-authored probes were opened; deliberately weighted toward conflicts, forecasts and corrections. Not human gold or real-filing accuracy."
+  },
+  "promotion": {
+    "promote": false,
+    "reason": "advisory rules-plus-AI pipeline, not human gold or decision authority"
+  },
+  "controller_wall_seconds": 660.030999999959,
+  "observed_combined_peak_RSS_bytes": 3852189696,
+  "owned_pids_observed": [
+    85016,
+    101992,
+    109252,
+    157528
+  ],
+  "source_unchanged": true,
+  "resource_check_passed": true
+}
