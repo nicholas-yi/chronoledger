@@ -52,6 +52,7 @@
     {"id": "timestamp-a3", "path": "scripts/run_full_timestamps_a3.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "timestamp-a3-impact", "path": "scripts/timestamp_a3_impact.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "f8-h0-reproducibility", "path": "scripts/f8_h0_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "f8-h4-reproducibility", "path": "scripts/h4_dev_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-real3", "path": "scripts/run_reader_real3.py", "status": "retired_historical", "command": null},
     {"id": "kpi-development", "path": "scripts/study_kpi_omission.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "audit-cs-validation", "path": "scripts/validate_audit_cs.py", "status": "historical_complete_no_rerun", "command": null},
@@ -408,6 +409,24 @@
       "report": "docs/FINDINGS.md",
       "freeze_revision": "76bbdc6",
       "status": "single_thread_exact_default_threads_reproduce_original_baseline_H4_held",
+      "supersedes": []
+    },
+    {
+      "id": "h4-dev-extract",
+      "kind": "recorded_exposure_and_exact_equivalence_not_a_hold_release",
+      "path": "results/h4_dev_extract.json",
+      "report": "docs/DEVIATIONS.md",
+      "freeze_revision": "7a23d02",
+      "status": "development_panel_equal_to_full_panel_holdout_rows_decoded_not_written",
+      "supersedes": []
+    },
+    {
+      "id": "f8-h4-reproducibility",
+      "kind": "development_numerical_provenance_not_scientific_acceptance",
+      "path": "results/f8_h4_reproducibility.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "21c36e5",
+      "status": "single_thread_exact_default_threads_reproduce_original_baseline_H4_stages_held",
       "supersedes": []
     },
     {

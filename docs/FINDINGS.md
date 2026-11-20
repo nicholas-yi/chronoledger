@@ -13,7 +13,8 @@ setting and reproduces exactly under each setting
 The header clock basis is now established, and 2,708 accessions have qualified
 times with no look-ahead found
 ([F9 update](#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20)).
-F7 security identity, the 14,213 unread accessions and H4 remain open.
+F7 security identity and the 14,213 unread accessions remain open. The H4 part of
+F8 is also explained by the thread setting (D15); the H4 stages stay held.
 
 ## Development rerun reconciliation (2026-11-13)
 
@@ -314,7 +315,7 @@ No holdout was opened or new source substituted.
 
 ### F8 update: explained by the numerical-thread setting (2026-11-20)
 
-**Status: H0 explained and exactly reproducible; H4 still held.** The approved
+**Status: H0 and H4 both explained and exactly reproducible.** The approved
 H0-only [reproducibility diagnostic](../results/f8_h0_reproducibility.json),
 frozen at `76bbdc6` with its decision rule written before execution, ran the
 unchanged registered H0 configurations in fresh child processes. It did not
@@ -340,9 +341,29 @@ alphas and the monthly series are untouched.
 No tolerance was substituted and no tie-breaking rule was adopted after the fact.
 [D14](DEVIATIONS.md#d14-hold-the-numerical-thread-setting-fixed-in-exact-reproduction)
 fixes the thread setting as part of future exact comparisons. The 36 appended
-ledger rows repeat existing config hashes, so `n_trials` is unchanged. The H4
-1e-13 coefficient differences were **not** examined: H4 remains on hard hold.
+ledger rows repeat existing config hashes, so `n_trials` is unchanged.
 This is numerical provenance, not scientific acceptance of any H0 estimate.
+
+**H4, same day.** H4's file-reading stages are held because they load outcome
+files that span the H4 holdout years. Under
+[D15](DEVIATIONS.md#d15-one-development-only-h4-extract-for-the-f8-numerical-check),
+one process read those files once, decoding 3,303 holdout-window outcome rows in
+memory and writing none, and produced a development-only extract. The extract's
+5,270-row panel equals the full-file panel exactly
+([extract receipt](../results/h4_dev_extract.json)). The registered regressions
+then ran on it in three fresh processes
+([H4 check](../results/f8_h4_reproducibility.json)):
+
+| Comparison (exact float equality) | Differences |
+|---|---:|
+| Single-thread run A vs single-thread run B | 0 |
+| Single-thread run A vs committed Batch B file | 0 |
+| Library-default threads vs the original baseline `15b8a2d` | 0 |
+| Library-default threads vs single-thread | 12 (the same 12 F8 fields, at most 6.5e-13) |
+
+So the H4 differences are also the thread setting, and D14 applies. The 18
+appended ledger rows repeat existing config hashes. Every H4 stage stays hard
+held, and nothing was run on validation or holdout data.
 
 ## F9: P0 acceptance-time authority is not uniformly certified by JSON Z fields
 

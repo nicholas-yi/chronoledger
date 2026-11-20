@@ -405,3 +405,8 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   which follows the H0 rule in D14. Its runs append ledger rows with existing
   config hashes. Every H4 file-reading stage stays hard held; the extract does
   not release H4 tests, validation, holdout evaluation or H6.
+- **Outcome (recorded after execution):** the extract's panel matched the full-file
+  panel exactly (5,270 rows; 3,303 holdout-window outcome rows decoded, none
+  written). One-thread runs matched each other and Batch B, and default threads
+  matched the original baseline; see the
+  [F8 update](FINDINGS.md#f8-update-explained-by-the-numerical-thread-setting-2026-11-20).
