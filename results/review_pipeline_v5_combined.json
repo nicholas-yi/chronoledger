@@ -1,0 +1,109 @@
+{
+  "status": "complete_combined_pre_split_halves",
+  "summary": {
+    "pipeline_id": "REVIEW-PIPELINE-02",
+    "reviewer_id": "AI-REVIEWER-04",
+    "pipeline": {
+      "planned": 30,
+      "correct_verdicts": 30,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 30,
+      "resolved_correct": 30
+    },
+    "rules_only": {
+      "planned": 30,
+      "correct_verdicts": 5,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 25,
+      "resolved": 5,
+      "resolved_correct": 5
+    },
+    "ai_on_rule_deferred": {
+      "planned": 25,
+      "correct_verdicts": 25,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 25,
+      "resolved_correct": 25
+    },
+    "ablation_value_check_alone_on_deferred_answered": {
+      "planned": 16,
+      "correct_verdicts": 10,
+      "false_support": 6,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 16,
+      "resolved_correct": 10
+    },
+    "agreement_on_deferred_answered": {
+      "planned": 16,
+      "correct_verdicts": 16,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 16,
+      "resolved_correct": 16
+    },
+    "abstentions": {
+      "planned": 10,
+      "correct_verdicts": 10,
+      "false_support": 0,
+      "false_rejection": 0,
+      "uncertain_or_invalid": 0,
+      "resolved": 10,
+      "resolved_correct": 10
+    },
+    "decided_by": {
+      "rules": 5,
+      "ai_fallback": 25
+    },
+    "ai_calls_recorded": 38,
+    "independent_human_reviews": 0,
+    "human_gold_labels": 0,
+    "promote": false,
+    "scope": "Declared before fresh, separately AI-authored probes were opened; deliberately weighted toward conflicts, forecasts and corrections. Not human gold or real-filing accuracy."
+  },
+  "halves": [
+    {
+      "study": "CL-FOCUS-REVIEW-PIPELINE-02A",
+      "status": "complete_invented_comparison",
+      "stop_reason": null,
+      "calls": 17,
+      "controller_wall_seconds": 660.030999999959,
+      "resource_check_passed": true,
+      "freeze_commit": "da7c070e4ede143c708df9dd1fb92089820dacf8"
+    },
+    {
+      "study": "CL-FOCUS-REVIEW-PIPELINE-02B",
+      "status": "complete_invented_comparison",
+      "stop_reason": null,
+      "calls": 21,
+      "controller_wall_seconds": 820.4840000001714,
+      "resource_check_passed": true,
+      "freeze_commit": "567cd1bd912f15755930867df2450a217a2e184d"
+    }
+  ],
+  "fixture_sha256": "e299975c7b63261f9372d1a89c80ce5bc4bcc6c50a53f2eba9545f6caff4a4b9",
+  "lineage": {
+    "freeze_commit": "dc7c67be5d89acc3a68137c7bb9c945d57122b0e",
+    "source_SHA256": {
+      "tests/fixtures/review_pipeline_v5.json": "e299975c7b63261f9372d1a89c80ce5bc4bcc6c50a53f2eba9545f6caff4a4b9",
+      "results/review_pipeline_v5a.json": "0219814a1f5d92b4e837f1d1883d37c1c0ebe2f5d7b52b5a0ee2f69df4668cae",
+      "results/review_pipeline_v5b.json": "17023cfc84e18ee234490080856c42e87b0db199f8f7b537ad5f1fe8fbaea0f2",
+      "scripts/combine_review_pipeline_v5.py": "238d453de0007d18613cb2b9c0ddcaa5daff97ff2f09643b26aeff01f2ddb674",
+      "src/asof/review_pipeline_v2.py": "e7a0ae7a987f678036dc6bb2326cee423f2d3844a3e192bbd4a3285f2b95b899",
+      "src/asof/review_pipeline.py": "c776c8be4d8a0e5846788c14fdbfc0b67579877554ca707d9103ce2282320dc8",
+      "src/asof/reader_ai_review_v3.py": "f0545a6e9be312f3dd9696c5ecbed1a216758be4536c961c49cfbab397da3bd8",
+      "src/asof/claim_verifier.py": "4d6187c4ba220aed4d9f2de8f538664c1cc784d0eea0788cd033f9708eac7a7c",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "model_calls_in_this_script": 0,
+  "wall_seconds": 0.0,
+  "process_peak_RSS_bytes": 35307520
+}
