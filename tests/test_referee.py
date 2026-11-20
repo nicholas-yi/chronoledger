@@ -65,6 +65,18 @@ def test_conditional_timestamp_coverage_is_not_historical_qualification(tmp_path
     assert not referee._timestamp_manifest(path)[0]
 
 
+def test_timestamp_manifest_is_confined_to_its_own_audit_directory(tmp_path) -> None:
+    import json
+
+    from asof import referee
+
+    path = tmp_path / "timestamp_full_a3_report.json"
+    path.write_text(json.dumps({"private_hash_manifest": {
+        "data/timestamp_full_a2/checkpoint.json": "0" * 64}}))
+    ok, evidence = referee._timestamp_manifest(path)
+    assert not ok and "outside" in evidence
+
+
 def test_default_referee_includes_recorded_clock_and_calibration_gaps() -> None:
     from asof.referee import default_threats
 

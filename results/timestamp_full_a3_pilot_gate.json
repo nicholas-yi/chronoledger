@@ -1,0 +1,10 @@
+{
+  "gate_passed": true,
+  "pilot_status": "stopped_final",
+  "stop_reason": "pilot_attempt_limit_reached",
+  "charged": 1000,
+  "throttle_pauses": 0,
+  "transport_unresolved": 0,
+  "rule": "Full runs only if the pilot stopped at its attempt limit or finished the order, used <=1 throttle pause and had no other stop.",
+  "status_SHA256": "2eab666be8dd885eb0b351cf65c3059b89ba0572ba1f723ada3b6d1877a0b256"
+}

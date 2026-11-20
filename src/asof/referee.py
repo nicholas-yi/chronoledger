@@ -134,6 +134,12 @@ def _calibration_harness(path: Path) -> tuple[bool, str]:
     return ok, "Recorded synthetic harness completion; not scientific acceptance or a rerun"
 
 
+def _latest_timestamp_report() -> Path:
+    """Latest integrated timestamp audit: A3 once reported, otherwise the A2 record."""
+    a3 = PROJECT_ROOT / "results" / "timestamp_full_a3_report.json"
+    return a3 if a3.exists() else PROJECT_ROOT / "results" / "timestamp_full_a2_report.json"
+
+
 def _timestamp_qualification(path: Path) -> tuple[bool, str]:
     if not path.exists():
         return False, "missing per-accession historical clock qualification"
@@ -152,9 +158,11 @@ def _timestamp_manifest(path: Path) -> tuple[bool, str]:
     manifest = json.loads(path.read_text()).get("private_hash_manifest")
     if not isinstance(manifest, dict) or not manifest:
         return False, "empty or malformed timestamp manifest"
+    private = DATA_DIR / ("timestamp_full_a3" if path.name.startswith("timestamp_full_a3")
+                          else "timestamp_full_a2")
     for relative, digest in manifest.items():
         target = (PROJECT_ROOT / relative).resolve()
-        if not target.is_relative_to((DATA_DIR / "timestamp_full_a2").resolve()):
+        if not target.is_relative_to(private.resolve()):
             return False, "timestamp manifest points outside its metadata-only audit directory"
         if not target.is_file() or file_sha256(target) != digest:
             return False, f"missing or changed timestamp evidence: {relative}"
@@ -563,9 +571,9 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
     return [
         Threat("time_authority", "Have the required filing clocks been historically qualified?", [
             Check("qualified per-accession clocks, not conditional agreement",
-                  lambda: _timestamp_qualification(PROJECT_ROOT / "results" / "timestamp_full_a2_report.json")),
+                  lambda: _timestamp_qualification(_latest_timestamp_report())),
             Check("recorded metadata evidence hashes remain intact",
-                  lambda: _timestamp_manifest(PROJECT_ROOT / "results" / "timestamp_full_a2_report.json")),
+                  lambda: _timestamp_manifest(_latest_timestamp_report())),
         ]),
         Threat("inference.calibration", "Does the registered monthly test have acceptable null size?", [
             Check("registered NW6 meets its recorded calibration adoption rule",
