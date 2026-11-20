@@ -49,6 +49,7 @@
     {"id": "timestamp-original", "path": "scripts/run_full_timestamps.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "timestamp-a1", "path": "scripts/run_full_timestamps_a1.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "timestamp-a2", "path": "scripts/run_full_timestamps_a2.py", "status": "historical_stopped_no_resume", "command": null},
+    {"id": "f8-h0-reproducibility", "path": "scripts/f8_h0_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-real3", "path": "scripts/run_reader_real3.py", "status": "retired_historical", "command": null},
     {"id": "kpi-development", "path": "scripts/study_kpi_omission.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "audit-cs-validation", "path": "scripts/validate_audit_cs.py", "status": "historical_complete_no_rerun", "command": null},
@@ -369,6 +370,15 @@
       "report": "docs/DATA_AUDIT.md",
       "freeze_revision": "cf65410",
       "status": "stopped_conditional_clock_assumption",
+      "supersedes": []
+    },
+    {
+      "id": "f8-h0-reproducibility",
+      "kind": "development_numerical_provenance_not_scientific_acceptance",
+      "path": "results/f8_h0_reproducibility.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "76bbdc6",
+      "status": "single_thread_exact_default_threads_reproduce_original_baseline_H4_held",
       "supersedes": []
     },
     {

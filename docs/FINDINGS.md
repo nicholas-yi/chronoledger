@@ -3,10 +3,14 @@
 Findings are recorded as they occur, including ones that weaken this project's own design.
 
 **Latest Batch B status:** development reruns completed once, but exact numerical
-reconciliation and claims-roster identity gates are **BLOCKED**; see F7/F8 below.
+reconciliation and claims-roster identity gates were **BLOCKED**; see F7/F8 below.
 No retry, tolerance relaxation, identity remapping or DSR calculation was used to
 make them pass. Earlier successful engineering checks remain evidence for their
 own revisions, not resolution of these new discrepancies.
+**Update 2026-11-20:** the H0 part of F8 is explained by the numerical-thread
+setting and reproduces exactly under each setting
+([F8 update](#f8-update-explained-by-the-numerical-thread-setting-2026-11-20), D14).
+F7 identity and H4 remain open.
 
 ## Development rerun reconciliation (2026-11-13)
 
@@ -299,6 +303,38 @@ reproducibility or scientific acceptance. Numerical provenance and the source
 disagreement in F7 need explicit review before additional affected evaluations.
 No holdout was opened or new source substituted.
 
+### F8 update: explained by the numerical-thread setting (2026-11-20)
+
+**Status: H0 explained and exactly reproducible; H4 still held.** The approved
+H0-only [reproducibility diagnostic](../results/f8_h0_reproducibility.json),
+frozen at `76bbdc6` with its decision rule written before execution, ran the
+unchanged registered H0 configurations in fresh child processes. It did not
+overwrite the recorded results file:
+
+| Comparison (`results` and `coverage`, exact float equality) | Differences |
+|---|---:|
+| Single-thread run A vs single-thread run B | 0 |
+| Single-thread run A vs committed Batch B file | 0 |
+| Library-default threads vs the original multi-thread baseline `15b8a2d` | 0 |
+| Library-default threads vs single-thread | 16 (the same 16 F8 fields) |
+
+Both recorded values are therefore deterministic on this host: one numerical
+thread reproduces Batch B bit for bit, and the OpenBLAS default (0.3.34, 16
+logical CPUs) reproduces the original baseline bit for bit. The mechanism was
+measured directly on the neutralized formation residuals, without reading returns.
+39,984 of 54,684 residuals differ in the last bits between the two settings, at
+most 1.7e-17. Only two near-tied pairs swap rank, four rows in total
+(10-K formation 2023-02 and latest formation 2023-05). Those swaps are the only
+change to rank IC, so mean IC moves by 9.1e-8 and 1.1e-6. Net/gross returns,
+alphas and the monthly series are untouched.
+
+No tolerance was substituted and no tie-breaking rule was adopted after the fact.
+[D14](DEVIATIONS.md#d14-hold-the-numerical-thread-setting-fixed-in-exact-reproduction)
+fixes the thread setting as part of future exact comparisons. The 36 appended
+ledger rows repeat existing config hashes, so `n_trials` is unchanged. The H4
+1e-13 coefficient differences were **not** examined: H4 remains on hard hold.
+This is numerical provenance, not scientific acceptance of any H0 estimate.
+
 ## F9: P0 acceptance-time authority is not uniformly certified by JSON Z fields
 
 **Status: P0 BLOCKED; no safe global time correction selected.** The read-only
@@ -477,3 +513,19 @@ No robust procedure, DSR/PBO or calibration outcome was applied to development d
 Monthly acceptance remains undetermined under unreliable geometry/low-nu rare-level
 holds; panel IM's label cannot clear P0, F2/F4, source, measurement or owner gates.
 The holdout remains sealed.
+
+### F10 status: a permanent limit of this design (2026-11-20)
+
+The failing `inference.calibration` referee check is **not a pending task** that
+more engineering can close. It fails because the registered monthly design has only T=17/18 development
+months, and the sealed holdout has about 28. Every monthly procedure tested,
+including the established robust alternatives, fails the frozen 5% size rule at
+all three lengths. More simulation cannot add months, and opening the holdout
+for that purpose is not authorized. Switching to a method chosen after these
+results would be a post-result protocol change.
+
+So the check stays failing on purpose, and the referee keeps reporting it. Any
+monthly t-statistic in this project should be read as descriptive. Closing the
+gap needs a new study design with more independent months, such as the
+[older-period study](RESEARCH_PLAN.md#closing-the-known-gaps), registered before
+its data are examined. This is a scope statement, not a new simulation or test.

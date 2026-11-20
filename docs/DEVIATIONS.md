@@ -364,3 +364,26 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   to the existing D6 limitation: **no future H4/H6(a) holdout evaluation may be
   described as untouched**. Hypotheses, outcomes, registered windows and
   thresholds are unchanged. No ledger row, holdout release, push or tag follows.
+
+## D14: hold the numerical-thread setting fixed in exact reproduction
+
+- **Logged:** 2026-11-20, **after** F8 and after the approved H0-only
+  [reproducibility diagnostic](../results/f8_h0_reproducibility.json). It changes
+  which run counts as the like-for-like reference. It does not change any
+  estimate, sign, registered N, threshold, window or conclusion, so no tag.
+- **Evidence:** with one numerical thread, two fresh runs match each other and
+  the committed Batch B file bit for bit. With the OpenBLAS default, a fresh run
+  matches the original multi-thread baseline `15b8a2d` bit for bit. The two
+  settings differ only through two near-tie rank swaps in neutralized residuals
+  ([F8 update](FINDINGS.md#f8-update-explained-by-the-numerical-thread-setting-2026-11-20)).
+- **Rule:** exact-comparison gates compare runs with the same recorded
+  numerical-thread setting. One thread (`OPENBLAS/OMP/MKL/NUMEXPR_NUM_THREADS=1`)
+  is the canonical setting, and the current single-thread
+  `results/returns_h0_development.json` is the H0 reference. The multi-thread
+  baseline stays valid history under its own setting; neither is rewritten.
+- **Not adopted:** no numerical tolerance, rounding or post-hoc tie-breaking
+  rule. A deterministic tie-break would be a method change and would need its
+  own prospective deviation.
+- **Scope:** H0 only. The H4 1e-13 coefficient differences were not examined,
+  and H4 stays on hard hold. This explains a stopped gate; it is not scientific
+  acceptance, and it releases no H4/H6 stage, holdout or new hypothesis.

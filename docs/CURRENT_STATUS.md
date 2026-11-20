@@ -148,7 +148,10 @@ The wheel smoke test builds offline with an installed backend whose version must
 match the committed lock, installs only the project wheel without dependencies into
 an owned temporary target, and imports it with precedence over the editable checkout.
 It reuses the already installed locked numerical dependencies. It is not a clean
-machine dependency-resolver test or remote CI evidence until those jobs actually run.
+machine dependency-resolver test. CI now runs it on Ubuntu and Windows after a
+hash-locked install; it passed in runs
+[44746416468](https://github.com/nicholas-yi/chronoledger/actions/runs/44746416468) and
+[44748676153](https://github.com/nicholas-yi/chronoledger/actions/runs/44748676153).
 An optional `--build-python` selects a separately prepared throwaway build environment
 if the working environment lacks the locked backend; it does not install dependencies
 or silently resolve a different version.
@@ -182,5 +185,6 @@ Local 2026-11-19 checks for the ingestion/accounting/navigation cleanup:
   using its committed hashes, **only into a throwaway build environment**.
   The final build/import/demo used that backend and all temporary targets were removed.
   No dependency manifest/lock or project environment installation was changed.
-- The new wheel/navigation CI steps have not run remotely for this revision;
-  no push was performed. These checks do not certify scientific validity.
+- The new wheel/navigation CI steps had not run remotely for this revision at the
+  time; no push was performed. They have since passed remotely (see above).
+  These checks do not certify scientific validity.
