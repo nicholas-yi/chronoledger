@@ -1,0 +1,2831 @@
+{
+  "phase": "baseline",
+  "challenge": {
+    "planned": 24,
+    "correct": 12,
+    "resolvable_planned": 12,
+    "resolvable_correct": 0,
+    "review_planned": 12,
+    "review_correct": 12,
+    "false_support": 0,
+    "false_contradiction": 0,
+    "unresolved_resolvable": 12,
+    "verdicts": {
+      "review": 24
+    },
+    "resolved_without_valid_proof": 0,
+    "rows": [
+      {
+        "id": "NOTATION-01",
+        "category": "compact_bn",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-02",
+        "category": "compact_bn",
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-03",
+        "category": "spelled_amount",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-04",
+        "category": "spelled_amount",
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-05",
+        "category": "compact_k_equivalence",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-06",
+        "category": "compact_k_equivalence",
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-07",
+        "category": "euro_symbol",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-08",
+        "category": "euro_symbol",
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-09",
+        "category": "spelled_us_dollars",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-10",
+        "category": "spelled_us_dollars",
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-11",
+        "category": "compact_m_equivalence",
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-12",
+        "category": "compact_m_equivalence",
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-13",
+        "category": "employee_turnover",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-14",
+        "category": "ambiguous_dollar_symbol",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-15",
+        "category": "forecast_modal",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-16",
+        "category": "inventory_turnover",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-17",
+        "category": "ambiguous_pounds",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-18",
+        "category": "trailing_qualification",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-19",
+        "category": "unaliased_net_sales",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-20",
+        "category": "wrong_year",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-21",
+        "category": "competitor_subject",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-22",
+        "category": "turnover_ratio",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-23",
+        "category": "illustrative",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "NOTATION-24",
+        "category": "percent_not_amount",
+        "expected_verdict": "review",
+        "verdict": "review",
+        "correct": true,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      }
+    ]
+  },
+  "grid": {
+    "planned": 780,
+    "correct": 540,
+    "resolvable_planned": 240,
+    "resolvable_correct": 0,
+    "review_planned": 540,
+    "review_correct": 540,
+    "false_support": 0,
+    "false_contradiction": 0,
+    "unresolved_resolvable": 240,
+    "verdicts": {
+      "review": 780
+    },
+    "resolved_without_valid_proof": 0,
+    "by_relation": {
+      "exact": {
+        "planned": 60,
+        "correct": 0,
+        "resolvable_planned": 60,
+        "resolvable_correct": 0,
+        "review_planned": 0,
+        "review_correct": 0,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 60,
+        "resolved_without_valid_proof": 0
+      },
+      "rescaled_equivalent": {
+        "planned": 60,
+        "correct": 0,
+        "resolvable_planned": 60,
+        "resolvable_correct": 0,
+        "review_planned": 0,
+        "review_correct": 0,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 60,
+        "resolved_without_valid_proof": 0
+      },
+      "value_changed": {
+        "planned": 60,
+        "correct": 0,
+        "resolvable_planned": 60,
+        "resolvable_correct": 0,
+        "review_planned": 0,
+        "review_correct": 0,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 60,
+        "resolved_without_valid_proof": 0
+      },
+      "currency_changed": {
+        "planned": 60,
+        "correct": 0,
+        "resolvable_planned": 60,
+        "resolvable_correct": 0,
+        "review_planned": 0,
+        "review_correct": 0,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 60,
+        "resolved_without_valid_proof": 0
+      },
+      "claim_year_absent": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      },
+      "claim_metric_absent": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      },
+      "qualified_metric": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      },
+      "nonasserted_verb": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      },
+      "trailing_qualification": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      },
+      "illustrative_document": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      },
+      "ambiguous_currency": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      },
+      "third_party_subject": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      },
+      "issuer_prefix_collision": {
+        "planned": 60,
+        "correct": 60,
+        "resolvable_planned": 0,
+        "resolvable_correct": 0,
+        "review_planned": 60,
+        "review_correct": 60,
+        "false_support": 0,
+        "false_contradiction": 0,
+        "unresolved_resolvable": 0,
+        "resolved_without_valid_proof": 0
+      }
+    },
+    "errors": [
+      {
+        "id": "GRID-00-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-00-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-00-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-00-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-01-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-01-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-01-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-01-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-02-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-02-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-02-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-02-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-03-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-03-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-03-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-03-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-04-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-04-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-04-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-04-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-05-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-05-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-05-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-05-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-06-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-06-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-06-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-06-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-07-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-07-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-07-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-07-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-08-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-08-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-08-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-08-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-09-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-09-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-09-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-09-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-10-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-10-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-10-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-10-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-11-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-11-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-11-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-11-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-12-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-12-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-12-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-12-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-13-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-13-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-13-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-13-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-14-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-14-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-14-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-14-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-15-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-15-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-15-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-15-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-16-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-16-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-16-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-16-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-17-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-17-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-17-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-17-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-18-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-18-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-18-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-18-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-19-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-19-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-19-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-19-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-20-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-20-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-20-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-20-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-21-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-21-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-21-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-21-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-22-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-22-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-22-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-22-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-23-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-23-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-23-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-23-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-24-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-24-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-24-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-24-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-25-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-25-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-25-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-25-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-26-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-26-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-26-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-26-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-27-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-27-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-27-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-27-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-28-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-28-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-28-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-28-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-29-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-29-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-29-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-29-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-30-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-30-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-30-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-30-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-31-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-31-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-31-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-31-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-32-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-32-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-32-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-32-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-33-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-33-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-33-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-33-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-34-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-34-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-34-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-34-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-35-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-35-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-35-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-35-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-36-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-36-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-36-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-36-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-37-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-37-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-37-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-37-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-38-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-38-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-38-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-38-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-39-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-39-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-39-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-39-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-40-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-40-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-40-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-40-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-41-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-41-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-41-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-41-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-42-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-42-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-42-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-42-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-43-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-43-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-43-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-43-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-44-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-44-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-44-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-44-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-45-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-45-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-45-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-45-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-46-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-46-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-46-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-46-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-47-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-47-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-47-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-47-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-48-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-48-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-48-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-48-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-49-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-49-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-49-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-49-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-50-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-50-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-50-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-50-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-51-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-51-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-51-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-51-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-52-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-52-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-52-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-52-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-53-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-53-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-53-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-53-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-54-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-54-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-54-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-54-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-55-exact",
+        "relation": "exact",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-55-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 0,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-55-value_changed",
+        "relation": "value_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-55-currency_changed",
+        "relation": "currency_changed",
+        "form": 0,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-56-exact",
+        "relation": "exact",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-56-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 1,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-56-value_changed",
+        "relation": "value_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-56-currency_changed",
+        "relation": "currency_changed",
+        "form": 1,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-57-exact",
+        "relation": "exact",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-57-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 2,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-57-value_changed",
+        "relation": "value_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-57-currency_changed",
+        "relation": "currency_changed",
+        "form": 2,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-58-exact",
+        "relation": "exact",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-58-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 3,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-58-value_changed",
+        "relation": "value_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-58-currency_changed",
+        "relation": "currency_changed",
+        "form": 3,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-59-exact",
+        "relation": "exact",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-59-rescaled_equivalent",
+        "relation": "rescaled_equivalent",
+        "form": 4,
+        "expected_verdict": "supported",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-59-value_changed",
+        "relation": "value_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      },
+      {
+        "id": "GRID-59-currency_changed",
+        "relation": "currency_changed",
+        "form": 4,
+        "expected_verdict": "contradicted",
+        "verdict": "review",
+        "correct": false,
+        "proof_valid": false,
+        "reason": "no_unique_source_proof_requires_review"
+      }
+    ]
+  },
+  "independent_gold": false,
+  "model_calls": 0,
+  "lineage": {
+    "freeze_commit": "b2e68c202357e86cdf718c8426eb6b68c71858cc",
+    "source_SHA256": {
+      "src/asof/notation_challenge.py": "b3909d6a1c2e88e7852bb8f3b00502e2f110ec76b4af06dadceb751a528a7d7e",
+      "scripts/validate_notation.py": "929e9458f1cb1f68847d1fd9933a428b6d869429ba687bdd3e202bbd07c0f64a",
+      "src/asof/claim_verifier.py": "730d0008a170a22dca1316be28126271d47fd18769704ccf44d6593ae2368efc",
+      "src/asof/reader_fields.py": "bde1ca7a373e8e806c5f429a3fca5bc90d7a841e6eadb44ee7fbb10f6051f5ac",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "fixture_sha256": "c55f5291eb9782768b2900fa1fdf10e4ed2f924f5097e781f01fef4fd570dcb6",
+  "grid_sha256": "dc221f1ec837fc7bc33ccb46efef4c80fadd551900804d063a5ba93c5da165aa",
+  "author_visible_not_blind": true,
+  "wall_seconds": 0.5470000002533197,
+  "process_peak_RSS_bytes": 37076992
+}
