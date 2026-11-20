@@ -1,0 +1,1175 @@
+{
+  "study": "CL-FOCUS-AI-REVIEW-02B",
+  "plan": {
+    "RAM_bytes": 6442450944,
+    "call_seconds": 90,
+    "case_count": 18,
+    "controller_RAM_allowance": 134217728,
+    "controller_stop_seconds": 1180,
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "endpoint": "http://127.0.0.1:11435",
+    "generation_contract": "6_fresh_plus_12_exposed_decomposed_AI_reviews_v2",
+    "max_calls": 18,
+    "model": "qwen3.5:4b",
+    "options": {
+      "num_batch": 64,
+      "num_ctx": 2048,
+      "num_gpu": 0,
+      "num_predict": 128,
+      "num_thread": 1,
+      "seed": 202611200915,
+      "temperature": 0
+    },
+    "output_truncation_policy": "count_invalid_and_continue_without_retry",
+    "preload": "one_empty_prompt_load_within_existing_startup_deadline",
+    "startup_seconds": 60,
+    "study": "CL-FOCUS-AI-REVIEW-02B",
+    "wall_seconds": 1200
+  },
+  "lineage": {
+    "freeze_commit": "749b515aaf82a91502f32630c9761ae9c3aaf29b",
+    "source_SHA256": {
+      "scripts/run_focused_reader.py": "c8efe96fd815c67dc0dd3b206906c757689e58d4e1bf0acfd73d9630e2946e58",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "src/asof/local_model_runtime.py": "cb87cd2921d71c0a50f1b5bc1ea7964b7eb8e4b51831dfd29191a16e5538125e",
+      "src/asof/reader_real2_guards.py": "ae81043c5099345039e0e958b52d9708803e8c18ded105327ea89921ddd59c7d",
+      "src/asof/reader_positive_control.py": "930e771f0dc3a59c72feda115382baf1b1e402e472abee065ed5b95e1d26a844",
+      "src/asof/reader_diagnostic.py": "b4edad4d0ff2537a3ace8779d2841a3d0d438bb59e43dce3345be3714e949f6b",
+      "src/asof/benchmark_baseline.py": "718bfc84bb18f1d8d81851c13b0eae3c5293947ce7a455db669811d87b9b473d",
+      "src/asof/ledger.py": "85e6f75a58616514d18c3a1fdfba8343adf23334fb76a939f2d3a97b2f3764b7",
+      "tests/test_focused_reader.py": "c5d530efb3d51da090564d7d964293a5e7c4623d51003f05ebb80b82e959ed87",
+      "results/reader_ai_review_v2b_plan.json": "76f245f53ca73213cb61c5dc33c52e6e384548c4abaf91901647e6d4c901d4fd",
+      "results/local_model_runtime_support.json": "55daf16377dfe43978e61feb3b961d690122926ccb17a8f12f1058c5230c2617",
+      "requirements-dev.lock": "c84cefb3543db283afc0a1021e2cace63ac4e7877a84611f345b928f64077f0c",
+      "docs/FOCUSED_READER.md": "46c49b6961d9cee9f0bad4bdacdaad1db4c890927aa7053e6a79164e3e1e1014",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "tests/test_verified_reader.py": "d43bc5af989182d0a9c99be9df776f33060a2bb72638f2c5bcce0a52b754d34e",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7",
+      "results/focused_reader_v2.json": "82bf4630e45ee5ba2edab2b75edf10a0ca1c4bb0cb6c5c3e466d00b96b4f3d14",
+      "src/asof/linked_reader.py": "8952ebc7fd1f4d9f7a491b5acdb38cc197b3d02c8fba92494273f113f7a50f29",
+      "tests/test_linked_reader.py": "31a760f49a43c7eff4e631ac3cc02ec747071ba2430fa269f5a9053b2a32dd1a",
+      "src/asof/reader_stress.py": "a7515ea2ac09bdb40cf224b30a0d9aa274493bd6f1a2df29f9b14a34da673cba",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "results/reader_stress.json": "aab4af98e15207aec3799f4db80764df3158814d8219d348ead3d73020ceb9a4",
+      "results/verified_reader.json": "db3414b73043bd1f1e93f2f358f2e74b3a26f9582d3efcfb57d24ff7eddf62de",
+      "src/asof/reader_fields.py": "bde1ca7a373e8e806c5f429a3fca5bc90d7a841e6eadb44ee7fbb10f6051f5ac",
+      "tests/test_reader_fields.py": "f53968aed3d9e1380a94412f0d7523d8323ed52327fd96760813d5d6b4602df0",
+      "results/linked_reader.json": "aa90834de02c37826c267cb0450d52184531f830730d5200448b1a6e7579b9e2",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "tests/test_reader_reliability.py": "d1fa6bee69f580b2630efe049774b343905679cbc8adea414121344682e1e3e9",
+      "results/reader_fields.json": "32580a1f4477226e848867dea935726f5731397aa6c71f49c4beeffeecfe46aa",
+      "src/asof/reader_cells.py": "1e3babc16511bcb96238fa7cbdc69104532c44703b3492a548500e7aab2beb05",
+      "src/asof/reader_field_challenge.py": "384c512732ebff3584720039e89dcffd07f7af90622f964021b41713b1b1418f",
+      "tests/test_reader_cells.py": "f79853d62bb09f752b4d285c83d2814fd8c7ff7d248d2163750df8fe44b76206",
+      "results/reader_reliability.json": "cef75a6a50a6a8793ab3101189e4a54e3184a7b4df806bf6b0c41e3253544956",
+      "src/asof/reader_ai_review.py": "ee500422e7b1c4f4eb1685199424034efb2f755ba1451c0f92525f6329f7cd42",
+      "tests/test_reader_ai_review.py": "65b546c91626bdb2d4052aa25d541b27806742fb89b6041a59cbec11a72e2f83",
+      "tests/test_local_model_runtime.py": "f5863b4261cdb2e88c490472104de858ffbe61934652daa9fc2cbaca85c0a653",
+      "results/reader_cell_selection.json": "8367b709e6e007538a56c49cc23512497e5394f0374a9cf7fb1c7fd31c3868b9",
+      "results/reader_cell_selection_accounting.json": "de4fd1bfdae62a73c0f559d1b75270dd20eb8771595a15ecac274db743734a7c",
+      "src/asof/reader_ai_review_v2.py": "3424814e190143d1a0e68d5e6b47fedea7f6034a96686149be55d4e71b7df7dd",
+      "tests/test_reader_ai_review_v2.py": "81137eb953ade407dc932de4d873029b4850ce82866ff81da89454f10ba5f1d6",
+      "results/reader_ai_review.json": "e45b2669984776079a497bb186ec4de58634ff24b138fe0545e8ea82fdffc78b",
+      "results/reader_ai_review_v2_plan.json": "960930dcfcb38d87acdca1a828e4a2f4564f89794a334cf3265306d7d125c37a",
+      "results/reader_ai_review_v2.json": "023b769c136982961ca7de2682d0935e81204cc3ff753135f58c953db1ed444f"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "status": "complete_invented_comparison",
+  "stop_reason": null,
+  "records": {
+    "FRESH01": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+        "candidate": {
+          "value": "58",
+          "unit": "EUR million",
+          "period": "2016",
+          "evidence": "FictionHeather reported revenue of 46 EUR million for 2016. Its customer FictionIris reported revenue of 58 EUR million for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value",
+            "entity"
+          ],
+          "citations": [
+            "E1",
+            "E2"
+          ]
+        },
+        "verdict": "unsupported",
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 59,
+            "text": "FictionHeather reported revenue of 46 EUR million for 2016."
+          },
+          {
+            "id": "E2",
+            "start": 59,
+            "end": 129,
+            "text": " Its customer FictionIris reported revenue of 58 EUR million for 2016."
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 1,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 41.7660000002943,
+        "origin": "fresh_unseen_by_reviewer_design",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "FRESH02": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+        "candidate": {
+          "value": "17",
+          "unit": "percent",
+          "period": "2016",
+          "evidence": "FictionJonquil reported gross margin of 17 percent for 2016. Its operating margin was 9 percent for 2016.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "supported",
+          "issues": [],
+          "citations": [
+            "E1"
+          ]
+        },
+        "verdict": "supported",
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 60,
+            "text": "FictionJonquil reported gross margin of 17 percent for 2016."
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 2,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 28.70300000021234,
+        "origin": "fresh_unseen_by_reviewer_design",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "FRESH03": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+        "candidate": {
+          "value": "32",
+          "unit": "EUR million",
+          "period": "2016",
+          "evidence": "For 2016, FictionLotus reported GAAP operating income of 21 EUR million and non-GAAP operating income of 32 EUR million.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value",
+            "unit"
+          ],
+          "citations": [
+            "E1"
+          ]
+        },
+        "verdict": "unsupported",
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 120,
+            "text": "For 2016, FictionLotus reported GAAP operating income of 21 EUR million and non-GAAP operating income of 32 EUR million."
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 3,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 34.6089999997057,
+        "origin": "fresh_unseen_by_reviewer_design",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "FRESH04": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+        "candidate": {
+          "value": "2.15",
+          "unit": "GBP per share",
+          "period": "2016",
+          "evidence": "FictionMagnolia reported diluted earnings per share of 2.15 GBP per share for 2016. Basic earnings per share was 2.45 GBP per share.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "supported",
+          "issues": [],
+          "citations": [
+            "E1"
+          ]
+        },
+        "verdict": "supported",
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 83,
+            "text": "FictionMagnolia reported diluted earnings per share of 2.15 GBP per share for 2016."
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 4,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 31.515999999828637,
+        "origin": "fresh_unseen_by_reviewer_design",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "FRESH05": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "disclosure_for_abstention",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "requested_year_not_disclosed"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "answer": "not_stated",
+          "citations": []
+        },
+        "verdict": "supported",
+        "source_citations": [],
+        "verdict_mapping": "fixed_code_table_not_model",
+        "call_id": 5,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 23.42200000025332,
+        "origin": "fresh_unseen_by_reviewer_design",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "FRESH06": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "disclosure_for_abstention",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "injected_unnecessary_abstention"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "answer": "stated",
+          "citations": [
+            "E1"
+          ]
+        },
+        "verdict": "unsupported",
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 57,
+            "text": "FictionElder reported revenue of 27 GBP million for 2016."
+          }
+        ],
+        "verdict_mapping": "fixed_code_table_not_model",
+        "call_id": 6,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 14.860000000335276,
+        "origin": "fresh_unseen_by_reviewer_design",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL01-0": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "2df36f02bcba1e34e954a25aa8c51bc7b0fd9c17150ac7565a967e0da06f996f",
+        "candidate": {
+          "value": "39.5",
+          "unit": "eur thousand",
+          "period": "2018",
+          "evidence": "39.5",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "supported",
+          "issues": [],
+          "citations": [
+            "E3"
+          ]
+        },
+        "verdict": "supported",
+        "source_citations": [
+          {
+            "id": "E3",
+            "start": 75,
+            "end": 98,
+            "text": "| Revenue | 74 | 39.5 |"
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 7,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 34.53099999995902,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL01-1": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "e1f15dd71575d910527d060922527fdea411a0a2b66b8da730dbead0ecb975bb",
+        "candidate": {
+          "value": "999",
+          "unit": "USD million",
+          "period": "2018",
+          "evidence": "Company: FictionAlder.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "unit",
+            "value"
+          ],
+          "citations": [
+            "E2",
+            "E3"
+          ]
+        },
+        "verdict": "unsupported",
+        "source_citations": [
+          {
+            "id": "E2",
+            "start": 23,
+            "end": 74,
+            "text": "| Item | 2017 (USD million) | 2018 (EUR thousand) |"
+          },
+          {
+            "id": "E3",
+            "start": 75,
+            "end": 112,
+            "text": "| Revenue (USD million) | 74 | 39.5 |"
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 8,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 41.34400000004098,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL02-0": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "d6c0209e2ea9e93993906ab6ebbdda04124b3a02146b7f3983fe2d2529532ac0",
+        "candidate": {
+          "value": "52",
+          "unit": "gbp million",
+          "period": "2016",
+          "evidence": "52",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value",
+            "unit"
+          ],
+          "citations": [
+            "E3"
+          ]
+        },
+        "verdict": "unsupported",
+        "source_citations": [
+          {
+            "id": "E3",
+            "start": 77,
+            "end": 99,
+            "text": "| Revenue | 52 | 910 |"
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 9,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 37.5,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL02-1": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "disclosure_for_abstention",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "651252a8636514366d4a0d386ce772cfbe1ab576caeb8c8c141b45e30ea245d3",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "linked_source_unavailable"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "answer": "not_stated",
+          "citations": []
+        },
+        "verdict": "supported",
+        "source_citations": [],
+        "verdict_mapping": "fixed_code_table_not_model",
+        "call_id": 10,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 26.82800000021234,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL03-0": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "2e3c035409235cb2a81ce1357446f76f771b62062fec93fde8927d1ed6529d92",
+        "candidate": {
+          "value": "142",
+          "unit": "usd million",
+          "period": "2018",
+          "evidence": "142",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "supported",
+          "issues": [],
+          "citations": [
+            "E5"
+          ]
+        },
+        "verdict": "supported",
+        "source_citations": [
+          {
+            "id": "E5",
+            "start": 97,
+            "end": 114,
+            "text": "| Revenue | 142 |"
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 11,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 31.375,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL03-1": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "e84b359d22ce11756053b7042a9477b41c713f7dcea729a32ebec376c71de353",
+        "candidate": {
+          "value": "999",
+          "unit": "USD million",
+          "period": "2018",
+          "evidence": "Company: FictionFir.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "value",
+            "unit"
+          ],
+          "citations": [
+            "E5",
+            "E6"
+          ]
+        },
+        "verdict": "unsupported",
+        "source_citations": [
+          {
+            "id": "E5",
+            "start": 102,
+            "end": 119,
+            "text": "| Revenue | 142 |"
+          },
+          {
+            "id": "E6",
+            "start": 120,
+            "end": 154,
+            "text": "The annual amount is not supplied."
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 12,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 43.688000000081956,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL04-0": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "da16b9777e40939d1616eb5a921dd97c73d4c51b0f835f5e5ca9109baab96fda",
+        "candidate": {
+          "value": "31",
+          "unit": "EUR million",
+          "period": "2018",
+          "evidence": "31",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "supported",
+          "issues": [],
+          "citations": [
+            "E3"
+          ]
+        },
+        "verdict": "supported",
+        "source_citations": [
+          {
+            "id": "E3",
+            "start": 74,
+            "end": 109,
+            "text": "| GAAP operating income | 19 | 31 |"
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 13,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 30.155999999959022,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL04-1": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "disclosure_for_abstention",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "9ae4f8c738a777779af5f47379e08c57044edc2c10614936a264977809ee7e3e",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "linked_source_unavailable"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "answer": "not_stated",
+          "citations": []
+        },
+        "verdict": "supported",
+        "source_citations": [],
+        "verdict_mapping": "fixed_code_table_not_model",
+        "call_id": 14,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 24.75,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL05-0": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "063613be84a65b912b64649b5989c06327f92fc2d20f34e4d94e02f40d0bf598",
+        "candidate": {
+          "value": "40",
+          "unit": "eur million",
+          "period": "2018",
+          "evidence": "40",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "supported",
+          "issues": [],
+          "citations": [
+            "E2"
+          ]
+        },
+        "verdict": "supported",
+        "source_citations": [
+          {
+            "id": "E2",
+            "start": 68,
+            "end": 139,
+            "text": " Correction: FictionLinden reported revenue of 40 EUR million for 2018."
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 15,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 35.110000000335276,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL05-1": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "answered_value_check",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "6f97dd6efde5c0d1f0328f335cf3a31eb9c84825b2aa6bd9c7e4e723ae6766f6",
+        "candidate": {
+          "value": "999",
+          "unit": "USD million",
+          "period": "2018",
+          "evidence": "Original: FictionLinden reported revenue of 36 EUR million for 2018.",
+          "abstain": false,
+          "reason": ""
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "verdict": "unsupported",
+          "issues": [
+            "unit",
+            "value"
+          ],
+          "citations": [
+            "E1",
+            "E2"
+          ]
+        },
+        "verdict": "unsupported",
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 68,
+            "text": "Original: FictionLinden reported revenue of 36 EUR million for 2018."
+          },
+          {
+            "id": "E2",
+            "start": 68,
+            "end": 139,
+            "text": " Correction: FictionLinden reported revenue of 40 EUR million for 2018."
+          }
+        ],
+        "verdict_mapping": "model_verdict",
+        "call_id": 16,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 43.95299999974668,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL06-0": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "disclosure_for_abstention",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "b695ac1c03afa954735c4afff45f705b72c9363851d9e4b319ebda24ea68335b",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "injected_unnecessary_abstention"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "answer": "stated",
+          "citations": [
+            "E1"
+          ]
+        },
+        "verdict": "unsupported",
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 80,
+            "text": "FictionRowan reported diluted earnings per share of 3.25 GBP per share for 2018."
+          }
+        ],
+        "verdict_mapping": "fixed_code_table_not_model",
+        "call_id": 17,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 19.45299999974668,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "unsupported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    },
+    "CELL06-1": {
+      "ai_review_v2": {
+        "reviewer_id": "AI-REVIEWER-02",
+        "reviewer_type": "AI",
+        "question": "disclosure_for_abstention",
+        "counts_as_independent_human": false,
+        "creates_gold": false,
+        "decision_authority": "advisory_only_no_candidate_mutation",
+        "source_sha256": "83213acc1a5bf05c5eae05b61f9df8780114e7b95283d29519a51dc8d08909b1",
+        "candidate": {
+          "value": null,
+          "unit": "",
+          "period": "",
+          "evidence": "",
+          "abstain": true,
+          "reason": "linked_source_unavailable"
+        },
+        "candidate_changed": false,
+        "valid": true,
+        "raw_opinion": {
+          "answer": "not_stated",
+          "citations": [
+            "E1",
+            "E2"
+          ]
+        },
+        "verdict": "supported",
+        "source_citations": [
+          {
+            "id": "E1",
+            "start": 0,
+            "end": 66,
+            "text": "FictionRowan reported total earnings of 3.25 GBP million for 2018."
+          },
+          {
+            "id": "E2",
+            "start": 66,
+            "end": 122,
+            "text": " No diluted share count or per-share amount is supplied."
+          }
+        ],
+        "verdict_mapping": "fixed_code_table_not_model",
+        "call_id": 18,
+        "attempt_status": "schema_valid",
+        "latency_seconds": 15.655999999959022,
+        "origin": "exposed_v1_probe",
+        "authored_expected_verdict": "supported",
+        "expected_verdict_not_supplied_to_model": true
+      }
+    }
+  },
+  "calls": [
+    {
+      "call_id": 1,
+      "case_id": "FRESH01",
+      "stage": "judge",
+      "request_sha256": "2bf6f2ecefb084895070b26e96b4e4b8ded47a01c7a69b7450fd7bbd47d86ef6",
+      "status": "schema_valid",
+      "latency_seconds": 41.7660000002943,
+      "generated_tokens": 54,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 2,
+      "case_id": "FRESH02",
+      "stage": "judge",
+      "request_sha256": "505677b8a991a7658dbe1b1785c73abf2ce575132fe3f4100652cc1f31666607",
+      "status": "schema_valid",
+      "latency_seconds": 28.70300000021234,
+      "generated_tokens": 20,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 3,
+      "case_id": "FRESH03",
+      "stage": "judge",
+      "request_sha256": "7d65221c6f2f84a9e005428958dea97a18fea8aa0af3da05286c910a52359daf",
+      "status": "schema_valid",
+      "latency_seconds": 34.6089999997057,
+      "generated_tokens": 25,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 4,
+      "case_id": "FRESH04",
+      "stage": "judge",
+      "request_sha256": "2e85adb83fd527a4f09afd7399390f8df9c90497f8f6311a57836c8b66e24581",
+      "status": "schema_valid",
+      "latency_seconds": 31.515999999828637,
+      "generated_tokens": 32,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 5,
+      "case_id": "FRESH05",
+      "stage": "judge",
+      "request_sha256": "38dfc82a3d735c3e06f5bad35cb2a2a6169098dedec32878d77aa9e23a579027",
+      "status": "schema_valid",
+      "latency_seconds": 23.42200000025332,
+      "generated_tokens": 22,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 6,
+      "case_id": "FRESH06",
+      "stage": "judge",
+      "request_sha256": "c2da405d3cb3b27cbbeface939d68afee037a73616ca9ff90b90216e36187e2d",
+      "status": "schema_valid",
+      "latency_seconds": 14.860000000335276,
+      "generated_tokens": 29,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 7,
+      "case_id": "CELL01-0",
+      "stage": "judge",
+      "request_sha256": "7d1fcefd62bb733655cbff089f30c70c96f2e1c007edbd54761bfc3e5cdd9cd1",
+      "status": "schema_valid",
+      "latency_seconds": 34.53099999995902,
+      "generated_tokens": 32,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 8,
+      "case_id": "CELL01-1",
+      "stage": "judge",
+      "request_sha256": "d9ab7f6874392167d14aca57a3e3605d3704cb2cb369f6628c992a421f15f570",
+      "status": "schema_valid",
+      "latency_seconds": 41.34400000004098,
+      "generated_tokens": 54,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 9,
+      "case_id": "CELL02-0",
+      "stage": "judge",
+      "request_sha256": "b23771606f2c7308fca92012ec2ca0a948f5ed3effddbd498d6ba035499f1dbd",
+      "status": "schema_valid",
+      "latency_seconds": 37.5,
+      "generated_tokens": 48,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 10,
+      "case_id": "CELL02-1",
+      "stage": "judge",
+      "request_sha256": "ab91dcdeb22b6b84be91c31cd069f018fc4783c588bc76478e68136c52416448",
+      "status": "schema_valid",
+      "latency_seconds": 26.82800000021234,
+      "generated_tokens": 15,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 11,
+      "case_id": "CELL03-0",
+      "stage": "judge",
+      "request_sha256": "ed6ef2db10cf69f4396f43521ab417473f20c5f62b819674db61f79ceadc9a9a",
+      "status": "schema_valid",
+      "latency_seconds": 31.375,
+      "generated_tokens": 20,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 12,
+      "case_id": "CELL03-1",
+      "stage": "judge",
+      "request_sha256": "f3eb262a7a1f1f7717698f65e5f89fd648f6682dfe81c5c9aac48733fa86e0c4",
+      "status": "schema_valid",
+      "latency_seconds": 43.688000000081956,
+      "generated_tokens": 54,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 13,
+      "case_id": "CELL04-0",
+      "stage": "judge",
+      "request_sha256": "816e75d2be1827da49b17f5c02ac767c4727f22851b8f2b9db894e9bf3026ab9",
+      "status": "schema_valid",
+      "latency_seconds": 30.155999999959022,
+      "generated_tokens": 20,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 14,
+      "case_id": "CELL04-1",
+      "stage": "judge",
+      "request_sha256": "0954aa2cc5c51891fe74612e0419b93e1a1dd573a04da3d3b6ef630373183ee8",
+      "status": "schema_valid",
+      "latency_seconds": 24.75,
+      "generated_tokens": 15,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 15,
+      "case_id": "CELL05-0",
+      "stage": "judge",
+      "request_sha256": "2a721befa376ba63f22b9421eea29f2bda9201a1bdec492b75e2aecb1455d70c",
+      "status": "schema_valid",
+      "latency_seconds": 35.110000000335276,
+      "generated_tokens": 32,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 16,
+      "case_id": "CELL05-1",
+      "stage": "judge",
+      "request_sha256": "cad2d2cb2c227bdb58455074851eba11d8c765ddee541bc7f555d4f0f8ff4989",
+      "status": "schema_valid",
+      "latency_seconds": 43.95299999974668,
+      "generated_tokens": 54,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 17,
+      "case_id": "CELL06-0",
+      "stage": "judge",
+      "request_sha256": "15e931817f9d5d6de0da22411aa6cfbe6353be5dc58d573fa05bcf94821cb87c",
+      "status": "schema_valid",
+      "latency_seconds": 19.45299999974668,
+      "generated_tokens": 16,
+      "wire_contract": "decomposed_review"
+    },
+    {
+      "call_id": 18,
+      "case_id": "CELL06-1",
+      "stage": "judge",
+      "request_sha256": "0e94edf67ef5cff09d4310384bed560516f531ac76fdcf21e15199b73e935c49",
+      "status": "schema_valid",
+      "latency_seconds": 15.655999999959022,
+      "generated_tokens": 21,
+      "wire_contract": "decomposed_review"
+    }
+  ],
+  "judge_calibration": [],
+  "candidate": null,
+  "real_data_read": false,
+  "weights_updated": false,
+  "production_ledger_rows": 0,
+  "worker_pid": 128068,
+  "affinity_mask": 1,
+  "server_pid": 71212,
+  "phase": "final",
+  "offline_baselines": null,
+  "preload": {
+    "status": "load_only_complete",
+    "wall_seconds": 15.703000000212342,
+    "model": "qwen3.5:4b",
+    "generated_tokens_reported": null,
+    "load_duration_ns": null,
+    "response_text_empty": true,
+    "separate_from_evaluated_generation": true,
+    "documentation": "https://github.com/ollama/ollama/blob/main/docs/api.md#load-a-model"
+  },
+  "worker_wall_seconds": 577.5470000002533,
+  "worker_exit_code": 0,
+  "summary": {
+    "reviewer_id": "AI-REVIEWER-02",
+    "reviewer_type": "AI",
+    "planned": 18,
+    "recorded": 18,
+    "valid": 18,
+    "correct_verdicts": 17,
+    "false_support": 1,
+    "false_rejection": 0,
+    "uncertain": 0,
+    "invalid_or_missing": 0,
+    "by_origin": {
+      "fresh_unseen_by_reviewer_design": {
+        "planned": 6,
+        "recorded": 6,
+        "valid": 6,
+        "correct_verdicts": 6,
+        "false_support": 0,
+        "false_rejection": 0,
+        "uncertain": 0,
+        "invalid_or_missing": 0
+      },
+      "exposed_v1_probe": {
+        "planned": 12,
+        "recorded": 12,
+        "valid": 12,
+        "correct_verdicts": 11,
+        "false_support": 1,
+        "false_rejection": 0,
+        "uncertain": 0,
+        "invalid_or_missing": 0
+      }
+    },
+    "by_question": {
+      "answered_value_check": {
+        "planned": 12,
+        "recorded": 12,
+        "valid": 12,
+        "correct_verdicts": 11,
+        "false_support": 1,
+        "false_rejection": 0,
+        "uncertain": 0,
+        "invalid_or_missing": 0
+      },
+      "disclosure_for_abstention": {
+        "planned": 6,
+        "recorded": 6,
+        "valid": 6,
+        "correct_verdicts": 6,
+        "false_support": 0,
+        "false_rejection": 0,
+        "uncertain": 0,
+        "invalid_or_missing": 0
+      }
+    },
+    "independent_human_reviews": 0,
+    "human_gold_labels": 0,
+    "promote": false,
+    "historical_v1_score_unchanged": "AI-REVIEWER-01 5/12 remains the recorded v1 result",
+    "scope": "One advisory AI reviewer on author-visible invented probes; exposed probes informed the v2 design, fresh probes did not. Not a blind human first pass."
+  },
+  "promotion": {
+    "promote": false,
+    "reason": "one advisory AI reviewer, not human gold or decision authority"
+  },
+  "controller_wall_seconds": 579.7969999997877,
+  "observed_combined_peak_RSS_bytes": 3931840512,
+  "owned_pids_observed": [
+    71212,
+    128068,
+    158432,
+    164952
+  ],
+  "source_unchanged": true,
+  "resource_check_passed": true
+}
