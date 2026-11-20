@@ -1965,3 +1965,86 @@ All26isolateddependencyversions exactly matched the prior receipt and their pack
 compatibility check passed. The supported-grammar development check was24/24,
 with all6format-shift controls unresolved. These authored outcomes were visible
 before the code/fixture freeze and are not independent generalization evidence.
+
+## Observed source-rule comparison: 24/24 resolved claims, six visible deferrals
+
+The [actual comparison receipt](../results/hhem_structured.json) records the one
+run frozen at `7083b99e0b9130c0b11a8b310ecb65ec68fc21a0`.
+All24modelinputs completed at the unchanged0.5threshold, without invalid outputs,
+truncation, retries, model-weight changes or post-result tuning.
+
+### Same24invented inputs: model versus source-proof decisions
+
+| Method | Correct /24 | False approvals | False rejections | Unresolved |
+|---|---:|---:|---:|---:|
+| Raw pinned HHEM, threshold0.5 | **17** | **7** | **0** | **0** |
+| New source-rule verifier | **24** | **0** | **0** | **0** |
+| Source-only control | **24** | **0** | **0** | **0** |
+
+All twelve supported and twelve contradicted claims were classified correctly
+by the source-rule path. Its24decisions all carried a valid original-offset proof.
+The source-only control is the same decision function without model probabilities:
+**there is no demonstrated incremental HHEM benefit**. This is an improvement in
+the system's bounded verification method, not the model becoming17/24to24/24.
+The prior17/24receipt remains unchanged, and the old24-case replay is separately
+labelled exposed/posthoc in the new receipt.
+
+| Raw HHEM false approval | Score | Source-rule reason |
+|---|---:|---|
+| Reporting-year column | 0.8192 | Bound requested-year fact differs in value/currency/scale |
+| Customer value assigned to issuer | 0.7962 | Claim differs from issuer-owned fact |
+| Operating substituted for gross margin | 0.8629 | Full metric identity selects another value |
+| Segment substituted for consolidated | 0.6472 | Full scope-qualified metric selects consolidated value |
+| Basic substituted for diluted EPS | 0.5390 | Exact denominator-qualified metric selects diluted value |
+| Wrong footnote unit | 0.7150 | Applicable unit differs in currency/scale |
+| Superseded original | 0.7267 | Qualified corrected fact has a different value |
+
+The raw model repeated the same classes of binding errors on changed names,
+values, currencies and year. The source verifier did not lower its threshold,
+accept only a hand-picked portion of the24pairs, infer a conversion or silently
+substitute a correct output for the model. It issued its own explicit
+supported/contradicted source decisions using all24inputs.
+
+### Broader coverage is 24/30, not30/30
+
+All six separately frozen format-shift controls remained `review`, including
+three supported and three false claims. No raw HHEM call was made for those six.
+Their deferral is not counted as a correct financial verdict:
+
+- total source-rule cases including controls: **30**;
+- resolved and correct: **24**;
+- unresolved: **6**;
+- overall resolved coverage: **80%**;
+- zero wrong decisions among the24resolved cases in this authored sample.
+
+Turnover synonyms, words-as-numbers and compact EPS notation still lie outside
+the declared grammar. Unknown-source handling stayed fail-closed rather than
+turning a high model probability into an unsupported approval. This is not a
+general perfect judge, nor a calibrated risk guarantee on unseen financial inputs.
+
+### Actual validation, resources and limits
+
+Controller wall time was **51.875s**, model loading0.641s and summed claim scoring
+8.734s. The24input pairs totalled1,493tokens (maximum77), with no truncation.
+Observed combined peak working set was **730,165,248bytes (0.680GiB)**.
+One CPU, source/resource checks and worker exit0 passed. Both sampled owned
+PIDs were confirmed absent; the preexisting shared Ollama server was untouched.
+All24raw scores and decisions were reconstructed, all24serialized proof objects
+revalidated against original source offsets, and all historical receipt hashes
+including the earlier HHEM17/24matched. JSON tuple/list representation was
+normalized only in the verification check; the saved receipt was not edited.
+The current nine-cohort source-reader regression matrix remained unchanged and passing.
+
+The **756-test full suite**, changed-file Ruff and documentation/index checks
+passed as recorded before execution. Only documentation/navigation/result changes
+followed generation. The exact isolated dependency venv was removed after use;
+the pinned offline asset cache remains available and the project `.venv` is untouched.
+Ledger file-size metadata remained106,246bytes, with no content read or new row.
+No real/private-review source, financial study, download of new model weights,
+training, human-gold creation, application-default promotion or push occurred.
+
+Remaining gaps are now explicit: six out-of-grammar controls, independent eligible
+real-source review/gold, broad semantic coverage and a reliable general AI judge.
+The earlier5/12reviewer and17/24HHEM results are still retained failures, not
+silently repaired historic scores. The new source-rule verifier is a separately
+measured narrower component; it does not eliminate the human-review requirement.

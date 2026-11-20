@@ -1,0 +1,3653 @@
+{
+  "status": "complete_invented_entailment_benchmark",
+  "stop_reason": null,
+  "rows": [
+    {
+      "id": "STRUCT-01-0",
+      "support_score": 0.9469521641731262,
+      "input_tokens": 49,
+      "latency_seconds": 0.32799999974668026
+    },
+    {
+      "id": "STRUCT-01-1",
+      "support_score": 0.02721237950026989,
+      "input_tokens": 50,
+      "latency_seconds": 0.1559999999590218
+    },
+    {
+      "id": "STRUCT-02-0",
+      "support_score": 0.8064296841621399,
+      "input_tokens": 68,
+      "latency_seconds": 0.1869999999180436
+    },
+    {
+      "id": "STRUCT-02-1",
+      "support_score": 0.8192097544670105,
+      "input_tokens": 67,
+      "latency_seconds": 0.23499999986961484
+    },
+    {
+      "id": "STRUCT-03-0",
+      "support_score": 0.9463534951210022,
+      "input_tokens": 45,
+      "latency_seconds": 0.1559999999590218
+    },
+    {
+      "id": "STRUCT-03-1",
+      "support_score": 0.11121542006731033,
+      "input_tokens": 44,
+      "latency_seconds": 0.14100000029429793
+    },
+    {
+      "id": "STRUCT-04-0",
+      "support_score": 0.8209518194198608,
+      "input_tokens": 60,
+      "latency_seconds": 0.1869999999180436
+    },
+    {
+      "id": "STRUCT-04-1",
+      "support_score": 0.05531556159257889,
+      "input_tokens": 60,
+      "latency_seconds": 0.17199999978765845
+    },
+    {
+      "id": "STRUCT-05-0",
+      "support_score": 0.8600468635559082,
+      "input_tokens": 59,
+      "latency_seconds": 0.20300000021234155
+    },
+    {
+      "id": "STRUCT-05-1",
+      "support_score": 0.18638478219509125,
+      "input_tokens": 59,
+      "latency_seconds": 0.20299999974668026
+    },
+    {
+      "id": "STRUCT-06-0",
+      "support_score": 0.9233531355857849,
+      "input_tokens": 61,
+      "latency_seconds": 0.17200000025331974
+    },
+    {
+      "id": "STRUCT-06-1",
+      "support_score": 0.7962150573730469,
+      "input_tokens": 62,
+      "latency_seconds": 0.1869999999180436
+    },
+    {
+      "id": "STRUCT-07-0",
+      "support_score": 0.8833931088447571,
+      "input_tokens": 56,
+      "latency_seconds": 0.20300000021234155
+    },
+    {
+      "id": "STRUCT-07-1",
+      "support_score": 0.8629366755485535,
+      "input_tokens": 56,
+      "latency_seconds": 0.15700000012293458
+    },
+    {
+      "id": "STRUCT-08-0",
+      "support_score": 0.87466961145401,
+      "input_tokens": 65,
+      "latency_seconds": 0.1880000000819564
+    },
+    {
+      "id": "STRUCT-08-1",
+      "support_score": 0.6471662521362305,
+      "input_tokens": 64,
+      "latency_seconds": 0.1869999999180436
+    },
+    {
+      "id": "STRUCT-09-0",
+      "support_score": 0.8267015218734741,
+      "input_tokens": 65,
+      "latency_seconds": 0.20300000021234155
+    },
+    {
+      "id": "STRUCT-09-1",
+      "support_score": 0.2429327517747879,
+      "input_tokens": 65,
+      "latency_seconds": 0.1880000000819564
+    },
+    {
+      "id": "STRUCT-10-0",
+      "support_score": 0.8661585450172424,
+      "input_tokens": 73,
+      "latency_seconds": 0.20300000021234155
+    },
+    {
+      "id": "STRUCT-10-1",
+      "support_score": 0.5390315651893616,
+      "input_tokens": 73,
+      "latency_seconds": 0.21799999987706542
+    },
+    {
+      "id": "STRUCT-11-0",
+      "support_score": 0.7889593839645386,
+      "input_tokens": 70,
+      "latency_seconds": 0.1880000000819564
+    },
+    {
+      "id": "STRUCT-11-1",
+      "support_score": 0.7149685025215149,
+      "input_tokens": 69,
+      "latency_seconds": 0.2190000000409782
+    },
+    {
+      "id": "STRUCT-12-0",
+      "support_score": 0.9222654104232788,
+      "input_tokens": 77,
+      "latency_seconds": 3.0469999997876585
+    },
+    {
+      "id": "STRUCT-12-1",
+      "support_score": 0.7267003059387207,
+      "input_tokens": 76,
+      "latency_seconds": 1.4059999999590218
+    }
+  ],
+  "started_cases": [
+    "STRUCT-01-0",
+    "STRUCT-01-1",
+    "STRUCT-02-0",
+    "STRUCT-02-1",
+    "STRUCT-03-0",
+    "STRUCT-03-1",
+    "STRUCT-04-0",
+    "STRUCT-04-1",
+    "STRUCT-05-0",
+    "STRUCT-05-1",
+    "STRUCT-06-0",
+    "STRUCT-06-1",
+    "STRUCT-07-0",
+    "STRUCT-07-1",
+    "STRUCT-08-0",
+    "STRUCT-08-1",
+    "STRUCT-09-0",
+    "STRUCT-09-1",
+    "STRUCT-10-0",
+    "STRUCT-10-1",
+    "STRUCT-11-0",
+    "STRUCT-11-1",
+    "STRUCT-12-0",
+    "STRUCT-12-1"
+  ],
+  "lineage": {
+    "freeze_commit": "7083b99e0b9130c0b11a8b310ecb65ec68fc21a0",
+    "source_SHA256": {
+      "src/asof/hhem_verifier.py": "412b57dcac00dd969add9a254b36739e5699fa39366143c473d776458b3ec4d7",
+      "src/asof/reader_regression.py": "a2e12a7220da4bfd6c7e89c5b4f26bd138ee3385c5baeb0db9c7289a3485d277",
+      "src/asof/reader_fields.py": "5a798b67cef1a5296b767d4f3bf12d438b934e6ac7a7c9fe2e5d20d18a9ab705",
+      "src/asof/linked_reader.py": "bfd1b101858efbf97445a8026071853ea1c8c1bcb6baece5a7cc3c9160864309",
+      "src/asof/runtime.py": "d4d6c4275e6202ad8c06e945ec082f06da8f78379396f899476417d1f5640935",
+      "src/asof/reader_cells.py": "1e3babc16511bcb96238fa7cbdc69104532c44703b3492a548500e7aab2beb05",
+      "src/asof/reader_field_challenge.py": "384c512732ebff3584720039e89dcffd07f7af90622f964021b41713b1b1418f",
+      "src/asof/reader_reliability.py": "ec977e0c301cb36d39114e698c6c524c836ac36e2671508a3fce62ea802ee290",
+      "src/asof/reader_stress.py": "a7515ea2ac09bdb40cf224b30a0d9aa274493bd6f1a2df29f9b14a34da673cba",
+      "src/asof/verified_reader.py": "6fcf4f9054f5b2f90ee1f9d36a20beb93daed68b708d36dbeb781531948a71e3",
+      "src/asof/focused_reader.py": "f12b2229fad6bdec555773f3a571fb03cc84fe9b701d9b65161d51ba6556c39f",
+      "src/asof/extraction.py": "d747ae97c36718b081fad43aa13ebebd82c2c611abfff09f1d06ae5a33c62cad",
+      "scripts/run_hhem_benchmark.py": "942604a7056325db548e9274443c0fc58a80f26f85abae43eeb3a3de77e6c18a",
+      "scripts/prepare_hhem_assets.py": "e15112c774363eda8019bc7a6da50f83c8293b1a9810fcac9e3b2e40ff0960df",
+      "scripts/check_reader_regressions.py": "456f5e5e7a6997de8bf2a50457368a2afa19ea63f3760ce7019565a0d3cf8891",
+      "tests/test_hhem_verifier.py": "23ef01914015c814628a89ae8ab531beee5f2223c339189ed7963c29f622a66c",
+      "tests/test_reader_fields.py": "f53968aed3d9e1380a94412f0d7523d8323ed52327fd96760813d5d6b4602df0",
+      "tests/test_reader_regression.py": "0258af2852994fe8cee7ca2095af00500f53303bdfd085b1713f3061cfe20fb0",
+      "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+      "tests/fixtures/verified_reader.json": "f36b65c0aa87258a2c1587014b04f064b85539ea45861e525bcf0b658e8524f6",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "tests/fixtures/linked_challenge.json": "ac34ab5c2e03ffdeae878e8ef83eb9808e2e78bafd5f4b1890200f24bace9810",
+      "tests/fixtures/reader_fields.json": "ec1c72985dd288c442b7718716409b6e55a2dcc7b24f9634a9fd0346141c20ac",
+      "tests/fixtures/reader_reliability.json": "3663885962ec7930fec547068841f1231c811efc242bf37c4f7e53b3eb96efbd",
+      "results/hhem_assets.json": "85071c1ec0339b4ca78fdbde81f49f3c01ce071a7579c4aa3e24ffbaafa7435e",
+      "results/hhem_environment.json": "594c1e8b4bbd0aa18e2f360327c8457b4a5769ba615276b3ef4ca4867bd7e822",
+      "results/hhem_plan.json": "ffd110574a99543b4eabcfc5496f08392c30d10c860b7da2bd637b9ff62eea5e",
+      "docs/FOCUSED_READER.md": "a9f57e5937c168d8f8cf10c8428ce2a12e6c146ab70ef5b869f0842363e626a3",
+      "pyproject.toml": "ec3e7e4b8b4851bbe941712229e57b9d7c8a952585df71768a1b6b8c777624c9",
+      "results/focused_reader.json": "d62d4bf5a495669c8142002b63008b44b371497dd01abf1d2b70e7dc6605bec7",
+      "results/focused_reader_v2.json": "82bf4630e45ee5ba2edab2b75edf10a0ca1c4bb0cb6c5c3e466d00b96b4f3d14",
+      "results/verified_reader.json": "db3414b73043bd1f1e93f2f358f2e74b3a26f9582d3efcfb57d24ff7eddf62de",
+      "results/reader_stress.json": "aab4af98e15207aec3799f4db80764df3158814d8219d348ead3d73020ceb9a4",
+      "results/linked_reader.json": "aa90834de02c37826c267cb0450d52184531f830730d5200448b1a6e7579b9e2",
+      "results/reader_fields.json": "32580a1f4477226e848867dea935726f5731397aa6c71f49c4beeffeecfe46aa",
+      "results/reader_reliability.json": "cef75a6a50a6a8793ab3101189e4a54e3184a7b4df806bf6b0c41e3253544956",
+      "results/reader_cell_selection.json": "8367b709e6e007538a56c49cc23512497e5394f0374a9cf7fb1c7fd31c3868b9",
+      "results/reader_cell_selection_accounting.json": "de4fd1bfdae62a73c0f559d1b75270dd20eb8771595a15ecac274db743734a7c",
+      "results/reader_ai_review.json": "e45b2669984776079a497bb186ec4de58634ff24b138fe0545e8ea82fdffc78b",
+      "src/asof/claim_verifier.py": "6a4641a1eb900c0457ab042b4f2e01001bb041a6cbf6b297d200124414224afb",
+      "src/asof/claim_challenge.py": "a3d27d50e1aa82b486866af48beac2b8841e63c0d22cc5a0e29811dc3d432937",
+      "tests/test_claim_verifier.py": "d6b350d0e0bfb19d604e46d7523ceb6f20eba687cef2d7f5a6dd644060ce7fbf",
+      "results/hhem_structured_plan.json": "551af850f601254dda271c16126c54a0c989b90bac8522d7020557e9e790bd13",
+      "results/hhem_benchmark.json": "629b7db88a2ae9be845c2cf2c39a4236462e77b938a16e1390b9e7c18c9ae4a8"
+    },
+    "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes"
+  },
+  "plan": {
+    "profile": "HHEM-STRUCTURED-01",
+    "max_cases": 24,
+    "threshold": 0.5,
+    "wall_seconds": 1200,
+    "controller_stop_seconds": 1180,
+    "RAM_bytes": 6442450944,
+    "controller_RAM_allowance": 134217728,
+    "CPU_count": 1,
+    "input_token_cap": 2048,
+    "GPU": false
+  },
+  "real_data_read": false,
+  "model": "vectara/hallucination_evaluation_model",
+  "production_ledger_rows": 0,
+  "training": false,
+  "decision_authority": "advisory_only",
+  "current_regressions": {
+    "status": "complete_exposed_current_candidate_regression",
+    "cohorts": {
+      "focused_original12": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 12,
+        "correct": 12,
+        "answerable": 7,
+        "complete_answers": 7,
+        "correct_refusals": 5,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 7,
+          "valid": 7
+        },
+        "field_checks": null
+      },
+      "grammar_robustness24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 19,
+        "complete_answers": 19,
+        "correct_refusals": 5,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 19,
+          "valid": 19
+        },
+        "field_checks": null
+      },
+      "harder_model_subset24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 22,
+        "complete_answers": 22,
+        "correct_refusals": 2,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 22,
+          "valid": 22
+        },
+        "field_checks": null
+      },
+      "harder_all288": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 288,
+        "correct": 288,
+        "answerable": 264,
+        "complete_answers": 264,
+        "correct_refusals": 24,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 264,
+          "valid": 264
+        },
+        "field_checks": null
+      },
+      "linked_challenge24": {
+        "contract": "current_tuple_and_source_proof_diagnostic",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": null
+      },
+      "reader_fields": {
+        "contract": "field-record-v1",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": {
+          "value": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "sign": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "currency": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scale": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "measure": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "reporting_year": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "issuer_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "metric_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scope": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "accounting_basis": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "period_kind": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "revision_status": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "source_evidence": {
+            "correct": 12,
+            "planned_answerable": 12
+          }
+        }
+      },
+      "reader_reliability": {
+        "contract": "field-record-v1",
+        "planned": 24,
+        "correct": 24,
+        "answerable": 12,
+        "complete_answers": 12,
+        "correct_refusals": 12,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 12,
+          "valid": 12
+        },
+        "field_checks": {
+          "value": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "sign": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "currency": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scale": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "measure": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "reporting_year": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "issuer_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "metric_binding": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "scope": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "accounting_basis": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "period_kind": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "revision_status": {
+            "correct": 12,
+            "planned_answerable": 12
+          },
+          "source_evidence": {
+            "correct": 12,
+            "planned_answerable": 12
+          }
+        }
+      },
+      "context_coverage192": {
+        "contract": "field-record-v1",
+        "planned": 192,
+        "correct": 192,
+        "answerable": 96,
+        "complete_answers": 96,
+        "correct_refusals": 96,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 96,
+          "valid": 96
+        },
+        "field_checks": {
+          "value": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "sign": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "currency": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "scale": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "measure": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "reporting_year": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "issuer_binding": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "metric_binding": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "scope": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "accounting_basis": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "period_kind": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "revision_status": {
+            "correct": 96,
+            "planned_answerable": 96
+          },
+          "source_evidence": {
+            "correct": 96,
+            "planned_answerable": 96
+          }
+        }
+      },
+      "cell_sources12": {
+        "contract": "field-record-v1",
+        "planned": 12,
+        "correct": 12,
+        "answerable": 6,
+        "complete_answers": 6,
+        "correct_refusals": 6,
+        "wrong_admitted_answers": 0,
+        "misses": [],
+        "proof_checks": {
+          "answered": 6,
+          "valid": 6
+        },
+        "field_checks": {
+          "value": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "sign": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "currency": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "scale": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "measure": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "reporting_year": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "issuer_binding": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "metric_binding": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "scope": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "accounting_basis": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "period_kind": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "revision_status": {
+            "correct": 6,
+            "planned_answerable": 6
+          },
+          "source_evidence": {
+            "correct": 6,
+            "planned_answerable": 6
+          }
+        }
+      }
+    },
+    "fixture_sha256": {
+      "tests/fixtures/focused_reader.json": "ccba55613cb0e950bd3000c6f62509e1cccdb09394e6d1c5886f78873c562e4c",
+      "tests/fixtures/verified_reader.json": "f36b65c0aa87258a2c1587014b04f064b85539ea45861e525bcf0b658e8524f6",
+      "tests/fixtures/reader_stress.json": "dc39048387021c9d45d998d99f849af2f7bec41418b418b52df4c8f35c7ade67",
+      "tests/fixtures/linked_challenge.json": "ac34ab5c2e03ffdeae878e8ef83eb9808e2e78bafd5f4b1890200f24bace9810",
+      "tests/fixtures/reader_fields.json": "ec1c72985dd288c442b7718716409b6e55a2dcc7b24f9634a9fd0346141c20ac",
+      "tests/fixtures/reader_reliability.json": "3663885962ec7930fec547068841f1231c811efc242bf37c4f7e53b3eb96efbd"
+    },
+    "posthoc_after_source_and_outcome_exposure": true,
+    "historical_results_rewritten": false,
+    "new_model_calls": 0,
+    "independent_gold": false,
+    "promote": false,
+    "overlap": "Harder model subset overlaps all288; coverage/cell sources are reused elsewhere. Do not pool as independent observations.",
+    "contract_warning": "Old cohorts use a new source-proof diagnostic, not their original single-quote scorer. Field-labelled cohorts retain field-record-v1.",
+    "requirements": {
+      "target": "Every declared supported regression case correct; never loosen proof/tuple checks to reach target.",
+      "unknown_context_is_not_discovered_fact": true,
+      "real_world_accuracy_established": false
+    }
+  },
+  "development_replay": {
+    "posthoc_after_source_and_outcome_exposure": true,
+    "new_model_calls": 0,
+    "prior_raw_HHEM": {
+      "planned": 24,
+      "recorded": 24,
+      "correct": 17,
+      "not_attempted": 0,
+      "invalid": 0,
+      "false_support": 7,
+      "false_rejection": 0,
+      "fixed_threshold": 0.5,
+      "threshold_tuned_on_results": false,
+      "independent_gold": false,
+      "promote": false,
+      "abstention_answerability_evaluated": false,
+      "refusal_policy": "No claim -> no entailment verdict; human/source coverage review required."
+    },
+    "source_rule_verifier": {
+      "planned": 24,
+      "resolved": 24,
+      "correct": 24,
+      "false_support": 0,
+      "false_rejection": 0,
+      "requires_review": 0,
+      "model_increment_established": false,
+      "model_weights_or_threshold_changed": false,
+      "decisions": {
+        "HHEM-01-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionPoppy",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "8895e93876e2e0b7e58127046aa001c0a462c8765630c13af731a1b15117ed5c",
+            "issuer": "FictionPoppy",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "period": "2017",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 12
+              },
+              {
+                "role": "metric",
+                "start": 22,
+                "end": 29
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 33,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "8895e93876e2e0b7e58127046aa001c0a462c8765630c13af731a1b15117ed5c",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-01-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionPoppy",
+            "metric": "revenue",
+            "value": "81",
+            "unit": "usd million",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "8895e93876e2e0b7e58127046aa001c0a462c8765630c13af731a1b15117ed5c",
+            "issuer": "FictionPoppy",
+            "metric": "revenue",
+            "value": "18",
+            "unit": "usd million",
+            "period": "2017",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 12
+              },
+              {
+                "role": "metric",
+                "start": 22,
+                "end": 29
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 33,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "8895e93876e2e0b7e58127046aa001c0a462c8765630c13af731a1b15117ed5c",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-02-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionQuartz",
+            "metric": "revenue",
+            "value": "28.5",
+            "unit": "eur thousand",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "c00782c7a371f2c2a5961dbab0c335815d720dfa436234a89428abb6456d9e61",
+            "issuer": "FictionQuartz",
+            "metric": "revenue",
+            "value": "28.5",
+            "unit": "eur thousand",
+            "period": "2017",
+            "method": "table",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 9,
+                "end": 22
+              },
+              {
+                "role": "metric",
+                "start": 78,
+                "end": 85
+              },
+              {
+                "role": "period",
+                "start": 54,
+                "end": 58
+              },
+              {
+                "role": "unit",
+                "start": 60,
+                "end": 72
+              },
+              {
+                "role": "value",
+                "start": 93,
+                "end": 97
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "c00782c7a371f2c2a5961dbab0c335815d720dfa436234a89428abb6456d9e61",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-02-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionQuartz",
+            "metric": "revenue",
+            "value": "63",
+            "unit": "usd million",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "c00782c7a371f2c2a5961dbab0c335815d720dfa436234a89428abb6456d9e61",
+            "issuer": "FictionQuartz",
+            "metric": "revenue",
+            "value": "28.5",
+            "unit": "eur thousand",
+            "period": "2017",
+            "method": "table",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 9,
+                "end": 22
+              },
+              {
+                "role": "metric",
+                "start": 78,
+                "end": 85
+              },
+              {
+                "role": "period",
+                "start": 54,
+                "end": 58
+              },
+              {
+                "role": "unit",
+                "start": 60,
+                "end": 72
+              },
+              {
+                "role": "value",
+                "start": 93,
+                "end": 97
+              }
+            ]
+          },
+          "mismatches": [
+            "value",
+            "currency",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "c00782c7a371f2c2a5961dbab0c335815d720dfa436234a89428abb6456d9e61",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-03-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionReed",
+            "metric": "revenue",
+            "value": "21",
+            "unit": "eur million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "668e58fbb50cbe3592595e6f3449955c652efd0f89f7ed77bf3ab7d8287534ea",
+            "issuer": "FictionReed",
+            "metric": "revenue",
+            "value": "21",
+            "unit": "eur million",
+            "period": "2018",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "668e58fbb50cbe3592595e6f3449955c652efd0f89f7ed77bf3ab7d8287534ea",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-03-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionReed",
+            "metric": "revenue",
+            "value": "21",
+            "unit": "usd million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "668e58fbb50cbe3592595e6f3449955c652efd0f89f7ed77bf3ab7d8287534ea",
+            "issuer": "FictionReed",
+            "metric": "revenue",
+            "value": "21",
+            "unit": "eur million",
+            "period": "2018",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 11
+              },
+              {
+                "role": "metric",
+                "start": 21,
+                "end": 28
+              },
+              {
+                "role": "period",
+                "start": 51,
+                "end": 55
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 46
+              },
+              {
+                "role": "value",
+                "start": 32,
+                "end": 34
+              }
+            ]
+          },
+          "mismatches": [
+            "currency"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "668e58fbb50cbe3592595e6f3449955c652efd0f89f7ed77bf3ab7d8287534ea",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-04-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionSpruce",
+            "metric": "revenue",
+            "value": "25",
+            "unit": "usd thousand",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "e02365c35b61ef043c5bc3102e98e5e7dfa3fc5457f5de99fc0053a9f5b7260c",
+            "issuer": "FictionSpruce",
+            "metric": "revenue",
+            "value": "25",
+            "unit": "usd thousand",
+            "period": "2018",
+            "method": "table",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 9,
+                "end": 22
+              },
+              {
+                "role": "metric",
+                "start": 67,
+                "end": 74
+              },
+              {
+                "role": "period",
+                "start": 58,
+                "end": 62
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 77,
+                "end": 79
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "e02365c35b61ef043c5bc3102e98e5e7dfa3fc5457f5de99fc0053a9f5b7260c",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-04-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionSpruce",
+            "metric": "revenue",
+            "value": "25",
+            "unit": "usd million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "e02365c35b61ef043c5bc3102e98e5e7dfa3fc5457f5de99fc0053a9f5b7260c",
+            "issuer": "FictionSpruce",
+            "metric": "revenue",
+            "value": "25",
+            "unit": "usd thousand",
+            "period": "2018",
+            "method": "table",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 9,
+                "end": 22
+              },
+              {
+                "role": "metric",
+                "start": 67,
+                "end": 74
+              },
+              {
+                "role": "period",
+                "start": 58,
+                "end": 62
+              },
+              {
+                "role": "unit",
+                "start": 35,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 77,
+                "end": 79
+              }
+            ]
+          },
+          "mismatches": [
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "e02365c35b61ef043c5bc3102e98e5e7dfa3fc5457f5de99fc0053a9f5b7260c",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-05-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionTamarack",
+            "metric": "operating income",
+            "value": "-14",
+            "unit": "usd million",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "e049966a8b17ec004a9c57375025e08417257ed205ac0937b7c7fa9ea887f056",
+            "issuer": "FictionTamarack",
+            "metric": "operating income",
+            "value": "-14",
+            "unit": "usd million",
+            "period": "2017",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 15
+              },
+              {
+                "role": "metric",
+                "start": 25,
+                "end": 41
+              },
+              {
+                "role": "period",
+                "start": 66,
+                "end": 70
+              },
+              {
+                "role": "sign_convention",
+                "start": 72,
+                "end": 101
+              },
+              {
+                "role": "unit",
+                "start": 50,
+                "end": 61
+              },
+              {
+                "role": "value",
+                "start": 45,
+                "end": 49
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "e049966a8b17ec004a9c57375025e08417257ed205ac0937b7c7fa9ea887f056",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-05-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionTamarack",
+            "metric": "operating income",
+            "value": "14",
+            "unit": "usd million",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "e049966a8b17ec004a9c57375025e08417257ed205ac0937b7c7fa9ea887f056",
+            "issuer": "FictionTamarack",
+            "metric": "operating income",
+            "value": "-14",
+            "unit": "usd million",
+            "period": "2017",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 15
+              },
+              {
+                "role": "metric",
+                "start": 25,
+                "end": 41
+              },
+              {
+                "role": "period",
+                "start": 66,
+                "end": 70
+              },
+              {
+                "role": "sign_convention",
+                "start": 72,
+                "end": 101
+              },
+              {
+                "role": "unit",
+                "start": 50,
+                "end": 61
+              },
+              {
+                "role": "value",
+                "start": 45,
+                "end": 49
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "e049966a8b17ec004a9c57375025e08417257ed205ac0937b7c7fa9ea887f056",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-06-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionUmber",
+            "metric": "revenue",
+            "value": "31",
+            "unit": "usd million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "2c7f1813f844f5ee5bbe8c51c12ca54862b3794d0f6de37f4d02f781dda187ed",
+            "issuer": "FictionUmber",
+            "metric": "revenue",
+            "value": "31",
+            "unit": "usd million",
+            "period": "2018",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 12
+              },
+              {
+                "role": "metric",
+                "start": 22,
+                "end": 29
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 33,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "2c7f1813f844f5ee5bbe8c51c12ca54862b3794d0f6de37f4d02f781dda187ed",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-06-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionUmber",
+            "metric": "revenue",
+            "value": "45",
+            "unit": "usd million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "2c7f1813f844f5ee5bbe8c51c12ca54862b3794d0f6de37f4d02f781dda187ed",
+            "issuer": "FictionUmber",
+            "metric": "revenue",
+            "value": "31",
+            "unit": "usd million",
+            "period": "2018",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 12
+              },
+              {
+                "role": "metric",
+                "start": 22,
+                "end": 29
+              },
+              {
+                "role": "period",
+                "start": 52,
+                "end": 56
+              },
+              {
+                "role": "unit",
+                "start": 36,
+                "end": 47
+              },
+              {
+                "role": "value",
+                "start": 33,
+                "end": 35
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "2c7f1813f844f5ee5bbe8c51c12ca54862b3794d0f6de37f4d02f781dda187ed",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-07-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionWillow",
+            "metric": "gross margin",
+            "value": "12",
+            "unit": "%",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "82e0d69f96ebb3779cb0b7041c50c33422d9875ed9a181d4b5bbaa135751140f",
+            "issuer": "FictionWillow",
+            "metric": "gross margin",
+            "value": "12",
+            "unit": "%",
+            "period": "2017",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 13
+              },
+              {
+                "role": "metric",
+                "start": 23,
+                "end": 35
+              },
+              {
+                "role": "period",
+                "start": 54,
+                "end": 58
+              },
+              {
+                "role": "unit",
+                "start": 42,
+                "end": 49
+              },
+              {
+                "role": "value",
+                "start": 39,
+                "end": 41
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "82e0d69f96ebb3779cb0b7041c50c33422d9875ed9a181d4b5bbaa135751140f",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-07-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionWillow",
+            "metric": "gross margin",
+            "value": "7",
+            "unit": "%",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "82e0d69f96ebb3779cb0b7041c50c33422d9875ed9a181d4b5bbaa135751140f",
+            "issuer": "FictionWillow",
+            "metric": "gross margin",
+            "value": "12",
+            "unit": "%",
+            "period": "2017",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 13
+              },
+              {
+                "role": "metric",
+                "start": 23,
+                "end": 35
+              },
+              {
+                "role": "period",
+                "start": 54,
+                "end": 58
+              },
+              {
+                "role": "unit",
+                "start": 42,
+                "end": 49
+              },
+              {
+                "role": "value",
+                "start": 39,
+                "end": 41
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "82e0d69f96ebb3779cb0b7041c50c33422d9875ed9a181d4b5bbaa135751140f",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-08-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionXylem",
+            "metric": "consolidated revenue",
+            "value": "70",
+            "unit": "usd million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "4e25aec3953a5df5ef8cec8527fd8270d199025ae6994fa47ddcf5eb08139919",
+            "issuer": "FictionXylem",
+            "metric": "consolidated revenue",
+            "value": "70",
+            "unit": "usd million",
+            "period": "2018",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 12
+              },
+              {
+                "role": "metric",
+                "start": 22,
+                "end": 42
+              },
+              {
+                "role": "period",
+                "start": 65,
+                "end": 69
+              },
+              {
+                "role": "scope",
+                "start": 22,
+                "end": 42
+              },
+              {
+                "role": "unit",
+                "start": 49,
+                "end": 60
+              },
+              {
+                "role": "value",
+                "start": 46,
+                "end": 48
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4e25aec3953a5df5ef8cec8527fd8270d199025ae6994fa47ddcf5eb08139919",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-08-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionXylem",
+            "metric": "consolidated revenue",
+            "value": "20",
+            "unit": "usd million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "4e25aec3953a5df5ef8cec8527fd8270d199025ae6994fa47ddcf5eb08139919",
+            "issuer": "FictionXylem",
+            "metric": "consolidated revenue",
+            "value": "70",
+            "unit": "usd million",
+            "period": "2018",
+            "method": "prose",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 12
+              },
+              {
+                "role": "metric",
+                "start": 22,
+                "end": 42
+              },
+              {
+                "role": "period",
+                "start": 65,
+                "end": 69
+              },
+              {
+                "role": "scope",
+                "start": 22,
+                "end": 42
+              },
+              {
+                "role": "unit",
+                "start": 49,
+                "end": 60
+              },
+              {
+                "role": "value",
+                "start": 46,
+                "end": 48
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "4e25aec3953a5df5ef8cec8527fd8270d199025ae6994fa47ddcf5eb08139919",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-09-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionYarrow",
+            "metric": "GAAP operating income",
+            "value": "13",
+            "unit": "usd million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "compound-claim-source-v1",
+            "source_sha256": "2471d52aeb22c909d90f5cc5fb87b71083ee912e9a741eda8fa441cc1cfa33ae",
+            "issuer": "FictionYarrow",
+            "metric": "GAAP operating income",
+            "value": "13",
+            "unit": "usd million",
+            "period": "2018",
+            "method": "bounded_compound_disclosure",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 10,
+                "end": 23
+              },
+              {
+                "role": "period",
+                "start": 4,
+                "end": 8
+              },
+              {
+                "role": "metric",
+                "start": 33,
+                "end": 54
+              },
+              {
+                "role": "value",
+                "start": 58,
+                "end": 60
+              },
+              {
+                "role": "unit",
+                "start": 61,
+                "end": 72
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "2471d52aeb22c909d90f5cc5fb87b71083ee912e9a741eda8fa441cc1cfa33ae",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-09-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionYarrow",
+            "metric": "GAAP operating income",
+            "value": "19",
+            "unit": "usd million",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "compound-claim-source-v1",
+            "source_sha256": "2471d52aeb22c909d90f5cc5fb87b71083ee912e9a741eda8fa441cc1cfa33ae",
+            "issuer": "FictionYarrow",
+            "metric": "GAAP operating income",
+            "value": "13",
+            "unit": "usd million",
+            "period": "2018",
+            "method": "bounded_compound_disclosure",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 10,
+                "end": 23
+              },
+              {
+                "role": "period",
+                "start": 4,
+                "end": 8
+              },
+              {
+                "role": "metric",
+                "start": 33,
+                "end": 54
+              },
+              {
+                "role": "value",
+                "start": 58,
+                "end": 60
+              },
+              {
+                "role": "unit",
+                "start": 61,
+                "end": 72
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "2471d52aeb22c909d90f5cc5fb87b71083ee912e9a741eda8fa441cc1cfa33ae",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-10-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionZircon",
+            "metric": "diluted earnings per share",
+            "value": "1.25",
+            "unit": "usd per share",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "compound-claim-source-v1",
+            "source_sha256": "227facb9b75f394f7537aeca0a1430ead12d0858e3c73296251c96af795645cc",
+            "issuer": "FictionZircon",
+            "metric": "diluted earnings per share",
+            "value": "1.25",
+            "unit": "usd per share",
+            "period": "2018",
+            "method": "bounded_compound_disclosure",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 13
+              },
+              {
+                "role": "period",
+                "start": 76,
+                "end": 80
+              },
+              {
+                "role": "metric",
+                "start": 23,
+                "end": 49
+              },
+              {
+                "role": "value",
+                "start": 53,
+                "end": 57
+              },
+              {
+                "role": "unit",
+                "start": 58,
+                "end": 71
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "227facb9b75f394f7537aeca0a1430ead12d0858e3c73296251c96af795645cc",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-10-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionZircon",
+            "metric": "diluted earnings per share",
+            "value": "1.40",
+            "unit": "usd per share",
+            "year": "2018",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "compound-claim-source-v1",
+            "source_sha256": "227facb9b75f394f7537aeca0a1430ead12d0858e3c73296251c96af795645cc",
+            "issuer": "FictionZircon",
+            "metric": "diluted earnings per share",
+            "value": "1.25",
+            "unit": "usd per share",
+            "period": "2018",
+            "method": "bounded_compound_disclosure",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 0,
+                "end": 13
+              },
+              {
+                "role": "period",
+                "start": 76,
+                "end": 80
+              },
+              {
+                "role": "metric",
+                "start": 23,
+                "end": 49
+              },
+              {
+                "role": "value",
+                "start": 53,
+                "end": 57
+              },
+              {
+                "role": "unit",
+                "start": 58,
+                "end": 71
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "227facb9b75f394f7537aeca0a1430ead12d0858e3c73296251c96af795645cc",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-11-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionAcorn",
+            "metric": "revenue",
+            "value": "33",
+            "unit": "eur thousand",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "926cba8d4b9db0a9b4cce8ca9103e9c24bbd3b10ada083c9d46d5a8be9e5da32",
+            "issuer": "FictionAcorn",
+            "metric": "revenue",
+            "value": "33",
+            "unit": "eur thousand",
+            "period": "2017",
+            "method": "table",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 9,
+                "end": 21
+              },
+              {
+                "role": "footnote_reference",
+                "start": 74,
+                "end": 77
+              },
+              {
+                "role": "metric",
+                "start": 66,
+                "end": 77
+              },
+              {
+                "role": "period",
+                "start": 30,
+                "end": 34
+              },
+              {
+                "role": "unit",
+                "start": 116,
+                "end": 128
+              },
+              {
+                "role": "unit_applicability",
+                "start": 85,
+                "end": 129
+              },
+              {
+                "role": "value",
+                "start": 80,
+                "end": 82
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "926cba8d4b9db0a9b4cce8ca9103e9c24bbd3b10ada083c9d46d5a8be9e5da32",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-11-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionAcorn",
+            "metric": "revenue",
+            "value": "33",
+            "unit": "usd million",
+            "year": "2017",
+            "corrected": false
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "926cba8d4b9db0a9b4cce8ca9103e9c24bbd3b10ada083c9d46d5a8be9e5da32",
+            "issuer": "FictionAcorn",
+            "metric": "revenue",
+            "value": "33",
+            "unit": "eur thousand",
+            "period": "2017",
+            "method": "table",
+            "priority": "current",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 9,
+                "end": 21
+              },
+              {
+                "role": "footnote_reference",
+                "start": 74,
+                "end": 77
+              },
+              {
+                "role": "metric",
+                "start": 66,
+                "end": 77
+              },
+              {
+                "role": "period",
+                "start": 30,
+                "end": 34
+              },
+              {
+                "role": "unit",
+                "start": 116,
+                "end": 128
+              },
+              {
+                "role": "unit_applicability",
+                "start": 85,
+                "end": 129
+              },
+              {
+                "role": "value",
+                "start": 80,
+                "end": 82
+              }
+            ]
+          },
+          "mismatches": [
+            "currency",
+            "scale"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "926cba8d4b9db0a9b4cce8ca9103e9c24bbd3b10ada083c9d46d5a8be9e5da32",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-12-0": {
+          "verdict": "supported",
+          "reason": "exact_claim_matches_bound_source",
+          "claim": {
+            "issuer": "FictionBramble",
+            "metric": "revenue",
+            "value": "44",
+            "unit": "eur million",
+            "year": "2018",
+            "corrected": true
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "b60f8e6ee071d8a2ca83836f5834262b1b34d2f270d5e50dff159563cf2a2d40",
+            "issuer": "FictionBramble",
+            "metric": "revenue",
+            "value": "44",
+            "unit": "eur million",
+            "period": "2018",
+            "method": "prose",
+            "priority": "correction",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 82,
+                "end": 96
+              },
+              {
+                "role": "metric",
+                "start": 106,
+                "end": 113
+              },
+              {
+                "role": "period",
+                "start": 136,
+                "end": 140
+              },
+              {
+                "role": "status",
+                "start": 70,
+                "end": 81
+              },
+              {
+                "role": "unit",
+                "start": 120,
+                "end": 131
+              },
+              {
+                "role": "value",
+                "start": 117,
+                "end": 119
+              },
+              {
+                "role": "supersession",
+                "start": 158,
+                "end": 181
+              }
+            ]
+          },
+          "mismatches": [],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "b60f8e6ee071d8a2ca83836f5834262b1b34d2f270d5e50dff159563cf2a2d40",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        },
+        "HHEM-12-1": {
+          "verdict": "contradicted",
+          "reason": "source_fact_differs",
+          "claim": {
+            "issuer": "FictionBramble",
+            "metric": "revenue",
+            "value": "40",
+            "unit": "eur million",
+            "year": "2018",
+            "corrected": true
+          },
+          "source_fact": {
+            "contract": "linked-evidence-v1",
+            "source_sha256": "b60f8e6ee071d8a2ca83836f5834262b1b34d2f270d5e50dff159563cf2a2d40",
+            "issuer": "FictionBramble",
+            "metric": "revenue",
+            "value": "44",
+            "unit": "eur million",
+            "period": "2018",
+            "method": "prose",
+            "priority": "correction",
+            "spans": [
+              {
+                "role": "entity",
+                "start": 82,
+                "end": 96
+              },
+              {
+                "role": "metric",
+                "start": 106,
+                "end": 113
+              },
+              {
+                "role": "period",
+                "start": 136,
+                "end": 140
+              },
+              {
+                "role": "status",
+                "start": 70,
+                "end": 81
+              },
+              {
+                "role": "unit",
+                "start": 120,
+                "end": 131
+              },
+              {
+                "role": "value",
+                "start": 117,
+                "end": 119
+              },
+              {
+                "role": "supersession",
+                "start": 158,
+                "end": 181
+              }
+            ]
+          },
+          "mismatches": [
+            "value"
+          ],
+          "proof_valid": true,
+          "decision_origin": "source_rules_not_model",
+          "source_sha256": "b60f8e6ee071d8a2ca83836f5834262b1b34d2f270d5e50dff159563cf2a2d40",
+          "no_claim_is_not_a_supported_nondisclosure": true
+        }
+      },
+      "raw_model_records": 24,
+      "independent_gold": false,
+      "scope": "A new source-rule verifier, not repaired raw HHEM predictions or a general financial judge."
+    },
+    "historical_scores_rewritten": false
+  },
+  "boundary_controls": {
+    "planned": 6,
+    "resolved": 0,
+    "correct": 0,
+    "false_support": 0,
+    "false_rejection": 0,
+    "requires_review": 6,
+    "model_increment_established": false,
+    "model_weights_or_threshold_changed": false,
+    "decisions": {
+      "BOUNDARY-01": {
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionPeony",
+          "metric": "revenue",
+          "value": "26",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "6e6b5613af785670b06266dbb86585c995b368575bb4d6b640dad4ec3f7c06db",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "BOUNDARY-02": {
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionPeony",
+          "metric": "revenue",
+          "value": "62",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "6e6b5613af785670b06266dbb86585c995b368575bb4d6b640dad4ec3f7c06db",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "BOUNDARY-03": {
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionRue",
+          "metric": "revenue",
+          "value": "20",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "31b4fcfa19cbb455ee42f9aa9354799989ee979047dca7549d64d25609a26362",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "BOUNDARY-04": {
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionRue",
+          "metric": "revenue",
+          "value": "30",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "31b4fcfa19cbb455ee42f9aa9354799989ee979047dca7549d64d25609a26362",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "BOUNDARY-05": {
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionSorrel",
+          "metric": "diluted earnings per share",
+          "value": "2.20",
+          "unit": "gbp per share",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "1f01947ad74be594ad8dcc99abc3cea1956760957ceedec56206970bd5ecdf3e",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "BOUNDARY-06": {
+        "verdict": "review",
+        "reason": "no_unique_source_proof_requires_review",
+        "claim": {
+          "issuer": "FictionSorrel",
+          "metric": "diluted earnings per share",
+          "value": "2.50",
+          "unit": "gbp per share",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": null,
+        "mismatches": [],
+        "proof_valid": false,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "1f01947ad74be594ad8dcc99abc3cea1956760957ceedec56206970bd5ecdf3e",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      }
+    },
+    "raw_model_records": 0,
+    "independent_gold": false,
+    "scope": "A new source-rule verifier, not repaired raw HHEM predictions or a general financial judge."
+  },
+  "affinity_mask": 1,
+  "load": {
+    "kind": "loaded",
+    "load_seconds": 0.6410000002942979,
+    "device": "cpu",
+    "torch_threads": 1
+  },
+  "summary": {
+    "planned": 24,
+    "recorded": 24,
+    "correct": 17,
+    "not_attempted": 0,
+    "invalid": 0,
+    "false_support": 7,
+    "false_rejection": 0,
+    "fixed_threshold": 0.5,
+    "threshold_tuned_on_results": false,
+    "independent_gold": false,
+    "promote": false,
+    "abstention_answerability_evaluated": false,
+    "refusal_policy": "No claim -> no entailment verdict; human/source coverage review required."
+  },
+  "load_seconds": 0.6410000002942979,
+  "worker_seconds": 9.469000000040978,
+  "dependencies": {
+    "torch": "2.9.1+cpu",
+    "transformers": "4.57.6",
+    "safetensors": "0.7.0",
+    "tokenizers": "0.22.2",
+    "numpy": "2.5.4"
+  },
+  "no_training": true,
+  "no_human_gold": true,
+  "worker_exit_code": 0,
+  "controller_wall_seconds": 51.875,
+  "observed_combined_peak_RSS_bytes": 730165248,
+  "owned_pids_observed": [
+    47884,
+    139808
+  ],
+  "fixture_sha256": "4f385ddf023d7f5ef5b10b22a1700cfd1d80f84c71c03c32c60ffb592bc8a347",
+  "source_structured": {
+    "planned": 24,
+    "resolved": 24,
+    "correct": 24,
+    "false_support": 0,
+    "false_rejection": 0,
+    "requires_review": 0,
+    "model_increment_established": false,
+    "model_weights_or_threshold_changed": false,
+    "decisions": {
+      "STRUCT-01-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionCamellia",
+          "metric": "revenue",
+          "value": "26",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+          "issuer": "FictionCamellia",
+          "metric": "revenue",
+          "value": "26",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 15
+            },
+            {
+              "role": "metric",
+              "start": 25,
+              "end": 32
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 39,
+              "end": 50
+            },
+            {
+              "role": "value",
+              "start": 36,
+              "end": 38
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-01-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionCamellia",
+          "metric": "revenue",
+          "value": "62",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+          "issuer": "FictionCamellia",
+          "metric": "revenue",
+          "value": "26",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 15
+            },
+            {
+              "role": "metric",
+              "start": 25,
+              "end": 32
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 39,
+              "end": 50
+            },
+            {
+              "role": "value",
+              "start": 36,
+              "end": 38
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "08d94d52a4ffe7c88f38ed9481a527521df3190891408afb4730872d1d4735bb",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-02-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionDogrose",
+          "metric": "revenue",
+          "value": "34.5",
+          "unit": "gbp thousand",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "43f24f4c58e44b66a23b6c3b2e903321d1871c7a7b261a684747bdda38c571b7",
+          "issuer": "FictionDogrose",
+          "metric": "revenue",
+          "value": "34.5",
+          "unit": "gbp thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 79,
+              "end": 86
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 61,
+              "end": 73
+            },
+            {
+              "role": "value",
+              "start": 94,
+              "end": 98
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "43f24f4c58e44b66a23b6c3b2e903321d1871c7a7b261a684747bdda38c571b7",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-02-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionDogrose",
+          "metric": "revenue",
+          "value": "82",
+          "unit": "usd million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "43f24f4c58e44b66a23b6c3b2e903321d1871c7a7b261a684747bdda38c571b7",
+          "issuer": "FictionDogrose",
+          "metric": "revenue",
+          "value": "34.5",
+          "unit": "gbp thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 79,
+              "end": 86
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 61,
+              "end": 73
+            },
+            {
+              "role": "value",
+              "start": 94,
+              "end": 98
+            }
+          ]
+        },
+        "mismatches": [
+          "value",
+          "currency",
+          "scale"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "43f24f4c58e44b66a23b6c3b2e903321d1871c7a7b261a684747bdda38c571b7",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-03-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionElder",
+          "metric": "revenue",
+          "value": "27",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+          "issuer": "FictionElder",
+          "metric": "revenue",
+          "value": "27",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 12
+            },
+            {
+              "role": "metric",
+              "start": 22,
+              "end": 29
+            },
+            {
+              "role": "period",
+              "start": 52,
+              "end": 56
+            },
+            {
+              "role": "unit",
+              "start": 36,
+              "end": 47
+            },
+            {
+              "role": "value",
+              "start": 33,
+              "end": 35
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-03-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionElder",
+          "metric": "revenue",
+          "value": "27",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+          "issuer": "FictionElder",
+          "metric": "revenue",
+          "value": "27",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 12
+            },
+            {
+              "role": "metric",
+              "start": 22,
+              "end": 29
+            },
+            {
+              "role": "period",
+              "start": 52,
+              "end": 56
+            },
+            {
+              "role": "unit",
+              "start": 36,
+              "end": 47
+            },
+            {
+              "role": "value",
+              "start": 33,
+              "end": 35
+            }
+          ]
+        },
+        "mismatches": [
+          "currency"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "152c6a39b03b079f363a2e9fc0bdac3645aa5ed1a60737b809c22f04ec44e930",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-04-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionFreesia",
+          "metric": "revenue",
+          "value": "38",
+          "unit": "eur thousand",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "893de6a55d6ed889775509d33c5d2e076808ee413772d11be39508c9de1ad09f",
+          "issuer": "FictionFreesia",
+          "metric": "revenue",
+          "value": "38",
+          "unit": "eur thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 68,
+              "end": 75
+            },
+            {
+              "role": "period",
+              "start": 59,
+              "end": 63
+            },
+            {
+              "role": "unit",
+              "start": 36,
+              "end": 48
+            },
+            {
+              "role": "value",
+              "start": 78,
+              "end": 80
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "893de6a55d6ed889775509d33c5d2e076808ee413772d11be39508c9de1ad09f",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-04-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionFreesia",
+          "metric": "revenue",
+          "value": "38",
+          "unit": "eur billion",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "893de6a55d6ed889775509d33c5d2e076808ee413772d11be39508c9de1ad09f",
+          "issuer": "FictionFreesia",
+          "metric": "revenue",
+          "value": "38",
+          "unit": "eur thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "role": "metric",
+              "start": 68,
+              "end": 75
+            },
+            {
+              "role": "period",
+              "start": 59,
+              "end": 63
+            },
+            {
+              "role": "unit",
+              "start": 36,
+              "end": 48
+            },
+            {
+              "role": "value",
+              "start": 78,
+              "end": 80
+            }
+          ]
+        },
+        "mismatches": [
+          "scale"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "893de6a55d6ed889775509d33c5d2e076808ee413772d11be39508c9de1ad09f",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-05-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionGentian",
+          "metric": "operating income",
+          "value": "-23",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "23eb8c6993e7ba3a610c761f0bce2187c2e126cda43be38a17cc5f76c0f99641",
+          "issuer": "FictionGentian",
+          "metric": "operating income",
+          "value": "-23",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 40
+            },
+            {
+              "role": "period",
+              "start": 65,
+              "end": 69
+            },
+            {
+              "role": "sign_convention",
+              "start": 71,
+              "end": 100
+            },
+            {
+              "role": "unit",
+              "start": 49,
+              "end": 60
+            },
+            {
+              "role": "value",
+              "start": 44,
+              "end": 48
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "23eb8c6993e7ba3a610c761f0bce2187c2e126cda43be38a17cc5f76c0f99641",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-05-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionGentian",
+          "metric": "operating income",
+          "value": "23",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "23eb8c6993e7ba3a610c761f0bce2187c2e126cda43be38a17cc5f76c0f99641",
+          "issuer": "FictionGentian",
+          "metric": "operating income",
+          "value": "-23",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 40
+            },
+            {
+              "role": "period",
+              "start": 65,
+              "end": 69
+            },
+            {
+              "role": "sign_convention",
+              "start": 71,
+              "end": 100
+            },
+            {
+              "role": "unit",
+              "start": 49,
+              "end": 60
+            },
+            {
+              "role": "value",
+              "start": 44,
+              "end": 48
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "23eb8c6993e7ba3a610c761f0bce2187c2e126cda43be38a17cc5f76c0f99641",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-06-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionHeather",
+          "metric": "revenue",
+          "value": "46",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+          "issuer": "FictionHeather",
+          "metric": "revenue",
+          "value": "46",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 31
+            },
+            {
+              "role": "period",
+              "start": 54,
+              "end": 58
+            },
+            {
+              "role": "unit",
+              "start": 38,
+              "end": 49
+            },
+            {
+              "role": "value",
+              "start": 35,
+              "end": 37
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-06-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionHeather",
+          "metric": "revenue",
+          "value": "58",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+          "issuer": "FictionHeather",
+          "metric": "revenue",
+          "value": "46",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 31
+            },
+            {
+              "role": "period",
+              "start": 54,
+              "end": 58
+            },
+            {
+              "role": "unit",
+              "start": 38,
+              "end": 49
+            },
+            {
+              "role": "value",
+              "start": 35,
+              "end": 37
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "7b33eecf7ef30eff3b748a90e63b6317e1829b00b03e48a795a85bec34b343c4",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-07-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionJonquil",
+          "metric": "gross margin",
+          "value": "17",
+          "unit": "%",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+          "issuer": "FictionJonquil",
+          "metric": "gross margin",
+          "value": "17",
+          "unit": "%",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 36
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 43,
+              "end": 50
+            },
+            {
+              "role": "value",
+              "start": 40,
+              "end": 42
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-07-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionJonquil",
+          "metric": "gross margin",
+          "value": "9",
+          "unit": "%",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+          "issuer": "FictionJonquil",
+          "metric": "gross margin",
+          "value": "17",
+          "unit": "%",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 14
+            },
+            {
+              "role": "metric",
+              "start": 24,
+              "end": 36
+            },
+            {
+              "role": "period",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 43,
+              "end": 50
+            },
+            {
+              "role": "value",
+              "start": 40,
+              "end": 42
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "df37823601716b2ff8f220d92987567408a1c7f0e23c65691b22322459d66e5c",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-08-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionKalmia",
+          "metric": "consolidated revenue",
+          "value": "84",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "c10a01f6b6447abf347febf0de456cc27c6777d522a25cde52175236f7ce49f8",
+          "issuer": "FictionKalmia",
+          "metric": "consolidated revenue",
+          "value": "84",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "role": "metric",
+              "start": 23,
+              "end": 43
+            },
+            {
+              "role": "period",
+              "start": 66,
+              "end": 70
+            },
+            {
+              "role": "scope",
+              "start": 23,
+              "end": 43
+            },
+            {
+              "role": "unit",
+              "start": 50,
+              "end": 61
+            },
+            {
+              "role": "value",
+              "start": 47,
+              "end": 49
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "c10a01f6b6447abf347febf0de456cc27c6777d522a25cde52175236f7ce49f8",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-08-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionKalmia",
+          "metric": "consolidated revenue",
+          "value": "29",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "c10a01f6b6447abf347febf0de456cc27c6777d522a25cde52175236f7ce49f8",
+          "issuer": "FictionKalmia",
+          "metric": "consolidated revenue",
+          "value": "84",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "role": "metric",
+              "start": 23,
+              "end": 43
+            },
+            {
+              "role": "period",
+              "start": 66,
+              "end": 70
+            },
+            {
+              "role": "scope",
+              "start": 23,
+              "end": 43
+            },
+            {
+              "role": "unit",
+              "start": 50,
+              "end": 61
+            },
+            {
+              "role": "value",
+              "start": 47,
+              "end": 49
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "c10a01f6b6447abf347febf0de456cc27c6777d522a25cde52175236f7ce49f8",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-09-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionLotus",
+          "metric": "GAAP operating income",
+          "value": "21",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compound-claim-source-v1",
+          "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+          "issuer": "FictionLotus",
+          "metric": "GAAP operating income",
+          "value": "21",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "bounded_compound_disclosure",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 10,
+              "end": 22
+            },
+            {
+              "role": "period",
+              "start": 4,
+              "end": 8
+            },
+            {
+              "role": "metric",
+              "start": 32,
+              "end": 53
+            },
+            {
+              "role": "value",
+              "start": 57,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 60,
+              "end": 71
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-09-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionLotus",
+          "metric": "GAAP operating income",
+          "value": "32",
+          "unit": "eur million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compound-claim-source-v1",
+          "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+          "issuer": "FictionLotus",
+          "metric": "GAAP operating income",
+          "value": "21",
+          "unit": "eur million",
+          "period": "2016",
+          "method": "bounded_compound_disclosure",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 10,
+              "end": 22
+            },
+            {
+              "role": "period",
+              "start": 4,
+              "end": 8
+            },
+            {
+              "role": "metric",
+              "start": 32,
+              "end": 53
+            },
+            {
+              "role": "value",
+              "start": 57,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 60,
+              "end": 71
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "64336571840f45dab1c1328716b0037a95eb8d10a7d08d634611dac6485b424d",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-10-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionMagnolia",
+          "metric": "diluted earnings per share",
+          "value": "2.15",
+          "unit": "gbp per share",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compound-claim-source-v1",
+          "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+          "issuer": "FictionMagnolia",
+          "metric": "diluted earnings per share",
+          "value": "2.15",
+          "unit": "gbp per share",
+          "period": "2016",
+          "method": "bounded_compound_disclosure",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 15
+            },
+            {
+              "role": "period",
+              "start": 78,
+              "end": 82
+            },
+            {
+              "role": "metric",
+              "start": 25,
+              "end": 51
+            },
+            {
+              "role": "value",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 60,
+              "end": 73
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-10-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionMagnolia",
+          "metric": "diluted earnings per share",
+          "value": "2.45",
+          "unit": "gbp per share",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "compound-claim-source-v1",
+          "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+          "issuer": "FictionMagnolia",
+          "metric": "diluted earnings per share",
+          "value": "2.15",
+          "unit": "gbp per share",
+          "period": "2016",
+          "method": "bounded_compound_disclosure",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 0,
+              "end": 15
+            },
+            {
+              "role": "period",
+              "start": 78,
+              "end": 82
+            },
+            {
+              "role": "metric",
+              "start": 25,
+              "end": 51
+            },
+            {
+              "role": "value",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "role": "unit",
+              "start": 60,
+              "end": 73
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "e96e00466717418026f4defc817fbafd2d23504f315ca05ef1825c3963e0074f",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-11-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionNarcissus",
+          "metric": "revenue",
+          "value": "48",
+          "unit": "gbp thousand",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "0f261d97f63f726beca21527ce216ffdd473c92d16d71ba97569623d97bfac22",
+          "issuer": "FictionNarcissus",
+          "metric": "revenue",
+          "value": "48",
+          "unit": "gbp thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 25
+            },
+            {
+              "role": "footnote_reference",
+              "start": 78,
+              "end": 81
+            },
+            {
+              "role": "metric",
+              "start": 70,
+              "end": 81
+            },
+            {
+              "role": "period",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "role": "unit",
+              "start": 120,
+              "end": 132
+            },
+            {
+              "role": "unit_applicability",
+              "start": 89,
+              "end": 133
+            },
+            {
+              "role": "value",
+              "start": 84,
+              "end": 86
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "0f261d97f63f726beca21527ce216ffdd473c92d16d71ba97569623d97bfac22",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-11-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionNarcissus",
+          "metric": "revenue",
+          "value": "48",
+          "unit": "usd million",
+          "year": "2016",
+          "corrected": false
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "0f261d97f63f726beca21527ce216ffdd473c92d16d71ba97569623d97bfac22",
+          "issuer": "FictionNarcissus",
+          "metric": "revenue",
+          "value": "48",
+          "unit": "gbp thousand",
+          "period": "2016",
+          "method": "table",
+          "priority": "current",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 9,
+              "end": 25
+            },
+            {
+              "role": "footnote_reference",
+              "start": 78,
+              "end": 81
+            },
+            {
+              "role": "metric",
+              "start": 70,
+              "end": 81
+            },
+            {
+              "role": "period",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "role": "unit",
+              "start": 120,
+              "end": 132
+            },
+            {
+              "role": "unit_applicability",
+              "start": 89,
+              "end": 133
+            },
+            {
+              "role": "value",
+              "start": 84,
+              "end": 86
+            }
+          ]
+        },
+        "mismatches": [
+          "currency",
+          "scale"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "0f261d97f63f726beca21527ce216ffdd473c92d16d71ba97569623d97bfac22",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-12-0": {
+        "verdict": "supported",
+        "reason": "exact_claim_matches_bound_source",
+        "claim": {
+          "issuer": "FictionOleander",
+          "metric": "revenue",
+          "value": "57",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": true
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "8813c2722d8f5cbd80c4fc7ae5f8c2d68e64c927d2a4c53871555fc40235cfac",
+          "issuer": "FictionOleander",
+          "metric": "revenue",
+          "value": "57",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "correction",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 83,
+              "end": 98
+            },
+            {
+              "role": "metric",
+              "start": 108,
+              "end": 115
+            },
+            {
+              "role": "period",
+              "start": 138,
+              "end": 142
+            },
+            {
+              "role": "status",
+              "start": 71,
+              "end": 82
+            },
+            {
+              "role": "unit",
+              "start": 122,
+              "end": 133
+            },
+            {
+              "role": "value",
+              "start": 119,
+              "end": 121
+            },
+            {
+              "role": "supersession",
+              "start": 160,
+              "end": 183
+            }
+          ]
+        },
+        "mismatches": [],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "8813c2722d8f5cbd80c4fc7ae5f8c2d68e64c927d2a4c53871555fc40235cfac",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      },
+      "STRUCT-12-1": {
+        "verdict": "contradicted",
+        "reason": "source_fact_differs",
+        "claim": {
+          "issuer": "FictionOleander",
+          "metric": "revenue",
+          "value": "52",
+          "unit": "gbp million",
+          "year": "2016",
+          "corrected": true
+        },
+        "source_fact": {
+          "contract": "linked-evidence-v1",
+          "source_sha256": "8813c2722d8f5cbd80c4fc7ae5f8c2d68e64c927d2a4c53871555fc40235cfac",
+          "issuer": "FictionOleander",
+          "metric": "revenue",
+          "value": "57",
+          "unit": "gbp million",
+          "period": "2016",
+          "method": "prose",
+          "priority": "correction",
+          "spans": [
+            {
+              "role": "entity",
+              "start": 83,
+              "end": 98
+            },
+            {
+              "role": "metric",
+              "start": 108,
+              "end": 115
+            },
+            {
+              "role": "period",
+              "start": 138,
+              "end": 142
+            },
+            {
+              "role": "status",
+              "start": 71,
+              "end": 82
+            },
+            {
+              "role": "unit",
+              "start": 122,
+              "end": 133
+            },
+            {
+              "role": "value",
+              "start": 119,
+              "end": 121
+            },
+            {
+              "role": "supersession",
+              "start": 160,
+              "end": 183
+            }
+          ]
+        },
+        "mismatches": [
+          "value"
+        ],
+        "proof_valid": true,
+        "decision_origin": "source_rules_not_model",
+        "source_sha256": "8813c2722d8f5cbd80c4fc7ae5f8c2d68e64c927d2a4c53871555fc40235cfac",
+        "no_claim_is_not_a_supported_nondisclosure": true
+      }
+    },
+    "raw_model_records": 24,
+    "independent_gold": false,
+    "scope": "A new source-rule verifier, not repaired raw HHEM predictions or a general financial judge."
+  },
+  "overall_source_rule_coverage": {
+    "planned_with_boundary": 30,
+    "resolved": 24,
+    "correct_including_unresolved_as_misses": 24,
+    "requires_review": 6,
+    "no_model_increment_claim": true,
+    "boundary_controls_have_no_raw_model_predictions": true
+  },
+  "source_unchanged": true,
+  "resource_check_passed": true
+}

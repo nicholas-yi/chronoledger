@@ -10,16 +10,16 @@ The model judge is nondefault, with its failed comparisons retained. The broader
 nine-area toolkit is parked reference mathematics, not the current research queue.
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
-Latest: [current-candidate consolidation and HHEM comparison](FOCUSED_READER.md#observed-consolidation-current-regressions-pass-hhem-is-not-an-approval-gate)
-passes all nine exposed invented regression cohorts under their declared current
-contracts, including grammar 24/24, harder 288/288, fields 24/24 and context 192/192.
-Older cohort scores are not regraded. Natural count/line-wrap gaps and three
-additional oldest-fixture failures are fixed with bounded source guards.
-**HHEM scored 17/24 with seven false approvals** at its fixed threshold: locally
-feasible (43.391 s / 0.677 GiB / one CPU), but not qualified to approve financial facts.
-The earlier 5/12 AI reviewer remains a different failed task, not a human substitute.
-Validation: 744 full-suite passes plus 28 affected checks, Ruff/docs pass.
-Independent real-source human labels/adjudication remain outstanding.
+Latest: the [source-rule claim verifier](FOCUSED_READER.md#observed-source-rule-comparison-2424-resolved-claims-six-visible-deferrals)
+scored **24/24 on the same new claims where raw HHEM scored 17/24**, eliminating
+seven false approvals within its declared grammar. This is a separate rule-based
+component, not improved model weights; its source-only control is identical.
+Six extra unfamiliar-format controls stayed unresolved: **24/30 overall resolved
+coverage (80%)**, not universal perfection. The current reader's nine exposed
+regression cohorts still pass, and historical scores are unchanged.
+The earlier 5/12 AI reviewer remains nondefault and human gold remains zero.
+Validation: **756 full-suite tests passed**, Ruff/docs pass; measured new run
+51.875 s / 0.680 GiB / one CPU. Independent real-source review is still required.
 
 | Retained comparison | Scoped outcome |
 |---|---|
@@ -33,6 +33,7 @@ Independent real-source human labels/adjudication remain outstanding.
 | [Cells/context coverage](FOCUSED_READER.md#observed-cell-audit-coverage-completed-model-comparison-stopped-on-first-timeout) | Deterministic192/192; model comparison stopped first-call timeout; no model accuracy result |
 | [AI reviewer + compact cells](FOCUSED_READER.md#observed-ai-reviewer-and-cell-run-cells-pass-judge-does-not-earn-trust) | Cells 12/12; AI verdicts 5/12, not promoted; full 724 tests pass |
 | [Current source regressions + HHEM](FOCUSED_READER.md#observed-consolidation-current-regressions-pass-hhem-is-not-an-approval-gate) | All 9 current cohorts pass; HHEM 17/24 with seven false approvals, not promoted |
+| [Source-rule claims](FOCUSED_READER.md#observed-source-rule-comparison-2424-resolved-claims-six-visible-deferrals) | Same-input raw 17/24 vs source 24/24; six boundaries deferred, overall 24/30 coverage |
 
 Twelve private real-source review windows and two blank forms are ready, but
 independent reviewers remain unassigned and gold labels remain zero.

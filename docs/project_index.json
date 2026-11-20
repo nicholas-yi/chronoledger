@@ -16,7 +16,7 @@
     "src/asof/research/prequential.py"
   ],
   "entrypoints": [
-    {"id": "source-structured-verifier", "path": "scripts/run_hhem_benchmark.py", "status": "approved_once_pending_frozen_source_rule_comparison", "command": null},
+    {"id": "source-structured-verifier", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_source24of24_raw17of24_boundaries6unresolved", "command": null},
     {"id": "reader-current-regressions", "path": "scripts/check_reader_regressions.py", "status": "active_invented_regressions_not_independent_gold", "command": "python scripts/check_reader_regressions.py"},
     {"id": "hhem-advisory", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_17of24_seven_false_support_not_promoted", "command": null},
     {"id": "hhem-assets", "path": "scripts/prepare_hhem_assets.py", "status": "public_artifacts_prepared_hash_pinned_no_inference", "command": null},
@@ -46,6 +46,15 @@
     {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
   ],
   "evidence": [
+    {
+      "id": "source-structured-claims",
+      "kind": "authored_source_rule_vs_raw_entailment_with_boundary_controls",
+      "path": "results/hhem_structured.json",
+      "report": "docs/FOCUSED_READER.md",
+      "freeze_revision": "7083b99e0b9130c0b11a8b310ecb65ec68fc21a0",
+      "status": "source24of24_raw17of24_6boundariesdeferred_24of30coverage_nohumangold",
+      "supersedes": []
+    },
     {
       "id": "hhem-and-current-regressions",
       "kind": "exposed_current_source_regression_and_local_claim_entailment_diagnostic",
