@@ -1,0 +1,88 @@
+{
+  "scope": "D15 development-only H4 extract (approved h4=dev_extract_repro)",
+  "freeze_commit": "7a23d0297d9bf97e4c79a0dea2461e2f5b543404",
+  "source_SHA256": {
+    "scripts/h4_dev_reproducibility.py": "6f5e27911b2460c8dfa44b8225c0841d23d8142448ae75ba99348f7e2089fabb",
+    "scripts/h4_fundamentals.py": "b971fb14dc990fc9e992571f6fc392a314e9f3ec792164402c9f63e558cb188f",
+    "scripts/development_diagnostics.py": "3e9b0ef92af780510fb0e56c1c4615e1d969acbab5a96420a502d271139508dd",
+    "src/asof/events.py": "6c9f4d4ed843281744ea62df1c7fcf2d669f5ccef357247961cf62bb2443fc81"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "declared_rule": "- extract: one process reads ``h4_pairs`` and ``h4_outcomes`` in full. That read is the\n  recorded exposure, including any H4 holdout-window rows. It writes pairs accepted\n  2012-2018, and outcome rows dated no later than the last development report date plus\n  430 days (the longest lag the panel uses). It writes nothing unless the panel built from the\n  re-read extract equals the panel built from the full files exactly. Only aggregate row\n  counts by year are recorded; no values.\n- check: three child processes run the registered H4 regressions on the extract: single_A\n  and single_B with one numerical thread, and default_threads. ``single_thread_reproducible``\n  iff single_A == single_B == the committed Batch B ``h4_development.json`` (exact floats).\n  default_threads versus the original multi-thread baseline is reported, not gating.",
+  "inputs_read_in_full_SHA256": {
+    "data/h4_pairs.parquet": "8326278412be317d405aac1056a52e1bfbf6e96f78eccdde8fc72b393de04e1b",
+    "data/h4_outcomes.parquet": "daeff1961e52ea9cbfe8d8bad979bbee95bc26392c52a60ee7965a3d747422fe",
+    "data/bulk_entities.parquet": "20b2f2eaccd5eedfc608eb90ffd09e626b77bcde56a94b69405aa915c44ba0cc"
+  },
+  "exposure": {
+    "pairs_rows_decoded_by_knowledge_year": {
+      "2011": 5,
+      "2012": 752,
+      "2013": 758,
+      "2014": 747,
+      "2015": 761,
+      "2016": 754,
+      "2017": 753,
+      "2018": 745,
+      "2019": 726,
+      "2020": 742,
+      "2021": 750,
+      "2022": 794,
+      "2023": 855,
+      "2024": 779,
+      "2025": 660
+    },
+    "outcome_rows_decoded_by_report_year": {
+      "1993": 62,
+      "1994": 86,
+      "1995": 120,
+      "1996": 215,
+      "1997": 235,
+      "1998": 260,
+      "1999": 266,
+      "2000": 269,
+      "2001": 290,
+      "2002": 450,
+      "2003": 467,
+      "2004": 498,
+      "2005": 537,
+      "2006": 569,
+      "2007": 605,
+      "2008": 677,
+      "2009": 734,
+      "2010": 778,
+      "2011": 820,
+      "2012": 818,
+      "2013": 815,
+      "2014": 819,
+      "2015": 806,
+      "2016": 814,
+      "2017": 798,
+      "2018": 787,
+      "2019": 797,
+      "2020": 850,
+      "2021": 948,
+      "2022": 901,
+      "2023": 815,
+      "2024": 781,
+      "2025": 710,
+      "2026": 96
+    },
+    "outcome_rows_decoded_in_H4_holdout_window_2022_plus": 3303,
+    "values_written_or_reported_from_2022_plus": 0,
+    "note": "Rows were decoded in memory by this one process; only these counts leave it."
+  },
+  "extract": {
+    "pairs_rows": 5270,
+    "outcome_rows": 14394,
+    "outcome_report_date_max": "2020-01-03",
+    "SHA256": {
+      "data/h4_dev/pairs.parquet": "e2159fd6a2310d9dcb5dea46e1d7f652e25ed290eab9ecb38d27642a4a848445",
+      "data/h4_dev/outcomes.parquet": "a7e0090731fa48ffdf305fc0f17de575146e06914d811d33a3eb5a1125338fc2"
+    }
+  },
+  "equivalence": {
+    "panel_rows": 5270,
+    "panel_from_extract_equals_full_panel_exactly": true
+  }
+}
