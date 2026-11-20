@@ -37,7 +37,7 @@ SOURCES = (
 )
 
 
-def worker() -> int:
+def worker(version: str = "v1") -> int:
     if sys.stdin.readline().strip() != "owned-hhem-job-ready":
         raise RuntimeError("ownedHHEMJobcontainmenthandshake required")
 
@@ -45,7 +45,12 @@ def worker() -> int:
         print(json.dumps(message, allow_nan=False), flush=True)
 
     try:
-        result = benchmark(ROOT, emit)
+        if version == "structured":
+            from asof.claim_challenge import fixture as new_fixture
+
+            result = benchmark(ROOT, emit, cases=new_fixture())
+        else:
+            result = benchmark(ROOT, emit)
     except (OSError, ValueError, RuntimeError, ImportError) as exc:
         emit({"kind": "failure", "reason": f"{type(exc).__name__}:{exc}"})
         return 2
@@ -55,23 +60,39 @@ def worker() -> int:
     return 0
 
 
-def run(python: Path) -> int:
+def run(python: Path, version: str = "v1") -> int:
     from asof.reader_regression import regression_matrix
 
-    report_path = ROOT / "results" / "hhem_benchmark.json"
-    private = ROOT / "data" / "hhem_benchmark_v1"
+    if version not in ("v1", "structured"):
+        raise ValueError("unknownverifierprofile")
+    stem = "hhem_structured" if version == "structured" else "hhem_benchmark"
+    report_path = ROOT / "results" / f"{stem}.json"
+    private = ROOT / "data" / f"{stem}_v1" if version == "structured" else ROOT / "data" / "hhem_benchmark_v1"
     if report_path.exists() or (private / "attempt.json").exists():
         raise FileExistsError("HHEMattemptalreadyexists;noautomaticretry")
-    plan = json.loads((ROOT / "results" / "hhem_plan.json").read_bytes())
+    plan_name = "hhem_structured_plan.json" if version == "structured" else "hhem_plan.json"
+    plan = json.loads((ROOT / "results" / plan_name).read_bytes())
     fixed = {"profile": "HHEM-LOCAL-01", "max_cases": 24, "threshold": 0.5,
              "wall_seconds": 1200, "controller_stop_seconds": 1180,
              "RAM_bytes": 6 << 30, "controller_RAM_allowance": 128 << 20,
              "CPU_count": 1, "input_token_cap": 2048, "GPU": False}
+    sources = SOURCES
+    chosen_cases = fixture()
+    if version == "structured":
+        from asof.claim_challenge import boundary_controls
+        from asof.claim_challenge import fixture as new_fixture
+        from asof.claim_verifier import summarize_structured
+
+        chosen_cases = new_fixture()
+        fixed["profile"] = "HHEM-STRUCTURED-01"
+        sources = (*SOURCES, "src/asof/claim_verifier.py", "src/asof/claim_challenge.py",
+                   "tests/test_claim_verifier.py", "results/hhem_structured_plan.json",
+                   "results/hhem_benchmark.json")
     if plan != fixed or any(os.environ.get(key) != "1" for key in THREAD_VARIABLES):
         raise ValueError("verifierallocationorthreadenvironmentdiffers")
     if not python.is_file():
         raise FileNotFoundError("explicitisolatedverifierPythonrequired")
-    lineage = frozen_receipt(ROOT, SOURCES)
+    lineage = frozen_receipt(ROOT, sources)
     private.mkdir(parents=True, exist_ok=True)
     write_receipt(private / "attempt.json", {"lineage": lineage, "plan": plan})
     report = {
@@ -82,6 +103,15 @@ def run(python: Path) -> int:
     }
     started = time.monotonic()
     report["current_regressions"] = regression_matrix(ROOT)
+    if version == "structured":
+        prior = json.loads((ROOT / "results" / "hhem_benchmark.json").read_bytes())
+        report["development_replay"] = {
+            "posthoc_after_source_and_outcome_exposure": True, "new_model_calls": 0,
+            "prior_raw_HHEM": prior["summary"],
+            "source_rule_verifier": summarize_structured(fixture(), prior["rows"]),
+            "historical_scores_rewritten": False,
+        }
+        report["boundary_controls"] = summarize_structured(boundary_controls(), [])
     environment = dict(os.environ)
     environment.update(
         PYTHONPATH=str(ROOT / "src"), HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1",
@@ -95,7 +125,7 @@ def run(python: Path) -> int:
         job = WorkerJob(memory_bytes=plan["RAM_bytes"]-plan["controller_RAM_allowance"], max_processes=2)
         with (private / "worker.log").open("xb") as log:
             process = subprocess.Popen(
-                [str(python), "-u", str(Path(__file__).resolve()), "--worker"],
+                [str(python), "-u", str(Path(__file__).resolve()), "--worker", "--version", version],
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=log, text=True, env=environment)
             mask = job.attach(process.pid)
             original_affinity = job.pin(os.getpid(), mask)
@@ -168,10 +198,21 @@ def run(python: Path) -> int:
                            "latency_seconds": None}
                           for uid in report["started_cases"] if uid not in recorded)
     report.update(
-        summary=summarize(report["rows"]), controller_wall_seconds=time.monotonic()-started,
+        summary=summarize(report["rows"], chosen_cases), controller_wall_seconds=time.monotonic()-started,
         observed_combined_peak_RSS_bytes=peak, owned_pids_observed=sorted(owned),
-        fixture_sha256=hashlib.sha256(json.dumps(fixture(), sort_keys=True).encode()).hexdigest(),
+        fixture_sha256=hashlib.sha256(json.dumps(chosen_cases, sort_keys=True).encode()).hexdigest(),
     )
+    if version == "structured":
+        report["source_structured"] = summarize_structured(chosen_cases, report["rows"])
+        boundary = report["boundary_controls"]
+        report["overall_source_rule_coverage"] = {
+            "planned_with_boundary": len(chosen_cases)+boundary["planned"],
+            "resolved": report["source_structured"]["resolved"]+boundary["resolved"],
+            "correct_including_unresolved_as_misses": report["source_structured"]["correct"]+boundary["correct"],
+            "requires_review": report["source_structured"]["requires_review"]+boundary["requires_review"],
+            "no_model_increment_claim": True,
+            "boundary_controls_have_no_raw_model_predictions": True,
+        }
     report["source_unchanged"] = frozen_sources_match(lineage)
     report["resource_check_passed"] = (
         report["controller_wall_seconds"] < plan["wall_seconds"]
@@ -180,9 +221,14 @@ def run(python: Path) -> int:
     if not report["source_unchanged"] or not report["resource_check_passed"]:
         report["status"], report["stop_reason"] = "stopped", "source_or_resource_contract_failed"
     write_receipt(report_path, report)
-    print(json.dumps({key: report[key] for key in (
+    output = {key: report[key] for key in (
         "status", "stop_reason", "summary", "source_unchanged", "resource_check_passed",
-        "controller_wall_seconds", "observed_combined_peak_RSS_bytes")}, indent=2))
+        "controller_wall_seconds", "observed_combined_peak_RSS_bytes")}
+    if version == "structured":
+        output["source_structured"] = {key: value for key, value in report["source_structured"].items()
+                                       if key != "decisions"}
+        output["overall_source_rule_coverage"] = report["overall_source_rule_coverage"]
+    print(json.dumps(output, indent=2))
     return 0 if report["status"] == "complete_invented_entailment_benchmark" else 2
 
 
@@ -196,9 +242,10 @@ if __name__ == "__main__":
     parser.add_argument("--worker", action="store_true")
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--python", type=Path)
+    parser.add_argument("--version", choices=("v1", "structured"), default="v1")
     args = parser.parse_args()
     if args.worker:
-        raise SystemExit(worker())
+        raise SystemExit(worker(args.version))
     if not args.execute or args.python is None:
         parser.error("--execute and explicit --python required")
-    raise SystemExit(run(args.python.resolve()))
+    raise SystemExit(run(args.python.resolve(), args.version))

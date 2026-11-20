@@ -1887,3 +1887,81 @@ beyond authored templates, arbitrary financial formats and a reliable abstention
 answerability reviewer. Two actual blind human passes and adjudication are still
 the independent-review protocol; one human plus AI must be labelled AI-assisted.
 Prepared base/context forms remain blank, and human gold remains zero.
+
+## Source-structured verification: a new rule-assisted comparison, not higher model scores
+
+The user requested further improvement after HHEM's seven false approvals.
+[`claim_verifier`](../src/asof/claim_verifier.py) checks a **bounded financial claim
+language against a unique exact-offset source fact**. Existing HHEM weights,
+raw scores, threshold0.5 and historical receipts are unchanged.
+
+The claim parser accepts complete named-issuer reported facts or possessive
+issuer/year/metric/value/unit assertions, with explicit positive/negative wording
+and optionally qualified corrected status. It does not interpret arbitrary
+natural-language claims, missing claims or refusals as supported facts.
+Numeric grouping, currency, scale, measure, reporting year and full metric
+identity remain explicit; there are no FX/scale conversions or fuzzy metric matches.
+
+For source facts it reuses the guarded reader, including table columns, applicable
+footnotes and correction priority. Two additional **whole-source compound
+constructions** support paired metric disclosures and diluted/basic per-share
+comparisons. Those bind both metric/value/unit groups and their shared named
+issuer/year to original offsets, without arbitrary sentence slicing or borrowing
+another company's context. Full metric equality avoids GAAP-within-non-GAAP
+substring matches. Duplicate inconsistent same-metric facts remain unresolved.
+The existing current-reader grammar/default and its regression matrix are unchanged.
+
+Each decision is:
+
+- `supported`: exact claim tuple matches the unique source-derived fact;
+- `contradicted`: the same issuer/metric/year has a qualified source fact with a
+  different value/currency/scale/measure;
+- `review`: claim/source grammar is unsupported, the period/entity is unbound,
+  correction status is unestablished, or evidence is missing/conflicting.
+
+Decisions retain claim fields, source SHA, source fact and exact spans, mismatch
+dimensions and proof-validation status. Validation recomputes the same source
+rules: this is **not independent semantic adjudication**. Missing source proof is
+not automatically contradiction or successful nondisclosure.
+
+### Frozen comparison design
+
+The [new plan](../results/hhem_structured_plan.json) retains one CPU, zero GPU,
+6 GiB, 20 minutes, 24 model input pairs maximum and the fixed threshold0.5.
+It uses new output and attempt paths; the earlier17/24receipt is read/hash-pinned
+but never overwritten. The prior pinned model/tokenizer cache is reused offline.
+The isolated environment is restored from its exact26recordedpackageversions;
+no new model, dependency version, paid API or project-venv modification is introduced.
+
+[`claim_challenge`](../src/asof/claim_challenge.py) freezes twelve new invented
+positive/negative pairs across the same twelve numeric/context dimensions.
+Names, values, units and years differ from the earlier fixture; the templates and
+expected labels are nevertheless **author-visible development material**, not
+a blind independent evaluation. Raw HHEM and the new source-rule verifier see
+identical source/claim texts. Report both and a source-only baseline explicitly:
+if decisions come from source rules, no model increment or improved model weights
+may be claimed.
+
+The earlier24cases are also replayed from saved model scores as **posthoc exposed
+development**, without new model calls or changed historical scores.
+
+Six additional format-shift controls use unrecognized turnover wording, spelled-out
+numbers and compact EPS notation. Three claims are supported and three false.
+They receive source-rule checks **without extra HHEM calls**, and unresolved items
+remain `review`. The headline24-case paired comparison and these controls are
+separate, but overall coverage must also show the full30case denominator: deferring
+six difficult cases cannot be reported as universal30/30accuracy.
+Invalid/unattempted model outputs remain in the model denominator.
+
+The new source verifier does not improve the raw model's entailment probabilities.
+It replaces unreliable approval with source-bound decisions where that narrower
+contract applies. For unsupported sources the HHEM number remains advisory and
+cannot bypass review, even when high. There is no global production promotion,
+learning loop, human-gold creation, source-access release or real-data evaluation.
+
+Pre-execution validation: **756 tests passed** in105.26s with two existing synthetic
+rank-deficiency warnings. Changed-file Ruff and documentation/index checks passed.
+All26isolateddependencyversions exactly matched the prior receipt and their package
+compatibility check passed. The supported-grammar development check was24/24,
+with all6format-shift controls unresolved. These authored outcomes were visible
+before the code/fixture freeze and are not independent generalization evidence.

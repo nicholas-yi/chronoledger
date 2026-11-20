@@ -70,12 +70,13 @@ def fixture() -> tuple[dict, ...]:
                  for member, claim in enumerate((positive, negative)))
 
 
-def summarize(rows: list[dict]) -> dict:
+def summarize(rows: list[dict], cases: tuple[dict, ...] | None = None) -> dict:
+    cases = fixture() if cases is None else cases
     by_id = {row["id"]: row for row in rows}
-    if len(by_id) != len(rows) or not set(by_id) <= {case["id"] for case in fixture()}:
+    if len(by_id) != len(rows) or not set(by_id) <= {case["id"] for case in cases}:
         raise ValueError("unexpected or duplicate verifier case identities")
     correct = false_support = false_rejection = invalid = 0
-    for case in fixture():
+    for case in cases:
         row = by_id.get(case["id"])
         if row is None:
             continue
@@ -88,8 +89,8 @@ def summarize(rows: list[dict]) -> dict:
         false_support += predicted and not case["expected_supported"]
         false_rejection += not predicted and case["expected_supported"]
     return {
-        "planned": len(fixture()), "recorded": len(rows), "correct": correct,
-        "not_attempted": len(fixture())-len(rows), "invalid": invalid,
+        "planned": len(cases), "recorded": len(rows), "correct": correct,
+        "not_attempted": len(cases)-len(rows), "invalid": invalid,
         "false_support": false_support, "false_rejection": false_rejection,
         "fixed_threshold": THRESHOLD, "threshold_tuned_on_results": False,
         "independent_gold": False, "promote": False,
@@ -113,12 +114,13 @@ def verify_assets(root: Path) -> dict:
     return receipt
 
 
-def benchmark(root: Path, emit) -> dict:
+def benchmark(root: Path, emit, *, cases: tuple[dict, ...] | None = None) -> dict:
     """Run only after the external worker's owned-Job gate; all model loads are local-only."""
     import torch
     from transformers import AutoConfig, AutoModelForSequenceClassification
 
     verify_assets(root)
+    cases = fixture() if cases is None else cases
     if importlib.metadata.version("transformers") != "4.57.6" or torch.__version__ != "2.9.1+cpu":
         raise ValueError("verifier dependency versions differ from fixed CPU allocation")
     torch.set_num_threads(1)
@@ -135,7 +137,7 @@ def benchmark(root: Path, emit) -> dict:
     emit({"kind": "loaded", "load_seconds": load_seconds, "device": str(model.device),
           "torch_threads": torch.get_num_threads()})
     rows = []
-    for case in fixture():
+    for case in cases:
         before = time.monotonic()
         emit({"kind": "case_started", "id": case["id"]})
         text = model.prompt.format(text1=case["source"], text2=case["claim"])
@@ -150,7 +152,7 @@ def benchmark(root: Path, emit) -> dict:
         rows.append(row)
         emit({"kind": "case", "row": row})
     return {
-        "status": "complete_invented_entailment_benchmark", "rows": rows, "summary": summarize(rows),
+        "status": "complete_invented_entailment_benchmark", "rows": rows, "summary": summarize(rows, cases),
         "load_seconds": load_seconds, "worker_seconds": time.monotonic()-started,
         "dependencies": {name: importlib.metadata.version(name)
                          for name in ("torch", "transformers", "safetensors", "tokenizers", "numpy")},

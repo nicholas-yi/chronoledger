@@ -33,6 +33,17 @@ def test_advisory_scoring_keeps_false_support_misses_and_invalids_in_denominator
     assert not summarize(rows)["abstention_answerability_evaluated"]
 
 
+def test_new_profile_keeps_original_case_id_contract_and_scores_separate():
+    from asof.claim_challenge import fixture as new_fixture
+
+    cases = new_fixture()
+    rows = [{"id": row["id"], "support_score": 0.9 if row["expected_supported"] else 0.1}
+            for row in cases]
+    with pytest.raises(ValueError, match="unexpected"):
+        summarize(rows)
+    assert summarize(rows, cases)["correct"] == 24
+
+
 def test_model_worker_is_gated_and_existing_attempt_refuses_before_loading(tmp_path, monkeypatch):
     script = Path(__file__).resolve().parents[1] / "scripts" / "run_hhem_benchmark.py"
     spec = importlib.util.spec_from_file_location("hhem_runner_test", script)
@@ -47,3 +58,6 @@ def test_model_worker_is_gated_and_existing_attempt_refuses_before_loading(tmp_p
     (tmp_path / "results" / "hhem_benchmark.json").write_text("{}")
     with pytest.raises(FileExistsError, match="noautomaticretry"):
         module.run(Path("unused"))
+    (tmp_path / "results" / "hhem_structured.json").write_text("{}")
+    with pytest.raises(FileExistsError, match="noautomaticretry"):
+        module.run(Path("unused"), "structured")
