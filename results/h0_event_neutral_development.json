@@ -1,0 +1,45 @@
+{
+  "label": "D17 EXPLORATORY development evidence: registered after earlier development results were seen; not confirmatory, not a tradable edge",
+  "freeze_commit": "89f18ea6eb00eee3dca06aa82dd0febdb3a847a9",
+  "source_SHA256": {
+    "scripts/h0_event_neutral.py": "ca33cf856a8b7758c8d1ee519fdc222d04e6e058017867f182ef90e7dac81589",
+    "src/asof/event_neutral.py": "fccb186ed66d135ce39aa00defba840c3212b3099174d889be070113c9e2f144",
+    "scripts/h0_backtest.py": "f2508e853b44e3a1d30e63318e2733996290a6bcb9439f2e8aa6d233c2ee5170"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "declared_rule": "(owner approval 2026-11-21, after earlier development results):\n- Signal: change = 1 - cos_full on the D16-corrected H0 signals. For each variant (latest\n  filing of either form; 10-K only), the event-time residual comes from\n  ``asof.event_neutral.trailing_residuals``: OLS of change on log market cap, a prior-365-day\n  8-K Item 2.01 flag and SIC2 dummies, fitted on that variant's filings accepted in the 365\n  days before the event's 00:00 ET, with at least 200 reference filings and SIC2 levels of at\n  least 5 (rare codes pooled; unseen levels unresolved).\n- Controls are as of the acceptance time: shares known strictly before it, the previous\n  month-end close, and M&A 8-Ks known strictly before it. SIC2 is the current bulk mapping (a\n  disclosed limit shared with the monthly variants).\n- Test: CAR +1..+60 (FF5+UMD, the existing engine) on the residual, for events accepted\n  2023-01-01..2024-06-30, OLS with month-clustered errors, plus D12's wild cluster\n  restricted bootstrap by month (Webb weights, seed 2026112101, 9,999 draws). Expected sign:\n  negative. Registered bar: |t| >= 3.2 with the D12 robust check at 0.137%; here reported as\n  exploratory development evidence only. Each variant is one logged trial.",
+  "results": {
+    "v2_latest_event_time_neutral": {
+      "coef": 0.11273538257567697,
+      "t": 0.45917700726559846,
+      "n_events": 12575,
+      "clusters": 17,
+      "WCR_p": 0.6719,
+      "WCR_status": "available",
+      "D12_robust_rejects_at_0.137pct_expected_sign": false,
+      "D12_robust_status": "evaluated_at_requested_level",
+      "registered_bar_met": false,
+      "events_with_car": 12575,
+      "development_events": 16226,
+      "events_with_residual": 14050,
+      "config_hash": "8e20a049017bfcca"
+    },
+    "v2_10K_event_time_neutral": {
+      "coef": 1.3661723100101464,
+      "t": 2.596783376378587,
+      "n_events": 4181,
+      "clusters": 16,
+      "WCR_p": 0.1299,
+      "WCR_status": "available",
+      "D12_robust_rejects_at_0.137pct_expected_sign": false,
+      "D12_robust_status": "evaluated_at_requested_level",
+      "registered_bar_met": false,
+      "events_with_car": 4181,
+      "development_events": 5113,
+      "events_with_residual": 4280,
+      "config_hash": "b6383659e3ccbe24"
+    }
+  },
+  "n_trials_H1n_after": 12,
+  "limits": "About 18 monthly clusters; F10 shows monthly clustering is unreliable at this length, so the WCR bootstrap is the more relevant check. SIC2 uses current metadata."
+}
