@@ -11,12 +11,13 @@ nine-area toolkit is parked reference mathematics, not the current research queu
 Keep source/date safeguards, exact checks and the simple answer-first baseline;
 do not add more financial models before the measurement task has independent evidence.
 Latest (data integrity): the
-[filing-time audit](FINDINGS.md#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20)
+[filing-time audit](FINDINGS.md#f9-update-2-every-required-accession-qualified-five-stored-early-2026-11-21)
 established which clock EDGAR headers use, by testing them against the SEC's 5:30 p.m. Eastern
-filing-date rule, and qualified **2,708 of 16,921** accessions. None has a stored time that
-trades before publication. The other 14,213 are unread, not failed. The
-[F8 numerical gap](FINDINGS.md#f8-update-explained-by-the-numerical-thread-setting-2026-11-20)
-is explained by the thread setting, and H0 reproduces exactly (D14). Monthly calibration stays
+filing-date rule, and qualified **all 16,921** timing-sensitive accessions. All 404 company-ID
+disagreements resolve to the listed security H0 already uses. **Five MHLA filings have stored
+times 4-5 hours early**, which is real look-ahead in the H0 inputs, pending a logged correction.
+The [F8 numerical gap](FINDINGS.md#f8-update-explained-by-the-numerical-thread-setting-2026-11-20)
+is explained by the thread setting, and H0 and H4 reproduce exactly (D14, D15). Monthly calibration stays
 failing as a [permanent design limit](FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20).
 Latest (reader): [guard coverage cost on real 10-K MD&A](FOCUSED_READER.md#observed-guard-coverage-cost-on-real-10-k-mda-text-aggregate-only)
 is now measured, aggregate-only, with the private review filings excluded: after a declared

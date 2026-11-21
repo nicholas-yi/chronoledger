@@ -357,6 +357,33 @@ The ledger was not touched. Raw metadata stays under ignored
 was rewritten. A further continuation would need a new decision, because the
 approved pause cap is used up.
 
+**A4: completed continuation, ceiling 35,000 and F7 fetches (2026-11-20/21).** The
+user then approved `gateway_policy=short_retry`, `ceiling=35000` and
+`f7_identity=true`. [run_full_timestamps_a4.py](../scripts/run_full_timestamps_a4.py)
+was frozen at `6e71c04`, before any A4 request
+([config](../results/timestamp_full_a4_config.json)). It raised the budget ceiling
+from 34,402 to 35,000 at usage 6,054. The order was 148 F7 headers (pair-CIK path,
+with the bulk-CIK path used only on a 404), then A3's remaining 28,426 resources.
+
+One segment finished the whole order in 10.9 hours:
+
+- 28,616 requests: 28,550 HTTP 200, 45 504 and 21 502. No 503 or 429.
+- 57 short gateway retries, 9 of 12 counted pauses, no transport unknowns and no
+  fallbacks needed.
+- Every dispatch gap was at least 0.667 seconds (median 1.012 seconds).
+- Usage 34,670 of 35,000. All 34,354 inventory resources now have an outcome.
+
+The [original report](../results/timestamp_full_a4_report.json) left 12 accessions
+unresolved because of a raw-reader bug for pinned-cache headers. That bug was found
+after the report and fixed under a frozen
+[correction](../results/timestamp_full_a4_correction1.json); the original report is
+kept. [Revision 2](../results/timestamp_full_a4_report_r2.json) qualifies all
+16,921 accessions, resolves all 404 F7 disagreements to the listed pair CIK, and
+finds five MHLA filings whose stored times are 4-5 hours early. Interpretation is in
+[F9 update 2](FINDINGS.md#f9-update-2-every-required-accession-qualified-five-stored-early-2026-11-21).
+Raw metadata stays under ignored `data\timestamp_full_a4`, hash-pinned in both
+reports. No timestamp or research input was rewritten, and the ledger was not touched.
+
 ### Local-reader memory safeguards
 
 The strict-format experiments are stopped; the default local request helper is the existing

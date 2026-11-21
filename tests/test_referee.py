@@ -77,6 +77,24 @@ def test_timestamp_manifest_is_confined_to_its_own_audit_directory(tmp_path) -> 
     assert not ok and "outside" in evidence
 
 
+def test_stored_time_lookahead_check_fails_on_any_early_stored_time(tmp_path) -> None:
+    import json
+
+    from asof import referee
+
+    path = tmp_path / "a4.json"
+    counts = {"same_first_close": 9, "stored_later_delay_only": 1}
+    path.write_text(json.dumps({"impact_first_close_direction": {"stored_pair": {
+        "nominal_16_00": counts, "conservative_early_close_13_00": counts, "calendar_sensitive_changes": {}}}}))
+    assert referee._stored_time_lookahead(path)[0]
+    early = {**counts, "stored_earlier_lookahead_risk": 1}
+    path.write_text(json.dumps({"impact_first_close_direction": {"stored_pair": {
+        "nominal_16_00": counts, "conservative_early_close_13_00": early}}}))
+    assert not referee._stored_time_lookahead(path)[0]
+    path.write_text(json.dumps({}))
+    assert not referee._stored_time_lookahead(path)[0]
+
+
 def test_default_referee_includes_recorded_clock_and_calibration_gaps() -> None:
     from asof.referee import default_threats
 

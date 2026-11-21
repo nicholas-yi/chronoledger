@@ -135,9 +135,12 @@ def _calibration_harness(path: Path) -> tuple[bool, str]:
 
 
 def _latest_timestamp_report() -> Path:
-    """Latest integrated timestamp audit: A3 once reported, otherwise the A2 record."""
-    a3 = PROJECT_ROOT / "results" / "timestamp_full_a3_report.json"
-    return a3 if a3.exists() else PROJECT_ROOT / "results" / "timestamp_full_a2_report.json"
+    """Latest integrated timestamp audit, newest recorded revision first."""
+    for name in ("timestamp_full_a4_report_r2", "timestamp_full_a4_report", "timestamp_full_a3_report"):
+        path = PROJECT_ROOT / "results" / f"{name}.json"
+        if path.exists():
+            return path
+    return PROJECT_ROOT / "results" / "timestamp_full_a2_report.json"
 
 
 def _timestamp_qualification(path: Path) -> tuple[bool, str]:
@@ -150,6 +153,20 @@ def _timestamp_qualification(path: Path) -> tuple[bool, str]:
                 f"unresolved={unresolved!r}; every required accession must qualify")
 
 
+def _stored_time_lookahead(path: Path) -> tuple[bool, str]:
+    """Stored H0 knowledge times must never reach an earlier close than the qualified time."""
+    if not path.exists():
+        return False, "missing timestamp audit"
+    impact = json.loads(path.read_text()).get("impact_first_close_direction")
+    if not isinstance(impact, dict) or "stored_pair" not in impact:
+        return False, "latest audit has no stored-versus-qualified impact counts"
+    early = {name: counts.get("stored_earlier_lookahead_risk", 0)
+             for name, counts in impact["stored_pair"].items() if name != "calendar_sensitive_changes"}
+    ok = bool(early) and all(v == 0 for v in early.values())
+    return ok, (f"Stored H0 knowledge times reaching an earlier first close than qualified: {early}; "
+                "inputs must be corrected under a logged deviation before this passes")
+
+
 def _timestamp_manifest(path: Path) -> tuple[bool, str]:
     from asof.ledger import file_sha256
 
@@ -158,8 +175,9 @@ def _timestamp_manifest(path: Path) -> tuple[bool, str]:
     manifest = json.loads(path.read_text()).get("private_hash_manifest")
     if not isinstance(manifest, dict) or not manifest:
         return False, "empty or malformed timestamp manifest"
-    private = DATA_DIR / ("timestamp_full_a3" if path.name.startswith("timestamp_full_a3")
-                          else "timestamp_full_a2")
+    audit = next((d for d in ("timestamp_full_a4", "timestamp_full_a3") if path.name.startswith(d)),
+                 "timestamp_full_a2")
+    private = DATA_DIR / audit
     for relative, digest in manifest.items():
         target = (PROJECT_ROOT / relative).resolve()
         if not target.is_relative_to(private.resolve()):
@@ -574,6 +592,8 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
                   lambda: _timestamp_qualification(_latest_timestamp_report())),
             Check("recorded metadata evidence hashes remain intact",
                   lambda: _timestamp_manifest(_latest_timestamp_report())),
+            Check("stored H0 knowledge times never precede their qualified first close",
+                  lambda: _stored_time_lookahead(_latest_timestamp_report())),
         ]),
         Threat("inference.calibration", "Does the registered monthly test have acceptable null size?", [
             Check("registered NW6 meets its recorded calibration adoption rule",

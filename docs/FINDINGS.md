@@ -7,14 +7,15 @@ reconciliation and claims-roster identity gates were **BLOCKED**; see F7/F8 belo
 No retry, tolerance relaxation, identity remapping or DSR calculation was used to
 make them pass. Earlier successful engineering checks remain evidence for their
 own revisions, not resolution of these new discrepancies.
-**Update 2026-11-20:** the H0 part of F8 is explained by the numerical-thread
-setting and reproduces exactly under each setting
-([F8 update](#f8-update-explained-by-the-numerical-thread-setting-2026-11-20), D14).
-The header clock basis is now established, and 2,708 accessions have qualified
-times with no look-ahead found
-([F9 update](#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20)).
-F7 security identity and the 14,213 unread accessions remain open. The H4 part of
-F8 is also explained by the thread setting (D15); the H4 stages stay held.
+**Update 2026-11-21:** F8 is explained by the numerical-thread setting for both H0
+and H4, and each reproduces exactly under its setting
+([F8 update](#f8-update-explained-by-the-numerical-thread-setting-2026-11-20), D14/D15).
+All 16,921 required accessions now have qualified acceptance times, and all 404 F7
+disagreements resolve to the listed security
+([F9 update 2](#f9-update-2-every-required-accession-qualified-five-stored-early-2026-11-21)).
+One new problem surfaced: five filings from one company have stored times 4-5 hours
+**early**, which is real look-ahead in the H0 inputs and needs a logged correction.
+The H4 stages stay held.
 
 ## Development rerun reconciliation (2026-11-13)
 
@@ -282,6 +283,11 @@ accessions, and every one lists both CIKs (co-registrant evidence). The 148 othe
 disagreements were outside the audit roster. See the
 [F9 update](#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20).
 Security-identity adjudication remains open.
+**Update 2026-11-21:** A4 read the other 148 headers. Under the declared rule,
+all 404 disagreements list both CIKs, and in every case only the pair CIK (the one
+H0 joins to prices) is a listed security. H0's identity join is therefore right
+for these filings; bulk's accession-level dedup kept the unlisted co-registrant.
+See the [F9 update 2](#f9-update-2-every-required-accession-qualified-five-stored-early-2026-11-21).
 
 ## F8: single-thread Batch B does not reproduce every recorded summary bit-for-bit
 
@@ -542,8 +548,61 @@ same six-pause cap. The sixth gateway pause stopped the audit permanently at
 seconds after the amendment.
 
 No timestamp, table, signal, price, return or ledger row was changed, and the
-holdout remains sealed. The referee's `time_authority` check now reads this report
-and still fails, correctly, because 14,213 accessions are unresolved.
+holdout remains sealed. The referee's `time_authority` check read this report
+and still failed, correctly, because 14,213 accessions were unresolved.
+
+### F9 update 2: every required accession qualified; five stored early (2026-11-21)
+
+**Status: clock authority established for all 16,921 accessions; H0 inputs need a
+correction for one company.** You approved continuing (A4) with a gentler gateway
+rule, a ceiling of 35,000 and the F7 fetches. The
+[A4 config](../results/timestamp_full_a4_config.json) was frozen before any request:
+
+- First 502/504 on a URL: wait 60 seconds and retry, not counted.
+- A repeat failure, or any 503/429: a counted 10-minute pause, capped at 12.
+- Stop if more than 15 of the last 500 requests are gateway errors.
+
+The single segment finished the whole order: 28,616 requests, of which 28,550 were
+HTTP 200, 45 were 504 and 21 were 502. It used 57 short retries and 9 of 12 counted
+pauses, and every resource in the inventory now has an outcome. Usage is 34,670 of
+35,000 requests.
+
+The [original A4 report](../results/timestamp_full_a4_report.json) qualified 16,909
+accessions. Its 12 "unresolved" were a bug in the report's raw reader: their headers
+were pinned-cache hits that the run had read and parsed correctly, but the report
+looked for them in the empty A4 attempt list. A disclosed
+[correction](../results/timestamp_full_a4_correction1.json), made after seeing that
+report and changing no rule, produced
+[revision 2](../results/timestamp_full_a4_report_r2.json):
+
+| Result (revision 2) | Value |
+|---|---:|
+| Required accessions qualified | **16,921 of 16,921** |
+| CB1 replication on 14,213 new headers: 16:30-17:30 daylight same-day / 17:35-21:30 rolled / early rolls | 2,729/2,729; 1,043/1,058; 0/13,057 |
+| F7 disagreements resolved to the listed pair CIK | 404 of 404 |
+| Pair time equals the qualified time | 16,818 |
+| Pair time reaches a later first close (delay only) | 51 |
+| Pair time reaches an **earlier** first close (look-ahead) | **5** |
+
+One accession (`0001437749-22-029683`) was accepted in the afternoon of a possible
+early-close date, so its first close is qualified only on the nominal calendar. One
+other has a filing date adjusted earlier, which the rule allows.
+
+**The five look-ahead cases** are all MHLA (CIK 1412100) filings from 2023-2024:
+`0001412100-23-000056`, `-23-000086`, `-23-000097`, `-24-000014` and `-24-000047`.
+Both SEC JSON sources store the Eastern wall-clock time with a UTC label. For example,
+a 10-Q accepted at 17:07 ET on 2023-05-09 is stored as 17:07 UTC (13:07 ET). That is
+before that day's 16:00 close, so H0 treats the filing as tradable one close before
+it was public. Metadata diagnostics on the pair times show 56 first closes and one
+formation-eligibility record-month change, with no latest-filing choice changed.
+The effect on H0 returns has **not** been measured. Correcting it means replacing
+stored knowledge times with qualified ones and rerunning the development results,
+which is a numbered deviation awaiting the owner's decision. A new referee check
+fails until it is done.
+
+This assumes EDGAR's own clock was synchronized and Rule 13(a)(2)'s Eastern basis.
+It does not verify any timestamp against an external clock. No timestamp, table,
+signal, price, return or ledger row was changed, and the holdout remains sealed.
 
 ## F10: synthetic finite-sample size distortion of the registered tests
 

@@ -125,7 +125,7 @@ accuracy or long-report memory safety. None of these fixes creates a trading res
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | [A3](../results/timestamp_full_a3_report.json) established the header clock basis against the SEC filing-date rule and qualified 2,708 of 16,921 accessions with no look-ahead found; it stopped at its approved pause cap | Read and qualify the 14,213 unread accessions, plus qualified calendar and security identity |
+| Filing timestamps | [A4](../results/timestamp_full_a4_report_r2.json) qualified all 16,921 timing-sensitive accessions and resolved all 404 identity disagreements; five MHLA filings are stored 4-5 hours early | Replace those stored times under a logged deviation and rerun the affected development results; qualify the one possible early-close date |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Recruit two annotators and an adjudicator, qualify/freeze the roster and use the [draft guide](H1_DESIGN.md#annotation-guide-h1-claim-guide-draft-01) and [empty first-pass template](h1_annotation_first_pass_template.csv); no labels exist | Measured precision and recall on real text, with coverage, agreement and company-separated audit results |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
@@ -163,9 +163,12 @@ SEC Rule 13(a)(2), filing dates roll at 5:30 p.m. Eastern in both seasons, and t
 roll exactly there (240/240 and 262/262 same-day just before the cutoff, 0 early rolls in
 2,632 cases). That rejects fixed-EST and UTC readings. A3 qualified 2,708 accessions,
 including all 364 priority disagreements, and none has a stored time that trades before
-publication. Gateway errors used up the approved pause cap at usage 6,054 of 34,402. The
-14,213 unread accessions, calendar and security identity remain open, and no data repair
-or backtest rerun follows without another decision.
+publication. Gateway errors used up the approved pause cap at usage 6,054 of 34,402.
+[A4](../results/timestamp_full_a4_report_r2.json), with a gentler gateway rule and a ceiling of
+35,000, then read every remaining resource (usage 34,670). All 16,921 accessions qualified, and
+all 404 identity disagreements resolve to the listed pair CIK. Five MHLA filings turned out to be
+stored 4-5 hours early. Correcting them is a separate, owner-approved deviation; no data repair
+or backtest rerun has happened yet.
 
 A fine-tuned modern model is not automatically free of look-ahead for old filings, even if its
 fine-tuning data is old, because its pretraining may include later text. Measurement models are

@@ -45,11 +45,13 @@ the real-filing figure is a deferral rate, not an accuracy measure.
 - **Still missing:** independent human labels, so accuracy on real filings is unmeasured.
   Weaker and failed results, such as raw HHEM 17/24 and the first AI judge's 5/12, stay on record.
 
-**Data integrity:** a [filing-time audit](docs/FINDINGS.md#f9-update-header-clock-basis-established-2708-accessions-qualified-2026-11-20)
+**Data integrity:** a [filing-time audit](docs/FINDINGS.md#f9-update-2-every-required-accession-qualified-five-stored-early-2026-11-21)
 showed that SEC filing headers use Eastern time, by checking them against the SEC's 5:30 p.m.
-filing-date rule. It qualified 2,708 of 16,921 filings and found none that the backtest could
-trade before publication; the rest are not yet read. Monthly significance tests remain
-unreliable with only 17–18 months of data, a [permanent limit](docs/FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20)
+filing-date rule, and verified the acceptance time of all 16,921 filings where timing could
+matter. It found five filings from one company whose stored times are 4–5 hours early, so the
+backtest could act on them one close too soon; those inputs still need a logged correction.
+Monthly significance tests remain unreliable with only 17–18 months of data, a
+[permanent limit](docs/FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20)
 of this design.
 
 The broader quant toolkit is parked reference code, not validated trading models.
@@ -387,14 +389,16 @@ times are Eastern, the header's filing date should change at 17:30 in summer and
 A [declared test](results/timestamp_a3_clock_basis_cb1.json) on 1,564 headers found exactly that:
 every daylight-time filing accepted between 16:30 and 17:30 kept its date (240 of 240), almost
 every one accepted after 17:35 moved to the next day (196 of 197), and none accepted by 17:30 moved.
-A UTC or fixed-EST clock would break this pattern. The test repeated on 1,400 newly read headers.
+A UTC or fixed-EST clock would break this pattern. The test repeated on 15,613 newly read headers.
 
-A [third audit pass](results/timestamp_full_a3_report.json) then qualified **2,708 of 16,921**
-filings that need checking, including all 364 audited filings where the two sources disagree on
-the time or the company ID.
-[None of them](results/timestamp_a3_impact.json) has a stored time that the backtest could trade
-before publication, even allowing for early market closes: the H0 time is either exact or late.
-SEC gateway errors used up the approved retry allowance, so the other 14,213 are still unread.
+Further audit passes then read every remaining header and
+[qualified all 16,921](results/timestamp_full_a4_report_r2.json) filings that need checking.
+That includes all 404 filings where the two sources disagree on the company ID: each lists both
+companies, and only the one the backtest uses is listed on an exchange.
+For 16,818 filings the stored H0 time is exact, and 51 are late, which only delays a trade.
+**Five are early:** all from one company (MHLA), whose acceptance times both SEC sources stored as
+Eastern clock readings labelled UTC. The backtest could treat those filings as public one close
+before they were. Fixing them requires a logged correction and a rerun, which is still pending.
 
 ### Are the significance tests honest at this sample size?
 
@@ -449,7 +453,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 
 | Open question | What it needs | Why it matters |
 |---|---|---|
-| Is every trading-day assignment right? | Read the remaining 14,213 filing headers; 2,708 are already verified, with no early timestamps found | Rules out the remaining timestamp-driven look-ahead |
+| Is every trading-day assignment right? | All 16,921 timing-sensitive filings are now verified; correct the five early MHLA timestamps under a logged deviation and rerun | Removes the one timestamp-driven look-ahead found |
 | Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2011 | The current sample can only detect implausibly large effects |
 | Does *what* changes matter more than *how much*? | The claim-level signal (H1), first checked against human-labelled real filing pairs and simple baselines | Synthetic benchmark scores are not real measurement accuracy |
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
@@ -528,7 +532,7 @@ point-in-time queries everything is built on.
 - [FOCUSED_READER.md](docs/FOCUSED_READER.md): the active metric-reader work, with every run's protocol, results and limits
 - [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md): exact interval reconciliation and its non-conformance/independence limits
 - [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
-- [project_readiness_checks.json](results/project_readiness_checks.json): the 2026-11-17 scoped clock/calibration checks, both failing then; the referee now reads the newer timestamp audit, and both checks still fail for the reasons in FINDINGS F9 and F10
+- [project_readiness_checks.json](results/project_readiness_checks.json): the 2026-11-17 scoped clock/calibration checks, both failing then. The referee now reads the completed timestamp audit: clock qualification passes, a new stored-time look-ahead check fails on the five MHLA filings, and calibration still fails (FINDINGS F9 and F10)
 - [REFEREE.md](results/REFEREE.md): the recorded broader software report, not rerun by the closure check or scientific acceptance
 
 ## License

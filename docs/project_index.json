@@ -51,6 +51,7 @@
     {"id": "timestamp-a2", "path": "scripts/run_full_timestamps_a2.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "timestamp-a3", "path": "scripts/run_full_timestamps_a3.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "timestamp-a3-impact", "path": "scripts/timestamp_a3_impact.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "timestamp-a4", "path": "scripts/run_full_timestamps_a4.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "f8-h0-reproducibility", "path": "scripts/f8_h0_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "f8-h4-reproducibility", "path": "scripts/h4_dev_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-real3", "path": "scripts/run_reader_real3.py", "status": "retired_historical", "command": null},
@@ -401,6 +402,24 @@
       "freeze_revision": "20e3fa4",
       "status": "zero_lookahead_among_2708_qualified_nominal_and_conservative_calendars",
       "supersedes": []
+    },
+    {
+      "id": "timestamp-a4",
+      "kind": "source_audit",
+      "path": "results/timestamp_full_a4_report.json",
+      "report": "docs/DATA_AUDIT.md",
+      "freeze_revision": "6e71c04",
+      "status": "order_complete_16909_qualified_12_unresolved_by_report_reader_bug",
+      "supersedes": ["timestamp-a3"]
+    },
+    {
+      "id": "timestamp-a4-r2",
+      "kind": "source_audit_disclosed_post_report_correction",
+      "path": "results/timestamp_full_a4_report_r2.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "1b82e54",
+      "status": "all_16921_qualified_404_F7_resolved_5_MHLA_stored_early",
+      "supersedes": ["timestamp-a4", "timestamp-a3-impact"]
     },
     {
       "id": "f8-h0-reproducibility",
