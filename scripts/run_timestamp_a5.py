@@ -42,6 +42,7 @@ START_USED = 34670
 CONFIG = PROJECT_ROOT / "results" / "timestamp_a5_config.json"
 STATUS = PROJECT_ROOT / "results" / "timestamp_a5_status.json"
 REPORT = PROJECT_ROOT / "results" / "timestamp_a5_report.json"
+CORRECTION = PROJECT_ROOT / "results" / "timestamp_a5_correction1.json"
 A4_R2 = PROJECT_ROOT / "results" / "timestamp_full_a4_report_r2.json"
 PRIVATE = DATA_DIR / "timestamp_a5"
 ORDER = PRIVATE / "frozen_order.jsonl"
@@ -108,7 +109,10 @@ def freeze() -> None:
 
 def committed_config() -> dict:
     config = json.loads(CONFIG.read_bytes())
-    base.verify({**config["input_SHA256"], **config["source_SHA256"], **config["order_SHA256"]})
+    sources = config["source_SHA256"]
+    if CORRECTION.exists():
+        sources = {**sources, **json.loads(CORRECTION.read_bytes())["source_SHA256"]}
+    base.verify({**config["input_SHA256"], **sources, **config["order_SHA256"]})
     lineage = ledger.lineage()
     if lineage["git_dirty"]:
         raise RuntimeError("commit the A5 freeze first")
@@ -191,7 +195,8 @@ def candidates(stored: datetime) -> set[datetime]:
 
 def h6a_state(f: pd.DataFrame, times: dict[str, pd.Timestamp]) -> pd.DataFrame:
     """Registered H6a development indicators per base filing under the given time map."""
-    f = f.assign(knowledge_time=f["accession"].map(times).fillna(f["knowledge_time"]))
+    corrected = pd.to_datetime(f["accession"].map(times), utc=True)
+    f = f.assign(knowledge_time=corrected.fillna(f["knowledge_time"]))
     base_rows = f[f["form"].isin(["10-K", "10-Q"])].copy()
     formal = f[(f["form"] == "10-K/A") | f["items"].fillna("").str.contains(FORMAL)]
     only402 = f[f["items"].fillna("").str.contains(FORMAL)]
@@ -206,6 +211,21 @@ def h6a_state(f: pd.DataFrame, times: dict[str, pd.Timestamp]) -> pd.DataFrame:
     base_rows["restate_12m"] = within(formal)
     base_rows["item402_12m"] = within(only402)
     return base_rows.set_index("accession")[["in_dev", "year", "restate_12m", "item402_12m"]]
+
+
+def correct() -> None:
+    """Correction 1: the first report attempt crashed (object dtype from an empty time map)."""
+    if CORRECTION.exists() or REPORT.exists():
+        raise RuntimeError("correction 1 applies once, before any A5 report exists")
+    config = json.loads(CONFIG.read_bytes())
+    base.verify({**config["input_SHA256"], **config["order_SHA256"]})
+    base.atomic_json(CORRECTION, {
+        "kind": "A5 correction 1: report date dtype",
+        "timing": "After the run, before any report output: the first report attempt raised on "
+                  "pandas .dt with an object column (empty time map). No result was produced or "
+                  "seen; no request, rule or order changes.",
+        "base_config_SHA256": ledger.file_sha256(CONFIG), "source_SHA256": base.pin(SOURCES)})
+    print(json.dumps({"correction_SHA256": ledger.file_sha256(CORRECTION)}))
 
 
 def report() -> None:
@@ -294,8 +314,8 @@ def report() -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("freeze", "run", "report"))
+    parser.add_argument("phase", choices=("freeze", "run", "correct", "report"))
     phase = parser.parse_args().phase
     if any(os.environ.get(k) != "1" for k in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS")):
         raise RuntimeError("set numerical library thread caps to 1")
-    {"freeze": freeze, "run": lambda: asyncio.run(run()), "report": report}[phase]()
+    {"freeze": freeze, "run": lambda: asyncio.run(run()), "correct": correct, "report": report}[phase]()
