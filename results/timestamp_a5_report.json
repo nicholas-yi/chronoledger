@@ -1,0 +1,119 @@
+{
+  "status": {
+    "status": "order_complete",
+    "stop_reason": null,
+    "charged": 529,
+    "throttle_pauses": 1,
+    "short_gateway_retries": 4,
+    "resources_recorded": 524
+  },
+  "config_SHA256": "272d4a0091d775241dfacfc7ab5e65ac73fa0ebe05249b625d8093226d22139d",
+  "report_lineage": {
+    "git_commit": "6f1d2e361397f670eb72ede7f1467d97eddd7a53",
+    "git_dirty": false,
+    "inputs": {},
+    "input_status": {},
+    "missing_inputs": [],
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  },
+  "accessions": 262,
+  "qualified": 0,
+  "unresolved": 262,
+  "unresolved_reasons": {
+    "declared_clock_basis_test_not_passed": 262,
+    "missing_unread_or_conflicting_header_index_pair": 110,
+    "filing_date_unread_or_nonunique": 110
+  },
+  "stored_minus_qualified_hours": {
+    "None": 262
+  },
+  "clock_basis": {
+    "A4_basis": true,
+    "CB1R3_on_2012_2018_headers": {
+      "declared_rule": {
+        "S1_fixed_EST_rejection": "Daylight-season weekday headers with wall in [16:30,17:30): n>=30 and same-day FILING-DATE share >=0.99.",
+        "S2_UTC_rejection": "Weekday headers with wall in [17:35,21:30): n>=20 and later FILING-DATE share >=0.95. If n<20, S3 decides: >=20 walls in [06:00,10:00) and operating-window violations <=0.1%.",
+        "integrity": "Weekday walls <=17:30 whose FILING-DATE rolled forward <=0.5%, and walls outside [06:00,22:00] <=0.1% of the evaluated population.",
+        "passed": "S1 AND UTC rejection AND integrity.",
+        "population": "Readable headers with one acceptance wall, one filing date and a unique Eastern conversion; Rule 13(a)(3)-(4) 22:00-cutoff forms excluded."
+      },
+      "evaluated_headers": 152,
+      "excluded": {},
+      "S1_daylight_16_30_to_17_30_same_day": {
+        "n": 39,
+        "k": 39,
+        "share": 1.0
+      },
+      "S1_control_standard_16_30_to_17_30_same_day": {
+        "n": 18,
+        "k": 18,
+        "share": 1.0
+      },
+      "S2_17_35_to_21_30_rolled": {
+        "n": 22,
+        "k": 22,
+        "share": 1.0
+      },
+      "S3_walls_06_00_to_10_00": 16,
+      "S3_walls_outside_06_00_to_22_00": 2,
+      "weekday_at_or_before_17_30_rolled": {
+        "n": 124,
+        "k": 0,
+        "share": 0.0
+      },
+      "filing_date_earlier_than_acceptance": 0,
+      "weekend_acceptances": 0,
+      "descriptive_cutoff_brackets": {
+        "daylight": {
+          "latest_same_day_wall": "17:30:35",
+          "earliest_rolled_wall_after_noon": "17:54:57",
+          "same_day_after_17_30": 2,
+          "rolled_at_or_before_17_30": 0
+        },
+        "standard": {
+          "latest_same_day_wall": "17:28:36",
+          "earliest_rolled_wall_after_noon": "17:48:14",
+          "same_day_after_17_30": 0,
+          "rolled_at_or_before_17_30": 0
+        }
+      },
+      "fixed_EST_rejected": true,
+      "UTC_rejected": true,
+      "UTC_route": "S2",
+      "integrity_passed": false,
+      "passed": false,
+      "interpretation_if_passed": "Header walls behave as the Rule 13(a)(2) Eastern civil clock (EST or EDT in effect). This rejects fixed-EST and UTC readings; it does not verify EDGAR's synchronization to UTC or correctness of any JSON timestamp."
+    },
+    "CB1R3_estimable": true,
+    "basis_accepted_for_qualification": false
+  },
+  "H6a_development_rows_changed": 0,
+  "H6a_development_change_details": {
+    "in_dev": 0,
+    "year": 0,
+    "restate_12m": 0,
+    "item402_12m": 0
+  },
+  "H4_same_company_10K_order_swaps": 0,
+  "counter": {
+    "actual_HTTP_attempts": 35199,
+    "ceiling": 35800
+  },
+  "private_hash_manifest": {
+    "data\\timestamp_a5\\frozen_order.jsonl": "1b699daa63a8d17b7176386057aca8e44c403afca554c7627a3c5595d344597e",
+    "data\\timestamp_a5\\resource_outcomes.jsonl": "8cd7210f723bd14b5ba737d18eab4f900c0f7864d8370694b9fad69962c89a4d",
+    "data\\timestamp_a5\\requests.jsonl": "c2e90366d4b70dbb0e61ad11d4fe7905cda6bf52c9df14c2cf889ad3995bcf49",
+    "data\\timestamp_a5\\waits_and_retries.jsonl": "b915744f0c6f0204301e27d91956ea34ac345ad2a4791a9bc603dc8051c32568"
+  },
+  "limits": "Qualification assumes EDGAR's clock and the Rule 13(a)(2) basis, here tested on 2022-2024 headers and replicated on these older headers only if estimable. Effects use metadata indicators; H6a quiet-revision detection (held companyfacts) was not run."
+}
