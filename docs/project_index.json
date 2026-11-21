@@ -53,6 +53,10 @@
     {"id": "timestamp-a3-impact", "path": "scripts/timestamp_a3_impact.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "timestamp-a4", "path": "scripts/run_full_timestamps_a4.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "d16-h0-correction", "path": "scripts/d16_h0_time_correction.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "timestamp-a5", "path": "scripts/run_timestamp_a5.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "timestamp-a5-posthoc", "path": "scripts/timestamp_a5_posthoc.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "d17-event-neutral", "path": "scripts/h0_event_neutral.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "sentiment-scorer-validation", "path": "scripts/validate_sentiment_scorer.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "f8-h0-reproducibility", "path": "scripts/f8_h0_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "f8-h4-reproducibility", "path": "scripts/h4_dev_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-real3", "path": "scripts/run_reader_real3.py", "status": "retired_historical", "command": null},
@@ -447,6 +451,42 @@
       "report": "docs/FINDINGS.md",
       "freeze_revision": "ab83707",
       "status": "conditional_DSR_computed_D4_not_supported_PBO_not_estimable",
+      "supersedes": []
+    },
+    {
+      "id": "timestamp-a5",
+      "kind": "source_audit",
+      "path": "results/timestamp_a5_report.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "6f1d2e3",
+      "status": "262_2012_2018_accessions_0_qualified_frozen_integrity_check_failed_on_two_22h_seconds",
+      "supersedes": []
+    },
+    {
+      "id": "timestamp-a5-posthoc",
+      "kind": "post_hoc_sensitivity_not_qualification",
+      "path": "results/timestamp_a5_posthoc_sensitivity.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "723c661",
+      "status": "eastern_reading_changes_no_H6a_indicator_or_H4_order",
+      "supersedes": []
+    },
+    {
+      "id": "d17-event-neutral",
+      "kind": "exploratory_development_evidence",
+      "path": "results/h0_event_neutral_development.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "89f18ea",
+      "status": "both_variants_wrong_sign_registered_bar_not_met",
+      "supersedes": []
+    },
+    {
+      "id": "sentiment-scorer-validation",
+      "kind": "scorer_qualification_not_return_evidence",
+      "path": "results/sentiment_scorer_validation.json",
+      "report": "docs/H7_SOCIAL_SENTIMENT.md",
+      "freeze_revision": "9424e08",
+      "status": "VADER_below_majority_baseline_not_qualified",
       "supersedes": []
     },
     {

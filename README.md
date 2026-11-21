@@ -258,6 +258,13 @@ return.
   prior year's net income downward. Those were followed by a formal amendment or restatement warning
   within a year 17.8% of the time, versus 13.7% for other filings (+4.2 points, t = 1.74):
   suggestive, but below the pre-set bar of 3.0.
+- **H4 and H6 confirmation** will use filings accepted from 22 November 2026, a period that
+  hasn't happened yet ([D18](docs/DEVIATIONS.md#d18-move-h4-and-h6a-confirmatory-evaluation-to-a-prospective-holdout)),
+  because the original 2022-2025 holdouts were already read by earlier processing. An audit of the
+  262 older filings whose timestamps could matter found no H4/H6 result that would change.
+- **H0 event study with industry and size controls** ([D17](docs/DEVIATIONS.md#d17-define-the-event-time-neutralized-signal-for-the-h0-event-co-primary),
+  exploratory): both versions point the wrong way. The 10-K version's t of 2.60 becomes p = 0.13
+  under a bootstrap suited to its 16 monthly clusters.
 - **H5, distress events.** Late-filing notices, auditor changes and restatement warnings cannot be
   tested with free price data: distressed companies that later delisted are 1.3-3.3× less likely to
   have prices, so the remaining sample is tilted toward survivors. These tests are reported as
@@ -453,8 +460,9 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 
 | Open question | What it needs | Why it matters |
 |---|---|---|
-| Is every trading-day assignment right? | Done for H0: all 16,921 timing-sensitive filings are verified and the inputs corrected (D16). Older 2012-2018 filings used by H4/H6 are not yet audited | Rules out timestamp-driven look-ahead for those studies too |
-| Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2011 | The current sample can only detect implausibly large effects |
+| Is every trading-day assignment right? | Done for H0 (16,921 verified, inputs corrected under D16). For H4/H6, the 262 older timing-sensitive filings were audited and no assignment changes | Older bulk times are often 4-5 hours early, which would matter for any future return test on them |
+| Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2001. Cheapest credible source found: about $39 (not purchased) | The current sample can only detect implausibly large effects, and monthly tests are unreliable with 17-18 months |
+| Does social-media sentiment add anything? | A finance-qualified scorer (VADER failed) and a budgeted X pull, as a separate short-horizon hypothesis ([H7 note](docs/H7_SOCIAL_SENTIMENT.md)) | It cannot fix the monthly sample-size problem, but a daily test can be calibrated |
 | Does *what* changes matter more than *how much*? | The claim-level signal (H1), first checked against human-labelled real filing pairs and simple baselines | Synthetic benchmark scores are not real measurement accuracy |
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
 | Would a trained model measure change better? | Real labelled claim pairs and training/test splits separated by time and by company | A bigger model does not create more independent market evidence |
@@ -532,6 +540,7 @@ point-in-time queries everything is built on.
 - [FOCUSED_READER.md](docs/FOCUSED_READER.md): the active metric-reader work, with every run's protocol, results and limits
 - [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md): exact interval reconciliation and its non-conformance/independence limits
 - [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
+- [H7_SOCIAL_SENTIMENT.md](docs/H7_SOCIAL_SENTIMENT.md): social-media sentiment design note, X costs and terms, and the failed scorer qualification
 - [project_readiness_checks.json](results/project_readiness_checks.json): the 2026-11-17 scoped clock/calibration checks, both failing then. Superseded by the 2026-11-21 referee run: clock authority now passes, including a check that every H0 knowledge time in use equals its verified time; calibration still fails (FINDINGS F9 and F10)
 - [REFEREE.md](results/REFEREE.md): the full referee report, rerun 2026-11-21 after D16. The gate is blocked only by monthly calibration; passing checks are software evidence, not scientific acceptance
 

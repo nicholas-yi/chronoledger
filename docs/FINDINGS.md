@@ -42,7 +42,7 @@ claim of exact replication of the old implementation.
 No held long/short leg lacks its next-month return, so all three missing-return assumptions
 coincide. That is not evidence that missing firms or survivorship have been repaired.
 The [full output](../results/returns_h0_development.json) includes raw descriptive event panels;
-neutralized event panels remain unevaluated. `H1n` is a historical ledger label for neutralized
+neutralized event panels remained unevaluated until D17 (exploratory, wrong sign; see the 2026-11-21 section). `H1n` is a historical ledger label for neutralized
 cosine variants, not a tested claim-level H1 signal.
 
 The full process took 61.073 seconds with validated prepared inputs, including all 12 monthly
@@ -230,7 +230,7 @@ Formation now ignores future return availability, uses explicit missing-return
 assumptions with counts, and neutralizes latest eligible signals using formation-time
 size/event controls under a fixed SIC mapping. The SIC mapping is current metadata,
 not verified historical classification, so neutralized H0 and H4 interpretations
-remain conditional on that proxy. Neutralized event panels remain unevaluated pending a time-safe specification;
+remain conditional on that proxy. Neutralized event panels remained unevaluated pending a time-safe specification, which D17 later supplied (exploratory);
 raw panels are descriptive diagnostics, not the pre-registered neutralized co-primary.
 These repairs do not establish an effect, repair survivorship, or validate historical
 estimates. No formal claim-level H1 result is produced by these cosine variants.
@@ -646,6 +646,65 @@ The full [referee](../results/REFEREE.md) now passes `time_authority` at level 4
 including a new check that every H0 knowledge time in use equals its qualified time.
 The gate stays **BLOCKED** only by `inference.calibration`, the permanent limit in F10.
 No holdout data was read, and the H4/H6 stages stay held.
+
+### H4/H6 timing, the event-time H0 panel, the prospective holdout and social sentiment (2026-11-21)
+
+**2012-2018 H4/H6a timing (A5).** Offline, only 262 of the H4 sample's 2012-2018
+filings could change a registered H4/H6a assignment if their time were 5 hours off:
+
+- 252 sit within hours of a restatement event or the 365-day window edge.
+- 10 are same-company 10-Ks filed within 10 hours of each other.
+- No H4 development pair is near the window or year edges.
+
+The approved [A5 audit](../results/timestamp_a5_report.json) read all 524 header and
+index pages (529 requests; usage 35,199 of 35,800). Two things came out of it:
+
+- 110 older filings have no header page (HTTP 404), so only their index time exists.
+- On the 152 headers that exist, the Eastern-clock pattern replicates: 39/39 same-day
+  filings just before 17:30, 22/22 rolled after 17:35, and 0/124 early rolls. The
+  frozen integrity sub-check still failed. Two filings were accepted 12 and 44 seconds
+  after 22:00 ET with correctly rolled dates, and at this sample size the 0.1%
+  tolerance allows none. Under the frozen rule, **0 of 262 qualify**. The rule was not
+  changed.
+
+A labelled [post-hoc sensitivity](../results/timestamp_a5_posthoc_sensitivity.json)
+reads those times as Eastern anyway:
+
+- 132 of the 262 stored bulk times are 4-5 hours early, 10 are 4 hours late and 120 are exact.
+- **No H6a development indicator, window or year changes, and no H4 10-K order changes**
+  (109 firms checked). H4 and H6a compare filings with each other and use dates
+  rather than trading closes, so a shared clock offset cancels.
+- The early times would matter for any future return test that uses these older bulk
+  times; they do not matter for H4/H6a as registered.
+
+**D17, the event-time neutralized H0 panel (exploratory).** Registered and tagged before
+it ran, after earlier development results ([D17](DEVIATIONS.md#d17-define-the-event-time-neutralized-signal-for-the-h0-event-co-primary)).
+Results are from the [D17 run](../results/h0_event_neutral_development.json):
+
+| Variant | Coefficient (expected < 0) | Month-clustered t | Wild bootstrap p | Events |
+|---|---:|---:|---:|---:|
+| Latest filing | +0.113 | 0.46 | 0.67 | 12,575 |
+| 10-K only | +1.366 | 2.60 | 0.13 | 4,181 |
+
+Neither supports the hypothesis. Both point the **wrong way**. The 10-K variant's
+clustered t of 2.60 shrinks to a bootstrap p of 0.13, which is the over-rejection F10
+predicts with 16 clusters. Two new H1n configurations were logged, so H1n now counts 12.
+
+**D18, a prospective H4/H6a holdout.** The exposed 2022-2025 windows are retired as
+confirmatory evidence. Confirmatory H4/H6a evaluation will use filings accepted from
+2026-11-22 to 2027-11-21, evaluated once: H6a not before 2028-12-31 and H4 not before
+2029-03-31. [periods.py](../src/asof/periods.py) enforces those dates
+([D18](DEVIATIONS.md#d18-move-h4-and-h6a-confirmatory-evaluation-to-a-prospective-holdout)).
+H6b stays invalid: fixing survivorship needs delisting-inclusive prices, and the owner
+declined paid data on 2026-11-21.
+
+**Social sentiment (H7 scaffolding).** A
+[point-in-time pipeline](../src/asof/social.py) is built and tested, but no X data has
+been fetched; see the [H7 design note](H7_SOCIAL_SENTIMENT.md). The candidate scorer
+failed its qualification on human-labelled finance text
+([receipt](../results/sentiment_scorer_validation.json)). On Financial PhraseBank, VADER
+scores 57.1% accuracy (macro-F1 0.49), below the 61.4% that always predicting
+"neutral" would get. A finance-qualified scorer is required before any paid data.
 
 ## F10: synthetic finite-sample size distortion of the registered tests
 

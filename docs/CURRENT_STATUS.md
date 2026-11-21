@@ -19,6 +19,11 @@ times 4-5 hours early**. [D16](DEVIATIONS.md#d16-replace-h0-knowledge-times-with
 The [F8 numerical gap](FINDINGS.md#f8-update-explained-by-the-numerical-thread-setting-2026-11-20)
 is explained by the thread setting, and H0 and H4 reproduce exactly (D14, D15). Monthly calibration stays
 failing as a [permanent design limit](FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20).
+Also on 2026-11-21 ([details](FINDINGS.md#h4h6-timing-the-event-time-h0-panel-the-prospective-holdout-and-social-sentiment-2026-11-21)):
+the 262 timing-sensitive 2012-2018 H4/H6a filings were audited (no assignment changes);
+the event-time neutralized H0 panel (D17, exploratory) points the wrong way; H4/H6a confirmation
+moves to a prospective holdout (D18); and social-sentiment tooling exists, but its VADER scorer failed
+qualification and no X data has been bought.
 Latest (reader): [guard coverage cost on real 10-K MD&A](FOCUSED_READER.md#observed-guard-coverage-cost-on-real-10-k-mda-text-aggregate-only)
 is now measured, aggregate-only, with the private review filings excluded: after a declared
 ingestion normalization (cp1252 repair, invisible-character removal) and two stem fixes, the guards
@@ -129,7 +134,7 @@ decoded by this checker. Missing targets and malformed index constraints fail CI
 | `scripts/check_repository.py` | Read-only documentation/index check |
 | `scripts/smoke_wheel.py` | Offline build/install into an owned temporary directory; verifies wheel imports, reference CSV and demo, then removes it |
 | `asof ingest` | Network/cache/database operation; requires a valid development `--scope-file` before client/directory/DB creation; not authorized merely by installation |
-| H4/H6 file-backed stages | **Hard held**, even with a valid scope file |
+| H4/H6 file-backed stages | **Hard held**, even with a valid scope file. D18 moves confirmatory H4/H6a evaluation to filings accepted from 2026-11-22 |
 | Completed synthetic/feasibility runners | Historical one-attempt records; **do not rerun or delete attempt markers** |
 | Timestamp A1/A2/A3, stopped KPI screen, retired REAL3 | Historical evidence, not launch instructions or pending automatic work |
 | Other unlisted scripts | Legacy/unreviewed for execution; a script's presence is not approval |
