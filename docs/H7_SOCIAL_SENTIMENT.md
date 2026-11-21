@@ -1,8 +1,10 @@
-# H7: social-media sentiment (design note, not registered)
+# H7: social-media sentiment (closed design note, not registered)
 
-**Status (2026-11-21):** the code is built and tested offline, but no X data has been
-fetched and no hypothesis is registered. Two things block a test: a finance-qualified
-sentiment scorer, and an owner-approved X budget with the owner's own API token.
+**Status (2026-11-21): closed, not pursued.** The owner declined any further spending on
+access to models or social-media posts. No X data was fetched, no token or budget was set,
+no paid model was used, and H7 was never registered, so no trial exists and nothing needs a
+deviation. The offline code and the failed VADER qualification remain as a record. Reopening
+H7 would need a new owner decision and a fresh registration before any data is pulled.
 
 ## Why this is a separate hypothesis
 
@@ -24,7 +26,7 @@ The published evidence points to predictability over hours to a few days, not mo
 A daily test has about 390 trading days in the development window, so unlike the monthly
 H0 test it can be calibrated.
 
-## Data: X API (owner decision required)
+## Data: X API (paid access declined 2026-11-21)
 
 - **Pricing:** pay-per-use, about $0.005 per post read; full-archive search is available
   ([X pricing](https://docs.x.com/x-api/getting-started/pricing),
@@ -63,7 +65,10 @@ The next candidate needs the `embed` dependencies, and must be qualified on labe
 it was **not** trained on. For example, a PhraseBank-trained model should be tested on a
 different labelled finance set.
 
-## Proposed sequence (each step needs the owner)
+## Proposed sequence (not adopted; kept for the record)
+
+Step 1 alone would cost nothing, but without post data it cannot lead to a test, so it was
+not pursued either.
 
 1. Choose and qualify a finance scorer offline (no cost).
 2. **Pilot, about $25 (5,000 posts):** cashtag posts for a stratified sample of 50 H0

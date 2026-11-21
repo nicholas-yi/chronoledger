@@ -462,7 +462,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 |---|---|---|
 | Is every trading-day assignment right? | Done for H0 (16,921 verified, inputs corrected under D16). For H4/H6, the 262 older timing-sensitive filings were audited and no assignment changes | Older bulk times are often 4-5 hours early, which would matter for any future return test on them |
 | Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2001. Cheapest credible source found: about $39 (not purchased) | The current sample can only detect implausibly large effects, and monthly tests are unreliable with 17-18 months |
-| Does social-media sentiment add anything? | A finance-qualified scorer (VADER failed) and a budgeted X pull, as a separate short-horizon hypothesis ([H7 note](docs/H7_SOCIAL_SENTIMENT.md)) | It cannot fix the monthly sample-size problem, but a daily test can be calibrated |
+| Does social-media sentiment add anything? | A finance-qualified scorer (VADER failed) and paid X data, as a separate short-horizon hypothesis. Closed: the owner declined paid model or social-media access on 2026-11-21 ([H7 note](docs/H7_SOCIAL_SENTIMENT.md)) | It cannot fix the monthly sample-size problem, but a daily test can be calibrated |
 | Does *what* changes matter more than *how much*? | The claim-level signal (H1), first checked against human-labelled real filing pairs and simple baselines | Synthetic benchmark scores are not real measurement accuracy |
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
 | Would a trained model measure change better? | Real labelled claim pairs and training/test splits separated by time and by company | A bigger model does not create more independent market evidence |
@@ -540,7 +540,7 @@ point-in-time queries everything is built on.
 - [FOCUSED_READER.md](docs/FOCUSED_READER.md): the active metric-reader work, with every run's protocol, results and limits
 - [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md): exact interval reconciliation and its non-conformance/independence limits
 - [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
-- [H7_SOCIAL_SENTIMENT.md](docs/H7_SOCIAL_SENTIMENT.md): social-media sentiment design note, X costs and terms, and the failed scorer qualification
+- [H7_SOCIAL_SENTIMENT.md](docs/H7_SOCIAL_SENTIMENT.md): closed social-media sentiment design note, X costs and terms, and the failed scorer qualification
 - [project_readiness_checks.json](results/project_readiness_checks.json): the 2026-11-17 scoped clock/calibration checks, both failing then. Superseded by the 2026-11-21 referee run: clock authority now passes, including a check that every H0 knowledge time in use equals its verified time; calibration still fails (FINDINGS F9 and F10)
 - [REFEREE.md](results/REFEREE.md): the full referee report, rerun 2026-11-21 after D16. The gate is blocked only by monthly calibration; passing checks are software evidence, not scientific acceptance
 

@@ -698,13 +698,14 @@ confirmatory evidence. Confirmatory H4/H6a evaluation will use filings accepted 
 H6b stays invalid: fixing survivorship needs delisting-inclusive prices, and the owner
 declined paid data on 2026-11-21.
 
-**Social sentiment (H7 scaffolding).** A
+**Social sentiment (H7, closed).** A
 [point-in-time pipeline](../src/asof/social.py) is built and tested, but no X data has
 been fetched; see the [H7 design note](H7_SOCIAL_SENTIMENT.md). The candidate scorer
 failed its qualification on human-labelled finance text
 ([receipt](../results/sentiment_scorer_validation.json)). On Financial PhraseBank, VADER
 scores 57.1% accuracy (macro-F1 0.49), below the 61.4% that always predicting
-"neutral" would get. A finance-qualified scorer is required before any paid data.
+"neutral" would get. On 2026-11-21 the owner declined further spending on model or
+social-media access, so H7 is closed unregistered: there is no H7 result, null or positive.
 
 ## F10: synthetic finite-sample size distortion of the registered tests
 

@@ -22,8 +22,8 @@ failing as a [permanent design limit](FINDINGS.md#f10-status-a-permanent-limit-o
 Also on 2026-11-21 ([details](FINDINGS.md#h4h6-timing-the-event-time-h0-panel-the-prospective-holdout-and-social-sentiment-2026-11-21)):
 the 262 timing-sensitive 2012-2018 H4/H6a filings were audited (no assignment changes);
 the event-time neutralized H0 panel (D17, exploratory) points the wrong way; H4/H6a confirmation
-moves to a prospective holdout (D18); and social-sentiment tooling exists, but its VADER scorer failed
-qualification and no X data has been bought.
+moves to a prospective holdout (D18); and social sentiment (H7) is closed unregistered: its VADER
+scorer failed qualification and the owner declined paid model or social-media access, so no X data was bought.
 Latest (reader): [guard coverage cost on real 10-K MD&A](FOCUSED_READER.md#observed-guard-coverage-cost-on-real-10-k-mda-text-aggregate-only)
 is now measured, aggregate-only, with the private review filings excluded: after a declared
 ingestion normalization (cp1252 repair, invisible-character removal) and two stem fixes, the guards
