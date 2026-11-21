@@ -1,0 +1,13 @@
+{
+  "kind": "A4 correction 1: report reads pinned-cache headers from the cache",
+  "timing": "Found AFTER the original report: its 12 unresolved accessions all had a header that was a pinned cache hit. The run read and parsed those headers correctly; the report's raw reader looked only at the empty A4 attempt list. No request, rule, threshold or order changes. The original report stays as recorded.",
+  "added_in_r2": "Formation-eligibility and latest-filing diagnostics (assignment_counts, as in A1-A3) and the accession list of stored-early cases, added after the original report showed five.",
+  "base_config_SHA256": "83a9958717b25604372c0b60d2fa86068dfe4c11b430a39c0f818eadfbfc78ac",
+  "original_report_SHA256": "ddb8d9f9d6bdbb2421b04a3cef404f6f0e4d5cc1f232c311407cfbf79b35275e",
+  "source_SHA256": {
+    "scripts\\run_full_timestamps_a4.py": "1c860e70ce6133ddee2fcd71faf771d67731f176438529a847c7ddd922505212",
+    "src\\asof\\filing_timestamp_a4.py": "6519ebb68e10db1018ee4909bb042af1d69d76ab3f9881c9052c46052390b334",
+    "scripts\\timestamp_a3_impact.py": "7c9c696010daa7371479883815204cbf5625f1c723bef74b293cc7bdfac97943",
+    "tests\\test_filing_timestamp_a4.py": "aae3181e9caf9930525990a34c5d3d8db9863c89b70339147594d1685b5f60d0"
+  }
+}
