@@ -16,6 +16,7 @@ import statistics
 import subprocess
 import sys
 import time
+from bisect import bisect_right
 from collections import Counter, defaultdict
 from datetime import UTC, datetime
 from itertools import pairwise
@@ -57,6 +58,8 @@ from asof.sec_documentation import DocumentationStop, MetadataUnknown
 START_USED = 6054
 CONFIG = PROJECT_ROOT / "results" / "timestamp_full_a4_config.json"
 REPORT = PROJECT_ROOT / "results" / "timestamp_full_a4_report.json"
+REPORT_R2 = PROJECT_ROOT / "results" / "timestamp_full_a4_report_r2.json"
+CORRECTION = PROJECT_ROOT / "results" / "timestamp_full_a4_correction1.json"
 PRIVATE = DATA_DIR / "timestamp_full_a4"
 ORDER = PRIVATE / "frozen_order.jsonl"
 TABLE = PRIVATE / "qualified_per_accession.jsonl"
@@ -84,7 +87,36 @@ def raw(row: dict) -> bytes:
 
 
 def frozen_checks(config: dict) -> None:
-    base.verify({**config["input_SHA256"], **config["source_SHA256"], **config["order_SHA256"]})
+    sources = config["source_SHA256"]
+    if CORRECTION.exists():
+        correction = json.loads(CORRECTION.read_bytes())
+        if correction["base_config_SHA256"] != ledger.file_sha256(CONFIG):
+            raise DocumentationStop("A4 correction does not reference this config")
+        sources = {**sources, **correction["source_SHA256"]}
+    base.verify({**config["input_SHA256"], **sources, **config["order_SHA256"]})
+
+
+def correct() -> None:
+    """Correction 1: the original report read cache-hit headers through A4_attempts (empty)."""
+    if CORRECTION.exists() or not REPORT.exists() or REPORT_R2.exists():
+        raise RuntimeError("correction 1 applies once, after the original report and before r2")
+    config = json.loads(CONFIG.read_bytes())
+    base.verify({**config["input_SHA256"], **config["order_SHA256"]})
+    value = {
+        "kind": "A4 correction 1: report reads pinned-cache headers from the cache",
+        "timing": "Found AFTER the original report: its 12 unresolved accessions all had a header "
+                  "that was a pinned cache hit. The run read and parsed those headers correctly; "
+                  "the report's raw reader looked only at the empty A4 attempt list. No request, "
+                  "rule, threshold or order changes. The original report stays as recorded.",
+        "added_in_r2": "Formation-eligibility and latest-filing diagnostics (assignment_counts, as "
+                       "in A1-A3) and the accession list of stored-early cases, added after the "
+                       "original report showed five.",
+        "base_config_SHA256": ledger.file_sha256(CONFIG),
+        "original_report_SHA256": ledger.file_sha256(REPORT),
+        "source_SHA256": base.pin(SOURCES),
+    }
+    base.atomic_json(CORRECTION, value)
+    print(json.dumps({"correction_SHA256": ledger.file_sha256(CORRECTION)}))
 
 
 def freeze() -> None:
@@ -319,9 +351,14 @@ def header_observations(rows: list[dict]) -> dict[str, dict]:
     return output
 
 
-def report() -> None:
-    if REPORT.exists() or TABLE.exists():
-        raise RuntimeError("A4 report already exists; preserve it")
+def report(revision: int = 1) -> None:
+    out, table_path, identity_path = (REPORT, TABLE, IDENTITY) if revision == 1 else (
+        REPORT_R2, TABLE.with_name("qualified_per_accession_r2.jsonl"),
+        IDENTITY.with_name("F7_identity_per_accession_r2.jsonl"))
+    if out.exists() or table_path.exists():
+        raise RuntimeError("A4 report revision already exists; preserve it")
+    if revision == 2 and not CORRECTION.exists():
+        raise RuntimeError("revision 2 requires the committed correction record")
     config = committed_config()
     a3_report = json.loads(a3.REPORT.read_bytes())
     segments = a4_segments()
@@ -347,7 +384,8 @@ def report() -> None:
         headers = [header_obs.get(r["URL"], {"unknown": r["parsed"].get("unknown", "unread")})
                    for r in resources if r["kind"] == "header"]
         result = qualify(row, headers, basis)
-        rows.append(row)
+        rows.append({**row, "conditional_UTC_assuming_Eastern": result["qualified_UTC"],
+                     "outside_frozen_candidate_envelope": False})
         table.append({**{k: row[k] for k in ("accession", "pool", "cik_pair", "cik_bulk",
                                               "API_time_stored_pair", "bulk_time", "header_wall",
                                               "index_wall", "agreement_class")}, **result})
@@ -376,8 +414,8 @@ def report() -> None:
                    for p in d.rglob("*") if p.is_file())
     if occupied + sum(len(json.dumps(r)) + 1 for r in table + identity) + (64 << 20) >= DISK_BYTES:
         raise DocumentationStop("A4_final_report_disk_budget")
-    base.write_lines(TABLE, table)
-    base.write_lines(IDENTITY, identity)
+    base.write_lines(table_path, table)
+    base.write_lines(identity_path, identity)
     calendar = json.loads(base.CALENDAR.read_bytes())
     closes = [datetime.fromisoformat(t) for t in calendar["closes"]]
     universe = base.load_lines(base.UNIVERSE)
@@ -406,6 +444,9 @@ def report() -> None:
     for segment in (s for s in SEGMENTS if (PRIVATE / s).exists()):
         for sub, name in (("raw_metadata", "raw_hashes.jsonl"), ("attempt_receipts", "receipt_hashes.jsonl")):
             manifest = PRIVATE / segment / name
+            if revision > 1 and manifest.exists():
+                manifests.append(manifest)
+                continue
             base.write_lines(manifest, [
                 {"path": str(p.relative_to(PRIVATE / segment)), "bytes": p.stat().st_size,
                  "SHA256": ledger.file_sha256(p)} for p in sorted((PRIVATE / segment / sub).glob("*"))])
@@ -449,14 +490,33 @@ def report() -> None:
                   "No timestamp, table, signal, price, return or ledger row was changed and no "
                   "holdout data was read.",
     }
-    base.atomic_json(REPORT, value)
+    if revision > 1:
+        early = [r["accession"] for r in table if r["qualified_UTC"] and any(
+            u["accession"] == r["accession"] for u in universe)
+            and datetime.fromisoformat(r["API_time_stored_pair"]) < datetime.fromisoformat(r["qualified_UTC"])
+            and bisect_right(closes, datetime.fromisoformat(r["API_time_stored_pair"]))
+            < bisect_right(closes, datetime.fromisoformat(r["qualified_UTC"]))]
+        value.update(
+            revision=revision, correction_SHA256=ledger.file_sha256(CORRECTION),
+            original_report_SHA256=ledger.file_sha256(REPORT),
+            stored_pair_earlier_first_close_accessions=early,
+            eligibility_and_latest_filing_vs_qualified=base.assignment_counts(
+                universe, rows, closes, [datetime.fromisoformat(t) for t in calendar["formations"]],
+                datetime.fromisoformat(calendar["start"]),
+                datetime.fromisoformat(calendar["end"]))["conditional_diagnostics_only"])
+        value["private_hash_manifest"] = {
+            k: v for k, v in value["private_hash_manifest"].items()
+            if k not in (str(TABLE.relative_to(PROJECT_ROOT)), str(IDENTITY.relative_to(PROJECT_ROOT)))
+        } | base.pin([table_path, identity_path])
+    base.atomic_json(out, value)
     print(json.dumps({"qualified_UTC": value["qualified_UTC"], "unresolved": value["unresolved_accessions"],
                       "F7": value["F7_identity"]["decisions"], "basis": basis}), flush=True)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("freeze", "run", "report"))
+    parser.add_argument("phase", choices=("freeze", "run", "correct", "report"))
+    parser.add_argument("--revision", type=int, choices=(1, 2), default=1)
     parser.add_argument("segment", nargs="?", choices=SEGMENTS)
     args = parser.parse_args()
     if any(os.environ.get(k) != "1" for k in
@@ -468,5 +528,7 @@ if __name__ == "__main__":
         if not args.segment:
             raise SystemExit("run requires a segment")
         asyncio.run(run(args.segment))
+    elif args.phase == "correct":
+        correct()
     else:
-        report()
+        report(args.revision)

@@ -126,3 +126,12 @@ def test_identity_decision_rule():
     assert identity_decision(2, 1, {1, 2}, listed) == "bulk_CIK_is_the_listed_security"
     assert identity_decision(1, 2, {1, 2}, {1, 2}) == "both_listed_ambiguous"
     assert identity_decision(1, 2, {1, 2}, set()) == "neither_listed"
+
+
+def test_cache_hit_rows_read_the_pinned_cache_not_A4_attempts(tmp_path):
+    from asof.filing_timestamp_a4 import a4_raw_bytes
+
+    row = {"cache_hit": True, "A4_attempts": [], "A4_segment": "seg1"}
+    assert a4_raw_bytes(row, {"seg1": tmp_path}, lambda r: b"cached") == b"cached"
+    with pytest.raises(ValueError, match="no complete"):
+        a4_raw_bytes({**row, "cache_hit": False}, {"seg1": tmp_path}, lambda r: b"cached")

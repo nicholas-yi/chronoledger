@@ -172,8 +172,8 @@ def segment_allowance(prior: list[dict]) -> dict:
 
 def a4_raw_bytes(row: dict, segment_dirs: dict[str, Path],
                  fallback: Callable[[dict], bytes]) -> bytes:
-    """Recorded body of an A4 outcome, hash-checked; earlier phases use ``fallback``."""
-    if "A4_attempts" not in row:
+    """Recorded body of an A4 outcome, hash-checked; cache hits and earlier phases use ``fallback``."""
+    if "A4_attempts" not in row or row.get("cache_hit"):
         return fallback(row)
     good = [a for a in row["A4_attempts"] if a.get("status") == 200 and a.get("body_complete")]
     if not good:
