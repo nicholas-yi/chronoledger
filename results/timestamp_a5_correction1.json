@@ -1,0 +1,10 @@
+{
+  "kind": "A5 correction 1: report date dtype",
+  "timing": "After the run, before any report output: the first report attempt raised on pandas .dt with an object column (empty time map). No result was produced or seen; no request, rule or order changes.",
+  "base_config_SHA256": "272d4a0091d775241dfacfc7ab5e65ac73fa0ebe05249b625d8093226d22139d",
+  "source_SHA256": {
+    "scripts\\run_timestamp_a5.py": "a770c932c4fc7808762fb91323267746b9117f8b48ada02ee395e0cf36ee91d9",
+    "src\\asof\\filing_timestamp_a5.py": "784582d0760f7a595abcd9e74de448c1ab3c66b421e7be931f4143b7d9d2c141",
+    "tests\\test_filing_timestamp_a5.py": "a11dd5340453f4eca5d0348daf519e762d16a1d4558d34ce1e2264a2cfaaa095"
+  }
+}
