@@ -1,0 +1,2057 @@
+{
+  "status": [
+    {
+      "segment": "seg1",
+      "status": "order_complete",
+      "stop_reason": null,
+      "charged": 28616,
+      "throttle_pauses": 9,
+      "short_gateway_retries": 57,
+      "transport_unresolved": 0,
+      "F7_fallbacks": 0
+    }
+  ],
+  "config_SHA256": "83a9958717b25604372c0b60d2fa86068dfe4c11b430a39c0f818eadfbfc78ac",
+  "report_lineage": {
+    "git_commit": "019085bc380176229060dfc1f3fd8bec486cca0d",
+    "git_dirty": false,
+    "inputs": {},
+    "input_status": {},
+    "missing_inputs": [],
+    "environment": {
+      "python": "3.12.10",
+      "duckdb": "2.0.0",
+      "pandas": "3.1.1",
+      "pyarrow": "26.0.1",
+      "httpx": "0.28.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "lxml": "6.1.3"
+    }
+  },
+  "clock_basis": {
+    "A3_basis_accepted": true,
+    "CB1R2_replication_on_A4_headers": {
+      "declared_rule": {
+        "S1_fixed_EST_rejection": "Daylight-season weekday headers with wall in [16:30,17:30): n>=30 and same-day FILING-DATE share >=0.99.",
+        "S2_UTC_rejection": "Weekday headers with wall in [17:35,21:30): n>=20 and later FILING-DATE share >=0.95. If n<20, S3 decides: >=20 walls in [06:00,10:00) and operating-window violations <=0.1%.",
+        "integrity": "Weekday walls <=17:30 whose FILING-DATE rolled forward <=0.5%, and walls outside [06:00,22:00] <=0.1% of the evaluated population.",
+        "passed": "S1 AND UTC rejection AND integrity.",
+        "population": "Readable headers with one acceptance wall, one filing date and a unique Eastern conversion; Rule 13(a)(3)-(4) 22:00-cutoff forms excluded."
+      },
+      "evaluated_headers": 14201,
+      "excluded": {
+        "unreadable:raw_unavailable:no complete recorded body": 12
+      },
+      "S1_daylight_16_30_to_17_30_same_day": {
+        "n": 2728,
+        "k": 2728,
+        "share": 1.0
+      },
+      "S1_control_standard_16_30_to_17_30_same_day": {
+        "n": 1572,
+        "k": 1572,
+        "share": 1.0
+      },
+      "S2_17_35_to_21_30_rolled": {
+        "n": 1058,
+        "k": 1043,
+        "share": 0.9858223062381852
+      },
+      "S3_walls_06_00_to_10_00": 101,
+      "S3_walls_outside_06_00_to_22_00": 0,
+      "weekday_at_or_before_17_30_rolled": {
+        "n": 13045,
+        "k": 0,
+        "share": 0.0
+      },
+      "filing_date_earlier_than_acceptance": 1,
+      "weekend_acceptances": 0,
+      "descriptive_cutoff_brackets": {
+        "daylight": {
+          "latest_same_day_wall": "18:20:46",
+          "earliest_rolled_wall_after_noon": "17:31:46",
+          "same_day_after_17_30": 38,
+          "rolled_at_or_before_17_30": 0
+        },
+        "standard": {
+          "latest_same_day_wall": "17:43:58",
+          "earliest_rolled_wall_after_noon": "17:32:52",
+          "same_day_after_17_30": 25,
+          "rolled_at_or_before_17_30": 0
+        }
+      },
+      "fixed_EST_rejected": true,
+      "UTC_rejected": true,
+      "UTC_route": "S2",
+      "integrity_passed": true,
+      "passed": true,
+      "interpretation_if_passed": "Header walls behave as the Rule 13(a)(2) Eastern civil clock (EST or EDT in effect). This rejects fixed-EST and UTC readings; it does not verify EDGAR's synchronization to UTC or correctness of any JSON timestamp."
+    },
+    "CB1R2_estimable": true,
+    "basis_accepted_for_qualification": true
+  },
+  "qualified_UTC": 16909,
+  "unresolved_accessions": 12,
+  "required_accessions": 16921,
+  "unresolved_reason_counts": {
+    "filing_date_unread_or_nonunique": 12
+  },
+  "filing_date_consistency": {
+    "consistent": 16835,
+    "consistent_commencement_lag_possible": 73,
+    "null": 12,
+    "adjusted_earlier_filing_date": 1
+  },
+  "first_close_status": {
+    "nominal_16_00_assignment_qualified": 16908,
+    "null": 12,
+    "possible_early_close_unresolved": 1
+  },
+  "by_pool": {
+    "CIK_disagreement": {
+      "accessions": 256,
+      "qualified": 256
+    },
+    "candidate_calendar_boundary_or_clock_issue": {
+      "accessions": 676,
+      "qualified": 668
+    },
+    "clock_agreement_sensitive": {
+      "accessions": 15881,
+      "qualified": 15877
+    },
+    "clock_disagreement_summer": {
+      "accessions": 71,
+      "qualified": 71
+    },
+    "clock_disagreement_winter": {
+      "accessions": 37,
+      "qualified": 37
+    }
+  },
+  "impact_first_close_direction": {
+    "stored_pair": {
+      "nominal_16_00": {
+        "same_first_close": 16853,
+        "stored_equals_qualified": 16806,
+        "stored_later_delay_only": 51,
+        "stored_earlier_lookahead_risk": 5
+      },
+      "conservative_early_close_13_00": {
+        "same_first_close": 16853,
+        "stored_equals_qualified": 16806,
+        "stored_later_delay_only": 51,
+        "stored_earlier_lookahead_risk": 5
+      },
+      "calendar_sensitive_changes": {}
+    },
+    "stored_bulk": {
+      "nominal_16_00": {
+        "same_first_close": 16822,
+        "stored_equals_qualified": 16652,
+        "stored_later_delay_only": 82,
+        "stored_earlier_lookahead_risk": 5
+      },
+      "conservative_early_close_13_00": {
+        "same_first_close": 16822,
+        "stored_equals_qualified": 16652,
+        "stored_later_delay_only": 82,
+        "stored_earlier_lookahead_risk": 5
+      },
+      "calendar_sensitive_changes": {}
+    }
+  },
+  "F7_identity": {
+    "universe_disagreements": 404,
+    "decisions": {
+      "qualified_pair_CIK_is_the_listed_security": 404
+    },
+    "by_source": {
+      "A4 F7 header": 148,
+      "A1-A4 audit header": 256
+    }
+  },
+  "A4_attempts": 28616,
+  "A4_HTTP_status_counts": {
+    "200": 28550,
+    "504": 45,
+    "502": 21
+  },
+  "A4_retries_charged": 66,
+  "every_wait_and_retry": [
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 0,
+      "failed_attempt": 6180,
+      "UTC": "2026-11-20T16:57:55.033547+00:00",
+      "perf_counter": 38492.7201417,
+      "URL_SHA256": "362278cb8ee66e512aa909044297b9c5b0419d6d5f5a6b7fb29b1d8c9006c8b2"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01562669999839,
+      "gap_after_seconds": 0.667,
+      "UTC": "2026-11-20T16:58:55.050857+00:00",
+      "perf_counter": 38552.7357854,
+      "URL_SHA256": "362278cb8ee66e512aa909044297b9c5b0419d6d5f5a6b7fb29b1d8c9006c8b2"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 6181,
+      "UTC": "2026-11-20T16:58:55.085629+00:00",
+      "perf_counter": 38552.770299,
+      "URL_SHA256": "362278cb8ee66e512aa909044297b9c5b0419d6d5f5a6b7fb29b1d8c9006c8b2"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 0,
+      "failed_attempt": 6250,
+      "UTC": "2026-11-20T17:00:15.597868+00:00",
+      "perf_counter": 38633.2806364,
+      "URL_SHA256": "ad1ca1b90f1b587d7776ca3447d713fb31092879ad631c6ce49075856632ebce"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00498050000169,
+      "gap_after_seconds": 0.667,
+      "UTC": "2026-11-20T17:01:15.603533+00:00",
+      "perf_counter": 38693.2856273,
+      "URL_SHA256": "ad1ca1b90f1b587d7776ca3447d713fb31092879ad631c6ce49075856632ebce"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 6251,
+      "UTC": "2026-11-20T17:01:15.616800+00:00",
+      "perf_counter": 38693.2988093,
+      "URL_SHA256": "ad1ca1b90f1b587d7776ca3447d713fb31092879ad631c6ce49075856632ebce"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 0,
+      "failed_attempt": 6263,
+      "UTC": "2026-11-20T17:01:29.529596+00:00",
+      "perf_counter": 38707.2116231,
+      "URL_SHA256": "33d84b67bfec213ba3703706ce6e114fb4958f70d6c1b74d48b25609cf43b1ce"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00996170000144,
+      "gap_after_seconds": 0.667,
+      "UTC": "2026-11-20T17:02:29.541580+00:00",
+      "perf_counter": 38767.2215923,
+      "URL_SHA256": "33d84b67bfec213ba3703706ce6e114fb4958f70d6c1b74d48b25609cf43b1ce"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 6264,
+      "UTC": "2026-11-20T17:02:29.548579+00:00",
+      "perf_counter": 38767.2288786,
+      "URL_SHA256": "33d84b67bfec213ba3703706ce6e114fb4958f70d6c1b74d48b25609cf43b1ce"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 0,
+      "failed_attempt": 7496,
+      "UTC": "2026-11-20T17:17:38.137091+00:00",
+      "perf_counter": 39675.7998252,
+      "URL_SHA256": "3ec7f419d0c156396df96ecc88f0fb374661619697d26e0aced7fe7104f175dd"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01211420000618,
+      "gap_after_seconds": 0.667,
+      "UTC": "2026-11-20T17:18:38.149861+00:00",
+      "perf_counter": 39735.8119452,
+      "URL_SHA256": "3ec7f419d0c156396df96ecc88f0fb374661619697d26e0aced7fe7104f175dd"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 7497,
+      "UTC": "2026-11-20T17:18:38.158120+00:00",
+      "perf_counter": 39735.8201248,
+      "URL_SHA256": "3ec7f419d0c156396df96ecc88f0fb374661619697d26e0aced7fe7104f175dd"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 0,
+      "failed_attempt": 8388,
+      "UTC": "2026-11-20T17:29:49.587764+00:00",
+      "perf_counter": 40407.2400019,
+      "URL_SHA256": "8c3e2b84776ecd0a0f83f758f376e68a84dcf318e8cd426b54956d70768050d9"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01100040000165,
+      "gap_after_seconds": 0.667,
+      "UTC": "2026-11-20T17:30:49.600079+00:00",
+      "perf_counter": 40467.2510135,
+      "URL_SHA256": "8c3e2b84776ecd0a0f83f758f376e68a84dcf318e8cd426b54956d70768050d9"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 8389,
+      "UTC": "2026-11-20T17:30:49.609648+00:00",
+      "perf_counter": 40467.2610297,
+      "URL_SHA256": "8c3e2b84776ecd0a0f83f758f376e68a84dcf318e8cd426b54956d70768050d9"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 0,
+      "failed_attempt": 8718,
+      "UTC": "2026-11-20T17:34:57.921291+00:00",
+      "perf_counter": 40715.5692415,
+      "URL_SHA256": "ac43d9720f70da61549eaa92279e323e043c4f5937e078b83f800dfddbfb1d67"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01505499999621,
+      "gap_after_seconds": 0.667,
+      "UTC": "2026-11-20T17:35:57.937265+00:00",
+      "perf_counter": 40775.5843054,
+      "URL_SHA256": "ac43d9720f70da61549eaa92279e323e043c4f5937e078b83f800dfddbfb1d67"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 8719,
+      "UTC": "2026-11-20T17:35:57.948645+00:00",
+      "perf_counter": 40775.5954363,
+      "URL_SHA256": "ac43d9720f70da61549eaa92279e323e043c4f5937e078b83f800dfddbfb1d67"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 0,
+      "failed_attempt": 9721,
+      "UTC": "2026-11-20T17:48:24.133735+00:00",
+      "perf_counter": 41521.7728616,
+      "URL_SHA256": "34fc3df777ade0771622b425fcd40049886e57654321c2575e60162458d34b3f"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.010443599996506,
+      "gap_after_seconds": 0.667,
+      "UTC": "2026-11-20T17:49:24.144114+00:00",
+      "perf_counter": 41581.7833113,
+      "URL_SHA256": "34fc3df777ade0771622b425fcd40049886e57654321c2575e60162458d34b3f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 9722,
+      "UTC": "2026-11-20T17:49:24.156873+00:00",
+      "perf_counter": 41581.7965294,
+      "URL_SHA256": "34fc3df777ade0771622b425fcd40049886e57654321c2575e60162458d34b3f"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 600,
+      "throttle_pauses": 1,
+      "failed_attempt": 9722,
+      "UTC": "2026-11-20T17:49:24.322887+00:00",
+      "perf_counter": 41581.9613277,
+      "URL_SHA256": "34fc3df777ade0771622b425fcd40049886e57654321c2575e60162458d34b3f"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0129164000027,
+      "gap_after_seconds": 0.667,
+      "UTC": "2026-11-20T17:59:24.339835+00:00",
+      "perf_counter": 42181.9742918,
+      "URL_SHA256": "34fc3df777ade0771622b425fcd40049886e57654321c2575e60162458d34b3f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 9723,
+      "UTC": "2026-11-20T17:59:24.349931+00:00",
+      "perf_counter": 42181.985405,
+      "URL_SHA256": "34fc3df777ade0771622b425fcd40049886e57654321c2575e60162458d34b3f"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 1,
+      "failed_attempt": 11385,
+      "UTC": "2026-11-20T18:29:03.386456+00:00",
+      "perf_counter": 43961.0103944,
+      "URL_SHA256": "3376c8fef3d265b05ad0f4ce1e3e47002c3f4d8a6f86e74ca6959c61c7196339"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00838709999516,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T18:30:03.394979+00:00",
+      "perf_counter": 44021.0187919,
+      "URL_SHA256": "3376c8fef3d265b05ad0f4ce1e3e47002c3f4d8a6f86e74ca6959c61c7196339"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 11386,
+      "UTC": "2026-11-20T18:30:03.400260+00:00",
+      "perf_counter": 44021.0260419,
+      "URL_SHA256": "3376c8fef3d265b05ad0f4ce1e3e47002c3f4d8a6f86e74ca6959c61c7196339"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 1,
+      "failed_attempt": 14614,
+      "UTC": "2026-11-20T19:27:10.752149+00:00",
+      "perf_counter": 47448.3677004,
+      "URL_SHA256": "8169a90178527178d427c8d2fa0c6fc477700d6a5a11bce1f51cb236a28477f3"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.013290099996084,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:28:10.765522+00:00",
+      "perf_counter": 47508.3809959,
+      "URL_SHA256": "8169a90178527178d427c8d2fa0c6fc477700d6a5a11bce1f51cb236a28477f3"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 14615,
+      "UTC": "2026-11-20T19:28:10.780547+00:00",
+      "perf_counter": 47508.3965153,
+      "URL_SHA256": "8169a90178527178d427c8d2fa0c6fc477700d6a5a11bce1f51cb236a28477f3"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 1,
+      "failed_attempt": 14659,
+      "UTC": "2026-11-20T19:29:16.343152+00:00",
+      "perf_counter": 47573.9586852,
+      "URL_SHA256": "99654b760dff01053b4050f26e41b8c688530bf0357328f8cd5154564ce50bfa"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01194250000117,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:30:16.355115+00:00",
+      "perf_counter": 47633.9706246,
+      "URL_SHA256": "99654b760dff01053b4050f26e41b8c688530bf0357328f8cd5154564ce50bfa"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 14660,
+      "UTC": "2026-11-20T19:30:16.361154+00:00",
+      "perf_counter": 47633.9777197,
+      "URL_SHA256": "99654b760dff01053b4050f26e41b8c688530bf0357328f8cd5154564ce50bfa"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 600,
+      "throttle_pauses": 2,
+      "failed_attempt": 14660,
+      "UTC": "2026-11-20T19:30:16.443523+00:00",
+      "perf_counter": 47634.0583996,
+      "URL_SHA256": "99654b760dff01053b4050f26e41b8c688530bf0357328f8cd5154564ce50bfa"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0074409000008,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:40:16.450924+00:00",
+      "perf_counter": 48234.0658527,
+      "URL_SHA256": "99654b760dff01053b4050f26e41b8c688530bf0357328f8cd5154564ce50bfa"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 14661,
+      "UTC": "2026-11-20T19:40:16.466594+00:00",
+      "perf_counter": 48234.0824867,
+      "URL_SHA256": "99654b760dff01053b4050f26e41b8c688530bf0357328f8cd5154564ce50bfa"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 2,
+      "failed_attempt": 14754,
+      "UTC": "2026-11-20T19:42:12.312478+00:00",
+      "perf_counter": 48349.9271004,
+      "URL_SHA256": "9c65e90a89b6ac56d2ef939b6cd4238a27a9ab5510a5012ed529fd07d26ded2a"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01750190000166,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:43:12.329850+00:00",
+      "perf_counter": 48409.9446097,
+      "URL_SHA256": "9c65e90a89b6ac56d2ef939b6cd4238a27a9ab5510a5012ed529fd07d26ded2a"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 14755,
+      "UTC": "2026-11-20T19:43:12.335888+00:00",
+      "perf_counter": 48409.9518473,
+      "URL_SHA256": "9c65e90a89b6ac56d2ef939b6cd4238a27a9ab5510a5012ed529fd07d26ded2a"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 2,
+      "failed_attempt": 14988,
+      "UTC": "2026-11-20T19:47:49.272017+00:00",
+      "perf_counter": 48686.886253,
+      "URL_SHA256": "cd592861e52d28c8077c6194c666a9615ad00c28206e3c749da3eac73c2daa4b"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.005294100003084,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:48:49.276881+00:00",
+      "perf_counter": 48746.891561,
+      "URL_SHA256": "cd592861e52d28c8077c6194c666a9615ad00c28206e3c749da3eac73c2daa4b"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 14989,
+      "UTC": "2026-11-20T19:48:49.289411+00:00",
+      "perf_counter": 48746.9038494,
+      "URL_SHA256": "cd592861e52d28c8077c6194c666a9615ad00c28206e3c749da3eac73c2daa4b"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 2,
+      "failed_attempt": 15104,
+      "UTC": "2026-11-20T19:51:08.099781+00:00",
+      "perf_counter": 48885.7146808,
+      "URL_SHA256": "688765b81a0ab6a10579f44b6da2728fd5b50f392e2c47a5096065d54dc63ced"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.005458399995405,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:52:08.105879+00:00",
+      "perf_counter": 48945.7201482,
+      "URL_SHA256": "688765b81a0ab6a10579f44b6da2728fd5b50f392e2c47a5096065d54dc63ced"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 15105,
+      "UTC": "2026-11-20T19:52:08.111918+00:00",
+      "perf_counter": 48945.7273714,
+      "URL_SHA256": "688765b81a0ab6a10579f44b6da2728fd5b50f392e2c47a5096065d54dc63ced"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 2,
+      "failed_attempt": 15106,
+      "UTC": "2026-11-20T19:52:21.326171+00:00",
+      "perf_counter": 48958.9412071,
+      "URL_SHA256": "7c4e5bdb9c4b1f2427994d7218841c71d36f509d585b1150a93b3d1a95333a75"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00130459999491,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:53:21.328883+00:00",
+      "perf_counter": 49018.9425178,
+      "URL_SHA256": "7c4e5bdb9c4b1f2427994d7218841c71d36f509d585b1150a93b3d1a95333a75"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 15107,
+      "UTC": "2026-11-20T19:53:21.340039+00:00",
+      "perf_counter": 49018.9546864,
+      "URL_SHA256": "7c4e5bdb9c4b1f2427994d7218841c71d36f509d585b1150a93b3d1a95333a75"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 2,
+      "failed_attempt": 15110,
+      "UTC": "2026-11-20T19:53:34.724291+00:00",
+      "perf_counter": 49032.3383278,
+      "URL_SHA256": "dab83c713e2c161ca4df78bf91fa6c3f182d49d4fe55a2cd97ba0c7ebf839f7e"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00791230000323,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:54:34.732782+00:00",
+      "perf_counter": 49092.3462836,
+      "URL_SHA256": "dab83c713e2c161ca4df78bf91fa6c3f182d49d4fe55a2cd97ba0c7ebf839f7e"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 15111,
+      "UTC": "2026-11-20T19:54:34.746151+00:00",
+      "perf_counter": 49092.3605371,
+      "URL_SHA256": "dab83c713e2c161ca4df78bf91fa6c3f182d49d4fe55a2cd97ba0c7ebf839f7e"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 2,
+      "failed_attempt": 15139,
+      "UTC": "2026-11-20T19:55:13.232914+00:00",
+      "perf_counter": 49130.8472553,
+      "URL_SHA256": "a06cf4f21b0d84c741953e9c1aae6ca8d0df9bb44e727f08523c6c9b0b56efe6"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00101909999648,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:56:13.234904+00:00",
+      "perf_counter": 49190.8482829,
+      "URL_SHA256": "a06cf4f21b0d84c741953e9c1aae6ca8d0df9bb44e727f08523c6c9b0b56efe6"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 15140,
+      "UTC": "2026-11-20T19:56:13.242927+00:00",
+      "perf_counter": 49190.8567445,
+      "URL_SHA256": "a06cf4f21b0d84c741953e9c1aae6ca8d0df9bb44e727f08523c6c9b0b56efe6"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 2,
+      "failed_attempt": 15249,
+      "UTC": "2026-11-20T19:58:24.528245+00:00",
+      "perf_counter": 49322.1422758,
+      "URL_SHA256": "5936a39aab3c755ffaa4219cb136fcfb446cccdee051ccd95b29db60d51ee29f"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00805200000468,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T19:59:24.536251+00:00",
+      "perf_counter": 49382.1503373,
+      "URL_SHA256": "5936a39aab3c755ffaa4219cb136fcfb446cccdee051ccd95b29db60d51ee29f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 15250,
+      "UTC": "2026-11-20T19:59:24.548327+00:00",
+      "perf_counter": 49382.1619001,
+      "URL_SHA256": "5936a39aab3c755ffaa4219cb136fcfb446cccdee051ccd95b29db60d51ee29f"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 600,
+      "throttle_pauses": 3,
+      "failed_attempt": 15250,
+      "UTC": "2026-11-20T19:59:24.648991+00:00",
+      "perf_counter": 49382.2627168,
+      "URL_SHA256": "5936a39aab3c755ffaa4219cb136fcfb446cccdee051ccd95b29db60d51ee29f"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0131221999982,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T20:09:24.662944+00:00",
+      "perf_counter": 49982.2758483,
+      "URL_SHA256": "5936a39aab3c755ffaa4219cb136fcfb446cccdee051ccd95b29db60d51ee29f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 15251,
+      "UTC": "2026-11-20T20:09:24.669912+00:00",
+      "perf_counter": 49982.2830814,
+      "URL_SHA256": "5936a39aab3c755ffaa4219cb136fcfb446cccdee051ccd95b29db60d51ee29f"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 3,
+      "failed_attempt": 15418,
+      "UTC": "2026-11-20T20:12:46.436216+00:00",
+      "perf_counter": 50184.0503348,
+      "URL_SHA256": "6377eb0724a6f507c986e9e633dc70e2e552efcd8c456cd2f82feea867a315a2"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00564569999551,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T20:13:46.442706+00:00",
+      "perf_counter": 50244.0559947,
+      "URL_SHA256": "6377eb0724a6f507c986e9e633dc70e2e552efcd8c456cd2f82feea867a315a2"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 15419,
+      "UTC": "2026-11-20T20:13:46.458614+00:00",
+      "perf_counter": 50244.0729966,
+      "URL_SHA256": "6377eb0724a6f507c986e9e633dc70e2e552efcd8c456cd2f82feea867a315a2"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 3,
+      "failed_attempt": 15506,
+      "UTC": "2026-11-20T20:15:21.442440+00:00",
+      "perf_counter": 50339.0565769,
+      "URL_SHA256": "0a9116bfebfc2fa793ad27ba0930e1215d61bc42e886a6b3328ec4c5f71e4ee4"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01028689999657,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T20:16:21.453328+00:00",
+      "perf_counter": 50399.0668717,
+      "URL_SHA256": "0a9116bfebfc2fa793ad27ba0930e1215d61bc42e886a6b3328ec4c5f71e4ee4"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 15507,
+      "UTC": "2026-11-20T20:16:21.468120+00:00",
+      "perf_counter": 50399.0813145,
+      "URL_SHA256": "0a9116bfebfc2fa793ad27ba0930e1215d61bc42e886a6b3328ec4c5f71e4ee4"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 3,
+      "failed_attempt": 15727,
+      "UTC": "2026-11-20T20:21:02.705337+00:00",
+      "perf_counter": 50680.3185944,
+      "URL_SHA256": "5fbb71c491959a1798dfc80d57bb52dfc4996d82d667e25fdf207efafc913823"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.0134149000005,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T20:22:02.718485+00:00",
+      "perf_counter": 50740.3320178,
+      "URL_SHA256": "5fbb71c491959a1798dfc80d57bb52dfc4996d82d667e25fdf207efafc913823"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 15728,
+      "UTC": "2026-11-20T20:22:02.730168+00:00",
+      "perf_counter": 50740.3434351,
+      "URL_SHA256": "5fbb71c491959a1798dfc80d57bb52dfc4996d82d667e25fdf207efafc913823"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 600,
+      "throttle_pauses": 4,
+      "failed_attempt": 15728,
+      "UTC": "2026-11-20T20:22:02.945487+00:00",
+      "perf_counter": 50740.5598422,
+      "URL_SHA256": "5fbb71c491959a1798dfc80d57bb52dfc4996d82d667e25fdf207efafc913823"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0122580000025,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T20:32:02.959110+00:00",
+      "perf_counter": 51340.5721169,
+      "URL_SHA256": "5fbb71c491959a1798dfc80d57bb52dfc4996d82d667e25fdf207efafc913823"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 15729,
+      "UTC": "2026-11-20T20:32:02.993479+00:00",
+      "perf_counter": 51340.6063061,
+      "URL_SHA256": "5fbb71c491959a1798dfc80d57bb52dfc4996d82d667e25fdf207efafc913823"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 4,
+      "failed_attempt": 18239,
+      "UTC": "2026-11-20T21:16:43.978725+00:00",
+      "perf_counter": 54021.5717884,
+      "URL_SHA256": "39a91ed6fb1ebb1554dcc26a4dce4034067c3e3939b3391ef88d7d65e34c8ae3"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.008043100002396,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:17:43.988386+00:00",
+      "perf_counter": 54081.5798303,
+      "URL_SHA256": "39a91ed6fb1ebb1554dcc26a4dce4034067c3e3939b3391ef88d7d65e34c8ae3"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 18240,
+      "UTC": "2026-11-20T21:17:43.998459+00:00",
+      "perf_counter": 54081.5915586,
+      "URL_SHA256": "39a91ed6fb1ebb1554dcc26a4dce4034067c3e3939b3391ef88d7d65e34c8ae3"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 4,
+      "failed_attempt": 18887,
+      "UTC": "2026-11-20T21:29:21.020506+00:00",
+      "perf_counter": 54778.6032861,
+      "URL_SHA256": "b235766e3f77290e1484bf469463de96291de3e8bb74f31bc96ea91c347ffbff"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00735420000274,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:30:21.028595+00:00",
+      "perf_counter": 54838.6106551,
+      "URL_SHA256": "b235766e3f77290e1484bf469463de96291de3e8bb74f31bc96ea91c347ffbff"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 18888,
+      "UTC": "2026-11-20T21:30:21.042787+00:00",
+      "perf_counter": 54838.6246478,
+      "URL_SHA256": "b235766e3f77290e1484bf469463de96291de3e8bb74f31bc96ea91c347ffbff"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 4,
+      "failed_attempt": 18907,
+      "UTC": "2026-11-20T21:30:43.332018+00:00",
+      "perf_counter": 54860.914125,
+      "URL_SHA256": "60ac0eae7dda54183592927ca2a568c4ee5229c275fffca87cec8a9a3cff735a"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.003768700000364,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:31:43.336932+00:00",
+      "perf_counter": 54920.9178966,
+      "URL_SHA256": "60ac0eae7dda54183592927ca2a568c4ee5229c275fffca87cec8a9a3cff735a"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 18908,
+      "UTC": "2026-11-20T21:31:43.344440+00:00",
+      "perf_counter": 54920.9256746,
+      "URL_SHA256": "60ac0eae7dda54183592927ca2a568c4ee5229c275fffca87cec8a9a3cff735a"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 4,
+      "failed_attempt": 19017,
+      "UTC": "2026-11-20T21:33:52.520329+00:00",
+      "perf_counter": 55050.099822,
+      "URL_SHA256": "769a6653a11e54f24c87644db1a99b0e6cb1d95244839207a67ce97ecc5d170f"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01101750000089,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:34:52.531568+00:00",
+      "perf_counter": 55110.1108421,
+      "URL_SHA256": "769a6653a11e54f24c87644db1a99b0e6cb1d95244839207a67ce97ecc5d170f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 19018,
+      "UTC": "2026-11-20T21:34:52.539627+00:00",
+      "perf_counter": 55110.1193131,
+      "URL_SHA256": "769a6653a11e54f24c87644db1a99b0e6cb1d95244839207a67ce97ecc5d170f"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 4,
+      "failed_attempt": 19232,
+      "UTC": "2026-11-20T21:39:26.962232+00:00",
+      "perf_counter": 55384.5385419,
+      "URL_SHA256": "d2bbcf662986068d42140b8e9cb6a576933f14ebcf47a687a089c0d9ae7232a5"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00985030000447,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:40:26.972954+00:00",
+      "perf_counter": 55444.5484397,
+      "URL_SHA256": "d2bbcf662986068d42140b8e9cb6a576933f14ebcf47a687a089c0d9ae7232a5"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 19233,
+      "UTC": "2026-11-20T21:40:26.989864+00:00",
+      "perf_counter": 55444.5663329,
+      "URL_SHA256": "d2bbcf662986068d42140b8e9cb6a576933f14ebcf47a687a089c0d9ae7232a5"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 4,
+      "failed_attempt": 19241,
+      "UTC": "2026-11-20T21:40:48.759125+00:00",
+      "perf_counter": 55466.3361111,
+      "URL_SHA256": "c0ce4888d70883e10f615d0cf2652e85123dfc8c88acf301455b6b16d1e19edc"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01083989999461,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:41:48.772080+00:00",
+      "perf_counter": 55526.346956,
+      "URL_SHA256": "c0ce4888d70883e10f615d0cf2652e85123dfc8c88acf301455b6b16d1e19edc"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 19242,
+      "UTC": "2026-11-20T21:41:48.780130+00:00",
+      "perf_counter": 55526.354691,
+      "URL_SHA256": "c0ce4888d70883e10f615d0cf2652e85123dfc8c88acf301455b6b16d1e19edc"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 600,
+      "throttle_pauses": 5,
+      "failed_attempt": 19242,
+      "UTC": "2026-11-20T21:41:48.855250+00:00",
+      "perf_counter": 55526.4298381,
+      "URL_SHA256": "c0ce4888d70883e10f615d0cf2652e85123dfc8c88acf301455b6b16d1e19edc"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0049014999968,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:51:48.865457+00:00",
+      "perf_counter": 56126.4347538,
+      "URL_SHA256": "c0ce4888d70883e10f615d0cf2652e85123dfc8c88acf301455b6b16d1e19edc"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 19243,
+      "UTC": "2026-11-20T21:51:48.904397+00:00",
+      "perf_counter": 56126.4741402,
+      "URL_SHA256": "c0ce4888d70883e10f615d0cf2652e85123dfc8c88acf301455b6b16d1e19edc"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 5,
+      "failed_attempt": 19413,
+      "UTC": "2026-11-20T21:55:23.392047+00:00",
+      "perf_counter": 56340.9597572,
+      "URL_SHA256": "c51db1b3520c4993078cd3af5fb23f1cb2c1882ef2d3bbf70db2aef2403c0e11"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00475990000268,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:56:23.397038+00:00",
+      "perf_counter": 56400.9645185,
+      "URL_SHA256": "c51db1b3520c4993078cd3af5fb23f1cb2c1882ef2d3bbf70db2aef2403c0e11"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 19414,
+      "UTC": "2026-11-20T21:56:23.405505+00:00",
+      "perf_counter": 56400.9728332,
+      "URL_SHA256": "c51db1b3520c4993078cd3af5fb23f1cb2c1882ef2d3bbf70db2aef2403c0e11"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 5,
+      "failed_attempt": 19420,
+      "UTC": "2026-11-20T21:56:42.843886+00:00",
+      "perf_counter": 56420.4110512,
+      "URL_SHA256": "0090a128ab8db7021a6b684457e6f27a5be7652f0457488af7077a874b7ad3e8"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01059460000397,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T21:57:42.854455+00:00",
+      "perf_counter": 56480.4216567,
+      "URL_SHA256": "0090a128ab8db7021a6b684457e6f27a5be7652f0457488af7077a874b7ad3e8"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 19421,
+      "UTC": "2026-11-20T21:57:42.869476+00:00",
+      "perf_counter": 56480.4365055,
+      "URL_SHA256": "0090a128ab8db7021a6b684457e6f27a5be7652f0457488af7077a874b7ad3e8"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 5,
+      "failed_attempt": 19606,
+      "UTC": "2026-11-20T22:01:37.247904+00:00",
+      "perf_counter": 56714.8137019,
+      "URL_SHA256": "1c3a226e460ccce63cc9a2217ae04cd55f3ea50856c03bb51a3166b9ce0688c9"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01162840000325,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:02:37.259896+00:00",
+      "perf_counter": 56774.825349,
+      "URL_SHA256": "1c3a226e460ccce63cc9a2217ae04cd55f3ea50856c03bb51a3166b9ce0688c9"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 19607,
+      "UTC": "2026-11-20T22:02:37.272428+00:00",
+      "perf_counter": 56774.8371293,
+      "URL_SHA256": "1c3a226e460ccce63cc9a2217ae04cd55f3ea50856c03bb51a3166b9ce0688c9"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 600,
+      "throttle_pauses": 6,
+      "failed_attempt": 19607,
+      "UTC": "2026-11-20T22:02:37.457466+00:00",
+      "perf_counter": 56775.0220111,
+      "URL_SHA256": "1c3a226e460ccce63cc9a2217ae04cd55f3ea50856c03bb51a3166b9ce0688c9"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.005063800003,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:12:37.466084+00:00",
+      "perf_counter": 57375.0270955,
+      "URL_SHA256": "1c3a226e460ccce63cc9a2217ae04cd55f3ea50856c03bb51a3166b9ce0688c9"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 19608,
+      "UTC": "2026-11-20T22:12:37.484106+00:00",
+      "perf_counter": 57375.0455522,
+      "URL_SHA256": "1c3a226e460ccce63cc9a2217ae04cd55f3ea50856c03bb51a3166b9ce0688c9"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 6,
+      "failed_attempt": 19785,
+      "UTC": "2026-11-20T22:16:33.497866+00:00",
+      "perf_counter": 57611.0582121,
+      "URL_SHA256": "9aa5c8554de6f2b8948d0d517da9df7d251a11bf14588116c0cbfcfd19fb825f"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.0124857999981,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:17:33.510791+00:00",
+      "perf_counter": 57671.0707109,
+      "URL_SHA256": "9aa5c8554de6f2b8948d0d517da9df7d251a11bf14588116c0cbfcfd19fb825f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 19786,
+      "UTC": "2026-11-20T22:17:33.527332+00:00",
+      "perf_counter": 57671.0872912,
+      "URL_SHA256": "9aa5c8554de6f2b8948d0d517da9df7d251a11bf14588116c0cbfcfd19fb825f"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 6,
+      "failed_attempt": 20025,
+      "UTC": "2026-11-20T22:22:28.053597+00:00",
+      "perf_counter": 57965.6121919,
+      "URL_SHA256": "c904308e1eafa7c36788b747767b3f17e4cc64db48219e3deb1de3f0fbd71efd"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00349580000329,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:23:28.057633+00:00",
+      "perf_counter": 58025.615693,
+      "URL_SHA256": "c904308e1eafa7c36788b747767b3f17e4cc64db48219e3deb1de3f0fbd71efd"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 20026,
+      "UTC": "2026-11-20T22:23:28.069841+00:00",
+      "perf_counter": 58025.6282338,
+      "URL_SHA256": "c904308e1eafa7c36788b747767b3f17e4cc64db48219e3deb1de3f0fbd71efd"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 600,
+      "throttle_pauses": 7,
+      "failed_attempt": 20026,
+      "UTC": "2026-11-20T22:23:28.325262+00:00",
+      "perf_counter": 58025.883493,
+      "URL_SHA256": "c904308e1eafa7c36788b747767b3f17e4cc64db48219e3deb1de3f0fbd71efd"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0155430000013,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:33:28.343346+00:00",
+      "perf_counter": 58625.8990538,
+      "URL_SHA256": "c904308e1eafa7c36788b747767b3f17e4cc64db48219e3deb1de3f0fbd71efd"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 20027,
+      "UTC": "2026-11-20T22:33:28.374868+00:00",
+      "perf_counter": 58625.9300831,
+      "URL_SHA256": "c904308e1eafa7c36788b747767b3f17e4cc64db48219e3deb1de3f0fbd71efd"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 20305,
+      "UTC": "2026-11-20T22:39:22.655766+00:00",
+      "perf_counter": 58980.2098035,
+      "URL_SHA256": "dff545834961365a5beba7a8452362bb54a473061981bfdd3a7dd9cd529dc060"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01260409999668,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:40:22.668260+00:00",
+      "perf_counter": 59040.2224095,
+      "URL_SHA256": "dff545834961365a5beba7a8452362bb54a473061981bfdd3a7dd9cd529dc060"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 20306,
+      "UTC": "2026-11-20T22:40:22.679279+00:00",
+      "perf_counter": 59040.2330542,
+      "URL_SHA256": "dff545834961365a5beba7a8452362bb54a473061981bfdd3a7dd9cd529dc060"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 20420,
+      "UTC": "2026-11-20T22:42:38.334568+00:00",
+      "perf_counter": 59175.8878269,
+      "URL_SHA256": "19b6338e680be780a2d2578a551f6d0fc4b99edb773c91a63f57222db1932a47"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.010045199996966,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:43:38.344861+00:00",
+      "perf_counter": 59235.8978735,
+      "URL_SHA256": "19b6338e680be780a2d2578a551f6d0fc4b99edb773c91a63f57222db1932a47"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 20421,
+      "UTC": "2026-11-20T22:43:38.356571+00:00",
+      "perf_counter": 59235.9095606,
+      "URL_SHA256": "19b6338e680be780a2d2578a551f6d0fc4b99edb773c91a63f57222db1932a47"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 20655,
+      "UTC": "2026-11-20T22:48:19.171237+00:00",
+      "perf_counter": 59516.7236946,
+      "URL_SHA256": "528337c8256363c84cd4b214363090a28484ee46431d02471040c2bd7c413121"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.04123609999806,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:49:19.212808+00:00",
+      "perf_counter": 59576.7651357,
+      "URL_SHA256": "528337c8256363c84cd4b214363090a28484ee46431d02471040c2bd7c413121"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 20656,
+      "UTC": "2026-11-20T22:49:19.287384+00:00",
+      "perf_counter": 59576.8399316,
+      "URL_SHA256": "528337c8256363c84cd4b214363090a28484ee46431d02471040c2bd7c413121"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 20706,
+      "UTC": "2026-11-20T22:50:28.344061+00:00",
+      "perf_counter": 59645.8956444,
+      "URL_SHA256": "d0c2f28f8986448858a305535b24428b9e34599c3bea2883e1a24a8b60743f99"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.010579900001176,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T22:51:28.354653+00:00",
+      "perf_counter": 59705.9062234,
+      "URL_SHA256": "d0c2f28f8986448858a305535b24428b9e34599c3bea2883e1a24a8b60743f99"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 20707,
+      "UTC": "2026-11-20T22:51:28.362800+00:00",
+      "perf_counter": 59705.9146053,
+      "URL_SHA256": "d0c2f28f8986448858a305535b24428b9e34599c3bea2883e1a24a8b60743f99"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 21849,
+      "UTC": "2026-11-20T23:15:36.594195+00:00",
+      "perf_counter": 61154.1423335,
+      "URL_SHA256": "54c3cfcb04c34a4802832ef37c285fea7bddfc0ec0c05447c99812a4e4ad08db"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00166750000062,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T23:16:36.596428+00:00",
+      "perf_counter": 61214.1440025,
+      "URL_SHA256": "54c3cfcb04c34a4802832ef37c285fea7bddfc0ec0c05447c99812a4e4ad08db"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 21850,
+      "UTC": "2026-11-20T23:16:36.603473+00:00",
+      "perf_counter": 61214.151597,
+      "URL_SHA256": "54c3cfcb04c34a4802832ef37c285fea7bddfc0ec0c05447c99812a4e4ad08db"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 22527,
+      "UTC": "2026-11-20T23:30:40.636897+00:00",
+      "perf_counter": 62058.1828271,
+      "URL_SHA256": "b1c738a384b1c015b29b2df582afa89905d23909d66e8217cf0a1c4e60645933"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01369120000163,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T23:31:40.650151+00:00",
+      "perf_counter": 62118.1965296,
+      "URL_SHA256": "b1c738a384b1c015b29b2df582afa89905d23909d66e8217cf0a1c4e60645933"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 22528,
+      "UTC": "2026-11-20T23:31:40.659177+00:00",
+      "perf_counter": 62118.2048497,
+      "URL_SHA256": "b1c738a384b1c015b29b2df582afa89905d23909d66e8217cf0a1c4e60645933"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 22723,
+      "UTC": "2026-11-20T23:35:31.542461+00:00",
+      "perf_counter": 62349.088569,
+      "URL_SHA256": "4152309c3cc6a7ad5e228c5a638d135295eb0a3bba470d0dd8eca6db6291ae9f"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00982219999423,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T23:36:31.552825+00:00",
+      "perf_counter": 62409.0983902,
+      "URL_SHA256": "4152309c3cc6a7ad5e228c5a638d135295eb0a3bba470d0dd8eca6db6291ae9f"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 22724,
+      "UTC": "2026-11-20T23:36:31.563853+00:00",
+      "perf_counter": 62409.109294,
+      "URL_SHA256": "4152309c3cc6a7ad5e228c5a638d135295eb0a3bba470d0dd8eca6db6291ae9f"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 22944,
+      "UTC": "2026-11-20T23:40:47.241293+00:00",
+      "perf_counter": 62664.7860035,
+      "URL_SHA256": "b2932b4aa6d1ef094f0e2e3784eb6500077fff2313a19a62d835d30b41bd14c5"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00276909999957,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T23:41:47.243595+00:00",
+      "perf_counter": 62724.7888797,
+      "URL_SHA256": "b2932b4aa6d1ef094f0e2e3784eb6500077fff2313a19a62d835d30b41bd14c5"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 22945,
+      "UTC": "2026-11-20T23:41:47.256167+00:00",
+      "perf_counter": 62724.8016763,
+      "URL_SHA256": "b2932b4aa6d1ef094f0e2e3784eb6500077fff2313a19a62d835d30b41bd14c5"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 23899,
+      "UTC": "2026-11-20T23:58:18.073532+00:00",
+      "perf_counter": 63715.6166401,
+      "URL_SHA256": "ef845063f3d7757b195819cbca2b82fbf5f14734cd36497f33583a37ce1ebc2a"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.004491799998505,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-20T23:59:18.077465+00:00",
+      "perf_counter": 63775.6211321,
+      "URL_SHA256": "ef845063f3d7757b195819cbca2b82fbf5f14734cd36497f33583a37ce1ebc2a"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 23900,
+      "UTC": "2026-11-20T23:59:18.085625+00:00",
+      "perf_counter": 63775.6293216,
+      "URL_SHA256": "ef845063f3d7757b195819cbca2b82fbf5f14734cd36497f33583a37ce1ebc2a"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 23919,
+      "UTC": "2026-11-20T23:59:48.228211+00:00",
+      "perf_counter": 63805.7720609,
+      "URL_SHA256": "a8bafb47e914fe19f1a33548627e46a6f5a041729e5bfdab37e9920836c084fe"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00508750000154,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T00:00:48.233836+00:00",
+      "perf_counter": 63865.7771545,
+      "URL_SHA256": "a8bafb47e914fe19f1a33548627e46a6f5a041729e5bfdab37e9920836c084fe"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 23920,
+      "UTC": "2026-11-21T00:00:48.261505+00:00",
+      "perf_counter": 63865.8047142,
+      "URL_SHA256": "a8bafb47e914fe19f1a33548627e46a6f5a041729e5bfdab37e9920836c084fe"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 24060,
+      "UTC": "2026-11-21T00:03:33.030933+00:00",
+      "perf_counter": 64030.5743722,
+      "URL_SHA256": "44db7fe533b58b38b6dfe02bee0df5d6107274cb0f9487141482494f28545769"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.0030196000007,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T00:04:33.034802+00:00",
+      "perf_counter": 64090.5773916,
+      "URL_SHA256": "44db7fe533b58b38b6dfe02bee0df5d6107274cb0f9487141482494f28545769"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 24061,
+      "UTC": "2026-11-21T00:04:33.047347+00:00",
+      "perf_counter": 64090.590537,
+      "URL_SHA256": "44db7fe533b58b38b6dfe02bee0df5d6107274cb0f9487141482494f28545769"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 24131,
+      "UTC": "2026-11-21T00:06:05.078198+00:00",
+      "perf_counter": 64182.6213952,
+      "URL_SHA256": "f9defc7603db859238da091b9347c24440107c8103afe8b0ab422d5448b46f65"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00888229999691,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T00:07:05.087718+00:00",
+      "perf_counter": 64242.6303147,
+      "URL_SHA256": "f9defc7603db859238da091b9347c24440107c8103afe8b0ab422d5448b46f65"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 24132,
+      "UTC": "2026-11-21T00:07:05.102929+00:00",
+      "perf_counter": 64242.6453352,
+      "URL_SHA256": "f9defc7603db859238da091b9347c24440107c8103afe8b0ab422d5448b46f65"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 24360,
+      "UTC": "2026-11-21T00:11:10.235514+00:00",
+      "perf_counter": 64487.7776346,
+      "URL_SHA256": "f1c956d60341c4eac9793b62d31218242a6c9a518055a94185859c7888d69554"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01435599999968,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T00:12:10.249700+00:00",
+      "perf_counter": 64547.7920009,
+      "URL_SHA256": "f1c956d60341c4eac9793b62d31218242a6c9a518055a94185859c7888d69554"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 24361,
+      "UTC": "2026-11-21T00:12:10.259693+00:00",
+      "perf_counter": 64547.8020919,
+      "URL_SHA256": "f1c956d60341c4eac9793b62d31218242a6c9a518055a94185859c7888d69554"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 7,
+      "failed_attempt": 26076,
+      "UTC": "2026-11-21T00:41:57.150698+00:00",
+      "perf_counter": 66334.690488,
+      "URL_SHA256": "08ca281e9eb04433b213ff678537523811dee6a72a23db789f165e937ea719fa"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01876059999631,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T00:42:57.169474+00:00",
+      "perf_counter": 66394.709264,
+      "URL_SHA256": "08ca281e9eb04433b213ff678537523811dee6a72a23db789f165e937ea719fa"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 26077,
+      "UTC": "2026-11-21T00:42:57.194912+00:00",
+      "perf_counter": 66394.7355538,
+      "URL_SHA256": "08ca281e9eb04433b213ff678537523811dee6a72a23db789f165e937ea719fa"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 600,
+      "throttle_pauses": 8,
+      "failed_attempt": 26077,
+      "UTC": "2026-11-21T00:42:57.430798+00:00",
+      "perf_counter": 66394.9714557,
+      "URL_SHA256": "08ca281e9eb04433b213ff678537523811dee6a72a23db789f165e937ea719fa"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0090766000067,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T00:52:57.441303+00:00",
+      "perf_counter": 66994.9805419,
+      "URL_SHA256": "08ca281e9eb04433b213ff678537523811dee6a72a23db789f165e937ea719fa"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 26078,
+      "UTC": "2026-11-21T00:52:57.469105+00:00",
+      "perf_counter": 66995.0093671,
+      "URL_SHA256": "08ca281e9eb04433b213ff678537523811dee6a72a23db789f165e937ea719fa"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 26410,
+      "UTC": "2026-11-21T00:59:08.500822+00:00",
+      "perf_counter": 67366.0394778,
+      "URL_SHA256": "3c801840370f5b98296af974a5bb308612059174a3ffa60155a2aec9efc38d0e"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.006323800000246,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T01:00:08.506524+00:00",
+      "perf_counter": 67426.0457998,
+      "URL_SHA256": "3c801840370f5b98296af974a5bb308612059174a3ffa60155a2aec9efc38d0e"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 26411,
+      "UTC": "2026-11-21T01:00:08.514536+00:00",
+      "perf_counter": 67426.0533688,
+      "URL_SHA256": "3c801840370f5b98296af974a5bb308612059174a3ffa60155a2aec9efc38d0e"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 28625,
+      "UTC": "2026-11-21T01:39:26.667603+00:00",
+      "perf_counter": 69784.1979333,
+      "URL_SHA256": "3c29d5869d6999f7d5e95f3effb35ad172ed3a9aef67fe396ef2ae2ad9ea2c74"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00570009999501,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T01:40:26.673764+00:00",
+      "perf_counter": 69844.2036336,
+      "URL_SHA256": "3c29d5869d6999f7d5e95f3effb35ad172ed3a9aef67fe396ef2ae2ad9ea2c74"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 28626,
+      "UTC": "2026-11-21T01:40:26.681763+00:00",
+      "perf_counter": 69844.2117082,
+      "URL_SHA256": "3c29d5869d6999f7d5e95f3effb35ad172ed3a9aef67fe396ef2ae2ad9ea2c74"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 28638,
+      "UTC": "2026-11-21T01:40:38.968469+00:00",
+      "perf_counter": 69856.4977875,
+      "URL_SHA256": "1a7218df8e5c1a1d429fb51bb0b5e864bc309512d469ed22705d30040e5b9f66"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.008578599998145,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T01:41:38.978152+00:00",
+      "perf_counter": 69916.5063779,
+      "URL_SHA256": "1a7218df8e5c1a1d429fb51bb0b5e864bc309512d469ed22705d30040e5b9f66"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 28639,
+      "UTC": "2026-11-21T01:41:38.992810+00:00",
+      "perf_counter": 69916.5210849,
+      "URL_SHA256": "1a7218df8e5c1a1d429fb51bb0b5e864bc309512d469ed22705d30040e5b9f66"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 29069,
+      "UTC": "2026-11-21T01:49:10.491593+00:00",
+      "perf_counter": 70368.0139899,
+      "URL_SHA256": "9e3e644ded987ca86c9fe095b1133a1f8a493d3a0f7cb3981227eaf7565147b9"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01169749999826,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T01:50:10.503393+00:00",
+      "perf_counter": 70428.0257339,
+      "URL_SHA256": "9e3e644ded987ca86c9fe095b1133a1f8a493d3a0f7cb3981227eaf7565147b9"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 29070,
+      "UTC": "2026-11-21T01:50:10.519090+00:00",
+      "perf_counter": 70428.0409755,
+      "URL_SHA256": "9e3e644ded987ca86c9fe095b1133a1f8a493d3a0f7cb3981227eaf7565147b9"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 29638,
+      "UTC": "2026-11-21T02:00:23.353411+00:00",
+      "perf_counter": 71040.869191,
+      "URL_SHA256": "eecc36323aaec5a037241969fb881b5561dc74997ba4cf3187a6dbcc012c9a5c"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00846680000541,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:01:23.362649+00:00",
+      "perf_counter": 71100.8776642,
+      "URL_SHA256": "eecc36323aaec5a037241969fb881b5561dc74997ba4cf3187a6dbcc012c9a5c"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 29639,
+      "UTC": "2026-11-21T02:01:23.375210+00:00",
+      "perf_counter": 71100.8902576,
+      "URL_SHA256": "eecc36323aaec5a037241969fb881b5561dc74997ba4cf3187a6dbcc012c9a5c"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 29688,
+      "UTC": "2026-11-21T02:02:24.516267+00:00",
+      "perf_counter": 71162.030909,
+      "URL_SHA256": "2fd5a5429dae32aecb51b47e2a2629d9f52325faab5ea04ef9d73714bb17e00d"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01577899999393,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:03:24.532402+00:00",
+      "perf_counter": 71222.0466911,
+      "URL_SHA256": "2fd5a5429dae32aecb51b47e2a2629d9f52325faab5ea04ef9d73714bb17e00d"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 29689,
+      "UTC": "2026-11-21T02:03:24.540407+00:00",
+      "perf_counter": 71222.0545446,
+      "URL_SHA256": "2fd5a5429dae32aecb51b47e2a2629d9f52325faab5ea04ef9d73714bb17e00d"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 29840,
+      "UTC": "2026-11-21T02:06:27.069875+00:00",
+      "perf_counter": 71404.5822539,
+      "URL_SHA256": "f42fdbe0de5f392ebc4f18efaf22cbc45cdccc40a38383ebc6878c1a591e36f5"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.012204600003315,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:07:27.082934+00:00",
+      "perf_counter": 71464.5944618,
+      "URL_SHA256": "f42fdbe0de5f392ebc4f18efaf22cbc45cdccc40a38383ebc6878c1a591e36f5"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 29841,
+      "UTC": "2026-11-21T02:07:27.093473+00:00",
+      "perf_counter": 71464.6055573,
+      "URL_SHA256": "f42fdbe0de5f392ebc4f18efaf22cbc45cdccc40a38383ebc6878c1a591e36f5"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 29916,
+      "UTC": "2026-11-21T02:08:54.250704+00:00",
+      "perf_counter": 71551.7620523,
+      "URL_SHA256": "ed1ee4bd7919ab86975524d309780f83861a347fb2bf9b66e5dedbda2901ff0d"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.005011100001866,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:09:54.256682+00:00",
+      "perf_counter": 71611.7670696,
+      "URL_SHA256": "ed1ee4bd7919ab86975524d309780f83861a347fb2bf9b66e5dedbda2901ff0d"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 29917,
+      "UTC": "2026-11-21T02:09:54.276344+00:00",
+      "perf_counter": 71611.7870593,
+      "URL_SHA256": "ed1ee4bd7919ab86975524d309780f83861a347fb2bf9b66e5dedbda2901ff0d"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 29974,
+      "UTC": "2026-11-21T02:11:05.479508+00:00",
+      "perf_counter": 71682.9893118,
+      "URL_SHA256": "73c5bb1a356742ac3cc17609dcf4ed097d829ecb909a348f5ec89c7fcce4b2d3"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01023329999589,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:12:05.489386+00:00",
+      "perf_counter": 71742.9995509,
+      "URL_SHA256": "73c5bb1a356742ac3cc17609dcf4ed097d829ecb909a348f5ec89c7fcce4b2d3"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 29975,
+      "UTC": "2026-11-21T02:12:05.497949+00:00",
+      "perf_counter": 71743.0080149,
+      "URL_SHA256": "73c5bb1a356742ac3cc17609dcf4ed097d829ecb909a348f5ec89c7fcce4b2d3"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 30314,
+      "UTC": "2026-11-21T02:18:24.131772+00:00",
+      "perf_counter": 72121.6384435,
+      "URL_SHA256": "e105be7098c5119afd7b0c3af742d94d75d4af969c101ce2a68f39156347a349"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.00750340000377,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:19:24.139425+00:00",
+      "perf_counter": 72181.645955,
+      "URL_SHA256": "e105be7098c5119afd7b0c3af742d94d75d4af969c101ce2a68f39156347a349"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 30315,
+      "UTC": "2026-11-21T02:19:24.150425+00:00",
+      "perf_counter": 72181.6572024,
+      "URL_SHA256": "e105be7098c5119afd7b0c3af742d94d75d4af969c101ce2a68f39156347a349"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 60,
+      "throttle_pauses": 8,
+      "failed_attempt": 30399,
+      "UTC": "2026-11-21T02:20:59.161788+00:00",
+      "perf_counter": 72276.6675804,
+      "URL_SHA256": "eb9f797366c6b07919dc5dcfe3758f0173c085e56a66d62312f8bda3fadb9050"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.006034699996235,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:21:59.168561+00:00",
+      "perf_counter": 72336.6736252,
+      "URL_SHA256": "eb9f797366c6b07919dc5dcfe3758f0173c085e56a66d62312f8bda3fadb9050"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 30400,
+      "UTC": "2026-11-21T02:21:59.182589+00:00",
+      "perf_counter": 72336.6876928,
+      "URL_SHA256": "eb9f797366c6b07919dc5dcfe3758f0173c085e56a66d62312f8bda3fadb9050"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_502",
+      "wait_seconds": 600,
+      "throttle_pauses": 9,
+      "failed_attempt": 30400,
+      "UTC": "2026-11-21T02:21:59.386387+00:00",
+      "perf_counter": 72336.8919487,
+      "URL_SHA256": "eb9f797366c6b07919dc5dcfe3758f0173c085e56a66d62312f8bda3fadb9050"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_502",
+      "status": "completed",
+      "elapsed_perf_seconds": 600.0124584000005,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:31:59.402712+00:00",
+      "perf_counter": 72936.9044064,
+      "URL_SHA256": "eb9f797366c6b07919dc5dcfe3758f0173c085e56a66d62312f8bda3fadb9050"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_502",
+      "retry_attempt": 30401,
+      "UTC": "2026-11-21T02:31:59.423519+00:00",
+      "perf_counter": 72936.9253276,
+      "URL_SHA256": "eb9f797366c6b07919dc5dcfe3758f0173c085e56a66d62312f8bda3fadb9050"
+    },
+    {
+      "event": "wait_started",
+      "trigger": "HTTP_504",
+      "wait_seconds": 60,
+      "throttle_pauses": 9,
+      "failed_attempt": 31102,
+      "UTC": "2026-11-21T02:44:38.851393+00:00",
+      "perf_counter": 73696.3484404,
+      "URL_SHA256": "f45f52b28e983992cce25ca04284530ffe2e928f212da38f5d570b8c72800a17"
+    },
+    {
+      "event": "wait_finished",
+      "trigger": "HTTP_504",
+      "status": "completed",
+      "elapsed_perf_seconds": 60.01395870000124,
+      "gap_after_seconds": 1.0,
+      "UTC": "2026-11-21T02:45:38.865258+00:00",
+      "perf_counter": 73756.3624059,
+      "URL_SHA256": "f45f52b28e983992cce25ca04284530ffe2e928f212da38f5d570b8c72800a17"
+    },
+    {
+      "event": "retry_started",
+      "trigger": "HTTP_504",
+      "retry_attempt": 31103,
+      "UTC": "2026-11-21T02:45:38.879443+00:00",
+      "perf_counter": 73756.3766203,
+      "URL_SHA256": "f45f52b28e983992cce25ca04284530ffe2e928f212da38f5d570b8c72800a17"
+    }
+  ],
+  "counter": {
+    "actual_HTTP_attempts": 34670,
+    "ceiling": 35000
+  },
+  "effective_unique_resource_outcomes": 34354,
+  "resources_never_attempted": 0,
+  "QPC_rate_by_segment": {
+    "seg1": {
+      "sends": 28616,
+      "minimum_gap_seconds": 0.6677124999987427,
+      "median_gap_seconds": 1.0117282999999588
+    }
+  },
+  "private_hash_manifest": {
+    "data\\timestamp_full_a4\\frozen_order.jsonl": "9be11808baaf32637bbd42d4db56790d7cefade800c5e0e838435e8bec5e0a4e",
+    "data\\timestamp_full_a4\\qualified_per_accession.jsonl": "f8acfb3827092d69e9461196604a796a5f44a5108bd7e282c6af217afed6fbe1",
+    "data\\timestamp_full_a4\\F7_identity_per_accession.jsonl": "9cc6d6605b4ccbf1b782f5cda450273fd510a9303c18e89688adcb8dadb2a4c6",
+    "data\\timestamp_full_a4\\seg1\\raw_hashes.jsonl": "5b2b66f7e751eadbaa3d1c0034cc943fee3e905f6448c3546df202c9efaa1ec1",
+    "data\\timestamp_full_a4\\seg1\\receipt_hashes.jsonl": "62adcaca917678d8df938a5f2ac0f814912b180740e3b0303f17b672753aac23",
+    "data\\timestamp_full_a4\\seg1\\resource_outcomes.jsonl": "f9abb526e6bd7361234707d7b1587c2203247232d32f5f28d2147065d8243524",
+    "data\\timestamp_full_a4\\seg1\\requests.jsonl": "04759dda625d6a58f5d60db2367fd2b365939a9aaeca10dd5550b5e9ba5add44",
+    "data\\timestamp_full_a4\\seg1\\waits_and_retries.jsonl": "3a16259885cdecf6339ffb18b26176c8263c0467635908a71b731218be7b85b3"
+  },
+  "limits": "Qualification assumes EDGAR's own clock was synchronized and the declared Rule 13(a)(2) basis. Identity names which stored CIK is the listed security of a co-filed accession; it is not historical security-master verification. No timestamp, table, signal, price, return or ledger row was changed and no holdout data was read."
+}
