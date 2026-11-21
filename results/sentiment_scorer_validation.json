@@ -1,0 +1,87 @@
+{
+  "scope": "VADER on Financial PhraseBank v1.0; scorer qualification before any social-media data",
+  "freeze_commit": "9424e083b369ce18fb8718ebe9eb7a631c1a7d2b",
+  "source_SHA256": {
+    "scripts/validate_sentiment_scorer.py": "41267eb95a9d697061d79261ef88c9afd7a849355b5ced2a25cd89782d3be58b",
+    "src/asof/social.py": "c4fefab20e8af589ba9be95763431c81ebd63217ea4fac84b98d07e8bdb54259"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "declared_rule": "VADER (vaderSentiment 3.3.2) with its standard thresholds,\ncompound >= 0.05 positive, <= -0.05 negative, otherwise neutral. Data: Financial PhraseBank\nv1.0 (Malo et al. 2014; CC BY-NC-SA 3.0, kept under ignored ``data/``), sentences where\nall annotators agreed and where at least half agreed. Reported against the majority-class\nbaseline. One shot; the receipt refuses to be overwritten.",
+  "data_SHA256": {
+    "Sentences_AllAgree.txt": "5fb370b3005b9a2759f708849a691ad2e4d2593d4c995c1afde229398a516594",
+    "Sentences_50Agree.txt": "bb1b4df6de05d50b146f87a9d4d024b69f947066445f2384f014c3564c1612c8"
+  },
+  "all_agree": {
+    "n": 2264,
+    "accuracy": 0.571113074204947,
+    "macro_F1": 0.48714886272316676,
+    "F1": {
+      "negative": 0.2786885245901639,
+      "neutral": 0.6733584274362192,
+      "positive": 0.509399636143117
+    },
+    "majority_class": "neutral",
+    "majority_baseline_accuracy": 0.6143992932862191,
+    "polar_sign_agreement": 0.7197640117994101,
+    "polar_pairs": 678,
+    "gold_counts": {
+      "neutral": 1391,
+      "positive": 570,
+      "negative": 303
+    },
+    "confusion_gold_to_predicted": {
+      "negative": {
+        "negative": 68,
+        "neutral": 83,
+        "positive": 152
+      },
+      "neutral": {
+        "negative": 79,
+        "neutral": 805,
+        "positive": 507
+      },
+      "positive": {
+        "positive": 420,
+        "neutral": 112,
+        "negative": 38
+      }
+    }
+  },
+  "at_least_half_agree": {
+    "n": 4846,
+    "accuracy": 0.5433347090383822,
+    "macro_F1": 0.48886695974685684,
+    "F1": {
+      "negative": 0.34449760765550247,
+      "neutral": 0.6097461097461097,
+      "positive": 0.5123571618389583
+    },
+    "majority_class": "neutral",
+    "majority_baseline_accuracy": 0.594098225340487,
+    "polar_sign_agreement": 0.78842177808408,
+    "polar_pairs": 1451,
+    "gold_counts": {
+      "neutral": 2879,
+      "negative": 604,
+      "positive": 1363
+    },
+    "confusion_gold_to_predicted": {
+      "negative": {
+        "neutral": 185,
+        "positive": 239,
+        "negative": 180
+      },
+      "neutral": {
+        "negative": 193,
+        "neutral": 1489,
+        "positive": 1197
+      },
+      "positive": {
+        "positive": 964,
+        "neutral": 331,
+        "negative": 68
+      }
+    }
+  },
+  "limits": "PhraseBank sentences are news and press-release text, not posts; this measures finance vocabulary handling, not accuracy on X posts. Data stay local under the CC BY-NC-SA licence."
+}
