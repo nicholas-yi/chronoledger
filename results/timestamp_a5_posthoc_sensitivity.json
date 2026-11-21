@@ -1,0 +1,27 @@
+{
+  "label": "POST-HOC sensitivity, written after the A5 report; not qualification",
+  "freeze_commit": "723c6613c658d6b234b2397ac29fa63ff459360b",
+  "source_SHA256": {
+    "scripts/timestamp_a5_posthoc.py": "9bad3ee43fcf8fffe14a7f296fc89391b8d11c176e49b5393700ee5960341825",
+    "scripts/run_timestamp_a5.py": "a770c932c4fc7808762fb91323267746b9117f8b48ada02ee395e0cf36ee91d9"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "rationale": "POST-HOC sensitivity for A5 (labelled; not qualification and not a rule change).\n\nWritten after the A5 report: its frozen CB1 replication failed only the integrity sub-check,\nbecause two of 152 older headers were accepted 12 and 44 seconds after 22:00 ET (both with\ncorrectly rolled filing dates). This asks the practical question under the Eastern reading the\nreplication otherwise supported (39/39, 22/22, 0/124): would any H6a development indicator,\nyear, window or H4 10-K order change? Header+index pairs use the header time; the 110 accessions\nwhose older header page is missing use the index ``Accepted`` time alone.",
+  "time_sources": {
+    "header": 152,
+    "index_only": 110
+  },
+  "stored_minus_eastern_hours": {
+    "0.0": 120,
+    "-5.0": 38,
+    "-4.0": 94,
+    "4.0": 10
+  },
+  "H6a_development_changes_if_eastern": {
+    "in_dev": 0,
+    "year": 0,
+    "restate_12m": 0,
+    "item402_12m": 0
+  },
+  "H6a_development_rows_changed_if_eastern": 0
+}
