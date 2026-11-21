@@ -1,0 +1,40 @@
+{
+  "scope": "D16 H0 knowledge-time correction (owner approval 2026-11-21)",
+  "freeze_commit": "afdeee47f069726b6f498c511cbf1ee48ed49422",
+  "source_SHA256": {
+    "scripts/d16_h0_time_correction.py": "348d54da2acce8fe689bf2672b9c1b58abe123ef87f70409d2aa5018c5739e18",
+    "scripts/h0_backtest.py": "f2508e853b44e3a1d30e63318e2733996290a6bcb9439f2e8aa6d233c2ee5170",
+    "scripts/development_diagnostics.py": "3e9b0ef92af780510fb0e56c1c4615e1d969acbab5a96420a502d271139508dd",
+    "scripts/plan_full_timestamps.py": "1e4743c4303f65e163eaea2ad8b38d1e8f384a8faaa01f526dc117290998c2e9"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "declared_rule": "(owner approval 2026-11-21, after the A4 revision-2 report):\n- build: for every H0 signal whose accession has an A4 revision-2 ``qualified_UTC``, the\n  knowledge time becomes that qualified time. Every other row keeps its stored time and must\n  be one the frozen roster rule marked assignment-insensitive (no candidate offset moves its\n  first close, month or eligibility). Refuse if any qualified time falls in [13:00, 16:00) ET\n  on a verified NYSE early-close date in the signal window. Only ``knowledge_time`` changes.\n- rerun: the unchanged H0 runner on the corrected file with one numerical thread (D14),\n  writing a new results file; the recorded Batch B file is never overwritten. Every trial is\n  logged. Compare against the committed Batch B results field by field (exact, reported,\n  not gating) and refuse if the runner's 5% plausibility guard fails.\n- diagnostics: the conditional current-vintage DSR and D4 status that F8 blocked\n  (``development_diagnostics`` functions, unchanged), on the corrected series. Development\n  only; PBO stays not_estimable below 32 aligned months.",
+  "A4_r2_report_SHA256": "685b3e27c1c5aeea048cf1b6545ab0ca6184ee5dad74f2b9e29bb601e5e293c3",
+  "qualified_table_SHA256": "5e21ac302e505241a5f81da067d44f33684f38b8acc951cae3e16430ba96abb6",
+  "signals": {
+    "rows": 21502,
+    "with_qualified_time": 16921,
+    "kept_stored_insensitive": 4581
+  },
+  "changes_versus_stored_on_registered_calendar": {
+    "unchanged_time": 21399,
+    "same_first_close": 47,
+    "was_later_delay": 51,
+    "was_earlier_lookahead": 5
+  },
+  "UTC_month_changed": 6,
+  "corrected_lookahead_accessions": [
+    "0001412100-24-000014",
+    "0001412100-23-000056",
+    "0001412100-23-000086",
+    "0001412100-23-000097",
+    "0001412100-24-000047"
+  ],
+  "verified_early_closes_checked": [
+    "2022-11-25",
+    "2023-07-03",
+    "2023-11-24"
+  ],
+  "input_SHA256": "1c75b2b53f67ed6ddeed18d014ae6ee44c7a85b6255a862901beb61e5e822305",
+  "output_SHA256": "49792e6a000f9258d8a7f0608bcbfb62aebdc60df0b2aaa800621486778c2dd3"
+}
