@@ -1,0 +1,578 @@
+{
+  "scope": "D16 H0 development rerun on corrected knowledge times; one numerical thread (D14)",
+  "freeze_commit": "ab837073d9461f5c069d23ade6256ab585d7c210",
+  "source_SHA256": {
+    "scripts/d16_h0_time_correction.py": "348d54da2acce8fe689bf2672b9c1b58abe123ef87f70409d2aa5018c5739e18",
+    "scripts/h0_backtest.py": "f2508e853b44e3a1d30e63318e2733996290a6bcb9439f2e8aa6d233c2ee5170",
+    "scripts/development_diagnostics.py": "3e9b0ef92af780510fb0e56c1c4615e1d969acbab5a96420a502d271139508dd",
+    "scripts/plan_full_timestamps.py": "1e4743c4303f65e163eaea2ad8b38d1e8f384a8faaa01f526dc117290998c2e9",
+    "results/d16_h0_time_correction.json": "463a45336d2364d3ff25306a3cdd38ea174d02ff29f39d030c37d40fedeee1fd"
+  },
+  "matching_policy": "LF/CRLF equivalence only; hashes record raw local bytes",
+  "results_SHA256": "6f6eaa6bde468dba1dc6ac7e94e2ae92d165bc5e5b6a814dbc8f1eb09560d6f9",
+  "changed_fields": 78,
+  "primary_summary_batch_B_vs_D16": {
+    "v1_10K_raw": {
+      "mean_net": {
+        "batch_B": -0.008048542087534851,
+        "D16": -0.008049739056646098
+      },
+      "alpha": {
+        "batch_B": -0.002836822499069423,
+        "D16": -0.002838775775619375
+      },
+      "alpha_t": {
+        "batch_B": -0.45431715643250004,
+        "D16": -0.4546061646466074
+      },
+      "mean_ic": {
+        "batch_B": 0.010968661246355727,
+        "D16": 0.010974889722832485
+      },
+      "ic_t": {
+        "batch_B": 0.9209525840277051,
+        "D16": 0.9214201060529957
+      },
+      "months": {
+        "batch_B": 17,
+        "D16": 17
+      },
+      "avg_firms": {
+        "batch_B": 1461.0,
+        "D16": 1460.9411764705883
+      },
+      "event_panel": {
+        "batch_B": {
+          "coef": 1.7446338720003947,
+          "t": 1.8411537120675652,
+          "n_events": 4960,
+          "clusters": 17
+        },
+        "D16": {
+          "coef": 1.7450596474402391,
+          "t": 2.0261442073905234,
+          "n_events": 4960,
+          "clusters": 17
+        }
+      }
+    },
+    "v2_latest_raw": {
+      "mean_net": {
+        "batch_B": 0.002907895034257874,
+        "D16": 0.002907895034257874
+      },
+      "alpha": {
+        "batch_B": 0.013298512498880246,
+        "D16": 0.013298512498880246
+      },
+      "alpha_t": {
+        "batch_B": 1.457483948284343,
+        "D16": 1.457483948284343
+      },
+      "mean_ic": {
+        "batch_B": 0.008541959127442876,
+        "D16": 0.008541959127442876
+      },
+      "ic_t": {
+        "batch_B": 0.6221606681410208,
+        "D16": 0.6221606681410208
+      },
+      "months": {
+        "batch_B": 18,
+        "D16": 18
+      },
+      "avg_firms": {
+        "batch_B": 1482.2777777777778,
+        "D16": 1482.2777777777778
+      },
+      "event_panel": {
+        "batch_B": {
+          "coef": 0.21664428550946516,
+          "t": 0.5389253056256739,
+          "n_events": 14391,
+          "clusters": 17
+        },
+        "D16": {
+          "coef": 0.21711285607637465,
+          "t": 0.5431730429676037,
+          "n_events": 14391,
+          "clusters": 17
+        }
+      }
+    },
+    "v2_latest_neutral": {
+      "mean_net": {
+        "batch_B": -0.0029410661399329823,
+        "D16": -0.0029410661399329823
+      },
+      "alpha": {
+        "batch_B": -0.017395670876276036,
+        "D16": -0.017395670876276036
+      },
+      "alpha_t": {
+        "batch_B": -2.3306570936675364,
+        "D16": -2.3306570936675364
+      },
+      "mean_ic": {
+        "batch_B": -0.004142428285648768,
+        "D16": -0.004142428285648768
+      },
+      "ic_t": {
+        "batch_B": -0.3306136301624041,
+        "D16": -0.3306136301624041
+      },
+      "months": {
+        "batch_B": 18,
+        "D16": 18
+      },
+      "avg_firms": {
+        "batch_B": 1482.2777777777778,
+        "D16": 1482.2777777777778
+      },
+      "event_panel": {
+        "batch_B": {
+          "status": "not_evaluated",
+          "note": "Formation-month residuals are not event-time signals (D8). An event-time neutralization contract must be fixed before this test."
+        },
+        "D16": {
+          "status": "not_evaluated",
+          "note": "Formation-month residuals are not event-time signals (D8). An event-time neutralization contract must be fixed before this test."
+        }
+      }
+    },
+    "v2_10K_neutral": {
+      "mean_net": {
+        "batch_B": -0.016894604998287238,
+        "D16": -0.016894699577583126
+      },
+      "alpha": {
+        "batch_B": -0.021246053785635002,
+        "D16": -0.02124629861991809
+      },
+      "alpha_t": {
+        "batch_B": -2.3591937466000457,
+        "D16": -2.3592499087128522
+      },
+      "mean_ic": {
+        "batch_B": -0.012302692054807066,
+        "D16": -0.012316593696324164
+      },
+      "ic_t": {
+        "batch_B": -1.4971314052134872,
+        "D16": -1.4994540661424487
+      },
+      "months": {
+        "batch_B": 17,
+        "D16": 17
+      },
+      "avg_firms": {
+        "batch_B": 1461.0,
+        "D16": 1460.9411764705883
+      },
+      "event_panel": {
+        "batch_B": {
+          "status": "not_evaluated",
+          "note": "Formation-month residuals are not event-time signals (D8). An event-time neutralization contract must be fixed before this test."
+        },
+        "D16": {
+          "status": "not_evaluated",
+          "note": "Formation-month residuals are not event-time signals (D8). An event-time neutralization contract must be fixed before this test."
+        }
+      }
+    }
+  },
+  "all_changed_fields": [
+    {
+      "path": "/0/monthly/mean_net",
+      "old": -0.008048542087534851,
+      "new": -0.008049739056646098
+    },
+    {
+      "path": "/0/monthly/mean_gross",
+      "old": -0.007055517317301605,
+      "new": -0.007056127010955753
+    },
+    {
+      "path": "/0/monthly/alpha",
+      "old": -0.002836822499069423,
+      "new": -0.002838775775619375
+    },
+    {
+      "path": "/0/monthly/alpha_t",
+      "old": -0.45431715643250004,
+      "new": -0.4546061646466074
+    },
+    {
+      "path": "/0/monthly/avg_firms",
+      "old": 1461.0,
+      "new": 1460.9411764705883
+    },
+    {
+      "path": "/0/monthly/mean_ic",
+      "old": 0.010968661246355727,
+      "new": 0.010974889722832485
+    },
+    {
+      "path": "/0/monthly/ic_t",
+      "old": 0.9209525840277051,
+      "new": 0.9214201060529957
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/0.0/mean_net",
+      "old": -0.008048542087534851,
+      "new": -0.008049739056646098
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/0.0/mean_gross",
+      "old": -0.007055517317301605,
+      "new": -0.007056127010955753
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/0.0/alpha",
+      "old": -0.002836822499069423,
+      "new": -0.002838775775619375
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/0.0/alpha_t",
+      "old": -0.45431715643250004,
+      "new": -0.4546061646466074
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/0.0/avg_firms",
+      "old": 1461.0,
+      "new": 1460.9411764705883
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/0.0/mean_ic",
+      "old": 0.010968661246355727,
+      "new": 0.010974889722832485
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/0.0/ic_t",
+      "old": 0.9209525840277051,
+      "new": 0.9214201060529957
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-0.3/mean_net",
+      "old": -0.008048542087534851,
+      "new": -0.008049739056646098
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-0.3/mean_gross",
+      "old": -0.007055517317301605,
+      "new": -0.007056127010955753
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-0.3/alpha",
+      "old": -0.002836822499069423,
+      "new": -0.002838775775619375
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-0.3/alpha_t",
+      "old": -0.45431715643250004,
+      "new": -0.4546061646466074
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-0.3/avg_firms",
+      "old": 1461.0,
+      "new": 1460.9411764705883
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-0.3/mean_ic",
+      "old": 0.010968661246355727,
+      "new": 0.010974889722832485
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-0.3/ic_t",
+      "old": 0.9209525840277051,
+      "new": 0.9214201060529957
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-1.0/mean_net",
+      "old": -0.008048542087534851,
+      "new": -0.008049739056646098
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-1.0/mean_gross",
+      "old": -0.007055517317301605,
+      "new": -0.007056127010955753
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-1.0/alpha",
+      "old": -0.002836822499069423,
+      "new": -0.002838775775619375
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-1.0/alpha_t",
+      "old": -0.45431715643250004,
+      "new": -0.4546061646466074
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-1.0/avg_firms",
+      "old": 1461.0,
+      "new": 1460.9411764705883
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-1.0/mean_ic",
+      "old": 0.010968661246355727,
+      "new": 0.010974889722832485
+    },
+    {
+      "path": "/0/monthly_missing_return_sensitivity/-1.0/ic_t",
+      "old": 0.9209525840277051,
+      "new": 0.9214201060529957
+    },
+    {
+      "path": "/0/monthly_return_series/0.0/13/ls_net",
+      "old": 0.013655440054689223,
+      "new": 0.013639906745804824
+    },
+    {
+      "path": "/0/monthly_return_series/0.0/13/ls_gross",
+      "old": 0.01404923504379059,
+      "new": 0.014038870251670048
+    },
+    {
+      "path": "/0/monthly_return_series/0.0/14/ls_net",
+      "old": -0.07096056833900768,
+      "new": -0.07096538350501447
+    },
+    {
+      "path": "/0/monthly_return_series/-0.3/13/ls_net",
+      "old": 0.013655440054689223,
+      "new": 0.013639906745804824
+    },
+    {
+      "path": "/0/monthly_return_series/-0.3/13/ls_gross",
+      "old": 0.01404923504379059,
+      "new": 0.014038870251670048
+    },
+    {
+      "path": "/0/monthly_return_series/-0.3/14/ls_net",
+      "old": -0.07096056833900768,
+      "new": -0.07096538350501447
+    },
+    {
+      "path": "/0/monthly_return_series/-1.0/13/ls_net",
+      "old": 0.013655440054689223,
+      "new": 0.013639906745804824
+    },
+    {
+      "path": "/0/monthly_return_series/-1.0/13/ls_gross",
+      "old": 0.01404923504379059,
+      "new": 0.014038870251670048
+    },
+    {
+      "path": "/0/monthly_return_series/-1.0/14/ls_net",
+      "old": -0.07096056833900768,
+      "new": -0.07096538350501447
+    },
+    {
+      "path": "/0/event_panel_change_on_car60/coef",
+      "old": 1.7446338720003947,
+      "new": 1.7450596474402391
+    },
+    {
+      "path": "/0/event_panel_change_on_car60/t",
+      "old": 1.8411537120675652,
+      "new": 2.0261442073905234
+    },
+    {
+      "path": "/1/event_panel_change_on_car60/coef",
+      "old": 0.21664428550946516,
+      "new": 0.21711285607637465
+    },
+    {
+      "path": "/1/event_panel_change_on_car60/t",
+      "old": 0.5389253056256739,
+      "new": 0.5431730429676037
+    },
+    {
+      "path": "/3/monthly/mean_net",
+      "old": -0.016894604998287238,
+      "new": -0.016894699577583126
+    },
+    {
+      "path": "/3/monthly/mean_gross",
+      "old": -0.014358956827336247,
+      "new": -0.01435905646696288
+    },
+    {
+      "path": "/3/monthly/alpha",
+      "old": -0.021246053785635002,
+      "new": -0.02124629861991809
+    },
+    {
+      "path": "/3/monthly/alpha_t",
+      "old": -2.3591937466000457,
+      "new": -2.3592499087128522
+    },
+    {
+      "path": "/3/monthly/avg_firms",
+      "old": 1461.0,
+      "new": 1460.9411764705883
+    },
+    {
+      "path": "/3/monthly/mean_ic",
+      "old": -0.012302692054807066,
+      "new": -0.012316593696324164
+    },
+    {
+      "path": "/3/monthly/ic_t",
+      "old": -1.4971314052134872,
+      "new": -1.4994540661424487
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/mean_net",
+      "old": -0.016894604998287238,
+      "new": -0.016894699577583126
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/mean_gross",
+      "old": -0.014358956827336247,
+      "new": -0.01435905646696288
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/alpha",
+      "old": -0.021246053785635002,
+      "new": -0.02124629861991809
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/alpha_t",
+      "old": -2.3591937466000457,
+      "new": -2.3592499087128522
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/avg_firms",
+      "old": 1461.0,
+      "new": 1460.9411764705883
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/mean_ic",
+      "old": -0.012302692054807066,
+      "new": -0.012316593696324164
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/0.0/ic_t",
+      "old": -1.4971314052134872,
+      "new": -1.4994540661424487
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/mean_net",
+      "old": -0.016894604998287238,
+      "new": -0.016894699577583126
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/mean_gross",
+      "old": -0.014358956827336247,
+      "new": -0.01435905646696288
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/alpha",
+      "old": -0.021246053785635002,
+      "new": -0.02124629861991809
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/alpha_t",
+      "old": -2.3591937466000457,
+      "new": -2.3592499087128522
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/avg_firms",
+      "old": 1461.0,
+      "new": 1460.9411764705883
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/mean_ic",
+      "old": -0.012302692054807066,
+      "new": -0.012316593696324164
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-0.3/ic_t",
+      "old": -1.4971314052134872,
+      "new": -1.4994540661424487
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/mean_net",
+      "old": -0.016894604998287238,
+      "new": -0.016894699577583126
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/mean_gross",
+      "old": -0.014358956827336247,
+      "new": -0.01435905646696288
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/alpha",
+      "old": -0.021246053785635002,
+      "new": -0.02124629861991809
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/alpha_t",
+      "old": -2.3591937466000457,
+      "new": -2.3592499087128522
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/avg_firms",
+      "old": 1461.0,
+      "new": 1460.9411764705883
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/mean_ic",
+      "old": -0.012302692054807066,
+      "new": -0.012316593696324164
+    },
+    {
+      "path": "/3/monthly_missing_return_sensitivity/-1.0/ic_t",
+      "old": -1.4971314052134872,
+      "new": -1.4994540661424487
+    },
+    {
+      "path": "/3/monthly_return_series/0.0/13/ls_net",
+      "old": -0.03898023945370516,
+      "new": -0.03898190572029799
+    },
+    {
+      "path": "/3/monthly_return_series/0.0/13/ls_gross",
+      "old": -0.036882928474124665,
+      "new": -0.03688462234777744
+    },
+    {
+      "path": "/3/monthly_return_series/0.0/14/ls_net",
+      "old": -0.08631933434333271,
+      "new": -0.08631927592476989
+    },
+    {
+      "path": "/3/monthly_return_series/-0.3/13/ls_net",
+      "old": -0.03898023945370516,
+      "new": -0.03898190572029799
+    },
+    {
+      "path": "/3/monthly_return_series/-0.3/13/ls_gross",
+      "old": -0.036882928474124665,
+      "new": -0.03688462234777744
+    },
+    {
+      "path": "/3/monthly_return_series/-0.3/14/ls_net",
+      "old": -0.08631933434333271,
+      "new": -0.08631927592476989
+    },
+    {
+      "path": "/3/monthly_return_series/-1.0/13/ls_net",
+      "old": -0.03898023945370516,
+      "new": -0.03898190572029799
+    },
+    {
+      "path": "/3/monthly_return_series/-1.0/13/ls_gross",
+      "old": -0.036882928474124665,
+      "new": -0.03688462234777744
+    },
+    {
+      "path": "/3/monthly_return_series/-1.0/14/ls_net",
+      "old": -0.08631933434333271,
+      "new": -0.08631927592476989
+    }
+  ],
+  "ledger_rows_appended": 12,
+  "limits": "Development period only, about 18 monthly observations; no holdout. A changed number is the effect of removing timestamp errors, not new evidence of an edge."
+}

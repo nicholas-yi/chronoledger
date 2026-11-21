@@ -1,0 +1,151 @@
+{
+  "label": "DEVELOPMENT ONLY, D16-corrected inputs; conditional diagnostics, not support or a tradable edge",
+  "families": {
+    "H0": {
+      "label": "DEVELOPMENT DIAGNOSTIC, current-vintage SR variance, registered N; not full historical-family inference or support",
+      "registered_N": 10,
+      "current_columns": 6,
+      "aligned_months": [
+        "2023-03",
+        "2023-04",
+        "2023-05",
+        "2023-06",
+        "2023-07",
+        "2023-08",
+        "2023-09",
+        "2023-10",
+        "2023-11",
+        "2023-12",
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07"
+      ],
+      "SR_benchmark": 0.1379296399074794,
+      "results": {
+        "v1_10K_raw:0.0": {
+          "per_month_SR": -0.23686461425070093,
+          "conditional_DSR": 0.03504968364431241
+        },
+        "v1_10K_raw:-0.3": {
+          "per_month_SR": -0.23686461425070093,
+          "conditional_DSR": 0.03504968364431241
+        },
+        "v1_10K_raw:-1.0": {
+          "per_month_SR": -0.23686461425070093,
+          "conditional_DSR": 0.03504968364431241
+        },
+        "v2_latest_raw:0.0": {
+          "per_month_SR": -0.07693562355442007,
+          "conditional_DSR": 0.19490286813075014
+        },
+        "v2_latest_raw:-0.3": {
+          "per_month_SR": -0.07693562355442007,
+          "conditional_DSR": 0.19490286813075014
+        },
+        "v2_latest_raw:-1.0": {
+          "per_month_SR": -0.07693562355442007,
+          "conditional_DSR": 0.19490286813075014
+        }
+      },
+      "PBO": {
+        "status": "not_estimable",
+        "reason": "16 blocks require at least32 aligned months; no automatic computation"
+      },
+      "full_historical_family_DSR": {
+        "status": "unavailable",
+        "reason": "older/invalid configuration aligned streams absent"
+      }
+    },
+    "H1n": {
+      "label": "DEVELOPMENT DIAGNOSTIC, current-vintage SR variance, registered N; not full historical-family inference or support",
+      "registered_N": 10,
+      "current_columns": 6,
+      "aligned_months": [
+        "2023-03",
+        "2023-04",
+        "2023-05",
+        "2023-06",
+        "2023-07",
+        "2023-08",
+        "2023-09",
+        "2023-10",
+        "2023-11",
+        "2023-12",
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07"
+      ],
+      "SR_benchmark": 0.33429299496196974,
+      "results": {
+        "v2_latest_neutral:0.0": {
+          "per_month_SR": -0.13911861903157444,
+          "conditional_DSR": 0.024342478856737085
+        },
+        "v2_latest_neutral:-0.3": {
+          "per_month_SR": -0.13911861903157444,
+          "conditional_DSR": 0.024342478856737085
+        },
+        "v2_latest_neutral:-1.0": {
+          "per_month_SR": -0.13911861903157444,
+          "conditional_DSR": 0.024342478856737085
+        },
+        "v2_10K_neutral:0.0": {
+          "per_month_SR": -0.526730312333803,
+          "conditional_DSR": 0.000711136518328264
+        },
+        "v2_10K_neutral:-0.3": {
+          "per_month_SR": -0.526730312333803,
+          "conditional_DSR": 0.000711136518328264
+        },
+        "v2_10K_neutral:-1.0": {
+          "per_month_SR": -0.526730312333803,
+          "conditional_DSR": 0.000711136518328264
+        }
+      },
+      "PBO": {
+        "status": "not_estimable",
+        "reason": "16 blocks require at least32 aligned months; no automatic computation"
+      },
+      "full_historical_family_DSR": {
+        "status": "unavailable",
+        "reason": "older/invalid configuration aligned streams absent"
+      }
+    }
+  },
+  "D4": {
+    "v1_10K_raw": {
+      "status": "not_supported",
+      "reasons": [
+        "v1_monthly_threshold_or_direction",
+        "delisting_direction",
+        "v2_co_primary_threshold_or_direction",
+        "missing_or_nonfinite_required_evidence"
+      ]
+    },
+    "v2_latest_raw": {
+      "status": "not_supported",
+      "reasons": [
+        "v1_monthly_threshold_or_direction",
+        "missing_or_nonfinite_required_evidence"
+      ]
+    },
+    "v2_latest_neutral": {
+      "status": "not_applicable",
+      "reason": "H1n is not formal H1"
+    },
+    "v2_10K_neutral": {
+      "status": "not_applicable",
+      "reason": "H1n is not formal H1"
+    }
+  },
+  "results_SHA256": "6f6eaa6bde468dba1dc6ac7e94e2ae92d165bc5e5b6a814dbc8f1eb09560d6f9",
+  "note": "Unblocked by D14 (F8 explained). The registered monthly NW t-test is unreliable at this length (F10), so every statistic here is descriptive."
+}
