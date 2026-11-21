@@ -52,6 +52,7 @@
     {"id": "timestamp-a3", "path": "scripts/run_full_timestamps_a3.py", "status": "historical_stopped_no_resume", "command": null},
     {"id": "timestamp-a3-impact", "path": "scripts/timestamp_a3_impact.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "timestamp-a4", "path": "scripts/run_full_timestamps_a4.py", "status": "historical_complete_no_rerun", "command": null},
+    {"id": "d16-h0-correction", "path": "scripts/d16_h0_time_correction.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "f8-h0-reproducibility", "path": "scripts/f8_h0_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "f8-h4-reproducibility", "path": "scripts/h4_dev_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
     {"id": "reader-real3", "path": "scripts/run_reader_real3.py", "status": "retired_historical", "command": null},
@@ -420,6 +421,33 @@
       "freeze_revision": "1b82e54",
       "status": "all_16921_qualified_404_F7_resolved_5_MHLA_stored_early",
       "supersedes": ["timestamp-a4", "timestamp-a3-impact"]
+    },
+    {
+      "id": "d16-h0-time-correction",
+      "kind": "input_correction_receipt",
+      "path": "results/d16_h0_time_correction.json",
+      "report": "docs/DEVIATIONS.md",
+      "freeze_revision": "afdeee4",
+      "status": "103_of_21502_times_corrected_5_lookahead_removed",
+      "supersedes": []
+    },
+    {
+      "id": "d16-h0-rerun",
+      "kind": "development_rerun_on_corrected_inputs_not_confirmatory",
+      "path": "results/d16_h0_rerun_comparison.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "ab83707",
+      "status": "78_small_field_changes_conclusions_unchanged",
+      "supersedes": []
+    },
+    {
+      "id": "d16-current-vintage-diagnostics",
+      "kind": "development_diagnostic_descriptive_under_F10",
+      "path": "results/current_vintage_diagnostics_d16.json",
+      "report": "docs/FINDINGS.md",
+      "freeze_revision": "ab83707",
+      "status": "conditional_DSR_computed_D4_not_supported_PBO_not_estimable",
+      "supersedes": []
     },
     {
       "id": "f8-h0-reproducibility",

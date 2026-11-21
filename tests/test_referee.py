@@ -77,11 +77,12 @@ def test_timestamp_manifest_is_confined_to_its_own_audit_directory(tmp_path) -> 
     assert not ok and "outside" in evidence
 
 
-def test_stored_time_lookahead_check_fails_on_any_early_stored_time(tmp_path) -> None:
+def test_stored_time_lookahead_check_fails_on_any_early_stored_time(tmp_path, monkeypatch) -> None:
     import json
 
     from asof import referee
 
+    monkeypatch.setattr(referee, "PROJECT_ROOT", tmp_path)
     path = tmp_path / "a4.json"
     counts = {"same_first_close": 9, "stored_later_delay_only": 1}
     path.write_text(json.dumps({"impact_first_close_direction": {"stored_pair": {

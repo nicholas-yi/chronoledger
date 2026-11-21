@@ -125,7 +125,7 @@ accuracy or long-report memory safety. None of these fixes creates a trading res
 
 | Gap | First step | What "done" looks like |
 |---|---|---|
-| Filing timestamps | [A4](../results/timestamp_full_a4_report_r2.json) qualified all 16,921 timing-sensitive accessions and resolved all 404 identity disagreements; five MHLA filings are stored 4-5 hours early | Replace those stored times under a logged deviation and rerun the affected development results; qualify the one possible early-close date |
+| Filing timestamps | [A4](../results/timestamp_full_a4_report_r2.json) qualified all 16,921 timing-sensitive accessions and resolved all 404 identity disagreements; five MHLA filings are stored 4-5 hours early | Done for H0 (D16: inputs corrected, rerun, early-close date verified as a full session). H4/H6 still use unaudited 2012-2018 bulk times |
 | Survivorship and identity | Compare data sources on a fixed panel of continuing, merged, delisted and renamed companies | Dated security identities, corporate actions and delisting payoffs that reconcile case by case |
 | Real measurement labels | Recruit two annotators and an adjudicator, qualify/freeze the roster and use the [draft guide](H1_DESIGN.md#annotation-guide-h1-claim-guide-draft-01) and [empty first-pass template](h1_annotation_first_pass_template.csv); no labels exist | Measured precision and recall on real text, with coverage, agreement and company-separated audit results |
 | Cheap baselines | Compare simple text-edit, TF-IDF, embedding and rule-based claim matching on the same labelled pairs | Evidence of whether the LLM adds anything beyond simple methods |
@@ -167,8 +167,8 @@ publication. Gateway errors used up the approved pause cap at usage 6,054 of 34,
 [A4](../results/timestamp_full_a4_report_r2.json), with a gentler gateway rule and a ceiling of
 35,000, then read every remaining resource (usage 34,670). All 16,921 accessions qualified, and
 all 404 identity disagreements resolve to the listed pair CIK. Five MHLA filings turned out to be
-stored 4-5 hours early. Correcting them is a separate, owner-approved deviation; no data repair
-or backtest rerun has happened yet.
+stored 4-5 hours early. The owner approved D16, which replaced every audited H0 time with its
+qualified value in a new input file and reran H0; the conclusions did not change.
 
 A fine-tuned modern model is not automatically free of look-ahead for old filings, even if its
 fine-tuning data is old, because its pretraining may include later text. Measurement models are

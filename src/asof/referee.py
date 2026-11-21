@@ -154,9 +154,39 @@ def _timestamp_qualification(path: Path) -> tuple[bool, str]:
 
 
 def _stored_time_lookahead(path: Path) -> tuple[bool, str]:
-    """Stored H0 knowledge times must never reach an earlier close than the qualified time."""
+    """H0 knowledge times in use must never reach an earlier close than the qualified time.
+
+    Before D16 the inputs in use are the stored times counted by the audit; after D16 they are
+    the corrected signal file, which is checked row by row against the qualified table.
+    """
     if not path.exists():
         return False, "missing timestamp audit"
+    receipt = PROJECT_ROOT / "results" / "d16_h0_time_correction.json"
+    if receipt.exists():
+        import pandas as pd
+
+        from asof.ledger import file_sha256
+
+        build = json.loads(receipt.read_text())
+        corrected = DATA_DIR / "h0_signals_d16.parquet"
+        table = DATA_DIR / "timestamp_full_a4" / "qualified_per_accession_r2.jsonl"
+        if not corrected.is_file() or file_sha256(corrected) != build["output_SHA256"]:
+            return False, "D16 corrected signal file missing or changed since its build receipt"
+        if file_sha256(table) != build["qualified_table_SHA256"]:
+            return False, "qualified table changed since the D16 build"
+        qualified = {}
+        with table.open(encoding="utf-8") as stream:
+            for line in stream:
+                row = json.loads(line)
+                if row["qualified_UTC"]:
+                    qualified[row["accession"]] = pd.Timestamp(row["qualified_UTC"])
+        signals = pd.read_parquet(corrected, columns=["accession", "knowledge_time"])
+        audited = signals[signals["accession"].isin(qualified)]
+        wrong = int((audited["knowledge_time"] != audited["accession"].map(qualified)).sum())
+        missing = len(qualified) - len(audited)
+        return wrong == 0 and missing == 0, (
+            f"D16 inputs in use: {len(audited)} qualified signals, {wrong} differ from their qualified "
+            f"time, {missing} qualified accessions absent; unaudited rows are assignment-insensitive")
     impact = json.loads(path.read_text()).get("impact_first_close_direction")
     if not isinstance(impact, dict) or "stored_pair" not in impact:
         return False, "latest audit has no stored-versus-qualified impact counts"
@@ -321,9 +351,15 @@ def _tfidf_invariance() -> tuple[bool, str]:
     return bad == 0, f"100 random corpora, {bad} differences between full and as-of-truncated fits"
 
 
+def _current_h0_results() -> Path:
+    """D16-corrected H0 results once recorded; otherwise the Batch B file."""
+    d16 = PROJECT_ROOT / "results" / "returns_h0_development_d16.json"
+    return d16 if d16.exists() else PROJECT_ROOT / "results" / "returns_h0_development.json"
+
+
 def _plausibility(max_monthly: float = 0.05) -> tuple[bool, str]:
     """Any long-short mean above 5%/month is treated as a data or code error until explained (F3)."""
-    path = PROJECT_ROOT / "results" / "returns_h0_development.json"
+    path = _current_h0_results()
     if not path.exists():
         return False, "no H0 results; development rerun is incomplete"
     res = json.loads(path.read_text())["results"]
@@ -592,7 +628,7 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
                   lambda: _timestamp_qualification(_latest_timestamp_report())),
             Check("recorded metadata evidence hashes remain intact",
                   lambda: _timestamp_manifest(_latest_timestamp_report())),
-            Check("stored H0 knowledge times never precede their qualified first close",
+            Check("H0 knowledge times in use never precede their qualified time",
                   lambda: _stored_time_lookahead(_latest_timestamp_report())),
         ]),
         Threat("inference.calibration", "Does the registered monthly test have acceptable null size?", [
@@ -675,7 +711,7 @@ def main() -> None:
     inputs = [
         DATA_DIR / "pilot.duckdb", DATA_DIR / "bulk_filings.parquet",
         DATA_DIR / "h0_universe.parquet", DATA_DIR / "h0_price_snapshot.json",
-        results / "returns_h0_development.json",
+        _current_h0_results(),
         results / "bench_qwen3.5-4b_n300_s0.json",
         results / "swap_qwen3.5-4b_n160_s0.json",
         results / "leakprobe_chronobert.json",

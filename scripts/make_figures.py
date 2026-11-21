@@ -105,7 +105,7 @@ def development_returns(theme: str):
     """Cumulative net long-short returns on the 2023-2024 development sample."""
     fig, ax = plt.subplots(figsize=(10, 4.2), layout="constrained")
     for color, result in zip((BLUE, ORANGE, GREEN, PURPLE),
-                             _load("returns_h0_development.json")["results"]):
+                             _load("returns_h0_development_d16.json")["results"]):
         series = result["monthly_return_series"]["0.0"]
         first = datetime.strptime(series[0]["return_month"], "%Y-%m")
         start = (first.replace(year=first.year - 1, month=12) if first.month == 1

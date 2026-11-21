@@ -14,7 +14,7 @@ All 16,921 required accessions now have qualified acceptance times, and all 404 
 disagreements resolve to the listed security
 ([F9 update 2](#f9-update-2-every-required-accession-qualified-five-stored-early-2026-11-21)).
 One new problem surfaced: five filings from one company have stored times 4-5 hours
-**early**, which is real look-ahead in the H0 inputs and needs a logged correction.
+**early**, which was real look-ahead in the H0 inputs. D16 corrected the inputs and reran H0 with no change in conclusions ([D16 rerun](#d16-rerun-on-corrected-filing-times-2026-11-21)).
 The H4 stages stay held.
 
 ## Development rerun reconciliation (2026-11-13)
@@ -597,12 +597,55 @@ it was public. Metadata diagnostics on the pair times show 56 first closes and o
 formation-eligibility record-month change, with no latest-filing choice changed.
 The effect on H0 returns has **not** been measured. Correcting it means replacing
 stored knowledge times with qualified ones and rerunning the development results,
-which is a numbered deviation awaiting the owner's decision. A new referee check
-fails until it is done.
+which is a numbered deviation. The owner approved it the same day; see the
+[D16 rerun](#d16-rerun-on-corrected-filing-times-2026-11-21).
 
 This assumes EDGAR's own clock was synchronized and Rule 13(a)(2)'s Eastern basis.
 It does not verify any timestamp against an external clock. No timestamp, table,
 signal, price, return or ledger row was changed, and the holdout remains sealed.
+
+### D16 rerun on corrected filing times (2026-11-21)
+
+**Status: H0 inputs corrected and rerun; conclusions unchanged; development only.**
+Under [D16](DEVIATIONS.md#d16-replace-h0-knowledge-times-with-qualified-acceptance-times),
+logged before anything ran, every H0 signal with a qualified time took that time, in a
+new input file ([build receipt](../results/d16_h0_time_correction.json)). The other
+4,581 rows kept their stored time, and the script confirmed that every one is
+assignment-insensitive. 103 of 21,502 times changed: the 5 look-ahead MHLA filings,
+51 late ones, and 47 that move without changing the first close. The one acceptance
+on a possible early-close afternoon (2022-12-23, 15:19 ET) is on a full trading day
+according to NYSE Group's published calendar, so its 16:00 close stands.
+
+The unchanged H0 runner then ran once with one thread (D14)
+([results](../results/returns_h0_development_d16.json),
+[comparison](../results/d16_h0_rerun_comparison.json)):
+
+| Variant | Net mean / month, Batch B → D16 | Alpha t, Batch B → D16 |
+|---|---:|---:|
+| `v1_10K_raw` | -0.80485% → -0.80497% | -0.4543 → -0.4546 |
+| `v2_latest_raw` | +0.29079% → +0.29079% | +1.4575 → +1.4575 |
+| `v2_latest_neutral` | -0.29411% → -0.29411% | -2.3307 → -2.3307 |
+| `v2_10K_neutral` | -1.68946% → -1.68947% | -2.3592 → -2.3592 |
+
+78 fields changed, all slightly. The largest movement is in the raw `v1_10K_raw`
+event panel (descriptive only), where t goes from 1.84 to 2.03 with the coefficient
+almost unchanged (1.7446 → 1.7451). Its sign is the **opposite** of the Lazy Prices
+prediction, it uses 17 month clusters, and it is not a registered test, so it supports
+nothing. The 12 ledger rows repeat existing configuration hashes.
+
+F8 had blocked two development diagnostics; D14 explained F8, so they now run on the
+corrected series ([diagnostics](../results/current_vintage_diagnostics_d16.json)).
+Using the registered trial count (10 per family) and 17 aligned months, the
+conditional deflated Sharpe probabilities are 0.035 (`v1_10K_raw`) and 0.195
+(`v2_latest_raw`) for H0, and 0.024 and 0.001 for the neutralized variants. The
+frozen D4 predicate marks both raw H0 variants **not_supported**. PBO is not estimable
+below 32 months. Because F10 makes the registered monthly t-test unreliable at this
+length, these are descriptive.
+
+The full [referee](../results/REFEREE.md) now passes `time_authority` at level 4,
+including a new check that every H0 knowledge time in use equals its qualified time.
+The gate stays **BLOCKED** only by `inference.calibration`, the permanent limit in F10.
+No holdout data was read, and the H4/H6 stages stay held.
 
 ## F10: synthetic finite-sample size distortion of the registered tests
 

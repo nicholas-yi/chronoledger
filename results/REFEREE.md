@@ -1,10 +1,12 @@
 # Referee report
 
-**Gate: PASS** (every gating threat must be at level 4 or higher)
+**Gate: BLOCKED** (every gating threat must be at level 4 or higher)
 
 This reports defined executable checks, not scientific acceptance or permission to open holdouts. Some checks read recorded model/extraction artifacts; passing does not mean those models were rerun.
 
 ```
+time_authority                     [####.] 4/5
+inference.calibration              [#....] 1/5
 lookahead.store                    [#####] 5/5
 lookahead.formation                [#####] 5/5
 lookahead.reconcile                [####.] 4/5
@@ -18,6 +20,21 @@ survivorship.distress_events [blocks H5b, H5c, H6b] [#....] 1/5  (known issue, n
 price_level_leak                   [#####] 5/5
 data_integrity                     [####.] 4/5
 ```
+
+## time_authority: level 4
+
+*Have the required filing clocks been historically qualified?*
+
+- PASS (check) **qualified per-accession clocks, not conditional agreement**: Latest integrated audit: historically qualified UTC=16921 of 16921 required, unresolved=0; every required accession must qualify
+- PASS (check) **recorded metadata evidence hashes remain intact**: 8 private metadata artifact hashes match; not clock authority
+- PASS (check) **H0 knowledge times in use never precede their qualified time**: D16 inputs in use: 16921 qualified signals, 0 differ from their qualified time, 0 qualified accessions absent; unaudited rows are assignment-insensitive
+
+## inference.calibration: level 1
+
+*Does the registered monthly test have acceptable null size?*
+
+- FAIL (check) **registered NW6 meets its recorded calibration adoption rule**: Recorded registered NW6 null-size evidence at T=17/18/28: {"17": {"status": "unreliable_at_this_geometry", "worst_95_upper_5percent": 0.39057733744216394}, "18": {"status": "unreliable_at_this_geometry", "worst_95_upper_5percent": 0.37996260652320607}, "28": {"status": "unreliable_at_this_geometry", "worst_95_upper_5percent": 0.24908182100081513}}; no method substitution, project-return test or new simulation performed
+- PASS (check) **synthetic calibration harness completed**: Recorded synthetic harness completion; not scientific acceptance or a rerun
 
 ## lookahead.store: level 5
 
@@ -78,14 +95,14 @@ data_integrity                     [####.] 4/5
 
 - PASS (check) **DSR rejects best-of-noise**: best of 500 noise strategies: naive PSR 1.00, DSR 0.60
 - PASS (mutation) **holdout is single-use**: second holdout access was refused
-- PASS (check) **no returns computed before deviation D1**: 2 commit(s) added return outputs, all after deviation-d1
+- PASS (check) **no returns computed before deviation D1**: 3 commit(s) added return outputs, all after deviation-d1
 
 ## survivorship: level 4
 
 *Are failed or acquired firms silently missing?*
 
 - PASS (check) **coverage audit and D1 documented**: coverage audit and deviation D1 are documented
-- PASS (check) **no returns computed before deviation D1**: 2 commit(s) added return outputs, all after deviation-d1
+- PASS (check) **no returns computed before deviation D1**: 3 commit(s) added return outputs, all after deviation-d1
 
 ## survivorship.distress_events [blocks H5b, H5c, H6b]: level 1 (known issue, non-gating)
 
@@ -111,27 +128,41 @@ data_integrity                     [####.] 4/5
 
 ## Run provenance
 
-Generated UTC: `2026-11-14T02:06:32.524769+00:00`.
+Generated UTC: `2026-11-21T14:29:26.405542+00:00`.
 
 The holdout-seal mutation uses a temporary synthetic ledger, not the project holdout.
 
 ```json
 {
-  "git_commit": "c689aa46714b4bb455bb11653a7cca4b1de13c17",
-  "git_dirty": false,
+  "git_commit": "28de5d08a44679b91ae8f3d226c0375b6788d361",
+  "git_dirty": true,
   "inputs": {
-    "pilot.duckdb": "8192692acd2d987ac4611d81cc40e2e4c0a9f9d722ceaf8e1ea796d9e90fc31c",
-    "bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
-    "h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017",
-    "h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
-    "returns_h0_development.json": "a259b847cb6a4783d2f563fb999f37f2300e95fe4ffc55a847257b5b720b07f2",
-    "bench_qwen3.5-4b_n300_s0.json": "f0b1c7371fdaa8552bf4f2b6a633c0c686fdafd62182485512803eca2aecdd3d",
-    "swap_qwen3.5-4b_n160_s0.json": "df99ef309ed2c70e4c4382ce7095751fbf7af4659ecca8e466bfdb0361d47428",
-    "leakprobe_chronobert.json": "135bb0713aef6070525bbafb4654135042da1de0854910730c7999c59e6d1d3e",
-    "DATA_AUDIT.md": "277f3f9e47a129a3f5c21db96903e5478a49623d062e223e668b82d9f93b4894",
-    "DEVIATIONS.md": "e3da04500fb25d9be055a9fdc5b2ee666cea7e8a4547eeae8338c8a81d7383f3",
-    "AAPL_to20240731_v2.json.gz": "1445c9d8e507440deb1bcf8dbc2bfc00255da74ee183e8b535c4ac5a273623d3"
+    "data/pilot.duckdb": "8192692acd2d987ac4611d81cc40e2e4c0a9f9d722ceaf8e1ea796d9e90fc31c",
+    "data/bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
+    "data/h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017",
+    "data/h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
+    "results/returns_h0_development_d16.json": "6f6eaa6bde468dba1dc6ac7e94e2ae92d165bc5e5b6a814dbc8f1eb09560d6f9",
+    "results/bench_qwen3.5-4b_n300_s0.json": "f0b1c7371fdaa8552bf4f2b6a633c0c686fdafd62182485512803eca2aecdd3d",
+    "results/swap_qwen3.5-4b_n160_s0.json": "df99ef309ed2c70e4c4382ce7095751fbf7af4659ecca8e466bfdb0361d47428",
+    "results/leakprobe_chronobert.json": "135bb0713aef6070525bbafb4654135042da1de0854910730c7999c59e6d1d3e",
+    "docs/DATA_AUDIT.md": "f8ee09724ad75f87d70563c707110d6ccab2a37d8790325561463370d96e411a",
+    "docs/DEVIATIONS.md": "e895b67e4caca28bdf53b00e54cf8465b699003498f081d36a8e48844f56b989",
+    "data/raw/yahoo/AAPL_to20240731_v2.json.gz": "1445c9d8e507440deb1bcf8dbc2bfc00255da74ee183e8b535c4ac5a273623d3"
   },
+  "input_status": {
+    "data/pilot.duckdb": "present",
+    "data/bulk_filings.parquet": "present",
+    "data/h0_universe.parquet": "present",
+    "data/h0_price_snapshot.json": "present",
+    "results/returns_h0_development_d16.json": "present",
+    "results/bench_qwen3.5-4b_n300_s0.json": "present",
+    "results/swap_qwen3.5-4b_n160_s0.json": "present",
+    "results/leakprobe_chronobert.json": "present",
+    "docs/DATA_AUDIT.md": "present",
+    "docs/DEVIATIONS.md": "present",
+    "data/raw/yahoo/AAPL_to20240731_v2.json.gz": "present"
+  },
+  "missing_inputs": [],
   "environment": {
     "python": "3.12.10",
     "duckdb": "2.0.0",

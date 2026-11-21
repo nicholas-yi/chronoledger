@@ -49,7 +49,7 @@ the real-filing figure is a deferral rate, not an accuracy measure.
 showed that SEC filing headers use Eastern time, by checking them against the SEC's 5:30 p.m.
 filing-date rule, and verified the acceptance time of all 16,921 filings where timing could
 matter. It found five filings from one company whose stored times are 4–5 hours early, so the
-backtest could act on them one close too soon; those inputs still need a logged correction.
+backtest could act on them one close too soon. Those times are now corrected ([D16](docs/DEVIATIONS.md#d16-replace-h0-knowledge-times-with-qualified-acceptance-times)) and the results rerun; the rounded figures below did not change.
 Monthly significance tests remain unreliable with only 17–18 months of data, a
 [permanent limit](docs/FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20)
 of this design.
@@ -235,7 +235,7 @@ through July 2024. This is where methods are tuned and checked; it is not confir
 <sub><b>Figure 2.</b> Cumulative net return of the long-low-change / short-high-change portfolio for each
 signal variant. "v1" compares consecutive 10-Ks; "v2" uses each firm's latest 10-K or 10-Q, compared
 with the same period a year earlier. "Neutral" variants first remove industry, size and acquisition effects.
-Source: <a href="results/returns_h0_development.json">returns_h0_development.json</a>.</sub>
+Source: <a href="results/returns_h0_development_d16.json">returns_h0_development_d16.json</a>, with filing times corrected under D16.</sub>
 
 | Variant | Months | Mean net return / month | Alpha t-stat* |
 |---|---:|---:|---:|
@@ -398,7 +398,7 @@ companies, and only the one the backtest uses is listed on an exchange.
 For 16,818 filings the stored H0 time is exact, and 51 are late, which only delays a trade.
 **Five are early:** all from one company (MHLA), whose acceptance times both SEC sources stored as
 Eastern clock readings labelled UTC. The backtest could treat those filings as public one close
-before they were. Fixing them requires a logged correction and a rerun, which is still pending.
+before they were. A logged correction ([D16](docs/DEVIATIONS.md#d16-replace-h0-knowledge-times-with-qualified-acceptance-times)) replaced every audited time with its verified value and reran H0; no conclusion changed.
 
 ### Are the significance tests honest at this sample size?
 
@@ -453,7 +453,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 
 | Open question | What it needs | Why it matters |
 |---|---|---|
-| Is every trading-day assignment right? | All 16,921 timing-sensitive filings are now verified; correct the five early MHLA timestamps under a logged deviation and rerun | Removes the one timestamp-driven look-ahead found |
+| Is every trading-day assignment right? | Done for H0: all 16,921 timing-sensitive filings are verified and the inputs corrected (D16). Older 2012-2018 filings used by H4/H6 are not yet audited | Rules out timestamp-driven look-ahead for those studies too |
 | Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2011 | The current sample can only detect implausibly large effects |
 | Does *what* changes matter more than *how much*? | The claim-level signal (H1), first checked against human-labelled real filing pairs and simple baselines | Synthetic benchmark scores are not real measurement accuracy |
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
@@ -532,8 +532,8 @@ point-in-time queries everything is built on.
 - [FOCUSED_READER.md](docs/FOCUSED_READER.md): the active metric-reader work, with every run's protocol, results and limits
 - [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md): exact interval reconciliation and its non-conformance/independence limits
 - [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
-- [project_readiness_checks.json](results/project_readiness_checks.json): the 2026-11-17 scoped clock/calibration checks, both failing then. The referee now reads the completed timestamp audit: clock qualification passes, a new stored-time look-ahead check fails on the five MHLA filings, and calibration still fails (FINDINGS F9 and F10)
-- [REFEREE.md](results/REFEREE.md): the recorded broader software report, not rerun by the closure check or scientific acceptance
+- [project_readiness_checks.json](results/project_readiness_checks.json): the 2026-11-17 scoped clock/calibration checks, both failing then. Superseded by the 2026-11-21 referee run: clock authority now passes, including a check that every H0 knowledge time in use equals its verified time; calibration still fails (FINDINGS F9 and F10)
+- [REFEREE.md](results/REFEREE.md): the full referee report, rerun 2026-11-21 after D16. The gate is blocked only by monthly calibration; passing checks are software evidence, not scientific acceptance
 
 ## License
 

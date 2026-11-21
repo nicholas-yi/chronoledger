@@ -15,7 +15,7 @@ Latest (data integrity): the
 established which clock EDGAR headers use, by testing them against the SEC's 5:30 p.m. Eastern
 filing-date rule, and qualified **all 16,921** timing-sensitive accessions. All 404 company-ID
 disagreements resolve to the listed security H0 already uses. **Five MHLA filings have stored
-times 4-5 hours early**, which is real look-ahead in the H0 inputs, pending a logged correction.
+times 4-5 hours early**. [D16](DEVIATIONS.md#d16-replace-h0-knowledge-times-with-qualified-acceptance-times) corrected them and reran H0; no conclusion changed, and the referee's clock-authority threat now passes.
 The [F8 numerical gap](FINDINGS.md#f8-update-explained-by-the-numerical-thread-setting-2026-11-20)
 is explained by the thread setting, and H0 and H4 reproduce exactly (D14, D15). Monthly calibration stays
 failing as a [permanent design limit](FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20).
