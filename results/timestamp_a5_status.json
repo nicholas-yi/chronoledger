@@ -1,0 +1,15 @@
+{
+  "status": "order_complete",
+  "commit": "67005d48e36f54fffec1b7fe15f77a890f29e76a",
+  "start_UTC": "2026-11-21T14:54:17.663966+00:00",
+  "resources_recorded": 524,
+  "counter": {
+    "actual_HTTP_attempts": 35199,
+    "ceiling": 35800
+  },
+  "checkpoint_UTC": "2026-11-21T15:19:41.906511+00:00",
+  "wall_seconds": 1524.25,
+  "charged": 529,
+  "throttle_pauses": 1,
+  "short_gateway_retries": 4
+}
