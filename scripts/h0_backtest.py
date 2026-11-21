@@ -54,9 +54,9 @@ def fingerprint_market_inputs() -> None:
     (DATA_DIR / "h0_market_inputs.json").write_text(json.dumps(manifest, indent=2))
 
 
-def load_inputs():
+def load_inputs(signals: Path = DATA_DIR / "h0_signals.parquet"):
     uni = pd.read_parquet(DATA_DIR / "h0_universe.parquet")
-    sig = pd.read_parquet(DATA_DIR / "h0_signals.parquet")
+    sig = pd.read_parquet(signals)
     sig["knowledge_time"] = pd.to_datetime(sig["knowledge_time"], utc=True)
     lo = datetime.combine(DEV_START, datetime.min.time(), tzinfo=UTC)
     hi = datetime.combine(DEV_END, datetime.max.time(), tzinfo=UTC)
@@ -183,9 +183,11 @@ def event_test(sig: pd.DataFrame, signal: str, daily_ret, engine: CarEngine, uni
     return {"coef": p.coef, "t": p.t_stat, "n_events": p.n_events, "clusters": p.n_clusters}
 
 
-def main(output: Path | None = None) -> None:
+def main(output: Path | None = None, signals: Path | None = None) -> None:
     started = perf_counter()
-    uni, sig, shares, ent, ma, panel, daily_ret = load_inputs()
+    signals = signals or DATA_DIR / "h0_signals.parquet"
+    inputs = [signals if p.name == "h0_signals.parquet" else p for p in INPUTS]
+    uni, sig, shares, ent, ma, panel, daily_ret = load_inputs(signals)
     factors = ff5_umd_monthly().loc[: pd.Period(DEV_RETURN_CUTOFF, "M")]
     factors_d = ff5_umd_daily()
     factors_d = factors_d[factors_d.index <= DEV_RETURN_CUTOFF]
@@ -219,7 +221,7 @@ def main(output: Path | None = None) -> None:
             cfg = replace(Config(), signal=col, long_high=long_high, missing_return=missing_return)
             config = {"variant": name, **asdict(cfg)}
             with ledger.development_trial(
-                "H0" if "raw" in name else "H1n", config, inputs=INPUTS,
+                "H0" if "raw" in name else "H1n", config, inputs=inputs,
             ) as metrics:
                 metrics["phase"] = "monthly"
                 series = []
@@ -264,4 +266,6 @@ def main(output: Path | None = None) -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, help="write here instead of the recorded results file")
-    main(parser.parse_args().output)
+    parser.add_argument("--signals", type=Path, help="signal file (default: data/h0_signals.parquet)")
+    args = parser.parse_args()
+    main(args.output, args.signals)

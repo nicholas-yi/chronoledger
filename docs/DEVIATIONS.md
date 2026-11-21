@@ -410,3 +410,24 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   written). One-thread runs matched each other and Batch B, and default threads
   matched the original baseline; see the
   [F8 update](FINDINGS.md#f8-update-explained-by-the-numerical-thread-setting-2026-11-20).
+
+## D16: replace H0 knowledge times with qualified acceptance times
+
+- **Logged:** 2026-11-21, **after** the A4 revision-2 report found five MHLA filings
+  stored 4-5 hours early, and **before** any corrected input or H0 rerun. Owner
+  decision the same day. It corrects inputs; it changes no hypothesis, signal
+  definition, window, threshold, cost or test, so no tag.
+- **Rule:** every H0 signal with a qualified time (16,921 of 21,502) takes that
+  time. The rest keep their stored time, and the script refuses unless every one
+  is assignment-insensitive under the frozen roster rule. A qualified time in the
+  afternoon of a verified NYSE early-close date would stop the build. Only
+  `knowledge_time` changes, in a new file; `h0_signals.parquet` is untouched.
+- **Rerun:** the unchanged H0 runner with one numerical thread (D14), written to a
+  new results file. The Batch B results stay as recorded. Every trial is logged with
+  the corrected input's fingerprint. Configuration hashes are unchanged, so these
+  are corrected reruns of the same 12 configurations, not new trials.
+- **Also unblocked:** the conditional current-vintage DSR and D4 status that the F8
+  gate stopped, now computed on the corrected series. Development only and
+  descriptive, because F10 makes the registered monthly t-test unreliable here.
+- **Not covered:** H4/H6 still use bulk times. H4's development pairs all agree
+  with bulk and are 2012-2018, outside this audit; their stages stay held.
