@@ -1,36 +1,34 @@
 {
   "segment": "seg1",
-  "status": "in_progress",
+  "status": "order_complete",
   "commit": "6e71c040d49a89dd618efadb3cef85ab5a467a1f",
   "start_UTC": "2026-11-20T16:55:18.189524+00:00",
   "wall_cap_seconds": 50400,
   "counter_start": 6054,
-  "resources_recorded": 125,
-  "charged": 126,
-  "throttle_pauses": 0,
+  "resources_recorded": 28574,
+  "charged": 28616,
+  "throttle_pauses": 9,
   "throttle_pauses_before": 0,
   "max_throttle_pauses": 12,
-  "short_gateway_retries": 1,
+  "short_gateway_retries": 57,
   "transport_unresolved": 0,
   "F7_fallbacks": 0,
   "sleep_interruptions": [],
   "config_SHA256": "83a9958717b25604372c0b60d2fa86068dfe4c11b430a39c0f818eadfbfc78ac",
   "counter": {
-    "actual_HTTP_attempts": 6180,
+    "actual_HTTP_attempts": 34670,
     "ceiling": 35000
   },
-  "wall_seconds": 156.85900000000402,
-  "disk_bytes_observed": 314557051,
-  "checkpoint_UTC": "2026-11-20T16:57:55.054625+00:00",
+  "wall_seconds": 39257.25,
+  "disk_bytes_observed": 960952122,
+  "checkpoint_UTC": "2026-11-21T03:49:35.648594+00:00",
   "latest_wait_event": {
-    "event": "wait_started",
+    "event": "retry_started",
     "trigger": "HTTP_504",
-    "wait_seconds": 60,
-    "throttle_pauses": 0,
-    "failed_attempt": 6180,
-    "UTC": "2026-11-20T16:57:55.033547+00:00",
-    "perf_counter": 38492.7201417
+    "retry_attempt": 31103,
+    "UTC": "2026-11-21T02:45:38.879443+00:00",
+    "perf_counter": 73756.3766203
   },
-  "gateway_errors_in_window": 1,
-  "gap_seconds": 0.667
+  "gateway_errors_in_window": 0,
+  "gap_seconds": 1.0
 }
