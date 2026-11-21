@@ -431,3 +431,40 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   descriptive, because F10 makes the registered monthly t-test unreliable here.
 - **Not covered:** H4/H6 still use bulk times. H4's development pairs all agree
   with bulk and are 2012-2018, outside this audit; their stages stay held.
+
+## D17: define the event-time neutralized signal for the H0 event co-primary
+
+- **Logged:** 2026-11-21, owner-approved, **after** the D16 development results were
+  seen and **before** this panel was ever computed. Pre-registration v2 asks for an
+  event panel on "the neutralized signal" but never defined event-time
+  neutralization; D8 therefore left the panel unevaluated. Because earlier
+  development results were seen, the D17 result is **exploratory**, not confirmatory.
+  Tagged `deviation-d17`.
+- **Definition** ([event_neutral.py](../src/asof/event_neutral.py)): for a filing
+  accepted on Eastern day d, the residual is its change minus a fitted value. The fit
+  regresses change on log market cap, a prior-year 8-K Item 2.01 flag and SIC2
+  dummies, using only that variant's filings accepted in the 365 days before 00:00 ET
+  on day d. It needs at least 200 reference filings, and SIC2 levels with at least 5
+  (rarer codes are pooled; an unseen level gets no residual). Controls are known
+  strictly before acceptance: shares, the previous month-end close, and M&A 8-Ks.
+  Tests confirm that later and same-day filings cannot change a residual.
+- **Test** ([runner](../scripts/h0_event_neutral.py)): CAR +1..+60 on the residual for
+  development events, with month-clustered OLS plus D12's wild cluster restricted
+  bootstrap by month. Expected sign: negative. One logged trial per variant (latest
+  filing; 10-K only), so H1n gains two configurations.
+
+## D18: move H4 and H6a confirmatory evaluation to a prospective holdout
+
+- **Logged:** 2026-11-21, owner-approved. The 2022-2025 H4/H6a holdout windows were
+  decoded in memory (D6, D13, D15), so they cannot count as untouched. They are
+  retired as confirmatory evidence and stay hard held. Tagged `deviation-d18`.
+- **New holdout:** filings accepted from 2026-11-22 through 2027-11-21, a period
+  that has not happened yet. H4 uses that cohort's 10-Ks with outcomes from the
+  next fiscal year's 10-K, evaluated once, not before 2029-03-31. H6a uses that
+  cohort's 10-Ks and 10-Qs with the 365-day restatement window, evaluated once,
+  not before 2028-12-31. [periods.py](../src/asof/periods.py) enforces the dates.
+- **Unchanged:** samples (the H4 seed-20261112 firm sample), outcomes, controls,
+  tests and thresholds (H4: |t| >= 3.0 with Holm across three outcomes; H6a:
+  |t| >= 3.0), plus D12's robust checks. Development results stay as recorded.
+- **Data:** new filings come from EDGAR as published, and their times can be
+  verified against headers as in A3-A5. No historical data is reopened.
