@@ -95,14 +95,15 @@ data_integrity                     [####.] 4/5
 
 - PASS (check) **DSR rejects best-of-noise**: best of 500 noise strategies: naive PSR 1.00, DSR 0.60
 - PASS (mutation) **holdout is single-use**: second holdout access was refused
-- PASS (check) **no returns computed before deviation D1**: 3 commit(s) added return outputs, all after deviation-d1
+- PASS (check) **no committed trial row was ever removed or rewritten**: 15 ledger versions, each a byte-prefix of the next
+- PASS (check) **no returns computed before deviation D1**: 4 commit(s) added return outputs, all after deviation-d1
 
 ## survivorship: level 4
 
 *Are failed or acquired firms silently missing?*
 
 - PASS (check) **coverage audit and D1 documented**: coverage audit and deviation D1 are documented
-- PASS (check) **no returns computed before deviation D1**: 3 commit(s) added return outputs, all after deviation-d1
+- PASS (check) **no returns computed before deviation D1**: 4 commit(s) added return outputs, all after deviation-d1
 
 ## survivorship.distress_events [blocks H5b, H5c, H6b]: level 1 (known issue, non-gating)
 
@@ -128,25 +129,25 @@ data_integrity                     [####.] 4/5
 
 ## Run provenance
 
-Generated UTC: `2026-11-24T19:31:42.144745+00:00`.
+Generated UTC: `2026-11-24T21:25:23.253919+00:00`.
 
 The holdout-seal mutation uses a temporary synthetic ledger, not the project holdout.
 
 ```json
 {
-  "git_commit": "0bf44e43a62aeffc74bef06b8204f49df0a98d42",
+  "git_commit": "330acecb5625fe813764add6a19ba039790145ba",
   "git_dirty": false,
   "inputs": {
     "data/pilot.duckdb": "8192692acd2d987ac4611d81cc40e2e4c0a9f9d722ceaf8e1ea796d9e90fc31c",
     "data/bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
     "data/h0_universe.parquet": "b1c0c856e9be9c1e3be1e3b647e40a75a8cdc184893262544234834119dee017",
-    "data/h0_price_snapshot.json": "8e6e90669feebe78b5177d54bb2a0a718fe500c3c11f1262bc3eef0847ca0ab9",
-    "results/returns_h0_development_d16.json": "6f6eaa6bde468dba1dc6ac7e94e2ae92d165bc5e5b6a814dbc8f1eb09560d6f9",
+    "data/h0_price_snapshot.json": "13ab80bc152c1d6cb141d67f435f427fa94714e5911fb9f1f25c1868d9fce406",
+    "results/returns_h0_development_d19.json": "6e7bb2abc29f142bf205a94909d227b1ae7854e46904357a3ad349f185d2a397",
     "results/bench_qwen3.5-4b_n300_s0.json": "f0b1c7371fdaa8552bf4f2b6a633c0c686fdafd62182485512803eca2aecdd3d",
     "results/swap_qwen3.5-4b_n160_s0.json": "df99ef309ed2c70e4c4382ce7095751fbf7af4659ecca8e466bfdb0361d47428",
     "results/leakprobe_chronobert.json": "135bb0713aef6070525bbafb4654135042da1de0854910730c7999c59e6d1d3e",
     "docs/DATA_AUDIT.md": "e2dc704c4369db73f4b4df834b1dcb7c7d56fc66ef5dea4d38d080a5f10106ba",
-    "docs/DEVIATIONS.md": "9d14f8ec912275fccc6fe1037c7dd2acb184f8e5b84047f7ad3dc61ec8aaa330",
+    "docs/DEVIATIONS.md": "46d6b4962101729724940240affe95331183cf598cf0b43b9e13ca32d11ff0aa",
     "data/raw/yahoo/AAPL_to20240731_v2.json.gz": "1445c9d8e507440deb1bcf8dbc2bfc00255da74ee183e8b535c4ac5a273623d3"
   },
   "input_status": {
@@ -154,7 +155,7 @@ The holdout-seal mutation uses a temporary synthetic ledger, not the project hol
     "data/bulk_filings.parquet": "present",
     "data/h0_universe.parquet": "present",
     "data/h0_price_snapshot.json": "present",
-    "results/returns_h0_development_d16.json": "present",
+    "results/returns_h0_development_d19.json": "present",
     "results/bench_qwen3.5-4b_n300_s0.json": "present",
     "results/swap_qwen3.5-4b_n160_s0.json": "present",
     "results/leakprobe_chronobert.json": "present",
