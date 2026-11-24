@@ -87,5 +87,5 @@ def test_causal_path_keeps_initial_levels_time_and_ignores_future_values() -> No
         causal_trajectory([T, T], [[1], [2]], as_of=T)
     with pytest.raises(ValueError, match="no eligible"):
         causal_trajectory([T], [[1]], as_of=clock(-1))
-    with pytest.raises((TypeError, ValueError), match="finite|numeric"):
+    with pytest.raises((TypeError, ValueError), match=r"finite|numeric"):
         causal_trajectory([T], [[np.nan]], as_of=T)

@@ -35,7 +35,7 @@ def html_to_text(html: bytes | str) -> str:
     """Fast path with lxml (about 5x faster than BeautifulSoup); falls back on parse errors."""
     try:
         return _html_to_text_lxml(html)
-    except Exception:
+    except Exception:  # noqa: BLE001 - any lxml failure falls back to the tolerant parser
         return _html_to_text_bs4(html)
 
 

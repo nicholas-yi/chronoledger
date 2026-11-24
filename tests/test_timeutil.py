@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 
 import pytest
 
@@ -62,7 +62,7 @@ def test_naive_knowledge_time_rejected() -> None:
 
 
 def test_no_future_trading_day_returns_none() -> None:
-    accepted = datetime(2026, 1, 5, 23, tzinfo=timezone.utc)
+    accepted = datetime(2026, 1, 5, 23, tzinfo=UTC)
     assert first_tradable_close(accepted, [date(2026, 1, 5)]) is None
 
 

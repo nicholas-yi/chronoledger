@@ -1,6 +1,5 @@
-"""Reusable owned-process resource and receipt utilities for NEW runners.
+"""Owned-process resource limits and frozen-receipt utilities shared by study runners.
 
-Historical frozen scripts retain their original implementations and source hashes.
 Job commit limits and observed RSS differ; this is not filesystem/network isolation.
 """
 

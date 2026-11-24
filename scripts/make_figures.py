@@ -34,13 +34,11 @@ THEMES = {
     "light": {"bg": "#ffffff", "ink": "#1f2328", "muted": "#59636e", "grid": "#d8dee4"},
     "dark": {"bg": "#0d1117", "ink": "#e6edf3", "muted": "#9198a1", "grid": "#30363d"},
 }
-T = THEMES["light"]
+T = {**THEMES["light"], "blue": BLUE}  # mutated in place by _use_theme
 
 
 def _use_theme(name: str) -> None:
-    global T, BLUE
-    T = THEMES[name]
-    BLUE = SKY if name == "dark" else "#0072B2"
+    T.update(THEMES[name], blue=SKY if name == "dark" else BLUE)
     plt.rcParams.update({
         "svg.fonttype": "none",
         "svg.hashsalt": "filing-time-machine",
@@ -73,13 +71,13 @@ def _title(fig, text: str) -> None:
     fig.suptitle(text, x=0.01, ha="left", fontsize=12.5, fontweight="bold")
 
 
-def time_machine(theme: str):
+def time_machine():
     """Illustration, not data: valid time versus knowledge time for one 10-K."""
     d = datetime.fromisoformat
     fig, ax = plt.subplots(figsize=(10, 3.9), layout="constrained")
     ax.grid(False)
     ax.barh(2, d("2023-01-01") - d("2022-07-01"), left=d("2022-07-01"), height=0.45,
-            color=BLUE)
+            color=T["blue"])
     ax.text(d("2022-09-30"), 2, "fiscal year 2022 →", ha="center", va="center",
             color="white", fontsize=10, fontweight="bold")
     for when, label, color in (("2023-02-22", "10-K accepted\nrevenue = $100M", GREEN),
@@ -101,11 +99,11 @@ def time_machine(theme: str):
     return fig
 
 
-def development_returns(theme: str):
+def development_returns():
     """Cumulative net long-short returns on the 2023-2024 development sample."""
     fig, ax = plt.subplots(figsize=(10, 4.2), layout="constrained")
-    for color, result in zip((BLUE, ORANGE, GREEN, PURPLE),
-                             _load("returns_h0_development_d16.json")["results"]):
+    for color, result in zip((T["blue"], ORANGE, GREEN, PURPLE),
+                             _load("returns_h0_development_d16.json")["results"], strict=True):
         series = result["monthly_return_series"]["0.0"]
         first = datetime.strptime(series[0]["return_month"], "%Y-%m")
         start = (first.replace(year=first.year - 1, month=12) if first.month == 1
@@ -128,12 +126,12 @@ def development_returns(theme: str):
     return fig
 
 
-def leak_probe(theme: str):
+def leak_probe():
     """ChronoBERT neologism probe: rank of a masked term in evoking vs control sentences."""
     rows = _load("leakprobe_chronobert.json")
     terms = ["COVID", "coronavirus", "Brexit"]
     fig, axes = plt.subplots(1, 3, figsize=(10.5, 4.1), sharey=True, layout="constrained")
-    for ax, term in zip(axes, terms):
+    for ax, term in zip(axes, terms, strict=True):
         sub = [r for r in rows if r["term"] == term]
         vintages = sorted({r["vintage"] for r in sub})
         xs = range(len(vintages))
@@ -160,15 +158,15 @@ def leak_probe(theme: str):
     return fig
 
 
-def test_size(theme: str):
+def test_size():
     """Synthetic null: how often each test 'finds' an effect that is not there."""
     cal = _load("robust_inference_calibration.json")
     monthly = (("registered_NW6", "textbook Newey-West", VERMILLION),
                ("NW_fixed_b", "Newey-West + fixed-b", ORANGE),
-               ("EWC", "equal-weighted cosine", BLUE))
+               ("EWC", "equal-weighted cosine", T["blue"]))
     panel = (("registered_two_way", "two-way\ncluster", VERMILLION),
              ("WCR", "wild\nbootstrap", ORANGE),
-             ("IM", "Ibragimov-\nMüller", BLUE))
+             ("IM", "Ibragimov-\nMüller", T["blue"]))
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.5, 4.3), layout="constrained",
                                    gridspec_kw={"width_ratios": [3, 1.5]})
     lengths = [17, 18, 28]
@@ -187,7 +185,7 @@ def test_size(theme: str):
     ax1.set_ylabel("false-positive rate, %")
     ax1.set_title("monthly alpha test, 6 factor controls", fontsize=10.5)
     ax1.grid(axis="x", visible=False)
-    for j, (key, label, color) in enumerate(panel):
+    for j, (key, _label, color) in enumerate(panel):
         rates = [100 * c["procedures"][key]["levels"]["0.05"]["rate"] for c in cal["case_results"]
                  if c["kind"] == "panel_null"]
         ax2.bar(j, sum(rates) / len(rates), color=color, width=0.6, alpha=0.9)
@@ -200,7 +198,7 @@ def test_size(theme: str):
     return fig
 
 
-def timestamps(theme: str):
+def timestamps():
     """SEC acceptance-time disagreement between two official SEC JSON sources."""
     audit = _load("p0_acceptance_authority_audit.json")
     char = audit["full_H0_disagreement_characterization"]
@@ -220,7 +218,7 @@ def timestamps(theme: str):
     ax1.grid(axis="y", visible=False)
     n = auth["header_index_wall_matches"]
     bars = [auth["ET_header_matches_pair"], auth["ET_header_matches_bulk"]]
-    ax2.bar(["API record", "bulk archive"], bars, color=[BLUE, ORANGE], width=0.55)
+    ax2.bar(["API record", "bulk archive"], bars, color=[T["blue"], ORANGE], width=0.55)
     for x, v in enumerate(bars):
         ax2.text(x, v + 0.4, f"{v} / {n}", ha="center", fontsize=10)
     ax2.set_ylim(0, n + 3)
@@ -238,7 +236,7 @@ def _wilson(k: int, n: int, z: float = 1.959964) -> tuple[float, float]:
     return max(0.0, centre - half), min(1.0, centre + half)
 
 
-def reader_accuracy(theme: str):
+def reader_accuracy():
     """Local model on 30 TAT-QA questions, each asked with and without its report."""
     items = _load("reader_real2_combined.json")["items"]
 
@@ -247,12 +245,12 @@ def reader_accuracy(theme: str):
 
     by_type = {t: [r for r in items if r["answer_type"] == t]
                for t in ("span", "arithmetic", "multi-span")}
-    rows = [("all questions, report given", *tally(items, "report_supplied"), BLUE, True),
+    rows = [("all questions, report given", *tally(items, "report_supplied"), T["blue"], True),
             ("all questions, no report", *tally(items, "no_report"), VERMILLION, True)]
-    rows += [(f"{t}, report given", *tally(r, "report_supplied"), BLUE, False)
+    rows += [(f"{t}, report given", *tally(r, "report_supplied"), T["blue"], False)
              for t, r in by_type.items()]
     fig, ax = plt.subplots(figsize=(10.5, 3.9), layout="constrained")
-    for y, (label, k, n, color, bold) in enumerate(rows[::-1]):
+    for y, (_label, k, n, color, bold) in enumerate(rows[::-1]):
         lo, hi = _wilson(k, n)
         ax.plot([100 * lo, 100 * hi], [y, y], color=color, lw=2.5, alpha=0.45,
                 solid_capstyle="round")
@@ -290,7 +288,7 @@ def main() -> None:
     for theme in THEMES:
         _use_theme(theme)
         for name, build in FIGURES.items():
-            fig = build(theme)
+            fig = build()
             fig.savefig(OUT / f"{name}-{theme}.svg", metadata={"Date": None})
             plt.close(fig)
     print(f"wrote {len(FIGURES) * len(THEMES)} figures to {OUT}")

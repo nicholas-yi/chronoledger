@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from hypothesis import given, settings
 from hypothesis import strategies as st
@@ -10,7 +10,7 @@ from hypothesis import strategies as st
 from asof.extraction import Link
 from asof.reconcile import FilingEvent, append_only, normalize_partner, reconcile
 
-T0 = datetime(2023, 2, 1, tzinfo=timezone.utc)
+T0 = datetime(2023, 2, 1, tzinfo=UTC)
 
 
 def L(partner: str, pct: float | None = None, rel: str = "customer") -> Link:

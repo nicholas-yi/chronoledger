@@ -58,7 +58,7 @@ def nyse_me_breakpoints() -> pd.DataFrame:
     for line in text.splitlines():
         parts = [p.strip() for p in line.split(",")]
         if len(parts[0]) == 6 and parts[0].isdigit() and len(parts) >= 22:
-            rows.append([parts[0]] + parts[2:22])
+            rows.append([parts[0], *parts[2:22]])
     df = pd.DataFrame(rows, columns=["yyyymm"] + [f"p{5 * i}" for i in range(1, 21)])
     df["month"] = pd.PeriodIndex(df.pop("yyyymm"), freq="M")
     return df.set_index("month").astype(float)

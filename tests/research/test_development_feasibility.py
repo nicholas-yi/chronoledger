@@ -1,9 +1,5 @@
-import hashlib
-import importlib.util
 import json
-import sys
 from copy import deepcopy
-from pathlib import Path
 
 import pytest
 
@@ -79,71 +75,3 @@ def test_unknown_sources_and_time_precision_are_not_filled_with_zero_or_fake_ins
     assert result["trajectory_diagnostics"]["ordered_trajectories"] == 0
 
 
-@pytest.fixture
-def runner(monkeypatch):
-    scripts = Path(__file__).resolve().parents[2] / "scripts"
-    monkeypatch.syspath_prepend(str(scripts))
-    spec = importlib.util.spec_from_file_location(
-        "execute_frontier_dev_feasibility", scripts / "execute_frontier_dev_feasibility.py")
-    assert spec is not None and spec.loader is not None
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module
-
-
-def test_curator_refuses_reserved_metadata_before_opening_derived_payload(runner, tmp_path, monkeypatch):
-    manifest, _ = fixture()
-    manifest["cases"][0]["annual"][0]["report_date"] = "2023-12-31"
-    (tmp_path / "manifest.json").write_text(json.dumps(manifest))
-    monkeypatch.setattr(runner, "SOURCE", tmp_path)
-    original = Path.open
-
-    def opened(path, *args, **kwargs):
-        if path.name == "cases.json":
-            pytest.fail("derived bytes opened before source dates passed")
-        return original(path, *args, **kwargs)
-
-    monkeypatch.setattr(Path, "open", opened)
-    plan = {"metadata_cap_bytes": 1 << 20}
-    access = {}
-    with pytest.raises(HoldoutAccessError):
-        runner.curate(plan, access)
-    assert "derived_extract_bytes_read" not in access
-
-
-def test_curator_pins_and_writes_only_count_projection(runner, tmp_path, monkeypatch):
-    manifest, cases = fixture()
-    source, target = tmp_path / "source", tmp_path / "target"
-    source.mkdir()
-    target.mkdir()
-    manifest_raw, raw = json.dumps(manifest).encode(), json.dumps(cases).encode()
-    (source / "manifest.json").write_bytes(manifest_raw)
-    (source / "cases.json").write_bytes(raw)
-    monkeypatch.setattr(runner, "SOURCE", source)
-    monkeypatch.setattr(runner, "PRIVATE", target)
-    plan = {
-        "metadata_cap_bytes": 1 << 20, "derived_cap_bytes": 1 << 20,
-        "source_manifest_sha256": hashlib.sha256(manifest_raw).hexdigest(),
-        "source_cases_sha256": hashlib.sha256(raw).hexdigest(),
-        "expected_manifest_cases": 1, "expected_guarded_references": 3,
-        "expected_derived_cases": 1,
-    }
-    access = {}
-    rows = runner.curate(plan, access)
-    assert len(rows) == 1 and access["all_metadata_guarded_before_derived_bytes"]
-    assert access["derived_extract_bytes_read"] == len(raw)
-    assert "DO_NOT_COPY" not in (target / "projected_input.json").read_text()
-
-
-def test_scope_changes_and_repeated_execution_are_blocked(runner, monkeypatch, tmp_path):
-    plan = json.loads(runner.PLAN.read_bytes())
-    plan["development_end"] = "2024-01-01"
-    with pytest.raises(ValueError, match="scope"):
-        runner.validate_plan(plan)
-    path = tmp_path / "attempt.json"
-    path.write_text("{}")
-    monkeypatch.setattr(runner, "ATTEMPT", path)
-    monkeypatch.setattr(runner, "freeze_receipt", lambda: pytest.fail("no source/data access"))
-    with pytest.raises(FileExistsError, match="no retry"):
-        runner.main(["--execute"])

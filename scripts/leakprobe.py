@@ -31,7 +31,7 @@ def main() -> None:
     out.write_text(json.dumps(rows, indent=2))
     for r in results:
         flag = "LEAK?" if r.before_first_use and r.context == "evoking" and r.first_rank <= 10 else ""
-        print(f"{r.term:<12} {r.vintage} before={str(r.before_first_use):<5} {r.context:<8} "
+        print(f"{r.term:<12} {r.vintage} before={r.before_first_use!s:<5} {r.context:<8} "
               f"rank={r.first_rank:<6} mean_logp={r.mean_logprob:7.2f} {flag}", file=sys.stdout)
 
 

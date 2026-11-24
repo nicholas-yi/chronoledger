@@ -429,10 +429,10 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 
 ## Caveats
 
-- **Assurance is partial.** Scoped loaders, held outcome stages and ledger integrity checks are not an OS sandbox or byte-level isolation; see [assurance and limits](docs/DATA_AUDIT.md#assurance-and-limits).
+- **Assurance is partial.** Scoped loaders, held outcome stages and ledger integrity checks are not an OS sandbox or byte-level isolation; see [assurance and limits](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#assurance-and-limits).
 - **Survivorship.** Free price data covers mostly companies that still trade today. Return tests are
   restricted to 2023 onwards, when coverage of large issuers reaches 88-97%
-  ([coverage audit](docs/DATA_AUDIT.md#coverage-among-public-equity-issuers-by-public-float)).
+  ([coverage audit](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#coverage-among-public-equity-issuers-by-public-float)).
 - **Short samples, uncalibrated inference.** An optimistic calculation using a hypothetical 3%
   monthly residual volatility gives roughly 2.8-2.9% a month for the 3.2 screen, not a reliably
   detectable project effect: no tested monthly method passed size calibration
@@ -445,7 +445,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
   [offline screen](results/p0_assignment_plan.json) found that, if any filing's time could be off
   by that offset, most filings' trading-day assignment could change, including filings where both
   SEC sources agree. A small targeted fix is therefore not enough; the times need checking against
-  each filing's own header ([details](docs/DATA_AUDIT.md#approved-offline-p0-assignment-planner)).
+  each filing's own header ([details](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#approved-offline-p0-assignment-planner)).
 - **Industry codes are today's.** Industry neutralization uses current SIC codes, not those in force
   at each filing date.
 - **Costs are a spread estimate.** Turnover costs use a daily high/low/close proxy; price impact,
@@ -462,7 +462,6 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 |---|---|---|
 | Is every trading-day assignment right? | Done for H0 (16,921 verified, inputs corrected under D16). For H4/H6, the 262 older timing-sensitive filings were audited and no assignment changes | Older bulk times are often 4-5 hours early, which would matter for any future return test on them |
 | Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2001. Cheapest credible source found: about $39 (not purchased) | The current sample can only detect implausibly large effects, and monthly tests are unreliable with 17-18 months |
-| Does social-media sentiment add anything? | A finance-qualified scorer (VADER failed) and paid X data, as a separate short-horizon hypothesis. Closed: the owner declined paid model or social-media access on 2026-11-21 ([H7 note](docs/H7_SOCIAL_SENTIMENT.md)) | It cannot fix the monthly sample-size problem, but a daily test can be calibrated |
 | Does *what* changes matter more than *how much*? | The claim-level signal (H1), first checked against human-labelled real filing pairs and simple baselines | Synthetic benchmark scores are not real measurement accuracy |
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |
 | Would a trained model measure change better? | Real labelled claim pairs and training/test splits separated by time and by company | A bigger model does not create more independent market evidence |
@@ -480,69 +479,60 @@ The [draft claim-level design](docs/H1_DESIGN.md) starts with human labels, whil
 uv venv --python 3.12
 uv pip install --require-hashes -r requirements-dev.lock
 uv pip install --no-build-isolation --no-deps -e .
-uv run --no-sync asof demo                      # Invented example; no data/network or result writes
+uv run --no-sync asof demo                      # Invented example; no data, network or file writes
 uv run --no-sync python scripts/check_repository.py
-uv run --no-sync pytest -q                       # Unit tests need no benchmark data or network
+uv run --no-sync pytest -q                       # Unit tests need no research data or network
 ```
 
-Figure regeneration and the data-dependent referee are separate historical/evidence
-operations, not installation smoke tests. Do not execute legacy rebuild commands or
-held study stages just to make setup pass. A scoped ingestion contract is required
-before any `asof ingest` client, cache-directory or database creation; see
-[current access limits](docs/CURRENT_STATUS.md#do-not-confuse-these-entrypoints).
-
-The [lock](requirements-dev.lock) covers Python 3.12 dev+figures dependencies and the
-existing build backend, with universal platform resolution and
-[public-PyPI hash verification](results/dependency_lock_verification.json).
-It excludes the optional embed and benchmarks extras; use a separate environment
-for those, outside this locked-environment receipt. Installation does not lift
-study holds or authorize data access.
-
-The [offline quant toolkit](docs/OFFLINE_QUANT_TOOLKIT.md) provides in-memory
-reference algorithms for economic innovation, event-time paths, typed exposure,
-mechanism twins, robust control, identification bounds and prequential scoring.
-Its invented-fixture tests need no research datasets and do not establish an edge.
-
-A [development-input feasibility pass](docs/QUANT_DEV_FEASIBILITY_RESULTS.md) processed
-50 previously exposed issuer triples: lexical features were computable, but independent
-gold and complete public histories were absent. This is not nine validated economic models.
+The [lock](requirements-dev.lock) pins the Python 3.12 dev and figures dependencies with
+[public-PyPI hash verification](results/dependency_lock_verification.json). The optional
+`embed` and `verifier` extras need a separate environment.
 
 Rebuilding the data from SEC EDGAR takes several hours and needs a contact email in
-`ASOF_USER_AGENT`, as the SEC requires; follow the step-by-step
-[runbook](docs/DATA_AUDIT.md#data-rebuild-runbook). The Python package is called `asof`, after the
-point-in-time queries everything is built on.
+`ASOF_USER_AGENT`, as the SEC requires; follow the
+[runbook](docs/DATA_AUDIT.md#data-rebuild-runbook). Study runners log every trial to the
+append-only ledger, and H4/H6 stay held for the
+[prospective holdout](docs/DEVIATIONS.md#d18-move-h4-and-h6a-confirmatory-evaluation-to-a-prospective-holdout),
+so treat them as evidence operations, not setup checks. The package is called `asof`, after
+the point-in-time queries everything is built on.
 
 ## Code tour
 
 | Path | What it does |
 |---|---|
 | [`store.py`](src/asof/store.py) | Bitemporal fact store and as-of queries |
-| [`edgar.py`](src/asof/edgar.py), [`bulk.py`](src/asof/bulk.py) | Rate-limited, cached SEC EDGAR clients |
-| [`prices.py`](src/asof/prices.py) | As-traded price reconstruction |
-| [`sections.py`](src/asof/sections.py), [`chrono.py`](src/asof/chrono.py) | 10-K parsing, Lazy Prices similarity, ChronoBERT embeddings |
-| [`extraction.py`](src/asof/extraction.py), [`reconcile.py`](src/asof/reconcile.py) | Quote-grounded claim extraction and its provenance graph |
-| [`backtest.py`](src/asof/backtest.py), [`events.py`](src/asof/events.py) | Point-in-time portfolios, event studies, neutralization |
+| [`edgar.py`](src/asof/edgar.py), [`bulk.py`](src/asof/bulk.py) | Rate-limited, cached SEC EDGAR clients and bulk readers |
+| [`prices.py`](src/asof/prices.py), [`marketdata.py`](src/asof/marketdata.py) | As-traded price reconstruction and verified price snapshots |
+| [`sections.py`](src/asof/sections.py), [`chrono.py`](src/asof/chrono.py), [`changes.py`](src/asof/changes.py) | 10-K parsing, Lazy Prices similarity, ChronoBERT embeddings, claim-level change |
+| [`extraction.py`](src/asof/extraction.py), [`reconcile.py`](src/asof/reconcile.py) | Quote-grounded relationship extraction and its provenance graph |
+| [`backtest.py`](src/asof/backtest.py), [`events.py`](src/asof/events.py), [`h0.py`](src/asof/h0.py) | Point-in-time portfolios, event studies, neutralization and the shared H0 inputs |
 | [`inference.py`](src/asof/inference.py), [`robust_inference.py`](src/asof/robust_inference.py) | Alpha tests, deflated Sharpe, small-sample HAC and cluster methods |
 | [`invariance.py`](src/asof/invariance.py), [`leakprobe.py`](src/asof/leakprobe.py) | Time-travel invariance harness and language-model leak probe |
 | [`ledger.py`](src/asof/ledger.py), [`referee.py`](src/asof/referee.py) | Append-only trial ledger and the automated referee |
-| [`costs.py`](src/asof/costs.py), [`studies.py`](src/asof/studies.py), [`measurement.py`](src/asof/measurement.py) | Trading-cost breakdowns, pre-run study checklists and evidence-linked measurement scoring |
-| [`benchmark_baseline.py`](src/asof/benchmark_baseline.py), [`reader_real_report.py`](src/asof/reader_real_report.py) | Real-report reading tests: rule baseline, local-model reader and benchmark scoring |
-| [`reader_fields.py`](src/asof/reader_fields.py), [`claim_verifier.py`](src/asof/claim_verifier.py), [`financial_notation.py`](src/asof/financial_notation.py), [`review_pipeline_v2.py`](src/asof/review_pipeline_v2.py) | Active work: source-bound metric reading, source-proved claim checks and the rules-first review pipeline |
-| [`scripts/`](scripts) · [`results/`](results) · [`tests/`](tests) | Data builds and study runners · every published number · unit, invariance and mutation tests |
+| [`reader_fields.py`](src/asof/reader_fields.py), [`claim_verifier.py`](src/asof/claim_verifier.py), [`review_pipeline_v2.py`](src/asof/review_pipeline_v2.py) | The [focused reader](docs/FOCUSED_READER.md): source-bound metric reading, source-proved claim checks and the rules-first review pipeline |
+| [`research/`](src/asof/research) | [Offline reference algorithms](docs/OFFLINE_QUANT_TOOLKIT.md), tested on invented fixtures only |
+| [`scripts/`](scripts) | Data builds, study runners and maintenance checks, each listed with its purpose in the [project index](docs/project_index.json) |
+| [`results/`](results) · [`tests/`](tests) | Every published number · unit, invariance and mutation tests |
+
+Completed one-shot runs (the timestamp audits, calibrations, reader experiments) and
+superseded versions are preserved at the tag
+[`archive-2026-11`](https://github.com/nicholas-yi/chronoledger/tree/archive-2026-11);
+see [ARCHIVE.md](docs/ARCHIVE.md). Each result records the commit it ran from.
 
 ## Documentation
 
-- [PREREGISTRATION.md](docs/PREREGISTRATION.md) and [DEVIATIONS.md](docs/DEVIATIONS.md): what was
-  decided in advance, and every later change
-- [FINDINGS.md](docs/FINDINGS.md): the research log, including issues that weaken this project
-- [DATA_AUDIT.md](docs/DATA_AUDIT.md): data provenance, coverage audits and the rebuild runbook
-- [CURRENT_STATUS.md](docs/CURRENT_STATUS.md): current evidence, safe onboarding and held/historical entrypoints
-- [FOCUSED_READER.md](docs/FOCUSED_READER.md): the active metric-reader work, with every run's protocol, results and limits
-- [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md): exact interval reconciliation and its non-conformance/independence limits
-- [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): experiment workflow, next steps, new study ideas and data sources
-- [H7_SOCIAL_SENTIMENT.md](docs/H7_SOCIAL_SENTIMENT.md): closed social-media sentiment design note, X costs and terms, and the failed scorer qualification
-- [project_readiness_checks.json](results/project_readiness_checks.json): the 2026-11-17 scoped clock/calibration checks, both failing then. Superseded by the 2026-11-21 referee run: clock authority now passes, including a check that every H0 knowledge time in use equals its verified time; calibration still fails (FINDINGS F9 and F10)
-- [REFEREE.md](results/REFEREE.md): the full referee report, rerun 2026-11-21 after D16. The gate is blocked only by monthly calibration; passing checks are software evidence, not scientific acceptance
+- [PREREGISTRATION.md](docs/PREREGISTRATION.md), [v2](docs/PREREGISTRATION_V2.md) and
+  [DEVIATIONS.md](docs/DEVIATIONS.md): what was decided in advance, and every later change
+- [FINDINGS.md](docs/FINDINGS.md): what is known, including issues that weaken this project
+- [CURRENT_STATUS.md](docs/CURRENT_STATUS.md): current evidence and what is held
+- [DATA_AUDIT.md](docs/DATA_AUDIT.md): data provenance, coverage and timestamp audits, and the rebuild runbook
+- [FOCUSED_READER.md](docs/FOCUSED_READER.md): the metric reader, its results and limits
+- [RESEARCH_PLAN.md](docs/RESEARCH_PLAN.md): next steps, study ideas and data sources
+- [H1_DESIGN.md](docs/H1_DESIGN.md), [ACCOUNTING_CONSISTENCY.md](docs/ACCOUNTING_CONSISTENCY.md),
+  [DOCUMENT_SCOPE.md](docs/DOCUMENT_SCOPE.md): the claim-level design draft and two narrow guards
+- [ARCHIVE.md](docs/ARCHIVE.md): what was archived and where to find it
+- [REFEREE.md](results/REFEREE.md): the full referee report. The gate is blocked only by monthly
+  calibration; passing checks are software evidence, not scientific acceptance
 
 ## License
 

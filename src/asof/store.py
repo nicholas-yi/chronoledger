@@ -11,8 +11,9 @@ as-of instant can influence a result. ``tests/test_invariance.py`` enforces this
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
-from typing import Any, Iterable
+from collections.abc import Iterable
+from datetime import UTC, datetime, timedelta
+from typing import Any
 
 import duckdb
 import pandas as pd
@@ -104,7 +105,7 @@ def _conservative_knowledge_time(filed: str) -> datetime:
     """
     day = datetime.fromisoformat(filed).date()
     end = datetime.combine(day + timedelta(days=1), datetime.min.time(), tzinfo=ET)
-    return end.astimezone(timezone.utc)
+    return end.astimezone(UTC)
 
 
 def flatten_companyfacts(cf: dict[str, Any]) -> pd.DataFrame:

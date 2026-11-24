@@ -182,9 +182,9 @@ def annotation_intake(
                     issues.append(f"{at}:frozen_pair_time_differs:{key}")
             if row["guide_version"] != manifest.guide_version:
                 issues.append(f"{at}:guide_version_differs")
-            if not _present(row["section_id"]) or manifest.scope == "block_scoped" and not _present(
+            if not _present(row["section_id"]) or (manifest.scope == "block_scoped" and not _present(
                 row["block_id"]
-            ):
+            )):
                 issues.append(f"{at}:section_or_block_identity_missing")
             if row["AI_suggestion_seen"].lower() != "false":
                 issues.append(f"{at}:blind_first_pass_not_declared")
@@ -211,8 +211,8 @@ def annotation_intake(
                     issues.append(f"{at}:claim_and_source_evidence_required:{side}")
             if sides and (not _present(row["entity"]) or not _present(row["predicate"])):
                 issues.append(f"{at}:entity_and_predicate_required")
-            if (not _present(row["rationale"]) or change == "EXCLUDED_BOILERPLATE/FORMAT"
-                    and not _present(row["exclusion_reason"])):
+            if (not _present(row["rationale"]) or (change == "EXCLUDED_BOILERPLATE/FORMAT"
+                    and not _present(row["exclusion_reason"]))):
                 issues.append(f"{at}:rationale_or_exclusion_reason_missing")
             unit: tuple[str, ...] = (pair.pair_id, row["section_id"], row["block_id"],
                                      row["old_claim_id"], row["new_claim_id"])
@@ -330,7 +330,7 @@ def source_intake(
             if case.fields.get(name) is None or case.fields[name].status != "documented":
                 issues.append(f"{prefix}:required_evidence_unavailable:{name}")
         if (not case.identity_reconciled or not case.adjustments_not_double_counted
-                or packet.requested_use == "complete_returns" and not case.payoff_reconciled
+                or (packet.requested_use == "complete_returns" and not case.payoff_reconciled)
                 or not _present(case.reconciliation_ref)):
             issues.append(f"{prefix}:independent_reconciliation_receipt_missing")
     return IntakeReport(

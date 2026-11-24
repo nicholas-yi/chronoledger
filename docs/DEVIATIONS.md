@@ -191,18 +191,18 @@ The original ledger, checked-in results, referee report, source pins and tags re
 historical evidence, not validation of these local changes. Any later empirical
 rerun requires an approved queue/resource decision, the usual trial lineage, and
 explicit review of affected source contracts. Design alternatives in the
-[bounded gate packet](DATA_AUDIT.md#bounded-gate-advancement-2026-11-13)
+[bounded gate packet](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#bounded-gate-advancement-2026-11-13)
 remain proposals; this note does not authorize them or a new numbered/tagged design.
 
 ## 2026-11-13 Lead-D3a: separate synthetic planner (not a registered-runner change)
 
 After the historical development results, the owner explicitly selected
 `timing_scope='separate-synthetic-planner'` under CL-P2. The opt-in
-[`asof.timing.plan_return_window`](../src/asof/timing.py) is implemented and tested
+[`asof.timing.plan_return_window`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/src/asof/timing.py) is implemented and tested
 only on caller-supplied synthetic schedules and availability metadata.
 Strictly later ready/deadline eligibility, hypothetical entry-close-to-next-close
 intervals, fixed scheduled estimation/outcome slots and explicit support/censoring
-are specified in the [v0.2 contract](DATA_AUDIT.md#lead-d3a-opt-in-synthetic-planner-v02).
+are specified in the [v0.2 contract](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#lead-d3a-opt-in-synthetic-planner-v02).
 
 This is not a new numbered scientific deviation, empirical configuration or tag.
 No historical runner, old clock/CAR default, source license, endpoint, SIC rule,
@@ -305,7 +305,7 @@ Lead-D2/D4-D9 stay open.
   is applied to development data in this batch. No push or tags.
 
 Equations, source pins, the pre-execution allocation and its limits are in the
-[Batch E contract](DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract).
+[Batch E contract](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#batch-e-established-tests-and-frozen-verification-contract).
 
 ## D13: exploratory KPI disclosure screen crossed reserved calendars
 
@@ -338,7 +338,7 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   The old static `holdout_opened=false` field is not an exposure audit.
 - **Prior calendar use (context only):** the same July 2021-June 2024
   bulk-metadata calendar was already used by earlier
-  [H0](../scripts/h0_data.py) and [P0](../scripts/p0_acceptance_audit.py)
+  [H0](../scripts/h0_data.py) and [P0](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/p0_acceptance_audit.py)
   development work. This does not authorize or cure the additional exposure,
   establish exclusion of outcome-bearing material, or restore untouched status.
 - **Quarantine:** original outputs and the metadata-only exposure audit remain
@@ -401,7 +401,7 @@ Equations, source pins, the pre-execution allocation and its limits are in the
 - **Extract:** development pairs (accepted 2012-2018) and outcome rows dated no
   later than the last development report date plus 430 days. Nothing is written
   unless the panel built from the extract equals the full-file panel exactly.
-- **Use:** only the [F8 H4 thread check](../scripts/h4_dev_reproducibility.py),
+- **Use:** only the [F8 H4 thread check](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/h4_dev_reproducibility.py),
   which follows the H0 rule in D14. Its runs append ledger rows with existing
   config hashes. Every H4 file-reading stage stays hard held; the extract does
   not release H4 tests, validation, holdout evaluation or H6.
@@ -448,7 +448,7 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   (rarer codes are pooled; an unseen level gets no residual). Controls are known
   strictly before acceptance: shares, the previous month-end close, and M&A 8-Ks.
   Tests confirm that later and same-day filings cannot change a residual.
-- **Test** ([runner](../scripts/h0_event_neutral.py)): CAR +1..+60 on the residual for
+- **Test** ([runner](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/h0_event_neutral.py)): CAR +1..+60 on the residual for
   development events, with month-clustered OLS plus D12's wild cluster restricted
   bootstrap by month. Expected sign: negative. One logged trial per variant (latest
   filing; 10-K only), so H1n gains two configurations.

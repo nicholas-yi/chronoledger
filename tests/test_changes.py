@@ -1,4 +1,5 @@
 import random
+from datetime import UTC
 
 import numpy as np
 import pytest
@@ -61,14 +62,14 @@ def test_calibrate_tau_separates() -> None:
 
 
 def test_tfidf_ignores_documents_after_as_of() -> None:
-    from datetime import datetime, timedelta, timezone
+    from datetime import datetime, timedelta
 
     from hypothesis import given, settings
     from hypothesis import strategies as st
 
     from asof.changes import AsOfTfidf
 
-    t0 = datetime(2023, 1, 1, tzinfo=timezone.utc)
+    t0 = datetime(2023, 1, 1, tzinfo=UTC)
     words = ["supply", "risk", "tariff", "cyber", "labor", "demand", "pandemic", "credit"]
 
     @settings(max_examples=40, deadline=None)
@@ -88,12 +89,12 @@ def test_tfidf_ignores_documents_after_as_of() -> None:
 
 
 def test_tfidf_future_only_word_is_unknown() -> None:
-    from datetime import datetime, timezone
+    from datetime import datetime
 
     from asof.changes import AsOfTfidf
 
-    docs = [(datetime(2019, 6, 1, tzinfo=timezone.utc), "supply risk"),
-            (datetime(2020, 6, 1, tzinfo=timezone.utc), "pandemic risk")]
-    vec = AsOfTfidf(min_df=1).fit(docs, datetime(2019, 12, 31, tzinfo=timezone.utc))
+    docs = [(datetime(2019, 6, 1, tzinfo=UTC), "supply risk"),
+            (datetime(2020, 6, 1, tzinfo=UTC), "pandemic risk")]
+    vec = AsOfTfidf(min_df=1).fit(docs, datetime(2019, 12, 31, tzinfo=UTC))
     assert "pandemic" not in vec.vocab
     assert np.allclose(vec.transform(["pandemic"]), 0.0)

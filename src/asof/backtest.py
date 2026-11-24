@@ -138,10 +138,7 @@ def clean_shares(shares: pd.DataFrame, jump: float = 10.0, confirm_tol: float = 
             v = float(r.val)
             if v <= 0:
                 continue
-            if accepted is None or 1 / jump <= v / accepted <= jump:
-                accepted, pending = v, None
-                out.append((cik, v, r.knowledge_time))
-            elif pending is not None and abs(v / pending - 1) <= confirm_tol:
+            if accepted is None or 1 / jump <= v / accepted <= jump or (pending is not None and abs(v / pending - 1) <= confirm_tol):
                 accepted, pending = v, None
                 out.append((cik, v, r.knowledge_time))
             else:

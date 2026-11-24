@@ -41,7 +41,7 @@ def test_packet_selection_is_bound_and_unlabelled_and_empty_templates_are_not_go
 def test_distinct_named_first_passes_still_require_external_adjudication():
     manifest, cases = fixture()
     items = select_items(manifest, cases, seed=7, limit=12)
-    row = {key: "" for key in FIELDS}
+    row = dict.fromkeys(FIELDS, "")
     row.update(item_id=items[0]["item_id"], reviewer_id="reviewer-a",
                AI_suggestion_seen="false", status="insufficient_context",
                rationale="Excerpt does not establish a matching fiscal period.")

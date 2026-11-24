@@ -42,7 +42,7 @@ def test_price_requests_past_dev_cutoff_are_refused(tmp_path) -> None:
         y.raw("AAPL", end=date(2024, 8, 1))
     with pytest.raises(HoldoutAccessError):
         y.daily("AAPL", end=date(2026, 1, 1))
-    assert DEV_RETURN_CUTOFF == date(2024, 7, 31)
+    assert date(2024, 7, 31) == DEV_RETURN_CUTOFF
 
 
 def test_guarded_payload_does_not_cache_current_price_metadata() -> None:

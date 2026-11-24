@@ -14,7 +14,7 @@ import gzip
 import json
 import logging
 import time
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 import httpx
@@ -59,7 +59,7 @@ class YahooPrices:
         if end is not None:
             price_end_allowed(end, holdout_opened)
         path = self.cache_path(ticker, end=end)
-        period2 = int(datetime.now(timezone.utc).timestamp())
+        period2 = int(datetime.now(UTC).timestamp())
         if path.exists() and not refresh:
             payload = json.loads(gzip.decompress(path.read_bytes()))
             return payload or None
@@ -131,7 +131,7 @@ def _strip_after(payload: dict, end: date) -> dict:
     }
     events = payload.get("events", {})
     out["events"] = {"splits": events.get("splits", {})}
-    cutoff = int(datetime.combine(end, datetime.max.time(), tzinfo=timezone.utc).timestamp())
+    cutoff = int(datetime.combine(end, datetime.max.time(), tzinfo=UTC).timestamp())
     out["events"]["dividends"] = {k: v for k, v in events.get("dividends", {}).items() if v.get("date", 0) <= cutoff}
     out["stripped_after"] = end.isoformat()
     return out

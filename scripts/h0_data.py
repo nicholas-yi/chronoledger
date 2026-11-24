@@ -13,8 +13,9 @@ Usage: python scripts/h0_data.py universe filings signals shares
 
 from __future__ import annotations
 
+import contextlib
 import sys
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 import pandas as pd
 
@@ -29,8 +30,8 @@ DB = DATA_DIR / "h0.duckdb"
 UNIVERSE = DATA_DIR / "h0_universe.parquet"
 SIGNALS = DATA_DIR / "h0_signals.parquet"
 SHARES = DATA_DIR / "h0_shares.parquet"
-FILING_FROM = datetime(2021, 7, 1, tzinfo=timezone.utc)
-FILING_TO = datetime(2024, 6, 30, 23, 59, 59, tzinfo=timezone.utc)
+FILING_FROM = datetime(2021, 7, 1, tzinfo=UTC)
+FILING_TO = datetime(2024, 6, 30, 23, 59, 59, tzinfo=UTC)
 EXCHANGES = {"NYSE", "Nasdaq", "NYSE American"}
 
 
@@ -75,10 +76,8 @@ def stage_filings(client: EdgarClient, uni: pd.DataFrame) -> None:
     for i, cik in enumerate(uni["cik"]):
         if cik in done:
             continue
-        try:
+        with contextlib.suppress(FileNotFoundError):
             store.ingest_submissions(con, client.submissions(int(cik)))
-        except FileNotFoundError:
-            pass
         if i % 200 == 0:
             log(f"filings: {i}/{len(uni)}")
     con.close()
@@ -148,8 +147,8 @@ def stage_pairs() -> None:
     con.close()
     f["report_date"] = pd.to_datetime(f["report_date"])
     rows = []
-    for (cik, form), g in f.groupby(["cik", "form"]):
-        g = g.dropna(subset=["report_date"]).sort_values("knowledge_time")
+    for (cik, form), group in f.groupby(["cik", "form"]):
+        g = group.dropna(subset=["report_date"]).sort_values("knowledge_time")
         for r in g.itertuples():
             if form == "10-K":
                 prev = g[g["knowledge_time"] < r.knowledge_time].tail(1)
@@ -200,7 +199,7 @@ def stage_prices(uni: pd.DataFrame) -> None:
     for i, t in enumerate(uni["ticker"]):
         try:
             y.raw(t, end=DEV_RETURN_CUTOFF)
-        except Exception as exc:  # keep going; coverage is audited later
+        except Exception as exc:  # noqa: BLE001 - any vendor failure is logged; coverage is audited later
             log(f"prices: {t} failed: {exc!r}")
         if i % 200 == 0:
             log(f"prices: {i}/{len(uni)}")

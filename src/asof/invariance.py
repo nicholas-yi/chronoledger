@@ -7,8 +7,8 @@ same result as running it on a store that only contains what was public at ``as_
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from datetime import datetime
-from typing import Callable
 
 import duckdb
 import pandas as pd
@@ -32,9 +32,7 @@ def truncated_copy(con: duckdb.DuckDBPyConnection, cutoff: datetime) -> duckdb.D
 
 
 def _normalize(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    df = df.sort_values(list(df.columns), kind="mergesort").reset_index(drop=True)
-    return df
+    return df.sort_values(list(df.columns), kind="mergesort").reset_index(drop=True)
 
 
 def invariance_violation(

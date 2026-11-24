@@ -1,7 +1,4 @@
-import asyncio
 import json
-
-import pytest
 
 from asof.reader_diagnostic import ReaderAnswer
 from asof.reader_positive_control import (
@@ -63,38 +60,3 @@ def test_pass_threshold_includes_unanswerable_controls_and_all_items():
     assert not pass_criterion(9, 2, 11)
 
 
-def test_load_threshold_and_active_request_cancellation(monkeypatch):
-    import importlib.util
-    from pathlib import Path
-    scripts = Path(__file__).resolve().parents[1] / "scripts"
-    monkeypatch.syspath_prepend(str(scripts))
-    spec = importlib.util.spec_from_file_location("run_reader_positive_control",
-                                                scripts / "run_reader_positive_control.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    loads = module.LoadHistory()
-    for load in (91, 90, 91, 92):
-        loads.add(load)
-    with pytest.raises(module.ResourceStop):
-        loads.add(93)
-
-    async def check():
-        cancelled = asyncio.Event()
-
-        class Client:
-            async def post(self, *args, **kwargs):
-                try:
-                    await asyncio.Event().wait()
-                finally:
-                    cancelled.set()
-
-        async def watch():
-            await asyncio.sleep(0.01)
-            raise module.ResourceStop("synthetic overload")
-
-        task = asyncio.create_task(watch())
-        with pytest.raises(module.ResourceStop):
-            await module.guarded_request(Client(), {}, task, 10)
-        assert cancelled.is_set()
-
-    asyncio.run(check())

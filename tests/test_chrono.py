@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -6,7 +6,7 @@ from asof.chrono import vintage_for
 
 
 def at(y, m, d, h=12):
-    return datetime(y, m, d, h, tzinfo=timezone.utc)
+    return datetime(y, m, d, h, tzinfo=UTC)
 
 
 def test_uses_previous_year_end_vintage() -> None:

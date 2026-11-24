@@ -21,10 +21,10 @@ from __future__ import annotations
 
 import json
 import random
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import Callable
 
 from asof.config import DATA_DIR, PROJECT_ROOT
 
@@ -71,7 +71,7 @@ def evaluate(threats: list[Threat]) -> list[Outcome]:
         for c in t.checks:
             try:
                 ok, evidence = c.fn()
-            except Exception as exc:  # a crashing check is a failed check
+            except Exception as exc:  # noqa: BLE001 - a crashing check is a failed check
                 ok, evidence = False, f"error: {exc!r}"
             results.append((c.name, ok, evidence, c.mutation))
         out.append(Outcome(t.tid, t.question, level(results), results, t.gating))
@@ -224,7 +224,7 @@ def _store_invariance(db: Path, n: int = 10) -> tuple[bool, str]:
     con = store.connect(str(db), read_only=True)
     fn = lambda c, t: store.facts_as_of(c, t)[["cik", "tag", "period_end", "value"]]  # noqa: E731
     rng = random.Random(0)
-    start, end = datetime(2010, 1, 1, tzinfo=timezone.utc), datetime(2026, 11, 1, tzinfo=timezone.utc)
+    start, end = datetime(2010, 1, 1, tzinfo=UTC), datetime(2026, 11, 1, tzinfo=UTC)
     bad = 0
     for _ in range(n):
         t = start + (end - start) * rng.random()
@@ -239,7 +239,7 @@ def _store_revision_invariance(db: Path, n: int = 6) -> tuple[bool, str]:
     con = store.connect(str(db), read_only=True)
     fn = lambda c, t: store.revisions_as_of(c, t)[["cik", "tag", "period_end", "value", "prev_value"]]  # noqa: E731
     rng = random.Random(1)
-    start, end = datetime(2012, 1, 1, tzinfo=timezone.utc), datetime(2026, 11, 1, tzinfo=timezone.utc)
+    start, end = datetime(2012, 1, 1, tzinfo=UTC), datetime(2026, 11, 1, tzinfo=UTC)
     bad = sum(invariance_violation(con, fn, start + (end - start) * rng.random()) is not None for _ in range(n))
     return bad == 0, f"revision detection at {n} instants, {bad} violations"
 
@@ -256,7 +256,7 @@ def _store_canary(db: Path) -> tuple[bool, str]:
             "QUALIFY row_number() OVER (PARTITION BY cik, tag, period_end "
             "ORDER BY knowledge_time DESC, accession DESC) = 1", [t]).df()
 
-    t = datetime(2020, 2, 5, tzinfo=timezone.utc)
+    t = datetime(2020, 2, 5, tzinfo=UTC)
     caught = invariance_violation(con, leaky, t) is not None
     return caught, "planted period-end look-ahead bug " + ("was caught" if caught else "was NOT caught")
 
@@ -266,7 +266,7 @@ def _reconcile_invariance() -> tuple[bool, str]:
     from asof.reconcile import FilingEvent, reconcile
 
     rng = random.Random(2)
-    t0 = datetime(2023, 1, 1, tzinfo=timezone.utc)
+    t0 = datetime(2023, 1, 1, tzinfo=UTC)
     bad = 0
     for trial in range(200):
         events, originals = [], []
@@ -290,7 +290,7 @@ def _reconcile_ablation() -> tuple[bool, str]:
     from asof.extraction import Link
     from asof.reconcile import FilingEvent, append_only, reconcile
 
-    t0 = datetime(2023, 1, 1, tzinfo=timezone.utc)
+    t0 = datetime(2023, 1, 1, tzinfo=UTC)
     ev = [FilingEvent("a", 1, "10-K", t0, (Link("X Co", "customer", 12.0, "e"),)),
           FilingEvent("a1", 1, "10-K/A", t0 + timedelta(days=30), (), amends="a")]
     as_of = t0 + timedelta(days=60)
@@ -305,7 +305,7 @@ def _vintage_rule() -> tuple[bool, str]:
     rng = random.Random(3)
     bad = 0
     for _ in range(2000):
-        t = datetime(2000, 1, 1, tzinfo=timezone.utc) + timedelta(seconds=rng.randint(0, 27 * 365 * 86400))
+        t = datetime(2000, 1, 1, tzinfo=UTC) + timedelta(seconds=rng.randint(0, 27 * 365 * 86400))
         cutoff = datetime.strptime(vintage_for(t)[-8:], "%Y%m%d").date()
         bad += not cutoff < t.date()
     return bad == 0, f"2000 random acceptance times; {bad} used a vintage not strictly before the filing date"
@@ -337,7 +337,7 @@ def _tfidf_invariance() -> tuple[bool, str]:
     from asof.changes import AsOfTfidf
 
     rng = random.Random(4)
-    t0 = datetime(2023, 1, 1, tzinfo=timezone.utc)
+    t0 = datetime(2023, 1, 1, tzinfo=UTC)
     words = ["supply", "risk", "tariff", "cyber", "labor", "demand", "pandemic", "credit", "rate"]
     bad = 0
     for _ in range(100):
@@ -414,14 +414,12 @@ def _formation_return_invariance(mutation: bool = False) -> tuple[bool, str]:
 
 
 def _formation_neutral_invariance() -> tuple[bool, str]:
-    import runpy
-
     import numpy as np
     import pandas as pd
 
     from asof.backtest import Config, formation_snapshots
+    from asof.h0 import neutralize_formations as fn
 
-    fn = runpy.run_path(str(PROJECT_ROOT / "scripts" / "h0_backtest.py"))["neutralize_formations"]
     month, signals, shares, panel = _formation_fixture()
     ent = pd.DataFrame({"cik": range(50), "sic": ["3500"] * 25 + ["4500"] * 25})
     ma = pd.DataFrame({"cik": [1], "knowledge_time": pd.to_datetime(["2023-03-03"], utc=True)})
@@ -443,7 +441,7 @@ def _shares_clean_unit() -> tuple[bool, str]:
 
     from asof.backtest import clean_shares
 
-    t = [datetime(2023, m, 1, tzinfo=timezone.utc) for m in (1, 4, 7)]
+    t = [datetime(2023, m, 1, tzinfo=UTC) for m in (1, 4, 7)]
     out = clean_shares(pd.DataFrame({"cik": 1, "val": [90e6, 90e9, 90e6], "knowledge_time": t}))
     return out["val"].tolist() == [90e6, 90e6], "a 1,000x share-count typo is rejected"
 
@@ -505,7 +503,7 @@ def _as_traded_real() -> tuple[bool, str]:
 def _vintage_canary() -> tuple[bool, str]:
     from asof.chrono import vintage_for
 
-    t = datetime(2023, 12, 31, 23, tzinfo=timezone.utc)
+    t = datetime(2023, 12, 31, 23, tzinfo=UTC)
     ok = not vintage_for(t).endswith("20231231")
     return ok, "a filing on 2023-12-31 does not get the same-day 2023-12-31 vintage"
 
@@ -571,7 +569,8 @@ def _no_returns_before_deviation() -> tuple[bool, str]:
     import subprocess
 
     def git(*args: str) -> subprocess.CompletedProcess:
-        return subprocess.run(["git", *args], cwd=PROJECT_ROOT, capture_output=True, text=True)
+        return subprocess.run(["git", *args], cwd=PROJECT_ROOT, capture_output=True, text=True,
+                              check=False)
 
     if git("rev-parse", "deviation-d1").returncode != 0:
         return False, "tag deviation-d1 not found"

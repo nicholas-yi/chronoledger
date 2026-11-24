@@ -1,10 +1,10 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import pandas as pd
 
 from asof.quiet import quiet_down_revisions
 
-T0 = datetime(2015, 2, 1, tzinfo=timezone.utc)
+T0 = datetime(2015, 2, 1, tzinfo=UTC)
 COLS = ["cik", "tag", "start", "end", "val", "accession", "form"]
 
 

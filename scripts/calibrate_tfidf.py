@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import random
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import numpy as np
 
@@ -15,7 +15,7 @@ from asof.config import DATA_DIR, PROJECT_ROOT
 from asof.edgar import EdgarClient
 from asof.sections import extract_sections, html_to_text
 
-AS_OF = datetime(2022, 12, 31, 23, 59, tzinfo=timezone.utc)
+AS_OF = datetime(2022, 12, 31, 23, 59, tzinfo=UTC)
 
 
 def auc(scores: np.ndarray, labels: np.ndarray) -> float:

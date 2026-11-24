@@ -24,9 +24,9 @@ jobs:
         run: uv pip install --require-hashes -r requirements-dev.lock
       - name: Install project without changing locked dependencies
         run: uv pip install --no-build-isolation --no-deps -e .
-      - name: Ruff with documented legacy per-file baseline
+      - name: Ruff
         run: uv run --no-sync ruff check .
-      - name: Check documentation targets and evidence navigation
+      - name: Check documentation links, project index and orphaned files
         run: uv run --no-sync python scripts/check_repository.py
       - name: Smoke-test isolated wheel imports and dataset-free demo
         run: uv run --no-sync python scripts/smoke_wheel.py

@@ -71,28 +71,3 @@ def test_h4_decline_requires_both_observed_income_values(
         assert panel["d_roa"].iloc[0] == pytest.approx(-0.04)
 
 
-def test_d15_extract_drops_unreachable_outcomes_without_changing_the_panel() -> None:
-    import sys
-
-    scripts = Path(__file__).resolve().parents[1] / "scripts"
-    sys.path.insert(0, str(scripts))
-    spec = importlib.util.spec_from_file_location("h4_dev_repro", scripts / "h4_dev_reproducibility.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    h4 = module.h4
-    pairs, outcomes = [], []
-    for cik in range(30):
-        for year in (2014, 2015, 2016, 2022):
-            pairs.append({"cik": cik, "accession": f"{cik}-{year}", "report_date": f"{year}-12-31",
-                          "knowledge_time": pd.Timestamp(f"{year + 1}-03-01", tz="UTC"), "cos_full": 0.9})
-        for year in (2013, 2014, 2015, 2016, 2017, 2018, 2022, 2023):
-            outcomes.append({"cik": cik, "accession": f"{cik}-{year}", "report_date": f"{year}-12-31",
-                             "ni": float(cik + year), "assets": 100.0 + year, "revenue": 50.0 + cik,
-                             "gw_impair": 0.0})
-    pairs, outcomes = pd.DataFrame(pairs), pd.DataFrame(outcomes)
-    ent = pd.DataFrame({"cik": range(30), "sic": "3500"})
-    dev_pairs, dev_outcomes = module.extract_frames(pairs, outcomes)
-    assert pd.to_datetime(dev_outcomes["report_date"]).max() == pd.Timestamp("2017-12-31")
-    assert not (pd.to_datetime(dev_pairs["knowledge_time"]).dt.year > 2018).any()
-    pd.testing.assert_frame_equal(h4.panel_from_frames(pairs, outcomes, ent),
-                                  h4.panel_from_frames(dev_pairs, dev_outcomes, ent), check_exact=True)

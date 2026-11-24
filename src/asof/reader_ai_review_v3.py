@@ -128,7 +128,7 @@ def source_views(case: Case) -> dict[str, dict]:
             if header is None:
                 header, view = cells, text
             elif len(cells) == len(header):
-                view = f"{cells[0]}: " + "; ".join(f"{name} = {cell}" for name, cell in zip(header[1:], cells[1:]))
+                view = f"{cells[0]}: " + "; ".join(f"{name} = {cell}" for name, cell in zip(header[1:], cells[1:], strict=True))
             else:
                 view = text
         else:
@@ -156,7 +156,7 @@ def messages(task: ReviewTask) -> list[dict]:
             {"role": "user", "content": json.dumps(payload, sort_keys=True)}]
 
 
-def parse(task: ReviewTask, content: str):
+def parse(_task: ReviewTask, content: str):
     return EXTRACTION.validate_json(content)
 
 
@@ -216,7 +216,7 @@ class Arm:
 
 ARMS = {
     "blind_extraction_v3": Arm("blind_extraction_v3", "blind_extraction_review", messages,
-                               lambda task: extraction_schema(), parse, record),
+                               lambda _task: extraction_schema(), parse, record),
     "decomposed_v2_control": Arm("decomposed_v2_control", "decomposed_review_control", v2_messages,
                                  v2_schema, v2_parse, v2_record),
 }

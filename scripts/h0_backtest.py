@@ -12,7 +12,7 @@ import argparse
 import json
 import sys
 from dataclasses import asdict, replace
-from datetime import UTC, date, datetime
+from datetime import date
 from pathlib import Path
 from time import perf_counter
 
@@ -22,24 +22,19 @@ import pandas as pd
 from asof import ledger
 from asof.backtest import (
     Config,
-    clean_shares,
     form_portfolios,
     formation_snapshots,
     long_short,
-    values_as_of,
 )
 from asof.config import DATA_DIR, PROJECT_ROOT, RAW_DIR
-from asof.events import CarEngine, event_panel, neutralize, rank_ic
+from asof.events import CarEngine, event_panel, rank_ic
 from asof.factors import ff5_umd_daily, ff5_umd_monthly, nyse_me_breakpoints
+from asof.h0 import INPUTS, load_inputs, neutralize_formations
 from asof.inference import nw_alpha
-from asof.marketdata import SNAPSHOT_FILES, load_price_snapshot
 from asof.periods import DEV_END, DEV_RETURN_CUTOFF, DEV_START
-from asof.timeutil import close_time_utc, first_tradable_close
+from asof.timeutil import first_tradable_close
 
 FACTORS = ["Mkt_RF", "SMB", "HML", "RMW", "CMA", "UMD"]
-INPUTS = [DATA_DIR / n for n in ("h0_universe.parquet", "h0_signals.parquet", "h0_shares.parquet",
-                                 "bulk_entities.parquet", "bulk_filings.parquet",
-                                 "h0_market_inputs.json")] + list(SNAPSHOT_FILES)
 
 
 def fingerprint_market_inputs() -> None:
@@ -54,81 +49,11 @@ def fingerprint_market_inputs() -> None:
     (DATA_DIR / "h0_market_inputs.json").write_text(json.dumps(manifest, indent=2))
 
 
-def load_inputs(signals: Path = DATA_DIR / "h0_signals.parquet"):
-    uni = pd.read_parquet(DATA_DIR / "h0_universe.parquet")
-    sig = pd.read_parquet(signals)
-    sig["knowledge_time"] = pd.to_datetime(sig["knowledge_time"], utc=True)
-    lo = datetime.combine(DEV_START, datetime.min.time(), tzinfo=UTC)
-    hi = datetime.combine(DEV_END, datetime.max.time(), tzinfo=UTC)
-    sig = sig[(sig["knowledge_time"] >= lo) & (sig["knowledge_time"] <= hi)].copy()
-    sig["change"] = 1.0 - sig["cos_full"]
-    shares = pd.read_parquet(DATA_DIR / "h0_shares.parquet")
-    shares["knowledge_time"] = pd.to_datetime(shares["knowledge_time"], utc=True)
-    shares = clean_shares(shares)  # point-in-time removal of XBRL share-count typos (F3)
-    ent = pd.read_parquet(DATA_DIR / "bulk_entities.parquet")[["cik", "sic"]]
-    fil = pd.read_parquet(DATA_DIR / "bulk_filings.parquet")
-    ma = fil[(fil["form"] == "8-K") & fil["items"].fillna("").str.contains(r"\b2\.01\b")][["cik", "knowledge_time"]]
-    panel, daily_ret = load_price_snapshot(uni)
-    return uni, sig, shares, ent, ma, panel, daily_ret
-
-
-def add_neutral(sig: pd.DataFrame, shares: pd.DataFrame, ent: pd.DataFrame, ma: pd.DataFrame,
-                panel: pd.DataFrame) -> pd.DataFrame:
-    """Legacy month-cohort calculation for numerical comparison, NOT an event-time signal."""
-    s = sig.merge(ent, on="cik", how="left")
-    s["sic2"] = s["sic"].astype(str).str[:2]
-    s["month"] = s["knowledge_time"].dt.tz_convert(None).dt.to_period("M")
-    s["change_n"] = np.nan
-    controls = s.assign(as_of=s.groupby("month")["knowledge_time"].transform("max"))
-    controls = values_as_of(controls, shares, ["val"])
-    px = panel[["month", "cik", "close"]].assign(month=lambda d: d["month"] + 1)
-    controls = controls.merge(px, on=["month", "cik"], how="left")
-    controls.index = s.index
-    controls["log_mcap"] = np.log((controls["val"] * controls["close"]).where(lambda v: v > 0))
-    recent = values_as_of(
-        controls[["cik", "as_of"]], ma.assign(ma_time=ma["knowledge_time"]), ["ma_time"],
-        allow_exact_matches=False,
-    )
-    controls["ma_flag"] = (recent["ma_time"] >= controls["as_of"] - pd.Timedelta(days=365)).astype(float)
-    for _, gg in controls.groupby("month"):
-        g = s.loc[gg.index]
-        s.loc[g.index, "change_n"] = neutralize(gg, "change", "sic2", ["log_mcap", "ma_flag"])
-    return s
-
-
-def neutralize_formations(
-    snapshots: dict[pd.Period, pd.DataFrame],
-    ent: pd.DataFrame,
-    ma: pd.DataFrame,
-    bp: pd.DataFrame,
-    cfg: Config,
-) -> dict[pd.Period, pd.DataFrame]:
-    """Neutralize formation snapshots: size/events are as-of; SIC is the supplied fixed mapping."""
-    if not snapshots:
-        return {}
-    rows = pd.concat([
-        g.assign(as_of=close_time_utc(max(g["last_day"]))) for g in snapshots.values()
-    ], ignore_index=True).merge(ent, on="cik", how="left")
-    rows["sic2"] = rows["sic"].astype(str).str[:2]
-    rows["mcap_musd"] = rows["shares"] * rows["close"] / 1e6
-    rows["log_mcap"] = np.log(rows["mcap_musd"].where(rows["mcap_musd"] > 0) * 1e6)
-    rows = values_as_of(
-        rows, ma.assign(ma_time=ma["knowledge_time"]), ["ma_time"], allow_exact_matches=False)
-    rows["ma_flag"] = (rows["ma_time"] >= rows["as_of"] - pd.Timedelta(days=365)).astype(float)
-    eligible = ((rows["close"] >= cfg.min_price)
-                & (rows["mcap_musd"] >= rows["month"].map(bp[cfg.size_pct])))
-    rows["neg_change_n"] = np.nan
-    for _, group in rows[eligible].groupby("month"):
-        rows.loc[group.index, "neg_change_n"] = -neutralize(
-            group, "change", "sic2", ["log_mcap", "ma_flag"])
-    return {m: g.drop(columns=["as_of"]) for m, g in rows.groupby("month")}
-
-
 def monthly_test(cfg: Config, sig, shares, panel, bp, factors, snapshots=None, *,
                  series_out: list[dict[str, str | float]] | None = None) -> dict:
     months = pd.period_range(pd.Period(DEV_START, "M"), pd.Period(DEV_END, "M"), freq="M")
     rows, prev, ics = [], None, []
-    panels = {m: g for m, g in panel.groupby("month")}
+    panels = dict(list(panel.groupby("month")))
     for m in months:
         pm = panels.get(m, panel.iloc[:0])
         snapshot = snapshots.get(m, pd.DataFrame(columns=[*pm.columns, cfg.signal, "shares"])) if snapshots is not None else None

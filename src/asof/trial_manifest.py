@@ -162,7 +162,7 @@ def co_primary_decision(
         return ProtocolDecision("not_supported", ("robust_requirement_failed",),
                                 base.supplementary_holm_p)
     if base.status != "supported" or any(g.status != "supported" for g in robust_gates.values()):
-        return ProtocolDecision("undetermined", tuple(reasons + ["robust_evidence_undetermined"]),
+        return ProtocolDecision("undetermined", (*reasons, "robust_evidence_undetermined"),
                                 base.supplementary_holm_p)
     monthly, event = robust_gates["monthly"], robust_gates["event"]
     if monthly.expected_direction != 1 or event.expected_direction != -1:

@@ -134,8 +134,8 @@ def summarize(probes, records: dict) -> dict:
               for probe, entry in answered]
     return {
         "pipeline_id": PIPELINE_ID, "reviewer_id": REVIEWER_ID,
-        "pipeline": _score([(e, entry["verdict"]) for e, (_, entry) in zip(expected, entries)]),
-        "rules_only": _score([(e, entry["rules"]["verdict"]) for e, (_, entry) in zip(expected, entries)]),
+        "pipeline": _score([(e, entry["verdict"]) for e, (_, entry) in zip(expected, entries, strict=True)]),
+        "rules_only": _score([(e, entry["rules"]["verdict"]) for e, (_, entry) in zip(expected, entries, strict=True)]),
         "ai_on_rule_deferred": _score([(probe.task.expected_verdict, entry["verdict"]) for probe, entry in deferred]),
         "ablation_value_check_alone_on_deferred_answered": _score(single),
         "agreement_on_deferred_answered": _score([(probe.task.expected_verdict, entry["verdict"])

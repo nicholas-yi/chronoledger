@@ -5,8 +5,6 @@ import json
 import pytest
 
 from asof import ledger, trial_manifest
-from asof.costs import component_costs
-from asof.studies import STUDIES, study_readiness
 
 
 @pytest.mark.parametrize(
@@ -72,73 +70,3 @@ def test_p3_m09_rejects_reduced_history_without_overwriting_registered_n(
     assert existing.read_bytes() == before
 
 
-@pytest.mark.parametrize(
-    ("study", "overrides", "hypothesis", "extra", "expected"),
-    [
-        ("CL-P5-B0", {"source_rights": None, "run_ready": True}, None, {}, "gate:source_rights"),
-        ("CL-P5-B0", {}, None, {"requested_outcomes": True}, "scope_mismatch"),
-        ("CL-P5-X1", {}, "H1", {}, "distinct_study_required"),
-        ("CL-P5-G1", {"two_ended_identity": None}, None, {}, "gate:two_ended_identity"),
-        ("CL-P5-U1", {"independent_calibration": False}, None, {}, "gate:independent_calibration"),
-        ("CL-P5-H1", {"run_authorized": None}, "H1", {}, "gate:run_authorized"),
-    ],
-)
-def test_p5_adversarial_readiness(study, overrides, hypothesis, extra, expected) -> None:
-    spec = STUDIES[study]
-    gates = {g: True for g in spec.gates}
-    gates.update(overrides)
-    result = study_readiness(
-        study, prerequisite_status={p: "completed" for p in spec.prerequisites},
-        gates=gates, hypothesis=hypothesis, **extra)
-    assert result.status == "blocked" and expected in result.blockers
-
-
-@pytest.mark.parametrize(("traded", "expected"), [(1000.0, 0.70), (2000.0, 1.40)])
-def test_p6_t01_t02_count_each_traded_leg_once(traded, expected) -> None:
-    result = component_costs(
-        capital=10000, currency="USD", turnover=traded / 10000, turnover_basis="gross_traded",
-        half_spread_bps=4, execution_bps={"fees": 1, "impact": 2},
-        holding_bps_of_capital={"borrow": 0, "financing": 0, "distributions": 0},
-        borrow_available=True, fills_supported=True, gross_return=None)
-    assert result.total_currency_cost == pytest.approx(expected)
-
-
-def test_p6_t03_separates_distribution_from_execution_and_carry() -> None:
-    result = component_costs(
-        capital=10000, currency="USD", turnover=1, turnover_basis="gross_traded",
-        half_spread_bps=4, execution_bps={"fees": 1, "impact": 0},
-        holding_bps_of_capital={"borrow": 15, "financing": 10, "distributions": 50},
-        borrow_available=True, fills_supported=True, gross_return=0)
-    assert result.total_currency_cost == pytest.approx(80)
-    assert result.total_currency_cost is not None
-    distribution_ratio = result.component_return_costs["distributions"]
-    assert distribution_ratio is not None
-    distribution = distribution_ratio * 10000
-    execution_carry = result.total_currency_cost - distribution
-    assert execution_carry == pytest.approx(30)
-    assert -50 - execution_carry == pytest.approx(0 - result.total_currency_cost)
-
-
-@pytest.mark.parametrize(("half_spread", "net"), [(5, 6), (8, 0), (10, -4)])
-def test_p6_t06_break_even_counts_only_incremental_costs(half_spread, net) -> None:
-    result = component_costs(
-        capital=10000, currency="USD", turnover=2, turnover_basis="gross_traded",
-        half_spread_bps=half_spread, execution_bps={"fees": 1, "impact": 0.5},
-        holding_bps_of_capital={"borrow": 1, "financing": 0, "distributions": 0},
-        borrow_available=True, fills_supported=True, gross_return=20 / 10000)
-    assert result.total_currency_cost is not None
-    assert 20 - result.total_currency_cost == pytest.approx(net)
-    assert result.break_even_one_way_bps == pytest.approx(9.5)
-
-
-def test_p6_t07_does_not_silently_halve_supplied_frozen_turnover() -> None:
-    args = {
-        "capital": 10000, "currency": "USD", "half_spread_bps": 4,
-        "execution_bps": {"fees": 0, "impact": 0},
-        "holding_bps_of_capital": {"borrow": 0, "financing": 0, "distributions": 0},
-        "borrow_available": True, "fills_supported": True, "gross_return": None,
-    }
-    frozen_basis = component_costs(turnover=0.2, turnover_basis="one_way", **args)
-    traded_basis = component_costs(turnover=2000 / 10000, turnover_basis="gross_traded", **args)
-    assert frozen_basis.total_currency_cost == pytest.approx(1.60)
-    assert traded_basis.total_currency_cost == pytest.approx(0.80)

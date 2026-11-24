@@ -1,5 +1,5 @@
 from dataclasses import replace
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 import numpy as np
 import pandas as pd
@@ -44,9 +44,9 @@ def test_monthly_returns_do_not_bridge_gaps() -> None:
 
 def test_latest_as_of_ignores_future_facts() -> None:
     f = pd.DataFrame({"cik": [1, 1], "val": [100, 200],
-                      "knowledge_time": [datetime(2023, 1, 5, tzinfo=timezone.utc),
-                                         datetime(2023, 3, 5, tzinfo=timezone.utc)]})
-    got = latest_as_of(f, "cik", datetime(2023, 2, 1, tzinfo=timezone.utc), ["val"])
+                      "knowledge_time": [datetime(2023, 1, 5, tzinfo=UTC),
+                                         datetime(2023, 3, 5, tzinfo=UTC)]})
+    got = latest_as_of(f, "cik", datetime(2023, 2, 1, tzinfo=UTC), ["val"])
     assert got["val"].tolist() == [100]
 
 
@@ -58,8 +58,8 @@ def _panel(n=50):
 
 def test_signals_after_formation_close_are_excluded() -> None:
     panel = _panel()
-    late = datetime(2023, 3, 31, 21, 0, tzinfo=timezone.utc)  # 17:00 ET, after the close
-    early = datetime(2023, 3, 1, tzinfo=timezone.utc)
+    late = datetime(2023, 3, 31, 21, 0, tzinfo=UTC)  # 17:00 ET, after the close
+    early = datetime(2023, 3, 1, tzinfo=UTC)
     sig = pd.DataFrame({"cik": list(range(50)), "cos_full": np.linspace(0, 1, 50),
                         "knowledge_time": [early] * 49 + [late]})
     shares = pd.DataFrame({"cik": range(50), "val": [1e8] * 50, "knowledge_time": [early] * 50})
@@ -70,7 +70,7 @@ def test_signals_after_formation_close_are_excluded() -> None:
 
 def test_long_short_signs_and_costs() -> None:
     panel = _panel()
-    t = datetime(2023, 3, 1, tzinfo=timezone.utc)
+    t = datetime(2023, 3, 1, tzinfo=UTC)
     sig = pd.DataFrame({"cik": range(50), "cos_full": np.linspace(0, 1, 50), "knowledge_time": [t] * 50})
     shares = pd.DataFrame({"cik": range(50), "val": [1e8] * 50, "knowledge_time": [t] * 50})
     port = form_portfolios(pd.Period("2023-03", "M"), sig, shares, panel, 700.0, Config())
@@ -83,7 +83,7 @@ def test_long_short_signs_and_costs() -> None:
 def test_clean_shares_drops_typo_and_accepts_confirmed_split() -> None:
     from asof.backtest import clean_shares
 
-    t = [datetime(2023, m, 1, tzinfo=timezone.utc) for m in (1, 4, 7, 10, 12)]
+    t = [datetime(2023, m, 1, tzinfo=UTC) for m in (1, 4, 7, 10, 12)]
     df = pd.DataFrame({"cik": 1, "val": [90e6, 90e9, 90e6, 4.5e6, 4.6e6], "knowledge_time": t})
     out = clean_shares(df)
     # 1,000x typo is never accepted; a 20:1 reverse split takes effect only once confirmed.

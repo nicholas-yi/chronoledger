@@ -23,7 +23,7 @@ from asof.prices import YahooPrices, daily_returns
 
 def clustered_mean(c: pd.DataFrame) -> dict:
     fit = sm.OLS(c["car"], np.ones(len(c))).fit(cov_type="cluster", cov_kwds={"groups": pd.factorize(c["month"])[0]})
-    return {"mean_car": float(fit.params.iloc[0]), "t": float(fit.tvalues.iloc[0]), "n": int(len(c))}
+    return {"mean_car": float(fit.params.iloc[0]), "t": float(fit.tvalues.iloc[0]), "n": len(c)}
 
 
 def main(n_placebo: int = 4000, seed: int = 7) -> None:

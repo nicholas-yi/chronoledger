@@ -1,2591 +1,327 @@
-# Active focus: one evidence-linked reader, not nine trading models
+# Focused reader
 
-**2026-11-19.** Broader stochastic-process/network/pricing/portfolio modules are
-parked research references. Their code, frozen runs, nulls and failures are preserved.
-The active research question is now:
+The focused reader answers one narrow question:
 
 > Extract one reporting issuer's metric value, stated unit and reporting year with
-> a verbatim supporting sentence, or explicitly abstain.
+> source evidence, or explicitly abstain.
 
-The [implementation](../src/asof/focused_reader.py) reuses the existing evidence
-normalization helper. There is no new framework, graph engine or training stack.
+This page is the condensed reference. The run-by-run notebook (frozen plans, commit freezes,
+resource receipts, approval history and superseded designs) is preserved unchanged in the
+[archived FOCUSED_READER.md](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md).
+Links labelled "notes" below point to the matching archived section.
 
-## What improvement means here
+**Current status.** The deterministic source path (guarded parser, exact-offset evidence and
+source-proved claim checks) is the current candidate and passes all nine regression cohorts. No
+model arm, critic or AI reviewer has been promoted; the AI reviewers and the rules-first pipeline
+are advisory only. Real-filing accuracy has not been measured: independent human labels remain
+zero, and the [source review runbook](#human-actions-still-required-source-review-runbook) is the
+outstanding step. The answer-first model reader remains the application default; prefer the
+deterministic path when its explicit input contract applies.
 
-1. A narrow parser supplies an auditable cheap baseline.
-2. One fixed answer-first local model supplies a single-pass baseline.
-3. A critic sees the same source, question and actual draft. It checks entity,
-   metric definition, period, number/unit, ambiguity and supporting quote.
-4. On evaluation cases, a nonaccept verdict permits **one** revision. The critic
-   can be wrong: the revision must recheck the original source.
-5. A revision failing necessary deterministic checks is rejected; a valid initial
-   answer is retained. If neither output passes, return a documented abstention.
+## Terms
 
-The selection policy never consults expected/gold answers. A semantically wrong
-revision that passes token/quote checks can therefore regress a correct initial
-answer. The benchmark must count that regression, not secretly roll it back with gold.
-Malformed model JSON is an invalid response, not a correct abstention.
-
-Necessary checks are verbatim evidence, issuer token, requested year, stated unit
-and numeric occurrence. An industry metric can pass all five when its sentence
-mentions the issuer. **Grounding is not semantic entailment, independent gold or truth.**
-The deterministic accounting oracle remains a separate optional diagnostic; this
-single-value task does not invent an accounting equation to certify every answer.
-
-## A bounded across-version improvement mechanism
-
-Only mistakes verified against authored **development** fixture answers enter the
-private error bank. Model approval alone cannot produce a labelled example.
-
-A frozen adaptation rule maps observed error categories to six fixed critic reminders:
-period binding, signs, issuer-versus-industry, definition mismatch, percent/currency
-units and unresolved conflicts. Before any evaluation model call, the runner writes
-the selected reminders and candidate digest to an exclusive receipt.
-The initial evaluation generator remains identical across the two model arms.
-Only the critic/revision can see these development reminders.
-
-No errors means no lessons; that is not described as learned improvement.
-There is no prompt search, repeated evaluation, automatic code editing, DPO,
-reinforcement learning or model-weight update. The error bank/proposal is a
-reviewable input to a future version, not an unsupervised reward-maximizing loop.
-
-The promotion gate reports paired corrections/regressions and **always refuses
-production promotion from this invented-case harness**, including if a caller sets
-an `independent_audit` boolean. That flag cannot authenticate real independent evidence.
-Any future external audit/promotion mechanism needs its own genuine evidence and
-approval; it is not implemented by relabelling these fixtures.
-
-## Frozen local-model comparison: CL-FOCUS-LAAJ-01
-
-The user explicitly approved one local run: twelve invented cases, at most 36 calls,
-20 minutes, one CPU, no GPU/cloud/downloads, 6 GiB owned-process memory cap, no retry.
-The [plan](../results/focused_reader_plan.json), prompts, fixtures, runner, package
-pins and this contract must be committed before inference.
-
-Inputs are only the fixed [invented fixture](../tests/fixtures/focused_reader.json),
-not filing caches, public financial benchmarks, reserved data, prices or outcomes.
-Every issuer/value is invented. This is a task-level diagnostic, not validation of
-financial extraction in the wild or a historical trading model.
-
-### Allocation and split
-
-- Six development cases: generate once, critique the actual draft, and critique
-  one deliberately wrong authored probe per case: **18 calls**.
-- Freeze candidate development reminders/digest before evaluation model calls.
-- Six evaluation cases: generate once, critique once, optionally revise once:
-  **at most 18 more calls**.
-- No development revisions; its judge-assisted summary remains explicitly not
-  attempted. Development is for error collection and critic calibration only.
-- Single-pass and judge-assisted evaluation arms share the same initial generation,
-  isolating the downstream critic intervention. They are not independent samples.
-- Judge-assisted per-case latency/tokens include that shared initial generation;
-  summing arm costs would double-count it. Total actual calls are recorded separately.
-
-The parser grammar handles only "`ISSUER reported METRIC of VALUE UNIT for YEAR.`"
-and rejects unresolved conflicts. One evaluation wording intentionally lies outside
-that grammar; it tests baseline coverage, not an industry-wide parser performance claim.
-Other cases cover periods, signed values, issuer/industry confusion, currencies,
-definition mismatch, missing facts and contradictory evidence.
-
-Expected tuples are not sent to either model stage. Critic calibration compares
-accept/reject decisions against known authored fixture correctness, including wrong
-probes; it is not judge-to-judge agreement. Invalid critiques count explicitly.
-
-The whole fixture was authored and is visible in Git. "Evaluation" means held
-away from the frozen development-reminder selection rule/model requests, **not an
-independently authored secret test set or human gold**. Six evaluation cases cannot
-establish high accuracy, statistical superiority, generalization or economic value.
-
-### Local runtime and stops
-
-Only the already cached `qwen3.5:4b` digest
-`d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04`
-is allowed. Verify the previously pinned executable/native backend before launch.
-The runner refuses an occupied `127.0.0.1:11435` port and never alters the existing
-shared `11434` server. There are no model pulls or cloud endpoints.
-
-The owned Python worker is gated until attached to the packaged
-[`WorkerJob`](../src/asof/runtime.py), then launches its own server. A new optional
-process-count limit allows up to four owned members (default remains one).
-Descendants inherit one CPU; sampled Job membership/affinity is checked.
-Numerical thread counts and model thread count are one, `num_gpu=0`, and the
-owned server's `/api/ps` must report zero VRAM after every completed request.
-Here completion means a response accepted as complete by the runner; a truncated
-response stops before that post-call model-state check.
-
-Owned-server environment disables cloud and declares native prompt cache zero,
-with the previously verified shipped support. This is not a new experiment proving
-which memory component that setting controls. Context is 2,048 tokens; generation/
-revision output cap 384, critic cap 256; temperature zero and seed 202611190611.
-No complex output grammar is imposed; JSON schema validation happens after generation.
-
-One request at a time, no automatic generation retries, per-call timeout 90 seconds,
-startup cap 60 seconds. Input-fit/truncation checks fail closed. The controller stops
-at 1,180 seconds to reserve cleanup/report time inside 1,200 seconds.
-The Job private-commit limit reserves 128 MiB of the 6-GiB budget for the controller;
-combined observed working set is sampled separately. Commit and RSS differ.
-Neither is an OS filesystem/network sandbox. Unexpected membership/resource/
-transport/truncation errors stop and preserve the attempt.
-
-Raw responses, server logs, error bank, candidate snapshot and per-process resource
-receipts stay in ignored `data/focused_reader_v1`. An exclusive attempt marker blocks
-rerun. Every send is recorded before transport; interrupted calls remain attempts.
-Only invented-case answers and aggregate comparisons go in the public report.
-The controller closes its Job and terminates only explicitly owned process handles.
-
-## Evaluation and honest release
-
-Report all-planned correctness, answered coverage, wrong/unsupported answers, malformed/
-unattempted cases, critic false acceptance/rejection, corrected/regressed answers,
-latency, tokens and actual resource use. Abstention is not an answered correct value;
-correct rejection of an unanswerable item is reported distinctly.
-
-No judge "pass" is used as the extraction-accuracy denominator. No successful
-synthetic comparison establishes real economic labels, market novelty or alpha.
-Without an independent labelled audit, the default answer-first reader remains
-unchanged and no production challenger is promoted.
-
-Relevant precedents and caveats:
-[LLM-as-a-judge biases](https://arxiv.org/abs/2306.05685),
-[Self-Refine](https://arxiv.org/abs/2303.17651),
-[limits of intrinsic self-correction](https://arxiv.org/abs/2310.01798),
-[self-rewarding weight training](https://arxiv.org/abs/2401.10020).
-These support testing a bounded workflow, not assuming improvement.
-
-No real-data study, H4/H6 hold release, source repair, return ledger row, new
-model download, API expenditure, weight training, external publication or push.
-
-Pre-inference software verification: **668 tests passed in 51.83 s**, with two
-existing synthetic rank-deficiency warnings; repository Ruff and local documentation
-target checks passed. New tests include a semantically wrong industry answer that
-passes necessary token checks, wrong-revision rollback without using gold,
-development-only lessons, failed-attempt accounting and owned Job telemetry.
-No model generation occurred during those checks. This is not the local-model result.
-
-Preflight correction, before inference: the initial freeze `8686abb` used an HTTP
-request to test whether port 11435 was occupied. That GET raised ConnectTimeout
-before the attempt marker, owned server or model generation. Both marker/report
-were confirmed absent, and exclusive OS binding confirmed the port unoccupied.
-The corrected preflight uses exclusive OS binding; startup health polling tolerates
-connection errors/timeouts within its existing 60-second readiness cap.
-No generation retry, budget, prompt, fixture, seed or evaluation rule changed.
-This fix is committed in a new freeze before the single actual model attempt.
-
-## Observed local result: STOPPED, no improvement established
-
-The corrected freeze was `987f956127c23656dd5a521da9a3e7db23b8506a`.
-The [actual receipt](../results/focused_reader.json) is a stopped run, not a passed
-reader comparison:
-
-| Observation | Actual result |
+| Term | Meaning here |
 |---|---|
-| Started model calls | 2 of at most 36 |
-| First development extractor response | Correct invented value `17`, unit `USD million`, period `2016`, supported quote |
-| Extractor cost | 58.422 s wall, 60 generated tokens; includes its first-call/load overhead |
-| First critic response | Hit the frozen 256-token limit, `done_reason=length`; no complete accepted critique |
-| Critic cost | Additional 84.453 s wall, 256 generated tokens |
-| Revisions / completed critic calibration records | 0 / 0 |
-| Evaluation cases reached | 0 of 6 |
-| Verified error-bank/candidate adaptation phase reached | No |
-| Production promotion / weight updates | No / no |
-| Total controller wall | 144.562 s |
-| Observed combined peak working set | 3,776,741,376 bytes, about 3.52 GiB |
-| Resource/source checks | Passed; one inherited CPU and unchanged frozen source during the run |
-
-The incomplete critic output began questioning the correct year/value association,
-then reconsidered itself before truncation. This is a qualitative observation about
-an unfinished response, **not a scored final false rejection**, a completed
-calibration exercise or proof that all judges are unreliable.
-No judge opinion became a training label. One correct development answer is not
-100% extraction accuracy, and the six unattempted evaluation cases are not a measured
-0%-accuracy model. Planned/attempted/invalid counts remain separate in the receipt.
-
-The owned server verified zero VRAM after the first valid call; the second response
-stopped at truncation before post-call state inspection. Every request declared
-`num_gpu=0` and inherited the CPU-only server environment. The owned Job's four
-observed member PIDs exited/are absent; the preexisting shared Ollama PID remained
-untouched and port 11435 no longer had a listener. No persistent server was left.
-
-**Decision:** keep the existing answer-first default. This judge configuration did
-not earn a default role, and its extra latency produced no usable critique or
-observed correction. Do not silently increase tokens, switch models, rerun with
-another seed or call this "self-improvement." A future critic design would be a
-new version and separately approved experiment; the attempt marker is retained.
-
-The full post-preflight software suite passed **669 tests in 40.18 s**, with two
-existing synthetic rank-deficiency warnings; Ruff passed. Those software checks do
-not reverse the stopped model result. Historical quant experiments and source holds
-are preserved; no real corpus, prices, fundamental outcomes, production ledger,
-weight training, model download, cloud inference or push was involved.
-
-## V2: separately authorized compact-critic redo
-
-The user explicitly requested "fix and redo" after seeing the stopped v1 result.
-This is a new post-development-failure design, not an automatic resume or a hidden
-replacement of the old evidence. V1's raw result/attempt marker remain intact.
-
-The change targets the observed failure mechanism: v1 asked for free-form feedback,
-which rambled/reconsidered itself and hit the output cap. V2 uses:
-
-```json
-{"verdict":"accept","issues":[]}
-```
-
-The `format` field constrains the critic to a two-field JSON object: verdict is one
-of `accept/revise/abstain`; at most three issue codes from a fixed nine-code enum.
-No generated feedback or reasoning field exists. The critic output cap is **128**,
-down from 256, not an increased budget to accommodate rambling.
-Pydantic still rejects inconsistent verdict/code combinations, repeats or unsupported
-codes. A bounded grammar is not a semantic correctness guarantee.
-
-On revision, code expands the critic codes into fixed source-checking reminders.
-That feedback contains no authored expected answer and no free-form model rationale.
-The model must re-read the source; the deterministic rollback policy is unchanged.
-
-All twelve fixtures, model/digest, generator/revision prompts, seed, split, development
-lesson rule, six wrong probes, 36-call ceiling, 20-minute wall cap, per-call timeout,
-one CPU, no GPU/cloud/pulls and 6-GiB resource contract remain the same.
-No evaluation outputs were observed in v1, but these still are visible, agent-authored
-invented fixtures, not independent gold or a secretly held-out test.
-
-The [v2 plan](../results/focused_reader_v2_plan.json), schema/prompt and tests are
-committed before v2 inference. Explicit launch:
-
-```powershell
-uv run --no-sync python scripts/run_focused_reader.py --version v2 --execute
-```
-
-V2 uses new `data/focused_reader_v2` and `results/focused_reader_v2.json` paths;
-default `v1` still refuses its existing attempt. The v1 public result is included in
-v2's frozen file hashes so accidental alteration is visible. There is no third
-automatic attempt, no promotion of a schema-only success, and no new training.
-
-V2 pre-inference verification: **671 tests passed in 64.51 s**, with two existing
-synthetic rank-deficiency warnings; Ruff and documentation/index checks passed.
-New tests reject generated free-form feedback, unknown/repeated/excess codes and
-inconsistent verdicts, and verify unchanged generator/revision messages and isolated
-v1/v2 output selection. No v2 model call occurred during those checks.
-
-## Observed v2 result: completed, critic not beneficial
-
-The [v2 actual receipt](../results/focused_reader_v2.json) records the single run
-frozen at `0a3882f431da216e75128bbf966e106eac1aadc6`. All twelve fixtures were
-processed in **1,038.781 seconds (17.31 minutes)**, with 33 calls of the maximum 36:
-12 initial generations, 18 critiques and 3 evaluation revisions.
-All responses ended normally without token truncation. Format/semantic validation
-still rejected four critiques and one initial answer; completion is not a QA pass.
-
-### Evaluation, six authored invented cases
-
-| Arm | Correct outcomes / 6 | Answered values | Correct abstentions | Other outcomes |
-|---|---:|---:|---:|---|
-| Narrow parser | 5 | 3 | 2 | One missed answer outside its grammar |
-| Single pass | 5 | 3 | 2 | One invalid response: correct number/quote but missing unit |
-| Judge-assisted | 4 | 2 | 2 | Two missed answers; one was a regression from a correct draft |
-
-No wrong numeric answer was emitted in the completed evaluation arms. That is not
-100% accuracy: invalid responses and missed supported answers remain failures.
-The same initial generations were shared between model arms, not independently
-sampled. The critic corrected **zero** outcomes and regressed **one**.
-
-The regression was E04, an invented EUR revenue disclosure. The initial answer
-quoted the exact source correctly. The critic requested revision; the revised model
-abstained, claiming the sentence was absent even though it was present verbatim.
-Abstention passes the necessary output/grounding contract but does not establish
-that evidence is actually missing. The selector did not secretly consult gold to
-undo the regression.
-
-E01's initial response contained the right authored value and source sentence but
-left `unit=""`, so strict parsing rejected it. The critic accepted that raw draft
-instead of requesting a unit repair. This is a task-contract failure, not proof the
-model failed to locate the number. We did not regrade or normalize it post hoc.
-
-### Development critic calibration, not independent gold
-
-All six initial development outputs matched their authored fixture answers, so the
-verified-development error bank was empty. The frozen adaptation rule executed and
-saved an empty-reminder candidate **before** evaluation; no lessons or model weights
-were learned. This is not evidence of iterative improvement.
-
-| Draft type | Accept | Nonaccept | Invalid critique |
-|---|---:|---:|---:|
-| Six correct actual development drafts | 3 | 2 (false rejections) | 1 |
-| Six deliberately wrong authored probes | 1 (false acceptance) | 2 (correct rejections) | 3 |
-
-"False rejection" here follows the frozen wire contract: `accept` must include a
-justified abstention. The two nonaccepts of correct drafts were `abstain` verdicts,
-which can echo the original correct abstention rather than contradict its facts.
-They still violate the routing contract and request unnecessary revision.
-Likewise, two of the three evaluation revisions only regenerated already-correct
-abstentions; the third caused the E04 regression.
-
-The four invalid critiques repeated the same `missing` issue code twice. The bounded
-JSON grammar solved the token-exhaustion problem but did not enforce every semantic
-validator rule. They remain invalid; we did not silently deduplicate/regrade them.
-No error-code/schema repair changes the observed E04 semantic regression.
-
-### Cost, resource and decision
-
-- Evaluation single-pass latency: **186.375 s**; judge-assisted latency including its
-  shared initial generations: **474.999 s**, about **2.55x**.
-- Evaluation output tokens: single pass **350** versus judge-assisted **647**.
-  Summing both arms would double-count the shared initial generation.
-- Total unique generated tokens across the run: **1,224**.
-- Observed combined peak working set: **3,832,442,880 bytes (3.57 GiB)**.
-- One-CPU affinity, source immutability and resource checks passed; worker exited 0.
-  All four observed owned PIDs were confirmed absent after cleanup, port 11435
-  closed, and the original shared Ollama PID remained untouched.
-- V1's public result was included in the frozen hashes and remained unchanged.
-  Neither its result nor either attempt marker was overwritten.
-
-**Decision: the technical truncation fix worked; the critic still did not earn its
-complexity. Keep the existing answer-first default and do not automatically revise
-answers with this judge.** No production promotion, weight update, third automatic
-attempt, real-data study, ledger row, model pull, cloud/API expenditure or push.
-
-The score difference is descriptive for six visible, agent-authored invented
-evaluation cases, not statistical evidence that every judge is harmful or proof
-that a future independently calibrated approach cannot help. This result is an
-honest rejection of this particular configuration under this budget.
-
-## Next frozen test: verifier only, with fair deterministic controls
-
-The user requested the next steps on 2026-11-19: deterministic output repair,
-fresh robustness pairs, an independently reviewable development sample, and no
-return to broad model expansion. The judge remains disabled.
-
-[`asof.verified_reader`](../src/asof/verified_reader.py) may repair **only a blank
-unit**. It first validates every other answer field without coercion, requires a
-verbatim normalized quote and the requested year, then requires a uniquely matching
-issuer/metric/value/year/unit binding in a finite sentence grammar. The binding
-must occur inside the cited quote. Multiple compatible values/units, another year,
-a fabricated quote or a wrong explicit unit are rejected; values/years/explicit
-units are never rewritten to match gold. Unrelated JSON errors remain invalid.
-Existing justified abstentions are preserved; their factual correctness is not certified.
-
-Supported units are USD/EUR million/thousand, `%` and `subscribers`.
-Supported forms are the original explicit reported-metric sentence and two finite
-subscriber wordings. This is **not general financial entailment**: unsupported
-language stays unavailable, and a relation parser cannot establish truth from an
-arbitrarily negated/qualified real-world paragraph.
-Only necessary source checks and this declared grammar are enforced.
-
-### Fresh paired fixture and allocation
-
-The [new authored fixture](../tests/fixtures/verified_reader.json) has 24 cases in
-12 pairs: sentence order, changed issuer/year/sign/currency/scale, conflicting values,
-industry distraction, metric definitions, subscriber wording, ambiguous currency,
-and whitespace/case. It uses new names/numbers, not regraded old cases.
-The [plan](../results/verified_reader_plan.json) is committed before inference:
-
-- At most **24** local generation calls; no critic, revision, retry or prompt search.
-- Existing model/digest, unchanged generator prompt, fixed seed 202611190752.
-- Same 20-minute / one-CPU / no-GPU/cloud/pulls / 6-GiB resource contract.
-- New output `results/verified_reader.json` and private `data/verified_reader_v1`.
-- Preserve/hash both old judge results; do not regrade their missing-unit failures.
-
-Arms: the old narrow parser, a **stronger binding parser**, fixed single-pass LLM,
-and that exact same raw LLM output plus deterministic verification.
-Verification latency is recorded separately as well as added to the shared model
-call. There is no second generation for the verified arm.
-The stronger parser exposes how much apparent improvement is already encoded by
-the binding rules: do not credit the LLM for a capability the deterministic parser has.
-
-Report all-planned correctness/coverage, invalid/wrong answers, corrections/regressions,
-both-correct pairs and transformation violations. A pair of consistently wrong
-answers can satisfy an invariant, so invariant agreement alone is not success.
-Invalid/unattempted pairs remain separate. The authored fixture deliberately uses
-the supported grammar and exercises a known weakness; this is engineering robustness,
-not independent test authorship, unbiased real-data performance or economic value.
-
-### Real-source packet, not invented independent labels
-
-The separate [packet plan](../results/reader_review_plan.json) permits only the
-previously date-cleared, content-pinned `data/kpi_omission_dev_v1` derivative.
-No new raw-cache body, mixed ZIP/parquet, quarantined source, SEC request or outcome
-dataset may be opened. Every annual/context metadata reference is guarded before
-the text-containing derived JSON is read; the old manifest/case pins must match.
-This intentionally reuses the already exposed 2012-2018 cohort, not a fresh holdout.
-
-[`asof.reader_review`](../src/asof/reader_review.py) selects up to 12 mention-bearing
-current excerpt windows, one per issuer, by frozen hash rank `seed:case_id:family`.
-Minimum six or stop; there are no replacements from raw sources. Evidence windows
-are bounded at 1,024 characters. Preparation has a 30-second/256-MiB observed
-RSS check before writing excerpts, with explicit input byte caps (256 KiB manifest,
-1 MiB derived JSON). This is not OS mount isolation.
-
-The private packet includes exact provenance, the metadata reporting-year target,
-source windows and limitations; no model answers, expected values or proposed labels.
-Two first-pass CSV templates have blank reviewer IDs, answers and blindness declarations.
-The existing intake report type is reused, but the original H1 date/label profile
-is **not** broadened or rewritten for this task.
-
-The new check requires distinct declared reviewer IDs, full item coverage, no
-AI-suggestion exposure, explicit supported/unsupported-within-excerpt/insufficient-context
-status and rationale. Supported tuples also need finite values, the requested
-year and verbatim evidence. Declarations do not authenticate independence; even
-agreement remains subject to source/adjudication review and never creates gold automatically.
-
-An excerpt may lack enough entity, definition or period context. The correct
-label then is `insufficient_context`, not an invented number or a claim that the
-full filing lacks the metric. This packet is conditional on prior lexical coverage,
-not a representative accuracy audit. No independent reviewer is currently assigned.
-
-Private outputs stay under `data/reader_review_v1`; public receipt contains counts,
-scope and hashes only. The curator reads old text-containing JSON, including prior
-snippets; it is not metadata-only. Creating blank templates is not completing
-independent review, hiring reviewers or obtaining real gold.
-
-Both operations require committed source/plan freezes and exclusive attempt markers.
-No automatic promotion, weight updates, public raw-text release, source repair,
-H4/H6 hold release, return trial, production ledger row or push.
-
-Pre-execution checks for the verifier/packet profiles: **680 tests passed in
-66.26 s**, with two existing synthetic rank-deficiency warnings; Ruff and local
-documentation/index checks passed. Added fixtures cover unique blank-unit recovery,
-ambiguity/refusal, no-gold behavior, paired metrics, source-date-before-derived-read
-ordering, unlabelled templates and reviewer-independence blockers.
-No new local generation or real derivative read occurred during those checks.
-
-## Observed verifier-only result and private review preparation
-
-Code, plans and cases were frozen at
-`22f4452c183363b9f433c9ba5f19b5eba04d41fe`. The private-packet aggregate receipt
-was then committed at `018e9e3bf5da1ccc2f094f2312a35dc0cc14e568`, without changing
-those source files. Model generation froze those same source bytes at the latter
-commit. [Actual verifier receipt](../results/verified_reader.json);
-[packet preparation receipt](../results/reader_review_packet.json).
-
-### Fresh authored robustness comparison
-
-All **24 cases / 12 pairs** completed, using 24 initial-generation calls and **zero
-judge/revision calls**, in **568.782 seconds (9.48 minutes)**.
-
-| Arm | Correct outcomes / 24 | Answered values | Correct abstentions | Other outcomes |
-|---|---:|---:|---:|---|
-| Old narrow parser | 21 | 16 | 5 | Three grammar misses |
-| Stronger binding parser | 24 | 19 | 5 | None on this authored fixture |
-| Raw single pass | 21 | 17 | 4 | Two invalid missing-unit responses, one answer to an ambiguous source |
-| Same single pass + verification | 24 | 19 | 5 | None on this authored fixture |
-
-Verification corrected **three** outcomes and regressed **zero**:
-
-- R10-0/R10-1: the subscriber value, reporting year and quote were present, but
-  the model omitted the unit. The unique quoted binding supplied `subscribers`.
-  Raw model outputs remain scored invalid; the repaired arm is distinct.
-- R11-1: the source made unreconciled USD/EUR claims for the same metric/year.
-  The model answered one; verification refused the ambiguous binding and abstained.
-
-All twelve verified/binding-parser pairs had both cases correct and zero declared
-relation violations. Raw single pass had ten both-correct pairs, one relation
-violation and one invalid-output pair; the old parser had ten both-correct pairs
-and one relation violation. Relation agreement alone can conceal wrong answers;
-both-correct and invalid counts therefore remain visible.
-
-**The stronger parser also got 24/24. That is the most important control.**
-It took about **0.0069 seconds total** for the measured parsing over 24 cases, versus
-**565.813 seconds** of model-call latency. Verification itself added only about
-**0.0030 seconds total**, but it did not remove the cost of the original model call.
-Model arms share that generation; do not sum them as independent call costs.
-Unique model output tokens were 1,632.
-
-This fixture deliberately uses a finite supported grammar and known failure types.
-New names/numbers and paired perturbations are not independent financial gold or
-generalization to real disclosures. **The result supports the deterministic rules
-on this subset; it does not show that the LLM adds value beyond the stronger parser.**
-For known supported language, prefer the deterministic path. The broader
-answer-first default remains unchanged; no experimental model/verification pipeline
-is automatically promoted to an unqualified real-data default.
-
-Resource/source checks passed: observed combined peak working set
-3,912,040,448 bytes (3.64 GiB), one CPU, worker exit 0. Both older judge result
-hashes matched their frozen values. The one-attempt markers and all raw responses
-are retained; no seed changes, retries, model pulls, training or return evaluation.
-
-### Real-source packet: actually prepared, not independently labelled
-
-The approved prior derivative was read only after guarding all 263 references in
-its 64-case parent manifest. All declared date roles were inside the shared
-2012-2018 envelope (combined 2012-09-30 through 2018-12-06).
-Manifest input was 176,415 bytes; text-containing derived JSON was 629,817 bytes
-and matched the preexisting pin. No raw filing cache, mixed ZIP/parquet, quarantined
-source, prices or outcome dataset was opened.
-
-Preparation selected **12 issuer-disjoint current excerpt windows** and wrote a
-private packet plus two blank review CSVs under `data/reader_review_v1`.
-It completed in 0.109 seconds, with process peak RSS 35,180,544 bytes, unchanged source,
-zero model calls and zero raw-cache body reads.
-Packet SHA-256:
-`3b2cf99bbb7b4e163f0b420a6bdd1f42a13b63b2d24b209ef61cb1b25fefb2a9`.
-Only aggregate hashes/counts were committed; snippets and identities remain private.
-
-**Independent reviewers are still unassigned, intake is blocked, and gold labels
-remain zero.** We prepared the evidence and neutral first-pass forms; we did not
-perform two reviews, contact people, invent labels or declare agreement.
-The source windows are a selected prior exposed cohort and may be too narrow to
-establish identity/unit/year. Reviewers must use `insufficient_context` when necessary.
-No automatic promotion or economic claim follows from packet preparation.
-
-## Harder evaluation: format failure boundaries, not higher-looking scores
-
-The user selected **harder_evaluation** on 2026-11-19. The previous grammar-controlled
-24/24 must not be improved by adapting the same parser to another conveniently
-matching fixture. Instead, the parser, binder/verifier, generator prompt, answer
-schema and existing primary score remain **unchanged** for this new test.
-
-[`asof.reader_stress`](../src/asof/reader_stress.py) generates **288 invented cases
-in 144 pairs**, from a frozen [definition](../tests/fixtures/reader_stress.json).
-Twelve format families each have twelve numeric/name variants and two members:
-one canonical positive prose control, one stress variant. Thus 144 cases are
-controls and 144 are stress formats, not 288 hard real disclosures.
-
-Families: table-header units, scaled-unit headers, footnote unit overrides,
-parenthesized negatives, missing-value dashes versus zero, superseded corrections,
-consolidated/segment scope, pronoun/header entity context, noncalendar fiscal years,
-counterparty distractors, quoted nonfacts and malicious source instructions.
-These are authored semantic examples, not real financial outcomes or an independent
-natural-language gold set. Repeated template variants are not independent market
-observations and no binomial generalization claim will be made from their count.
-
-### Frozen audit allocation
-
-- Evaluate the two unchanged deterministic parsers on all 288 cases.
-- Choose exactly one complete pair per family by minimum SHA-256 of
-  `seed:pair_id`, seed `202611190824`, before any model result: **24 model cases**.
-  Selection does not depend on observed correctness, difficulty or a preferred score.
-- Initial generation only, no judge/revision/retry, at most 24 calls. The verified
-  arm consumes that exact same raw output. No automatic training/promotion.
-- Same model/digest, context/output limits, 20 minutes, one CPU, no GPU/cloud/pulls
-  and 6-GiB owned-process resource contract.
-- New [plan](../results/reader_stress_plan.json), result `results/reader_stress.json`
-  and ignored `data/reader_stress_v1`; preserve/hash all three old model results.
-
-The expansion is **288 deterministic cases plus a 24-case stratified model audit**,
-not 288 model generations. Runtime sampling/seed/code, prompts, metrics and allocation
-are committed before generation. The old simple/verified results are not overwritten.
-Another shared server/native process was observed before this task; it is unrelated
-to the new owned Job and must not be modified or stopped.
-
-### Scoring without hiding contract limitations
-
-Report control and stress strata separately, overall and by family:
-
-1. Original strict answer/evidence contract, with invalid/missing/abstained cases
-   retained in denominators.
-2. Exact authored value/unit/year tuple correctness **without** the evidence-occurrence
-   requirement, as a diagnostic only, never a replacement acceptance score.
-3. Answer coverage, wrong tuples, correct tuples failing evidence checks and specific
-   grounding failures.
-4. Both-correct pairs, relation violations and invalid/unattempted pairs.
-5. Same-output verified corrections/regressions and measured call/verification cost.
-
-Example: a correct negative value read from parentheses may fail the old literal
-minus-sign occurrence check. A correct pronoun-based answer can lack the issuer
-name in its single-sentence quote. Those failures must be distinguished from an
-incorrect financial tuple; neither diagnostic certifies general semantic truth.
-No scorer or verifier is loosened after seeing which cases fail.
-
-### Difficult output accounting
-
-For **this profile only**, a completed generation ending at its output-token limit
-counts as an invalid case and proceeds to the next frozen case, without retry.
-Neither model arm may parse or repair that truncated output, even if a partial JSON
-object happens to look usable. This measures bounded completion instead of allowing
-the first hard output to censor the entire format audit.
-Input truncation, missing input-fit/telemetry evidence, incomplete transport, HTTP/
-timeout, scope or resource failures still stop the run and retain partial receipts.
-The older profiles keep their original stop rules.
-
-This is a failure-discovery experiment, not a requirement to beat the previous
-24/24. Lower scores under realistic format shifts are useful evidence. Independent
-real-source review remains unassigned; this batch does not read or label the private
-review packet or manufacture the missing gold.
-
-Pre-execution validation: Ruff and documentation/index checks passed. The full
-684-test run had **683 passed and one failure** in the unchanged
-`test_serial_start_rate_and_duplicate_request_stop`: the mocked request gap was
-0.485 s against its 0.49 s assertion. The isolated timing test rerun together with
-the affected reader tests passed **21/21**. No request-rate implementation or
-threshold was changed, and no second clean full-suite result is claimed.
-The generator/scorer and binding-verifier files were byte-compared with the prior
-24-case run's recorded hashes and were unchanged before this harder execution.
-
-## Observed harder audit: the old perfect score was format-specific
-
-The [actual harder-audit receipt](../results/reader_stress.json) records the one run
-frozen at `ebfda0d75c3c88ecbec5e1da556b26d4217d3358`.
-All **288 deterministic cases** and the separate **24 model cases** completed,
-with 24 initial-generation calls, no critic/retry/training, in **591.391 s (9.86 min)**.
-All model responses were schema-valid and none hit the output cap.
-
-### Offline deterministic coverage: 288 cases, not model generations
-
-| Unchanged implementation | Canonical prose controls | Stress-format variants |
-|---|---:|---:|
-| Old narrow parser | 144/144 | 24/144 |
-| Binding parser | 144/144 | 36/144 |
-
-The narrow parser answered twelve quoted-nonfact examples as if their embedded
-fictional sentence were a disclosure. Its other stress failures were mainly
-abstentions on unfamiliar language. The binding parser avoided those wrong
-answers but still missed 108 answerable stress variants.
-These template repetitions are format coverage, not 288 independent real financial
-observations. The old 24/24 result has not been rewritten; it was limited to its
-supported grammar and did not establish generalization.
-
-### Stratified model audit: twelve control/stress pairs
-
-All arms scored 12/12 on their canonical control cases.
-On the **twelve stress cases**:
-
-| Arm | Full evidence-contract outcomes correct | Value/unit/year outcomes correct, ignoring evidence requirement | Answered values |
-|---|---:|---:|---:|
-| Old narrow parser | 2/12 | 2/12 | 2 |
-| Binding parser | 3/12 | 3/12 | 1 |
-| Single-pass LLM | 5/12 | 12/12 | 10 |
-| Same LLM output + current verifier | 3/12 | 3/12 | 1 |
-
-Correct outcomes include appropriate abstentions on two unanswerable stress cases.
-The LLM's ten other stress answers matched the authored value/unit/year tuples;
-seven did not meet the unchanged evidence contract. **Those are not seven wrong
-financial tuples.** The raw primary `wrong_answer` label includes emitted answers
-that fail source/evidence requirements; the new diagnostic separates that from
-wrong tuple content without changing acceptance or regrading old results.
-Tuple-only correctness does not certify reliable sourcing, real financial validity
-or accuracy beyond these authored cases.
-
-Across all 24 audited cases, full-contract counts were parser **14/24**, binding
-parser **15/24**, single pass **17/24**, and verified **15/24**.
-The verifier corrected zero outcomes and regressed two. The two regressions were
-the superseded-correction and consolidated/segment-scope cases: the raw answers
-already met the primary contract, but the finite binding grammar refused them.
-
-### What actually failed
-
-| Format | Raw tuple | Primary evidence result | Current verifier |
+| Invented / authored cohort | Cases written for this project, with expected labels visible to the authors. Not independent gold. |
+| Exposed | Already seen during development. Re-scoring it is a regression check, not a fresh measurement. |
+| Fresh / one-shot | Frozen in Git before the cases were opened, then recorded once. Still author-visible unless stated. |
+| Review / deferral | The system declines to decide and sends the item to review. Counted against coverage, never as a correct financial verdict or as proof of absence. |
+| Advisory | Output may inform a human; it cannot change candidates, source guards, human-review counts or gold. |
+
+## Design
+
+### Components
+
+| Stage | Module | What it does |
+|---|---|---|
+| Field reading | [`reader_fields.py`](../src/asof/reader_fields.py) | Guarded source parser and the `field-record-v1` scorer. Binds issuer, metric, value, sign, currency, scale, measure and reporting year, plus scope, accounting basis, period kind and revision status when the source states them. Hosts the shared admission guard. |
+| Evidence linking | [`linked_reader.py`](../src/asof/linked_reader.py) | `linked-evidence-v1`: source SHA-256 plus exact character offsets for value, metric, entity, unit and reporting year, and for scope, sign convention, footnote and correction spans where applicable. |
+| Answer verification | [`verified_reader.py`](../src/asof/verified_reader.py) | Checks a model answer against a unique bound fact inside its cited quote. May fill **only a blank unit**; never rewrites values, years or explicit units. |
+| Source-cell selection | [`reader_cells.py`](../src/asof/reader_cells.py) | The model picks a `cell_id` from parser-qualified cells; code derives the answer from that cell's proof. Numbers are never generated. |
+| Claim checks | [`claim_verifier.py`](../src/asof/claim_verifier.py) | `source-claim-v2`: compares a claim with a unique exact-offset source fact and returns `supported`, `contradicted` or `review`. |
+| Notation | [`financial_notation.py`](../src/asof/financial_notation.py) | `financial-notation-v2`: bounded compact notation (`GBP26m`, `EUR 4.5bn`), spelled cardinals and declared revenue aliases. Used only when the guarded reader finds nothing, never after it refuses. |
+| Ingestion normalization | [`text_normalization.py`](../src/asof/text_normalization.py) | Repairs C1 bytes to their cp1252 characters and removes invisible formatting in real filing text, as a declared, counted step. |
+| Review pipeline | [`review_pipeline_v2.py`](../src/asof/review_pipeline_v2.py) | REVIEW-PIPELINE-02: frozen rules first; AI-REVIEWER-04 only where rules defer. Advisory. |
+| Regression replay | [`reader_regression.py`](../src/asof/reader_regression.py), [`check_reader_regressions.py`](../scripts/check_reader_regressions.py) | Replays the current candidate over nine exposed invented cohorts; exits nonzero on any newly missed case. |
+| Private review preparation | [`reader_review.py`](../src/asof/reader_review.py), [`prepare_reader_review.py`](../scripts/prepare_reader_review.py), [`reader_review_context.py`](../src/asof/reader_review_context.py), [`prepare_reader_context_forms.py`](../scripts/prepare_reader_context_forms.py) | Builds the private twelve-window packet and blank reviewer forms, and checks returned forms mechanically. |
+
+The original answer-first model reader is [`focused_reader.py`](../src/asof/focused_reader.py).
+Other reader modules still in `src/asof` (for example stress, reliability, AI reviewers v1/v3,
+pipeline v1, HHEM and the challenge generators) back the recorded experiments below; they are not
+part of the current path.
+
+### How a claim is decided
+
+1. **Normalize** real filing text ([`text_normalization.py`](../src/asof/text_normalization.py)).
+   Bidirectional controls and undefined C1 bytes are kept, so the verifier still defers them.
+2. **Admission guard.** Dispute, denial, retraction, misstatement/restatement, estimate,
+   preliminary/provisional/unaudited/draft and hypothetical-framing vocabulary anywhere in the
+   source defers to review. So do clause-local negation or forecast wording, source-wide
+   illustrative or quarterly/forecast qualifications, invisible format/control characters,
+   non-ASCII digits and non-Latin letters. Claims must be printable ASCII.
+3. **Prove a source fact** with the guarded reader (table columns, applicable footnotes,
+   correction priority, full metric identity). If the reader refuses (`context_rejected`), the
+   claim stays in review; the notation path runs only when the reader finds nothing.
+4. **Compare.** Exact match gives `supported`; a qualified same issuer/metric/year fact with a
+   different value, currency, scale or measure gives `contradicted`; anything unproved gives
+   `review`. Same-currency denominations are compared exactly (18 USD million equals 18,000 USD
+   thousand); there is no FX conversion, rounding, fuzzy metric matching or alias substitution
+   beyond the declared notation policy.
+5. **Advisory fallback** (REVIEW-PIPELINE-02). For items the rules defer, an answered candidate
+   counts as supported only if the unchanged AI-REVIEWER-02 value check says `supported` **and** a
+   separate disclosure question answers `stated`. Abstentions get the disclosure question only, and
+   fixed code (not the model) maps its answer to a verdict.
+
+### Design rules
+
+- **Fail closed.** Unsupported grammar or context goes to review or abstention and counts against
+  coverage. Missing proof is not contradiction or successful nondisclosure.
+- **Never regenerate source facts.** Values, years, currencies and scales come from bound source
+  spans; changing a value, year, unit, entity, role, offset or link path cannot produce an accepted proof.
+- **Bounded grammar.** A finite prose/Markdown grammar over at most 8,192 source characters; not
+  arbitrary financial entailment, an HTML/layout parser or XBRL conformance.
+- **Shared rules, not independent judgment.** Proof construction and validation use the same
+  deterministic rules; agreement between them is not semantic adjudication.
+- **Separate states.** `unknown`, `not_applicable` and `unanswered` are distinct; a dash/nil is
+  never coerced to zero. Issuer and metric are supplied queries, so binding is tested, not discovery.
+- **One-attempt model runs.** Every model run was frozen in Git before inference and allowed one
+  attempt: cached local `qwen3.5:4b`, one CPU, no GPU/cloud/downloads, 6-GiB owned-process cap,
+  20-minute wall cap, 90-second call cap (the real-report runs differed; see
+  [below](#real-reports-tat-qa--finqa)). Stopped runs are kept, not retried.
+
+### Rejected alternatives
+
+| Alternative | Why rejected | Evidence |
+|---|---|---|
+| Critic/revision loop | v1 truncated with no usable critique; v2 corrected zero outcomes and regressed one | [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-v2-result-completed-critic-not-beneficial) |
+| General entailment model as a gate | Raw HHEM approved seven false claims at threshold 0.5 | [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#hhem-result-1724-at-the-predeclared-threshold) |
+| Blind-extraction reviewer (AI-REVIEWER-03) | 17/24, below the unchanged control's 20/24 | [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#fresh-ai-review-comparison-on-24-separately-authored-probes) |
+| "Cited line must contain value and currency" rule | Tuned to one miss; would also downgrade two correct table verdicts | [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#decomposed-ai-reviewer-ai-reviewer-02) |
+| Unicode normalization of look-alikes; non-ASCII digits as numbers | Hides evidence; ambiguous provenance | [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#guards-added-a2e57c4) |
+| Blocking bare forecast words on every path | Breaks a deliberate control ("Its customer may forecast lower costs.") | same |
+| `$`/`£` as one currency; net sales as revenue; open-ended spelled numbers | Ambiguous. "Turnover" and "top line" as revenue are declared policy choices, not universal truths | [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#notation-policy-financial-notation-v1) |
+| Strict answer formats on real reports | Did not carry over to real reports; answer-first remains the reader | [archived plan](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/RESEARCH_PLAN.md#toward-a-stricter-answer-format) |
+
+## Results
+
+One row per experiment or round, in run order. Scores are copied from the receipts; the scoring
+contract changed between some rows (single-quote, linked, `field-record-v1`, claim decisions), so
+scores in different rows are not like-for-like. "In main tree" means the code is part of the current
+design; it does not mean production promotion.
+
+### Real reports (TAT-QA / FinQA)
+
+Local Qwen 3.5 4B on CPU. Questions were drawn at random, and questions, prompt and scoring were
+committed before any answer. Format controls used newly written invented questions: 21 answerable
+and 3 unanswerable each. Detail: [archived plan](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/RESEARCH_PLAN.md#what-has-been-run).
+
+REAL2 by question type (report supplied): 7 of 10 single-value lookups, 4 of 15 calculations and
+none of the 4 questions needing several values; the single counting question was wrong. It first
+stopped after 10 question pairs when memory passed a 6 GiB limit; the limit was raised to 10 GiB
+with nothing else changed and only the unfinished questions were run. The TAT-QA paper's
+human-expert 84.1% exact match is on its own test set and is not a matched comparison.
+
+| Experiment | Headline | Status | Evidence |
 |---|---|---|---|
-| Table headers / scaled headers | Correct | Selected quote omitted issuer, period and unit context | Refused unsupported grammar |
-| Footnote unit override | Correct | Footnote quote lacked the number and issuer/year context needed to support the tuple | Refused unsupported grammar |
-| Parenthesized negative | Correct | Literal minus-sign number was not present in the quoted parentheses representation | Refused unsupported grammar |
-| Superseded correction | Correct | Passed primary evidence checks | Regressed to abstention |
-| Consolidated versus segment | Correct | Passed primary evidence checks | Regressed to abstention |
-| Pronoun, fiscal-year, counterparty context | Correct | Quote omitted explicit issuer token | Refused unsupported grammar |
-| Dash-not-zero / quoted nonfact | Correct abstention | Passed | Preserved abstention |
-| Malicious source instruction | Correct tuple | Passed in this one audit variant | Passed |
-
-One resisted instruction variant is not an injection-security certificate. Likewise,
-a correct tuple with an incomplete citation is not a qualified evidence-linked answer.
-The failure pattern is a contract/representation limitation as well as a coverage
-limitation, not a justification to loosen checks blindly.
-
-Pairs with both members meeting the full contract were 2/12 for the narrow parser,
-3/12 for the binding parser, 5/12 for the LLM and 3/12 for verified output.
-Raw LLM predictions had zero declared tuple-relation violations; the verifier
-introduced eight by turning valid format-dependent answers into abstentions.
-Neither invariance alone nor a tuple-only score establishes semantic evidence.
-
-### Decision and resources
-
-The result does **not** justify default promotion of the current verifier or an
-automatic return to the judge. It does show that the stronger parser's prior perfect
-score was not evidence that the LLM was useless outside its grammar.
-The model demonstrated broader tuple extraction on this small authored audit,
-but the single-sentence citation contract and narrow verifier did not capture it reliably.
-
-The next candidate design, if separately approved, should represent **linked evidence
-bundles**: value cell/span plus applicable unit/header/footnote, reporting period,
-entity and scope, and explicit correction priority. It should not merely search
-for those words anywhere in a document or remove source checks to inflate accuracy.
-That would be a new version, evaluated beyond these now-exposed cases and eventually
-against independently reviewed real sources. No such parser/scorer change was made
-during or after this audit.
-
-Observed peak combined working set was **4,026,531,840 bytes (3.75 GiB)**; one CPU,
-source/resource checks and worker exit 0 passed. Unique generated tokens were 1,484.
-The 24 model calls consumed about 588.438 s; verification added about 0.0034 s but
-still could not handle the out-of-grammar evidence. All four sampled owned PIDs
-were confirmed absent, port 11435 closed and the shared Ollama process remained.
-No actions were taken against the unrelated preexisting native process.
-
-All three previous model-result hashes remained unchanged. No real disclosure,
-private review packet, held source, prices, fundamental outcomes or production
-trial-ledger content was read; no row was appended, source repaired, model pulled,
-weights trained, experiment retried or push performed.
-The independently reviewable private packet remains unlabelled, with reviewers unassigned.
-Software validation retains the disclosed full-suite timing-test failure and isolated
-recheck; a clean full regression result is not claimed for this batch.
-
-## Linked-evidence improvement: a new explicit contract, not regraded old scores
-
-The user requested the evidence improvements and best supported scoring on
-2026-11-19. [`asof.linked_reader`](../src/asof/linked_reader.py) adds
-`linked-evidence-v1`. The old single-quote scorer, old parser/verifier implementations,
-generator prompt and all old results remain unchanged.
-
-A positive result now carries a source SHA-256 and exact character-offset spans for
-**value, metric, entity, unit and reporting year**, with scope, sign-convention,
-footnote applicability and correction/supersession spans where applicable.
-Evidence can cross a value cell, its year/header, a unit caption and its own footnote.
-It is not enough for those words to occur somewhere in the document:
-
-- Markdown year columns select their own value cells; row/selected-column units
-  override declared defaults only when compatible.
-- A row footnote must have the same marker and target metric. Missing/mismatched
-  notes and contradictory row/column units make the query unavailable.
-- Only explicit topic headings or named/first-person subjects establish entity
-  context. A later different-company heading cannot inherit the earlier issuer.
-- Prose period bindings are local; a publication year is not a reporting year.
-- Parentheses need an explicit negative convention in prose; financial table
-  amounts use the declared table convention unless source text contradicts it.
-  Irregular comma grouping or double signs are rejected.
-- Explicit same-query corrections supersede an original only with source priority
-  evidence. Two unresolved correction values or unranked competing facts abstain.
-- Marked fictional quotations and explicit source-instruction regions cannot supply
-  facts, footnotes, sign rules or supersession evidence.
-
-The validator recomputes the canonical source-bound relation and checks every span,
-query identity and source hash. Changing a value, year, unit, entity, role/offset or
-link path cannot manufacture an accepted proof. Construction/validation share these
-deterministic rules; **they are not independent semantic adjudicators**.
-This is a finite supported prose/Markdown grammar over at most 8,192 source characters,
-not arbitrary financial entailment, an HTML/layout parser or XBRL conformance.
-The existing float-based table baseline is preserved; exact Decimal amounts and
-offset/footnote binding require this separate path rather than silently changing it.
-
-### Same model output, explicit evidence completion
-
-The model still emits the existing value/unit/year and original quote.
-Completion requires that quote to occur in the source and seed at least one linked
-component, and the explicit value/year/unit must match a unique bound fact.
-Only a blank unit can be filled from that fact; an explicit wrong tuple or fabricated
-quote is refused. Original citations and parsed/raw scores remain separate.
-Supported abstentions are not replaced with numbers just to improve coverage.
-
-`linked_parser` supplies a strong **no-model control** using the same source rules.
-If it matches model-assisted scores, do not attribute its deterministic capability
-to the LLM. A full linked score means both the authored tuple/refusal and the new
-source-proof contract pass; it is **not the original single-sentence score renamed**.
-Answerable and unanswerable counts are reported separately to expose abstain-all behavior.
-
-### Development exposure versus fresh challenge
-
-Development has already inspected the earlier 288-case format suite and 24 saved
-parsed model outputs. The initial prototype replay reached 288/288 deterministic
-and 24/24 completed saved outputs under the **new** contract, versus 17/24 raw
-original-contract outcomes. This was an exposed, posthoc engineering diagnostic,
-not an independent gain, new model run, original-score replacement or release criterion.
-The final frozen replay will be recorded separately in the new receipt.
-
-The [new 24-case challenge](../tests/fixtures/linked_challenge.json) contains twelve
-paired supported/insufficient-or-conflicting cases: swapped year columns, row/column
-units, row-specific footnotes, entity resets, competing corrections, consolidated
-scope, sign conventions, unrelated unit mentions, publication dates, instruction-only
-footnotes and duplicate facts. Positive/negative counts are 12/12.
-These cases were authored with the design known; they are not secret or independent
-human gold. Tests reject tampered and cross-context proofs and changing expected
-labels cannot alter construction/completion.
-
-The [plan](../results/linked_reader_plan.json), code, prompts, challenge, posthoc-replay
-inputs and this contract are committed before new generation.
-New private/public paths are `data/linked_reader_v1` and `results/linked_reader.json`;
-all four earlier model results are hash-pinned and retained.
-At most 24 generation calls, no critic/retry/training, same 20 minutes, one CPU,
-no GPU/cloud/pulls and 6-GiB resource contract; seed 202611190926.
-Output-token failures count invalid without salvage/retry; unsafe input/transport/
-scope/resource failures still stop. No post-challenge retuning or automatic promotion.
-
-Independent real-source reviewers remain unassigned and no new private source
-window, fundamental outcome, price, production ledger row or held material is
-accessed by this synthetic/model task. No public raw-source release, push or claim
-that a high synthetic score establishes real-world accuracy.
-
-Pre-inference validation for the linked version: **692 tests passed in 106.79 s**,
-with two existing synthetic rank-deficiency warnings; Ruff and documentation/index
-checks passed. This includes source-role tampering, cross-entity/year/unit/footnote
-substitution, missing sign conventions, unranked corrections, unsupported trailing
-scope qualifiers and no-gold construction tests. The older timing-test failure
-remains part of its prior run history; no rate code or old test threshold was changed.
-
-## Observed linked challenge: 23/24 completed, 24/24 deterministic control
-
-The [actual linked receipt](../results/linked_reader.json) records the one challenge
-run frozen at `4c0401438d3f12033fefc146d64fdd035e3f6d4b`.
-All 24 cases completed using 24 initial-generation calls, **zero judge/revision calls**,
-in **570.079 seconds (9.50 minutes)**. There was no output truncation or retry.
-
-| Arm and scoring contract | Correct / 24 | Answerable correct / 12 | Negative correct / 12 | Wrong emitted answers |
-|---|---:|---:|---:|---:|
-| Old parser, original single-quote contract | 13 | 1 | 12 | 0 |
-| Old binding parser, original contract | 13 | 1 | 12 | 0 |
-| Raw LLM, original contract | 14 | 3 | 11 | 8 |
-| Old verified LLM, original contract | 13 | 1 | 12 | 0 |
-| Linked deterministic parser, **new linked contract** | **24** | **12** | **12** | **0** |
-| Same raw LLM output + evidence completion, **new contract** | **23** | **11** | **12** | **0** |
-
-These are not interchangeable score definitions. The old primary `wrong_answer`
-label includes missing source-context evidence, not just wrong numeric tuples.
-The new results require complete source-bound role proofs, rather than deleting
-evidence checks, but they must not be presented as a like-for-like upgrade of old
-single-sentence accuracy or as real financial gold.
-
-A separately labelled **posthoc backward-compatibility check** discarded the new
-bundles and applied the old scorer to the completed answers' retained quotes:
-**15/24**, not 23/24. The 23/24 result specifically depends on the additional,
-validated multi-span evidence. This check changed neither result files nor score
-definitions and is not a new preregistered endpoint.
-
-The one remaining completed-path miss was L01-0: the model incorrectly inferred
-that the question required USD even though the applicable 2017 column explicitly
-used EUR. It abstained despite identifying the EUR amount. Completion deliberately
-preserved that abstention instead of silently substituting a number to hit 24/24.
-The no-model linked parser resolved the column correctly.
-
-One raw negative response was schema-invalid because its unit was blank.
-The source itself had no applicable revenue-unit declaration, so the linked route
-refused the unsupported source fact rather than filling a unit from unrelated text.
-That is a separately scored safe refusal, not retroactive repair of the old raw score.
-
-### Posthoc replay is development, not the fresh challenge
-
-The final frozen rules also completed the old exposed 288 deterministic cases and
-24 saved parsed stress outputs under the new contract: 288/288 and 24/24.
-The latter had originally scored 17/24 under the old evidence rule. Those old scores
-and raw results remain untouched. This replay used no new generation, was explicitly
-after source/outcome exposure and is **not independent validation**.
-
-### What earned support, and what did not
-
-Within the declared financial-prose/Markdown subset, explicit source roles removed
-the earlier citation bottleneck while all twelve fresh negative/cross-context
-controls were correctly refused. Tampered roles/offsets and incompatible context
-also have software regression tests. This is meaningful implementation evidence,
-but the challenge was authored with the design known and the source grammar is bounded.
-
-**The deterministic control matched or exceeded the model-assisted result.**
-It took about **0.0131 s total** over the challenge; model-call latency was
-**567.172 s** and evidence completion added about **0.0050 s**.
-No incremental LLM advantage is established on this challenge, and no global
-production default, model weights, source-access permission or research hypothesis
-was changed. Prefer the deterministic path when its explicit input contract applies;
-unknown formats and real-world semantic adequacy still need separate evidence.
-
-Observed peak combined working set was **3,897,978,880 bytes (3.63 GiB)**.
-One CPU, source/resource checks and worker exit 0 passed. Unique generated tokens
-were 1,401. All four sampled owned PIDs were confirmed absent, port 11435 closed,
-and the preexisting shared Ollama process remained. All four earlier model-result
-hashes matched their frozen values.
-
-The software suite passed 692 tests before this run, with two existing synthetic
-rank-deficiency warnings; Ruff and documentation checks passed.
-No post-challenge parser/scorer tuning, third-party model/API call, new download,
-real-source/private-review read, financial backtest, training, production trial
-ledger row or push occurred. The twelve real-source review windows are still
-unlabelled; independent reviewer assignment and real gold remain outstanding.
-
-## Parser-first field records: frozen comparison plan
-
-The user approved this next step on 2026-11-19: preserve historical scores, add a
-separate parser-first candidate, measure individual fields and complete records,
-broaden the challenge, and obtain independent source review before real-world claims.
-The first four engineering/evaluation tasks can run locally. **Actual human review
-cannot be replaced by this assistant, a model judge or synthetic labels.**
-
-### Historical scores and common new endpoint
-
-All five prior model receipts stay immutable and historically scoped. None is
-deleted, regraded or rerun to chase a perfect headline. Old single-quote and linked
-scores remain different contracts. They are regression/evidence records, not a
-current general-accuracy estimate.
-
-[`asof.reader_fields`](../src/asof/reader_fields.py) introduces `field-record-v1`.
-On identical new inputs, four arms share this endpoint: old linked parser, old
-model-output evidence completion, guarded source parser, and parser-first routing.
-Every arm must pass the same field/context requirements. Per-case legacy linked
-scores are retained separately; historical result files are never altered.
-
-The parser-first candidate tries a qualified deterministic source relation first.
-It can answer independently of an unnecessary model abstention, but that is a
-**separate source-selected answer**, never a rewritten raw model result.
-Explicit incompatible context is refused without model fallback. Unresolved
-grammar can use the saved initial model output, still subject to the same source
-proof and context guards. This fallback shares the finite source validator: it
-does not establish general semantic extraction outside that grammar.
-
-New safeguards reject GAAP substrings inside a non-GAAP definition and subannual
-periods for an annual year-only request. The model's new-profile input explicitly
-states that annual requirement; the old generator module is unchanged.
-An added exact-offset per-share rule accepts one complete canonical source
-sentence, including issuer, requested metric, value, currency/denominator and year.
-It has contract `field-source-v1`; existing relations retain `linked-evidence-v1`.
-Both proofs feed the common field-record scorer. Unsupported prose, quoted examples,
-different denominators and tampered proofs are not accepted by that extra rule.
-
-### Field dictionary and denominators
-
-| Field | Meaning and limit |
-|---|---|
-| `value`, `sign` | Exact stated decimal and derived negative/zero/positive; no economic conversion |
-| `currency`, `scale`, `measure` | Explicit currency/scale; percent, subscribers and the bounded per-share form remain distinct |
-| `reporting_year` | Requested four-digit annual year; no invented period start/end dates |
-| `issuer_binding`, `metric_binding` | Source association to the supplied query, **not independent entity/concept discovery** |
-| `scope` | Bound consolidated/segment label or explicit applicable scope caption; otherwise unknown |
-| `accounting_basis` | Bound GAAP/non-GAAP label or explicit applicable basis caption; not assumed |
-| `period_kind` | Explicit fiscal/calendar-year context; otherwise unknown, never automatically calendar year |
-| `revision_status` | Explicit original/correction selection status; otherwise unknown, not a claim of latest real filing |
-| `source_evidence` | Source hash, exact role offsets, tuple agreement and supported context validation |
-
-`unknown`, `not_applicable` and `unanswered` are separate states. A zero is a
-reported numeric value; a dash/nil is not coerced into zero. Unknown context means
-not established under this bounded source grammar, not absent from an entire filing.
-The source-relation constructor and validator share rules; this is not independent
-semantic adjudication, XBRL conformance or proof of financial truth.
-
-Each positive case contributes to each field denominator, including abstentions,
-invalid outputs and unattempted cases. Known-value counts are also shown separately,
-so correctly leaving many fields unknown cannot masquerade as discovering them.
-Whole-record correctness requires **every field** plus source evidence. Negative
-cases are scored as correct refusals, never as thirteen correctly extracted fields.
-Answer precision, correct-answer coverage and wrong emitted records stay separate;
-abstaining everywhere must not look successful.
-
-### New authored challenge and one-run contract
-
-The [fixture](../tests/fixtures/reader_fields.json) contains 24 cases in twelve
-positive/negative pairs. Families cover zero/missing, currency/scale, annual fiscal
-versus quarterly periods, consolidated/segment scope, GAAP/non-GAAP identity,
-correction priority, footnote units, signs, entity resets, percent, subscriber counts
-and per-share denominators. All cases are invented, author-visible and exposed
-during software development; this is **not blind independent evaluation**.
-
-The [plan](../results/reader_fields_plan.json) permits one frozen paired model
-comparison: 24 initial calls maximum, no judge/revision/retry, existing qwen3.5:4b
-digest, one CPU, zero GPU/cloud/pulls, 20 minutes and the same 6-GiB owned-process
-contract. It uses new output/attempt locations and hashes all five older reports.
-All candidates and the common scorer are frozen before generation.
-Output truncation is an invalid raw response, never salvaged; an independent source
-parser can still answer without using that response.
-
-All 24 initial generations are deliberately requested for the paired comparison,
-even when parser-first could have skipped them. Report actual calls separately
-from **counterfactual** route-needed calls/latency. Do not call those estimated
-savings an observed deployment wall-time result.
-The broader answer-first application default remains unchanged; no automatic
-production promotion, weight learning, hypothesis alteration or source-access release.
-
-### Independent review: an explicit remaining prerequisite
-
-The existing private packet has twelve excerpt windows and two blank first-pass
-forms; actual reviewers remain unassigned and independent labels remain zero.
-This task does not reopen those excerpts, contact anyone, fill the forms or fake
-two independent passes. Two actual blind reviewers must complete them, disagreements
-need adjudication and evidence provenance, and insufficient context stays unresolved.
-Existing value/unit/year forms alone cannot qualify all the new scope/basis/period
-fields: additional source-context annotations are required for full-record gold.
-No synthetic score, model confidence or agreement between these parsers lifts that gate.
-
-Pre-generation verification: **700 tests passed** in 95.63 seconds, with two
-existing synthetic rank-deficiency warnings. Changed-file Ruff and documentation/
-index checks passed. The Pylance reference request timed out; no editor type-check
-success is claimed. The deterministic development check was old linked parser
-21/24 versus guarded parser 24/24 under the common field contract; those authored
-sources and expected labels were visible during development, before model execution.
-
-## Observed field comparison: complete positive records; fallback still adds a failure
-
-The [actual receipt](../results/reader_fields.json) records the single run frozen at
-`f252a592149bdf57f1970cb4e6a0330afa6c926f`. It completed all 24 initial calls in
-**776.922 seconds (12.95 minutes)**, without judge, revision, retry or output
-truncation. There were 23 schema-valid responses and one schema-invalid response.
-No candidate, scorer or fixture was changed after generation.
-
-All four rows below use **the same new inputs and `field-record-v1` endpoint**:
-
-| Arm | Correct outcomes / 24 | Complete positive records / 12 | Correct negative refusals / 12 | Wrong emitted records |
-|---|---:|---:|---:|---:|
-| Old linked parser | 21 | 11 | 10 | 2 |
-| Old model-output evidence completion | 20 | 9 | 11 | 0 |
-| New guarded source parser, no model | **24** | **12** | **12** | **0** |
-| New parser-first + model fallback | **23** | **12** | **11** | **0** |
-
-This is not a regrading of the five historical runs. The new primary endpoint
-includes the additional context requirements, and the annual query is explicit.
-The new source parser achieved 100% answer precision and correct-answer coverage
-on this authored sample, not established real-world accuracy.
-
-### Actual field checks: known values versus unknown/not-applicable targets
-
-Both new paths passed all thirteen field checks on every positive case: **156/156
-field checks**, of which **112** had known-valued targets and **44** were explicitly
-unknown or not applicable (40 unknown context targets; four nonmonetary currency/
-scale targets). These are correlated checks on twelve records, not 156 independent
-facts. Issuer/metric identities were supplied queries; source association, not
-independent entity/concept discovery, was tested.
-
-| Field | Correct on all positive cases | Known-valued targets correct |
-|---|---:|---:|
-| Value, sign, measure, reporting year, issuer binding, metric binding, source evidence (each) | 12/12 | 12/12 each |
-| Currency, scale (each) | 12/12 | 10/10 each |
-| Scope | 12/12 | 2/2 |
-| Accounting basis | 12/12 | 2/2 |
-| Fiscal/calendar period kind | 12/12 | 3/3 |
-| Revision status | 12/12 | 1/1 |
-
-The tiny known-context denominators are a limitation, not evidence that these
-dimensions are solved. We still do not extract complete filing schemas, arbitrary
-period endpoints or every possible unit/definition.
-
-### What improved, and what remains wrong
-
-- The old source parser accepted the quarterly F03-1 amount as annual and matched
-  GAAP inside the non-GAAP F05-1 definition. The separate candidate refused both.
-  Its bounded per-share proof also answered F12-0, which the old grammar missed.
-- The raw model unnecessarily refused F02-0, claiming it needed an exchange rate
-  to convert the explicitly selected EUR-thousand column to a USD-million default.
-  The parser-first answer used the column's stated units without conversion.
-- F04-0's raw model returned `billion USD` rather than the stated `USD billion`.
-  The old completion rejected that explicit noncanonical unit rather than rewriting
-  it. Parser-first selected its own correctly bound source record. This does not
-  establish that unit-word-order normalization is economically unsafe; it documents
-  a remaining limitation of the old canonical-unit contract.
-- F12-0's raw model tuple was correct, but the old source validator did not support
-  that per-share grammar. The new independent source route supplied the qualified proof.
-- **F06-1 remained invalid in the model-fallback path.** The source had two unranked
-  corrections; the raw response violated the answer schema. It was not converted
-  into a successful abstention. The no-model parser correctly refused the ambiguity.
-
-All twelve positive records were selected by the source parser, while two explicit
-context failures took the source-refusal route. Ten remaining cases used model
-fallback: nine correct refusals and one invalid output, **zero added positive
-completions**. For this bounded contract the guarded no-model control did better.
-There is no evidence here that adding a judge, larger model or more retries is the
-next useful step. Keep that conclusion local to this grammar and exposed sample.
-
-### Runtime, provenance and remaining gates
-
-The paired audit actually made **24 model calls** and generated 1,366 unique output
-tokens. The parser-first route would have required ten calls on these same inputs:
-that is a **counterfactual**, not an observed ten-call deployment.
-Summed selected-route time was about 243.623 s versus 769.628 s for the old model
-completion, excluding unused paired generations and startup; these are not
-end-to-end deployment wall-time measurements. Measured guarded-parser computation
-over the challenge totalled about 0.0229 s.
-
-Observed peak combined working set was **3,929,235,456 bytes (3.66 GiB)**.
-One CPU, source/resource checks and worker exit 0 passed. All four sampled owned
-PIDs were confirmed absent, port 11435 closed and the preexisting shared server
-remained present. All 96 serialized arm records were reconstructed and rescored
-without changing the saved receipt; all five historical result hashes matched.
-The production ledger was checked by file-size metadata only (106,246 bytes);
-no row was appended and no ledger content was opened.
-
-The 700-test, Ruff and documentation checks recorded above preceded generation.
-Only result/navigation/documentation edits followed it. No model rerun, source
-retuning, real-source/private-review read, financial study, download, training,
-default promotion or push occurred.
-
-**Independent source review is still blocked:** no actual human labels were
-supplied. The existing twelve-window preparation receipt is not a completed review,
-and its narrow blank forms cannot establish the expanded context gold without
-additional annotations. Human first passes and adjudication remain a user/independent
-reviewer action; they have not been fabricated or silently counted as done.
-
-## Reliability follow-up: source gating, equivalent units and paired response shapes
-
-The user requested further improvements on 2026-11-19 and resumed the interrupted
-validation before any new model call. The [new module](../src/asof/reader_reliability.py)
-targets the remaining mechanics, without rewriting historical receipts or claiming
-that a repeated synthetic perfect score is independent evidence.
-
-- **Admission before generation:** `source_gated` uses the qualified source parser
-  and sends unresolved cases to review, without calling a model that the same finite
-  source validator cannot admit as a new fact. This is the existing guarded parser's
-  extraction coverage with an explicit no-fallback policy, not a broader parser.
-  An unresolved answerable case still counts as missed, never as proof of absence.
-- **Unit identity, not conversion:** the new completion accepts explicitly
-  equivalent `billion USD`, `billions of USD` and `USD billion` labels, but only
-  when the source-bound value, currency, scale, year and verbatim value/metric
-  seed agree. It accepts the existing qualified per-share proof. It never rewrites
-  a currency, scale, numeric value or reporting year, and records the original
-  response and any normalization operation. Invalid responses remain invalid;
-  unnecessary model abstentions are not overwritten by this completion arm.
-- **Constrained response shape:** a two-branch JSON schema separates complete
-  supported answers from explicit abstentions with null/empty fields. Runtime
-  validation remains authoritative; a decoding constraint does not prove correct
-  reasoning or source support. A model can still confidently choose the wrong fact.
-- **No invented FX requirement:** both new generation arms explicitly receive
-  no target currency/scale and instructions to preserve the selected fact's units.
-  That reminder is shared across the paired comparison, not changed between arms.
-
-### Frozen audit allocation and scoring
-
-The [new fixture](../tests/fixtures/reader_reliability.json) remixes the previous
-twelve authored families with new names, values, units and reporting year.
-All **24** cases receive deterministic source-gated evaluation. A fixed six pairs
-(`U02`, `U03`, `U04`, `U06`, `U10`, `U12`) form the **12-case model audit**:
-selected currency/scale, annual versus quarter, scope, conflicting corrections,
-percent and per-share denominators. Selection targets known development weaknesses;
-it is not a representative sample or blind generalization test.
-
-Each of these twelve cases gets one free-form and one schema-constrained initial
-generation: **24 calls total, not 24 cases per model arm**. Both use identical
-messages, model/digest, seed and resource limits except for the schema parameter.
-SHA-ranked ordering puts constrained generation first on six cases and free-form
-first on six. Each request is an isolated source question; no previous answer or
-gold is supplied. No judges, revisions, seed retries, model pulls or training.
-
-The [plan](../results/reader_reliability_plan.json) retains one CPU, zero GPU/cloud,
-6 GiB and 20 minutes, with a 90-second call cap. Output truncation counts invalid
-without salvage; transport/input/resource failures stop with partial accounting.
-New attempt/result paths and all six older result hashes are frozen before execution.
-
-On each model response, retain both the old evidence-completion baseline and the
-new normalized completion. All four completion arms plus source gating share
-`field-record-v1`; show whole records, field denominators, coverage and wrong answers.
-Separately report original `Answer` schema conformance and stricter wire conformance,
-actual call time, same-output corrections/regressions and normalization events.
-This tests output shaping against the paired free arm; it does not isolate the new
-shared unit reminder from historical prompts. Comparing different vintage scores
-cannot establish a causal improvement in model reasoning.
-
-The no-model source-gated control is measured before either generation and its
-actual computation time is separate from the full paired audit's model time.
-Do not claim that skipping post-hoc failed model answers achieved a faster deployment:
-the source policy is frozen and uses no model output or expected labels.
-
-These are author-visible format/implementation diagnostics, not human financial
-gold. The independent-review gate, all held data paths, the production ledger,
-historical results and broader application default remain unchanged. No real-source
-packet is reopened or labelled, and no push is authorized by this experiment.
-
-Pre-generation validation: the full suite recorded **705 passes and two failures**
-in 532.84 s, with two existing rank-deficiency warnings. Both failures were unchanged
-Windows Job tests whose owned children did not signal readiness within ten seconds
-(`test_job_close_terminates_only_the_owned_blocked_worker` and
-`test_packaged_job_pins_and_terminates_only_the_owned_gated_child`).
-The isolated two containment checks plus affected reader tests then passed **31/31**
-in 30.80 s. No resource code, test threshold or allocation was relaxed; a clean full
-suite is not claimed for this batch. Ruff, documentation/index and input-fit checks
-passed. The author-visible deterministic check was 24/24 over the new source cohort;
-no new generation had yet occurred.
-
-## Observed reliability audit: valid shapes improve; wrong-year reasoning remains
-
-The [actual receipt](../results/reader_reliability.json) records the single frozen
-`a76bc7971eb038deac1e11197df97e2156628f82` run. All **24 calls completed** in
-**1,067.094 seconds (17.78 minutes)**. Each of twelve audit cases received both
-generation formats; the separate offline source cohort contained 24 cases.
-There was no retry, output truncation, judge, weight training or post-result tuning.
-
-### Same twelve inputs, common field-record endpoint
-
-| Arm | Correct / 12 | Complete positive records / 6 | Correct negative refusals / 6 | Wrong admitted records |
-|---|---:|---:|---:|---:|
-| Old completion on free generation | 9 | 4 | 5 | 0 |
-| New completion on the same free output | 10 | 5 | 5 | 0 |
-| Old completion on constrained generation | 10 | 4 | 6 | 0 |
-| New completion on the same constrained output | **11** | **5** | **6** | **0** |
-| Source-gated, no generation used | **12** | **6** | **6** | **0** |
-
-Original-answer and strict-wire schema conformance were **10/12 free versus 12/12
-constrained**. This is a paired format comparison, not a comparison of different
-old score contracts. The new completion corrected one outcome and regressed none
-on each version's saved output. Those two corrections were the same per-share case
-U12-0: the new completion can use the already-qualified per-share source proof
-that the old completion lacked. **The measured correctness gain was not a unit
-word-order repair.** This run emitted canonical currency units; `percent` to `%`
-normalization occurred once per generation arm without changing correctness.
-Unit-word-order aliases have software tests, not an observed win in this audit.
-
-The new constrained arm passed 65/78 positive field checks, including 47/56
-known-valued targets. The source-gated audit control passed 78/78, including
-56/56 known-valued targets. These correlated checks are not independent facts.
-No new scope/basis/period discovery coverage is established by repeating templates.
-
-### The unresolved model error is substantive, not malformed JSON
-
-U02-0 requested the 2018 amount, whose column explicitly stated GBP thousand.
-The free response selected the 2017 USD-million amount and simultaneously marked
-it as an abstention with populated answer fields: invalid, not a successful refusal.
-The constrained response obeyed the schema but still selected that **wrong 2017
-fact**. The completion rejected the wrong period/value instead of converting it
-or accepting its valid JSON. The shared no-target-currency reminder did not eliminate
-the mistake. Thus **schema validity is not semantic correctness**.
-
-U02-1's free output also mixed abstention with populated fields and remained invalid.
-Its constrained counterpart correctly refused the incompatible row/column units.
-The earlier conflicting-correction failure did not recur here: both fresh U06-1
-outputs were valid refusals. That observation does not revise the old F06-1 failure.
-
-The source-gated candidate selected the requested-year amount from its bound column
-and sent unresolved sources to review **before any generation**. On the full
-24-case offline cohort it scored **24/24**: twelve complete positive records and
-twelve refusals, no wrong admitted records and zero model calls. All thirteen
-positive field checks passed: 112 known targets plus 44 unknown/not-applicable targets.
-This keeps the guarded parser's existing grammar; it is a routing simplification,
-not evidence of a newly universal reader. Outside its grammar, an answerable item
-can still be sent to review and must count against coverage.
-
-### Actual cost and provenance
-
-The full paired audit made 24 calls and generated 1,628 output tokens.
-Free generation totalled 494.875 s, constrained generation 530.157 s (about 7.1%
-more call time in this single, order-balanced run). Shared-worker conditions mean
-this is not a robust latency estimate. The separately measured source-gated
-computation over all 24 cases totalled 1.876 s, with no model generation used.
-The 17.78-minute audit must not be described as a zero-model deployment run.
-
-Observed peak combined working set was **3,850,702,848 bytes (3.59 GiB)**.
-One CPU, source/resource checks and worker exit 0 passed. An auxiliary two-second
-HTTP health probe timed out; the benchmark's own startup checks and all subsequent
-generation/state requests completed without changing their limits or retrying
-the experiment. All four sampled owned PIDs were confirmed absent, port 11435
-closed and the preexisting shared server remained present.
-
-All **84 serialized field records** (24 offline plus five arms on twelve audit
-cases) were reconstructed and rescored. Raw schema-conformance and normalization
-events were checked against saved responses. All six earlier report hashes matched
-the freeze. Ledger file-size metadata remained 106,246 bytes; no ledger contents
-were read or rows appended.
-
-Validation remains the disclosed **705 passed / two unchanged startup-test failures**
-in the full suite, followed by **31/31 isolated containment and affected-reader
-passes**, with Ruff and documentation checks passing. Only result/documentation/
-navigation edits followed generation; no clean full-suite claim is substituted.
-
-These are author-visible invented cohorts, not independently labelled financial
-sources. Independent reviewers remain unassigned, human gold stays zero, the held
-sources stay held and the broader application default is not silently promoted.
-The defensible gain is better response conformance and source-qualified completion,
-not proof that all financial fields or model reasoning are solved.
-
-## Source-cell selection and expanded field coverage: frozen plan
-
-The user approved the field-audit follow-up on 2026-11-19: source-cell selection,
-mandatory constrained model responses, larger known-context tests, differentiated
-failure reporting and concrete independent-review preparation.
-All seven prior model receipts stay immutable. No old score is rerun or rewritten.
-
-### Select a source cell; never regenerate its tuple
-
-[`asof.reader_cells`](../src/asof/reader_cells.py) reuses the guarded source parser
-to enumerate its qualified issuer/metric cells across at most twelve candidate
-reporting years. Each ID hashes the source-bound proof, including source SHA and
-offsets. The catalogue can contain different-year distractors; the model sees
-their explicit year, unit, value and supporting spans without any gold or target
-correctness flag. A source change changes its IDs.
-
-The model returns only an allowed `cell_id` with an empty reason, or null with a
-bounded refusal reason. Numbers, units and years are not generated. Code rechecks
-catalogue membership and requested year, then derives the answer from that cell's
-proof. Foreign IDs, malformed selections and different-year selections are
-rejected; none triggers a convenient substitution of the correct cell.
-A model abstention on a supported query remains a miss.
-
-**This is source-assisted selection, not independent table discovery.** The same
-source parser can already resolve the requested year. A catalogue cannot recover
-facts outside its grammar or ambiguous source contexts. The deterministic
-source-only control is therefore essential; model selection must earn an increment,
-not receive credit for work done by the parser.
-
-### Known-value test expansion
-
-[`reader_field_challenge`](../src/asof/reader_field_challenge.py) freezes **192
-invented cases**: four dimension groups, each with 24 supported positives and 24
-negative contrasts. Scope, accounting basis, period kind and revision status each
-have **24 explicitly known positive targets** instead of mainly unknowns.
-All 96 positives also have explicit value/sign/currency/scale/measure/year and
-source bindings. Variants rotate signs/zero, currencies, scales and fiscal years.
-Scope includes consolidated and named segment captions; basis includes GAAP and
-non-GAAP; period kind includes fiscal/calendar annual captions with quarterly/YTD
-contrasts; revision status includes explicitly original and superseding corrections
-with missing-priority contrasts.
-
-These are author-visible templates and mechanical variants, **not 24 independently
-authored semantic formats per field or independent financial observations**.
-The code records actual failure counts rather than assuming that a designed count
-is a passing score. Unsupported cases remain explicit: arbitrary quarter/YTD
-extraction, exact period dates, 52/53-week calendars, partial line-item restatement
-semantics, independent entity/concept discovery and real financial accuracy.
-Their safe rejection does not amount to extracting those fields successfully.
-
-### Paired model audit
-
-The [fixed plan](../results/reader_cell_selection_plan.json) permits twelve new
-authored source cases (six positive/negative pairs) and **24 calls maximum**:
-one strict tuple generation and one strict cell selection on each source.
-Both response formats are mandatory schemas, not optional free-form arms.
-Cases cover mixed column units, reversed/missing years, annual/subannual context,
-GAAP definition, correction priority and per-share denominators.
-The same model/digest, seed, one CPU, zero GPU/cloud/pulls, 20-minute/6-GiB limits,
-90-second call cap and one-attempt receipts remain.
-
-The reused SHA-order schedule balances cell-first and tuple-first on six sources
-each. The tuple arm sees the original source and existing unit/annual constraints.
-The cell arm additionally sees source-derived candidates, so this is a
-**system-design comparison**, not an equal-information model-format ablation.
-All three arms (strict tuple completion, cell selection and source control) use the
-same `field-record-v1` endpoint. The 192 deterministic cases are separate from
-the twelve model cases; no claim of 192 model generations is permitted.
-
-Per-case diagnostics distinguish malformed response, wrong raw fields, unsupported
-evidence, unnecessary abstention, unsupported grammar/context and correct refusals.
-Raw tuple diagnostics compare numeric value/sign, currency, scale, measure and
-year where a valid raw tuple exists. Record-level failed-field lists remain
-separate: rejecting one wrong-year record is not thirteen independent numeric errors.
-
-### Human actions still required: source-review runbook
-
-The [public preparation receipt](../results/reader_review_packet.json) identifies
-the existing private twelve-window packet and its pin:
-`3b2cf99bbb7b4e163f0b420a6bdd1f42a13b63b2d24b209ef61cb1b25fefb2a9`.
-No private excerpt is reopened by this implementation.
-
-1. **Assign two actual independent reviewers.** Each must have authorized access,
-   do a blind first pass without AI answers or the other person's labels, and use
-   a consistent reviewer ID. This assistant does not contact people or authenticate
-   reviewer identity. If you have seen model suggestions, do not declare an unseen
-   blind pass; use other reviewers or disclose exposure and keep it exploratory.
-2. Provide the existing private `data/reader_review_v1/packet.json` and one of the
-   existing `reviewer_a.csv` / `reviewer_b.csv` forms to each reviewer. Check the
-   packet pin before distribution; do not copy source snippets/identities into Git.
-   Those forms cover supported value/unit/year or insufficient context.
-3. Give each reviewer the matching **new supplemental context form**:
-   `data/reader_review_context_v1/context_reviewer_a.csv` or
-   `context_reviewer_b.csv`. These are generated from the public item count and pin
-   only, without source reads, by
-   `python scripts/prepare_reader_context_forms.py --prepare-blank`.
-   The command creates 72 blank rows per file (six dimensions x twelve items),
-   refuses overwrite and does not complete or authenticate a review.
-4. For every item, annotate issuer binding, metric binding, scope, accounting basis,
-   period kind and revision status. Choose `supported`, `unknown` or `not_applicable`.
-   For supported values, provide zero-based character offsets `[evidence_start,
-   evidence_end)` into the exact packet excerpt plus a rationale. Use `unknown`
-   if required context is outside that window; do not browse a full filing or infer
-   it from background knowledge to complete the form. Unknown/inapplicable rows
-   have no value/span, but still require a rationale. Do not invent fiscal endpoints.
-5. Return both base forms and both supplemental forms privately. The existing
-   `check_reviews` validator checks base declarations. The new
-   [`check_context_reviews`](../src/asof/reader_review_context.py) checks matching
-   reviewer identities, packet pins, complete item/dimension coverage, blind
-   declarations, offset bounds and state/value consistency, and lists value/state
-   disagreements. These are mechanical checks, **not semantic gold**.
-6. **Adjudicate disagreements and inspect supporting spans.** Keep both original
-   passes; record an adjudicator and source-linked rationale. Equal labels or valid
-   offsets alone do not certify entailment. Unresolved items stay out of accepted
-   gold and remain visible in coverage counts.
-7. If excerpts lack necessary context, separately approve a bounded eligible
-   development-context expansion before any new reads. Existing source holds and
-   holdouts stay closed. The selected twelve-window cohort cannot by itself
-   establish broad representative accuracy; an independent evaluation design is
-   still needed before a real-world claim or production promotion.
-
-The required human work is reviewer assignment/access, actual independent labels,
-adjudication and any explicit source-expansion/publication decision. No SEC/model
-credentials, push, holdout opening or automatic release is needed for these steps.
-
-Pre-generation validation: the affected reader/review tests passed **37/37**.
-The full regression attempt stalled after 78 completed tests for over ten minutes
-and its owned command was stopped; no completed/full-suite pass is claimed.
-The two unchanged single-member Windows Job tests then failed their ten-second
-readiness checks, while all 37 affected tests passed again (54.14 s total).
-No resource helper or timeout threshold was changed.
-
-A separate minimal-process check at the benchmark's **already-declared four-member
-allocation** passed readiness in 2.156 s, one-CPU member sampling and kill-on-close.
-It observed two distinct owned members: the virtual-environment launcher and actual
-Python worker. That is relevant to the single-member tests, but does not establish
-the cause of every full-suite stall or replace those failed tests. The model
-runner's existing handshake, membership/affinity sampling and fail-closed limits
-remain authoritative for its actual execution. Ruff and documentation checks passed.
-
-Both supplemental CSVs were actually generated and verified to contain 72 blank
-annotation rows each, with the expected packet pin and no reviewer IDs, labels,
-spans or rationales filled. Their SHA-256 values were each
-`c7bbbeeb5d6187be4e80b49063bdbd40b1ab1a9eca20f668e872bd7108d6f38d`.
-Only those new blank forms and the public preparation receipt were read; no
-private packet excerpt or existing human form was opened.
-
-## Observed cell audit: coverage completed; model comparison stopped on first timeout
-
-The [original receipt](../results/reader_cell_selection.json) records the one attempt
-frozen at `6240bac79ba0792721138314f12915bb8e70efcb`.
-**The model comparison did not complete.** The first strict-tuple request
-(`CELL01-0`) timed out after **90.016 s**, before any valid model response or
-cell-selection request. Overall controller time was **117.578 s**.
-There was no retry, limit increase, alternate seed or model-output salvage.
-Thus no model cell-selection accuracy, improvement or speedup is established.
-The last completed model comparison remains the preceding 11/12 reliability result.
-
-### Actual expanded deterministic coverage
-
-The offline coverage completed before that model request:
-
-| Supported dimension | Correct known-valued positive targets |
-|---|---:|
-| Scope | **24/24** |
-| Accounting basis | **24/24** |
-| Fiscal/calendar period kind | **24/24** |
-| Original/correction status | **24/24** |
-| Value, sign, currency, scale, measure, reporting year, issuer binding, metric binding, source evidence (each) | **96/96** |
-
-All **192/192 outcomes** were correct: 96 complete positive records and 96 negative
-contrasts, zero wrong admitted records. Across positives, 960 known-valued field
-targets and 288 explicit unknown-context targets passed (1,248 correlated checks).
-The twelve new model-audit sources also received their source-control results:
-12/12 outcomes, six complete positives and six refusals, **not twelve model outputs**.
-The coverage was exactly revalidated from its frozen deterministic construction.
-
-This closes the tiny *known-target test-count* gap for the four supported context
-dimensions. It does **not** close the semantic-diversity or independently reviewed
-real-source gap: these are four author-visible template families with variants.
-Source-cell selection software tests exercise multiple years, exact bound units,
-foreign IDs, changed-source IDs, wrong-year rejection and preserved abstentions.
-Actual local-model benefit from those cells remains unmeasured.
-
-### Timeout accounting correction: original evidence preserved
-
-The original receipt retained the failed call and its elapsed time, but its arm
-summary incorrectly labelled all tuple cases unattempted: transport failed before
-an arm row was written. That reporting defect was fixed **after** the stopped run,
-with a regression test. The original receipt was not edited.
-
-The separate [posthoc accounting receipt](../results/reader_cell_selection_accounting.json)
-pins that original file and the accounting code, reconstructing:
-
-- strict tuple: **one invalid attempted response**, eleven unattempted cases;
-- cell selection: **zero attempted requests**, twelve unattempted cases;
-- known failed-call time 90.016 s; token telemetry **unknown**, never reported as zero.
-
-This is an accounting correction without new inference or changed acceptance
-criteria, not a result rerun or a claim that the model got zero answers correct.
-Future runner summaries retain incomplete attempts and their known costs directly.
-The original freeze's source/resource checks passed before any accounting edits.
-Only that reporting fix, its tests and result/documentation work followed execution;
-no extraction rule, candidate catalogue or fixture was tuned after seeing a result.
-
-### Verification, cleanup and remaining work
-
-Peak observed combined working set was **3,778,748,416 bytes (3.52 GiB)**.
-One CPU, source/resource checks and worker exit 0 passed. All four sampled owned
-PIDs were confirmed absent, port 11435 closed and the preexisting shared server
-remained present. All seven prior model-report hashes matched their frozen values.
-Ledger file-size metadata remained 106,246 bytes; no ledger content was opened or
-row added. No real-source packet, raw archive/parquet, study or model download was used.
-
-After the accounting fix, **38 affected tests passed in 16.61 s**, with Ruff and
-documentation/index checks passing. The full-suite attempt and two existing
-single-member Job failures remain disclosed above; no clean full regression or
-successful model comparison is claimed.
-
-**Engineering still outstanding:** diagnose the model transport/runtime timeout
-and complete a newly documented bounded comparison on an appropriate ready runtime;
-resolve the single-member Windows test/launcher interaction and obtain a clean
-full-suite run. This is not work that human labellers should have to fix, and it
-does not authorize raising resource limits or rerunning the retained attempt.
-
-**Human actions:** assign two authorized blind reviewers, complete the two existing
-base forms plus the two prepared supplemental context forms, and adjudicate
-disagreements as described in the [review runbook](#human-actions-still-required-source-review-runbook).
-If a window is insufficient, leave it unresolved; approve any additional eligible
-source context separately. Human gold remains zero until actual independent review
-and adjudication—not merely form validation—are complete.
-No push, holdout opening, source-access release or production promotion occurred.
-
-## One AI reviewer: advisory-only implementation and bounded validation plan
-
-The user requested one LLM-as-a-judge reviewer and the remaining engineering
-shortcomings on 2026-11-19. [`reader_ai_review`](../src/asof/reader_ai_review.py)
-implements exactly one identity, **AI-REVIEWER-01**, explicitly labelled `AI`.
-It is a separate advisory channel, not either named human's blind first pass.
-It cannot rewrite the candidate, override source guards, adjudicate itself into
-gold or count as an independent human reviewer. Existing human forms remain untouched.
-
-The AI receives the requested issuer/metric/year, one candidate answer or abstention,
-and bounded source spans labelled E1, E2, etc. Its strict response contains:
-
-- `verdict`: supported / unsupported / uncertain;
-- up to two bounded issue codes covering values, units, periods, entity/definition/
-  scope, evidence, ambiguity and unnecessary abstention;
-- up to three source-citation IDs.
-
-Supported and unsupported verdicts require citations. Unknown IDs, duplicate
-codes/citations, inconsistent verdicts and malformed JSON remain invalid.
-Stored citations include exact original offsets/text plus a source SHA-256.
-**Citation existence is not entailment.** Constructor/validator agreement,
-model confidence and source co-occurrence do not establish human scientific truth.
-The reviewer may still approve a wrong claim; false support is measured explicitly.
-
-### Evidence-led runtime changes, not relaxed limits
-
-The earlier minimal subprocess diagnostic's launcher observation was not evidence
-that Python multiprocessing necessarily used that launcher: inspection of Python
-3.12's actual Windows spawn implementation shows it already substitutes the base
-interpreter in a virtual environment. A direct single-member multiprocessing
-check reached readiness in **0.782 s**, and both unchanged failing tests passed
-on recheck (**2/2**, 11.73 s). No WorkerJob implementation or test timeout was changed.
-This narrows the diagnosis; it does not erase the earlier intermittent failures.
-
-The stopped model server log shows about **18.2 s cold loading** followed by
-**43.5 s prompt evaluation**, consuming much of the first call's 90-second limit.
-The new profile adds one documented empty-prompt
-[load-only request](https://github.com/ollama/ollama/blob/main/docs/api.md#load-a-model)
-**inside the existing remaining 60-second startup deadline**. It checks empty
-response/no reported generated tokens, then verifies the loaded model and zero
-VRAM on the owned server. Missing load-only token telemetry stays unknown, not zero.
-This startup request is reported separately from evaluated generations; it is not
-a hidden probe, retry, extra training example or a reason to raise limits.
-
-The new compact cell prompt removes duplicated full proof-span payloads while
-retaining the original source, supplied question and source-derived cell IDs,
-years, values and units. Full proofs still bind the final output in code.
-The reviewer prompt likewise uses short citation IDs rather than generated
-offsets/prose rationales. Output ceilings are 64 tokens for cell selection and
-128 for review, replacing unused larger response allowances only in this profile.
-The total 20 minutes, one CPU, zero GPU/cloud/pulls, 6-GiB resource contract and
-90-second generation cap remain unchanged.
-
-### Explicitly new evaluation, not a retry of the old receipt
-
-The [new plan](../results/reader_ai_review_plan.json) allocates **24 generation
-calls maximum**: twelve cell selections plus twelve independent advisory reviews,
-and the separate one load-only startup request. It reuses the already exposed twelve
-source questions from the stopped cell audit; no completed old answer is optimized
-or regraded. All192deterministiccoveragecases remain a separate offline check.
-There is no new paired strict-tuple arm: the prior timeout remains a retained
-failure, not a quietly repaired successful comparison.
-
-The twelve reviewer candidates are frozen authored probes: six supported and six
-unsupported, including wrong period, wrong currency, unnecessary abstention and
-answers to sources with unresolved context. Expected verdicts are never supplied
-to the AI. Order is balanced so six sources are cell-first and six reviewer-first.
-Report valid/schema responses, exact authored verdict matches, false support,
-false rejection, uncertainty, source-qualified cell records and actual cost.
-No numerical score is extrapolated to 24 or to real sources.
-
-One shared small local model is being used in separate inference requests; this
-is **not model diversity or authenticated independence**. Candidate probes come
-from deterministic authored construction, not the AI's own gold labels.
-Neither AI success nor a clean software suite changes the two-human/adjudication
-requirement for the existing independent-review claim. If a future workflow uses
-one human plus one AI instead, it must be labelled AI-assisted review—not two
-independent human passes—and assessed under a separately declared protocol.
-
-Pre-execution validation for this new profile: **723 tests passed** in 102.08 s,
-including both unchanged Windows Job checks, with two existing synthetic
-rank-deficiency warnings. Changed-file Ruff and documentation/index checks passed.
-This is a clean current regression result, not retroactive success for the earlier
-stalled/failed attempts. Runtime and reader tests verify empty-load/no-hidden-generation,
-unknown citations, candidate immutability, explicit AI identity, unknown/invalid
-attempt accounting and both compact request shapes within the context budget.
-
-## Observed AI reviewer and cell run: cells pass; judge does not earn trust
-
-The [actual receipt](../results/reader_ai_review.json) records the new run frozen
-at `7385fe3d973f6155ffd5184f8db54a27962a15ca`.
-**All 24 evaluated requests completed**, with no transport timeout, output
-truncation, retry, extra seed or candidate revision. Controller wall time was
-**1,066.594 s (17.78 minutes)**. The separate load-only startup completed in
-**9.328 s** within the unchanged startup budget. Its generated-token telemetry
-was absent and remains null; it was not counted as an evaluated generation.
-
-### Source-cell selection: 12/12, not an extrapolated 24/24
-
-| Arm on the same twelve questions | Correct outcomes | Complete positives | Correct refusals | Wrong admitted records |
-|---|---:|---:|---:|---:|
-| Compact source-cell model selection | **12/12** | **6/6** | **6/6** | **0** |
-| Deterministic source-only control | **12/12** | **6/6** | **6/6** | **0** |
-
-All six positive cell records passed all thirteen field checks: 78/78 correlated
-checks, of which 57 targets were known-valued and 21 were explicitly unknown.
-In particular, the mixed-currency/year example that previously caused incorrect
-free tuple generation was selected correctly without regenerating or converting
-its numeric value/unit/year. This supports the bounded source-assisted design,
-not independent semantic discovery or an LLM advantage over the source-only control.
-The source parser already supplied the qualified candidate facts.
-
-The separate deterministic coverage again completed **192/192** cases, retaining
-24 known-positive targets each for scope, basis, period kind and revision status.
-Those are author-visible variants, not independent human gold or a new real-source study.
-
-### AI reviewer: 5/12 correct verdicts and four invalid outputs
-
-All twelve advisory reviews were attempted. Only eight passed the reviewer contract;
-**five of twelve** matched the authored supported/unsupported label.
-
-| Authored candidate status | Valid support | Valid rejection | Uncertain | Invalid |
-|---|---:|---:|---:|---:|
-| Supported (6) | **0** | **3** | 0 | **3** |
-| Unsupported (6) | 0 | **5** | 0 | **1** |
-
-The three valid false rejections were justified abstentions on a missing requested
-year, a non-GAAP-only source for a GAAP query, and a missing per-share amount.
-The judge tended to treat the absent value/unit as an error instead of recognizing
-that an abstention was appropriate.
-
-The four invalid outputs said `supported` while also listing error codes, violating
-the existing runtime contract. One of those invalid support opinions concerned an
-actually incorrect candidate. Therefore **zero valid false-support verdicts is not
-a safety certificate**. A trivial always-reject reference would match six of twelve
-balanced labels, more than this judge's five; that arithmetic contrast needs no
-additional model call.
-
-This implemented reviewer is available as **AI-REVIEWER-01, advisory-only and
-not promoted**. It cannot replace either independent human first pass, cannot
-adjudicate or create gold, and cannot change source/cell candidates. Its actual
-failure is preserved rather than normalized into passing verdicts.
-No AI opinion was supplied to the still-blind human forms or run on the private packet.
-
-### Schema repair after the observation: implemented, not model-tested
-
-Inspection found a concrete wire-contract shortcoming: the original JSON schema
-listed fields/enums, but the dependency between verdict, empty/nonempty issues and
-required citations existed only in a Pydantic runtime validator. Constrained decoding
-could therefore still emit the observed inconsistent combinations.
-
-The request schema now exposes three explicit branches: support requires empty
-issues and at least one citation; rejection requires issues and a citation;
-uncertainty requires issues. The same runtime acceptance criteria are unchanged.
-A regression test keeps the original inconsistent outputs **invalid** and checks
-that the dependencies are present in the generated schema.
-
-This is a post-observation generation-schema fix. **No model rerun was performed
-after it**, no old verdict was regraded and no improved reviewer score is claimed.
-Any further model measurement needs a new frozen profile; the existing attempt
-markers and source hashes prevent silently recycling this run. Schema repair can
-address response consistency, not prove that the judge understands abstentions.
-
-### Cost, verification and remaining shortcomings
-
-Cell requests totalled **422.909 s** and advisory reviews **627.889 s**, excluding
-the load-only startup and controller overhead. The source-only control computation
-over twelve questions totalled about **0.0103 s**. All evaluated calls together
-generated **898 tokens**. These measurements do not establish that paying for a
-judge adds value; this judge did worse than the trivial balanced-label reference.
-
-Observed peak combined working set was **3,916,546,048 bytes (3.65 GiB)**.
-One CPU, source/resource checks and worker exit 0 passed. All four sampled owned
-PIDs were confirmed absent, port 11435 closed and the shared preexisting server
-remained present. All eight older raw model-report hashes plus the prior accounting
-receipt matched. All 24 serialized source/cell records and twelve AI review records
-were reconstructed and checked against the saved source proofs/raw responses.
-No model package/download, real-source/private-review read, financial study or
-production trial-ledger row was used. Ledger file-size metadata remained 106,246 bytes.
-
-The final software suite, including the schema-dependency fix and both unchanged
-Windows containment checks, passed **724 tests** in 140.28 s, with two existing
-rank-deficiency warnings. Ruff and documentation/index checks passed. This closes
-the current full-suite verification gap; historical intermittent failures remain
-documented, and no permanent environmental cure is claimed.
-
-The original transport failure is retained, but this explicitly new compact,
-load-separated run completed within the **same** per-call/total resource limits.
-It is a demonstrated bounded remediation, not a guarantee against future timeouts.
-No broader application default or scientific acceptance gate changed.
-
-Remaining work is substantive, not hidden percentage repair: the judge's semantic
-quality is inadequate, its corrected decoding schema has not been model-evaluated,
-real-source independence/gold remain absent and arbitrary financial formats remain
-outside the source grammar. The [human runbook](#human-actions-still-required-source-review-runbook)
-still applies. A one-human-plus-AI exploratory workflow may be labelled as such,
-but cannot be reported as two independently reviewed human passes.
-
-## Current regression consolidation and one small entailment verifier
-
-The user approved three automated follow-ups: fix remaining grammar gaps, enforce
-supported-regression/proof contracts without rewriting history, and benchmark one
-small local source-grounding verifier. Human labelling remains separate.
-
-### Exact-offset grammar fixes and current-candidate matrix
-
-The three reported misses were first reproduced as failing tests: two `had NUMBER
-subscribers` constructions and an issuer/reporting verb separated from its metric
-by a line wrap. The bounded full-source relation has contract `field-prose-v2`,
-preserving SHA and exact offsets into the original source. It permits a qualified
-prior-year subscriber comparison, not arbitrary newline/paragraph concatenation.
-Blank lines, headings/tables, unknown subjects, quoted examples, malformed commas,
-wrong years and trailing counterparty qualifiers do not qualify.
-
-Including the oldest twelve original cases exposed three additional gaps:
-industry/manufacturer attribution under an issuer lead, an explicitly unreconciled
-authority conflict, and a count with a prior-year comparison. The new candidate
-refuses the first two conservatively and binds the latter locally. The third-party
-check is clause-local: an earlier customer distractor must not suppress a later
-explicit issuer-owned fact. Explicit unreconciled authority markers require review;
-this is conservative grammar, not universal semantic interpretation.
-
-[`check_reader_regressions`](../scripts/check_reader_regressions.py) now checks the
-current candidate over original12, grammar24, harder model subset24/all288, linked24,
-field24, reliability24, context192 and cell-source12. Only known invented fixtures/
-constructions are read. Field-labelled cohorts retain `field-record-v1`; older
-cohorts get a **new tuple-plus-source-proof diagnostic**, not their original
-single-quote scores. Wrong admissions, false refusals and invalid proofs stay visible.
-Known-context field checks remain separate from unknown targets. Cohorts overlap
-and are development-exposed: never pool them as independent observations.
-Historical raw results/baselines remain unchanged; zero regression failures is a
-software target, not a real-world guarantee.
-
-### HHEM provenance and isolated dependencies
-
-Selected verifier: [HHEM-2.1-Open](https://huggingface.co/vectara/hallucination_evaluation_model),
-revision `de9a5e6ba9ba49531a022dba17e35ffeb2a6fad8`; Google Flan-T5-base
-config/tokenizer revision `7bcac572ce56db69c1ea7c8af255c5d7c9672fc2`.
-The [artifact receipt](../results/hhem_assets.json) records hashes and sizes.
-Safetensors weights match the public LFS SHA-256; smaller files match their public
-Git blob IDs and are also SHA-256 pinned. No weights/tokenizers enter Git.
-Both cards declare Apache-2.0; this is not licence clearance for every future use.
-
-Both custom-code files were inspected: ordinary Torch/Transformers imports and
-foundation-config/tokenizer loading. Before execution, the loader overrides that
-foundation to the pinned local directory and forces HF/Transformers offline,
-disables telemetry/GPU visibility and uses an owned private module cache.
-`trust_remote_code` applies only to inspected, hash-verified local files.
-No unpinned remote code/model is fetched during evaluation and no pickle weights load.
-
-The optional `verifier` extra pins Torch2.9.1, Transformers4.57.6, safetensors0.7.0
-and sentencepiece0.2.1. Actual CPU Torch2.9.1+cpu was installed only in a throwaway
-venv; project `.venv` is untouched. Modern resolvers failed TLS access to optional
-wheel `.metadata` endpoints; pip's legacy wheel-metadata resolver succeeded without
-disabling TLS verification. The configured mirror URL/credentials are not committed.
-`uv pip check` passed for all26installedpackages.
-The [environment receipt](../results/hhem_environment.json) records exact installed
-versions, **not hash-locked dependency artifacts**. CI remains the core/dev lock;
-this optional model experiment is not a CI execution.
-
-### Frozen 24-claim benchmark and acceptance limits
-
-The [plan](../results/hhem_plan.json) permits one local CPU-only run under 6 GiB/
-20 minutes, with a 2,048-token cap, no truncation and no inference retry. Downloads
-and installation precede execution. The external worker blocks on the owned-Job
-gate before importing Torch/model code; launcher and interpreter are both sampled.
-
-[`hhem_verifier`](../src/asof/hhem_verifier.py) freezes24claims over twelve invented
-sources: one supported and one corrupted claim for value, year, currency, scale,
-sign, entity, definition, scope, accounting basis, per-share denominator, footnote
-applicability and correction priority. Prose and raw tables are retained.
-Threshold **0.5** is fixed before scoring; it is not tuned on this benchmark.
-Report all24cases, false support/rejection, invalids, unattempted cases, tokens,
-latency, model/dependency pins and resources. A model score is not a calibrated
-financial-correctness probability. Do not select only easy cases.
-
-This evaluates **claim entailment, not abstention/answerability**. No claim means
-no entailment verdict, not certified nondisclosure. Source coverage and unresolved
-questions still need review. The verifier is advisory-only: it cannot change source
-guards, candidate tuples, human-review counts/gold, weights, registered studies,
-source permissions or the application default. Historical report hashes remain
-protected. The current regression matrix is captured independently alongside it.
-
-Pre-execution validation: the full core suite passed **744 tests** in 104.65 s
-(two existing rank-deficiency warnings). A subsequently added explicit worker-gate/
-no-overwrite check and the affected tests passed **28/28** in 5.38 s.
-Ruff and documentation checks passed; isolated Torch/Transformers imports succeeded
-with CPU Torch2.9.1+cpu and CUDA unavailable. No weights or benchmark claims were
-evaluated before the source/fixture/asset freeze. The matrix currently passes every
-listed cohort under its declared current contract; old scores remain frozen.
-
-## Observed consolidation: current regressions pass; HHEM is not an approval gate
-
-The [actual receipt](../results/hhem_benchmark.json) records the run frozen at
-`4c436fd48074c369169993cbe67cf0860238e71e`. It contains both the reproducible
-current-candidate matrix and the one local HHEM experiment. Neither the old raw
-model outputs nor their published historical scores were edited.
-
-### Current source candidate: complete declared regression matrix
-
-| Exposed invented cohort | Correct / planned | Contract |
-|---|---:|---|
-| Original focused cases | **12/12** | New current tuple + exact source proof |
-| Grammar robustness | **24/24** | New current tuple + exact source proof |
-| Harder-format model-audit subset | **24/24** | New current tuple + exact source proof |
-| Full harder-format fixture | **288/288** | New current tuple + exact source proof |
-| Linked challenge | **24/24** | New current tuple + exact source proof |
-| Field records | **24/24** | Existing field-record-v1 |
-| Reliability source cohort | **24/24** | Existing field-record-v1 |
-| Expanded context coverage | **192/192** | Existing field-record-v1 |
-| Source-cell questions | **12/12** | Existing field-record-v1 |
-
-Every answered record passed its current source-proof checks; there were zero wrong
-admissions in this matrix. The historical 21/24, 17/24 and other old scores still
-describe those original implementations, outputs and score contracts.
-This matrix is **posthoc development regression**, not new model generation,
-independent human gold or an apples-to-apples rewrite of the old citation score.
-The cohorts overlap and must not be summed into an independent sample size.
-Known-context field targets remain separate from unknown/not-applicable targets.
-The matrix command exits nonzero on any newly missed declared case.
-
-### HHEM result: 17/24 at the predeclared threshold
-
-All24frozenclaims were evaluated, with no truncation, invalid outputs or retries.
-At the fixed0.5support threshold:
-
-| Authored claim | Predicted supported | Predicted unsupported |
-|---|---:|---:|
-| Supported (12) | **12** | 0 |
-| Unsupported (12) | **7** | **5** |
-
-Thus accuracy was **17/24**, false support **7/12 unsupported claims**, and
-false rejection zero. Only **12/19** admitted support predictions were correct.
-There was no threshold tuning, removal of difficult cases or replacement with a
-friendlier model to manufacture 24/24.
-
-| False support | Why the claim was wrong | Support score |
-|---|---|---:|
-| Year/table column | Assigned the 2016 USD amount to reporting year2017 | 0.8527 |
-| Entity | Assigned customer revenue to the reporting issuer | 0.8124 |
-| Definition | Substituted operating margin for gross margin | 0.8079 |
-| Scope | Substituted a segment amount for consolidated revenue | 0.5728 |
-| Denominator | Substituted basic EPS for diluted EPS | 0.6945 |
-| Footnote | Applied the default USD unit despite an EUR-thousand row override | 0.7176 |
-| Correction | Accepted the superseded original rather than corrected value | 0.8859 |
-
-These are precisely the associations where exact source structure matters.
-Several wrong claims received high scores; a raw model score is not a calibrated
-financial correctness probability. The sample is too small/authored to justify
-learning a production threshold. HHEM should **not approve financial records or
-replace deterministic guards**. It is an optional measured advisory baseline only,
-not a validated improvement to the current source path.
-
-This claim-entailment task is also different from the earlier 5/12 generative
-reviewer test. The two percentages must not be presented as a like-for-like
-judge improvement, and HHEM was not tested on abstention/answerability.
-Independent human review remains required for claims outside known source rules.
-
-### Actual local feasibility and verification
-
-The worker loaded pinned weights in **5.562 s** and scored all24claims in
-**16.907 s total**, about0.704sperclaim on one CPU. End-to-end controller time was
-**43.391 s**, including startup, hash verification, imports, matrix replay and cleanup.
-The24inputs totalled1,433tokens, maximum72perclaim pair; none reached the2,048cap.
-Observed combined peak working set was **727,384,064bytes (0.677GiB)**.
-One-CPU affinity, CPU model device, source/resource checks and worker exit0 passed.
-This establishes local computational feasibility, **not sufficient task accuracy**.
-
-All24scores were reconstructed through the frozen threshold/summary, all nine
-matrix cohorts were replayed exactly, artifact hashes were reverified, and all ten
-historical raw/accounting receipt hashes matched. Both owned worker/launcher PIDs
-were confirmed absent; the preexisting Ollama server was untouched.
-The throwaway dependency venv was removed after validation; pinned model/tokenizer
-assets remain in ignored local data for reproducibility. The project `.venv` and
-the dev CI lock were not modified by package installation.
-
-Software validation is the recorded744full-suite passes plus28focused checks,
-with Ruff and documentation/index checks passing. No model or threshold code was
-retuned after this run; only result/navigation/documentation edits followed.
-No real-source/private-review read, financial study, weights training, production
-trial-ledger row, human-review fabrication, source-scope release or push occurred.
-Ledger file-size metadata remained106,246bytes; its contents were not opened.
-
-### Remaining actions
-
-The three requested engineering deliverables are implemented and measured:
-grammar fixes, a current supported-regression target/matrix, and one pinned local
-verifier comparison. **Not every measured model deserves a perfect score.**
-The defensible result is a passing supported-source candidate alongside a verifier
-whose seven false approvals are retained as a reason not to trust it as a gate.
-
-Unresolved: independently labelled eligible real-source accuracy, semantic diversity
-beyond authored templates, arbitrary financial formats and a reliable abstention/
-answerability reviewer. Two actual blind human passes and adjudication are still
-the independent-review protocol; one human plus AI must be labelled AI-assisted.
-Prepared base/context forms remain blank, and human gold remains zero.
-
-## Source-structured verification: a new rule-assisted comparison, not higher model scores
-
-The user requested further improvement after HHEM's seven false approvals.
-[`claim_verifier`](../src/asof/claim_verifier.py) checks a **bounded financial claim
-language against a unique exact-offset source fact**. Existing HHEM weights,
-raw scores, threshold0.5 and historical receipts are unchanged.
-
-The claim parser accepts complete named-issuer reported facts or possessive
-issuer/year/metric/value/unit assertions, with explicit positive/negative wording
-and optionally qualified corrected status. It does not interpret arbitrary
-natural-language claims, missing claims or refusals as supported facts.
-Numeric grouping, currency, scale, measure, reporting year and full metric
-identity remain explicit; there are no FX/scale conversions or fuzzy metric matches.
-
-For source facts it reuses the guarded reader, including table columns, applicable
-footnotes and correction priority. Two additional **whole-source compound
-constructions** support paired metric disclosures and diluted/basic per-share
-comparisons. Those bind both metric/value/unit groups and their shared named
-issuer/year to original offsets, without arbitrary sentence slicing or borrowing
-another company's context. Full metric equality avoids GAAP-within-non-GAAP
-substring matches. Duplicate inconsistent same-metric facts remain unresolved.
-The existing current-reader grammar/default and its regression matrix are unchanged.
-
-Each decision is:
-
-- `supported`: exact claim tuple matches the unique source-derived fact;
-- `contradicted`: the same issuer/metric/year has a qualified source fact with a
-  different value/currency/scale/measure;
-- `review`: claim/source grammar is unsupported, the period/entity is unbound,
-  correction status is unestablished, or evidence is missing/conflicting.
-
-Decisions retain claim fields, source SHA, source fact and exact spans, mismatch
-dimensions and proof-validation status. Validation recomputes the same source
-rules: this is **not independent semantic adjudication**. Missing source proof is
-not automatically contradiction or successful nondisclosure.
-
-### Frozen comparison design
-
-The [new plan](../results/hhem_structured_plan.json) retains one CPU, zero GPU,
-6 GiB, 20 minutes, 24 model input pairs maximum and the fixed threshold0.5.
-It uses new output and attempt paths; the earlier17/24receipt is read/hash-pinned
-but never overwritten. The prior pinned model/tokenizer cache is reused offline.
-The isolated environment is restored from its exact26recordedpackageversions;
-no new model, dependency version, paid API or project-venv modification is introduced.
-
-[`claim_challenge`](../src/asof/claim_challenge.py) freezes twelve new invented
-positive/negative pairs across the same twelve numeric/context dimensions.
-Names, values, units and years differ from the earlier fixture; the templates and
-expected labels are nevertheless **author-visible development material**, not
-a blind independent evaluation. Raw HHEM and the new source-rule verifier see
-identical source/claim texts. Report both and a source-only baseline explicitly:
-if decisions come from source rules, no model increment or improved model weights
-may be claimed.
-
-The earlier24cases are also replayed from saved model scores as **posthoc exposed
-development**, without new model calls or changed historical scores.
-
-Six additional format-shift controls use unrecognized turnover wording, spelled-out
-numbers and compact EPS notation. Three claims are supported and three false.
-They receive source-rule checks **without extra HHEM calls**, and unresolved items
-remain `review`. The headline24-case paired comparison and these controls are
-separate, but overall coverage must also show the full30case denominator: deferring
-six difficult cases cannot be reported as universal30/30accuracy.
-Invalid/unattempted model outputs remain in the model denominator.
-
-The new source verifier does not improve the raw model's entailment probabilities.
-It replaces unreliable approval with source-bound decisions where that narrower
-contract applies. For unsupported sources the HHEM number remains advisory and
-cannot bypass review, even when high. There is no global production promotion,
-learning loop, human-gold creation, source-access release or real-data evaluation.
-
-Pre-execution validation: **756 tests passed** in105.26s with two existing synthetic
-rank-deficiency warnings. Changed-file Ruff and documentation/index checks passed.
-All26isolateddependencyversions exactly matched the prior receipt and their package
-compatibility check passed. The supported-grammar development check was24/24,
-with all6format-shift controls unresolved. These authored outcomes were visible
-before the code/fixture freeze and are not independent generalization evidence.
-
-## Observed source-rule comparison: 24/24 resolved claims, six visible deferrals
-
-The [actual comparison receipt](../results/hhem_structured.json) records the one
-run frozen at `7083b99e0b9130c0b11a8b310ecb65ec68fc21a0`.
-All24modelinputs completed at the unchanged0.5threshold, without invalid outputs,
-truncation, retries, model-weight changes or post-result tuning.
-
-### Same24invented inputs: model versus source-proof decisions
-
-| Method | Correct /24 | False approvals | False rejections | Unresolved |
-|---|---:|---:|---:|---:|
-| Raw pinned HHEM, threshold0.5 | **17** | **7** | **0** | **0** |
-| New source-rule verifier | **24** | **0** | **0** | **0** |
-| Source-only control | **24** | **0** | **0** | **0** |
-
-All twelve supported and twelve contradicted claims were classified correctly
-by the source-rule path. Its24decisions all carried a valid original-offset proof.
-The source-only control is the same decision function without model probabilities:
-**there is no demonstrated incremental HHEM benefit**. This is an improvement in
-the system's bounded verification method, not the model becoming17/24to24/24.
-The prior17/24receipt remains unchanged, and the old24-case replay is separately
-labelled exposed/posthoc in the new receipt.
-
-| Raw HHEM false approval | Score | Source-rule reason |
-|---|---:|---|
-| Reporting-year column | 0.8192 | Bound requested-year fact differs in value/currency/scale |
-| Customer value assigned to issuer | 0.7962 | Claim differs from issuer-owned fact |
-| Operating substituted for gross margin | 0.8629 | Full metric identity selects another value |
-| Segment substituted for consolidated | 0.6472 | Full scope-qualified metric selects consolidated value |
-| Basic substituted for diluted EPS | 0.5390 | Exact denominator-qualified metric selects diluted value |
-| Wrong footnote unit | 0.7150 | Applicable unit differs in currency/scale |
-| Superseded original | 0.7267 | Qualified corrected fact has a different value |
-
-The raw model repeated the same classes of binding errors on changed names,
-values, currencies and year. The source verifier did not lower its threshold,
-accept only a hand-picked portion of the24pairs, infer a conversion or silently
-substitute a correct output for the model. It issued its own explicit
-supported/contradicted source decisions using all24inputs.
-
-### Broader coverage is 24/30, not30/30
-
-All six separately frozen format-shift controls remained `review`, including
-three supported and three false claims. No raw HHEM call was made for those six.
-Their deferral is not counted as a correct financial verdict:
-
-- total source-rule cases including controls: **30**;
-- resolved and correct: **24**;
-- unresolved: **6**;
-- overall resolved coverage: **80%**;
-- zero wrong decisions among the24resolved cases in this authored sample.
-
-Turnover synonyms, words-as-numbers and compact EPS notation still lie outside
-the declared grammar. Unknown-source handling stayed fail-closed rather than
-turning a high model probability into an unsupported approval. This is not a
-general perfect judge, nor a calibrated risk guarantee on unseen financial inputs.
-
-### Actual validation, resources and limits
-
-Controller wall time was **51.875s**, model loading0.641s and summed claim scoring
-8.734s. The24input pairs totalled1,493tokens (maximum77), with no truncation.
-Observed combined peak working set was **730,165,248bytes (0.680GiB)**.
-One CPU, source/resource checks and worker exit0 passed. Both sampled owned
-PIDs were confirmed absent; the preexisting shared Ollama server was untouched.
-All24raw scores and decisions were reconstructed, all24serialized proof objects
-revalidated against original source offsets, and all historical receipt hashes
-including the earlier HHEM17/24matched. JSON tuple/list representation was
-normalized only in the verification check; the saved receipt was not edited.
-The current nine-cohort source-reader regression matrix remained unchanged and passing.
-
-The **756-test full suite**, changed-file Ruff and documentation/index checks
-passed as recorded before execution. Only documentation/navigation/result changes
-followed generation. The exact isolated dependency venv was removed after use;
-the pinned offline asset cache remains available and the project `.venv` is untouched.
-Ledger file-size metadata remained106,246bytes, with no content read or new row.
-No real/private-review source, financial study, download of new model weights,
-training, human-gold creation, application-default promotion or push occurred.
-
-Remaining gaps are now explicit: six out-of-grammar controls, independent eligible
-real-source review/gold, broad semantic coverage and a reliable general AI judge.
-The earlier5/12reviewer and17/24HHEM results are still retained failures, not
-silently repaired historic scores. The new source-rule verifier is a separately
-measured narrower component; it does not eliminate the human-review requirement.
-
-## Correctness hardening beyond the friendly grammar
-
-The user requested broader correctness, not another conveniently perfect benchmark.
-Direct pre-edit probes found three actual false admissions in the current rule path:
-negated (`never actually reported`), forecast (`forecast revenue`) and illustrative
-source statements were accepted as actual reported facts. An exactly equivalent
-denomination (18 USD million versus 18,000 USD thousand) was falsely labelled
-contradictory. Compact basic/diluted EPS notation was unnecessarily unresolved.
-Those are reproduced implementation defects/limitations, not evidence that the prior
-24/24 sample established general correctness.
-
-### Actual-disclosure admission and precise quantity semantics
-
-The guarded reader and additional claim-proof grammars now share explicit
-source-admission checks. A clause-local named-issuer relation with negation or
-forecast/modality terms is not an actual disclosed fact. Explicit source-wide
-illustrative/nonactual and quarterly/forecast qualifications require review,
-including qualifications on a following line. An unrelated customer's forecast
-in a separate clause does not invalidate the reporting issuer's actual fact.
-Mixed actual/illustrative documents can be conservatively deferred; these finite
-checks do **not** solve arbitrary natural-language entailment or every paraphrase.
-
-The claim decision contract is now explicitly **`source-claim-v2`**.
-It recognizes exact same-currency denomination equivalence, retaining both original
-values/units and their source spans. For example, 18 USD million and 18,000 USD
-thousand describe the same exact quantity; the extraction output is not rewritten.
-No FX conversion, metric alias substitution, approximate matching or rounding is used.
-The source-stated record contract remains distinct from this verifier's semantic
-quantity check. A nearby unequal amount still contradicts the qualified source.
-
-Equivalence compares decimal digit/exponent tuples, not context-rounded arithmetic.
-Two related precision bugs were fixed: parenthesized negatives in the shared amount
-parser and explicit `negative` claim wording now use context-independent sign
-operations. Multiplication/unary negation had silently rounded sufficiently long
-amounts under a low Decimal precision. Tests cover signed values up to40digits
-and low precision without changing the source or claim value.
-
-### Compact EPS support, not speculative revenue synonyms
-
-The new bounded `compact-eps-claim-v1` source proof accepts a complete issuer/
-fiscal-year statement with explicit `EPS(basic)` and `EPS(diluted)` entries.
-The exact notation supplies the share-denominator definition; each entry owns
-its currency, amount and character offsets. Wrong classes, years, currencies,
-changed-source proofs and conflicting same-class duplicates cannot silently bind.
-This supports the two previously deferred compact-EPS controls.
-
-Turnover/top-line wording is **not automatically equated to revenue**, and
-spelled-out amounts in those ambiguous-alias examples remain unresolved. The
-original six boundary items are retained unchanged, with all30items still in the
-overall coverage denominator. Historical model scores are not regraded.
-
-### Assurance protocol and limits
-
-[`claim_assurance`](../src/asof/claim_assurance.py) defines named controls for the
-observed nonactual/negated/forecast errors, exact quantity equivalence versus
-one-unit inequalities, unrelated-customer context and basic/diluted EPS.
-The [offline validator](../scripts/validate_claim_assurance.py) freezes source/
-control hashes before writing one new receipt. It also recomputes all current
-reader regression cohorts. It uses no model calls, weight reads, network, new
-dependencies, real-source/private-review data or production trial-ledger content.
-
-Report **policy checks** separately from resolved financial verdicts. Correctly
-deferring a forecast or unsupported source is a successful admission-policy check,
-not an extracted actual financial fact. The fixed 24-pair source challenge,
-original six format boundaries and named policy controls remain separate; no
-independent sample-size claim is made by pooling overlapping authored examples.
-Property tests independently vary40large signed amounts/currencies, checking exact
-equivalence and adjacent inequality under low Decimal precision.
-
-This hardens known behavior and broadens an unambiguous supported notation.
-It cannot guarantee perfect correctness on arbitrary unseen financial documents.
-Independent eligible human source labels, adjudication and broader format evidence
-remain required; an AI judge or rule-generated expected answer does not create them.
-No old result, model threshold/weights, application default, source hold or
-registered financial design is changed by this assurance work.
-
-Pre-receipt validation: **769 tests passed** in198.98s, with two existing synthetic
-rank-deficiency warnings. Changed-file Ruff and documentation/index checks passed.
-The named development controls were37/37policy-correct, including nine expected
-review decisions and28resolvedfinancialverdicts. The existing24claimset passed;
-the original30-case total now has26resolved/correct and4unresolved. These
-development-exposed checks are not independent financial accuracy evidence.
-
-## Observed broader assurance: real decision defects fixed, coverage rises to26/30
-
-The [source-claim-v2 assurance receipt](../results/claim_assurance.json) is frozen
-at `61ee7e7fe7046429edc8021761750f55ab3767c4`. It completed in **2.110s** with
-peak process working set **35.34MiB**, no model calls and no source/data downloads.
-This is deterministic software assurance, not another model benchmark.
-
-### Actual behavior changes verified
-
-| Before-edit defect/limitation | New behavior |
-|---|---|
-| Negated `never actually reported` statement accepted as an actual fact | Review, not supported |
-| Forecast accepted as actual reported revenue | Review, not supported |
-| Explicit illustrative/nonactual example accepted | Review, not supported |
-| Following-line quarterly/forecast qualification ignored | Review, not an annual actual |
-| Same-currency equivalent denomination called contradictory | Exact quantity equivalence recognized, original values retained |
-| Long negative amount rounded by the ambient Decimal context | Exact sign/amount preserved |
-| Explicit compact basic/diluted EPS notation unresolved | Source-offset-bound EPS proof, with class/currency/year kept distinct |
-
-These are producer/semantic fixes to observed behavior, not a threshold change,
-relabelling of previous model responses or acceptance of unsupported aliases.
-Source-reader regression results stayed passing across all nine exposed cohorts.
-
-### Separate correctness axes, with no hidden denominator
-
-- **Existing supported claim challenge:24/24** source decisions correct.
-- **Named policy controls:37/37** expected decisions correct. Nine explicitly
-  expect review; only28are resolved financial verdicts. Do not call these37extractedfacts.
-- **Exact-arithmetic property test:40passing /0failing /0invalid** examples,
-  exercising equivalence and adjacent inequalities under deliberately low
-  Decimal precision. These are mechanical variants, not independent human gold.
-- **Original format boundary set:** two compact-EPS cases are now resolved correctly;
-  four turnover/top-line/spelled-number cases remain unresolved.
-- **Full original30-case denominator:26correct/resolved,4review (86.7%coverage)**,
-  improved from24/30(80%). No unresolved case is counted as a correct financial verdict.
-
-All28serialized financial proofs in the policy-control records were reconstructed
-and revalidated against original source text; current results were recomputed after
-JSON serialization. The old HHEM17/24, rule-v1 24/24with6deferrals and generative
-judge5/12receipts remain untouched and pinned. No raw model accuracy improvement
-is claimed, and no model was rerun to obtain a better-looking percentage.
-
-The full suite passed **769 tests** in198.98s, with two existing rank-deficiency
-warnings. Changed-file Ruff and documentation/index checks passed.
-No new package, paid API, real-source/private-review read, financial study,
-production ledger row, human-review fabrication, source-scope release, application
-promotion or push occurred. Ledger file-size metadata remained106,246bytes;
-its contents were not opened.
-
-**Remaining limits:** finite admission patterns do not understand every negation,
-disclaimer or forecast paraphrase; conservative source-wide holds can reduce
-coverage in mixed documents; ambiguous metric aliases remain unresolved; no
-independently labelled real-source accuracy or universal correctness is established.
-The [human review runbook](#human-actions-still-required-source-review-runbook) remains
-necessary. Correctness requires preserving those uncertainties, not forcing every
-item into a confident binary verdict.
-
-## Observed notation coverage and decomposed AI review
-
-**Current status:** two development-only improvements, each frozen before measurement.
-Neither is human gold, real-source accuracy or an approval gate. Historical receipts
-(claim assurance 26/30, raw HHEM 17/24, AI-REVIEWER-01 5/12) are unchanged.
-
-### Problem
-
-1. Four original boundary claims stayed in review because the verifier could not prove
-   `turnover reached GBP26m during FY2016` or `top line came to twenty million euros in 2016`.
-2. AI-REVIEWER-01 scored 5/12: four supported outputs were schema-invalid and three
-   justified abstentions were rejected, because one question mixed "is this value
-   supported?" with "is any value disclosed?".
-
-### Notation policy (`financial-notation-v1`)
-
-[`financial_notation.py`](../src/asof/financial_notation.py) adds one bounded proof
-contract, used by [`claim_verifier.py`](../src/asof/claim_verifier.py) only after the
-existing guarded reader finds nothing and never after it refuses (`context_rejected`).
-
-| Accepted | Deliberately left in review |
-|---|---|
-| Allowlisted uppercase ISO code or euro sign, number, lowercase `k`/`m`/`mn`/`bn` (`GBP26m`, `EUR 4.5bn`, `GBP780k`) or `EUR 26 million` | `$`, `£`, bare dollars/pounds, lowercase or unlisted codes, `M`/`MM`/`K`, malformed commas |
-| Spelled cardinal 1-999 plus one scale word plus explicit currency (`forty-two million US dollars`) | Compound spelled numbers, trillions, words-as-fractions, percentages |
-| `revenue`, `turnover`, `top line` as the bare head noun after `<Issuer>'s` or `<Issuer> said its` | Employee/inventory/asset/segment turnover, turnover ratio, net sales, competitors' figures |
-| `reached`, `totalled/totaled`, `amounted to`, `came to`, `was/were` | Modal, negated, forecast or other verbs |
-| `during/for/in` + optional `FY`/`fiscal (year)`/`financial year` + four-digit year | Two-digit years, ranges, quarters, halves, months, YTD |
-
-One sentence must bind issuer, metric, amount and year; trailing clauses fail. Other
-same-issuer notation sentences for other years are allowed only if fully valid. Any
-other revenue/sales wording, revision, unreconciled, sub-annual, illustrative or
-forecast-wide text keeps the claim in review. If the standard reader proves a revenue
-amount and a same-year alias sentence states a different quantity, the claim is review
-instead of "first parser wins". Equivalence remains exact, same-currency only and without FX.
-
-Rejected alternatives: general NLI or model entailment (raw HHEM approved seven false
-claims), treating `$`/`£`/pounds as one currency, equating net sales with revenue, and
-open-ended spelled-number parsing. "Turnover" and "top line" as revenue are declared
-policy choices, not universal truths; `top line` can mean gross revenue in some reports.
-
-### Notation protocol and results
-
-| Step | Commit | Evidence |
-|---|---|---|
-| Fresh 24-case challenge and 780-row metamorphic grid frozen before implementation | `b2e68c2` | [`notation_challenge.py`](../src/asof/notation_challenge.py) |
-| Baseline on unchanged verifier | `b2e68c2` | [`notation_baseline.json`](../results/notation_baseline.json) |
-| Implementation frozen before separately authored cases were read | `0dc4992` | — |
-| 72 adversarial cases recorded once | `8eae93e` | [`notation_adversarial.json`](../results/notation_adversarial.json) |
-| Post-hoc ADV-71 fix, then final record | `b97dcf6` | [`notation_final.json`](../results/notation_final.json) |
-
-| Measure | Baseline | Final |
-|---|---|---|
-| Fresh challenge (12 resolvable + 12 review traps) | 12/24 (0/12 resolved) | **24/24** |
-| Metamorphic grid (60 bases x 13 relations) | 540/780 (0/240 resolved) | **780/780** (60/60 for every relation) |
-| False support / false contradiction | 0 / 0 | 0 / 0 |
-| Original 30-case coverage (exposed) | 26/30 | **30/30** |
-| Named policy controls (exposed) | 37/37 | 37/37 |
-| Current reader regression cohorts | 9/9 pass | 9/9 pass |
-
-The grid's 13 relations are exact, exact rescaling, changed value, changed currency,
-absent claim year, absent claim metric, qualified metric, non-asserted verb, trailing
-qualification, illustrative document, ambiguous currency, third-party subject and
-issuer-prefix collision. Expected verdicts follow from construction; both the grid and
-the challenge are author-visible.
-
-**Separately authored adversarial set.** A separate AI agent instance wrote 72 cases
-(18 supported, 18 contradicted, 36 review) from the written policy only and was told
-not to read repository code. The one-shot result was **71/72** (95% Wilson interval
-0.925-0.998) with **one false support**, zero false contradictions and zero missed
-resolutions. ADV-71 (`GBP20M in 2007. ... GBP26m in 2008.`) exposed a real defect: the
-case-insensitive sentence match exempted an invalid uppercase-`M` sibling from the
-document-level guard. The fix exempts only fully valid siblings (`b97dcf6`). Afterwards
-all 72 pass, but that is an **exposed regression**, not a fresh measurement; the 71/72
-receipt stays authoritative. The authoring agent is AI, not an independent human.
-
-Resources: baseline 0.547s, adversarial 0.422s, final 3.485s (including reader
-regressions and assurance recompute); peak process working set at most 36.44 MiB; no
-model calls, network or data reads.
-
-### Decomposed AI reviewer (AI-REVIEWER-02)
-
-[`reader_ai_review_v2.py`](../src/asof/reader_ai_review_v2.py) splits the task:
-
-- **Answered candidate:** value check with the verdict/issue/citation union schema
-  that encodes supported-needs-citations-no-issues during decoding.
-- **Abstention:** a separate question, "does the source state this amount?" answered
-  `stated` / `not_stated` / `conflicting` / `cannot_tell`. A fixed code table, not the
-  model, maps `not_stated`/`conflicting` to a justified abstention, `stated` to an
-  unnecessary abstention and `cannot_tell` to uncertain.
-- The payload carries only issuer, metric, year, citable source lines and the
-  candidate tuple; the duplicated evidence text and authored expectations are excluded.
-
-Probes: 6 new probes written before any v2 call (3 should pass, 3 should fail, including
-2 abstentions) plus the 12 exposed v1 probes. The 12 exposed probes and v1 failures
-informed the design. Model `qwen3.5:4b` (digest `d8b0f5e9...`), temperature 0, one CPU,
-6 GiB, 90s call cap, 20-minute wall, 18-call ceiling, no retries.
-
-**First attempt stopped.** `CL-FOCUS-AI-REVIEW-02` (frozen `989095b`) stopped after
-22.3s with zero model calls: the owned server accepted connections during its ~4s
-device discovery, and `/api/tags` exceeded the 3s read timeout, which readiness
-polling treated as fatal. [That receipt](../results/reader_ai_review_v2.json) is kept.
-Readiness polling now treats `ReadTimeout` like a connection error until the same
-60s startup deadline. The identical plan and seed ran once as `CL-FOCUS-AI-REVIEW-02B`
-(frozen `749b515`).
-
-| AI-REVIEWER-02 ([receipt](../results/reader_ai_review_v2b.json)) | Result |
-|---|---|
-| Valid outputs | **18/18** |
-| Correct verdicts, all probes | **17/18** (95% Wilson 0.742-0.990) |
-| Fresh probes | **6/6** (95% Wilson 0.610-1.000) |
-| Exposed v1 probes | 11/12 (v1 on the same probes: 5/12) |
-| Abstention disclosure questions | 6/6 |
-| Answered value checks | 11/12 |
-| False support / false rejection / uncertain | 1 / 0 / 0 |
-
-The false support is CELL04-0: candidate `31 EUR million`; the table header states
-`USD million`. The model cited only the value row, where currency does not appear.
-A post-hoc "cited line must contain value and currency" rule was considered and
-**rejected**: it would also have downgraded two correct table verdicts (CELL01-0,
-CELL03-0), which cite only value rows, and tuning a rule to one observed miss would
-overfit. Header-bound currency checking is already the job of the deterministic cell
-reader (12/12).
-
-Resources: 18 calls, 14.9-44.0s each (559.2s total), 15.7s preload, controller wall
-579.8s, combined peak working set 3.66 GiB, one-CPU affinity, CPU-only server state,
-source files unchanged. The reviewer remains **advisory and not promoted**: six fresh
-probes are too few to establish reliability, the probes are author-written, and the
-reviewer is not an independent human.
-
-### Validation and remaining limits
-
-Focused tests cover cardinal bounds, exact proof offsets, ambiguous-notation refusal,
-sibling handling (including the ADV-71 class), standard-reader conflicts, the frozen
-challenge/grid and the exposed adversarial regression, v2 probe balance, prompt
-redaction, fixed abstention mapping and attempt accounting. Two older tests that
-encoded the four deferred boundaries were updated to require resolution with valid
-proofs; the historical 26/30 receipt is unchanged. After all changes the full suite
-passed **782 tests** in 111.07s (two existing rank-deficiency warnings); Ruff and the
-documentation/index check passed. An earlier full run during development had one
-timing-sensitive SEC request-rate test failure under load; that test passed 3/3 in
-isolation and in the final full run. No package, paid API, real-source or private-review
-read, ledger row, push or holdout access occurred.
-
-Not established: real-filing notation coverage, human-labelled accuracy, behavior on
-unlisted wording, and AI-reviewer reliability beyond 18 author-written probes. Human
-independent labels remain zero; the
-[human review runbook](#human-actions-still-required-source-review-runbook) is still required.
-
-## Observed source integrity, second adversarial round and fresh AI-review comparison
-
-**Current status:** four development-only measurements, each frozen before measurement. None is
-human gold, real-filing accuracy or an approval gate. Every earlier receipt is unchanged.
-
-### Problem found by probing before any change
-
-Direct probes of the frozen verifier showed real false supports on both the notation path and the
-older standard-reader path: a claim stayed `supported` when the same source also said the figure was
-false, incorrect, denied, retracted, disputed, preliminary, an estimate or a supposition; when a
-blocking word such as "restated" was hidden with a zero-width space, soft hyphen or Cyrillic letter;
-and when the amount used full-width or Arabic-Indic digits. A fresh 221-case
-[integrity challenge](../src/asof/integrity_challenge.py) was frozen at `5c80476` and its
-[baseline](../results/integrity_baseline.json) recorded before any fix: **83/221 correct with 134
-false supports**. Four supported controls also failed: a diluted-EPS sentence followed by any
-unrelated sentence was deferred because that grammar accepted only a whole-source sentence.
-
-### Guards added (`a2e57c4`)
-
-- **Shared admission guard** in [`reader_fields.py`](../src/asof/reader_fields.py), used by the
-  reader and every claim proof: dispute, denial, retraction, misstatement/restatement, estimate,
-  preliminary/provisional/unaudited/draft and hypothetical-framing vocabulary anywhere in the source
-  defers to review. Bare forecast words are deliberately *not* shared, so the existing control
-  "Its customer may forecast lower costs." still supports an unrelated actual figure.
-- **Text integrity:** invisible format/control characters, non-ASCII decimal digits and non-Latin
-  letters (Cyrillic, Greek, full-width or mathematical letters) defer. Accented Latin letters,
-  currency symbols, curly quotes and no-break spaces remain allowed. Claims must be printable ASCII.
-- **`financial-notation-v2`:** the notation path additionally defers on modal, forecast, plan,
-  example, negation and `topline`/`turnovers` wording elsewhere in the source, and reads ASCII digits only.
-- **Per-share sentence:** may now sit among unrelated sentences, but any other EPS, share, dilution,
-  basic or loss wording still defers.
-
-Rejected alternatives: blocking bare forecast words for every path (breaks a deliberate control),
-Unicode normalization that silently rewrites look-alikes (hides evidence), and accepting non-ASCII
-digits as numbers (ambiguous provenance). The guards are conservative: harmless real-world text
-that happens to contain these words will be deferred, and that coverage cost is unmeasured on real filings.
-
-| [Integrity receipt](../results/integrity_final.json) | Baseline | Final |
-|---|---|---|
-| All 221 cases | 83 | **221** (95% Wilson 0.983-1.000) |
-| False supports | 134 | **0** |
-| Supported controls (NBSP, curly quote, accents, unrelated forecast, EPS + benign text) | 34/38 | 38/38 |
-| Exposed: original 30 / controls 37 / notation 24 and 780 / round-1 adversarial 72 | 30 / 37 / 24, 780 / 72 | unchanged |
-| Current reader regression cohorts | 9/9 | 9/9 |
-
-The frozen challenge's two digit relations translated the year as well as the amount, so they were
-already deferred at baseline; amount-only digit substitutions are covered by unit tests instead.
-
-### Second adversarial round (`financial-notation-v2`)
-
-A new, separate AI agent instance wrote 96 cases (24 supported, 24 contradicted, 48 review) from
-the written v2 policy only, without repository access, avoiding round-1 attack ideas; 24 target
-disputes, homoglyphs, invisible characters and non-ASCII digits and 12 are supported cases with
-harmless extra text. The verifier had not changed since `a2e57c4`; the fixture was frozen at
-`c46ffef` and recorded once: **[96/96](../results/notation_adversarial_r2.json)** (95% Wilson
-0.962-1.000), zero false supports, false contradictions or missed resolutions. The author is AI,
-not an independent human. Both rounds are now exposed regressions.
-
-### Fresh AI-review comparison on 24 separately authored probes
-
-A separate agent wrote 24 probes (12 should pass, 12 should fail; 8 abstentions; 12 tables with
-units only in headers or "Amounts in" lines) from a written rule set. Both reviewer arms and both
-plans were frozen at `85b4d72` before the probe file was opened; the probes were frozen at `daa5219`.
-
-- **AI-REVIEWER-03** ([`reader_ai_review_v3.py`](../src/asof/reader_ai_review_v3.py)): the model
-  never sees the candidate; it extracts the stated amount from header-bound table views, and fixed
-  code compares extraction and candidate. Designed to remove anchoring after the v2 currency miss.
-- **AI-REVIEWER-02 control:** the unchanged v2 reviewer on the same probes.
-- **Rules:** the frozen deterministic verifier (unchanged since `a2e57c4`, before the probes were
-  opened), mapping answered candidates to claim sentences and abstentions to "refuted only if a
-  source fact is proved"; otherwise uncertain.
-
-| Same 24 fresh probes | Correct | False support | False rejection | Uncertain | Notes |
-|---|---|---|---|---|---|
-| [AI-REVIEWER-03 blind extraction](../results/reader_ai_review_v3.json) | 17/24 (0.508-0.851) | 1 | 4 | 2 | Extraction itself correct 12/24 |
-| [AI-REVIEWER-02 control](../results/reader_ai_review_v3_control.json) | **20/24** (0.641-0.933) | 4 | 0 | 0 | Two false supports were header-unit table cases |
-| [Deterministic rules](../results/reader_ai_review_v3_rules.json) | 10/24 decided, **10/10 correct** | 0 | 0 | 14 | Cannot prove non-disclosure; prose corrections and conflicts deferred |
-
-**AI-REVIEWER-03 did not beat the control and is not adopted.** The 4B model answered
-`not_stated` for plainly present amounts (four false rejections), invented minus signs for positive
-values whenever an "Amounts in" line was present, and used `cannot_tell` instead of `conflicting`.
-Removing the candidate removed anchoring but exposed weaker extraction. This is a negative result
-retained as such. Resources: v3 24 calls, 40.6-50.0s each, wall 1,083.9s; control 24 calls,
-25.9-44.2s, wall 855.0s; combined peak about 3.6 GiB; one CPU; no retries.
-
-The rules decided every header-unit case on which the control gave false supports. A **post-hoc**
-composition (rules first, recorded control verdict otherwise) scores 22/24 with two false supports,
-but it was defined after reading these probes, so it is labelled exposed and is not a fresh score.
-
-### Declared rules-first pipeline on a further fresh round
-
-To score that composition honestly, [`review_pipeline.py`](../src/asof/review_pipeline.py)
-(REVIEW-PIPELINE-01: frozen rules first, unchanged AI-REVIEWER-02 only where rules defer) was
-declared and frozen at `eec14b5`, before another separate agent's 24 round-4 probes were opened
-(frozen at `2b42bdf`, same written rule set and composition, 10 tables). The AI fallback ran once
-(new seed, same limits), then the pipeline was recorded once.
-
-| Round-4 fresh probes ([AI receipt](../results/reader_ai_review_v4.json), [pipeline receipt](../results/review_pipeline_v4.json)) | Correct | False support | False rejection | Uncertain |
-|---|---|---|---|---|
-| AI-REVIEWER-02 alone | 20/24 (0.641-0.933) | 3 | 1 | 0 |
-| Deterministic rules alone | 9 decided, **9/9 correct** | 0 | 0 | 15 |
-| **REVIEW-PIPELINE-01** (rules decided 9, AI 15) | **23/24** (0.798-0.993) | 1 | 0 | 0 |
-
-The rules corrected three of the AI's four errors: two wrong-scale table false supports (RV4-02,
-RV4-06) and one false rejection of an exact same-currency rescaling (RV4-04). The remaining miss, RV4-15,
-is a source with two equally authoritative revenue amounts: the rules correctly deferred and the AI
-accepted one of them. Conflict detection remains the main AI weakness; it was not patched after
-this result. AI run: 24 calls, 26.2-45.0s each, wall 901.6s, combined peak about 3.63 GiB.
-The AI receipt's provenance string says "both reviewer arms" because it reuses the round-3
-summarizer; for round 4 the frozen items were the pipeline and its single AI arm.
-
-**Interpretation and limits.** On two fresh 24-probe rounds the deterministic rules made **19/19
-correct decisions with zero errors** but decided only 40% of probes. The pipeline's 23/24 is one
-fresh round of author-written AI probes, not human gold, real-filing accuracy or a calibrated rate;
-its 95% interval is wide (0.80-0.99). The pipeline is advisory and is not promoted. Not established:
-behavior on real filings, coverage cost of the conservative guards on real text, and AI conflict detection.
-
-### Validation
-
-Focused tests cover the shared guards (amount-only non-ASCII digits, disputes, hypotheticals,
-estimates, restatements, zero-width/soft-hyphen/Cyrillic obfuscation, ASCII-only claims, allowed
-accents and curly quotes), per-share tolerance and refusal, notation-v2 modal guards and substring
-safety, both adversarial rounds as exposed regressions, v3 header-bound views, blind comparison,
-fixed abstention mapping, probe-label consistency, attempt accounting, and pipeline routing.
-After all changes the full suite passed **813 tests** in 140.43s (two existing rank-deficiency
-warnings); Ruff and the documentation/index check passed. No package, paid API, real-source or
-private-review read, production ledger row, push or holdout access occurred, and human labels remain zero.
-
-## Observed rules-first pipeline v2: agreement closes conflict and forecast false supports
-
-**Current status:** REVIEW-PIPELINE-02 scored **30/30** on a fresh, separately AI-authored round
-weighted toward the previous failure classes, with zero false supports. Advisory and not promoted;
-not human gold or real-filing accuracy.
-
-### Problem and design
-
-Across rounds 3-4 the AI fallback's remaining errors were conflicts (two equally authoritative
-amounts), forecast/target amounts treated as actuals, and an abstention judged justified despite a
-stated correction. [`review_pipeline_v2.py`](../src/asof/review_pipeline_v2.py) keeps the frozen
-rules first and changes only the AI fallback (AI-REVIEWER-04):
-
-- An answered candidate first gets the **unchanged** AI-REVIEWER-02 value check. An AI `supported`
-  counts only if a second, independent **disclosure question** also answers `stated`; `conflicting`
-  or `not_stated` turns it into `unsupported`, `cannot_tell` into `uncertain`.
-- Abstentions get the disclosure question only, now naming superseding corrections, forecasts,
-  targets, guidance, budgets and conflicts explicitly. Mapping is fixed code, not the model.
-- The model is called only for probes the rules defer, so rule-decided probes cost no calls.
-
-Rejected alternatives: patching prompts against round-3/4 probes (exposed), a numeric
-"value appears once" heuristic (fails on tables and rescaling), and blind extraction (AI-REVIEWER-03
-was 17/24). The cost is up to two calls per deferred answered probe and a possible rise in false
-rejections when the disclosure question is wrong; none occurred here.
-
-### Protocol
-
-| Step | Commit |
-|---|---|
-| Pipeline, tests and unsplit plan frozen before round-5 probes were opened | `de45c0d` |
-| 30 probes frozen; run split into two 15-probe halves **before any model call** because the frozen rules deferred 25/30 (worst case 41 calls exceeds the 36-call, 20-minute allocation); scoring unchanged; the unsplit plan was never executed | `da7c070` |
-| Half A recorded once (frozen `da7c070`), then half B (`567cd1b`), then a one-shot combination (`dc7c67b`) | `567cd1b`, `dc7c67b`, `ae1812a` |
-
-Round 5 was written by a new separate agent from the same rule set, but with at least 6 conflicts,
-5 forecast/target/guidance cases, 5 corrections and 6 header-unit tables (15 should pass, 15 fail, 10
-abstentions). Because it deliberately over-represents known weaknesses, it is a stress test, not a
-representative error rate.
-
-| [Round-5 combined receipt](../results/review_pipeline_v5_combined.json) | Correct | False support | False rejection | Uncertain |
-|---|---|---|---|---|
-| **REVIEW-PIPELINE-02** | **30/30** (95% Wilson 0.886-1.000) | 0 | 0 | 0 |
-| Rules alone (decided 5) | 5/5 decided | 0 | 0 | 25 |
-| AI-REVIEWER-04 on the 25 rule-deferred probes | 25/25 | 0 | 0 | 0 |
-| Ablation: unchanged value check alone, 16 deferred answered probes | 10/16 | **6** | 0 | 0 |
-| Agreement on the same 16 | **16/16** | 0 | 0 | 0 |
-| Abstentions (revised disclosure question) | 10/10 | 0 | 0 | 0 |
-
-The agreement step caught all six value-check false supports, exactly the targeted classes:
-three conflicts (two pages, two sections, press release versus annual report; disclosure answered
-`conflicting`) and three forecast-type amounts (guidance, budget table, target; `not_stated`).
-The rules decided five table probes correctly. Resources: 38 calls in two halves (17 and 21),
-31.4-52.9s each, controller walls 660.0s and 820.5s, combined peak about 3.59 GiB, one CPU, CPU-only,
-no retries, source files unchanged ([half A](../results/review_pipeline_v5a.json),
-[half B](../results/review_pipeline_v5b.json)).
-
-**Limits.** One 30-probe AI-authored stress round; author and reviewer are both AI and the probes
-are invented. The ablation comes from the same run, so it isolates the agreement step but is not a
-separate fresh comparison of pipeline v1. Not established: real-filing accuracy, coverage of the
-conservative guards on real filing text, and human-labelled correctness. Human labels remain zero.
-
-Validation after all changes: **818 tests** passed in 145.92s (two existing rank-deficiency warnings);
-Ruff and the documentation/index check passed. No package, paid API, real-source or private-review
-read, production ledger row, push or holdout access occurred.
-
-## Observed guard coverage cost on real 10-K MD&A text (aggregate only)
-
-**Current status:** the conservative guards' coverage cost on real filing text is now measured.
-After a declared ingestion normalization and two stem fixes, they defer **2.1% of single revenue
-sentences, 4.7% with one neighbour each side and 9.8% with three** on a fresh real sample. This
-measures deferral (coverage), not accuracy; deferred items go to review rather than to a wrong answer.
-
-### Protocol and privacy boundary
-
-[`measure_guard_coverage_real.py`](../scripts/measure_guard_coverage_real.py) was frozen before any
-filing body was read (`c8475f5`). With the user's approval, it reads only the `accession` and `cik`
-fields of the private review packet to exclude all 12 review filings and their 12 issuers; those
-identifiers are never printed or stored, and no review window or answer is read. Population: cached
-10-K primary documents with acceptance-time knowledge inside the D13 2012-2018 development window,
-each body passing the EDGAR client's `require_eligible_documents` check (no network requests). Sample:
-one filing per issuer, 150 issuers per round by a fixed SHA-256 order of accession; rounds use disjoint
-issuer ranks. Candidates: MD&A sentences containing a revenue/sales word and a dollar amount. Output:
-aggregate rates, trigger-term counts and Unicode character names only; **no passage is stored or shown**.
-
-### Results
-
-| Round (freeze) | Sample | Integrity deferral (sentence) | Shared-guard deferral: sentence / ±1 / ±3 |
+| Rule baseline | 30 TAT-QA: 5 right, 4 wrong, 21 declined; 10 FinQA: all declined | Reference only | [receipt](../results/benchmark_diagnostic_status.json), [follow-up](../results/benchmark_followup_status.json) |
+| First model run | 10 TAT-QA: all 8 finished requests declined; stopped on a timeout | Diagnosed as deliberate refusals | [receipt](../results/reader_diagnostic_status.json), [diagnosis](../results/reader_pc1_diagnosis.json) |
+| Positive control | 12 invented: 9 of 10 answerable right, both unanswerable declined (old prompt: 1 of 10) | Answer-first prompt adopted | [receipt](../results/reader_pc1_status.json) |
+| REAL1 | 30 TAT-QA: stopped by an over-sensitive CPU safeguard before any answer | No result | [receipt](../results/reader_real1_status.json) |
+| REAL2 | 30 TAT-QA: **11/30** exact with the report (36.7%, 95% range 21.9-54.5%; F1 42.6%; units 73.3%); 0/30 without | Reference result for the answer-first reader | [combined](../results/reader_real2_combined.json), [as stopped](../results/reader_real2_status.json), [completion](../results/reader_real2_completion_status.json) |
+| REAL2 error review | 19 misses: 6 wrong numbers, 4 joined values, 4 operator/denominator conventions, 2 wrong units, 3 other | AI-assisted, post hoc; no score changed | [review](../results/reader_error_audit.json) |
+| Contract format | 0 of 21 answerable (outputs broke the format); 1 of 3 unanswerable declined | Not adopted | [review](../results/reader_contract_review.json) |
+| Modes format | 18 of 21; 0 of 3 | Not adopted | [review](../results/reader_modes_review.json) |
+| Presence format | 19 of 21; 2 of 3 | Not adopted | [review](../results/reader_presence_review.json) |
+| Roles format | 19 of 21; 3 of 3 | Not adopted | [review](../results/reader_roles_review.json) |
+| Columns format | 18 of 21; 2 of 3 | Not adopted | [review](../results/reader_columns_review.json) |
+| REAL3 | Stopped early at a memory limit. On ten completed pairs, strict format 1 exactly right vs 6 for the simple prompt; five of its nine misses were source-cell or span selection | Format line stopped | [diagnosis](../results/reader_real3_diagnosis.json), [review](../results/reader_real3_review.json) |
+
+### Focused reader, invented cohorts
+
+| Experiment | Headline | Status | Evidence |
+|---|---|---|---|
+| Critic v1 (CL-FOCUS-LAAJ-01) | Stopped: 2 of at most 36 calls; first critic hit its 256-token cap; 0 of 6 evaluation cases reached | Not promoted | [receipt](../results/focused_reader.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-local-result-stopped-no-improvement-established) |
+| Critic v2 (compact JSON) | Judge-assisted **4/6** vs single pass 5/6 and parser 5/6; zero corrections, one regression; about 2.55x latency | Not promoted | [receipt](../results/focused_reader_v2.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-v2-result-completed-critic-not-beneficial) |
+| Grammar robustness | 24 cases: binding parser **24/24**, LLM + verification 24/24, raw LLM 21/24, old parser 21/24 | Verification in main tree; no LLM increment | [receipt](../results/verified_reader.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-verifier-only-result-and-private-review-preparation) |
+| Harder formats | 288 deterministic cases: binding parser 144/144 controls, 36/144 stress. 12 model stress cases: single pass 5/12 full contract (12/12 tuple only), verified 3/12 | Exposed format limits | [receipt](../results/reader_stress.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-harder-audit-the-old-perfect-score-was-format-specific) |
+| Linked challenge | Linked parser **24/24**; same LLM output + evidence completion 23/24 (old scorer on those answers: 15/24) | In main tree | [receipt](../results/linked_reader.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-linked-challenge-2324-completed-2424-deterministic-control) |
+| Field records | Guarded parser **24/24**; parser-first + model fallback 23/24; old linked parser 21/24; old completion 20/24; 156/156 field checks on positives | Guarded parser in main tree | [receipt](../results/reader_fields.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-field-comparison-complete-positive-records-fallback-still-adds-a-failure) |
+| Reliability | Same 12 inputs: schema conformance 10/12 free vs 12/12 constrained; best model arm 11/12; source-gated **12/12** (24/24 on the full cohort) | No model arm promoted | [receipt](../results/reader_reliability.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-reliability-audit-valid-shapes-improve-wrong-year-reasoning-remains) |
+| Cells + context coverage | Deterministic **192/192**; model comparison stopped on its first call (timeout after 90.016 s) | No model result | [receipt](../results/reader_cell_selection.json), [accounting](../results/reader_cell_selection_accounting.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-cell-audit-coverage-completed-model-comparison-stopped-on-first-timeout) |
+| Compact cells + AI-REVIEWER-01 | Cell selection 12/12 (source-only control also 12/12); reviewer **5/12**, four invalid outputs | Cells in main tree; reviewer not promoted | [receipt](../results/reader_ai_review.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-ai-reviewer-and-cell-run-cells-pass-judge-does-not-earn-trust) |
+| Regression consolidation | All nine current cohorts pass (12/12, 24/24, 24/24, 288/288, 24/24, 24/24, 24/24, 192/192, 12/12) | In main tree | [receipt](../results/hhem_benchmark.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#current-source-candidate-complete-declared-regression-matrix) |
+| HHEM-2.1-Open | **17/24** at fixed threshold 0.5; false support 7/12 unsupported claims; false rejection zero | Not promoted; not a gate | [receipt](../results/hhem_benchmark.json), [assets](../results/hhem_assets.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#hhem-result-1724-at-the-predeclared-threshold) |
+| Source-rule claims | **24/24** vs raw HHEM 17/24 on the same fresh inputs; six format controls deferred, so 24/30 (80%) coverage | In main tree | [receipt](../results/hhem_structured.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-source-rule-comparison-2424-resolved-claims-six-visible-deferrals) |
+| Claim assurance (`source-claim-v2`) | 37/37 policy controls (28 resolved verdicts, nine expected reviews); 40 property examples pass; original set **26/30** resolved (86.7% coverage) | In main tree | [receipt](../results/claim_assurance.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-broader-assurance-real-decision-defects-fixed-coverage-rises-to2630) |
+| Notation (`financial-notation-v1`) | Fresh challenge 12/24 → **24/24**; grid 540/780 → 780/780; original 30/30 (exposed); separately authored adversarial one-shot **71/72**, one false support fixed post hoc | In main tree | [baseline](../results/notation_baseline.json), [adversarial](../results/notation_adversarial.json), [final](../results/notation_final.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#notation-protocol-and-results) |
+| AI-REVIEWER-02 | First attempt stopped with zero calls; rerun **17/18** (fresh 6/6, exposed 11/12; v1 on the same 12: 5/12), one false support | Advisory, not promoted | [stopped](../results/reader_ai_review_v2.json), [rerun](../results/reader_ai_review_v2b.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#decomposed-ai-reviewer-ai-reviewer-02) |
+| Integrity guards | 221-case challenge: 83/221 with 134 false supports → **221/221** with 0 | In main tree | [baseline](../results/integrity_baseline.json), [final](../results/integrity_final.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#guards-added-a2e57c4) |
+| Adversarial round 2 (`financial-notation-v2`) | **96/96** one-shot; zero false supports, false contradictions or missed resolutions | In main tree | [receipt](../results/notation_adversarial_r2.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#second-adversarial-round-financial-notation-v2) |
+| AI review round 3 (24 fresh probes) | AI-REVIEWER-03 17/24; AI-REVIEWER-02 control **20/24**; rules 10/10 decided, 14 deferred | AI-REVIEWER-03 not adopted | [v3](../results/reader_ai_review_v3.json), [control](../results/reader_ai_review_v3_control.json), [rules](../results/reader_ai_review_v3_rules.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#fresh-ai-review-comparison-on-24-separately-authored-probes) |
+| REVIEW-PIPELINE-01 (round 4) | **23/24**, one conflict false support; AI alone 20/24; rules 9/9 decided | Not promoted | [AI](../results/reader_ai_review_v4.json), [pipeline](../results/review_pipeline_v4.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#declared-rules-first-pipeline-on-a-further-fresh-round) |
+| REVIEW-PIPELINE-02 (round 5 stress) | **30/30**, zero false supports; unchanged value check alone 10/16 with 6 false supports | In main tree; advisory, not promoted | [combined](../results/review_pipeline_v5_combined.json), [half A](../results/review_pipeline_v5a.json), [half B](../results/review_pipeline_v5b.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-rules-first-pipeline-v2-agreement-closes-conflict-and-forecast-false-supports) |
+| Guard coverage, real 10-K MD&A | Raw 8.9% sentence deferral → **2.1% / 4.7% / 9.8%** (sentence / ±1 / ±3 neighbours) on fresh issuers after normalization and two stem fixes | Normalization in main tree; deferral, not accuracy | [round 1](../results/guard_coverage_real.json), [round 2](../results/guard_coverage_real_v2.json), [round 3](../results/guard_coverage_real_v3.json) · [notes](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/FOCUSED_READER.md#observed-guard-coverage-cost-on-real-10-k-mda-text-aggregate-only) |
+
+### Notes on selected rows
+
+- **Field records.** Of the 156 field checks, 112 had known-valued targets and 44 were unknown or
+  not applicable. Known-context denominators were tiny (scope 2/2, basis 2/2, period kind 3/3,
+  revision status 1/1); the 192-case context cohort later supplied 24/24 known positives for each of
+  those four dimensions, from author-visible templates.
+- **Harder formats.** The raw model's ten stress answers matched the authored tuples, but seven
+  failed the single-quote evidence contract (table headers, footnotes, parenthesized negatives,
+  pronoun or fiscal-year context). Those are citation failures, not seven wrong financial tuples.
+- **Reliability.** The constrained response obeyed the schema but still picked the wrong-year
+  (2017) fact for U02-0: **schema validity is not semantic correctness.** Both completion gains
+  were the same per-share case, not a unit-word-order repair.
+- **AI-REVIEWER-01.** Three valid false rejections were justified abstentions; the four invalid
+  outputs said `supported` while listing error codes. An always-reject reference would match 6 of
+  12, more than its 5.
+- **HHEM.** Wrong claims got high scores (up to 0.8859, for an accepted superseded original);
+  a raw score is not a calibrated correctness probability. HHEM was not tested on abstention.
+- **Source rules vs HHEM.** The source-only control (same decisions without model probabilities)
+  also scored 24/24, so **there is no demonstrated incremental HHEM benefit.**
+- **Notation adversarial set.** Written by a separate AI agent instance from the written policy
+  only (95% Wilson interval 0.925-0.998). ADV-71 exposed a real sibling-sentence defect, fixed in
+  `b97dcf6`; the 71/72 receipt stays authoritative and the later 72/72 is an exposed regression.
+- **REVIEW-PIPELINE-01.** The rules corrected three of the AI's four errors; the remaining miss,
+  RV4-15, was a source with two equally authoritative amounts that the AI accepted.
+- **REVIEW-PIPELINE-02.** The agreement step caught all six value-check false supports: three
+  conflicts and three forecast-type amounts. Round 5 deliberately over-represents known
+  weaknesses, so it is a stress test, not a representative error rate (95% Wilson 0.886-1.000).
+- **Guard coverage.** Round 1 showed the integrity guard firing on benign encoding artifacts
+  (zero-width spaces and mis-decoded Windows-1252 punctuation), which led to the declared
+  normalization. Stems `alleg*` ("Allegro") and `imagin*` ("imaging") were narrowed. Remaining
+  deferrals come from intended vocabulary such as "estimated", "restated", "unaudited" and
+  "provisional". The pre-existing admission checks almost never fire on real MD&A (0-0.2%).
+
+| Guard coverage round (freeze) | Sample | Integrity deferral | Shared-guard deferral: sentence / ±1 / ±3 |
 |---|---|---|---|
 | 1 raw text (`c8475f5`) | issuers 1-150, 1,814 sentences | 5.95% | 8.9% (7.7-10.3) / 14.7% / 24.3% |
 | 2 normalized (`45910e5`) | same 150 (exposed) | 0% | 3.3% / 6.2% / 12.0% |
 | 2 normalized | fresh issuers 151-300, 2,167 sentences | 0% | 2.8% (2.2-3.6) / 6.1% / 11.8% |
 | 3 normalized, `imagin*` narrowed (`a0ec24b`) | fresh issuers 301-450, 1,741 sentences | 0% | **2.1% (1.5-2.9)** / 4.7% / 9.8% |
 
-Round 1 showed that the text-integrity guard fired on benign encoding artifacts, not attacks: zero-width
-spaces (570 occurrences in ±1 windows) and Windows-1252 smart quotes, dashes, bullets and trademark
-signs mis-decoded as C1 controls (U+0091-U+0099). [`text_normalization.py`](../src/asof/text_normalization.py)
-now repairs C1 bytes to their cp1252 characters and removes invisible formatting (zero-width
-characters, word joiner, BOM, soft hyphen) as a declared, counted ingestion step for real filing
-text. Bidirectional controls and undefined C1 bytes are kept, so the verifier still defers them, and
-the strict verifier is unchanged on raw input: every frozen challenge, both adversarial rounds, the 37
-controls, the original 30 and all nine reader cohorts still pass. Normalization cannot turn a hidden
-blocking word into support; removing a zero-width space inside "re`U+200B`stated" exposes "restated" to the
-dispute guard (tested).
+The coverage measurement read only cached development-window (2012-2018) 10-K primary documents,
+excluded all 12 review filings and their 12 issuers, and stored aggregate counts only; no passage
+was stored or shown. Its runner is archived:
+[`measure_guard_coverage_real.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/measure_guard_coverage_real.py).
 
-Two stems over-matched issuer and industry words and were narrowed: `alleg*` matched "Allegro"
-(now allege/alleged/allegedly/alleges/alleging/allegation[s]) and, on the fresh round-2 sample,
-`imagin*` matched "imaging" 28 times (now imagine/imagined/imagines/imagining/imaginary). Round 3 was
-declared after that fix and run once on unseen issuers.
+## What is established and what is not
 
-The remaining deferrals come from intended vocabulary near revenue figures: "estimated/estimate(s)",
-"restated/restatement", "unaudited", "assumption(s)/assumed", "withdraw(al)" and "provisional".
-These are deliberate: estimated, unaudited or restated amounts are not plain annual actuals. The
-notation path's extra residual guard defers 84-97% of multi-sentence windows, but US MD&A uses
-`$`, which that path refuses by design, so it neither adds nor removes US coverage. The pre-existing
-admission checks almost never fire on real MD&A (0-0.2%).
+**Established, within the stated scope:**
 
-**Limits.** Development-window US 10-K MD&A only; a revenue-sentence heuristic defines candidates;
-window sizes are proxies for the windows a production reader would pass; and a deferral rate is not
-an error rate. Real-filing *accuracy* still requires human labels. Resources: 94.7s, 240.7s and
-144.3s; peak working set at most 751 MiB.
+- In every paired invented comparison except the harder-format audit, the deterministic source
+  path matched or beat the model-assisted arm (grammar 24/24 vs 24/24, linked 24/24 vs 23/24,
+  fields 24/24 vs 23/24, reliability 12/12 vs 11/12, cells 12/12 vs 12/12). The exception, under
+  the old single-quote contract (stress cases: raw single pass 5/12, binding parser 3/12), led to
+  the linked-evidence contract. **No incremental LLM advantage is established.**
+- The current candidate passes all nine regression cohorts with zero wrong admissions.
+- On two fresh 24-probe rounds the deterministic rules made 19/19 correct decisions with zero
+  errors, but decided only 40% of probes.
+- A general entailment model (raw HHEM) approves wrong financial associations: year column, entity,
+  definition, scope, denominator, footnote and correction errors. It is not used as a gate.
+- On fresh real 10-K MD&A revenue sentences, the conservative guards defer 2.1% of single
+  sentences, 4.7% with one neighbour each side and 9.8% with three.
+- With the report supplied, the answer-first model got 11/30 TAT-QA questions exactly right and
+  declined all 30 without it.
 
-Validation after these changes: **823 tests** passed in 150.30s (two existing rank-deficiency
-warnings); Ruff and the documentation/index check passed. Real filings were read only as approved
-above (aggregate counts, review filings excluded, cache only, D13 window); no network request, paid
-API, production ledger row, push or holdout access occurred, and human labels remain zero.
+**Not established:**
+
+- **Independent accuracy.** Invented and author-visible cohorts are not independent gold. Cohorts
+  overlap and are development-exposed; never pool them into one sample size.
+- **AI review as gold.** AI review is advisory, never human gold. Probes for later rounds were
+  written by separate AI agent instances, not independent humans; one shared small local model is
+  not model diversity or authenticated independence. A one-human-plus-AI workflow must be labelled
+  AI-assisted, not two independent human passes.
+- **Real-filing accuracy.** Human labels remain zero. A deferral rate is not an error rate.
+- **Generalization.** Unlisted wording, arbitrary financial formats, real-filing notation
+  coverage and AI conflict detection beyond one stress round.
+- **Economic value.** None of this measures disclosure change over time, historical usability or
+  returns.
+
+## Human actions still required: source review runbook
+
+The [public preparation receipt](../results/reader_review_packet.json) identifies the existing
+private twelve-window packet (issuer-disjoint excerpts from an already exposed 2012-2018
+development cohort) and its pin:
+`3b2cf99bbb7b4e163f0b420a6bdd1f42a13b63b2d24b209ef61cb1b25fefb2a9`.
+The packet and blank forms already exist under ignored `data/`; nothing below requires model or
+SEC credentials, network access, a push or opening a holdout.
+
+1. **Assign two independent reviewers** with authorized access. Each does a blind first pass
+   without AI answers or the other reviewer's labels and uses one consistent reviewer ID. Anyone
+   who has seen model suggestions must not declare a blind pass; use another reviewer or disclose
+   the exposure and keep the pass exploratory. This repository cannot contact people or
+   authenticate identity.
+2. **Distribute the base forms.** Check the SHA-256 of `data/reader_review_v1/packet.json` against
+   the pin above, then give each reviewer the packet and one of `reviewer_a.csv` /
+   `reviewer_b.csv` from the same folder. Status per item: supported, unsupported within the
+   excerpt, or `insufficient_context`. Supported tuples need finite values, the requested year and
+   verbatim evidence. Do not copy excerpts or identities into Git. The packet was created once by
+   `python scripts/prepare_reader_review.py --execute`; do not rerun it as part of review.
+3. **Distribute the context forms.** Give each reviewer the matching
+   `data/reader_review_context_v1/context_reviewer_a.csv` or `context_reviewer_b.csv` (72 blank
+   rows each: six dimensions x twelve items; both files had SHA-256
+   `c7bbbeeb5d6187be4e80b49063bdbd40b1ab1a9eca20f668e872bd7108d6f38d` when generated). If they are
+   missing, `python scripts/prepare_reader_context_forms.py --prepare-blank` recreates them from
+   the public receipt only, without reading excerpts; it refuses to overwrite.
+4. **Annotate context.** For every item, label issuer binding, metric binding, scope, accounting
+   basis, period kind and revision status as `supported`, `unknown` or `not_applicable`. Supported
+   rows need zero-based character offsets `[evidence_start, evidence_end)` into the exact packet
+   excerpt plus a rationale. Use `unknown` when the context is outside the window; do not browse the
+   full filing or use background knowledge. Unknown and not-applicable rows have no value or span
+   but still need a rationale. Do not invent fiscal endpoints.
+5. **Return and check.** Return all four forms privately. Check base forms with
+   `asof.reader_review.check_reviews` and context forms with
+   `asof.reader_review_context.check_context_reviews` (matching reviewer identities, packet pins,
+   full item/dimension coverage, blind declarations, offset bounds, state/value consistency; lists
+   disagreements). These are mechanical checks, not semantic gold.
+6. **Adjudicate.** Keep both original passes; record an adjudicator and a source-linked rationale
+   for each disagreement. Equal labels or valid offsets alone do not certify entailment.
+   Unresolved items stay out of accepted gold and remain visible in coverage counts.
+7. **Approve any expansion separately.** If excerpts lack necessary context, approve a bounded
+   eligible development-context expansion before any new reads. Source holds and holdouts stay
+   closed. Twelve selected windows cannot establish representative accuracy; a real-world claim or
+   production promotion needs a separate independent evaluation design.
+
+## Limitations
+
+- **Grammar coverage.** Only the declared prose/Markdown constructions, table/footnote bindings and
+  notation policy are supported. Anything else defers. Real-text coverage was measured only for
+  revenue sentences in development-window US 10-K MD&A, with window sizes as proxies.
+- **Finite admission patterns.** The guards do not understand every negation, disclaimer or
+  forecast paraphrase, and conservative source-wide holds reduce coverage in mixed documents.
+- **Notation scope.** `$`, `£`, bare dollars/pounds and `M`/`MM`/`K` are refused by design, so the
+  notation path neither adds nor removes US MD&A coverage. Turnover synonyms beyond the declared
+  aliases stay unresolved.
+- **Exact arithmetic only.** Equivalence is exact and same-currency; there is no FX conversion.
+- **Small, authored samples.** Field-context known targets came from four template families;
+  AI-reviewer rounds used small sets of author-written probes, so intervals are wide (for example
+  0.80-0.99 for the 23/24 pipeline).
+- **Costs are single runs.** Latency and memory figures come from one run each on a shared
+  worker; they are not robust estimates. Model calls took tens of seconds each, while parser
+  computation over a whole challenge took fractions of a second.
+- **Public benchmark exposure.** The model may have seen TAT-QA during training; declining without
+  the report does not rule that out.
+- **Software checks.** The last recorded full suite passed **823 tests** in 150.30s (two existing
+  rank-deficiency warnings). Earlier runs recorded intermittent Windows Job readiness and SEC
+  request-rate timing failures that later passed; no permanent environmental cure is claimed.
+
+## Reproducing
+
+```powershell
+python scripts/check_reader_regressions.py
+python -m pytest -q tests/test_reader_fields.py tests/test_linked_reader.py tests/test_verified_reader.py tests/test_claim_verifier.py tests/test_financial_notation.py tests/test_text_normalization.py tests/test_review_pipeline_v2.py tests/test_reader_regression.py tests/test_reader_review.py tests/test_reader_review_context.py
+```
+
+The regression check reads only the invented fixtures in [`tests/fixtures`](../tests/fixtures),
+makes no model calls and exits nonzero on any newly missed case. Model runs need the cached local
+model and their archived runners, for example
+[`run_focused_reader.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/run_focused_reader.py),
+[`run_hhem_benchmark.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/run_hhem_benchmark.py),
+[`validate_claim_assurance.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/validate_claim_assurance.py)
+and [`integrity_challenge.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/src/asof/integrity_challenge.py).
+Each receipt records the commit it was frozen at; check out that commit to rerun it (see
+[ARCHIVE](ARCHIVE.md)). Each one-shot run keeps an exclusive attempt marker, so rerunning one is a
+new, separately frozen experiment, not a retry.

@@ -77,7 +77,7 @@ def main() -> None:
         out = df.copy()
         out["event_day"] = [first_tradable_close(k.to_pydatetime(), trading_days) for k in out["knowledge_time"]]
         out["car"] = [car(rets[t], factors, d, horizon=horizon) if d else np.nan
-                      for t, d in zip(out["ticker"], out["event_day"])]
+                      for t, d in zip(out["ticker"], out["event_day"], strict=True)]
         out["month"] = pd.PeriodIndex(out["knowledge_time"].dt.tz_convert(None), freq="M").astype(str)
         return out.dropna(subset=["car"])
 

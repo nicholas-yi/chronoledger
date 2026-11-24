@@ -1,574 +1,567 @@
 {
-  "schema_version": 1,
-  "scope": "Curated navigation, not execution permission or independent evidence certification.",
-  "unlisted_scripts": "legacy_unreviewed_not_authorized",
-  "unlisted_results": "historical_unindexed_not_current_evidence",
-  "active_research": "one evidence-linked metric extractor with deterministic verification; model judge nondefault",
-  "parked_reference_modules": [
-    "src/asof/research/economic.py",
-    "src/asof/research/arrivals.py",
-    "src/asof/research/trajectories.py",
-    "src/asof/research/networks.py",
-    "src/asof/research/pricing.py",
-    "src/asof/research/mechanisms.py",
-    "src/asof/research/control.py",
-    "src/asof/research/identification.py",
-    "src/asof/research/prequential.py"
-  ],
-  "entrypoints": [
-    {"id": "guard-coverage-real", "path": "scripts/measure_guard_coverage_real.py", "status": "historical_complete_rounds_1_to_3_aggregate_only_no_rerun", "command": null},
-    {"id": "review-pipeline-v5", "path": "scripts/combine_review_pipeline_v5.py", "status": "historical_complete_30of30_not_promoted_no_rerun", "command": null},
-    {"id": "integrity-claims", "path": "scripts/validate_integrity.py", "status": "historical_complete_baseline_and_final_no_rerun", "command": null},
-    {"id": "review-pipeline-v4", "path": "scripts/validate_review_pipeline.py", "status": "historical_complete_23of24_not_promoted_no_rerun", "command": null},
-    {"id": "review-probes-rules-v3", "path": "scripts/validate_review_probes_rules.py", "status": "historical_complete_10of10_decided_no_rerun", "command": null},
-    {"id": "reader-ai-review-v3", "path": "scripts/run_focused_reader.py", "status": "historical_complete_v3_17of24_control_20of24_round4_20of24_no_rerun", "command": null},
-    {"id": "notation-claims", "path": "scripts/validate_notation.py", "status": "historical_complete_baseline_and_final_no_rerun", "command": null},
-    {"id": "notation-adversarial", "path": "scripts/validate_notation_adversarial.py", "status": "historical_complete_one_shot_71of72_no_rerun", "command": null},
-    {"id": "reader-ai-review-v2", "path": "scripts/run_focused_reader.py", "status": "historical_complete_02B_17of18_AI_not_promoted_no_rerun", "command": null},
-    {"id": "source-claim-assurance", "path": "scripts/validate_claim_assurance.py", "status": "historical_complete_policy37of37_supported24of24_coverage26of30", "command": null},
-    {"id": "source-structured-verifier", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_source24of24_raw17of24_boundaries6unresolved", "command": null},
-    {"id": "reader-current-regressions", "path": "scripts/check_reader_regressions.py", "status": "active_invented_regressions_not_independent_gold", "command": "python scripts/check_reader_regressions.py"},
-    {"id": "hhem-advisory", "path": "scripts/run_hhem_benchmark.py", "status": "historical_complete_17of24_seven_false_support_not_promoted", "command": null},
-    {"id": "hhem-assets", "path": "scripts/prepare_hhem_assets.py", "status": "public_artifacts_prepared_hash_pinned_no_inference", "command": null},
-    {"id": "reader-ai-review", "path": "scripts/run_focused_reader.py", "status": "historical_complete_AI_not_promoted_no_rerun", "command": null},
-    {"id": "reader-cell-selection", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_automatic_retry", "command": null},
-    {"id": "reader-context-forms", "path": "scripts/prepare_reader_context_forms.py", "status": "blank_forms_prepared_reviews_unassigned_no_overwrite", "command": null},
-    {"id": "reader-reliability", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "reader-fields", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "linked-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "reader-stress", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "verified-reader", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "reader-review-packet", "path": "scripts/prepare_reader_review.py", "status": "private_packet_prepared_reviews_unassigned", "command": null},
-    {"id": "focused-reader-v2", "path": "scripts/run_focused_reader.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "focused-reader", "path": "scripts/run_focused_reader.py", "status": "historical_stopped_no_resume", "command": null},
-    {"id": "demo", "path": "src/asof/demo.py", "status": "active_offline", "command": "asof demo"},
-    {"id": "cli-ingest", "path": "src/asof/cli.py", "status": "guarded_requires_separate_approval", "command": "asof ingest --help"},
-    {"id": "repo-check", "path": "scripts/check_repository.py", "status": "active_offline", "command": "python scripts/check_repository.py"},
-    {"id": "h4", "path": "scripts/h4_fundamentals.py", "status": "hard_held", "command": null},
-    {"id": "h6", "path": "scripts/h6_quiet.py", "status": "hard_held", "command": null},
-    {"id": "timestamp-original", "path": "scripts/run_full_timestamps.py", "status": "historical_stopped_no_resume", "command": null},
-    {"id": "timestamp-a1", "path": "scripts/run_full_timestamps_a1.py", "status": "historical_stopped_no_resume", "command": null},
-    {"id": "timestamp-a2", "path": "scripts/run_full_timestamps_a2.py", "status": "historical_stopped_no_resume", "command": null},
-    {"id": "timestamp-a3", "path": "scripts/run_full_timestamps_a3.py", "status": "historical_stopped_no_resume", "command": null},
-    {"id": "timestamp-a3-impact", "path": "scripts/timestamp_a3_impact.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "timestamp-a4", "path": "scripts/run_full_timestamps_a4.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "d16-h0-correction", "path": "scripts/d16_h0_time_correction.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "timestamp-a5", "path": "scripts/run_timestamp_a5.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "timestamp-a5-posthoc", "path": "scripts/timestamp_a5_posthoc.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "d17-event-neutral", "path": "scripts/h0_event_neutral.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "sentiment-scorer-validation", "path": "scripts/validate_sentiment_scorer.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "f8-h0-reproducibility", "path": "scripts/f8_h0_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "f8-h4-reproducibility", "path": "scripts/h4_dev_reproducibility.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "reader-real3", "path": "scripts/run_reader_real3.py", "status": "retired_historical", "command": null},
-    {"id": "kpi-development", "path": "scripts/study_kpi_omission.py", "status": "historical_stopped_no_resume", "command": null},
-    {"id": "audit-cs-validation", "path": "scripts/validate_audit_cs.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "frontier-synthetic", "path": "scripts/validate_quant_frontiers.py", "status": "historical_complete_no_rerun", "command": null},
-    {"id": "frontier-feasibility", "path": "scripts/execute_frontier_dev_feasibility.py", "status": "historical_complete_no_rerun", "command": null}
-  ],
-  "evidence": [
-    {
-      "id": "guard-coverage-real-v3",
-      "kind": "aggregate_only_real_mdna_deferral_rate_fresh_issuers_not_accuracy",
-      "path": "results/guard_coverage_real_v3.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "a0ec24b",
-      "status": "normalized_sentence2.1pct_pm1_4.7pct_pm3_9.8pct_integrity0pct",
-      "supersedes": []
-    },
-    {
-      "id": "guard-coverage-real-v2",
-      "kind": "aggregate_only_real_mdna_deferral_rate_same_and_fresh_samples",
-      "path": "results/guard_coverage_real_v2.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "45910e5",
-      "status": "normalized_same3.3pct_fresh2.8pct_sentence_integrity0pct_imaging_overmatch_found",
-      "supersedes": []
-    },
-    {
-      "id": "guard-coverage-real",
-      "kind": "aggregate_only_real_mdna_deferral_rate_raw_text_baseline",
-      "path": "results/guard_coverage_real.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "c8475f5",
-      "status": "raw_sentence8.9pct_pm1_14.7pct_pm3_24.3pct_integrity_artifacts",
-      "supersedes": []
-    },
-    {
-      "id": "review-pipeline-v5-combined",
-      "kind": "declared_rules_first_agreement_pipeline_on_fresh_AI_authored_stress_probes_not_human_gold",
-      "path": "results/review_pipeline_v5_combined.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "dc7c67b",
-      "status": "30of30_zero_false_support_value_check_alone_10of16_not_promoted",
-      "supersedes": []
-    },
-    {
-      "id": "review-pipeline-v5a",
-      "kind": "half_run_of_declared_pipeline_v2",
-      "path": "results/review_pipeline_v5a.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "da7c070",
-      "status": "15of15_17_calls",
-      "supersedes": []
-    },
-    {
-      "id": "review-pipeline-v5b",
-      "kind": "half_run_of_declared_pipeline_v2",
-      "path": "results/review_pipeline_v5b.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "567cd1b",
-      "status": "15of15_21_calls",
-      "supersedes": []
-    },
-    {
-      "id": "review-pipeline-v4",
-      "kind": "declared_rules_first_AI_fallback_pipeline_on_fresh_AI_authored_probes_not_human_gold",
-      "path": "results/review_pipeline_v4.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "424fe20",
-      "status": "pipeline23of24_ai_alone20of24_rules9of9_decided_one_conflict_false_support_not_promoted",
-      "supersedes": []
-    },
-    {
-      "id": "reader-ai-review-v4-fallback",
-      "kind": "advisory_local_AI_reviewer_on_fresh_AI_authored_probes",
-      "path": "results/reader_ai_review_v4.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "2b42bdf",
-      "status": "20of24_three_false_support_one_false_rejection",
-      "supersedes": []
-    },
-    {
-      "id": "reader-ai-review-v3-blind",
-      "kind": "advisory_blind_extraction_AI_reviewer_on_fresh_AI_authored_probes",
-      "path": "results/reader_ai_review_v3.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "daa5219",
-      "status": "17of24_extraction12of24_not_adopted",
-      "supersedes": []
-    },
-    {
-      "id": "reader-ai-review-v3-control",
-      "kind": "advisory_v2_reviewer_control_on_same_fresh_probes",
-      "path": "results/reader_ai_review_v3_control.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "6bce097",
-      "status": "20of24_four_false_support",
-      "supersedes": []
-    },
-    {
-      "id": "review-probes-rules-v3",
-      "kind": "frozen_deterministic_rules_on_fresh_review_probes_plus_labelled_posthoc_compositions",
-      "path": "results/reader_ai_review_v3_rules.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "81c1b66",
-      "status": "rules10of10_decided_14_deferred_posthoc_composition22of24_exposed",
-      "supersedes": []
-    },
-    {
-      "id": "integrity-final",
-      "kind": "authored_frozen_integrity_challenge_not_human_gold",
-      "path": "results/integrity_final.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "a2e57c4",
-      "status": "221of221_zero_false_support_from_baseline83of221",
-      "supersedes": []
-    },
-    {
-      "id": "integrity-baseline",
-      "kind": "pre_implementation_baseline_of_frozen_integrity_challenge",
-      "path": "results/integrity_baseline.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "5c80476",
-      "status": "83of221_134_false_supports",
-      "supersedes": []
-    },
-    {
-      "id": "notation-adversarial-r2",
-      "kind": "separate_AI_authored_policy_adversarial_cases_not_human_gold",
-      "path": "results/notation_adversarial_r2.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "c46ffef",
-      "status": "one_shot_96of96_zero_false_decisions",
-      "supersedes": []
-    },
-    {
-      "id": "notation-final",
-      "kind": "authored_frozen_challenge_and_metamorphic_grid_not_human_gold",
-      "path": "results/notation_final.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "b97dcf6356a3a73c7a390be8dc34d2ba04cc6ae5",
-      "status": "challenge24of24_grid780of780_exposed_original30of30_policy37of37_after_disclosed_ADV71_fix",
-      "supersedes": []
-    },
-    {
-      "id": "notation-baseline",
-      "kind": "pre_implementation_baseline_of_frozen_notation_challenge",
-      "path": "results/notation_baseline.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "b2e68c202357e86cdf718c8426eb6b68c71858cc",
-      "status": "challenge12of24_grid540of780_zero_resolved_zero_false_decisions",
-      "supersedes": []
-    },
-    {
-      "id": "notation-adversarial",
-      "kind": "separate_AI_authored_policy_adversarial_cases_not_human_gold",
-      "path": "results/notation_adversarial.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "8eae93e8f2473cefeacb4e220e36eb7adcf8cb3d",
-      "status": "one_shot_71of72_one_false_support_ADV71_fixed_posthoc",
-      "supersedes": []
-    },
-    {
-      "id": "reader-ai-review-v2b",
-      "kind": "advisory_local_AI_reviewer_on_authored_probes_not_human_gold",
-      "path": "results/reader_ai_review_v2b.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "749b515aaf82a91502f32630c9761ae9c3aaf29b",
-      "status": "valid18of18_correct17of18_fresh6of6_exposed11of12_one_false_support_not_promoted",
-      "supersedes": []
-    },
-    {
-      "id": "reader-ai-review-v2-stopped",
-      "kind": "stopped_local_model_attempt_retained",
-      "path": "results/reader_ai_review_v2.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "989095be59c7a8658749fdf42103f7f7579f2072",
-      "status": "stopped_startup_readiness_ReadTimeout_zero_model_calls",
-      "supersedes": []
-    },
-    {
-      "id": "source-claim-v2-assurance",
-      "kind": "deterministic_admission_quantity_and_EPS_assurance_not_model_or_human_gold",
-      "path": "results/claim_assurance.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "61ee7e7fe7046429edc8021761750f55ab3767c4",
-      "status": "policy37of37_9review_supported24of24_overall26of30_4unresolved",
-      "supersedes": []
-    },
-    {
-      "id": "source-structured-claims",
-      "kind": "authored_source_rule_vs_raw_entailment_with_boundary_controls",
-      "path": "results/hhem_structured.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "7083b99e0b9130c0b11a8b310ecb65ec68fc21a0",
-      "status": "source24of24_raw17of24_6boundariesdeferred_24of30coverage_nohumangold",
-      "supersedes": []
-    },
-    {
-      "id": "hhem-and-current-regressions",
-      "kind": "exposed_current_source_regression_and_local_claim_entailment_diagnostic",
-      "path": "results/hhem_benchmark.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "4c436fd48074c369169993cbe67cf0860238e71e",
-      "status": "current9cohortspass_HHEM17of24_sevenfalseapprovals_no_independent_gold",
-      "supersedes": []
-    },
-    {
-      "id": "reader-ai-review",
-      "kind": "authored_AI_advisory_calibration_and_source_assisted_cell_check",
-      "path": "results/reader_ai_review.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "7385fe3d973f6155ffd5184f8db54a27962a15ca",
-      "status": "complete_cells12of12_AIverdicts5of12_not_promoted_postrun_schemafix_unexecuted",
-      "supersedes": []
-    },
-    {
-      "id": "reader-cell-selection",
-      "kind": "authored_coverage_and_stopped_cell_model_comparison",
-      "path": "results/reader_cell_selection.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "6240bac79ba0792721138314f12915bb8e70efcb",
-      "status": "offline192of192_model_first_call_timeout_no_accuracy_claim",
-      "supersedes": []
-    },
-    {
-      "id": "reader-cell-attempt-accounting",
-      "kind": "posthoc_transport_attempt_accounting_no_new_inference",
-      "path": "results/reader_cell_selection_accounting.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": null,
-      "status": "one_invalid_tuple_attempt_11unattempted_12unattempted_cell_requests_original_preserved",
-      "supersedes": []
-    },
-    {
-      "id": "reader-reliability",
-      "kind": "authored_paired_wire_and_source_admission_diagnostic",
-      "path": "results/reader_reliability.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "a76bc7971eb038deac1e11197df97e2156628f82",
-      "status": "complete_wire12of12_completion11of12_source24of24_no_human_gold",
-      "supersedes": []
-    },
-    {
-      "id": "reader-fields",
-      "kind": "authored_common_contract_field_record_comparison",
-      "path": "results/reader_fields.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "f252a592149bdf57f1970cb4e6a0330afa6c926f",
-      "status": "complete_guarded24of24_parserfirst23of24_no_independent_gold",
-      "supersedes": []
-    },
-    {
-      "id": "linked-reader",
-      "kind": "synthetic_linked_evidence_contract_challenge",
-      "path": "results/linked_reader.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "4c0401438d3f12033fefc146d64fdd035e3f6d4b",
-      "status": "complete_new_contract_model23of24_deterministic24of24_no_real_gold",
-      "supersedes": []
-    },
-    {
-      "id": "reader-stress",
-      "kind": "synthetic_format_stress_diagnostic",
-      "path": "results/reader_stress.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "ebfda0d75c3c88ecbec5e1da556b26d4217d3358",
-      "status": "complete_prior_perfect_score_did_not_generalize_evidence_contract_bottleneck",
-      "supersedes": []
-    },
-    {
-      "id": "verified-reader",
-      "kind": "synthetic_local_model_diagnostic",
-      "path": "results/verified_reader.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "018e9e3bf5da1ccc2f094f2312a35dc0cc14e568",
-      "status": "complete_deterministic_repairs_help_but_binding_parser_matches",
-      "supersedes": []
-    },
-    {
-      "id": "reader-review-packet",
-      "kind": "source_packet_preparation_not_gold",
-      "path": "results/reader_review_packet.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "22f4452c183363b9f433c9ba5f19b5eba04d41fe",
-      "status": "private_unlabelled_packet_reviewers_unassigned",
-      "supersedes": []
-    },
-    {
-      "id": "focused-reader-v2",
-      "kind": "synthetic_local_model_diagnostic",
-      "path": "results/focused_reader_v2.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "0a3882f431da216e75128bbf966e106eac1aadc6",
-      "status": "complete_no_truncation_but_critic_regressed_no_promotion",
-      "supersedes": []
-    },
-    {
-      "id": "focused-reader",
-      "kind": "synthetic_local_model_diagnostic",
-      "path": "results/focused_reader.json",
-      "report": "docs/FOCUSED_READER.md",
-      "freeze_revision": "987f956127c23656dd5a521da9a3e7db23b8506a",
-      "status": "stopped_critic_truncation_no_evaluation_or_promotion",
-      "supersedes": []
-    },
-    {
-      "id": "audit-cs",
-      "kind": "synthetic_qa",
-      "path": "results/audit_cs_validation.json",
-      "report": "docs/AUDIT_CONFIDENCE_SEQUENCE.md",
-      "freeze_revision": "84b79452fd6ac365781a69c07a35919630ccfef6",
-      "status": "completed_scoped_qa_only",
-      "supersedes": []
-    },
-    {
-      "id": "timestamp-a2",
-      "kind": "source_audit",
-      "path": "results/timestamp_full_a2_review.json",
-      "report": "docs/DATA_AUDIT.md",
-      "freeze_revision": "cf65410",
-      "status": "stopped_conditional_clock_assumption",
-      "supersedes": []
-    },
-    {
-      "id": "timestamp-a3-clock-basis",
-      "kind": "source_audit_declared_clock_basis_test",
-      "path": "results/timestamp_a3_clock_basis_cb1.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "47a6c51",
-      "status": "passed_rule13a2_eastern_civil_clock_replicated_on_new_headers",
-      "supersedes": []
-    },
-    {
-      "id": "timestamp-a3",
-      "kind": "source_audit",
-      "path": "results/timestamp_full_a3_report.json",
-      "report": "docs/DATA_AUDIT.md",
-      "freeze_revision": "47a6c51",
-      "status": "stopped_pause_cap_2708_of_16921_qualified_14213_unread",
-      "supersedes": ["timestamp-a2"]
-    },
-    {
-      "id": "timestamp-a3-impact",
-      "kind": "source_audit_direction_counts_not_return_effects",
-      "path": "results/timestamp_a3_impact.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "20e3fa4",
-      "status": "zero_lookahead_among_2708_qualified_nominal_and_conservative_calendars",
-      "supersedes": []
-    },
-    {
-      "id": "timestamp-a4",
-      "kind": "source_audit",
-      "path": "results/timestamp_full_a4_report.json",
-      "report": "docs/DATA_AUDIT.md",
-      "freeze_revision": "6e71c04",
-      "status": "order_complete_16909_qualified_12_unresolved_by_report_reader_bug",
-      "supersedes": ["timestamp-a3"]
-    },
-    {
-      "id": "timestamp-a4-r2",
-      "kind": "source_audit_disclosed_post_report_correction",
-      "path": "results/timestamp_full_a4_report_r2.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "1b82e54",
-      "status": "all_16921_qualified_404_F7_resolved_5_MHLA_stored_early",
-      "supersedes": ["timestamp-a4", "timestamp-a3-impact"]
-    },
-    {
-      "id": "d16-h0-time-correction",
-      "kind": "input_correction_receipt",
-      "path": "results/d16_h0_time_correction.json",
-      "report": "docs/DEVIATIONS.md",
-      "freeze_revision": "afdeee4",
-      "status": "103_of_21502_times_corrected_5_lookahead_removed",
-      "supersedes": []
-    },
-    {
-      "id": "d16-h0-rerun",
-      "kind": "development_rerun_on_corrected_inputs_not_confirmatory",
-      "path": "results/d16_h0_rerun_comparison.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "ab83707",
-      "status": "78_small_field_changes_conclusions_unchanged",
-      "supersedes": []
-    },
-    {
-      "id": "d16-current-vintage-diagnostics",
-      "kind": "development_diagnostic_descriptive_under_F10",
-      "path": "results/current_vintage_diagnostics_d16.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "ab83707",
-      "status": "conditional_DSR_computed_D4_not_supported_PBO_not_estimable",
-      "supersedes": []
-    },
-    {
-      "id": "timestamp-a5",
-      "kind": "source_audit",
-      "path": "results/timestamp_a5_report.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "6f1d2e3",
-      "status": "262_2012_2018_accessions_0_qualified_frozen_integrity_check_failed_on_two_22h_seconds",
-      "supersedes": []
-    },
-    {
-      "id": "timestamp-a5-posthoc",
-      "kind": "post_hoc_sensitivity_not_qualification",
-      "path": "results/timestamp_a5_posthoc_sensitivity.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "723c661",
-      "status": "eastern_reading_changes_no_H6a_indicator_or_H4_order",
-      "supersedes": []
-    },
-    {
-      "id": "d17-event-neutral",
-      "kind": "exploratory_development_evidence",
-      "path": "results/h0_event_neutral_development.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "89f18ea",
-      "status": "both_variants_wrong_sign_registered_bar_not_met",
-      "supersedes": []
-    },
-    {
-      "id": "sentiment-scorer-validation",
-      "kind": "scorer_qualification_not_return_evidence",
-      "path": "results/sentiment_scorer_validation.json",
-      "report": "docs/H7_SOCIAL_SENTIMENT.md",
-      "freeze_revision": "9424e08",
-      "status": "VADER_below_majority_baseline_not_qualified",
-      "supersedes": []
-    },
-    {
-      "id": "f8-h0-reproducibility",
-      "kind": "development_numerical_provenance_not_scientific_acceptance",
-      "path": "results/f8_h0_reproducibility.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "76bbdc6",
-      "status": "single_thread_exact_default_threads_reproduce_original_baseline_H4_held",
-      "supersedes": []
-    },
-    {
-      "id": "h4-dev-extract",
-      "kind": "recorded_exposure_and_exact_equivalence_not_a_hold_release",
-      "path": "results/h4_dev_extract.json",
-      "report": "docs/DEVIATIONS.md",
-      "freeze_revision": "7a23d02",
-      "status": "development_panel_equal_to_full_panel_holdout_rows_decoded_not_written",
-      "supersedes": []
-    },
-    {
-      "id": "f8-h4-reproducibility",
-      "kind": "development_numerical_provenance_not_scientific_acceptance",
-      "path": "results/f8_h4_reproducibility.json",
-      "report": "docs/FINDINGS.md",
-      "freeze_revision": "21c36e5",
-      "status": "single_thread_exact_default_threads_reproduce_original_baseline_H4_stages_held",
-      "supersedes": []
-    },
-    {
-      "id": "small-sample-inference",
-      "kind": "synthetic_calibration",
-      "path": "results/robust_inference_calibration.json",
-      "report": "docs/H1_DESIGN.md",
-      "freeze_revision": null,
-      "status": "recorded_failures_geometry_specific",
-      "supersedes": []
-    },
-    {
-      "id": "reader-real3",
-      "kind": "measurement_diagnostic",
-      "path": "results/reader_real3_status.json",
-      "report": "docs/RESEARCH_PLAN.md",
-      "freeze_revision": null,
-      "status": "stopped_reader_retired",
-      "supersedes": []
-    },
-    {
-      "id": "kpi-development",
-      "kind": "development_diagnostic",
-      "path": "results/kpi_omission_dev_review.json",
-      "report": "docs/KPI_DEVELOPMENT_STUDY.md",
-      "freeze_revision": "bdca2029ef35298df1971470250afdd647835417",
-      "status": "stopped_no_independent_gold",
-      "supersedes": []
-    },
-    {
-      "id": "dependency-lock",
-      "kind": "software_verification",
-      "path": "results/dependency_lock_verification.json",
-      "report": "docs/DATA_AUDIT.md",
-      "freeze_revision": null,
-      "status": "local_install_and_public_hash_checks",
-      "supersedes": []
-    },
-    {
-      "id": "frontier-synthetic",
-      "kind": "synthetic_qa",
-      "path": "results/quant_frontiers_validation.json",
-      "report": "docs/QUANT_SYNTHETIC_RESULTS.md",
-      "freeze_revision": "2885d77d8416009231034883ac2c0e92471ea528",
-      "status": "completed_scoped_qa_only",
-      "supersedes": []
-    },
-    {
-      "id": "frontier-feasibility",
-      "kind": "development_diagnostic",
-      "path": "results/quant_dev_feasibility.json",
-      "report": "docs/QUANT_DEV_FEASIBILITY_RESULTS.md",
-      "freeze_revision": "7f5d59a0f25ee2aa150166d0cd5950e73078df88",
-      "status": "completed_proxy_only_not_economic_validation",
-      "supersedes": []
-    }
-  ]
+ "schema_version": 2,
+ "scope": "Navigation, not execution permission. Archived runs are at tag archive-2026-11.",
+ "archive_tag": "archive-2026-11",
+ "entrypoints": [
+  {
+   "path": "scripts/bulk_download.py",
+   "status": "pipeline",
+   "purpose": "Download SEC nightly bulk archives (company facts, submissions) with resume",
+   "command": null
+  },
+  {
+   "path": "scripts/master_index.py",
+   "status": "pipeline",
+   "purpose": "Rebuild the 2011-present EDGAR master index",
+   "command": null
+  },
+  {
+   "path": "scripts/h0_data.py",
+   "status": "pipeline",
+   "purpose": "H0 development data: universe, filings, text features, pairs, shares, prices",
+   "command": null
+  },
+  {
+   "path": "scripts/h0_backtest.py",
+   "status": "pipeline",
+   "purpose": "H0 monthly and event-panel tests on the development period; logs every trial",
+   "command": null
+  },
+  {
+   "path": "scripts/h5_events.py",
+   "status": "pipeline",
+   "purpose": "H5 timestamp-event tests (results invalid under F2 survivorship)",
+   "command": null
+  },
+  {
+   "path": "scripts/h4_fundamentals.py",
+   "status": "held",
+   "purpose": "H4 text change vs future fundamentals; confirmation moved to the D18 prospective holdout",
+   "command": null
+  },
+  {
+   "path": "scripts/h6_quiet.py",
+   "status": "held",
+   "purpose": "H6 quiet downward revisions; confirmation moved to the D18 prospective holdout",
+   "command": null
+  },
+  {
+   "path": "scripts/leakprobe.py",
+   "status": "pipeline",
+   "purpose": "Neologism leak probe across ChronoBERT vintages",
+   "command": null
+  },
+  {
+   "path": "scripts/run_bench.py",
+   "status": "pipeline",
+   "purpose": "Synthetic relationship-extraction benchmark on real 10-K backgrounds (local Ollama model)",
+   "command": null
+  },
+  {
+   "path": "scripts/calibrate_tfidf.py",
+   "status": "pipeline",
+   "purpose": "Calibrate the D3 TF-IDF claim-match threshold on synthetic pairs",
+   "command": null
+  },
+  {
+   "path": "scripts/event_diagnostics.py",
+   "status": "pipeline",
+   "purpose": "Event-study diagnostics: unconditional mean CAR and a random-date placebo",
+   "command": null
+  },
+  {
+   "path": "scripts/check_research_intake.py",
+   "status": "pipeline",
+   "purpose": "H1 annotation intake: prepare private draft packets and validate first-pass files offline",
+   "command": null
+  },
+  {
+   "path": "scripts/make_figures.py",
+   "status": "pipeline",
+   "purpose": "Regenerate the README figures from committed results",
+   "command": ".\\.venv\\Scripts\\python.exe scripts/make_figures.py"
+  },
+  {
+   "path": "scripts/check_repository.py",
+   "status": "maintenance",
+   "purpose": "Check doc links, this index, and orphaned scripts/results",
+   "command": ".\\.venv\\Scripts\\python.exe scripts/check_repository.py"
+  },
+  {
+   "path": "scripts/smoke_wheel.py",
+   "status": "maintenance",
+   "purpose": "Build the wheel and smoke-test it outside the checkout (run in CI)",
+   "command": ".\\.venv\\Scripts\\python.exe scripts/smoke_wheel.py"
+  },
+  {
+   "path": "scripts/check_reader_regressions.py",
+   "status": "reader",
+   "purpose": "Replay the current reader on the exposed invented regression cohorts",
+   "command": ".\\.venv\\Scripts\\python.exe scripts/check_reader_regressions.py"
+  },
+  {
+   "path": "scripts/prepare_reader_review.py",
+   "status": "reader",
+   "purpose": "Prepare the private, unlabelled human-review packet",
+   "command": null
+  },
+  {
+   "path": "scripts/prepare_reader_context_forms.py",
+   "status": "reader",
+   "purpose": "Create blank supplemental review-context forms",
+   "command": null
+  },
+  {
+   "path": "scripts/start_local_reader_server.py",
+   "status": "reader",
+   "purpose": "Freeze or launch the answer-first local model server policy",
+   "command": null
+  },
+  {
+   "path": "src/asof/cli.py",
+   "status": "maintenance",
+   "purpose": "`asof` command line: the offline demo and guarded ingestion",
+   "command": "asof demo"
+  }
+ ],
+ "evidence": [
+  {
+   "path": "results/guard_coverage_real_v3.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "a0ec24b"
+  },
+  {
+   "path": "results/guard_coverage_real_v2.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "45910e5"
+  },
+  {
+   "path": "results/guard_coverage_real.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "c8475f5"
+  },
+  {
+   "path": "results/review_pipeline_v5_combined.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "dc7c67b"
+  },
+  {
+   "path": "results/review_pipeline_v5a.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "da7c070"
+  },
+  {
+   "path": "results/review_pipeline_v5b.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "567cd1b"
+  },
+  {
+   "path": "results/review_pipeline_v4.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "424fe20"
+  },
+  {
+   "path": "results/reader_ai_review_v4.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "2b42bdf"
+  },
+  {
+   "path": "results/reader_ai_review_v3.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "daa5219"
+  },
+  {
+   "path": "results/reader_ai_review_v3_control.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "6bce097"
+  },
+  {
+   "path": "results/reader_ai_review_v3_rules.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "81c1b66"
+  },
+  {
+   "path": "results/integrity_final.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "a2e57c4"
+  },
+  {
+   "path": "results/integrity_baseline.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "5c80476"
+  },
+  {
+   "path": "results/notation_adversarial_r2.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "c46ffef"
+  },
+  {
+   "path": "results/notation_final.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "b97dcf6356a3a73c7a390be8dc34d2ba04cc6ae5"
+  },
+  {
+   "path": "results/notation_baseline.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "b2e68c202357e86cdf718c8426eb6b68c71858cc"
+  },
+  {
+   "path": "results/notation_adversarial.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "8eae93e8f2473cefeacb4e220e36eb7adcf8cb3d"
+  },
+  {
+   "path": "results/reader_ai_review_v2b.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "749b515aaf82a91502f32630c9761ae9c3aaf29b"
+  },
+  {
+   "path": "results/reader_ai_review_v2.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "989095be59c7a8658749fdf42103f7f7579f2072"
+  },
+  {
+   "path": "results/claim_assurance.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "61ee7e7fe7046429edc8021761750f55ab3767c4"
+  },
+  {
+   "path": "results/hhem_structured.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "7083b99e0b9130c0b11a8b310ecb65ec68fc21a0"
+  },
+  {
+   "path": "results/hhem_benchmark.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "4c436fd48074c369169993cbe67cf0860238e71e"
+  },
+  {
+   "path": "results/reader_ai_review.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "7385fe3d973f6155ffd5184f8db54a27962a15ca"
+  },
+  {
+   "path": "results/reader_cell_selection.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "6240bac79ba0792721138314f12915bb8e70efcb"
+  },
+  {
+   "path": "results/reader_cell_selection_accounting.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/reader_reliability.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "a76bc7971eb038deac1e11197df97e2156628f82"
+  },
+  {
+   "path": "results/reader_fields.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "f252a592149bdf57f1970cb4e6a0330afa6c926f"
+  },
+  {
+   "path": "results/linked_reader.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "4c0401438d3f12033fefc146d64fdd035e3f6d4b"
+  },
+  {
+   "path": "results/reader_stress.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "ebfda0d75c3c88ecbec5e1da556b26d4217d3358"
+  },
+  {
+   "path": "results/verified_reader.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "018e9e3bf5da1ccc2f094f2312a35dc0cc14e568"
+  },
+  {
+   "path": "results/reader_review_packet.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "22f4452c183363b9f433c9ba5f19b5eba04d41fe"
+  },
+  {
+   "path": "results/focused_reader_v2.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "0a3882f431da216e75128bbf966e106eac1aadc6"
+  },
+  {
+   "path": "results/focused_reader.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": "987f956127c23656dd5a521da9a3e7db23b8506a"
+  },
+  {
+   "path": "results/timestamp_full_a2_review.json",
+   "report": "docs/DATA_AUDIT.md",
+   "status": "superseded",
+   "freeze_revision": "cf65410"
+  },
+  {
+   "path": "results/timestamp_a3_clock_basis_cb1.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "47a6c51"
+  },
+  {
+   "path": "results/timestamp_full_a3_report.json",
+   "report": "docs/DATA_AUDIT.md",
+   "status": "superseded",
+   "freeze_revision": "47a6c51"
+  },
+  {
+   "path": "results/timestamp_a3_impact.json",
+   "report": "docs/FINDINGS.md",
+   "status": "superseded",
+   "freeze_revision": "20e3fa4"
+  },
+  {
+   "path": "results/timestamp_full_a4_report.json",
+   "report": "docs/DATA_AUDIT.md",
+   "status": "superseded",
+   "freeze_revision": "6e71c04"
+  },
+  {
+   "path": "results/timestamp_full_a4_report_r2.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "1b82e54"
+  },
+  {
+   "path": "results/d16_h0_time_correction.json",
+   "report": "docs/DEVIATIONS.md",
+   "status": "current",
+   "freeze_revision": "afdeee4"
+  },
+  {
+   "path": "results/d16_h0_rerun_comparison.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "ab83707"
+  },
+  {
+   "path": "results/current_vintage_diagnostics_d16.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "ab83707"
+  },
+  {
+   "path": "results/timestamp_a5_report.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "6f1d2e3"
+  },
+  {
+   "path": "results/timestamp_a5_posthoc_sensitivity.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "723c661"
+  },
+  {
+   "path": "results/h0_event_neutral_development.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "89f18ea"
+  },
+  {
+   "path": "results/f8_h0_reproducibility.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "76bbdc6"
+  },
+  {
+   "path": "results/h4_dev_extract.json",
+   "report": "docs/DEVIATIONS.md",
+   "status": "current",
+   "freeze_revision": "7a23d02"
+  },
+  {
+   "path": "results/f8_h4_reproducibility.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": "21c36e5"
+  },
+  {
+   "path": "results/robust_inference_calibration.json",
+   "report": "docs/H1_DESIGN.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/reader_real3_status.json",
+   "report": "docs/RESEARCH_PLAN.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/dependency_lock_verification.json",
+   "report": "docs/DATA_AUDIT.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/bench_qwen3.5-4b_n300_s0.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/change_calibration.json",
+   "report": "docs/DEVIATIONS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/change_calibration_tfidf.json",
+   "report": "docs/DEVIATIONS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/h4_development.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/h6_development.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/hhem_assets.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/leakprobe_chronobert.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/local_model_runtime_support.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/p0_acceptance_authority_audit.json",
+   "report": "docs/DATA_AUDIT.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/price_source_test_panel.json",
+   "report": "docs/DATA_AUDIT.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/reader_real2_combined.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/reader_review_plan.json",
+   "report": "docs/FOCUSED_READER.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/REFEREE.md",
+   "report": "README.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/returns_event_diagnostics.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/returns_h0_development.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/returns_h0_development_d16.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/returns_h5_development.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/swap_qwen3.5-4b_n160_s0.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/timestamp_full_a2_report.json",
+   "report": "docs/DATA_AUDIT.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/trial_ledger.jsonl",
+   "report": "README.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/trial_ledger_chain_anchor.json",
+   "report": "README.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
+   "path": "results/trial_manifest.json",
+   "report": "README.md",
+   "status": "current",
+   "freeze_revision": null
+  }
+ ]
 }

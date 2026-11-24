@@ -89,8 +89,8 @@ def stage_pairs(*, scope: FrozenFactWindow | None = None) -> None:
     k = fil[(fil["form"] == "10-K") & fil["cik"].isin(s)].copy()
     k["report_date"] = pd.to_datetime(k["report_date"])
     rows = []
-    for cik, g in k.sort_values("knowledge_time").groupby("cik"):
-        g = g.dropna(subset=["report_date"])
+    for cik, firm in k.sort_values("knowledge_time").groupby("cik"):
+        g = firm.dropna(subset=["report_date"])
         for i in range(1, len(g)):
             cur, prev = g.iloc[i], g.iloc[i - 1]
             lag = (cur["report_date"] - prev["report_date"]).days
@@ -133,7 +133,7 @@ def stage_outcomes(*, scope: FrozenFactWindow | None = None) -> None:
     fil = pd.read_parquet(FIL)
     s = set(pd.read_parquet(SAMPLE)["cik"])
     k = fil[(fil["form"] == "10-K") & fil["cik"].isin(s)].dropna(subset=["report_date"])
-    by_cik = {c: g for c, g in k.groupby("cik")}
+    by_cik = dict(list(k.groupby("cik")))
     rows = []
     for cik, data in iter_companyfacts(s, scope=scope):
         facts = data.get("facts", {})
@@ -210,7 +210,7 @@ def results_from_panel(panel: pd.DataFrame, inputs: list[Path]) -> dict:
 
     dev = panel[pd.to_datetime(panel["knowledge_time"]).between(*DEV)].copy()
     dev["change_n"] = np.nan
-    for y, g in dev.groupby("year"):
+    for _, g in dev.groupby("year"):
         dev.loc[g.index, "change_n"] = neutralize(g, "change", "sic2", ["log_assets"])
     results = {}
     for sig in ("change_n", "change"):

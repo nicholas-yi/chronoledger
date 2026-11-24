@@ -11,9 +11,9 @@ from __future__ import annotations
 
 import random
 import re
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Callable
 
 import numpy as np
 
@@ -132,7 +132,7 @@ class AsOfTfidf:
         self.vocab: dict[str, int] = {}
         self.idf = np.zeros(0)
 
-    def fit(self, docs: list[tuple[datetime, str]], as_of: datetime) -> "AsOfTfidf":
+    def fit(self, docs: list[tuple[datetime, str]], as_of: datetime) -> AsOfTfidf:
         from collections import Counter
 
         from asof.sections import tokens

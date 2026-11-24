@@ -27,7 +27,7 @@ def test_master_index_streams_only_elapsed_quarters(tmp_path, monkeypatch) -> No
     script.build(None, output, datetime(2012, 5, 1, tzinfo=UTC))
     assert calls == [(2011, q) for q in range(1, 5)] + [(2012, 1), (2012, 2)]
     result = pd.read_parquet(output)
-    assert list(zip(result["cik"], result["quarter"])) == calls
+    assert list(zip(result["cik"], result["quarter"], strict=True)) == calls
     assert not output.with_suffix(".tmp").exists()
 
 

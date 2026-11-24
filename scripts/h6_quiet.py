@@ -37,7 +37,7 @@ def detect(
 ) -> pd.DataFrame:
     require_fact_window(scope)
     hold_outcome_stage("H6.detect")
-    by_cik = {c: g for c, g in filings[filings["cik"].isin(ciks)].groupby("cik")}
+    by_cik = dict(list(filings[filings["cik"].isin(ciks)].groupby("cik")))
     out = []
     for cik, data in iter_companyfacts(ciks, scope=scope):
         facts = flatten_usd(data.get("facts", {}), cik, IS_TAGS)
@@ -59,7 +59,7 @@ def part_a(filings: pd.DataFrame, *, scope: FrozenFactWindow | None = None) -> d
     def within(rows, events):
         ev = events.groupby("cik")["knowledge_time"].apply(list).to_dict()
         return [float(any(t < e <= t + timedelta(days=365) for e in ev.get(c, [])))
-                for c, t in zip(rows["cik"], rows["knowledge_time"])]
+                for c, t in zip(rows["cik"], rows["knowledge_time"], strict=True)]
 
     base["restate_12m"] = within(base, formal)
     base["item402_12m"] = within(base, only402)

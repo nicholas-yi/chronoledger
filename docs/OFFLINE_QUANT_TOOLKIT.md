@@ -6,7 +6,7 @@ projects. The active task is the [focused evidence-linked reader](FOCUSED_READER
 Original code, fixtures, failed/null evidence and committed run receipts remain intact.
 
 The user approved `all_offline` on 2026-11-17: all nine directions from the
-[frontiers review](QUANT_RESEARCH_FRONTIERS_2026_11.md), with invented-fixture tests,
+[frontiers review](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/QUANT_RESEARCH_FRONTIERS_2026_11.md), with invented-fixture tests,
 no downloads, model calls/training, empirical backtests, sealed-data access,
 production ledger rows or push.
 
@@ -298,13 +298,13 @@ No scientific power/coverage study, empirical return trial or cloud validation w
 performed. No real data, production ledger rows, registered designs, dependency pins,
 study holds or frozen historical outputs were changed. These local changes are not pushed.
 
-Under a later `synthetic_and_plan` approval, a [separately frozen known-truth stress run](QUANT_SYNTHETIC_RESULTS.md)
+Under a later `synthetic_and_plan` approval, a [separately frozen known-truth stress run](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/QUANT_SYNTHETIC_RESULTS.md)
 completed all nine areas within 34.21 s and approximately 164.8 MiB combined peak RSS.
 Its pre-execution controller/software suite passed 637 tests. The results preserve
 the important negative/adverse controls and are not empirical performance evidence.
-The accompanying [empirical pilot](QUANT_EMPIRICAL_PILOT.md) remains blocked.
+The accompanying [empirical pilot](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/QUANT_EMPIRICAL_PILOT.md) remains blocked.
 
-On 2026-11-18, a [real development-input feasibility pass](QUANT_DEV_FEASIBILITY_RESULTS.md)
+On 2026-11-18, a [real development-input feasibility pass](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/QUANT_DEV_FEASIBILITY_RESULTS.md)
 processed the prior derivative's 50 issuer triples without reopening raw caches.
 It computed lexical proxy states and 91-coordinate trajectories (22 varying coordinates,
 numerical rank 15), not validated economic observations. Independent gold and complete

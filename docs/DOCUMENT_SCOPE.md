@@ -80,7 +80,7 @@ months; and used context. [Entrypoint tests](../tests/test_document_scope_entryp
 verify rejection before source/client/cache access and a metadata-only inventory using
 invented files. Existing HTML-comment and named-month/ISO parser regressions also remain.
 
-The [development-cache counter](../scripts/count_kpi_development_cache.py) projects only
+The [development-cache counter](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/count_kpi_development_cache.py) projects only
 filing metadata, checks the shared guard and uses file-existence checks, not decompression
 or cache hashing. It counts one latest eligible annual triple per issuer, with 330-400-day
 period gaps and eligible used context. Fewer than 30 eligible issuers means stop: no download,

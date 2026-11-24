@@ -28,7 +28,9 @@ def test_gate_passes_when_all_threats_at_four() -> None:
 
 def test_empty_or_only_nongating_report_cannot_pass() -> None:
     assert "Gate: BLOCKED" in render([])
-    ok = lambda: (True, "fine")
+    def ok():
+        return True, "fine"
+
     out = evaluate([Threat("diagnostic", "q?", [Check("a", ok), Check("b", ok)], gating=False)])
     assert "Gate: BLOCKED" in render(out)
 

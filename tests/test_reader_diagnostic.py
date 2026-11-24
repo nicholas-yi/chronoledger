@@ -1,10 +1,5 @@
-import importlib.util
 import json
-import random
-from pathlib import Path
-from types import SimpleNamespace
 
-import httpx
 import pytest
 from pydantic import ValidationError
 
@@ -60,85 +55,3 @@ def test_citation_locations_and_quotes_are_checked_but_not_claimed_as_answer_pro
     assert references_locally_valid(abstain, ITEM, supplied_context=True) is None
 
 
-def test_transport_failure_stops_calls_without_retry_and_keeps_all_selected_items(monkeypatch, tmp_path):
-    scripts = Path(__file__).resolve().parents[1] / "scripts"
-    monkeypatch.syspath_prepend(str(scripts))
-    spec = importlib.util.spec_from_file_location("run_reader_diagnostic", scripts / "run_reader_diagnostic.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    root = tmp_path / "assets"
-    (root / "tatqa").mkdir(parents=True)
-    questions = [
-        {"uid": f"toy{i}", "question": "Toy amount?", "answer": "PRIVATE_GOLD"}
-        for i in range(10)
-    ]
-    (root / "tatqa" / "dev.json").write_text(json.dumps([{
-        "table": {"table": [["toy", "7"]]}, "paragraphs": [{"text": "PRIVATE_REPORT"}],
-        "questions": questions,
-    }]), encoding="utf-8")
-    config = tmp_path / "config.json"
-    config.write_text(json.dumps({
-        "seed": module.SEED, "excluded_ids": [],
-        "ids": random.Random(module.SEED).sample(sorted(q["uid"] for q in questions), 10),
-        "assets": {}, "source_sha256": {}, "options": {},
-        "limits": {"serialized_request_bytes": 12000},
-        "model": {"name": module.MODEL, "digest": module.DIGEST, "ollama_version": "toy"},
-    }), encoding="utf-8")
-
-    class Metric:
-        def __call__(self, **kwargs):
-            pass
-
-        def get_raw(self):
-            return [{"em": 0, "f1": 0}]
-
-        def get_overall_metric(self):
-            return 0, 0, 0, 0
-
-    calls = []
-
-    class Client:
-        def __init__(self, **kwargs):
-            pass
-
-        def __enter__(self):
-            return self
-
-        def __exit__(self, *args):
-            pass
-
-        def get(self, path):
-            data = ({"models": [{"name": module.MODEL, "digest": module.DIGEST}]}
-                    if path == "/api/tags" else {"version": "toy"})
-            return httpx.Response(200, json=data, request=httpx.Request("GET", module.ENDPOINT + path))
-
-        def post(self, path, **kwargs):
-            calls.append(kwargs["content"])
-            raise httpx.ReadTimeout("PRIVATE_TRANSPORT_DETAIL")
-
-    for key, value in {
-        "ROOT": root, "CONFIG": config, "RECEIPT": tmp_path / "receipt.json",
-        "PRIVATE": tmp_path / "private", "SOURCE_FILES": [],
-    }.items():
-        monkeypatch.setattr(module, key, value)
-    for name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
-        monkeypatch.setenv(name, "1")
-    monkeypatch.setattr(module.ledger, "lineage", lambda *args: {"git_dirty": False})
-    monkeypatch.setattr(module, "verified_assets", dict)
-    monkeypatch.setattr(module, "load_native", lambda *args: SimpleNamespace(TaTQAEmAndF1=Metric))
-    monkeypatch.setattr(module.httpx, "Client", Client)
-    module.run()
-    result = json.loads(module.RECEIPT.read_text())
-    assert result["generation_attempts"] == len(calls) == 1
-    assert len(result["items"]) == 10 and result["status"] == "partial"
-    assert result["stop_reason"] == "ReadTimeout"
-    reasons = [
-        row[arm]["reason"] for row in result["items"] for arm in ("grounded", "no_context")
-        if row[arm]["outcome"] == "not_attempted"
-    ]
-    assert reasons and set(reasons) == {"prior_stop:ReadTimeout"}
-    assert result["lineage"]["git_dirty"] is False
-    assert result["frozen_source_and_config_unchanged"] is True
-    assert "PRIVATE_GOLD" not in calls[0].decode()
-    assert "PRIVATE" not in module.RECEIPT.read_text()
-    assert result["summaries"]["grounded"]["native_EM"] == 0
