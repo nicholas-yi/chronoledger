@@ -19,6 +19,8 @@ dependencies = [
     "lxml>=5.0",
     "beautifulsoup4>=4.12",
     "pydantic>=2.7",
+    # Not imported directly: DuckDB needs it to return TIMESTAMPTZ values to Python.
+    "pytz>=2024.1",
 ]
 
 [project.optional-dependencies]
