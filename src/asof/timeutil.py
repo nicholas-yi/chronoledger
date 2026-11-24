@@ -8,7 +8,7 @@ header/index evidence and source provenance before treating it as knowledge time
 from __future__ import annotations
 
 from bisect import bisect_left
-from datetime import UTC, date, datetime, time, timedelta
+from datetime import UTC, date, datetime, time
 from zoneinfo import ZoneInfo
 
 ET = ZoneInfo("America/New_York")
@@ -95,8 +95,3 @@ def first_tradable_close(knowledge_time: datetime, trading_days: list[date]) -> 
     if i < len(trading_days) and close_time_utc(trading_days[i]) <= knowledge_time:
         i += 1
     return trading_days[i] if i < len(trading_days) else None
-
-
-def utc_day_end(day: date) -> datetime:
-    """End of a calendar day in UTC, useful for as-of queries keyed by date."""
-    return datetime.combine(day + timedelta(days=1), time(0), tzinfo=UTC)

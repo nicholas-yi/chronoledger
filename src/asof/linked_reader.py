@@ -7,10 +7,8 @@ adjudication. They use no gold, I/O, judge or model call. Scoring/replay is sepa
 from __future__ import annotations
 
 import hashlib
-import json
 import re
-from collections import Counter
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from itertools import pairwise
 
@@ -18,7 +16,6 @@ from pydantic import ValidationError
 
 from asof.extraction import normalize
 from asof.focused_reader import Answer, Case, abstention
-from asof.reader_stress import audit_cases, build_fixture
 from asof.verified_reader import WireFields, load_robustness_cases
 
 UNIT = r"(?:[A-Z]{3}\s+(?:thousand|million|billion)s?|%|percent|subscribers)"
@@ -440,63 +437,5 @@ def linked_score(case: Case, result: LinkedResult) -> dict:
             "answered": True, "bundle_errors": list(errors)}
 
 
-def result_record(case: Case, result: LinkedResult) -> dict:
-    return {
-        "answer": result.answer.model_dump() if result.answer else None,
-        "bundle": asdict(result.bundle) if result.bundle else None,
-        "score": linked_score(case, result), "status": result.status, "reasons": list(result.reasons),
-        "contract": "linked-evidence-v1",
-    }
-
-
-def development_replay(definition: dict, prior: dict) -> dict:
-    """Explicit posthoc replay on exposed sources/saved parsed outputs, no new model calls."""
-    fixture = build_fixture(definition)
-    all_cases = tuple(case for pair in fixture["pairs"] for case in pair["cases"])
-    old_contract = sum(prior["records"][case.id]["single_pass"]["score"]["correct"]
-                       for case in audit_cases(fixture))
-    completed = []
-    for case in audit_cases(fixture):
-        answer = prior["records"][case.id]["single_pass"]["answer"]
-        completed.append(linked_score(case, complete_evidence(case, json.dumps(answer)))["correct"])
-    return {
-        "posthoc_after_source_and_outcome_exposure": True, "new_model_calls": 0,
-        "deterministic_source_cases": len(all_cases),
-        "linked_parser_correct": sum(linked_score(case, linked_parser(case))["correct"]
-                                     for case in all_cases),
-        "saved_parsed_model_outputs": len(completed), "prior_original_contract_correct": old_contract,
-        "new_contract_completed_correct": sum(completed),
-        "old_scores_rewritten": False, "independent_validation": False,
-    }
-
-
 def challenge_cases(payload: dict) -> tuple[Case, ...]:
     return load_robustness_cases(payload)
-
-
-def summarize_challenge(cases: tuple[Case, ...], records: dict[str, dict]) -> dict:
-    result = {}
-    for arm in ("parser", "binding_parser", "single_pass", "verified", "linked_parser", "linked"):
-        rows = [records.get(case.id, {}).get(arm) for case in cases]
-        result[arm] = {
-            "contract": "linked-evidence-v1" if arm.startswith("linked") else "original-single-quote-v1",
-            "planned": len(cases), "recorded": sum(row is not None for row in rows),
-            "correct": sum(row is not None and row["score"]["correct"] for row in rows),
-            "answered": sum(row is not None and row["score"]["answered"] for row in rows),
-            "wrong_answers": sum(row is not None and row["score"]["answered"]
-                                 and not row["score"]["correct"] for row in rows),
-            "positive_correct": sum(row is not None and row["score"]["correct"]
-                                    and case.expected is not None
-                                    for case, row in zip(cases, rows, strict=True)),
-            "negative_correct": sum(row is not None and row["score"]["correct"]
-                                    and case.expected is None
-                                    for case, row in zip(cases, rows, strict=True)),
-            "outcomes": dict(Counter(row["score"]["outcome"] if row else "not_attempted" for row in rows)),
-            "known_latency_seconds": sum(row["latency_seconds"] for row in rows
-                                         if row and row.get("latency_seconds") is not None),
-        }
-    return {
-        "arms": result, "independent_gold": False, "promote": False,
-        "contract_comparison_warning": "Linked evidence is a new source-proof contract; do not relabel old scores.",
-        "case_count": len(cases),
-    }

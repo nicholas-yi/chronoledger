@@ -9,8 +9,7 @@ from collections import Counter
 from decimal import Decimal
 
 from asof.extraction import normalize
-from asof.focused_reader import Case, parser_answer, score
-from asof.verified_reader import binding_parser
+from asof.focused_reader import Case
 
 FAMILIES = (
     "table_headers", "scaled_header", "footnote_override", "parentheses_negative",
@@ -157,25 +156,6 @@ def summarize_rows(cases: tuple[Case, ...], records: dict[str, dict], arm: str) 
                                      and case.category == family
                                      for case, row in zip(cases, rows, strict=True)),
             } for family in FAMILIES},
-    }
-
-
-def offline_baselines(fixture: dict) -> dict:
-    cases = tuple(case for pair in fixture["pairs"] for case in pair["cases"])
-    records = {}
-    for case in cases:
-        records[case.id] = {}
-        for name, function in (("parser", parser_answer), ("binding_parser", binding_parser)):
-            answer = function(case)
-            records[case.id][name] = {"answer": answer.model_dump(), "score": score(case, answer)}
-    return {
-        "cases": len(cases), "pairs": len(fixture["pairs"]),
-        "canonical_controls": {
-            arm: summarize_rows(tuple(c for c in cases if c.id.endswith("-0")), records, arm)
-            for arm in ("parser", "binding_parser")},
-        "stress_formats": {
-            arm: summarize_rows(tuple(c for c in cases if c.id.endswith("-1")), records, arm)
-            for arm in ("parser", "binding_parser")},
     }
 
 

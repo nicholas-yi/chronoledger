@@ -1,2 +1,1 @@
-def hello() -> str:
-    return "Hello from asof!"
+"""ChronoLedger: point-in-time research on SEC filings (package ``asof``)."""

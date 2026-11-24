@@ -19,7 +19,6 @@ dependencies = [
     "lxml>=5.0",
     "beautifulsoup4>=4.12",
     "pydantic>=2.7",
-    "pytz>=2024.1",
 ]
 
 [project.optional-dependencies]
@@ -35,12 +34,6 @@ dev = [
 figures = [
     "matplotlib>=3.8",
 ]
-verifier = [
-    "torch==2.9.1",
-    "transformers==4.57.6",
-    "sentencepiece==0.2.1",
-    "safetensors==0.7.0",
-]
 
 [project.scripts]
 asof = "asof.cli:main"
@@ -51,8 +44,6 @@ build-backend = "uv_build"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-markers = ["network: tests that call live SEC or market-data endpoints"]
-addopts = "-m 'not network'"
 filterwarnings = ["ignore:The inplace keyword in DataFrame.drop is deprecated"]
 
 [tool.ruff]

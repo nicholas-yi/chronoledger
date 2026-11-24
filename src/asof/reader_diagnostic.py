@@ -10,7 +10,6 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from asof.benchmark_baseline import TableInput
 from asof.extraction import normalize
 
-SCALES = ("", "thousand", "million", "billion", "percent")
 SYSTEM = (
     "Answer this financial report question using only the supplied report, not prior knowledge. "
     "If the supplied evidence is insufficient, abstain with answer=null, scale='', evidence=[]. "

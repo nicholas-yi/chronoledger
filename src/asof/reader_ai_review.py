@@ -12,7 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError,
 
 from asof.focused_reader import Answer, Case, abstention
 from asof.reader_cells import account_cell_attempts, audit_fixture, catalog
-from asof.reader_fields import guarded_parser, summarize_fields
+from asof.reader_fields import guarded_parser
 
 Issue = Literal["value", "unit", "period", "entity", "definition", "scope",
                 "evidence", "ambiguity", "unnecessary_abstention", "insufficient_context"]
@@ -198,19 +198,3 @@ def account_review_attempts(tasks: tuple[ReviewTask, ...], records: dict, calls:
                 "latency_seconds": call.get("latency_seconds"),
             }
     return updated
-
-
-def summarize_review_run(records: dict, calls: list[dict]) -> dict:
-    cases, labels = audit_fixture()
-    fields = summarize_fields(cases, records, labels, arm_names=("cell_selection", "source_control"))
-    return {
-        "cells": fields["arms"], "reviewer": summarize_reviews(review_tasks(), records),
-        "call_accounting": {kind: {
-            "attempted": sum(call.get("wire_contract") == kind for call in calls),
-            "known_seconds": sum(call["latency_seconds"] for call in calls
-                                 if call.get("wire_contract") == kind and call.get("latency_seconds") is not None),
-            "missing_latency": sum(call.get("wire_contract") == kind
-                                   and call.get("latency_seconds") is None for call in calls),
-        } for kind in ("bound_cell", "advisory_review")},
-        "promote": False, "independent_human_reviews": 0, "human_gold_labels": 0,
-    }

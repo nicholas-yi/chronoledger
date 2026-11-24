@@ -282,26 +282,13 @@ missing-support and conditional-null expectations, plus rejection cases and the
 all-nine no-I/O integration check. They do not establish economic truth, realistic
 model probabilities, estimator efficiency or predictive performance.
 
-Pylance's workspace-symbol request timed out in this session. Runtime fixture checks,
-the existing regression suite and Ruff are the available verification evidence;
-no successful editor type-check is claimed.
-
-Initial toolkit validation on 2026-11-17, with numerical library thread counts set to one:
-
-| Command | Observed result |
-|---|---|
-| `.venv\Scripts\python.exe -m pytest -q` | 629 passed in 70.78 s; two existing synthetic rank-deficiency warnings |
-| `.venv\Scripts\python.exe -m ruff check .` | Passed with the repository's existing documented legacy baseline |
-
-The full suite includes 32 new reference-toolkit tests and the prior 597 regressions.
-No scientific power/coverage study, empirical return trial or cloud validation was
-performed. No real data, production ledger rows, registered designs, dependency pins,
-study holds or frozen historical outputs were changed. These local changes are not pushed.
+These tests run with the full suite in CI on Ubuntu and Windows. No scientific power or
+coverage study, empirical return trial or editor type-check is claimed.
 
 Under a later `synthetic_and_plan` approval, a [separately frozen known-truth stress run](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/QUANT_SYNTHETIC_RESULTS.md)
 completed all nine areas within 34.21 s and approximately 164.8 MiB combined peak RSS.
-Its pre-execution controller/software suite passed 637 tests. The results preserve
-the important negative/adverse controls and are not empirical performance evidence.
+The results preserve the important negative and adverse controls and are not empirical
+performance evidence.
 The accompanying [empirical pilot](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/QUANT_EMPIRICAL_PILOT.md) remains blocked.
 
 On 2026-11-18, a [real development-input feasibility pass](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/QUANT_DEV_FEASIBILITY_RESULTS.md)

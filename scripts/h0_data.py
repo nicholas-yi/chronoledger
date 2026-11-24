@@ -13,6 +13,7 @@ Usage: python scripts/h0_data.py universe filings signals shares
 
 from __future__ import annotations
 
+import argparse
 import contextlib
 import sys
 from datetime import UTC, date, datetime
@@ -208,8 +209,14 @@ def stage_prices(uni: pd.DataFrame) -> None:
     build_price_snapshot(uni)
 
 
-def main() -> None:
-    stages = sys.argv[1:] or ["universe", "filings", "signals", "shares"]
+STAGES = ("universe", "filings", "signals", "features", "pairs", "shares", "prices", "price_snapshot")
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description="H0 development data acquisition (resumable).")
+    parser.add_argument("stages", nargs="*", choices=STAGES,
+                        help="default: universe filings signals shares")
+    stages = parser.parse_args(argv).stages or ["universe", "filings", "signals", "shares"]
     client = EdgarClient()
     uni = pd.read_parquet(UNIVERSE) if UNIVERSE.exists() else None
     if "universe" in stages or uni is None:

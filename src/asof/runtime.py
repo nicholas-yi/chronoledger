@@ -13,9 +13,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-THREAD_VARIABLES = ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS",
-                    "NUMEXPR_NUM_THREADS")
-
 
 def frozen_receipt(root: Path, paths: tuple[str, ...]) -> dict:
     """Verify a clean committed source/config selection; never inspect unlisted data payloads."""

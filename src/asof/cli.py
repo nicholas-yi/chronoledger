@@ -42,6 +42,15 @@ def ingest(ciks: list[int], db_path: str, *, scope: FrozenFactWindow | None = No
             }), file=sys.stderr)
 
 
+def check_claim(source_path: Path, claim: str) -> dict:
+    """Decide one claim from one source file with the deterministic rules; no model is called."""
+    from asof.claim_verifier import verify_claim
+    from asof.text_normalization import normalize_filing_text
+
+    source, changes = normalize_filing_text(source_path.read_text(encoding="utf-8"))
+    return {**verify_claim(source, claim), "source_normalization": changes}
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(prog="asof")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -50,6 +59,10 @@ def main(argv: list[str] | None = None) -> None:
     p_ingest.add_argument("--db", default=str(DB_PATH))
     p_ingest.add_argument("--scope-file", type=Path, help="frozen development date-window JSON")
     sub.add_parser("demo", help="run an invented, dataset-free example; no network or data writes")
+    p_claim = sub.add_parser(
+        "check-claim", help="decide supported/contradicted/review for a claim against a source file")
+    p_claim.add_argument("source", type=Path, help="UTF-8 text of the source passage")
+    p_claim.add_argument("claim", help='e.g. "Contoso reported revenue of 18 USD million for 2017."')
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
         try:
@@ -61,6 +74,8 @@ def main(argv: list[str] | None = None) -> None:
         from asof.demo import demo
 
         print(json.dumps(demo(), indent=2, allow_nan=False))
+    elif args.cmd == "check-claim":
+        print(json.dumps(check_claim(args.source, args.claim), indent=2))
 
 
 if __name__ == "__main__":

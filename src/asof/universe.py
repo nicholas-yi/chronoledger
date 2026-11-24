@@ -31,33 +31,3 @@ def current_tickers(client: EdgarClient) -> pd.DataFrame:
     data = client.get_json("https://www.sec.gov/files/company_tickers_exchange.json", refresh=False)
     df = pd.DataFrame(data["data"], columns=data["fields"])
     return df.rename(columns={"cik": "cik", "ticker": "ticker", "exchange": "exchange"})
-
-
-def coverage_audit(index: pd.DataFrame, tickers: pd.DataFrame) -> pd.DataFrame:
-    """Per filing year: annual-report filers, how many still have a ticker, how many delisted."""
-    annual = index[index["form"].isin(ANNUAL_FORMS)].copy()
-    annual["year"] = pd.to_datetime(annual["date_filed"]).dt.year
-    delist = index[index["form"].isin(DELISTING_FORMS)][["cik", "date_filed"]]
-    first_delist = delist.groupby("cik")["date_filed"].min()
-    has_ticker = set(tickers["cik"].astype(int))
-    last_annual = annual.groupby("cik")["year"].max()
-    final_year = int(annual["year"].max())
-
-    rows = []
-    for year, grp in annual.groupby("year"):
-        ciks = set(grp["cik"])
-        with_ticker = ciks & has_ticker
-        later_delist = {c for c in ciks if c in first_delist.index}
-        stopped = {c for c in ciks if last_annual[c] < final_year - 1}
-        rows.append(
-            {
-                "year": year,
-                "annual_filers": len(ciks),
-                "with_current_ticker": len(with_ticker),
-                "coverage": len(with_ticker) / len(ciks),
-                "filed_form_25_or_15_ever": len(later_delist),
-                "stopped_filing_annual": len(stopped),
-                "missing_and_stopped": len((ciks - has_ticker) & stopped),
-            }
-        )
-    return pd.DataFrame(rows)

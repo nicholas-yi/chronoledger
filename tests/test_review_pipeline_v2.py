@@ -2,7 +2,7 @@ import json
 
 from asof.focused_reader import Answer, Case, abstention
 from asof.reader_ai_review import ReviewTask
-from asof.reader_ai_review_v3 import Probe
+from asof.review_pipeline import Probe
 from asof.review_pipeline_v2 import (
     account_attempts,
     ai_verdict,

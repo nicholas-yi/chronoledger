@@ -489,7 +489,7 @@ uv run --no-sync pytest -q                       # Unit tests need no research d
 
 The [lock](requirements-dev.lock) pins the Python 3.12 dev and figures dependencies with
 [public-PyPI hash verification](results/dependency_lock_verification.json). The optional
-`embed` and `verifier` extras need a separate environment.
+`embed` extra (torch and transformers, for ChronoBERT) needs a separate environment.
 
 Rebuilding the data from SEC EDGAR takes several hours and needs a contact email in
 `ASOF_USER_AGENT`, as the SEC requires; follow the

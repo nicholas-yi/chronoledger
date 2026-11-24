@@ -6,10 +6,24 @@ verifier and the AI arm is the frozen decomposed v2 reviewer. Only the routing b
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+from typing import Literal
+
 from asof.claim_verifier import Claim, resolve_fact, verify_claim
+from asof.reader_ai_review import ReviewTask
 
 PIPELINE_ID = "REVIEW-PIPELINE-01"
 RULE_VERDICT = {"supported": "supported", "contradicted": "unsupported", "review": "uncertain"}
+
+
+@dataclass(frozen=True)
+class Probe:
+    """One review item: a candidate answer, its source, and the author's declared source status."""
+
+    task: ReviewTask
+    source_status: Literal["stated", "not_stated", "conflicting"]
+    source_fact: tuple[str, str] | None
+    category: str
 
 
 def rule_decision(probe) -> dict:

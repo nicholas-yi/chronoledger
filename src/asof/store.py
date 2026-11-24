@@ -224,17 +224,3 @@ def revisions_as_of(
         ORDER BY cik, tag, period_end, knowledge_time
     """
     return con.execute(sql, [as_of, rel_tol]).df()
-
-
-def filings_as_of(
-    con: duckdb.DuckDBPyConnection, as_of: datetime, forms: list[str] | None = None
-) -> pd.DataFrame:
-    where = ["knowledge_time <= ?"]
-    params: list[Any] = [as_of]
-    if forms:
-        where.append(f"form IN ({','.join('?' * len(forms))})")
-        params += forms
-    return con.execute(
-        f"SELECT * FROM filings WHERE {' AND '.join(where)} ORDER BY cik, knowledge_time",
-        params,
-    ).df()

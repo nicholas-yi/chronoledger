@@ -68,6 +68,7 @@ and the unknown-short lower bound is the string `-infinity`.
 | Entrypoint | Status |
 |---|---|
 | `asof demo`, `scripts/check_repository.py`, `scripts/smoke_wheel.py` | Safe, offline; all run in CI |
+| `asof check-claim SOURCE CLAIM` | Safe, offline; decides one claim against one source file with the deterministic rules |
 | `asof ingest` | Network, cache and database operation; needs a valid development `--scope-file` |
 | H0 and H5 study runners | Development evidence operations; every run is logged to the append-only ledger |
 | `scripts/h4_fundamentals.py`, `scripts/h6_quiet.py` | **Held** for the D18 prospective holdout |

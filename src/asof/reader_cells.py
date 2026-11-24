@@ -127,10 +127,6 @@ def select_cell(case: Case, content: str) -> LinkedResult:
     return LinkedResult(result.answer, result.bundle, "selected_bound_source_cell")
 
 
-def selection_valid(case: Case, content: str) -> bool:
-    return select_cell(case, content).answer is not None
-
-
 def diagnostic(case: Case, result: LinkedResult, raw_answer: Answer | None,
                *, response_valid: bool, model_fields: bool, context: dict | None = None) -> dict:
     """Keep record failures separate from individual raw tuple mismatches."""

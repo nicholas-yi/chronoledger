@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from asof.claim_challenge import boundary_controls, fixture
 from asof.claim_verifier import summarize_structured, verify_claim
+from support.claim_challenge import boundary_controls, fixture
 
 
 def controls() -> tuple[dict, ...]:

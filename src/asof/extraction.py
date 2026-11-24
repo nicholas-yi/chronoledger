@@ -17,7 +17,7 @@ import hashlib
 import json
 import re
 import urllib.request
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from pathlib import Path
 
 from asof.config import RAW_DIR
@@ -173,7 +173,3 @@ class Extractor:
             result.accepted += r.accepted
             result.rejected += r.rejected
         return result
-
-
-def link_to_dict(link: Link) -> dict:
-    return asdict(link)

@@ -462,12 +462,6 @@
    "freeze_revision": null
   },
   {
-   "path": "results/hhem_assets.json",
-   "report": "docs/FOCUSED_READER.md",
-   "status": "current",
-   "freeze_revision": null
-  },
-  {
    "path": "results/leakprobe_chronobert.json",
    "report": "docs/FINDINGS.md",
    "status": "current",

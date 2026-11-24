@@ -4,8 +4,9 @@ from decimal import localcontext
 import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
+from support.claim_challenge import boundary_controls, fixture
+from support.structured_cases import fixture as old_fixture
 
-from asof.claim_challenge import boundary_controls, fixture
 from asof.claim_verifier import (
     parse_claim,
     resolve_fact,
@@ -13,7 +14,6 @@ from asof.claim_verifier import (
     validate_fact,
     verify_claim,
 )
-from asof.hhem_verifier import fixture as old_fixture
 
 
 def test_source_verdicts_fix_numeric_binding_without_reading_model_scores_or_gold():
@@ -142,7 +142,7 @@ def test_compact_eps_does_not_mix_share_classes_units_periods_or_unranked_duplic
 
 
 def test_assurance_reports_policy_success_separately_from_financial_coverage():
-    from asof.claim_assurance import evaluate
+    from support.claim_assurance import evaluate
 
     report = evaluate()
     assert report["policy_controls"]["correct"] == report["policy_controls"]["planned"]

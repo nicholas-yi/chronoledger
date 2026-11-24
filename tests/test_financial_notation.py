@@ -53,7 +53,7 @@ def test_alias_conflict_with_standard_reader_is_review_not_first_parser_wins():
 
 
 def test_frozen_notation_challenge_and_metamorphic_grid_stay_exact():
-    from asof.notation_challenge import evaluate
+    from support.notation_challenge import evaluate
 
     report = evaluate()
     for name, planned in (("challenge", 24), ("grid", 780)):

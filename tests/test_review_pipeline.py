@@ -2,8 +2,7 @@ import json
 
 from asof.focused_reader import Answer, Case, abstention
 from asof.reader_ai_review import ReviewTask
-from asof.reader_ai_review_v3 import Probe
-from asof.review_pipeline import evaluate, route, rule_decision
+from asof.review_pipeline import Probe, evaluate, route, rule_decision
 
 TABLE = "Company: FictionTest.\n| Item | 2017 (USD million) | 2018 (EUR thousand) |\n| Revenue | 74 | 39.5 |"
 PROSE = "FictionTest said revenue for 2018 was corrected and now supersedes earlier figures."

@@ -46,9 +46,19 @@ deterministic path when its explicit input contract applies.
 | Private review preparation | [`reader_review.py`](../src/asof/reader_review.py), [`prepare_reader_review.py`](../scripts/prepare_reader_review.py), [`reader_review_context.py`](../src/asof/reader_review_context.py), [`prepare_reader_context_forms.py`](../scripts/prepare_reader_context_forms.py) | Builds the private twelve-window packet and blank reviewer forms, and checks returned forms mechanically. |
 
 The original answer-first model reader is [`focused_reader.py`](../src/asof/focused_reader.py).
-Other reader modules still in `src/asof` (for example stress, reliability, AI reviewers v1/v3,
-pipeline v1, HHEM and the challenge generators) back the recorded experiments below; they are not
-part of the current path.
+Other reader modules still in `src/asof` (stress, reliability, AI reviewers v1/v2 and pipeline v1)
+back the regression replay and the review pipeline. The invented challenge corpora and their
+scoring now live in [`tests/support`](../tests/support); the HHEM wrapper and the non-adopted
+AI-REVIEWER-03 are [archived](ARCHIVE.md).
+
+To decide one claim against one source file with the deterministic rules (no model call):
+
+```powershell
+uv run --no-sync asof check-claim source.txt "Contoso reported revenue of 18 USD million for 2017."
+```
+
+It prints `supported`, `contradicted` or `review` with the bound source span, after the declared
+filing-text normalization.
 
 ### How a claim is decided
 
@@ -107,7 +117,7 @@ part of the current path.
 One row per experiment or round, in run order. Scores are copied from the receipts; the scoring
 contract changed between some rows (single-quote, linked, `field-record-v1`, claim decisions), so
 scores in different rows are not like-for-like. "In main tree" means the code is part of the current
-design; it does not mean production promotion.
+design (its challenge corpus may live in `tests/support`); it does not mean production promotion.
 
 ### Real reports (TAT-QA / FinQA)
 
@@ -304,9 +314,9 @@ SEC credentials, network access, a push or opening a holdout.
   computation over a whole challenge took fractions of a second.
 - **Public benchmark exposure.** The model may have seen TAT-QA during training; declining without
   the report does not rule that out.
-- **Software checks.** The last recorded full suite passed **823 tests** in 150.30s (two existing
-  rank-deficiency warnings). Earlier runs recorded intermittent Windows Job readiness and SEC
-  request-rate timing failures that later passed; no permanent environmental cure is claimed.
+- **Software checks.** The full suite runs in CI on Ubuntu and Windows for every push. Earlier
+  runs recorded intermittent Windows Job readiness and SEC request-rate timing failures that later
+  passed; no permanent environmental cure is claimed.
 
 ## Reproducing
 
@@ -321,7 +331,9 @@ model and their archived runners, for example
 [`run_focused_reader.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/run_focused_reader.py),
 [`run_hhem_benchmark.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/run_hhem_benchmark.py),
 [`validate_claim_assurance.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/scripts/validate_claim_assurance.py)
-and [`integrity_challenge.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/src/asof/integrity_challenge.py).
+and [`integrity_challenge.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/src/asof/integrity_challenge.py),
+or the archived [`hhem_verifier.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/src/asof/hhem_verifier.py)
+and [`reader_ai_review_v3.py`](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/src/asof/reader_ai_review_v3.py).
 Each receipt records the commit it was frozen at; check out that commit to rerun it (see
 [ARCHIVE](ARCHIVE.md)). Each one-shot run keeps an exclusive attempt marker, so rerunning one is a
 new, separately frozen experiment, not a retry.
