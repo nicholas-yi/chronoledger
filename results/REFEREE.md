@@ -128,14 +128,14 @@ data_integrity                     [####.] 4/5
 
 ## Run provenance
 
-Generated UTC: `2026-11-21T14:29:26.405542+00:00`.
+Generated UTC: `2026-11-24T19:31:42.144745+00:00`.
 
 The holdout-seal mutation uses a temporary synthetic ledger, not the project holdout.
 
 ```json
 {
-  "git_commit": "28de5d08a44679b91ae8f3d226c0375b6788d361",
-  "git_dirty": true,
+  "git_commit": "0bf44e43a62aeffc74bef06b8204f49df0a98d42",
+  "git_dirty": false,
   "inputs": {
     "data/pilot.duckdb": "8192692acd2d987ac4611d81cc40e2e4c0a9f9d722ceaf8e1ea796d9e90fc31c",
     "data/bulk_filings.parquet": "dc804237f3c77be81c19cf47cfcb1e60be65e916ca96bdbc874d6340b711f7a4",
@@ -145,8 +145,8 @@ The holdout-seal mutation uses a temporary synthetic ledger, not the project hol
     "results/bench_qwen3.5-4b_n300_s0.json": "f0b1c7371fdaa8552bf4f2b6a633c0c686fdafd62182485512803eca2aecdd3d",
     "results/swap_qwen3.5-4b_n160_s0.json": "df99ef309ed2c70e4c4382ce7095751fbf7af4659ecca8e466bfdb0361d47428",
     "results/leakprobe_chronobert.json": "135bb0713aef6070525bbafb4654135042da1de0854910730c7999c59e6d1d3e",
-    "docs/DATA_AUDIT.md": "f8ee09724ad75f87d70563c707110d6ccab2a37d8790325561463370d96e411a",
-    "docs/DEVIATIONS.md": "e895b67e4caca28bdf53b00e54cf8465b699003498f081d36a8e48844f56b989",
+    "docs/DATA_AUDIT.md": "e2dc704c4369db73f4b4df834b1dcb7c7d56fc66ef5dea4d38d080a5f10106ba",
+    "docs/DEVIATIONS.md": "9d14f8ec912275fccc6fe1037c7dd2acb184f8e5b84047f7ad3dc61ec8aaa330",
     "data/raw/yahoo/AAPL_to20240731_v2.json.gz": "1445c9d8e507440deb1bcf8dbc2bfc00255da74ee183e8b535c4ac5a273623d3"
   },
   "input_status": {
