@@ -21,6 +21,12 @@ SNAPSHOT_FILES = (
     DATA_DIR / "h0_price_snapshot.json",
 )
 REBUILD = "run python scripts/h0_data.py price_snapshot"
+SCHEMA_VERSION = 2
+
+
+def _splits_path() -> Path:
+    """Split events live beside the manifest (located from it, so redirected snapshots move too)."""
+    return SNAPSHOT_FILES[2].with_name("h0_splits.parquet")
 logger = logging.getLogger(__name__)
 
 
@@ -66,15 +72,35 @@ def _read_snapshot(metadata: dict[str, Any], panel_path: Path, daily_path: Path)
     return panel, returns
 
 
-def load_price_snapshot(universe: pd.DataFrame):
-    """Refuse absent, stale, corrupt, or post-cutoff snapshots; never silently rebuild."""
-    price_end_allowed(DEV_RETURN_CUTOFF)
-    panel_path, daily_path, manifest_path = SNAPSHOT_FILES
+def _manifest(universe: pd.DataFrame) -> dict[str, Any]:
+    manifest_path = SNAPSHOT_FILES[2]
     if not manifest_path.exists():
         raise FileNotFoundError(f"No processed price snapshot; {REBUILD}")
     metadata = json.loads(manifest_path.read_text())
-    if metadata.get("schema_version") != 1 or metadata["inputs"] != _snapshot_key(universe):
+    if metadata.get("schema_version") != SCHEMA_VERSION or metadata["inputs"] != _snapshot_key(universe):
         raise ValueError(f"Stale price snapshot (data, universe, code, or runtime changed); {REBUILD}")
+    return metadata
+
+
+def load_split_events(universe: pd.DataFrame) -> pd.DataFrame:
+    """Verified (cik, ticker, ex_date, ratio) split events with ex-dates up to the cutoff."""
+    price_end_allowed(DEV_RETURN_CUTOFF)
+    metadata = _manifest(universe)
+    path = _splits_path()
+    if not path.exists() or ledger.file_sha256(path) != metadata["outputs"][path.name]:
+        raise ValueError(f"Split events missing or corrupt: {path.name}; {REBUILD}")
+    splits = pd.read_parquet(path)
+    splits["ex_date"] = pd.to_datetime(splits["ex_date"]).dt.date
+    if not splits.empty:
+        price_end_allowed(max(splits["ex_date"]))
+    return splits
+
+
+def load_price_snapshot(universe: pd.DataFrame):
+    """Refuse absent, stale, corrupt, or post-cutoff snapshots; never silently rebuild."""
+    price_end_allowed(DEV_RETURN_CUTOFF)
+    panel_path, daily_path, _ = SNAPSHOT_FILES
+    metadata = _manifest(universe)
     for path in (panel_path, daily_path):
         if not path.exists() or ledger.file_sha256(path) != metadata["outputs"][path.name]:
             raise ValueError(f"Price snapshot missing or corrupt: {path.name}; {REBUILD}")
@@ -90,7 +116,7 @@ def build_price_snapshot(universe: pd.DataFrame) -> None:
     price_end_allowed(DEV_RETURN_CUTOFF)
     key = _snapshot_key(universe)
     vendor = prices.YahooPrices()
-    frames, returns = [], {}
+    frames, returns, split_rows = [], {}, []
     for ticker in universe["ticker"]:
         try:
             daily = vendor.daily(ticker, end=DEV_RETURN_CUTOFF)
@@ -101,6 +127,8 @@ def build_price_snapshot(universe: pd.DataFrame) -> None:
             continue
         price_end_allowed(max(daily["date"]))
         returns[ticker] = prices.daily_returns(daily.set_index("date")).dropna()
+        split_rows += [(ticker, day, ratio) for day, ratio in prices.splits_from_payload(
+            vendor.raw(ticker, end=DEV_RETURN_CUTOFF) or {}) if day <= DEV_RETURN_CUTOFF]
         frames.append(daily[daily["date"] >= pd.Timestamp("2022-11-01").date()])
     if not frames:
         raise ValueError("No guarded price observations are available for this universe")
@@ -116,17 +144,22 @@ def build_price_snapshot(universe: pd.DataFrame) -> None:
     })
     if _snapshot_key(universe) != key:
         raise RuntimeError(f"Price inputs changed during snapshot generation; {REBUILD}")
+    splits = pd.DataFrame(split_rows, columns=["ticker", "ex_date", "ratio"]).merge(
+        universe[["cik", "ticker"]], on="ticker")[["cik", "ticker", "ex_date", "ratio"]]
     panel_path, daily_path, manifest_path = SNAPSHOT_FILES
-    temporary = [p.with_suffix(".tmp") for p in SNAPSHOT_FILES]
+    splits_path = _splits_path()
+    temporary = [p.with_suffix(".tmp") for p in (*SNAPSHOT_FILES, splits_path)]
     for path in SNAPSHOT_FILES:
         path.parent.mkdir(parents=True, exist_ok=True)
     panel.to_parquet(temporary[0], index=False)
     daily.to_parquet(temporary[1], index=False)
+    splits.to_parquet(temporary[3], index=False)
     metadata = {
-        "schema_version": 1, "inputs": key,
+        "schema_version": SCHEMA_VERSION, "inputs": key,
         "outputs": {
             panel_path.name: ledger.file_sha256(temporary[0]),
             daily_path.name: ledger.file_sha256(temporary[1]),
+            splits_path.name: ledger.file_sha256(temporary[3]),
         },
         "series": {t: {"rows": len(r), "excluded_price_returns": r.attrs["excluded_price_returns"]}
                    for t, r in returns.items()},
@@ -144,6 +177,7 @@ def build_price_snapshot(universe: pd.DataFrame) -> None:
     temporary[2].write_text(serialized)
     temporary[0].replace(panel_path)
     temporary[1].replace(daily_path)
+    temporary[3].replace(splits_path)
     temporary[2].replace(manifest_path)
     print(f"price snapshot: verified {len(panel)} monthly rows and {len(returns)} daily series",
           file=sys.stderr, flush=True)

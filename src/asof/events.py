@@ -1,7 +1,7 @@
 """Event studies, signal neutralization, and rank information coefficients.
 
-Abnormal returns use FF5+UMD betas estimated over trading days -260..-21 relative to the event's
-first tradable close; CARs start the day after that close. All windows must end on or before the
+Abnormal returns use FF5+UMD betas estimated over trading sessions -260..-21 relative to the
+event's first tradable close; CARs cover sessions +1..+h. Windows are fixed on the session calendar. All windows must end on or before the
 caller's data cutoff, which the caller enforces with the holdout guard.
 """
 
@@ -18,6 +18,17 @@ from scipy import stats
 FACTORS = ["Mkt_RF", "SMB", "HML", "RMW", "CMA", "UMD"]
 
 
+def _session_window(days: list[date], event_day: date, horizon: int,
+                    est: tuple[int, int]) -> tuple[int, int, int] | None:
+    """Session positions (event, estimation start, estimation end) on the factor calendar."""
+    import bisect
+
+    i = bisect.bisect_left(days, event_day)  # the event's session, or the next one
+    if i >= len(days) or i + est[0] < 0 or i + horizon >= len(days):
+        return None
+    return i, i + est[0], i + est[1]
+
+
 def car(
     returns: pd.Series,
     factors: pd.DataFrame,
@@ -26,46 +37,40 @@ def car(
     est: tuple[int, int] = (-260, -21),
     min_est: int = 120,
 ) -> float:
-    """Cumulative abnormal return over trading days +1..+horizon after ``event_day``.
+    """Cumulative abnormal return over trading sessions +1..+horizon after ``event_day``.
 
-    ``returns`` is a daily simple-return series indexed by date (one firm); ``factors`` holds daily
-    factors and RF. Returns NaN if the estimation or event window is incomplete.
+    Windows are fixed on the factor (trading-session) calendar, never on the firm's own
+    observations: estimation uses the firm's available returns in sessions ``est`` (at least
+    ``min_est``), and the CAR is NaN if any return in the event window is missing, rather than
+    extending the window past the requested sessions.
     """
-    data = pd.concat([returns.rename("r"), factors], axis=1, join="inner").dropna()
-    days = list(data.index)
-    if event_day not in data.index:
-        later = [d for d in days if d >= event_day]
-        if not later:
-            return float("nan")
-        event_day = later[0]
-    i = days.index(event_day)
-    lo, hi = i + est[0], i + est[1]
-    if lo < 0 or i + horizon >= len(days):
+    factors = factors.dropna()
+    window = _session_window(list(factors.index), event_day, horizon, est)
+    if window is None:
         return float("nan")
-    window = data.iloc[lo:hi + 1]
-    if len(window) < min_est:
+    i, lo, hi = window
+    r = returns.reindex(factors.index)
+    estimation = factors.iloc[lo:hi + 1].assign(r=r.iloc[lo:hi + 1]).dropna()
+    post = factors.iloc[i + 1:i + 1 + horizon].assign(r=r.iloc[i + 1:i + 1 + horizon])
+    if len(estimation) < min_est or post["r"].isna().any():
         return float("nan")
-    x = sm.add_constant(window[FACTORS])
-    beta = sm.OLS(window["r"] - window["RF"], x).fit().params
-    post = data.iloc[i + 1:i + 1 + horizon]
+    x = sm.add_constant(estimation[FACTORS])
+    beta = sm.OLS(estimation["r"] - estimation["RF"], x).fit().params
     expected = post["RF"] + (sm.add_constant(post[FACTORS], has_constant="add") @ beta)
     return float((post["r"] - expected).sum())
 
 
 class CarEngine:
-    """Fast CARs: each firm's returns are aligned to the factor calendar once, then every event is
-    a slice plus a small least-squares fit, using ``car``'s joint nonmissing-row rule.
-
-    Window offsets still count complete observations, not scheduled exchange sessions.
+    """Fast CARs with ``car``'s fixed session windows: each firm's returns are aligned to the
+    factor calendar once, then every event is a slice plus a small least-squares fit.
     """
 
     def __init__(self, factors: pd.DataFrame) -> None:
+        factors = factors.dropna()
         self.factors = factors
         self.days = list(factors.index)
-        self.pos = {d: i for i, d in enumerate(self.days)}
         self.F = factors[FACTORS].to_numpy()
         self.rf = factors["RF"].to_numpy()
-        self._complete_factors = factors.notna().all(axis=1).to_numpy()
         self._cache: dict[str, np.ndarray] = {}
 
     def _aligned(self, key: str, returns: pd.Series) -> np.ndarray:
@@ -75,23 +80,17 @@ class CarEngine:
 
     def car(self, key: str, returns: pd.Series, event_day: date, horizon: int = 60,
             est: tuple[int, int] = (-260, -21), min_est: int = 120) -> float:
-        import bisect
-
+        window = _session_window(self.days, event_day, horizon, est)
+        if window is None:
+            return float("nan")
+        i, lo, hi = window
         r = self._aligned(key, returns)
-        idx = np.flatnonzero(~np.isnan(r) & self._complete_factors)
-        dpos = bisect.bisect_left(self.days, event_day)  # first calendar day >= event_day
-        j = int(np.searchsorted(idx, dpos))  # first valid firm day on/after the event
-        if j >= idx.size:
-            return float("nan")
-        lo, hi = j + est[0], j + est[1]
-        if lo < 0 or j + horizon >= idx.size:
-            return float("nan")
-        e = idx[lo:hi + 1]
-        if e.size < min_est:
+        e = lo + np.flatnonzero(~np.isnan(r[lo:hi + 1]))
+        p = np.arange(i + 1, i + 1 + horizon)
+        if e.size < min_est or np.isnan(r[p]).any():
             return float("nan")
         X = np.column_stack([np.ones(e.size), self.F[e]])
         beta, *_ = np.linalg.lstsq(X, r[e] - self.rf[e], rcond=None)
-        p = idx[j + 1:j + 1 + horizon]
         expected = self.rf[p] + np.column_stack([np.ones(p.size), self.F[p]]) @ beta
         return float((r[p] - expected).sum())
 

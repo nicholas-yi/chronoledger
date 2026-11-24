@@ -13,6 +13,27 @@ from zoneinfo import ZoneInfo
 
 ET = ZoneInfo("America/New_York")
 MARKET_CLOSE_ET = time(16, 0)
+EARLY_CLOSE_ET = time(13, 0)
+# NYSE 1:00 p.m. closes follow fixed rules in this span (pandas_market_calendars NYSE rules,
+# cross-checked against nyse.com for 2026-2028). Outside it, closes must not be guessed.
+CALENDAR_YEARS = range(2011, 2029)
+
+
+def nyse_early_close(day: date) -> bool:
+    """Whether NYSE closes at 1:00 p.m. ET on ``day`` (2011-2028).
+
+    July 3 on a Monday-Thursday, the day after Thanksgiving, and Christmas Eve on a
+    Monday-Thursday. A Friday July 3 or December 24 is a full holiday, not an early close.
+    """
+    if day.year not in CALENDAR_YEARS:
+        raise ValueError(f"NYSE early-close calendar covers {CALENDAR_YEARS.start}-"
+                         f"{CALENDAR_YEARS.stop - 1}; extend it from nyse.com before using {day}")
+    if (day.month, day.day) in ((7, 3), (12, 24)):
+        return day.weekday() <= 3
+    if day.month == 11 and day.weekday() == 4:
+        thanksgiving = 22 + (3 - date(day.year, 11, 1).weekday()) % 7
+        return day.day == thanksgiving + 1
+    return False
 
 
 def aware_utc(value: datetime, name: str = "time") -> datetime:
@@ -56,7 +77,9 @@ def parse_header_acceptance_et(value: str) -> datetime:
 
 
 def close_time_utc(day: date) -> datetime:
-    return datetime.combine(day, MARKET_CLOSE_ET, tzinfo=ET).astimezone(UTC)
+    """The NYSE closing instant on a trading ``day``, including 1:00 p.m. early closes."""
+    close = EARLY_CLOSE_ET if nyse_early_close(day) else MARKET_CLOSE_ET
+    return datetime.combine(day, close, tzinfo=ET).astimezone(UTC)
 
 
 def first_tradable_close(knowledge_time: datetime, trading_days: list[date]) -> date | None:

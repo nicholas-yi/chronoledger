@@ -11,13 +11,13 @@ import pandas as pd
 from asof.backtest import Config, clean_shares, values_as_of
 from asof.config import DATA_DIR
 from asof.events import neutralize
-from asof.marketdata import SNAPSHOT_FILES, load_price_snapshot
+from asof.marketdata import SNAPSHOT_FILES, load_price_snapshot, load_split_events
 from asof.periods import DEV_END, DEV_START
 from asof.timeutil import close_time_utc
 
 INPUTS = [DATA_DIR / n for n in ("h0_universe.parquet", "h0_signals.parquet", "h0_shares.parquet",
                                  "bulk_entities.parquet", "bulk_filings.parquet",
-                                 "h0_market_inputs.json")] + list(SNAPSHOT_FILES)
+                                 "h0_market_inputs.json", "h0_splits.parquet")] + list(SNAPSHOT_FILES)
 
 
 def load_inputs(signals: Path = DATA_DIR / "h0_signals.parquet"):
@@ -30,12 +30,13 @@ def load_inputs(signals: Path = DATA_DIR / "h0_signals.parquet"):
     sig["change"] = 1.0 - sig["cos_full"]
     shares = pd.read_parquet(DATA_DIR / "h0_shares.parquet")
     shares["knowledge_time"] = pd.to_datetime(shares["knowledge_time"], utc=True)
-    shares = clean_shares(shares)  # point-in-time removal of XBRL share-count typos (F3)
+    splits = load_split_events(uni)
+    shares = clean_shares(shares, splits=splits)  # point-in-time removal of share-count typos (F3)
     ent = pd.read_parquet(DATA_DIR / "bulk_entities.parquet")[["cik", "sic"]]
     fil = pd.read_parquet(DATA_DIR / "bulk_filings.parquet")
     ma = fil[(fil["form"] == "8-K") & fil["items"].fillna("").str.contains(r"\b2\.01\b")][["cik", "knowledge_time"]]
     panel, daily_ret = load_price_snapshot(uni)
-    return uni, sig, shares, ent, ma, panel, daily_ret
+    return uni, sig, shares, ent, ma, panel, daily_ret, splits
 
 
 def neutralize_formations(

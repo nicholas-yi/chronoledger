@@ -1,8 +1,9 @@
-from datetime import UTC, date, datetime, timedelta
+from datetime import UTC, date, datetime, time, timedelta
 
 import pytest
 
 from asof.timeutil import (
+    ET,
     close_time_utc,
     first_tradable_close,
     parse_acceptance_utc,
@@ -64,6 +65,29 @@ def test_naive_knowledge_time_rejected() -> None:
 def test_no_future_trading_day_returns_none() -> None:
     accepted = datetime(2026, 1, 5, 23, tzinfo=UTC)
     assert first_tradable_close(accepted, [date(2026, 1, 5)]) is None
+
+
+def test_filing_after_an_early_close_waits_for_the_next_session() -> None:
+    accepted = parse_header_acceptance_et("20231124140000")  # 2 p.m. on a 1 p.m. close day
+    assert first_tradable_close(accepted, [date(2023, 11, 24), date(2023, 11, 27)]) == date(2023, 11, 27)
+    before = parse_header_acceptance_et("20231124124500")
+    assert first_tradable_close(before, [date(2023, 11, 24), date(2023, 11, 27)]) == date(2023, 11, 24)
+
+
+@pytest.mark.parametrize(("day", "early"), [
+    # Published by NYSE for 2026-2028.
+    (date(2026, 11, 27), True), (date(2026, 12, 24), True), (date(2027, 11, 26), True),
+    (date(2028, 7, 3), True), (date(2028, 11, 24), True),
+    # Friday holidays and ordinary days are not early closes.
+    (date(2026, 7, 2), False), (date(2027, 12, 23), False), (date(2026, 11, 25), False),
+])
+def test_early_closes_match_published_nyse_schedule(day, early) -> None:
+    assert close_time_utc(day).astimezone(ET).time() == (time(13) if early else time(16))
+
+
+def test_dates_outside_the_verified_calendar_are_refused() -> None:
+    with pytest.raises(ValueError, match=r"extend it from nyse\.com"):
+        close_time_utc(date(2029, 1, 2))
 
 
 def test_binary_lookup_matches_linear_reference_across_dst_and_gaps() -> None:

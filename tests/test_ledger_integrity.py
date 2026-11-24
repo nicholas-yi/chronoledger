@@ -97,3 +97,24 @@ def test_truncated_tail_is_not_silently_repaired(tmp_path) -> None:
     path.write_bytes(path.read_bytes()[:-1])
     with pytest.raises(ledger.LedgerIntegrityError, match="incomplete"):
         ledger.verify_chain(path)
+
+
+def test_committed_ledger_history_is_append_only() -> None:
+    assert ledger.verify_committed_history() >= 2
+
+
+def test_deleting_a_committed_tail_row_is_detected(tmp_path) -> None:
+    import subprocess
+
+    def git(*args):
+        subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@example.test", *args],
+                       cwd=tmp_path, check=True, capture_output=True)
+
+    path = tmp_path / "ledger.jsonl"
+    git("init", "-q")
+    path.write_text('{"row": 1}\n{"row": 2}\n')
+    git("add", "ledger.jsonl")
+    git("commit", "-q", "-m", "two rows")
+    path.write_text('{"row": 1}\n')  # the hash chain alone accepts a valid shorter prefix
+    with pytest.raises(ledger.LedgerIntegrityError, match="working tree"):
+        ledger.verify_committed_history(path, root=tmp_path)

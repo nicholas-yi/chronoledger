@@ -112,7 +112,7 @@ def main(output: Path | None = None, signals: Path | None = None) -> None:
     started = perf_counter()
     signals = signals or DATA_DIR / "h0_signals.parquet"
     inputs = [signals if p.name == "h0_signals.parquet" else p for p in INPUTS]
-    uni, sig, shares, ent, ma, panel, daily_ret = load_inputs(signals)
+    uni, sig, shares, ent, ma, panel, daily_ret, splits = load_inputs(signals)
     factors = ff5_umd_monthly().loc[: pd.Period(DEV_RETURN_CUTOFF, "M")]
     factors_d = ff5_umd_daily()
     factors_d = factors_d[factors_d.index <= DEV_RETURN_CUTOFF]
@@ -121,8 +121,8 @@ def main(output: Path | None = None, signals: Path | None = None) -> None:
     fingerprint_market_inputs()
     tenk = sig[sig["form"] == "10-K"]
     snapshots = {
-        "10-K": formation_snapshots(tenk, shares, panel),
-        "latest": formation_snapshots(sig, shares, panel),
+        "10-K": formation_snapshots(tenk, shares, panel, splits=splits),
+        "latest": formation_snapshots(sig, shares, panel, splits=splits),
     }
     snapshots = {
         key: neutralize_formations(value, ent, ma, bp, Config())

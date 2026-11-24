@@ -270,5 +270,29 @@ def verify_chain(
     return checked
 
 
+def verify_committed_history(path: Path = LEDGER_PATH, *, root: Path = PROJECT_ROOT) -> int:
+    """Check that no committed row was ever removed or rewritten; return versions checked.
+
+    The hash chain cannot detect a deleted tail, so every committed version of the ledger must
+    be a byte-prefix of the next, and the working file must extend the last commit.
+    """
+    import subprocess
+    from itertools import pairwise
+
+    rel = path.resolve().relative_to(root.resolve()).as_posix()
+
+    def git(*args: str) -> bytes:
+        return subprocess.run(["git", *args], cwd=root, capture_output=True, check=True).stdout
+
+    shas = git("log", "--format=%H", "--reverse", "--", rel).decode().split()
+    versions = [(sha[:7], git("show", f"{sha}:{rel}").replace(b"\r\n", b"\n")) for sha in shas]
+    if path.exists():
+        versions.append(("working tree", path.read_bytes().replace(b"\r\n", b"\n")))
+    for (_, before), (label, after) in pairwise(versions):
+        if not after.startswith(before):
+            raise LedgerIntegrityError(f"ledger rows were removed or rewritten at {label}")
+    return len(versions)
+
+
 def n_trials(hypothesis: str, path: Path = LEDGER_PATH) -> int:
     return len({e["config_hash"] for e in read_ledger(path) if e["hypothesis"] == hypothesis})

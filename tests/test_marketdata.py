@@ -27,6 +27,12 @@ def snapshot_case(tmp_path, monkeypatch):
                 "high": [x + 0.1 for x in close], "low": [x - 0.1 for x in close],
             })
 
+        def raw(self, ticker, *, end):
+            # One split inside the window and one after the cutoff, which must be dropped.
+            return {"meta": {"exchangeTimezoneName": "UTC"}, "events": {"splits": {
+                "a": {"date": 1675209600, "numerator": 2, "denominator": 1},
+                "b": {"date": 1767225600, "numerator": 3, "denominator": 1}}}}
+
     monkeypatch.setattr(marketdata.prices, "YahooPrices", Vendor)
     universe = pd.DataFrame({"cik": [1, 2], "ticker": ["SYN", "EMPTY"]})
     return universe, paths, state, calls
@@ -46,6 +52,9 @@ def test_price_snapshot_roundtrips_and_loads_without_recomputing(snapshot_case) 
     assert returns["SYN"].index.tolist() == [
         date(2023, 1, 31), date(2023, 2, 1), date(2023, 2, 2), date(2023, 2, 3)]
     assert returns["SYN"].tolist() == pytest.approx([21 / 20 - 1, 22 / 21 - 1, 23 / 22 - 1, 24 / 23 - 1])
+    splits = marketdata.load_split_events(universe)
+    assert splits[splits["ticker"] == "SYN"][["cik", "ex_date", "ratio"]].values.tolist() == [
+        [1, date(2023, 2, 1), 2.0]]
 
 
 def test_price_snapshot_refuses_changed_sources_and_corrupt_outputs(snapshot_case) -> None:

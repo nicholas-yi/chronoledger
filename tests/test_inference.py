@@ -60,6 +60,12 @@ def test_pbo_high_for_noise_low_for_real_edge() -> None:
     assert pbo_cscv(edge, n_blocks=8) < 0.1
 
 
+def test_pbo_refuses_a_missing_configuration_instead_of_scoring_it_zero() -> None:
+    perf = np.array([[-0.01, np.nan], [-0.02, np.nan], [-0.01, np.nan], [-0.02, np.nan]])
+    with pytest.raises(ValueError, match="finite"):
+        pbo_cscv(perf, n_blocks=2)
+
+
 def test_ledger_counts_trials_and_seals_holdout(tmp_path) -> None:
     path = tmp_path / "ledger.jsonl"
     ledger.log_trial("H1", {"q": 5}, "development", {"t": 1.0}, path)

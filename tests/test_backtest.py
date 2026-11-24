@@ -181,7 +181,7 @@ def test_turnover_alignment_matches_concat_reference_with_exits_and_missing_spre
         drift = old["w"] * (1 + old["ret_next"])
         drift /= drift.sum()
         both = pd.concat([cur["w"].rename("new"), drift.rename("old")], axis=1).fillna(0)
-        spread = pd.concat([cur["spread"], old["spread"]]).groupby(level=0).last()
+        spread = pd.concat([old["spread"], cur["spread"]]).groupby(level=0).last()
         expected = ((both["new"] - both["old"]).abs() * spread.reindex(both.index).fillna(0) / 2).sum()
         assert got[f"{leg}_cost"] == pytest.approx(expected, abs=1e-14)
 
@@ -273,3 +273,66 @@ def test_monthly_panel_batches_many_small_windows() -> None:
     panel = monthly_panel(daily)
     assert perf_counter() - start < 2.0
     assert len(panel) == 5000
+
+def _formation_inputs(n=50, last_day=date(2023, 3, 31)):
+    t = pd.Timestamp("2023-03-01", tz="UTC")
+    panel = _panel(n).assign(month=pd.Period("2023-03", "M"))
+    sig = pd.DataFrame({"cik": range(n), "cos_full": np.linspace(0, 1, n), "knowledge_time": t})
+    shares = pd.DataFrame({"cik": range(n), "val": 1e8, "end": "2023-02-15", "knowledge_time": t})
+    return panel, sig, shares
+
+
+def _both_paths(sig, shares, panel, **kwargs):
+    month = pd.Period("2023-03", "M")
+    direct = form_portfolios(month, sig, shares, panel, 700.0, Config(), **kwargs)
+    snaps = formation_snapshots(sig, shares, panel, **kwargs)
+    fast = form_portfolios(month, sig, shares, panel, 700.0, Config(), snapshot=snaps[month])
+    return direct, fast
+
+
+def test_stale_quotes_are_not_tradable_at_formation() -> None:
+    panel, sig, shares = _formation_inputs()
+    panel.loc[0, "last_day"] = date(2023, 3, 10)  # last traded three weeks before formation
+    for port in _both_paths(sig, shares, panel):
+        assert 0 not in set(port["cik"])
+
+
+def test_shares_reported_exactly_at_the_close_do_not_size_that_close() -> None:
+    panel, sig, shares = _formation_inputs()
+    close = pd.Timestamp("2023-03-31 20:00:00", tz="UTC")
+    shares = pd.concat([shares, pd.DataFrame({"cik": [7], "val": [2e8], "end": "2023-03-31",
+                                              "knowledge_time": [close]})], ignore_index=True)
+    for port in _both_paths(sig, shares, panel):
+        assert port.set_index("cik").loc[7, "shares"] == 1e8
+
+
+def test_split_after_the_share_report_rolls_shares_onto_the_traded_basis() -> None:
+    panel, sig, shares = _formation_inputs()
+    splits = pd.DataFrame({"cik": [3, 3], "ex_date": [date(2023, 3, 20), date(2023, 4, 20)],
+                           "ratio": [1 / 2, 3.0]})  # 1-for-2 before formation; later split ignored
+    for port in _both_paths(sig, shares, panel, splits=splits):
+        got = port.set_index("cik")
+        assert got.loc[3, "shares"] == pytest.approx(5e7)
+        assert got.loc[4, "shares"] == 1e8
+
+
+def test_known_split_is_not_treated_as_a_share_typo() -> None:
+    from asof.backtest import clean_shares
+
+    t = pd.to_datetime(["2023-01-10", "2023-05-10"], utc=True)
+    shares = pd.DataFrame({"cik": 1, "val": [90e6, 4.5e6], "end": ["2022-12-31", "2023-04-30"],
+                           "knowledge_time": t})
+    splits = pd.DataFrame({"cik": [1], "ex_date": [date(2023, 3, 1)], "ratio": [1 / 20]})
+    assert clean_shares(shares)["val"].tolist() == [90e6]  # unconfirmed without split data
+    assert clean_shares(shares, splits=splits)["val"].tolist() == [90e6, 4.5e6]
+
+
+def test_split_does_not_register_as_spread() -> None:
+    adjusted = pd.DataFrame({"close": [10.1] * 4, "high": [11.0] * 4, "low": [100 / 11] * 4})
+    scale = np.array([4, 4, 1, 1], dtype=float)  # 4-for-1 split between the second and third day
+    traded = pd.DataFrame({"close": adjusted["close"] * scale, "high": adjusted["high"] * scale,
+                           "low": adjusted["low"] * scale, "close_split_adj": adjusted["close"]})
+    assert abdi_ranaldo_spread(traded) == pytest.approx(abdi_ranaldo_spread(adjusted))
+    daily = traded.assign(ticker="X", date=list(pd.bdate_range("2023-03-01", periods=4).date),
+                          adjclose=adjusted["close"])
+    assert monthly_panel(daily)["spread"].iloc[0] == pytest.approx(abdi_ranaldo_spread(adjusted))

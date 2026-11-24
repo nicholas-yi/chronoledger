@@ -45,6 +45,20 @@ def test_price_requests_past_dev_cutoff_are_refused(tmp_path) -> None:
     assert date(2024, 7, 31) == DEV_RETURN_CUTOFF
 
 
+def test_cached_payload_not_stripped_at_the_cutoff_is_refused(tmp_path) -> None:
+    import gzip
+    import json
+
+    from asof.periods import DEV_RETURN_CUTOFF
+    from asof.prices import YahooPrices
+
+    y = YahooPrices(cache_dir=tmp_path)
+    future = {"meta": {"exchangeTimezoneName": "UTC"}, "timestamp": [1735689600]}  # 2025-01-01
+    y.cache_path("X", end=DEV_RETURN_CUTOFF).write_bytes(gzip.compress(json.dumps(future).encode()))
+    with pytest.raises(ValueError, match="not stripped"):
+        y.daily("X", end=DEV_RETURN_CUTOFF)
+
+
 def test_guarded_payload_does_not_cache_current_price_metadata() -> None:
     from asof.prices import _strip_after
 

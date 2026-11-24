@@ -536,6 +536,13 @@ def _grounding_canary() -> tuple[bool, str]:
     return ok, "fabricated partner and invented quote are both rejected"
 
 
+def _ledger_history() -> tuple[bool, str]:
+    from asof import ledger
+
+    versions = ledger.verify_committed_history()
+    return True, f"{versions} ledger versions, each a byte-prefix of the next"
+
+
 def _ledger_seal() -> tuple[bool, str]:
     import tempfile
 
@@ -676,6 +683,7 @@ def default_threats(db: Path | None = None, bench: Path | None = None,
         Threat("multiple_testing", "Is the reported edge just the best of many tries?", [
             Check("DSR rejects best-of-noise", _dsr_noise),
             Check("holdout is single-use", _ledger_seal, mutation=True),
+            Check("no committed trial row was ever removed or rewritten", _ledger_history),
             Check("no returns computed before deviation D1", _no_returns_before_deviation),
         ]),
         Threat("survivorship", "Are failed or acquired firms silently missing?", [

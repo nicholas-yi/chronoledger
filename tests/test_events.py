@@ -32,6 +32,20 @@ def test_car_nan_when_window_incomplete() -> None:
     assert np.isnan(car(r, f, f.index[-5], horizon=20))   # event window runs past data
 
 
+def test_missing_return_in_the_event_window_is_not_replaced_by_a_later_session() -> None:
+    from asof.events import CarEngine
+
+    f = _factors()
+    r = (f["RF"] + f["Mkt_RF"]).copy()
+    event = f.index[400]
+    r.iloc[401] = np.nan          # session +1 unobserved
+    r.iloc[403] += 0.10           # a jump on session +3, outside a two-session window
+    assert np.isnan(car(r, f, event, horizon=2))
+    assert np.isnan(CarEngine(f).car("X", r, event, horizon=2))
+    r.iloc[401] = f["RF"].iloc[401] + f["Mkt_RF"].iloc[401]
+    assert abs(car(r, f, event, horizon=2)) < 0.01
+
+
 def test_event_panel_detects_planted_effect() -> None:
     rng = np.random.default_rng(2)
     n = 2000

@@ -85,6 +85,8 @@ def pbo_cscv(perf: np.ndarray, n_blocks: int = 16) -> float:
     t, n = perf.shape
     if n < 2 or n_blocks % 2 or t < n_blocks:
         raise ValueError("need >=2 configurations, even n_blocks, and T >= n_blocks")
+    if not np.isfinite(perf).all():
+        raise ValueError("performance matrix must be finite; a missing configuration is not a zero")
     blocks = np.array_split(np.arange(t), n_blocks)
     below = 0
     total = 0

@@ -39,14 +39,14 @@ class YahooPrices:
         self._last = 0.0
         self._http = httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=60.0)
 
-    def cache_path(self, ticker: str, *, end: date | None = None) -> Path:
-        symbol = _yahoo_symbol(ticker)
-        name = f"{symbol}_to{end:%Y%m%d}_v2.json.gz" if end is not None else f"{symbol}.json.gz"
-        return self.cache_dir / name
+    def cache_path(self, ticker: str, *, end: date) -> Path:
+        return self.cache_dir / f"{_yahoo_symbol(ticker)}_to{end:%Y%m%d}_v2.json.gz"
 
-    def raw(self, ticker: str, *, end: date | None = None, holdout_opened: bool = False,
+    def raw(self, ticker: str, *, end: date, holdout_opened: bool = False,
             refresh: bool = False) -> dict | None:
-        """Fetch daily history; with ``end``, price rows after ``end`` are stripped before caching.
+        """Fetch daily history; price rows after ``end`` are stripped before caching.
+
+        ``end`` is required and checked against the holdout seal; there is no unguarded default.
 
         Yahoo adjusts *all* prices for every split up to today. To reverse that adjustment
         (as-traded reconstruction) we need split *events* after ``end`` as well. So the request
@@ -56,12 +56,13 @@ class YahooPrices:
         from asof.periods import price_end_allowed
 
         symbol = _yahoo_symbol(ticker)
-        if end is not None:
-            price_end_allowed(end, holdout_opened)
+        price_end_allowed(end, holdout_opened)
         path = self.cache_path(ticker, end=end)
         period2 = int(datetime.now(UTC).timestamp())
         if path.exists() and not refresh:
             payload = json.loads(gzip.decompress(path.read_bytes()))
+            if payload and payload.get("stripped_after") != end.isoformat():
+                raise ValueError(f"{path.name}: cached prices are not stripped at {end}")
             return payload or None
         wait = self.min_interval - (time.monotonic() - self._last)
         if wait > 0:
@@ -81,12 +82,12 @@ class YahooPrices:
             payload = result[0] if result else {}
         elif resp.status_code not in (400, 404):  # 400/404: no data for this symbol and range
             resp.raise_for_status()
-        if end is not None and payload:
+        if payload:
             payload = _strip_after(payload, end)
         path.write_bytes(gzip.compress(json.dumps(payload).encode()))
         return payload or None
 
-    def daily(self, ticker: str, *, end: date | None = None, holdout_opened: bool = False) -> pd.DataFrame:
+    def daily(self, ticker: str, *, end: date, holdout_opened: bool = False) -> pd.DataFrame:
         payload = self.raw(ticker, end=end, holdout_opened=holdout_opened)
         if not payload or "timestamp" not in payload:
             return pd.DataFrame()
@@ -111,8 +112,7 @@ class YahooPrices:
         for col in ("open", "high", "low"):
             df[col] = df[col] * factor
         df["ticker"] = ticker.upper()
-        if end is not None:
-            df = df[df["date"] <= end]
+        df = df[df["date"] <= end]
         return df.drop_duplicates("date", keep="last").reset_index(drop=True)
 
 

@@ -468,3 +468,39 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   |t| >= 3.0), plus D12's robust checks. Development results stay as recorded.
 - **Data:** new filings come from EDGAR as published, and their times can be
   verified against headers as in A3-A5. No historical data is reopened.
+
+## D19: correct five engine defects found by the 2026-11-24 audit
+
+- **Logged:** 2026-11-24, owner-approved, **after** every H0 development result through
+  D16 was seen and **before** any rerun on the corrected engine. These are corrections of
+  implementation defects against the registered design, not new design choices, but they
+  change how the registered H0 test is computed. Tagged `deviation-d19`.
+- **Corrections** (each has a regression test that fails on the previous engine):
+  1. **Rebalancing cost** charged last month's spread estimate on trades made at this
+     month's formation. It now uses the formation month's spread, falling back to the
+     previous estimate only for exits. The registered rule (2 × half-spread × turnover) is
+     unchanged.
+  2. **Stale formation quotes.** A stock whose last trade was before the formation session
+     could be bought at that old price with a later signal. Only stocks quoted on the
+     formation session are now eligible.
+  3. **Split basis of share counts.** Shares reported before a split were multiplied by the
+     post-split as-traded price. Counts are now rolled by split ex-dates between their
+     measurement date and the formation session (ex-dates up to the 2024-07-31 cutoff only,
+     stored as a verified file in the price snapshot). The F3 share cleaner compares values on
+     the same split basis, so a known split is no longer held as an unconfirmed jump.
+  4. **Split discontinuities in spreads.** The Abdi-Ranaldo estimate read a split as a price
+     move. It is now computed on one consistent split-adjusted basis.
+  5. **Event windows.** CARs counted the firm's own observations, so a missing return pulled a
+     later session into the window. Estimation (-260..-21) and event (+1..+60) windows are now
+     fixed on the trading-session calendar, and an event with a missing return in its window
+     is excluded rather than extended.
+  Share counts filed exactly at the formation close are now excluded, matching the existing
+  strict rule for signals.
+- **Rerun:** the H0 runner with one numerical thread (D14) on the D16-corrected signals,
+  written to a new results file; the D16 results stay as recorded. Configuration hashes are
+  unchanged, so these are corrected reruns of the same 12 configurations, not new trials.
+  The exploratory D17 panel is not rerun.
+- **Also in this revision, with no effect on any recorded result:** NYSE 1:00 p.m. early
+  closes for 2011-2028 (no H0 signal was accepted in an early-close afternoon); a required
+  price cutoff with validated caches; a check that no committed ledger row was ever removed;
+  and PBO refusing non-finite input.
