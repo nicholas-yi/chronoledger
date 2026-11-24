@@ -229,26 +229,29 @@ through July 2024. This is where methods are tuned and checked; it is not confir
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/figures/development-returns-dark.svg">
-  <img alt="Cumulative net returns of four long-short text-change portfolios from early 2023 to July 2024; they end between about +4% and -26%, with no consistent positive trend." src="docs/figures/development-returns-light.svg" width="100%">
+  <img alt="Cumulative net returns of four long-short text-change portfolios from early 2023 to July 2024; they end between about +6% and -23%, with no consistent positive trend." src="docs/figures/development-returns-light.svg" width="100%">
 </picture>
 
 <sub><b>Figure 2.</b> Cumulative net return of the long-low-change / short-high-change portfolio for each
 signal variant. "v1" compares consecutive 10-Ks; "v2" uses each firm's latest 10-K or 10-Q, compared
 with the same period a year earlier. "Neutral" variants first remove industry, size and acquisition effects.
-Source: <a href="results/returns_h0_development_d16.json">returns_h0_development_d16.json</a>, with filing times corrected under D16.</sub>
+Source: <a href="results/returns_h0_development_d19.json">returns_h0_development_d19.json</a>, with filing times corrected under D16 and engine defects corrected under D19.</sub>
 
 | Variant | Months | Mean net return / month | Alpha t-stat* |
 |---|---:|---:|---:|
-| 10-K, raw | 17 | -0.80% | -0.45 |
-| Latest filing, raw | 18 | +0.29% | +1.46 |
-| Latest filing, neutral | 18 | -0.29% | -2.33 |
-| 10-K, neutral | 17 | -1.69% | -2.36 |
+| 10-K, raw | 17 | -0.60% | +0.63 |
+| Latest filing, raw | 18 | +0.40% | +1.72 |
+| Latest filing, neutral | 18 | -0.04% | -1.91 |
+| 10-K, neutral | 17 | -1.50% | -2.08 |
 
 **No variant supports the hypothesis.** The two neutral variants even point the wrong way, but
 \*at this sample length the textbook t-test shown here flags pure noise as significant about 30% of
-the time instead of 5% (Figure 6), so values near ±2.3 are within the range of chance. Missing-return
+the time instead of 5% (Figure 6), so values near ±2 are within the range of chance. Missing-return
 sensitivities (0%, -30%, -100%) give identical answers because every held stock had a next-month
-return.
+return. A 2026-11-24 code audit found five defects in the backtest engine, including stale
+formation prices, share counts on the wrong split basis and last month's spread used for trading
+costs. Correcting them ([D19](docs/DEVIATIONS.md#d19-correct-five-engine-defects-found-by-the-2026-11-24-audit))
+moved each mean by at most 0.25 percentage points a month and changed no conclusion.
 
 ### Other hypotheses
 

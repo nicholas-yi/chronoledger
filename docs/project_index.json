@@ -528,6 +528,12 @@
    "freeze_revision": null
   },
   {
+   "path": "results/returns_h0_development_d19.json",
+   "report": "docs/FINDINGS.md",
+   "status": "current",
+   "freeze_revision": null
+  },
+  {
    "path": "results/returns_h5_development.json",
    "report": "docs/FINDINGS.md",
    "status": "current",

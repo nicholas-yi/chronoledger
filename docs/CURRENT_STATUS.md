@@ -14,6 +14,11 @@ supported.** Details live in [FINDINGS](FINDINGS.md), [DEVIATIONS](DEVIATIONS.md
   were also audited, with no assignment changes.
 - **H0 (Lazy Prices) shows no reliable premium after costs** on the development sample. The
   exploratory event-time neutralized panel (D17) points the wrong way.
+- **Engine audit (2026-11-24):** five backtest defects (stale formation prices, split-basis share
+  counts and spreads, last month's spread in trading costs, and event windows that skipped missing
+  returns) were corrected under
+  [D19](DEVIATIONS.md#d19-correct-five-engine-defects-found-by-the-2026-11-24-audit) and H0 was
+  rerun; means moved by at most 0.25 percentage points a month and no conclusion changed.
 - **Reproducibility:** the earlier F8 numerical gap is explained by the BLAS thread setting; H0
   and H4 reproduce exactly (D14, D15).
 - **Monthly calibration fails, as a

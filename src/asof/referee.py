@@ -352,9 +352,11 @@ def _tfidf_invariance() -> tuple[bool, str]:
 
 
 def _current_h0_results() -> Path:
-    """D16-corrected H0 results once recorded; otherwise the Batch B file."""
-    d16 = PROJECT_ROOT / "results" / "returns_h0_development_d16.json"
-    return d16 if d16.exists() else PROJECT_ROOT / "results" / "returns_h0_development.json"
+    """The latest recorded H0 results: D19, else D16, else the Batch B file."""
+    for name in ("returns_h0_development_d19.json", "returns_h0_development_d16.json"):
+        if (PROJECT_ROOT / "results" / name).exists():
+            return PROJECT_ROOT / "results" / name
+    return PROJECT_ROOT / "results" / "returns_h0_development.json"
 
 
 def _plausibility(max_monthly: float = 0.05) -> tuple[bool, str]:

@@ -504,3 +504,8 @@ Equations, source pins, the pre-execution allocation and its limits are in the
   closes for 2011-2028 (no H0 signal was accepted in an early-close afternoon); a required
   price cutoff with validated caches; a check that no committed ledger row was ever removed;
   and PBO refusing non-finite input.
+
+- **Outcome** (2026-11-24): no conclusion changed. Net means moved by at most 0.25 percentage
+  points a month (for example `v2_10K_neutral` -1.68947% → -1.50004%, alpha t -2.3592 → -2.0788)
+  and the raw `v1_10K_raw` event panel went from t 2.03 to 1.92, still opposite the prediction.
+  See [FINDINGS](FINDINGS.md#d19-rerun-on-the-corrected-engine-2026-11-24).

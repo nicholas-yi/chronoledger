@@ -9,8 +9,9 @@ Superseded intermediate states are compressed; the full chronological log is at 
 - **No hypothesis is supported and no tradable edge is claimed.** Every estimate below is a
   development diagnostic; a development estimate is not a finding, and a positive one is not
   a tradable edge.
-- **H0:** no variant supports the registered direction; the D16 rerun on corrected filing
-  times changed no conclusion, and the D17 event-time panel points the wrong way.
+- **H0:** no variant supports the registered direction; neither the D16 rerun on corrected
+  filing times nor the D19 rerun on the corrected engine changed a conclusion, and the D17
+  event-time panel points the wrong way.
 - **H4:** every absolute t is below 1.23, against the 3.0 bar. **H5b, H5c and H6(b)** are
   **invalid** under F2; H6(a) (t = 1.7377173) is below the 3.0 bar. **H7** was closed
   unregistered on 2026-11-21, so there is no H7 result.
@@ -23,8 +24,8 @@ Superseded intermediate states are compressed; the full chronological log is at 
   [trial ledger](../results/trial_ledger.jsonl) keeps every run, including invalid ones.
 
 Standing qualifiers, stated once: industry neutralization uses a current-SIC proxy, not
-historical industry data; event inputs use a fixed-16:00 session clock and valid-observation
-CAR indexing; H4's original holdout was contaminated (F4, D18); and with 17/18 development
+historical industry data; event windows are fixed on the trading-session calendar, including
+NYSE 1:00 p.m. early closes (D19); H4's original holdout was contaminated (F4, D18); and with 17/18 development
 months every monthly t-statistic is descriptive (F10). No paid data or market-data key was used.
 
 | # | Finding | Status | Consequence |
@@ -350,6 +351,30 @@ deflated Sharpe probabilities ([diagnostics](../results/current_vintage_diagnost
 are 0.035 (`v1_10K_raw`) and 0.195 (`v2_latest_raw`), and 0.024 and 0.001 for the neutralized
 variants; the frozen D4 predicate marks both raw variants **not_supported**. PBO is not
 estimable below 32 months.
+
+#### D19 rerun on the corrected engine (2026-11-24)
+
+A code audit found five engine defects: last month's spread charged on this month's trades,
+stale formation quotes, share counts on the wrong split basis, split jumps read as spread, and
+event windows extended past missing returns.
+[D19](DEVIATIONS.md#d19-correct-five-engine-defects-found-by-the-2026-11-24-audit) corrected them,
+logged and tagged before the rerun. The runner then ran once with one thread on the
+D16-corrected signals ([results](../results/returns_h0_development_d19.json)):
+
+| Variant | Monthly observations | Net mean / month, D16 → D19 | Alpha t, D16 → D19 | Average firms, D16 → D19 |
+|---|---:|---:|---:|---:|
+| `v1_10K_raw` | 17 | -0.80497% → -0.60023% | -0.4546 → +0.6324 | 1460.9 → 1453.7 |
+| `v2_latest_raw` | 18 | +0.29079% → +0.39660% | +1.4575 → +1.7175 | 1482.3 → 1475.2 |
+| `v2_latest_neutral` | 18 | -0.29411% → -0.03966% | -2.3307 → -1.9088 | 1482.3 → 1475.2 |
+| `v2_10K_neutral` | 17 | -1.68947% → -1.50004% | -2.3592 → -2.0788 | 1460.9 → 1453.7 |
+
+**No conclusion changes.** Means move by at most 0.25 percentage points a month, and about
+seven stale-quoted firms a month leave the formation sample. The raw event panels change little:
+`v1_10K_raw` coefficient 1.7451 → 1.8804 with t 2.03 → 1.92 on 4,968 events (still the
+**opposite** sign to the prediction), and `v2_latest_raw` t 0.54 → 0.70. Fixed session windows
+admit a few more events with shorter but adequate estimation histories, and exclude windows
+with a missing return. Configuration hashes are unchanged, so the trial counts stay 10 (H0) and
+12 (H1n). The D17 panel was not rerun.
 
 #### D17: event-time neutralized H0 panel (exploratory)
 
