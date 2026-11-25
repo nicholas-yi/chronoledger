@@ -70,6 +70,19 @@ def test_dirty_check_includes_protocol_changes_but_not_ignored_files(tmp_path, m
     assert ledger.lineage()["git_dirty"] is True
 
 
+def test_ledger_appends_alone_do_not_mark_the_tree_dirty(tmp_path, monkeypatch) -> None:
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    ledger_file = tmp_path / "results" / "trial_ledger.jsonl"
+    ledger_file.parent.mkdir()
+    ledger_file.write_text('{"row": 1}\n')
+    subprocess.run(["git", "-C", str(tmp_path), "add", "."], check=True)
+    subprocess.run(["git", "-C", str(tmp_path), "-c", "user.name=Fixture",
+                    "-c", "user.email=fixture@example.test", "commit", "-qm", "invented"], check=True)
+    monkeypatch.setattr(ledger, "PROJECT_ROOT", tmp_path)
+    ledger_file.write_text('{"row": 1}\n{"row": 2}\n')
+    assert ledger.lineage()["git_dirty"] is False
+
+
 def test_exclusive_appends_form_one_valid_chain_across_workers(tmp_path) -> None:
     path = tmp_path / "concurrent.jsonl"
     context = multiprocessing.get_context("spawn")

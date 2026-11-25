@@ -11,7 +11,8 @@ supported.** Details live in [FINDINGS](FINDINGS.md), [DEVIATIONS](DEVIATIONS.md
   filings had stored times 4-5 hours early;
   [D16](DEVIATIONS.md#d16-replace-h0-knowledge-times-with-qualified-acceptance-times) corrected
   them and reran H0, and no conclusion changed. The 262 timing-sensitive 2012-2018 H4/H6a filings
-  were also audited, with no assignment changes.
+  were also audited; none qualified under the frozen rule, and a labelled post-hoc check found no
+  assignment changes.
 - **H0 (Lazy Prices) shows no reliable premium after costs** on the development sample. The
   exploratory event-time neutralized panel (D17) points the wrong way.
 - **Engine audit (2026-11-24):** five backtest defects (stale formation prices, split-basis share

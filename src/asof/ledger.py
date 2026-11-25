@@ -179,7 +179,10 @@ def lineage(inputs: list[Path] | None = None) -> dict[str, Any]:
         statuses[key] = "present" if present else "missing_or_not_regular_file"
     return {
         "git_commit": git("rev-parse", "HEAD"),
-        "git_dirty": bool(git("status", "--porcelain", "--untracked-files=normal")),
+        # The ledger's own appended rows are not a source change; excluding them keeps every row
+        # of a multi-trial run from reporting a dirty tree after the first append.
+        "git_dirty": bool(git("status", "--porcelain", "--untracked-files=normal", "--",
+                              ".", ":(exclude)results/trial_ledger.jsonl")),
         "inputs": fingerprints, "input_status": statuses,
         "missing_inputs": [key for key, value in fingerprints.items() if value is None],
         "environment": {

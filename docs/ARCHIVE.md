@@ -21,7 +21,7 @@ No result, trial-ledger row, deviation or holdout rule changed in the cleanup.
 
 | Area | What it was | Outcome, where recorded |
 |---|---|---|
-| SEC timestamp audit | Header pilot, the original full audit and continuations A1-A5, their planners, identity and acceptance audits, and the D16 time correction | All 16,921 H0 accessions qualified; 103 H0 knowledge times corrected (D16); 0/262 older H4/H6a filings qualified with no assignment changes. [FINDINGS](FINDINGS.md), [DATA_AUDIT](DATA_AUDIT.md) |
+| SEC timestamp audit | Header pilot, the original full audit and continuations A1-A5, their planners, identity and acceptance audits, and the D16 time correction | All 16,921 H0 accessions qualified; 103 H0 knowledge times corrected (D16); 0/262 older H4/H6a filings qualified, and a labelled post-hoc check found no assignment changes. [FINDINGS](FINDINGS.md), [DATA_AUDIT](DATA_AUDIT.md) |
 | Reproducibility diagnostics | F8 H0 and D15 H4 thread checks, Batch B reconciliation, optimized-H0 verification | Differences explained by BLAS thread count; exact reproduction single-threaded. [FINDINGS](FINDINGS.md) |
 | Inference calibration | Batch A and Batch E synthetic calibrations | Monthly tests oversize at 17-28 months (F10, a permanent limit). Results kept in [results/robust_inference_calibration.json](../results/robust_inference_calibration.json) |
 | D17 event-time panel | One-shot exploratory runner | Neither variant points the expected way. Method kept as [`asof.event_neutral`](../src/asof/event_neutral.py) |

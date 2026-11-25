@@ -26,8 +26,8 @@ instant?" and gets only that, so a restatement filed in June cannot leak into a 
 **Current status:** no tradable-edge claim is supported. Return tests, historical data coverage
 and human measurement are still incomplete; the [closure review](results/project_closure_review.json)
 separates verified engineering fixes from evidence that still needs to be obtained.
-Start with the [current evidence map](docs/CURRENT_STATUS.md); the [curated index](docs/project_index.json)
-distinguishes historical, held and safe offline work.
+Start with the [current evidence map](docs/CURRENT_STATUS.md); the [project index](docs/project_index.json)
+lists every script (pipeline, held, maintenance or reader) and the evidence behind each result.
 
 **Active work is deliberately narrow:** a
 [source-grounded metric reader with deterministic verification](docs/FOCUSED_READER.md).
@@ -49,7 +49,7 @@ the real-filing figure is a deferral rate, not an accuracy measure.
 showed that SEC filing headers use Eastern time, by checking them against the SEC's 5:30 p.m.
 filing-date rule, and verified the acceptance time of all 16,921 filings where timing could
 matter. It found five filings from one company whose stored times are 4–5 hours early, so the
-backtest could act on them one close too soon. Those times are now corrected ([D16](docs/DEVIATIONS.md#d16-replace-h0-knowledge-times-with-qualified-acceptance-times)) and the results rerun; the rounded figures below did not change.
+backtest could act on them one close too soon. Those times are now corrected ([D16](docs/DEVIATIONS.md#d16-replace-h0-knowledge-times-with-qualified-acceptance-times)) and the results rerun with no change in conclusion; a later engine audit ([D19](docs/DEVIATIONS.md#d19-correct-five-engine-defects-found-by-the-2026-11-24-audit)) moved the figures below slightly, again changing no conclusion.
 Monthly significance tests remain unreliable with only 17–18 months of data, a
 [permanent limit](docs/FINDINGS.md#f10-status-a-permanent-limit-of-this-design-2026-11-20)
 of this design.
@@ -106,8 +106,8 @@ time** (when EDGAR accepted the filing, in UTC). Research code reads facts throu
 queries that return only what was public at instant `t`. Amendments are stored as new rows, never
 overwrites, so history cannot be rewritten after the fact.
 
-A signal becomes tradable at the **first 16:00 ET market close strictly after acceptance**: a filing
-accepted at 4:01 p.m. waits for the next day.
+A signal becomes tradable at the **first market close strictly after acceptance**: 4:00 p.m. ET,
+or 1:00 p.m. on NYSE half-days. A filing accepted at 4:01 p.m. waits for the next day.
 </details>
 
 <details open>
@@ -145,8 +145,10 @@ accounting, cybersecurity disclosures) are not mistaken for firm-specific news.
 At each month-end close the engine sorts firms with a current signal into fifths, goes long the
 least-changed fifth and short the most-changed fifth, and weights by market value (point-in-time
 XBRL shares outstanding × as-traded price). Stocks need a price of at least $5 and a market cap at or
-above the NYSE 20th-percentile breakpoint. Costs are 2 × half-spread × turnover, with spreads estimated
-from daily high/low/close prices ([Abdi & Ranaldo 2017](https://alexandria.unisg.ch/entities/publication/734062b6-b25a-46fb-95cf-9f75bfd12ff6/full)).
+above the NYSE 20th-percentile breakpoint, and must have traded on the formation day itself. Share counts
+are rolled forward through any split between their report date and the formation day, so size uses one
+split basis. Costs are 2 × half-spread × turnover, with the formation month's spread estimated from
+daily high/low/close prices ([Abdi & Ranaldo 2017](https://alexandria.unisg.ch/entities/publication/734062b6-b25a-46fb-95cf-9f75bfd12ff6/full)).
 
 Formation is tested to ignore the future: hiding any future return must leave today's holdings
 unchanged, and a test plants exactly that leak to confirm it is caught.
@@ -218,7 +220,8 @@ Raw vendor data stays local and is never redistributed; only derived statistics 
 
 **Scale:** 32,508 filings with text features · 21,502 consecutive-filing pairs · 2,733 price
 histories (14.4 million daily returns) · a 132,527-fact verification store. The complete
-four-variant H0 backtest runs in **61 seconds** from a validated, checksummed price snapshot.
+four-variant H0 backtest runs in about **74 seconds** on one CPU thread from a validated, checksummed
+price snapshot.
 
 ## Results so far
 
@@ -263,8 +266,9 @@ moved each mean by at most 0.25 percentage points a month and changed no conclus
   suggestive, but below the pre-set bar of 3.0.
 - **H4 and H6 confirmation** will use filings accepted from 22 November 2026, a period that
   hasn't happened yet ([D18](docs/DEVIATIONS.md#d18-move-h4-and-h6a-confirmatory-evaluation-to-a-prospective-holdout)),
-  because the original 2022-2025 holdouts were already read by earlier processing. An audit of the
-  262 older filings whose timestamps could matter found no H4/H6 result that would change.
+  because the original 2022-2025 holdouts were already read by earlier processing. For the 262 older
+  filings whose timestamps could matter, a labelled post-hoc check found no H4/H6 assignment that
+  would change.
 - **H0 event study with industry and size controls** ([D17](docs/DEVIATIONS.md#d17-define-the-event-time-neutralized-signal-for-the-h0-event-co-primary),
   exploratory): both versions point the wrong way. The 10-K version's t of 2.60 becomes p = 0.13
   under a bootstrap suited to its 16 monthly clusters.
@@ -432,7 +436,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 
 ## Caveats
 
-- **Assurance is partial.** Scoped loaders, held outcome stages and ledger integrity checks are not an OS sandbox or byte-level isolation; see [assurance and limits](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#assurance-and-limits).
+- **Assurance is partial.** Scoped loaders, held outcome stages and ledger integrity checks are not an OS sandbox or byte-level isolation; see [known limitations](docs/DATA_AUDIT.md#known-limitations-and-open-items).
 - **Survivorship.** Free price data covers mostly companies that still trade today. Return tests are
   restricted to 2023 onwards, when coverage of large issuers reaches 88-97%
   ([coverage audit](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#coverage-among-public-equity-issuers-by-public-float)).
@@ -443,12 +447,11 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
   Anomaly returns typically shrink by more than
   half after publication ([McLean & Pontiff 2016](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2156623)),
   so a realistic effect would be far smaller.
-- **Timestamps not yet verified filing by filing.** Acceptance times come from SEC JSON, which is
-  known to be wrong by one Eastern-time offset for some filings. An
-  [offline screen](results/p0_assignment_plan.json) found that, if any filing's time could be off
-  by that offset, most filings' trading-day assignment could change, including filings where both
-  SEC sources agree. A small targeted fix is therefore not enough; the times need checking against
-  each filing's own header ([details](https://github.com/nicholas-yi/chronoledger/blob/archive-2026-11/docs/DATA_AUDIT.md#approved-offline-p0-assignment-planner)).
+- **Older timestamps are unverified.** Every H0 filing time that could change a trading day was
+  checked against the filing's own header and corrected ([above](#are-the-timestamps-right)). The
+  2012-2018 bulk times behind H4/H6 are not verified and are often 4-5 hours early; a labelled
+  post-hoc check found they change no H4/H6 assignment, but any future return test on them would
+  need header checks.
 - **Industry codes are today's.** Industry neutralization uses current SIC codes, not those in force
   at each filing date.
 - **Costs are a spread estimate.** Turnover costs use a daily high/low/close proxy; price impact,
@@ -463,7 +466,7 @@ The textbook two-way clustered test did not pass. None of the tested monthly met
 
 | Open question | What it needs | Why it matters |
 |---|---|---|
-| Is every trading-day assignment right? | Done for H0 (16,921 verified, inputs corrected under D16). For H4/H6, the 262 older timing-sensitive filings were audited and no assignment changes | Older bulk times are often 4-5 hours early, which would matter for any future return test on them |
+| Is every trading-day assignment right? | Done for H0 (16,921 verified, inputs corrected under D16). For H4/H6, the 262 older timing-sensitive filings were audited: none qualified under the frozen rule, and a labelled post-hoc check found no assignment changes | Older bulk times are often 4-5 hours early, which would matter for any future return test on them |
 | Is there an effect of realistic size? | Survivorship-free prices with dated security identities and delisting payoffs, extending the sample back to 2001. Cheapest credible source found: about $39 (not purchased) | The current sample can only detect implausibly large effects, and monthly tests are unreliable with 17-18 months |
 | Does *what* changes matter more than *how much*? | The claim-level signal (H1), first checked against human-labelled real filing pairs and simple baselines | Synthetic benchmark scores are not real measurement accuracy |
 | Do customers' disclosures move their suppliers? | Customer-supplier links dated to when they were disclosed, with verified identities on both sides (H2-H3) | Prevents relationships discovered later from looking predictive |

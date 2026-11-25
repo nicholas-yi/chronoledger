@@ -21,7 +21,10 @@ Superseded intermediate states are compressed; the full chronological log is at 
 - **Referee gate.** The full [referee](../results/REFEREE.md) passes `time_authority` and is
   **BLOCKED** only by `inference.calibration`, the permanent limit in F10. Passing checks are
   software evidence, not scientific acceptance. The append-only
-  [trial ledger](../results/trial_ledger.jsonl) keeps every run, including invalid ones.
+  [trial ledger](../results/trial_ledger.jsonl) keeps every run, including invalid ones. In runs
+  logged before 2026-11-25, every row after a run's first shows `git_dirty: true` only because
+  the ledger file itself had been appended; source code was unchanged. Later runs exclude the
+  ledger from that check.
 
 Standing qualifiers, stated once: industry neutralization uses a current-SIC proxy, not
 historical industry data; event windows are fixed on the trading-session calendar, including

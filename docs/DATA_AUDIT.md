@@ -367,8 +367,9 @@ Other kept scripts: [event_diagnostics.py](../scripts/event_diagnostics.py) (pla
 - **Older bulk times.** 2012-2018 bulk acceptance times are unqualified (0 of 262) and often
   4-5 hours early; a future return test on them needs header verification.
 - **Industry and calendar.** SIC is the current classification, so neutralized H0 and H4
-  are conditional on a proxy. The fixed 16:00 ET close is not a certified exchange calendar;
-  early closes and gaps are not modelled beyond the one D16 date checked against NYSE.
+  are conditional on a proxy. Closes use NYSE's rule-based 1:00 p.m. early closes for 2011-2028,
+  checked against NYSE's published 2026-2028 dates (D19); other dates are refused rather than
+  guessed. Unscheduled closures are taken from the trading calendar in the data, not certified.
 - **Vendor quality.** Guards exclude impossible prices but do not validate the vendor's
   adjusted series or dividends.
 - **Reproducibility.** Under current holds a fresh clone cannot rebuild the bulk
